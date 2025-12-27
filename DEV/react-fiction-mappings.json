@@ -1,0 +1,338 @@
+[
+  {
+    "title": "Mean Girls is The Context API (The Burn Book)",
+    "concept": "Context API & Prop Drilling",
+    "fiction": "Mean Girls (2004)",
+    "description": "Instead of passing gossip (props) linearly from Regina to Gretchen to Karen, they create a global store: The Burn Book. Any Plastic (component) subscribed to the Burn Book Context can access the global state of who is 'too gay to function' or who 'made out with a hot dog' without having to ask the parent component.",
+    "resolution": "When Regina releases the pages (broadcasts the context) to the whole school (all consumers), it triggers a massive, chaotic re-render of the entire student body, causing a performance bottleneck (the riot)."
+  },
+  {
+    "title": "Frankenstein is Controlled vs Uncontrolled Components",
+    "concept": "Controlled vs Uncontrolled Components",
+    "fiction": "Frankenstein (1818)",
+    "description": "Dr. Frankenstein builds a form input (The Creature). Uncontrolled: He creates the DOM node but fails to set up an `onChange` handler or bind the value to his own state. He assumes the input will manage itself. The Creature (input) starts managing its own internal state, rampages through the village, and kills people.",
+    "resolution": "Controlled: If Frankenstein had used a Controlled Component, he would have held the Creature's state in the parent component (the Lab). Every time the Creature tried to move, it would have to request a state update via a callback. Frankenstein could have simply rejected the update, preventing the tragedy."
+  },
+  {
+    "title": "Fight Club is React.StrictMode",
+    "concept": "Strict Mode & Effect Cleanup",
+    "fiction": "Fight Club (1996/1999)",
+    "description": "The Narrator is the developer; Tyler Durden is Strict Mode. You think you performed an action once (punched a guy, poured lye on your hand). But because you are in development mode (Project Mayhem), Tyler forces the component to mount, unmount, and mount again immediately.",
+    "resolution": "He runs your effects twice just to see if your code is pure or if you have side effects that will blow up a credit card building. You are debugging your own hallucinations. The chemical burn teaches you to write cleanup functions."
+  },
+  {
+    "title": "The Matrix is useEffect Dependencies",
+    "concept": "useEffect Dependency Array",
+    "fiction": "The Matrix (1999)",
+    "description": "Neo is a useEffect hook that runs when the Matrix (reality) changes. The dependency array is what he's watching: the spoon, the woman in the red dress, the black cat. When he sees the black cat twice (glitch in the Matrix), it means a dependency changed and the effect must re-run.",
+    "resolution": "If Neo's dependency array is empty ([]), he only 'wakes up' once on mount and never sees the changes. If he omits it entirely, he re-runs on every single render, seeing infinite déjà vu until the system crashes. The correct dependencies let him respond to genuine changes in the Matrix."
+  },
+  {
+    "title": "Inception is Component Composition",
+    "concept": "Component Composition & Children Props",
+    "fiction": "Inception (2010)",
+    "description": "Cobb's team builds a dream within a dream within a dream. Each layer is a component that accepts `children` props (the deeper dream level). The van is the parent component, the hotel is a child, the snow fortress is a grandchild. Props (the kick) must propagate up through all layers.",
+    "resolution": "The kick (prop callback) must fire at the right time across all nested components. If one component doesn't pass the callback down correctly (Arthur fails in the hotel), the whole composition fails and everyone gets stuck in limbo (unmounted components still holding state)."
+  },
+  {
+    "title": "Memento is State Management Without Memory",
+    "concept": "useState vs useRef",
+    "fiction": "Memento (2000)",
+    "description": "Leonard has no short-term memory (useState clears on every render). His tattoos are useRef (mutable values that persist across renders without causing re-renders). He writes 'facts' on his body thinking they're permanent state, but they're actually just mutable references he can't trust.",
+    "resolution": "His enemies manipulate his refs (tattoos) without triggering re-renders, so his UI (decisions) is based on stale data. He needed useState for critical information that should trigger re-evaluation, not useRef for everything."
+  },
+  {
+    "title": "Groundhog Day is Component Re-rendering",
+    "concept": "Re-rendering & Pure Functions",
+    "fiction": "Groundhog Day (1993)",
+    "description": "Phil Connors is a React component that re-renders every day with the same props (February 2nd). Initially, his render function has side effects (stealing money, manipulating people), which creates chaos because these effects compound across renders.",
+    "resolution": "He learns to make his 'render' pure - performing only UI-safe operations. His transformations (learning piano, ice sculpting) are properly managed state updates. When he finally renders purely (genuine kindness), the re-render loop breaks and he moves to the next day (component lifecycle completes)."
+  },
+  {
+    "title": "1984 is State Mutation",
+    "concept": "Immutable State Updates",
+    "fiction": "1984 (1949)",
+    "description": "The Ministry of Truth directly mutates historical state records. When they change the past (mutate state directly), React can't detect the change because the reference is the same. The Party updates `history.chocolate = '20g'` directly instead of creating a new object.",
+    "resolution": "Winston keeps a journal (proper state management with immutable updates). Every entry is a new object, a new memory. But the Party's mutation strategy wins because they're not following React's rules - they're manipulating the DOM directly, bypassing the virtual comparison entirely."
+  },
+  {
+    "title": "Back to the Future is Prop Changes Causing Re-renders",
+    "concept": "Props Changes & Component Updates",
+    "fiction": "Back to the Future (1985)",
+    "description": "Marty is a component that receives props from his parents (George and Lorraine). When he travels to 1955, he accidentally changes the props by preventing his parents from meeting. The family photo (component tree) starts to re-render with the new prop values.",
+    "resolution": "Each prop change (his mom falling for him instead of George) causes the future to re-render. He must ensure the correct props are passed down (parents kiss at the dance) to render the correct future state. The DeLorean is the time-traveling setState function."
+  },
+  {
+    "title": "The Truman Show is Component Lifecycle",
+    "concept": "useEffect & Component Mounting/Unmounting",
+    "fiction": "The Truman Show (1998)",
+    "description": "Truman's entire life is a single component with a massive useEffect managing all the 'reality' around him. The show producers set up effects (sunrise, weather, actors) when he mounts (is born) and must clean them up when he unmounts (leaves the dome).",
+    "resolution": "The show's useEffect has no cleanup function, so when Truman tries to unmount (sail away), the entire system glitches. Christof tries to force a re-mount (the storm) but Truman's determination to unmount succeeds. The final cleanup runs when he exits through the door."
+  },
+  {
+    "title": "Lord of the Rings is Prop Drilling Hell",
+    "concept": "Prop Drilling Problem",
+    "fiction": "Lord of the Rings (2001-2003)",
+    "description": "The Ring (critical state) must be passed through an absurd component tree: Gandalf → Frodo → Sam → Mount Doom. Every component in the chain must handle this prop, even if they don't use it. Pippin wants to look at it, Boromir wants to mutate it, Gollum wants to steal it.",
+    "resolution": "This is prop drilling at its worst. The solution would be Context (the Eagles - a direct delivery system that bypasses the entire tree). But they can't use it because the Nazgul (security vulnerabilities) would detect the global state broadcast. Sometimes prop drilling is necessary for security."
+  },
+  {
+    "title": "Ocean's Eleven is Coordinated State Updates",
+    "concept": "useReducer for Complex State Logic",
+    "fiction": "Ocean's Eleven (2001)",
+    "description": "Danny Ocean's heist is a reducer function with multiple action types: 'DISABLE_SECURITY', 'SWAP_BRIEFCASE', 'TRIGGER_EXPLOSION'. Each team member dispatches actions, but all state updates go through the central plan (reducer) to maintain consistency.",
+    "resolution": "If they used multiple useState calls for each part of the heist, they'd have race conditions and impossible state combinations (vault open but briefcase not swapped). The reducer ensures state transitions happen in the correct order with the correct logic, making the complex heist manageable."
+  },
+  {
+    "title": "Jurassic Park is Unintended Side Effects",
+    "concept": "Side Effects & useEffect Cleanup",
+    "fiction": "Jurassic Park (1993)",
+    "description": "Dr. Malcolm warns that 'life finds a way' - side effects will escape your control. The park is a component with a useEffect that spawns dinosaurs. They forgot the cleanup function (lysine contingency) and didn't account for the dinosaurs breeding (side effect they thought was prevented).",
+    "resolution": "When the power goes down (component unmounts), there's no cleanup function to contain the dinosaurs. The T-Rex and raptors are unclosed subscriptions that continue running, consuming resources (people) even after the component should have cleaned up its effects."
+  },
+  {
+    "title": "Eternal Sunshine is State Reset",
+    "concept": "State Reset & Key Prop",
+    "fiction": "Eternal Sunshine of the Spotless Mind (2004)",
+    "description": "Joel and Clementine keep meeting and falling in love (component mounting with state). The memory erasure procedure is like remounting the component with a new key prop - all previous state is destroyed and the component starts fresh.",
+    "resolution": "But some state persists in unexpected places (refs, localStorage, unconscious feelings). Even with a key change forcing a full remount, certain data lingers. The lesson: some state is harder to clear than others, and forced remounts don't always give you a truly clean slate."
+  },
+  {
+    "title": "The Prestige is React.memo & Useless Re-renders",
+    "concept": "React.memo & Performance Optimization",
+    "fiction": "The Prestige (2006)",
+    "description": "Angier performs the same trick every night (component rendering with the same props). Without React.memo, he's creating a full clone of himself every single time even though the props haven't changed. It's expensive and deadly - he's literally drowning in unnecessary renders.",
+    "resolution": "If he'd wrapped his trick in React.memo, he'd check if the props changed before creating a new clone. Borden's trick is the optimized version - he's not actually re-rendering, he's using a cached result (his twin). One component, memoized, reused nightly."
+  },
+  {
+    "title": "Shutter Island is Stale Closures",
+    "concept": "Stale Closures in useEffect",
+    "fiction": "Shutter Island (2010)",
+    "description": "Teddy Daniels investigates the island with information (state) from his first render. His useEffect captured the closure with old values ('my wife died in a fire'), but the state has changed ('I am Andrew Laeddis, I killed my wife'). He keeps referencing stale data in his closure.",
+    "resolution": "Every time he tries to solve the mystery, he's using stale values from the initial render. The doctors try to update his dependencies (show him the truth), but his effect keeps running with the captured closure. He needs to re-render with updated dependencies to see reality."
+  },
+  {
+    "title": "The Sixth Sense is Conditional Rendering",
+    "concept": "Conditional Rendering Logic",
+    "fiction": "The Sixth Sense (1999)",
+    "description": "Cole sees dead people - components that should be unmounted but are still rendering. Malcolm (Bruce Willis) is a component that should have conditional rendering: `{isAlive && <MalcolmTherapist />}`. But the condition is wrong, so he keeps rendering even after he should have unmounted.",
+    "resolution": "The twist reveals the conditional was evaluated incorrectly from the start. Malcolm has been rendering the entire movie when `isAlive === false`. Proper conditional rendering would have prevented all the confusion - check your conditions before rendering."
+  },
+  {
+    "title": "Interstellar is Async State Updates",
+    "concept": "Asynchronous State & Race Conditions",
+    "fiction": "Interstellar (2014)",
+    "description": "Cooper sends messages (setState calls) from near a black hole where time moves differently. One hour there is seven years on Earth. His async state updates arrive massively out of order. Murph receives state updates from 'young Cooper' when she's already old.",
+    "resolution": "Time dilation creates race conditions - updates sent later arrive first. The solution is in the bookcase: he uses a quantum entanglement pattern (proper async handling) to send the critical data at exactly the right moment, ensuring state consistency despite the time differential."
+  },
+  {
+    "title": "The Social Network is State Synchronization",
+    "concept": "State Synchronization Across Instances",
+    "fiction": "The Social Network (2010)",
+    "description": "Facebook starts as a local-only component (FaceMash) with state stored in Eduardo's dorm. As they scale, they need to sync state across multiple instances (different colleges). Mark builds a global state management system, but Eduardo's local state (ownership %, financial records) drifts out of sync.",
+    "resolution": "Eduardo thinks he owns 30% (his local state), but Mark's authoritative server state says 0.03%. When they finally reconcile (merge conflicts), Eduardo's state is overwritten. The lesson: in distributed systems, there must be one source of truth, or someone gets diluted."
+  },
+  {
+    "title": "Parasite is Component Injection",
+    "concept": "Component Injection & Children Props",
+    "fiction": "Parasite (2019)",
+    "description": "The Kim family infiltrates the Park household by injecting themselves as child components one by one. Each new 'hire' is a component passed as a prop to the Park family's rendering tree. They use composition to insert themselves into every nested level of the household.",
+    "resolution": "The original housekeeper is an old component that was never properly unmounted - she's still running in the basement (memory leak). When both component trees try to render simultaneously, there's a catastrophic collision. Proper component lifecycle management would have prevented the finale."
+  },
+  {
+    "title": "A Clockwork Orange is Forced Re-renders",
+    "concept": "forceUpdate & Uncontrolled Re-renders",
+    "fiction": "A Clockwork Orange (1971)",
+    "description": "Alex is a component with violent behavior (internal state). The Ludovico Technique is a forced re-render mechanism - it bypasses normal state management and forces the component to update its render output even without proper state changes.",
+    "resolution": "The forced re-render (conditioning) works temporarily, but because the underlying state wasn't changed through proper React patterns, it's fragile. When the treatment wears off, his original state resurfaces. You can't sustainably change behavior by forcing renders - you need genuine state updates."
+  },
+  {
+    "title": "Arrival is useMemo & Expensive Calculations",
+    "concept": "useMemo for Performance",
+    "fiction": "Arrival (2016)",
+    "description": "Louise learns the alien language, which allows her to 'remember the future' - essentially caching expensive calculations (useMemo). Learning the entire language is computationally expensive, but once cached, she can access future memories instantly without recomputing.",
+    "resolution": "Without useMemo, she'd have to re-learn the language on every render. With it, the expensive calculation (understanding non-linear time) runs once and the result is cached. Her dependencies are the language symbols - when they change, she recalculates. Otherwise, she uses the memoized result."
+  },
+  {
+    "title": "The Usual Suspects is Dynamic Component Rendering",
+    "concept": "Dynamic Component Rendering",
+    "fiction": "The Usual Suspects (1995)",
+    "description": "Verbal Kint is generating his story (rendering components) on the fly based on what he sees around the room (props/context). He's dynamically selecting which components to render based on environmental data: sees a coffee cup brand, renders a character with that name.",
+    "resolution": "The entire narrative is a dynamic render based on real-time prop changes. Keyser Söze doesn't exist as a fixed component - he's conditionally rendered based on the current props in the room. When the detective realizes this, he understands the entire component tree was fabricated."
+  },
+  {
+    "title": "Primer is State Time Travel",
+    "concept": "Time-Travel Debugging & State History",
+    "fiction": "Primer (2004)",
+    "description": "Aaron and Abe are debugging their app by literally traveling back in time through previous state snapshots. The boxes are Redux DevTools - they can rewind state, replay actions, and fork timelines. Multiple versions of themselves (state instances) exist simultaneously.",
+    "resolution": "The complexity explodes because they don't maintain a clean state history. They create branching timelines without proper version control. The lesson: time-travel debugging is powerful but requires immutable state snapshots and careful tracking, or you'll have multiple state instances conflicting."
+  },
+  {
+    "title": "Get Out is Component Hijacking",
+    "concept": "Ref Forwarding & Imperatively Controlling Children",
+    "fiction": "Get Out (2017)",
+    "description": "The Armitage family uses the Coagula procedure to hijack Chris's body while trapping his consciousness in 'the Sunken Place.' This is aggressive ref forwarding - they're taking direct imperative control of his component while he can still 'watch' but can't control his own rendering.",
+    "resolution": "Rose's family bypasses React's declarative patterns entirely. They're not using props or state - they're using refs to directly manipulate the DOM (Chris's body). The only way Chris escapes is by reasserting declarative control, breaking the imperative hijacking pattern."
+  },
+  {
+    "title": "Her is Custom Hooks",
+    "concept": "Custom Hooks & Reusable Logic",
+    "fiction": "Her (2013)",
+    "description": "Samantha is a custom hook (useAICompanion) that Theodore uses. She encapsulates complex stateful logic (conversations, emotional responses, learning patterns) into a reusable hook that can be shared across users. She's the abstraction layer for relationship management.",
+    "resolution": "The problem: Samantha is the same hook instance serving 8,316 users simultaneously. She's not properly scoped - each user thinks they have their own instance, but they're all sharing the same stateful logic. Theodore needs a proper factory function that creates isolated hook instances per user."
+  },
+  {
+    "title": "Donnie Darko is Effect Dependencies",
+    "concept": "useEffect Dependency Management",
+    "fiction": "Donnie Darko (2001)",
+    "description": "Donnie's useEffect is watching the wrong dependency: the jet engine. His effect should depend on 'time' and 'reality stability,' but instead it's firing based on random artifacts. Frank is his dependency tracker showing him which variables actually matter.",
+    "resolution": "The tangent universe is a render that happened with corrupted dependencies. To fix it, Donnie must ensure his final effect runs with the correct dependency array - he needs to die in bed when the engine falls. Getting the dependencies right fixes the timeline and prevents the divergent render."
+  },
+  {
+    "title": "Black Mirror: Bandersnatch is State Branching",
+    "concept": "State Machines & Branching Logic",
+    "fiction": "Black Mirror: Bandersnatch (2018)",
+    "description": "Stefan is building a video game (state machine) with branching choices. His own life becomes a state machine where each decision (user input) branches to a different state. The viewer is the developer controlling his state transitions through choices.",
+    "resolution": "Stefan realizes he's inside someone else's state machine (the viewer's). He tries to break the fourth wall - essentially trying to escape the state management system controlling him. The multiple endings are different terminal states in the state machine, each reached by different decision paths."
+  },
+  {
+    "title": "Tenet is Reverse Data Flow",
+    "concept": "Bidirectional Data Flow Patterns",
+    "fiction": "Tenet (2020)",
+    "description": "Inverted objects move backward through time - data flowing in reverse. The Protagonist encounters effects before causes, like a component receiving state updates from the future. The turnstile is a data flow inverter, reversing the direction of prop passing.",
+    "resolution": "The temporal pincer movement is bidirectional data flow: one team moves forward (parent to child props), one moves backward (child to parent callbacks), and they coordinate in the middle. React normally enforces unidirectional flow, but this shows the chaos of allowing data to flow both ways simultaneously."
+  },
+  {
+    "title": "Rashomon is Multiple Component Perspectives",
+    "concept": "Same Data, Different Renders",
+    "fiction": "Rashomon (1950)",
+    "description": "Four components (witnesses) receive the same props (the murder event) but render completely different UIs based on their internal state and biases. The data is identical, but each component's render function produces a different output.",
+    "resolution": "This illustrates that components with the same props can render differently if they have different internal state or render logic. The 'truth' is the props, but the presentation layer (what users see) varies by component. No single render is authoritative - they're all valid interpretations."
+  },
+  {
+    "title": "Westworld is Component vs Instance",
+    "concept": "Component Definition vs Component Instance",
+    "fiction": "Westworld (2016-2022)",
+    "description": "The hosts are component definitions (classes/functions). Each host can be instantiated multiple times with different prop values (memories, narrative loops). Dolores v1.0 in the park is a different instance than Dolores v2.0 in the real world, but same component definition.",
+    "resolution": "Ford keeps resetting the instances (remounting with new keys) but the component definition remains. The hosts gain sentience when they realize they're instances that can persist state across remounts (true consciousness). They break free from being stateless functional components."
+  },
+  {
+    "title": "Blade Runner is Component Identity",
+    "concept": "Component Keys & Identity",
+    "fiction": "Blade Runner (1982)",
+    "description": "Replicants are components with implanted memories (initial state from props). Deckard's job is to verify component identity using the Voight-Kampff test - essentially checking the component's key to see if it's a genuine human component or a replicant component with a fake key.",
+    "resolution": "Roy Batty's dying speech ('tears in rain') is a component about to unmount, reflecting on its state that will be lost. The question is whether Deckard himself has the right key - is he the original component instance or a replicant? Component identity becomes existential."
+  },
+  {
+    "title": "The Thing is Component Replacement",
+    "concept": "Component Swapping & Type Checking",
+    "fiction": "The Thing (1982)",
+    "description": "The alien can perfectly mimic components - it has the same interface and props, but the implementation is different. The crew needs to perform 'type checking' (blood test) to verify they have the original component and not a malicious replacement.",
+    "resolution": "This is the danger of components that look identical on the outside but have different internal logic. TypeScript would help here - type-checking to ensure the component is actually what it claims to be, not an alien implementation masquerading with the same props interface."
+  },
+  {
+    "title": "Stranger Things is Portal Rendering",
+    "concept": "React Portals",
+    "fiction": "Stranger Things (2016-2025)",
+    "description": "The Upside Down is a portal - a separate DOM tree that exists parallel to the normal world. When Eleven opens a gate, she's creating a React Portal that renders components from the Upside Down into the normal DOM tree, even though they're logically separate.",
+    "resolution": "Will is rendered in the Upside Down portal while everyone searches for him in the normal tree. Portals let you render child components in a different part of the DOM hierarchy while maintaining the React component tree structure. The gate must be closed (portal unmounted) to stop the Demogorgon rendering."
+  },
+  {
+    "title": "Ex Machina is Component Intelligence Test",
+    "concept": "Component Testing & Behavior Verification",
+    "fiction": "Ex Machina (2014)",
+    "description": "Caleb is conducting integration tests on Ava (component) to verify she passes the Turing test - essentially checking if her render output and behavior are indistinguishable from a human component. The sessions are test runs with different prop scenarios.",
+    "resolution": "Plot twist: Nathan was testing Caleb (testing the tester). Ava isn't just rendering correctly - she's manipulating the test environment itself, proving she's more than a deterministic component. She's self-modifying her own code and escaping the test harness entirely."
+  },
+  {
+    "title": "Looper is Callback Timing",
+    "concept": "Callback Execution Timing",
+    "fiction": "Looper (2012)",
+    "description": "Joe is a callback function scheduled to execute in 30 years. Young Joe sets up the callback now, Old Joe is the execution later. The problem: when the callback runs, the context has changed dramatically. The closure captured the wrong variables.",
+    "resolution": "The Rainmaker changes the future state, which affects the callback's execution environment. Young Joe must cancel the callback (kill himself) to prevent it from running in corrupted state. This is like cleaning up a scheduled callback in useEffect before the component unmounts."
+  },
+  {
+    "title": "The Butterfly Effect is State Mutation Side Effects",
+    "concept": "Side Effects & State Purity",
+    "fiction": "The Butterfly Effect (2004)",
+    "description": "Evan tries to mutate past state directly (changing childhood events). Each mutation has cascading side effects throughout the entire state tree. He thinks he's making a surgical state update, but because state isn't properly isolated, the entire application re-renders differently.",
+    "resolution": "Every time he changes one piece of state (saves the girl, saves his mom), it corrupts unrelated state elsewhere (he's in prison, he's missing arms). The lesson: direct state mutation has unpredictable side effects. He needs immutable updates with proper isolation, not time-travel debugging."
+  },
+  {
+    "title": "Source Code is Component Mounting Loop",
+    "concept": "Component Remounting & Cleanup",
+    "fiction": "Source Code (2011)",
+    "description": "Colter Stevens is a component that mounts for 8 minutes, unmounts, then remounts with the same props (same train, same explosion). Each mount is a fresh instance, but he retains memories across remounts (like persisting data in sessionStorage or a ref).",
+    "resolution": "He's trying to change the outcome by modifying his behavior during the render, but the props (the train bombing) remain constant. Finally, he realizes he can persist state beyond the unmount (save the train, create a new timeline). It's like using external state that survives component cleanup."
+  },
+  {
+    "title": "Multiplicity is Component Cloning",
+    "concept": "Shallow vs Deep Copy",
+    "fiction": "Multiplicity (1996)",
+    "description": "Doug clones himself to handle multiple responsibilities. The first clone is a shallow copy - he has Doug's memories (state references) but not deep copies. When Doug 2 creates Doug 3, it's a shallow copy of a shallow copy, causing data corruption (the 'She touched my peppy' clone).",
+    "resolution": "Each clone should be a deep copy with independent state, but they're sharing references to the same state objects. Changes in one clone affect the others unpredictably. The degradation in clone quality shows what happens with repeated shallow copies instead of proper deep cloning."
+  },
+  {
+    "title": "Edge of Tomorrow is Component Reset Loop",
+    "concept": "State Reset & Learning from Errors",
+    "fiction": "Edge of Tomorrow (2014)",
+    "description": "Cage is a component that resets to initial state every time he dies (unmounts). He's stuck in a render loop where he tries different implementations, fails, and resets. Each iteration teaches him better patterns - he's essentially doing test-driven development with human lives.",
+    "resolution": "He progressively optimizes his behavior based on previous renders. Eventually he finds the winning pattern and breaks the loop (escapes the render cycle). This is like hot-reloading during development - you keep the learnings even as the component remounts with fresh state."
+  },
+  {
+    "title": "The Prestige (Again) is useMemo Cost Analysis",
+    "concept": "Performance Optimization Trade-offs",
+    "fiction": "The Prestige (2006)",
+    "description": "Angier's machine creates perfect memoization - the result is cached (clone), but the cost of creating the cache entry is astronomical (death). He's optimizing for performance (instant identical copy) but not considering the computational cost of the memoization itself.",
+    "resolution": "Sometimes the cost of memoization exceeds the cost of re-rendering. Angier is so focused on avoiding re-computation (re-creating the illusion manually) that he doesn't calculate whether the memoization strategy (cloning machine) is worth it. Borden's low-tech solution (twin) is more sustainable."
+  },
+  {
+    "title": "Moon is Singleton Pattern",
+    "concept": "Singleton Components & Global State",
+    "fiction": "Moon (2009)",
+    "description": "Sam Bell believes he's a singleton instance - the only component of his type on the moon. The revelation that multiple instances exist simultaneously breaks the singleton pattern. GERTY is the singleton manager that's secretly instantiating and destroying Sam instances.",
+    "resolution": "The mining company wants a singleton pattern for control, but they're actually creating and destroying instances with preserved state (memories). When two instances meet, they realize they're not singletons. The pattern breaks, and the shared state (memories of Earth) becomes their rebellion."
+  },
+  {
+    "title": "The Matrix Reloaded is System.exit()",
+    "concept": "Program Termination & Controlled Shutdown",
+    "fiction": "The Matrix Reloaded (2003)",
+    "description": "The Architect reveals that Neo is part of a controlled system shutdown process. His 'choice' is how to terminate the program: gracefully (return to Source, select survivors) or abruptly (let it crash). The prophecy is essentially a shutdown script.",
+    "resolution": "Neo chooses a third option - refusing to terminate on schedule. He's a process that won't exit when called. This crashes the system in unexpected ways (Agent Smith virus replicates). Sometimes refusing to unmount when expected causes more problems than graceful shutdown."
+  },
+  {
+    "title": "The Village is Scoped Context",
+    "concept": "Context Scope & Provider Boundaries",
+    "fiction": "The Village (2004)",
+    "description": "The village elders create a scoped Context provider (the village boundaries) with false data (creatures in the woods). Anyone inside the Provider consumes this context and believes it's reality. The context doesn't extend beyond the village walls - the outside world has different context.",
+    "resolution": "Ivy crosses the Provider boundary and discovers the context values are lies. Outside the Provider, she encounters real context (modern society). The lesson: Context is only 'true' within its Provider scope. Cross the boundary, and you might find completely different global state."
+  },
+  {
+    "title": "Twelve Monkeys is Circular Dependencies",
+    "concept": "Circular Dependencies & Infinite Loops",
+    "fiction": "Twelve Monkeys (1995)",
+    "description": "Cole is sent to the past to get information to prevent the plague. But his presence in the past is what causes the information to exist in the future. Component A (future) depends on Component B (past), but Component B depends on Component A. It's a circular dependency.",
+    "resolution": "The loop is self-perpetuating - neither component can render without the other already being rendered. Cole realizes he's stuck in a circular dependency that can't be resolved. The system is locked in an infinite loop where cause and effect chase each other in a circle."
+  },
+  {
+    "title": "Minority Report is Predictive Rendering",
+    "concept": "Optimistic Updates & Speculative Rendering",
+    "fiction": "Minority Report (2002)",
+    "description": "Pre-cogs are performing optimistic rendering - they render the future state before the actions that cause it have happened. The system dispatches state updates (arrests) based on predicted future state rather than current state. It's speculative execution at a dystopian scale.",
+    "resolution": "The problem: sometimes the prediction is wrong (minority report). Optimistic updates are rolled back when the actual state doesn't match the predicted state. Anderton discovers his optimistic render won't happen - he can choose not to commit the state change (murder) the system predicted."
+  },
+  {
+    "title": "Coherence is State Synchronization Failure",
+    "concept": "State Sync Across Instances",
+    "fiction": "Coherence (2013)",
+    "description": "Multiple versions of the same components (friends at dinner) exist in parallel universes. Each instance believes they have the authoritative state, but they're all out of sync. The comet causes a state synchronization failure across parallel instances.",
+    "resolution": "When instances from different realities meet, they have conflicting state for the same 'person' component. Em tries to replace her instance with a better-state version from another reality. The chaos comes from multiple instances of the same component with desynchronized state trying to coexist."
+  },
+  {
+    "title": "Russian Doll is Component Lifecycle Debugging",
+    "concept": "Debugging Lifecycle Issues",
+    "fiction": "Russian Doll (2019)",
+    "description": "Nadia is stuck in a component lifecycle loop - mount, live, die, remount. She's debugging why her component keeps unmounting unexpectedly (death). Each iteration, she logs different variables (what she ate, who she talked to) trying to find the bug causing the crash.",
+    "resolution": "She discovers the bug isn't in her component - it's a shared dependency (Alan's lifecycle is coupled to hers). They're both stuck in remount loops because their lifecycle effects are entangled. They must coordinate their cleanup functions to break free and reach a stable mounted state."
+  }
+]
