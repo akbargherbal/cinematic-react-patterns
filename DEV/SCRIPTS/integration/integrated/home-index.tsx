@@ -11,64 +11,7 @@ interface Module {
   bgClass: string;
 }
 
-const modules: Module[] = [
-  {
-    path: "/dr-frank",
-    title: "Frankenstein's Forms",
-    subtitle: "Dr. Victor Frankenstein, 18--",
-    concept: "Controlled vs Uncontrolled Components",
-    icon: FlaskConical,
-    colorClass: "text-emerald-500",
-    bgClass: "bg-emerald-950/20 border-emerald-500/30 hover:border-emerald-500",
-  },
-  {
-    path: "/fight-club",
-    title: "Project Mayhem",
-    subtitle: "I am Jack's Component",
-    concept: "Strict Mode & Cleanup Functions",
-    icon: Zap,
-    colorClass: "text-red-500",
-    bgClass: "bg-red-950/20 border-red-500/30 hover:border-red-500",
-  },
-  {
-    path: "/mean-girls",
-    title: "The Burn Book",
-    subtitle: "North Shore High, 2004",
-    concept: "Context API & Prop Drilling",
-    icon: Book,
-    colorClass: "text-pink-500",
-    bgClass: "bg-pink-950/20 border-pink-500/30 hover:border-pink-500",
-  },
-
-  {
-    path: "/clockwork-orange-forced-rerenders",
-    title: "A Clockwork Orange",
-    subtitle: "Alex DeLarge, 1971",
-    concept: "forceUpdate & Forced Re-renders",
-    icon: Zap,
-    colorClass: "text-red-500",
-    bgClass: "bg-red-950/20 border-red-500/30 hover:border-red-500",
-  },
-
-  {
-    path: "/matrix-dependencies",
-    title: "The Matrix Reloaded",
-    subtitle: "Neo, The One, 2003",
-    concept: "useEffect Dependencies",
-    icon: Zap,
-    colorClass: "text-emerald-500",
-    bgClass: "bg-emerald-950/20 border-emerald-500/30 hover:border-emerald-500",
-  },
-
-  {
-    path: "/looper-callback-timing",
-    title: "Looper",
-    subtitle: "Joe, Kansas, 2044",
-    concept: "Callback Execution Timing",
-    icon: Clock,
-    colorClass: "text-amber-500",
-    bgClass: "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
-  },,
+const modules: Module[] = [,
 
   {
     path: "/mean-girls-context-api",
@@ -271,6 +214,16 @@ const modules: Module[] = [
   },
 
   {
+    path: "/clockwork-orange-forced-rerenders",
+    title: "A Clockwork Orange",
+    subtitle: "Alex DeLarge, Dystopian Future, 1971",
+    concept: "forceUpdate() &amp; Uncontrolled Re-renders",
+    icon: Zap,
+    colorClass: "text-red-500",
+    bgClass: "bg-red-950/20 border-red-500/30 hover:border-red-500"
+  },
+
+  {
     path: "/arrival-usememo-expensive-calculations",
     title: "Arrival",
     subtitle: "Dr. Louise Banks, Montana, 2016",
@@ -408,6 +361,16 @@ const modules: Module[] = [
     icon: Eye,
     colorClass: "text-cyan-400",
     bgClass: "bg-slate-950/20 border-cyan-500/30 hover:border-cyan-500"
+  },
+
+  {
+    path: "/looper-callback-timing",
+    title: "Looper",
+    subtitle: "Joe, Kansas Cornfield, 2044",
+    concept: "Callback Execution Timing",
+    icon: Clock,
+    colorClass: "text-amber-500",
+    bgClass: "bg-amber-950/20 border-amber-500/30 hover:border-amber-500"
   },
 
   {

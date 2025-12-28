@@ -3,14 +3,22 @@
 Extract code and integration snippets from Persona B XML output.
 
 Usage:
+    # From file
     python extract_persona_b_output.py <input.xml> [--output-dir ./src]
-    python extract_persona_b_output.py persona_b_response.xml --output-dir ../cinematic-react-patterns/src
+
+    # From string in Python
+    from extract_persona_b_output import main
+    result = main(input_file=xml_string, path=False, output_dir='./EXPORT')
+
+    # With pandas
+    df['RESULT'].apply(lambda x: main(input_file=x, path=False, output_dir='./EXPORT'))
 """
 
 import argparse
 import xml.etree.ElementTree as ET
 from pathlib import Path
 import sys
+from typing import Optional, Dict, Any
 
 
 def parse_xml(xml_content: str) -> ET.Element:
@@ -82,9 +90,6 @@ def extract_integration(root: ET.Element) -> dict:
             integration[key] = element.text.strip()
 
     return integration
-
-
-# jjj
 
 
 def write_files(files: list[dict], output_dir: Path, dry_run: bool = False) -> int:
@@ -168,7 +173,6 @@ def write_plan(plan: str, output_dir: Path, slug: str, dry_run: bool = False) ->
     return 1
 
 
-# jjj
 def print_summary(module_info: dict, files: list[dict], integration: dict):
     """Print extraction summary."""
     print("\n" + "=" * 60)
@@ -186,15 +190,10 @@ def print_summary(module_info: dict, files: list[dict], integration: dict):
     print("=" * 60 + "\n")
 
 
-from typing import Optional, Dict, Any
-from pathlib import Path
-import argparse
-import sys
-
-
 def main(
     input_file: Optional[str] = None,
     output_dir: Optional[str] = None,
+    path: bool = True,
     dry_run: bool = False,
     save_snippets: bool = False,
     save_plan: bool = False,
@@ -203,8 +202,9 @@ def main(
     """Extract code from Persona B XML output.
 
     Args:
-        input_file: Path to XML file containing Persona B output
+        input_file: Either a file path (if path=True) or XML string (if path=False)
         output_dir: Output directory for extracted files (default: ./src)
+        path: If True, treat input_file as file path; if False, treat as XML string
         dry_run: Show what would be extracted without writing files
         save_snippets: Save integration snippets to separate files
         save_plan: Save implementation plan to PLAN.md
@@ -219,8 +219,19 @@ def main(
             - errors (list): Any errors encountered
 
     Raises:
-        FileNotFoundError: If input_file doesn't exist
+        FileNotFoundError: If path=True and input_file doesn't exist
         ValueError: If required arguments are missing
+
+    Examples:
+        # From file path
+        result = main(input_file='response.xml', output_dir='./src')
+
+        # From XML string
+        xml_str = '<response>...</response>'
+        result = main(input_file=xml_str, path=False, output_dir='./src')
+
+        # With pandas DataFrame
+        df['RESULT'].apply(lambda x: main(input_file=x, path=False, output_dir='./EXPORT'))
     """
     # Handle None/missing arguments
     if input_file is None:
@@ -240,15 +251,21 @@ def main(
     }
 
     try:
-        # Read input file
-        input_path = Path(input_file)
-        if not input_path.exists():
-            raise FileNotFoundError(f"Input file not found: {input_path}")
+        # Read XML content based on path parameter
+        if path:
+            # Treat input_file as a file path
+            input_path = Path(input_file)
+            if not input_path.exists():
+                raise FileNotFoundError(f"Input file not found: {input_path}")
 
-        xml_content = input_path.read_text(encoding="utf-8")
+            print(f"📖 Reading: {input_path}")
+            xml_content = input_path.read_text(encoding="utf-8")
+        else:
+            # Treat input_file as XML string directly
+            xml_content = input_file
+            print("📖 Processing XML string")
 
         # Parse XML
-        print(f"📖 Reading: {input_path}")
         root = parse_xml(xml_content)
 
         # Extract components
@@ -389,6 +406,7 @@ def cli_main(argv: Optional[list] = None) -> int:
     result = main(
         input_file=args.input_file,
         output_dir=args.output_dir,
+        path=True,  # CLI always uses file paths
         dry_run=args.dry_run,
         save_snippets=args.save_snippets,
         save_plan=args.save_plan,

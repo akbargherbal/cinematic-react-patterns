@@ -1,9 +1,0 @@
-{
-  path: "/matrix-dependencies",
-  title: "The Matrix Reloaded",
-  subtitle: "Neo, The One, 2003",
-  concept: "useEffect Dependencies",
-  icon: Zap,
-  colorClass: "text-emerald-500",
-  bgClass: "bg-emerald-950/20 border-emerald-500/30 hover:border-emerald-500"
-}

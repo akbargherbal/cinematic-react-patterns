@@ -9,12 +9,7 @@ import { useEffect } from "react";
 
 // Import modules
 import Home from "@modules/home";
-import DrFrank from "@modules/dr-frank";
-import FightClub from "@modules/fight-club";
-import MeanGirls from "@modules/mean-girls";
-import ClockworkOrangeModule from "@modules/clockwork-orange-forced-rerenders";
-import MatrixDependencies from "@modules/matrix-dependencies";
-import LooperCallbackTiming from "@modules/looper-callback-timing";
+
 
 import MeanGirlsContextAPI from "@modules/mean-girls-context-api";
 import FrankensteinModule from "@modules/frankenstein-controlled-components";
@@ -36,6 +31,7 @@ import SixthSenseModule from "@modules/sixth-sense-conditional-rendering";
 import InterstellarAsyncState from "@modules/interstellar-async-state";
 import SocialNetworkStateSync from "@modules/social-network-state-sync";
 import ParasiteComponentInjection from "@modules/parasite-component-injection";
+import ClockworkOrange from "@modules/clockwork-orange-forced-rerenders";
 import ArrivalUseMemo from "@modules/arrival-usememo-expensive-calculations";
 import UsualSuspectsDynamicRendering from "@modules/usual-suspects-dynamic-rendering";
 import PrimerStateTimeTravel from "@modules/primer-state-time-travel";
@@ -50,6 +46,7 @@ import BladeRunnerComponentIdentity from "@modules/blade-runner-component-identi
 import TheThingComponentReplacement from "@modules/the-thing-component-replacement";
 import StrangerThingsPortalRendering from "@modules/stranger-things-portal-rendering";
 import ExMachinaComponentTesting from "@modules/ex-machina-component-testing";
+import LooperCallbackTiming from "@modules/looper-callback-timing";
 import ButterflyEffectModule from "@modules/butterfly-effect-state-mutation";
 import SourceCodeRemountingLoop from "@modules/source-code-remounting-loop";
 import MultiplicityModule from "@modules/multiplicity-component-cloning";
@@ -141,86 +138,6 @@ export default function App() {
           }
         />
 
-        {/* Module 1: Frankenstein's Forms */}
-        <Route
-          path="/dr-frank"
-          element={
-            <ModuleWrapper
-              bgClass="bg-slate-950"
-              textClass="text-slate-300"
-              fontClass="font-serif"
-            >
-              <DrFrank />
-            </ModuleWrapper>
-          }
-        />
-
-        {/* Module 2: Project Mayhem (Fight Club) */}
-        <Route
-          path="/fight-club"
-          element={
-            <ModuleWrapper
-              bgClass="bg-black"
-              textClass="text-white"
-              fontClass="font-sans"
-            >
-              <FightClub />
-            </ModuleWrapper>
-          }
-        />
-
-        {/* Module 3: The Burn Book (Mean Girls) */}
-        <Route
-          path="/mean-girls"
-          element={
-            <ModuleWrapper
-              bgClass="bg-pink-50"
-              textClass="text-gray-900"
-              fontClass="font-sans"
-            >
-              <MeanGirls />
-            </ModuleWrapper>
-          }
-        />
-
-        <Route
-          path="/clockwork-orange-forced-rerenders"
-          element={
-            <ModuleWrapper
-              bgClass="bg-slate-950"
-              textClass="text-slate-200"
-              fontClass="font-sans"
-            >
-              <ClockworkOrangeModule />
-            </ModuleWrapper>
-          }
-        />
-
-        <Route
-          path="/matrix-dependencies"
-          element={
-            <ModuleWrapper
-              bgClass="bg-emerald-950"
-              textClass="text-slate-300"
-              fontClass="font-serif"
-            >
-              <MatrixDependencies />
-            </ModuleWrapper>
-          }
-        />
-
-        <Route
-          path="/looper-callback-timing"
-          element={
-            <ModuleWrapper
-              bgClass="bg-slate-950"
-              textClass="text-slate-200"
-              fontClass="font-sans"
-            >
-              <LooperCallbackTiming />
-            </ModuleWrapper>
-          }
-        />
 
         
         <Route
@@ -484,6 +401,19 @@ export default function App() {
         />
 
         <Route
+          path="/clockwork-orange-forced-rerenders"
+          element={
+            <ModuleWrapper
+              bgClass="bg-slate-950"
+              textClass="text-slate-300"
+              fontClass="font-sans"
+            >
+              <ClockworkOrange />
+            </ModuleWrapper>
+          }
+        />
+
+        <Route
           path="/arrival-usememo-expensive-calculations"
           element={
             <ModuleWrapper
@@ -661,6 +591,19 @@ export default function App() {
               fontClass="font-sans"
             >
               <ExMachinaComponentTesting />
+            </ModuleWrapper>
+          }
+        />
+
+        <Route
+          path="/looper-callback-timing"
+          element={
+            <ModuleWrapper
+              bgClass="bg-slate-950"
+              textClass="text-slate-300"
+              fontClass="font-sans"
+            >
+              <LooperCallbackTiming />
             </ModuleWrapper>
           }
         />
