@@ -198,41 +198,42 @@ export default function LOTRPropDrilling() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-serif">
+    <div className="min-h-screen bg-slate-950 font-serif text-slate-300">
       {/* Header */}
       <header className="border-b border-slate-700/50 bg-slate-900/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-4 mb-4">
-            <Mountain className="w-12 h-12 text-amber-500" />
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+          <div className="mb-4 flex items-center gap-4">
+            <Mountain className="h-12 w-12 text-amber-500" />
             <div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-slate-100">
+              <h1 className="text-3xl font-bold text-slate-100 sm:text-4xl lg:text-5xl">
                 The Lord of the Rings
               </h1>
-              <p className="text-lg sm:text-xl text-amber-500 mt-1">
+              <p className="mt-1 text-lg text-amber-500 sm:text-xl">
                 Prop Drilling Hell
               </p>
             </div>
           </div>
-          <p className="text-base sm:text-lg text-slate-400 max-w-3xl">
-            One Ring to pass them all, One Ring to bind them, One Ring to drill through all components and in the darkness type them.
+          <p className="max-w-3xl text-base text-slate-400 sm:text-lg">
+            One Ring to pass them all, One Ring to bind them, One Ring to drill
+            through all components and in the darkness type them.
           </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-8 sm:px-6 lg:px-8 pb-32">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8">
+      <main className="mx-auto max-w-7xl px-4 py-8 pb-32 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-5">
           {/* Narrative Content */}
           <div className="lg:col-span-2">
             <div className="sticky top-8">
-              <div className="flex items-center gap-3 mb-6">
-                <BookOpen className="w-6 h-6 text-amber-500" />
-                <h2 className="text-2xl sm:text-3xl font-bold text-slate-100">
+              <div className="mb-6 flex items-center gap-3">
+                <BookOpen className="h-6 w-6 text-amber-500" />
+                <h2 className="text-2xl font-bold text-slate-100 sm:text-3xl">
                   {currentChapter.title}
                 </h2>
               </div>
               <div className="prose prose-invert prose-slate max-w-none">
-                <div className="text-base leading-relaxed whitespace-pre-line">
+                <div className="whitespace-pre-line text-base leading-relaxed">
                   {currentChapter.content}
                 </div>
               </div>
@@ -241,24 +242,25 @@ export default function LOTRPropDrilling() {
 
           {/* Interactive Demonstration */}
           <div className="lg:col-span-3">
-            <div className="bg-slate-900/50 border border-slate-700/50 rounded-lg p-6">
+            <div className="rounded-lg border border-slate-700/50 bg-slate-900/50 p-6">
               {chapter === 0 && (
                 <div>
-                  <h3 className="text-xl font-bold text-amber-500 mb-4 flex items-center gap-2">
-                    <Users className="w-5 h-5" />
+                  <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-amber-500">
+                    <Users className="h-5 w-5" />
                     The Component Tree
                   </h3>
-                  <p className="text-sm text-slate-400 mb-6">
-                    Watch the Ring (state) pass through each component. Notice how many components handle it without using it.
+                  <p className="mb-6 text-sm text-slate-400">
+                    Watch the Ring (state) pass through each component. Notice
+                    how many components handle it without using it.
                   </p>
-                  <div className="space-y-3 mb-6">
+                  <div className="mb-6 space-y-3">
                     {fellowship.map((member, index) => (
                       <div
                         key={member.name}
-                        className={`p-4 rounded border transition-all duration-300 ${
+                        className={`rounded border p-4 transition-all duration-300 ${
                           index === ringPosition
-                            ? "bg-amber-500/20 border-amber-500 shadow-lg shadow-amber-500/20"
-                            : "bg-slate-800/50 border-slate-700"
+                            ? "border-amber-500 bg-amber-500/20 shadow-lg shadow-amber-500/20"
+                            : "border-slate-700 bg-slate-800/50"
                         }`}
                         style={{ marginLeft: `${index * 8}px` }}
                       >
@@ -273,16 +275,16 @@ export default function LOTRPropDrilling() {
                           </div>
                           <div className="flex items-center gap-2">
                             {member.usesRing ? (
-                              <span className="text-xs px-2 py-1 bg-emerald-500/20 text-emerald-400 rounded border border-emerald-500/30">
+                              <span className="rounded border border-emerald-500/30 bg-emerald-500/20 px-2 py-1 text-xs text-emerald-400">
                                 Uses Ring
                               </span>
                             ) : (
-                              <span className="text-xs px-2 py-1 bg-slate-700/50 text-slate-400 rounded border border-slate-600">
+                              <span className="rounded border border-slate-600 bg-slate-700/50 px-2 py-1 text-xs text-slate-400">
                                 Passes Only
                               </span>
                             )}
                             {index === ringPosition && (
-                              <div className="w-6 h-6 bg-amber-500 rounded-full animate-pulse shadow-lg shadow-amber-500/50" />
+                              <div className="h-6 w-6 animate-pulse rounded-full bg-amber-500 shadow-lg shadow-amber-500/50" />
                             )}
                           </div>
                         </div>
@@ -291,48 +293,51 @@ export default function LOTRPropDrilling() {
                   </div>
                   <button
                     onClick={passRing}
-                    className="w-full px-6 py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded transition-colors"
+                    className="w-full rounded bg-amber-500 px-6 py-3 font-semibold text-slate-950 transition-colors hover:bg-amber-600"
                   >
                     Pass the Ring
                   </button>
-                  <div className="mt-4 p-4 bg-slate-800/50 border border-slate-700 rounded text-sm">
-                    <strong className="text-amber-500">Observation:</strong> Only 3 of 11 components actually use the Ring, yet all must handle it.
+                  <div className="mt-4 rounded border border-slate-700 bg-slate-800/50 p-4 text-sm">
+                    <strong className="text-amber-500">Observation:</strong>{" "}
+                    Only 3 of 11 components actually use the Ring, yet all must
+                    handle it.
                   </div>
                 </div>
               )}
 
               {chapter === 1 && (
                 <div>
-                  <h3 className="text-xl font-bold text-amber-500 mb-4 flex items-center gap-2">
-                    <AlertTriangle className="w-5 h-5" />
+                  <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-amber-500">
+                    <AlertTriangle className="h-5 w-5" />
                     Unnecessary Coupling
                   </h3>
-                  <p className="text-sm text-slate-400 mb-6">
-                    Click on Fellowship members to see their prop interfaces. Notice the bloat.
+                  <p className="mb-6 text-sm text-slate-400">
+                    Click on Fellowship members to see their prop interfaces.
+                    Notice the bloat.
                   </p>
-                  <div className="grid grid-cols-2 gap-3 mb-6">
+                  <div className="mb-6 grid grid-cols-2 gap-3">
                     {fellowship.slice(2, 8).map((member) => (
                       <button
                         key={member.name}
                         onClick={() => setSelectedMember(member.name)}
-                        className={`p-4 rounded border text-left transition-all ${
+                        className={`rounded border p-4 text-left transition-all ${
                           selectedMember === member.name
-                            ? "bg-amber-500/20 border-amber-500"
-                            : "bg-slate-800/50 border-slate-700 hover:border-slate-600"
+                            ? "border-amber-500 bg-amber-500/20"
+                            : "border-slate-700 bg-slate-800/50 hover:border-slate-600"
                         }`}
                       >
-                        <div className="font-semibold text-slate-100 text-sm">
+                        <div className="text-sm font-semibold text-slate-100">
                           {member.name}
                         </div>
-                        <div className="text-xs text-slate-400 mt-1">
+                        <div className="mt-1 text-xs text-slate-400">
                           {member.role}
                         </div>
                       </button>
                     ))}
                   </div>
                   {selectedMember && (
-                    <div className="p-4 bg-slate-800 border border-slate-700 rounded font-mono text-xs">
-                      <div className="text-amber-500 mb-2">
+                    <div className="rounded border border-slate-700 bg-slate-800 p-4 font-mono text-xs">
+                      <div className="mb-2 text-amber-500">
                         interface {selectedMember}Props {"{"}
                       </div>
                       <div className="ml-4 space-y-1">
@@ -345,7 +350,7 @@ export default function LOTRPropDrilling() {
                         <div className="text-emerald-400">
                           onMove: (direction: Direction) =&gt; void;
                         </div>
-                        <div className="text-slate-500 mt-2">
+                        <div className="mt-2 text-slate-500">
                           // Props forced by prop drilling:
                         </div>
                         <div className="text-red-400 line-through opacity-50">
@@ -358,30 +363,34 @@ export default function LOTRPropDrilling() {
                           ringInterface: RingInterface; // Unnecessary coupling!
                         </div>
                       </div>
-                      <div className="text-amber-500 mt-2">{"}"}</div>
+                      <div className="mt-2 text-amber-500">{"}"}</div>
                     </div>
                   )}
-                  <div className="mt-4 p-4 bg-red-950/20 border border-red-500/30 rounded text-sm">
-                    <strong className="text-red-400">Problem:</strong> If Ring interface changes, ALL components must update, even those that never use it.
+                  <div className="mt-4 rounded border border-red-500/30 bg-red-950/20 p-4 text-sm">
+                    <strong className="text-red-400">Problem:</strong> If Ring
+                    interface changes, ALL components must update, even those
+                    that never use it.
                   </div>
                 </div>
               )}
 
               {chapter === 2 && (
                 <div>
-                  <h3 className="text-xl font-bold text-amber-500 mb-4">
+                  <h3 className="mb-4 text-xl font-bold text-amber-500">
                     Fragility & Corruption
                   </h3>
-                  <p className="text-sm text-slate-400 mb-6">
-                    The longer the chain, the more vulnerable it becomes. Watch what happens when components try to mutate or steal the state.
+                  <p className="mb-6 text-sm text-slate-400">
+                    The longer the chain, the more vulnerable it becomes. Watch
+                    what happens when components try to mutate or steal the
+                    state.
                   </p>
-                  <div className="space-y-4 mb-6">
-                    <div className="p-4 bg-slate-800/50 border border-slate-700 rounded">
-                      <div className="flex items-center justify-between mb-2">
+                  <div className="mb-6 space-y-4">
+                    <div className="rounded border border-slate-700 bg-slate-800/50 p-4">
+                      <div className="mb-2 flex items-center justify-between">
                         <span className="font-semibold text-slate-100">
                           Boromir (Mutator)
                         </span>
-                        <span className="text-xs px-2 py-1 bg-red-500/20 text-red-400 rounded border border-red-500/30">
+                        <span className="rounded border border-red-500/30 bg-red-500/20 px-2 py-1 text-xs text-red-400">
                           Mutation Attempt
                         </span>
                       </div>
@@ -389,12 +398,12 @@ export default function LOTRPropDrilling() {
                         ring.power = "MINE"; // Corrupts state!
                       </div>
                     </div>
-                    <div className="p-4 bg-slate-800/50 border border-slate-700 rounded">
-                      <div className="flex items-center justify-between mb-2">
+                    <div className="rounded border border-slate-700 bg-slate-800/50 p-4">
+                      <div className="mb-2 flex items-center justify-between">
                         <span className="font-semibold text-slate-100">
                           Gollum (Rogue Component)
                         </span>
-                        <span className="text-xs px-2 py-1 bg-red-500/20 text-red-400 rounded border border-red-500/30 animate-pulse">
+                        <span className="animate-pulse rounded border border-red-500/30 bg-red-500/20 px-2 py-1 text-xs text-red-400">
                           Theft Attempt
                         </span>
                       </div>
@@ -402,12 +411,12 @@ export default function LOTRPropDrilling() {
                         const stolen = ring; // Unauthorized access!
                       </div>
                     </div>
-                    <div className="p-4 bg-slate-800/50 border border-slate-700 rounded">
-                      <div className="flex items-center justify-between mb-2">
+                    <div className="rounded border border-slate-700 bg-slate-800/50 p-4">
+                      <div className="mb-2 flex items-center justify-between">
                         <span className="font-semibold text-slate-100">
                           Pippin (Curious Component)
                         </span>
-                        <span className="text-xs px-2 py-1 bg-yellow-500/20 text-yellow-400 rounded border border-yellow-500/30">
+                        <span className="rounded border border-yellow-500/30 bg-yellow-500/20 px-2 py-1 text-xs text-yellow-400">
                           Read-Only Access
                         </span>
                       </div>
@@ -416,35 +425,38 @@ export default function LOTRPropDrilling() {
                       </div>
                     </div>
                   </div>
-                  <div className="p-4 bg-red-950/20 border border-red-500/30 rounded text-sm">
-                    <strong className="text-red-400">Vulnerability:</strong> Every component in the chain is a potential attack vector. More handlers = more risk.
+                  <div className="rounded border border-red-500/30 bg-red-950/20 p-4 text-sm">
+                    <strong className="text-red-400">Vulnerability:</strong>{" "}
+                    Every component in the chain is a potential attack vector.
+                    More handlers = more risk.
                   </div>
                 </div>
               )}
 
               {chapter === 3 && (
                 <div>
-                  <h3 className="text-xl font-bold text-amber-500 mb-4 flex items-center gap-2">
-                    <Zap className="w-5 h-5" />
+                  <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-amber-500">
+                    <Zap className="h-5 w-5" />
                     Eagles vs. Walking
                   </h3>
-                  <p className="text-sm text-slate-400 mb-6">
-                    Choose your approach: Prop drilling (walk) or Context API (fly). See the consequences.
+                  <p className="mb-6 text-sm text-slate-400">
+                    Choose your approach: Prop drilling (walk) or Context API
+                    (fly). See the consequences.
                   </p>
-                  <div className="grid grid-cols-2 gap-4 mb-6">
+                  <div className="mb-6 grid grid-cols-2 gap-4">
                     <button
                       onClick={() => {
                         setUseEagles(false);
                         setNazgulDetected(false);
                       }}
-                      className={`p-6 rounded border transition-all ${
+                      className={`rounded border p-6 transition-all ${
                         !useEagles
-                          ? "bg-emerald-500/20 border-emerald-500"
-                          : "bg-slate-800/50 border-slate-700 hover:border-slate-600"
+                          ? "border-emerald-500 bg-emerald-500/20"
+                          : "border-slate-700 bg-slate-800/50 hover:border-slate-600"
                       }`}
                     >
-                      <Mountain className="w-8 h-8 text-emerald-500 mb-2" />
-                      <div className="font-semibold text-slate-100 mb-1">
+                      <Mountain className="mb-2 h-8 w-8 text-emerald-500" />
+                      <div className="mb-1 font-semibold text-slate-100">
                         Walk to Mordor
                       </div>
                       <div className="text-xs text-slate-400">
@@ -453,14 +465,14 @@ export default function LOTRPropDrilling() {
                     </button>
                     <button
                       onClick={toggleEagles}
-                      className={`p-6 rounded border transition-all ${
+                      className={`rounded border p-6 transition-all ${
                         useEagles
-                          ? "bg-red-500/20 border-red-500"
-                          : "bg-slate-800/50 border-slate-700 hover:border-slate-600"
+                          ? "border-red-500 bg-red-500/20"
+                          : "border-slate-700 bg-slate-800/50 hover:border-slate-600"
                       }`}
                     >
-                      <Zap className="w-8 h-8 text-amber-500 mb-2" />
-                      <div className="font-semibold text-slate-100 mb-1">
+                      <Zap className="mb-2 h-8 w-8 text-amber-500" />
+                      <div className="mb-1 font-semibold text-slate-100">
                         Use the Eagles
                       </div>
                       <div className="text-xs text-slate-400">Context API</div>
@@ -469,9 +481,9 @@ export default function LOTRPropDrilling() {
 
                   {!useEagles && (
                     <div className="space-y-3">
-                      <div className="p-4 bg-emerald-950/20 border border-emerald-500/30 rounded">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="w-2 h-2 bg-emerald-500 rounded-full" />
+                      <div className="rounded border border-emerald-500/30 bg-emerald-950/20 p-4">
+                        <div className="mb-2 flex items-center gap-2">
+                          <div className="h-2 w-2 rounded-full bg-emerald-500" />
                           <span className="text-sm font-semibold text-emerald-400">
                             Security: High
                           </span>
@@ -480,9 +492,9 @@ export default function LOTRPropDrilling() {
                           Explicit control over which components access state
                         </p>
                       </div>
-                      <div className="p-4 bg-yellow-950/20 border border-yellow-500/30 rounded">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="w-2 h-2 bg-yellow-500 rounded-full" />
+                      <div className="rounded border border-yellow-500/30 bg-yellow-950/20 p-4">
+                        <div className="mb-2 flex items-center gap-2">
+                          <div className="h-2 w-2 rounded-full bg-yellow-500" />
                           <span className="text-sm font-semibold text-yellow-400">
                             Convenience: Low
                           </span>
@@ -491,9 +503,9 @@ export default function LOTRPropDrilling() {
                           Must pass through all intermediate components
                         </p>
                       </div>
-                      <div className="p-4 bg-yellow-950/20 border border-yellow-500/30 rounded">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="w-2 h-2 bg-yellow-500 rounded-full" />
+                      <div className="rounded border border-yellow-500/30 bg-yellow-950/20 p-4">
+                        <div className="mb-2 flex items-center gap-2">
+                          <div className="h-2 w-2 rounded-full bg-yellow-500" />
                           <span className="text-sm font-semibold text-yellow-400">
                             Maintainability: Low
                           </span>
@@ -508,21 +520,22 @@ export default function LOTRPropDrilling() {
                   {useEagles && (
                     <div className="space-y-3">
                       {nazgulDetected && (
-                        <div className="p-4 bg-red-950/20 border border-red-500 rounded animate-pulse">
-                          <div className="flex items-center gap-2 mb-2">
-                            <AlertTriangle className="w-5 h-5 text-red-500" />
+                        <div className="animate-pulse rounded border border-red-500 bg-red-950/20 p-4">
+                          <div className="mb-2 flex items-center gap-2">
+                            <AlertTriangle className="h-5 w-5 text-red-500" />
                             <span className="text-sm font-semibold text-red-400">
                               NAZGÛL DETECTED!
                             </span>
                           </div>
                           <p className="text-xs text-slate-400">
-                            Global state broadcast detected by security threats. Ring exposed to all components!
+                            Global state broadcast detected by security threats.
+                            Ring exposed to all components!
                           </p>
                         </div>
                       )}
-                      <div className="p-4 bg-red-950/20 border border-red-500/30 rounded">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="w-2 h-2 bg-red-500 rounded-full" />
+                      <div className="rounded border border-red-500/30 bg-red-950/20 p-4">
+                        <div className="mb-2 flex items-center gap-2">
+                          <div className="h-2 w-2 rounded-full bg-red-500" />
                           <span className="text-sm font-semibold text-red-400">
                             Security: Low
                           </span>
@@ -531,9 +544,9 @@ export default function LOTRPropDrilling() {
                           Any component can access state globally
                         </p>
                       </div>
-                      <div className="p-4 bg-emerald-950/20 border border-emerald-500/30 rounded">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="w-2 h-2 bg-emerald-500 rounded-full" />
+                      <div className="rounded border border-emerald-500/30 bg-emerald-950/20 p-4">
+                        <div className="mb-2 flex items-center gap-2">
+                          <div className="h-2 w-2 rounded-full bg-emerald-500" />
                           <span className="text-sm font-semibold text-emerald-400">
                             Convenience: High
                           </span>
@@ -542,9 +555,9 @@ export default function LOTRPropDrilling() {
                           Direct access without intermediate components
                         </p>
                       </div>
-                      <div className="p-4 bg-emerald-950/20 border border-emerald-500/30 rounded">
-                        <div className="flex items-center gap-2 mb-2">
-                          <div className="w-2 h-2 bg-emerald-500 rounded-full" />
+                      <div className="rounded border border-emerald-500/30 bg-emerald-950/20 p-4">
+                        <div className="mb-2 flex items-center gap-2">
+                          <div className="h-2 w-2 rounded-full bg-emerald-500" />
                           <span className="text-sm font-semibold text-emerald-400">
                             Maintainability: High
                           </span>
@@ -560,18 +573,19 @@ export default function LOTRPropDrilling() {
 
               {chapter === 4 && (
                 <div>
-                  <h3 className="text-xl font-bold text-amber-500 mb-4">
+                  <h3 className="mb-4 text-xl font-bold text-amber-500">
                     The Trade-Offs Matrix
                   </h3>
-                  <p className="text-sm text-slate-400 mb-6">
-                    Understanding when to use each approach based on your requirements.
+                  <p className="mb-6 text-sm text-slate-400">
+                    Understanding when to use each approach based on your
+                    requirements.
                   </p>
                   <div className="space-y-4">
-                    <div className="p-4 bg-slate-800/50 border border-slate-700 rounded">
-                      <div className="font-semibold text-emerald-400 mb-2">
+                    <div className="rounded border border-slate-700 bg-slate-800/50 p-4">
+                      <div className="mb-2 font-semibold text-emerald-400">
                         ✓ Use Prop Drilling When:
                       </div>
-                      <ul className="text-sm text-slate-300 space-y-1 ml-4">
+                      <ul className="ml-4 space-y-1 text-sm text-slate-300">
                         <li>• Data is sensitive (auth tokens, credentials)</li>
                         <li>• You need explicit control over access</li>
                         <li>• Security is more important than convenience</li>
@@ -579,11 +593,11 @@ export default function LOTRPropDrilling() {
                         <li>• You need to audit data flow</li>
                       </ul>
                     </div>
-                    <div className="p-4 bg-slate-800/50 border border-slate-700 rounded">
-                      <div className="font-semibold text-amber-400 mb-2">
+                    <div className="rounded border border-slate-700 bg-slate-800/50 p-4">
+                      <div className="mb-2 font-semibold text-amber-400">
                         ✓ Use Context When:
                       </div>
-                      <ul className="text-sm text-slate-300 space-y-1 ml-4">
+                      <ul className="ml-4 space-y-1 text-sm text-slate-300">
                         <li>• Data is non-sensitive (theme, language)</li>
                         <li>• Many components at different levels need it</li>
                         <li>• Convenience outweighs security concerns</li>
@@ -591,12 +605,14 @@ export default function LOTRPropDrilling() {
                         <li>• Prop drilling would be truly painful</li>
                       </ul>
                     </div>
-                    <div className="p-4 bg-amber-950/20 border border-amber-500/30 rounded">
-                      <div className="font-semibold text-amber-400 mb-2">
+                    <div className="rounded border border-amber-500/30 bg-amber-950/20 p-4">
+                      <div className="mb-2 font-semibold text-amber-400">
                         The Wisdom:
                       </div>
                       <p className="text-sm text-slate-300">
-                        Prop drilling isn't inherently bad. It's a tool with trade-offs. Choose based on your requirements, not convenience. Sometimes, the hard path is the right path.
+                        Prop drilling isn't inherently bad. It's a tool with
+                        trade-offs. Choose based on your requirements, not
+                        convenience. Sometimes, the hard path is the right path.
                       </p>
                     </div>
                   </div>
@@ -608,13 +624,13 @@ export default function LOTRPropDrilling() {
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-t border-slate-700/50">
-        <div className="max-w-7xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-slate-700/50 bg-slate-900/95 backdrop-blur-sm">
+        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <button
               onClick={handlePrevious}
               disabled={chapter === 0}
-              className="px-4 sm:px-6 py-2 bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-slate-800 text-slate-100 font-semibold rounded transition-colors text-sm sm:text-base"
+              className="rounded bg-slate-800 px-4 py-2 text-sm font-semibold text-slate-100 transition-colors hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-slate-800 sm:px-6 sm:text-base"
             >
               ← Previous
             </button>
@@ -630,9 +646,9 @@ export default function LOTRPropDrilling() {
                     setUseEagles(false);
                     setNazgulDetected(false);
                   }}
-                  className={`w-2 h-2 rounded-full transition-all ${
+                  className={`h-2 w-2 rounded-full transition-all ${
                     index === chapter
-                      ? "bg-amber-500 w-8"
+                      ? "w-8 bg-amber-500"
                       : "bg-slate-600 hover:bg-slate-500"
                   }`}
                   aria-label={`Go to chapter ${index + 1}`}
@@ -643,13 +659,13 @@ export default function LOTRPropDrilling() {
             <button
               onClick={handleNext}
               disabled={chapter === chapters.length - 1}
-              className="px-4 sm:px-6 py-2 bg-amber-500 hover:bg-amber-600 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-amber-500 text-slate-950 font-semibold rounded transition-colors text-sm sm:text-base"
+              className="rounded bg-amber-500 px-4 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-amber-600 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-amber-500 sm:px-6 sm:text-base"
             >
               Next →
             </button>
           </div>
-          <div className="text-center mt-2">
-            <span className="text-xs sm:text-sm text-slate-400">
+          <div className="mt-2 text-center">
+            <span className="text-xs text-slate-400 sm:text-sm">
               Chapter {chapter + 1} of {chapters.length}: {currentChapter.title}
             </span>
           </div>

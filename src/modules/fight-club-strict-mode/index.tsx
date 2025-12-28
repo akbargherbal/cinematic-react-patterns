@@ -1,5 +1,14 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Flame, Zap, AlertTriangle, CheckCircle, Code, Play, Pause, RotateCcw } from "lucide-react";
+import {
+  Flame,
+  Zap,
+  AlertTriangle,
+  CheckCircle,
+  Code,
+  Play,
+  Pause,
+  RotateCcw,
+} from "lucide-react";
 
 interface Chapter {
   id: string;
@@ -216,14 +225,14 @@ export default function FightClubStrictMode() {
   const [hasCleanup, setHasCleanup] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
   const [executionLog, setExecutionLog] = useState<string[]>([]);
-  
+
   const intervalsRef = useRef<NodeJS.Timeout[]>([]);
   const mountCountRef = useRef(0);
 
   const currentChapter = chapters[chapter];
 
   const addLog = useCallback((message: string) => {
-    setExecutionLog(prev => [...prev.slice(-5), message]);
+    setExecutionLog((prev) => [...prev.slice(-5), message]);
   }, []);
 
   const simulateEffect = useCallback(() => {
@@ -232,16 +241,16 @@ export default function FightClubStrictMode() {
     const mountId = mountCountRef.current;
 
     addLog(`[Mount ${mountId}] Effect running...`);
-    setConnectionCount(prev => prev + 1);
-    
+    setConnectionCount((prev) => prev + 1);
+
     const interval = setInterval(() => {
-      setIntervalCount(prev => prev + 1);
+      setIntervalCount((prev) => prev + 1);
     }, 1000);
-    
+
     intervalsRef.current.push(interval);
 
     if (!hasCleanup) {
-      setBurnIntensity(prev => Math.min(prev + 20, 100));
+      setBurnIntensity((prev) => Math.min(prev + 20, 100));
     }
 
     if (strictModeEnabled) {
@@ -249,24 +258,26 @@ export default function FightClubStrictMode() {
         addLog(`[Unmount ${mountId}] StrictMode cleanup...`);
         if (hasCleanup) {
           clearInterval(interval);
-          intervalsRef.current = intervalsRef.current.filter(i => i !== interval);
-          setConnectionCount(prev => Math.max(prev - 1, 0));
+          intervalsRef.current = intervalsRef.current.filter(
+            (i) => i !== interval,
+          );
+          setConnectionCount((prev) => Math.max(prev - 1, 0));
           addLog(`[Unmount ${mountId}] Resources cleaned up ✓`);
-          setBurnIntensity(prev => Math.max(prev - 15, 0));
+          setBurnIntensity((prev) => Math.max(prev - 15, 0));
         } else {
           addLog(`[Unmount ${mountId}] No cleanup! Resource leaked ✗`);
         }
 
         setTimeout(() => {
           addLog(`[Remount ${mountId}] Effect running again...`);
-          setConnectionCount(prev => prev + 1);
+          setConnectionCount((prev) => prev + 1);
           const newInterval = setInterval(() => {
-            setIntervalCount(prev => prev + 1);
+            setIntervalCount((prev) => prev + 1);
           }, 1000);
           intervalsRef.current.push(newInterval);
-          
+
           if (!hasCleanup) {
-            setBurnIntensity(prev => Math.min(prev + 20, 100));
+            setBurnIntensity((prev) => Math.min(prev + 20, 100));
           }
         }, 500);
       }, 1000);
@@ -291,39 +302,69 @@ export default function FightClubStrictMode() {
   }, []);
 
   const resourceTable = [
-    { type: "WebSocket", create: "new WebSocket(url)", cleanup: "socket.close()" },
-    { type: "Interval", create: "setInterval(fn, ms)", cleanup: "clearInterval(id)" },
-    { type: "Timeout", create: "setTimeout(fn, ms)", cleanup: "clearTimeout(id)" },
-    { type: "Event Listener", create: "element.addEventListener()", cleanup: "element.removeEventListener()" },
-    { type: "Subscription", create: "api.subscribe(fn)", cleanup: "subscription.unsubscribe()" },
-    { type: "Animation Frame", create: "requestAnimationFrame(fn)", cleanup: "cancelAnimationFrame(id)" },
+    {
+      type: "WebSocket",
+      create: "new WebSocket(url)",
+      cleanup: "socket.close()",
+    },
+    {
+      type: "Interval",
+      create: "setInterval(fn, ms)",
+      cleanup: "clearInterval(id)",
+    },
+    {
+      type: "Timeout",
+      create: "setTimeout(fn, ms)",
+      cleanup: "clearTimeout(id)",
+    },
+    {
+      type: "Event Listener",
+      create: "element.addEventListener()",
+      cleanup: "element.removeEventListener()",
+    },
+    {
+      type: "Subscription",
+      create: "api.subscribe(fn)",
+      cleanup: "subscription.unsubscribe()",
+    },
+    {
+      type: "Animation Frame",
+      create: "requestAnimationFrame(fn)",
+      cleanup: "cancelAnimationFrame(id)",
+    },
   ];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 font-sans">
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-200">
       {/* Header */}
-      <header className="border-b border-red-500/30 bg-slate-900/50 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Flame className="w-8 h-8 text-red-500" />
-            <h1 className="text-4xl font-bold tracking-tight text-red-500">Fight Club</h1>
+      <header className="sticky top-0 z-10 border-b border-red-500/30 bg-slate-900/50 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-6">
+          <div className="mb-2 flex items-center gap-3">
+            <Flame className="h-8 w-8 text-red-500" />
+            <h1 className="text-4xl font-bold tracking-tight text-red-500">
+              Fight Club
+            </h1>
           </div>
           <p className="text-lg text-slate-400">Tyler Durden, 1999</p>
-          <p className="text-sm text-red-400 font-semibold mt-1">React.StrictMode & Effect Cleanup</p>
+          <p className="mt-1 text-sm font-semibold text-red-400">
+            React.StrictMode & Effect Cleanup
+          </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 py-12 pb-32">
+      <main className="mx-auto max-w-6xl px-4 py-12 pb-32">
         {/* Chapter Title */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-red-500 mb-2">{currentChapter.title}</h2>
+          <h2 className="mb-2 text-3xl font-bold text-red-500">
+            {currentChapter.title}
+          </h2>
           <div className="h-1 w-24 bg-red-500"></div>
         </div>
 
         {/* Chapter Content */}
-        <div className="prose prose-invert prose-lg max-w-none mb-12">
-          {currentChapter.content.split('\n\n').map((paragraph, idx) => (
+        <div className="prose prose-invert prose-lg mb-12 max-w-none">
+          {currentChapter.content.split("\n\n").map((paragraph, idx) => (
             <p key={idx} className="mb-4 leading-relaxed text-slate-300">
               {paragraph}
             </p>
@@ -332,33 +373,38 @@ export default function FightClubStrictMode() {
 
         {/* Interactive Demonstrations */}
         {chapter === 0 && (
-          <div className="bg-slate-900/50 border border-red-500/30 rounded-lg p-6 mb-8">
-            <div className="flex items-center gap-2 mb-4">
-              <Code className="w-5 h-5 text-red-500" />
-              <h3 className="text-xl font-bold text-red-500">The StrictMode Wrapper</h3>
+          <div className="mb-8 rounded-lg border border-red-500/30 bg-slate-900/50 p-6">
+            <div className="mb-4 flex items-center gap-2">
+              <Code className="h-5 w-5 text-red-500" />
+              <h3 className="text-xl font-bold text-red-500">
+                The StrictMode Wrapper
+              </h3>
             </div>
-            <div className="bg-slate-950 border-2 border-red-500/50 rounded p-4 font-mono text-sm">
+            <div className="rounded border-2 border-red-500/50 bg-slate-950 p-4 font-mono text-sm">
               <div className="text-red-400">&lt;React.StrictMode&gt;</div>
               <div className="pl-4 text-slate-300">&lt;App /&gt;</div>
               <div className="text-red-400">&lt;/React.StrictMode&gt;</div>
             </div>
             <p className="mt-4 text-sm text-slate-400">
-              In development, this wrapper forces your effects to run twice. Mount → Unmount → Mount again.
+              In development, this wrapper forces your effects to run twice.
+              Mount → Unmount → Mount again.
             </p>
           </div>
         )}
 
         {chapter === 1 && (
-          <div className="bg-slate-900/50 border border-red-500/30 rounded-lg p-6 mb-8">
-            <div className="flex items-center justify-between mb-4">
+          <div className="mb-8 rounded-lg border border-red-500/30 bg-slate-900/50 p-6">
+            <div className="mb-4 flex items-center justify-between">
               <div className="flex items-center gap-2">
-                <Zap className="w-5 h-5 text-red-500" />
-                <h3 className="text-xl font-bold text-red-500">Double-Execution Simulator</h3>
+                <Zap className="h-5 w-5 text-red-500" />
+                <h3 className="text-xl font-bold text-red-500">
+                  Double-Execution Simulator
+                </h3>
               </div>
               <div className="flex gap-2">
                 <button
                   onClick={() => setStrictModeEnabled(!strictModeEnabled)}
-                  className={`px-3 py-1 rounded text-sm font-semibold transition-colors ${
+                  className={`rounded px-3 py-1 text-sm font-semibold transition-colors ${
                     strictModeEnabled
                       ? "bg-red-500 text-white"
                       : "bg-slate-700 text-slate-400"
@@ -368,7 +414,7 @@ export default function FightClubStrictMode() {
                 </button>
                 <button
                   onClick={() => setHasCleanup(!hasCleanup)}
-                  className={`px-3 py-1 rounded text-sm font-semibold transition-colors ${
+                  className={`rounded px-3 py-1 text-sm font-semibold transition-colors ${
                     hasCleanup
                       ? "bg-emerald-500 text-white"
                       : "bg-slate-700 text-slate-400"
@@ -379,23 +425,35 @@ export default function FightClubStrictMode() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-4 mb-4">
-              <div className="bg-slate-950 border border-slate-700 rounded p-4">
-                <div className="text-sm text-slate-400 mb-2">Active Connections</div>
-                <div className="text-3xl font-bold text-red-500">{connectionCount}</div>
+            <div className="mb-4 grid gap-4 md:grid-cols-2">
+              <div className="rounded border border-slate-700 bg-slate-950 p-4">
+                <div className="mb-2 text-sm text-slate-400">
+                  Active Connections
+                </div>
+                <div className="text-3xl font-bold text-red-500">
+                  {connectionCount}
+                </div>
               </div>
-              <div className="bg-slate-950 border border-slate-700 rounded p-4">
-                <div className="text-sm text-slate-400 mb-2">Interval Ticks</div>
-                <div className="text-3xl font-bold text-red-500">{intervalCount}</div>
+              <div className="rounded border border-slate-700 bg-slate-950 p-4">
+                <div className="mb-2 text-sm text-slate-400">
+                  Interval Ticks
+                </div>
+                <div className="text-3xl font-bold text-red-500">
+                  {intervalCount}
+                </div>
               </div>
             </div>
 
-            <div className="bg-slate-950 border border-slate-700 rounded p-4 mb-4 font-mono text-xs max-h-32 overflow-y-auto">
+            <div className="mb-4 max-h-32 overflow-y-auto rounded border border-slate-700 bg-slate-950 p-4 font-mono text-xs">
               {executionLog.length === 0 ? (
-                <div className="text-slate-500">Click "Run Effect" to see execution log...</div>
+                <div className="text-slate-500">
+                  Click "Run Effect" to see execution log...
+                </div>
               ) : (
                 executionLog.map((log, idx) => (
-                  <div key={idx} className="text-slate-300 mb-1">{log}</div>
+                  <div key={idx} className="mb-1 text-slate-300">
+                    {log}
+                  </div>
                 ))
               )}
             </div>
@@ -404,16 +462,16 @@ export default function FightClubStrictMode() {
               <button
                 onClick={simulateEffect}
                 disabled={isRunning}
-                className="flex items-center gap-2 px-4 py-2 bg-red-500 text-white rounded font-semibold hover:bg-red-600 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+                className="flex items-center gap-2 rounded bg-red-500 px-4 py-2 font-semibold text-white transition-colors hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-50"
               >
-                <Play className="w-4 h-4" />
+                <Play className="h-4 w-4" />
                 Run Effect
               </button>
               <button
                 onClick={resetDemo}
-                className="flex items-center gap-2 px-4 py-2 bg-slate-700 text-slate-300 rounded font-semibold hover:bg-slate-600 transition-colors"
+                className="flex items-center gap-2 rounded bg-slate-700 px-4 py-2 font-semibold text-slate-300 transition-colors hover:bg-slate-600"
               >
-                <RotateCcw className="w-4 h-4" />
+                <RotateCcw className="h-4 w-4" />
                 Reset
               </button>
             </div>
@@ -421,120 +479,165 @@ export default function FightClubStrictMode() {
         )}
 
         {chapter === 2 && (
-          <div className="bg-slate-900/50 border border-red-500/30 rounded-lg p-6 mb-8">
-            <div className="flex items-center gap-2 mb-4">
-              <AlertTriangle className="w-5 h-5 text-red-500" />
-              <h3 className="text-xl font-bold text-red-500">The Chemical Burn</h3>
+          <div className="mb-8 rounded-lg border border-red-500/30 bg-slate-900/50 p-6">
+            <div className="mb-4 flex items-center gap-2">
+              <AlertTriangle className="h-5 w-5 text-red-500" />
+              <h3 className="text-xl font-bold text-red-500">
+                The Chemical Burn
+              </h3>
             </div>
             <div className="mb-4">
-              <div className="flex justify-between text-sm mb-2">
+              <div className="mb-2 flex justify-between text-sm">
                 <span className="text-slate-400">Memory Leak Intensity</span>
-                <span className="text-red-500 font-bold">{burnIntensity}%</span>
+                <span className="font-bold text-red-500">{burnIntensity}%</span>
               </div>
-              <div className="h-8 bg-slate-950 border border-slate-700 rounded overflow-hidden">
+              <div className="h-8 overflow-hidden rounded border border-slate-700 bg-slate-950">
                 <div
                   className="h-full bg-gradient-to-r from-red-500 to-red-700 transition-all duration-500"
                   style={{ width: `${burnIntensity}%` }}
                 ></div>
               </div>
             </div>
-            <div className="bg-slate-950 border-2 border-red-500/50 rounded p-4 font-mono text-sm">
+            <div className="rounded border-2 border-red-500/50 bg-slate-950 p-4 font-mono text-sm">
               <div className="text-slate-500">// Effect without cleanup</div>
               <div className="text-blue-400">useEffect</div>
               <div className="text-slate-300">{"(() => {"}</div>
               <div className="pl-4 text-slate-300">
-                <span className="text-purple-400">const</span> socket = <span className="text-blue-400">new</span> WebSocket(url);
+                <span className="text-purple-400">const</span> socket ={" "}
+                <span className="text-blue-400">new</span> WebSocket(url);
               </div>
-              <div className="pl-4 text-slate-300">socket.onmessage = handleMessage;</div>
-              <div className="pl-4 text-red-500">// No cleanup - the burn continues...</div>
+              <div className="pl-4 text-slate-300">
+                socket.onmessage = handleMessage;
+              </div>
+              <div className="pl-4 text-red-500">
+                // No cleanup - the burn continues...
+              </div>
               <div className="text-slate-300">{"}, []);"}</div>
             </div>
             <p className="mt-4 text-sm text-slate-400">
-              Without cleanup, resources leak. The burn intensifies. The damage persists.
+              Without cleanup, resources leak. The burn intensifies. The damage
+              persists.
             </p>
           </div>
         )}
 
         {chapter === 3 && (
-          <div className="bg-slate-900/50 border border-emerald-500/30 rounded-lg p-6 mb-8">
-            <div className="flex items-center gap-2 mb-4">
-              <CheckCircle className="w-5 h-5 text-emerald-500" />
-              <h3 className="text-xl font-bold text-emerald-500">The Antidote: Cleanup Functions</h3>
+          <div className="mb-8 rounded-lg border border-emerald-500/30 bg-slate-900/50 p-6">
+            <div className="mb-4 flex items-center gap-2">
+              <CheckCircle className="h-5 w-5 text-emerald-500" />
+              <h3 className="text-xl font-bold text-emerald-500">
+                The Antidote: Cleanup Functions
+              </h3>
             </div>
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid gap-4 md:grid-cols-2">
               <div>
-                <div className="text-sm text-red-400 font-semibold mb-2">❌ Without Cleanup</div>
-                <div className="bg-slate-950 border-2 border-red-500/50 rounded p-4 font-mono text-xs">
+                <div className="mb-2 text-sm font-semibold text-red-400">
+                  ❌ Without Cleanup
+                </div>
+                <div className="rounded border-2 border-red-500/50 bg-slate-950 p-4 font-mono text-xs">
                   <div className="text-blue-400">useEffect</div>
                   <div className="text-slate-300">{"(() => {"}</div>
                   <div className="pl-2 text-slate-300">
-                    <span className="text-purple-400">const</span> id = setInterval(fn, 1000);
+                    <span className="text-purple-400">const</span> id =
+                    setInterval(fn, 1000);
                   </div>
                   <div className="pl-2 text-red-500">// Leak!</div>
                   <div className="text-slate-300">{"}, []);"}</div>
                 </div>
               </div>
               <div>
-                <div className="text-sm text-emerald-400 font-semibold mb-2">✓ With Cleanup</div>
-                <div className="bg-slate-950 border-2 border-emerald-500/50 rounded p-4 font-mono text-xs">
+                <div className="mb-2 text-sm font-semibold text-emerald-400">
+                  ✓ With Cleanup
+                </div>
+                <div className="rounded border-2 border-emerald-500/50 bg-slate-950 p-4 font-mono text-xs">
                   <div className="text-blue-400">useEffect</div>
                   <div className="text-slate-300">{"(() => {"}</div>
                   <div className="pl-2 text-slate-300">
-                    <span className="text-purple-400">const</span> id = setInterval(fn, 1000);
+                    <span className="text-purple-400">const</span> id =
+                    setInterval(fn, 1000);
                   </div>
                   <div className="pl-2 text-emerald-400">
-                    <span className="text-purple-400">return</span> () =&gt; clearInterval(id);
+                    <span className="text-purple-400">return</span> () =&gt;
+                    clearInterval(id);
                   </div>
                   <div className="text-slate-300">{"}, []);"}</div>
                 </div>
               </div>
             </div>
             <p className="mt-4 text-sm text-slate-400">
-              Return a cleanup function. It runs on unmount. It destroys what you created. The burn heals.
+              Return a cleanup function. It runs on unmount. It destroys what
+              you created. The burn heals.
             </p>
           </div>
         )}
 
         {chapter === 4 && (
-          <div className="bg-slate-900/50 border border-red-500/30 rounded-lg p-6 mb-8">
-            <div className="flex items-center gap-2 mb-4">
-              <Code className="w-5 h-5 text-red-500" />
-              <h3 className="text-xl font-bold text-red-500">Resource Cleanup Patterns</h3>
+          <div className="mb-8 rounded-lg border border-red-500/30 bg-slate-900/50 p-6">
+            <div className="mb-4 flex items-center gap-2">
+              <Code className="h-5 w-5 text-red-500" />
+              <h3 className="text-xl font-bold text-red-500">
+                Resource Cleanup Patterns
+              </h3>
             </div>
             <div className="overflow-x-auto">
               <table className="w-full text-sm">
                 <thead>
                   <tr className="border-b border-slate-700">
-                    <th className="text-left py-2 px-3 text-red-400 font-semibold">Resource Type</th>
-                    <th className="text-left py-2 px-3 text-red-400 font-semibold">Creation</th>
-                    <th className="text-left py-2 px-3 text-red-400 font-semibold">Cleanup</th>
+                    <th className="px-3 py-2 text-left font-semibold text-red-400">
+                      Resource Type
+                    </th>
+                    <th className="px-3 py-2 text-left font-semibold text-red-400">
+                      Creation
+                    </th>
+                    <th className="px-3 py-2 text-left font-semibold text-red-400">
+                      Cleanup
+                    </th>
                   </tr>
                 </thead>
                 <tbody>
                   {resourceTable.map((row, idx) => (
-                    <tr key={idx} className="border-b border-slate-800 hover:bg-slate-800/50 transition-colors">
-                      <td className="py-3 px-3 font-semibold text-slate-300">{row.type}</td>
-                      <td className="py-3 px-3 font-mono text-xs text-slate-400">{row.create}</td>
-                      <td className="py-3 px-3 font-mono text-xs text-emerald-400">{row.cleanup}</td>
+                    <tr
+                      key={idx}
+                      className="border-b border-slate-800 transition-colors hover:bg-slate-800/50"
+                    >
+                      <td className="px-3 py-3 font-semibold text-slate-300">
+                        {row.type}
+                      </td>
+                      <td className="px-3 py-3 font-mono text-xs text-slate-400">
+                        {row.create}
+                      </td>
+                      <td className="px-3 py-3 font-mono text-xs text-emerald-400">
+                        {row.cleanup}
+                      </td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <div className="mt-6 bg-slate-950 border border-emerald-500/30 rounded p-4">
-              <div className="text-sm text-emerald-400 font-semibold mb-2">The Pattern:</div>
+            <div className="mt-6 rounded border border-emerald-500/30 bg-slate-950 p-4">
+              <div className="mb-2 text-sm font-semibold text-emerald-400">
+                The Pattern:
+              </div>
               <div className="font-mono text-xs text-slate-300">
                 <div className="text-blue-400">useEffect</div>
                 <div>{"(() => {"}</div>
-                <div className="pl-2 text-slate-500">// 1. Create the resource</div>
-                <div className="pl-2">
-                  <span className="text-purple-400">const</span> resource = createResource();
+                <div className="pl-2 text-slate-500">
+                  // 1. Create the resource
                 </div>
-                <div className="pl-2 text-slate-500 mt-2">// 2. Use the resource</div>
+                <div className="pl-2">
+                  <span className="text-purple-400">const</span> resource =
+                  createResource();
+                </div>
+                <div className="mt-2 pl-2 text-slate-500">
+                  // 2. Use the resource
+                </div>
                 <div className="pl-2">resource.doSomething();</div>
-                <div className="pl-2 text-slate-500 mt-2">// 3. Return cleanup</div>
+                <div className="mt-2 pl-2 text-slate-500">
+                  // 3. Return cleanup
+                </div>
                 <div className="pl-2 text-emerald-400">
-                  <span className="text-purple-400">return</span> () =&gt; resource.destroy();
+                  <span className="text-purple-400">return</span> () =&gt;
+                  resource.destroy();
                 </div>
                 <div>{"}, [dependencies]);"}</div>
               </div>
@@ -544,17 +647,17 @@ export default function FightClubStrictMode() {
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-t border-red-500/30">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-red-500/30 bg-slate-900/95 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-4">
+          <div className="flex items-center justify-between">
             <button
-              onClick={() => setChapter(c => c - 1)}
+              onClick={() => setChapter((c) => c - 1)}
               disabled={chapter === 0}
-              className="px-6 py-2 bg-red-500 text-white rounded font-semibold hover:bg-red-600 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="rounded bg-red-500 px-6 py-2 font-semibold text-white transition-colors hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-30"
             >
               Previous
             </button>
-            
+
             <div className="flex items-center gap-4">
               <span className="text-sm text-slate-400">
                 Chapter {chapter + 1} of {chapters.length}
@@ -564,19 +667,21 @@ export default function FightClubStrictMode() {
                   <button
                     key={idx}
                     onClick={() => setChapter(idx)}
-                    className={`w-2 h-2 rounded-full transition-colors ${
-                      idx === chapter ? "bg-red-500" : "bg-slate-700 hover:bg-slate-600"
+                    className={`h-2 w-2 rounded-full transition-colors ${
+                      idx === chapter
+                        ? "bg-red-500"
+                        : "bg-slate-700 hover:bg-slate-600"
                     }`}
                     aria-label={`Go to chapter ${idx + 1}`}
                   />
                 ))}
               </div>
             </div>
-            
+
             <button
-              onClick={() => setChapter(c => c + 1)}
+              onClick={() => setChapter((c) => c + 1)}
               disabled={chapter === chapters.length - 1}
-              className="px-6 py-2 bg-red-500 text-white rounded font-semibold hover:bg-red-600 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+              className="rounded bg-red-500 px-6 py-2 font-semibold text-white transition-colors hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-30"
             >
               Next
             </button>

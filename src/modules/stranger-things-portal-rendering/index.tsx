@@ -37,7 +37,7 @@ export default function StrangerThingsPortalRendering() {
         subtitle: "When to Use Portals",
       },
     ],
-    []
+    [],
   );
 
   const currentChapter = chapters[chapter];
@@ -59,13 +59,13 @@ export default function StrangerThingsPortalRendering() {
   }, []);
 
   return (
-    <div className="min-h-screen bg-red-950 text-slate-300 font-sans">
+    <div className="min-h-screen bg-red-950 font-sans text-slate-300">
       {/* Header */}
-      <header className="border-b border-red-900/30 bg-red-950/80 backdrop-blur-sm sticky top-0 z-40">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Zap className="w-8 h-8 text-red-500" />
-            <h1 className="text-3xl md:text-4xl font-bold text-red-500 uppercase tracking-wide">
+      <header className="sticky top-0 z-40 border-b border-red-900/30 bg-red-950/80 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-6">
+          <div className="mb-2 flex items-center gap-3">
+            <Zap className="h-8 w-8 text-red-500" />
+            <h1 className="text-3xl font-bold uppercase tracking-wide text-red-500 md:text-4xl">
               Stranger Things
             </h1>
           </div>
@@ -76,13 +76,13 @@ export default function StrangerThingsPortalRendering() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 py-12 pb-32">
+      <main className="mx-auto max-w-6xl px-4 py-12 pb-32">
         {/* Chapter Header */}
         <div className="mb-8">
-          <div className="text-sm text-red-500 uppercase tracking-wider mb-2">
+          <div className="mb-2 text-sm uppercase tracking-wider text-red-500">
             Chapter {chapter + 1} of {chapters.length}
           </div>
-          <h2 className="text-4xl md:text-5xl font-bold text-slate-100 mb-2">
+          <h2 className="mb-2 text-4xl font-bold text-slate-100 md:text-5xl">
             {currentChapter.title}
           </h2>
           <p className="text-xl text-slate-400">{currentChapter.subtitle}</p>
@@ -118,13 +118,13 @@ export default function StrangerThingsPortalRendering() {
       </main>
 
       {/* Navigation Footer */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-red-950/95 backdrop-blur-sm border-t border-red-900/30 z-50">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
+      <footer className="fixed bottom-0 left-0 right-0 z-50 border-t border-red-900/30 bg-red-950/95 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-4">
+          <div className="flex items-center justify-between">
             <button
               onClick={handlePrevious}
               disabled={chapter === 0}
-              className="px-6 py-2 bg-red-900/40 text-slate-300 rounded border border-red-800/50 hover:bg-red-900/60 hover:border-red-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              className="rounded border border-red-800/50 bg-red-900/40 px-6 py-2 text-slate-300 transition-all hover:border-red-700 hover:bg-red-900/60 disabled:cursor-not-allowed disabled:opacity-30"
             >
               Previous
             </button>
@@ -136,7 +136,7 @@ export default function StrangerThingsPortalRendering() {
             <button
               onClick={handleNext}
               disabled={chapter === chapters.length - 1}
-              className="px-6 py-2 bg-red-900/40 text-slate-300 rounded border border-red-800/50 hover:bg-red-900/60 hover:border-red-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              className="rounded border border-red-800/50 bg-red-900/40 px-6 py-2 text-slate-300 transition-all hover:border-red-700 hover:bg-red-900/60 disabled:cursor-not-allowed disabled:opacity-30"
             >
               Next
             </button>
@@ -162,12 +162,12 @@ function ChapterIntro() {
         </p>
       </div>
 
-      <div className="bg-red-900/20 border border-red-800/30 rounded-lg p-6">
-        <h3 className="text-xl font-bold text-red-500 mb-4 flex items-center gap-2">
-          <Code className="w-5 h-5" />
+      <div className="rounded-lg border border-red-800/30 bg-red-900/20 p-6">
+        <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-red-500">
+          <Code className="h-5 w-5" />
           The Core Concept
         </h3>
-        <p className="text-slate-300 mb-4">
+        <p className="mb-4 text-slate-300">
           <strong>The Upside Down is not another world.</strong> It's the same
           world, the same Hawkins—but rendered in a different space. A parallel
           DOM tree.
@@ -176,16 +176,16 @@ function ChapterIntro() {
           When you build a React application, you create a component tree. But
           the React component tree and the DOM tree are not the same thing.
           Sometimes, you need to render content outside the normal component
-          hierarchy—like a modal that appears on top of everything, or a
-          tooltip that escapes overflow constraints.
+          hierarchy—like a modal that appears on top of everything, or a tooltip
+          that escapes overflow constraints.
         </p>
       </div>
 
-      <div className="bg-slate-900/40 border border-slate-700/30 rounded-lg p-6">
-        <h3 className="text-xl font-bold text-amber-500 mb-4">
+      <div className="rounded-lg border border-slate-700/30 bg-slate-900/40 p-6">
+        <h3 className="mb-4 text-xl font-bold text-amber-500">
           The Problem: Trapped Components
         </h3>
-        <p className="text-slate-300 mb-4">
+        <p className="mb-4 text-slate-300">
           Imagine you're building a modal dialog deep inside your component
           hierarchy. Logically, it belongs to the component that triggered it.
           But visually, it needs to appear centered on the screen, above
@@ -199,16 +199,16 @@ function ChapterIntro() {
         </p>
       </div>
 
-      <div className="bg-red-900/20 border border-red-800/30 rounded-lg p-6">
-        <h3 className="text-xl font-bold text-red-500 mb-4">
+      <div className="rounded-lg border border-red-800/30 bg-red-900/20 p-6">
+        <h3 className="mb-4 text-xl font-bold text-red-500">
           The Solution: React Portals
         </h3>
-        <p className="text-slate-300 mb-4">
+        <p className="mb-4 text-slate-300">
           <strong>React Portals</strong> are the gates between dimensions. They
           allow you to render a component in a different part of the DOM tree
           while maintaining its position in the React component tree.
         </p>
-        <div className="bg-slate-950 rounded p-4 font-mono text-sm overflow-x-auto">
+        <div className="overflow-x-auto rounded bg-slate-950 p-4 font-mono text-sm">
           <pre className="text-emerald-400">
             {`// Will exists in the component tree here
 function Sidebar() {
@@ -221,7 +221,7 @@ function Sidebar() {
 }`}
           </pre>
         </div>
-        <p className="text-slate-300 mt-4">
+        <p className="mt-4 text-slate-300">
           Will is in the Upside Down (a different DOM location), but he's still
           Joyce's son (still part of the React tree). The connection remains.
         </p>
@@ -253,34 +253,34 @@ function ChapterBuild({
         </p>
       </div>
 
-      <div className="bg-red-900/20 border border-red-800/30 rounded-lg p-6">
-        <h3 className="text-xl font-bold text-red-500 mb-4 flex items-center gap-2">
-          <AlertTriangle className="w-5 h-5" />
+      <div className="rounded-lg border border-red-800/30 bg-red-900/20 p-6">
+        <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-red-500">
+          <AlertTriangle className="h-5 w-5" />
           The Overflow Trap
         </h3>
-        <p className="text-slate-300 mb-6">
+        <p className="mb-6 text-slate-300">
           Watch what happens when you try to render a modal inside a container
           with <code>overflow: hidden</code>. The modal gets clipped by its
           parent's boundaries—it can't escape.
         </p>
 
-        <div className="flex items-center gap-4 mb-6">
+        <div className="mb-6 flex items-center gap-4">
           <button
             onClick={() => setShowPortalVersion(false)}
-            className={`px-4 py-2 rounded border transition-all ${
+            className={`rounded border px-4 py-2 transition-all ${
               !showPortalVersion
-                ? "bg-red-900/60 border-red-700 text-slate-100"
-                : "bg-red-900/20 border-red-800/30 text-slate-400"
+                ? "border-red-700 bg-red-900/60 text-slate-100"
+                : "border-red-800/30 bg-red-900/20 text-slate-400"
             }`}
           >
             Normal Render
           </button>
           <button
             onClick={() => setShowPortalVersion(true)}
-            className={`px-4 py-2 rounded border transition-all ${
+            className={`rounded border px-4 py-2 transition-all ${
               showPortalVersion
-                ? "bg-red-900/60 border-red-700 text-slate-100"
-                : "bg-red-900/20 border-red-800/30 text-slate-400"
+                ? "border-red-700 bg-red-900/60 text-slate-100"
+                : "border-red-800/30 bg-red-900/20 text-slate-400"
             }`}
           >
             Portal Render
@@ -290,13 +290,13 @@ function ChapterBuild({
         <OverflowDemo showPortalVersion={showPortalVersion} />
       </div>
 
-      <div className="bg-slate-900/40 border border-slate-700/30 rounded-lg p-6">
-        <h3 className="text-xl font-bold text-amber-500 mb-4">
+      <div className="rounded-lg border border-slate-700/30 bg-slate-900/40 p-6">
+        <h3 className="mb-4 text-xl font-bold text-amber-500">
           Three Problems Portals Solve
         </h3>
         <div className="space-y-4">
           <div>
-            <h4 className="font-bold text-slate-200 mb-2">
+            <h4 className="mb-2 font-bold text-slate-200">
               1. The Overflow Trap
             </h4>
             <p className="text-slate-300">
@@ -306,7 +306,7 @@ function ChapterBuild({
             </p>
           </div>
           <div>
-            <h4 className="font-bold text-slate-200 mb-2">
+            <h4 className="mb-2 font-bold text-slate-200">
               2. The Z-Index Stack
             </h4>
             <p className="text-slate-300">
@@ -316,7 +316,7 @@ function ChapterBuild({
             </p>
           </div>
           <div>
-            <h4 className="font-bold text-slate-200 mb-2">
+            <h4 className="mb-2 font-bold text-slate-200">
               3. The Position Context
             </h4>
             <p className="text-slate-300">
@@ -353,16 +353,16 @@ function ChapterClimax({
         </p>
       </div>
 
-      <div className="bg-red-900/20 border border-red-800/30 rounded-lg p-6">
-        <h3 className="text-xl font-bold text-red-500 mb-4 flex items-center gap-2">
-          <Zap className="w-5 h-5" />
+      <div className="rounded-lg border border-red-800/30 bg-red-900/20 p-6">
+        <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-red-500">
+          <Zap className="h-5 w-5" />
           Opening the Gate
         </h3>
-        <p className="text-slate-300 mb-4">
+        <p className="mb-4 text-slate-300">
           Here's the syntax—the incantation that tears a hole between the React
           tree and the DOM tree:
         </p>
-        <div className="bg-slate-950 rounded p-4 font-mono text-sm overflow-x-auto mb-4">
+        <div className="mb-4 overflow-x-auto rounded bg-slate-950 p-4 font-mono text-sm">
           <pre className="text-emerald-400">
             {`import { createPortal } from 'react-dom';
 
@@ -385,26 +385,26 @@ function SettingsButton() {
           </pre>
         </div>
         <p className="text-slate-300">
-          The modal is a child of <code>SettingsButton</code> in the React
-          tree. But in the actual DOM, it's rendered as a direct child of{" "}
+          The modal is a child of <code>SettingsButton</code> in the React tree.
+          But in the actual DOM, it's rendered as a direct child of{" "}
           <code>&lt;body&gt;</code>. This is the gate.
         </p>
       </div>
 
-      <div className="bg-slate-900/40 border border-slate-700/30 rounded-lg p-6">
-        <h3 className="text-xl font-bold text-amber-500 mb-4">
+      <div className="rounded-lg border border-slate-700/30 bg-slate-900/40 p-6">
+        <h3 className="mb-4 text-xl font-bold text-amber-500">
           Interactive Gate Control
         </h3>
-        <p className="text-slate-300 mb-4">
+        <p className="mb-4 text-slate-300">
           Click the button to open or close the gate. Watch how the portal
           mounts and unmounts:
         </p>
         <button
           onClick={() => setIsGateOpen(!isGateOpen)}
-          className={`px-6 py-3 rounded border transition-all ${
+          className={`rounded border px-6 py-3 transition-all ${
             isGateOpen
-              ? "bg-red-600/60 border-red-500 text-slate-100 animate-pulse"
-              : "bg-red-900/40 border-red-800/50 text-slate-300"
+              ? "animate-pulse border-red-500 bg-red-600/60 text-slate-100"
+              : "border-red-800/50 bg-red-900/40 text-slate-300"
           }`}
         >
           {isGateOpen ? "Close the Gate" : "Open the Gate"}
@@ -412,34 +412,34 @@ function SettingsButton() {
 
         {isGateOpen &&
           createPortal(
-            <div className="fixed inset-0 bg-red-950/80 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in">
-              <div className="bg-slate-900 border-2 border-red-500 rounded-lg p-8 max-w-md shadow-2xl shadow-red-500/20">
-                <h4 className="text-2xl font-bold text-red-500 mb-4">
+            <div className="animate-fade-in fixed inset-0 z-50 flex items-center justify-center bg-red-950/80 backdrop-blur-sm">
+              <div className="max-w-md rounded-lg border-2 border-red-500 bg-slate-900 p-8 shadow-2xl shadow-red-500/20">
+                <h4 className="mb-4 text-2xl font-bold text-red-500">
                   The Gate is Open
                 </h4>
-                <p className="text-slate-300 mb-4">
+                <p className="mb-4 text-slate-300">
                   This component is rendered through a portal. It's logically a
                   child of the button that opened it, but physically it's
                   rendered at <code>document.body</code>.
                 </p>
-                <p className="text-slate-400 text-sm mb-6">
+                <p className="mb-6 text-sm text-slate-400">
                   Check your browser's DevTools—you'll see this element is
                   outside the main React root, but events still bubble through
                   the React tree.
                 </p>
                 <button
                   onClick={() => setIsGateOpen(false)}
-                  className="w-full px-4 py-2 bg-red-600 text-slate-100 rounded hover:bg-red-700 transition-colors"
+                  className="w-full rounded bg-red-600 px-4 py-2 text-slate-100 transition-colors hover:bg-red-700"
                 >
                   Close Gate
                 </button>
               </div>
             </div>,
-            document.body
+            document.body,
           )}
 
-        <div className="mt-6 p-4 bg-slate-950 rounded border border-slate-700/30">
-          <p className="text-sm text-slate-400 mb-2">Gate Status:</p>
+        <div className="mt-6 rounded border border-slate-700/30 bg-slate-950 p-4">
+          <p className="mb-2 text-sm text-slate-400">Gate Status:</p>
           <p
             className={`text-lg font-bold ${
               isGateOpen ? "text-red-500" : "text-slate-500"
@@ -450,13 +450,13 @@ function SettingsButton() {
         </div>
       </div>
 
-      <div className="bg-red-900/20 border border-red-800/30 rounded-lg p-6">
-        <h3 className="text-xl font-bold text-red-500 mb-4">
+      <div className="rounded-lg border border-red-800/30 bg-red-900/20 p-6">
+        <h3 className="mb-4 text-xl font-bold text-red-500">
           The Three Guarantees
         </h3>
         <div className="space-y-4">
           <div>
-            <h4 className="font-bold text-slate-200 mb-2">
+            <h4 className="mb-2 font-bold text-slate-200">
               1. Props Flow Through the Portal
             </h4>
             <p className="text-slate-300">
@@ -465,21 +465,23 @@ function SettingsButton() {
             </p>
           </div>
           <div>
-            <h4 className="font-bold text-slate-200 mb-2">
+            <h4 className="mb-2 font-bold text-slate-200">
               2. Events Bubble Through the React Tree
             </h4>
             <p className="text-slate-300">
-              Even though the component is rendered at <code>document.body</code>
-              , clicks bubble up through the React tree to parent handlers.
+              Even though the component is rendered at{" "}
+              <code>document.body</code>, clicks bubble up through the React
+              tree to parent handlers.
             </p>
           </div>
           <div>
-            <h4 className="font-bold text-slate-200 mb-2">
+            <h4 className="mb-2 font-bold text-slate-200">
               3. Context Flows Through the Portal
             </h4>
             <p className="text-slate-300">
               Components rendered through portals can access context from their
-              React ancestors, even though they're physically rendered elsewhere.
+              React ancestors, even though they're physically rendered
+              elsewhere.
             </p>
           </div>
         </div>
@@ -493,27 +495,27 @@ function ChapterResolution() {
     <div className="space-y-6">
       <div className="prose prose-invert max-w-none">
         <p className="text-lg leading-relaxed">
-          Season 2. The gate is still open. The Demogorgon is dead, but the
-          rift remains. The Upside Down is bleeding into Hawkins. The gate must
-          be closed.
+          Season 2. The gate is still open. The Demogorgon is dead, but the rift
+          remains. The Upside Down is bleeding into Hawkins. The gate must be
+          closed.
         </p>
         <p className="text-lg leading-relaxed">
           Eleven returns. She descends into the tunnels beneath Hawkins Lab,
-          stands before the gate, and with all her power, she seals it shut.
-          The portal closes. The dimensions separate.
+          stands before the gate, and with all her power, she seals it shut. The
+          portal closes. The dimensions separate.
         </p>
       </div>
 
-      <div className="bg-red-900/20 border border-red-800/30 rounded-lg p-6">
-        <h3 className="text-xl font-bold text-red-500 mb-4 flex items-center gap-2">
-          <AlertTriangle className="w-5 h-5" />
+      <div className="rounded-lg border border-red-800/30 bg-red-900/20 p-6">
+        <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-red-500">
+          <AlertTriangle className="h-5 w-5" />
           The Danger of Open Gates
         </h3>
-        <p className="text-slate-300 mb-4">
+        <p className="mb-4 text-slate-300">
           If you're not careful with portal management, you'll create memory
           leaks, zombie components, and monsters in the normal world.
         </p>
-        <div className="bg-slate-950 rounded p-4 font-mono text-sm overflow-x-auto">
+        <div className="overflow-x-auto rounded bg-slate-950 p-4 font-mono text-sm">
           <pre className="text-red-400">
             {`// ❌ DANGER: Gate left open
 function BadModal() {
@@ -531,15 +533,15 @@ function BadModal() {
         </div>
       </div>
 
-      <div className="bg-slate-900/40 border border-slate-700/30 rounded-lg p-6">
-        <h3 className="text-xl font-bold text-emerald-500 mb-4 flex items-center gap-2">
-          <CheckCircle className="w-5 h-5" />
+      <div className="rounded-lg border border-slate-700/30 bg-slate-900/40 p-6">
+        <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-emerald-500">
+          <CheckCircle className="h-5 w-5" />
           The Correct Pattern
         </h3>
-        <p className="text-slate-300 mb-4">
+        <p className="mb-4 text-slate-300">
           Controlled portal lifecycle with proper cleanup:
         </p>
-        <div className="bg-slate-950 rounded p-4 font-mono text-sm overflow-x-auto">
+        <div className="overflow-x-auto rounded bg-slate-950 p-4 font-mono text-sm">
           <pre className="text-emerald-400">
             {`function SettingsModal({ isOpen, onClose }) {
   // Only render the portal when needed
@@ -578,7 +580,7 @@ function SettingsButton() {
           <p className="text-slate-300">
             <strong>What makes this correct:</strong>
           </p>
-          <ul className="list-disc list-inside space-y-1 text-slate-300">
+          <ul className="list-inside list-disc space-y-1 text-slate-300">
             <li>Conditional rendering—portal only exists when needed</li>
             <li>No manual DOM manipulation</li>
             <li>Clean unmounting when isOpen becomes false</li>
@@ -587,14 +589,14 @@ function SettingsButton() {
         </div>
       </div>
 
-      <div className="bg-red-900/20 border border-red-800/30 rounded-lg p-6">
-        <h3 className="text-xl font-bold text-red-500 mb-4">
+      <div className="rounded-lg border border-red-800/30 bg-red-900/20 p-6">
+        <h3 className="mb-4 text-xl font-bold text-red-500">
           Advanced: useEffect Cleanup
         </h3>
-        <p className="text-slate-300 mb-4">
+        <p className="mb-4 text-slate-300">
           For more complex portal management with custom containers:
         </p>
-        <div className="bg-slate-950 rounded p-4 font-mono text-sm overflow-x-auto">
+        <div className="overflow-x-auto rounded bg-slate-950 p-4 font-mono text-sm">
           <pre className="text-emerald-400">
             {`function AdvancedModal({ isOpen, children }) {
   const [modalRoot] = useState(() => {
@@ -619,7 +621,7 @@ function SettingsButton() {
 }`}
           </pre>
         </div>
-        <p className="text-slate-300 mt-4">
+        <p className="mt-4 text-slate-300">
           The useEffect cleanup function runs when the component unmounts,
           removing the portal container from the DOM. The gate seals.
         </p>
@@ -634,19 +636,19 @@ function ChapterSummary() {
       <div className="prose prose-invert max-w-none">
         <p className="text-lg leading-relaxed">
           Will Byers is home, but he's not the same. He's been to the Upside
-          Down and back. He exists in both worlds now—physically in Hawkins,
-          but forever connected to that parallel dimension.
+          Down and back. He exists in both worlds now—physically in Hawkins, but
+          forever connected to that parallel dimension.
         </p>
         <p className="text-lg leading-relaxed">
-          He's in-between. And that's exactly what React Portals are:
-          components that exist in-between the React tree and the DOM tree,
-          maintaining connections to both worlds.
+          He's in-between. And that's exactly what React Portals are: components
+          that exist in-between the React tree and the DOM tree, maintaining
+          connections to both worlds.
         </p>
       </div>
 
-      <div className="bg-red-900/20 border border-red-800/30 rounded-lg p-6">
-        <h3 className="text-xl font-bold text-red-500 mb-4">The Core Truth</h3>
-        <p className="text-slate-300 text-lg">
+      <div className="rounded-lg border border-red-800/30 bg-red-900/20 p-6">
+        <h3 className="mb-4 text-xl font-bold text-red-500">The Core Truth</h3>
+        <p className="text-lg text-slate-300">
           <strong>
             A React Portal is a component that renders in a different part of
             the DOM tree while maintaining its position in the React component
@@ -655,10 +657,10 @@ function ChapterSummary() {
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="bg-slate-900/40 border border-emerald-700/30 rounded-lg p-6">
-          <h3 className="text-xl font-bold text-emerald-500 mb-4 flex items-center gap-2">
-            <CheckCircle className="w-5 h-5" />
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="rounded-lg border border-emerald-700/30 bg-slate-900/40 p-6">
+          <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-emerald-500">
+            <CheckCircle className="h-5 w-5" />
             When to Use Portals
           </h3>
           <ul className="space-y-2 text-slate-300">
@@ -670,9 +672,9 @@ function ChapterSummary() {
           </ul>
         </div>
 
-        <div className="bg-slate-900/40 border border-red-700/30 rounded-lg p-6">
-          <h3 className="text-xl font-bold text-red-500 mb-4 flex items-center gap-2">
-            <AlertTriangle className="w-5 h-5" />
+        <div className="rounded-lg border border-red-700/30 bg-slate-900/40 p-6">
+          <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-red-500">
+            <AlertTriangle className="h-5 w-5" />
             When NOT to Use Portals
           </h3>
           <ul className="space-y-2 text-slate-300">
@@ -684,9 +686,9 @@ function ChapterSummary() {
         </div>
       </div>
 
-      <div className="bg-red-900/20 border border-red-800/30 rounded-lg p-6">
-        <h3 className="text-xl font-bold text-red-500 mb-4">Quick Reference</h3>
-        <div className="bg-slate-950 rounded p-4 font-mono text-sm overflow-x-auto">
+      <div className="rounded-lg border border-red-800/30 bg-red-900/20 p-6">
+        <h3 className="mb-4 text-xl font-bold text-red-500">Quick Reference</h3>
+        <div className="overflow-x-auto rounded bg-slate-950 p-4 font-mono text-sm">
           <pre className="text-emerald-400">
             {`import { createPortal } from 'react-dom';
 
@@ -713,13 +715,13 @@ useEffect(() => {
         </div>
       </div>
 
-      <div className="bg-slate-900/40 border border-amber-700/30 rounded-lg p-6">
-        <h3 className="text-xl font-bold text-amber-500 mb-4">
+      <div className="rounded-lg border border-amber-700/30 bg-slate-900/40 p-6">
+        <h3 className="mb-4 text-xl font-bold text-amber-500">
           The Three Escape Hatches
         </h3>
         <div className="space-y-4">
           <div>
-            <h4 className="font-bold text-slate-200 mb-2">
+            <h4 className="mb-2 font-bold text-slate-200">
               1. The Overflow Trap
             </h4>
             <p className="text-slate-300">
@@ -728,7 +730,7 @@ useEffect(() => {
             </p>
           </div>
           <div>
-            <h4 className="font-bold text-slate-200 mb-2">
+            <h4 className="mb-2 font-bold text-slate-200">
               2. The Z-Index Stack
             </h4>
             <p className="text-slate-300">
@@ -737,7 +739,7 @@ useEffect(() => {
             </p>
           </div>
           <div>
-            <h4 className="font-bold text-slate-200 mb-2">
+            <h4 className="mb-2 font-bold text-slate-200">
               3. The Position Context
             </h4>
             <p className="text-slate-300">
@@ -749,8 +751,8 @@ useEffect(() => {
         </div>
       </div>
 
-      <div className="bg-red-900/20 border border-red-800/30 rounded-lg p-6 text-center">
-        <p className="text-2xl font-bold text-red-500 mb-2">
+      <div className="rounded-lg border border-red-800/30 bg-red-900/20 p-6 text-center">
+        <p className="mb-2 text-2xl font-bold text-red-500">
           "He's not gone. He's just rendering somewhere else."
         </p>
         <p className="text-slate-400">
@@ -773,29 +775,31 @@ function ChristmasLights({
   const alphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split("");
 
   return (
-    <div className="bg-slate-900/40 border border-amber-700/30 rounded-lg p-6">
-      <h3 className="text-xl font-bold text-amber-500 mb-4">
+    <div className="rounded-lg border border-amber-700/30 bg-slate-900/40 p-6">
+      <h3 className="mb-4 text-xl font-bold text-amber-500">
         Joyce's Christmas Lights
       </h3>
-      <p className="text-slate-300 mb-4">
-        Click the lights to send a message. Notice how events bubble through
-        the portal—even though the lights are rendered elsewhere, the parent
+      <p className="mb-4 text-slate-300">
+        Click the lights to send a message. Notice how events bubble through the
+        portal—even though the lights are rendered elsewhere, the parent
         component receives the clicks.
       </p>
 
-      <div className="mb-6 p-4 bg-slate-950 rounded border border-slate-700/30">
-        <p className="text-sm text-slate-400 mb-2">Message from the Upside Down:</p>
-        <p className="text-2xl font-bold text-amber-500 min-h-[2rem]">
+      <div className="mb-6 rounded border border-slate-700/30 bg-slate-950 p-4">
+        <p className="mb-2 text-sm text-slate-400">
+          Message from the Upside Down:
+        </p>
+        <p className="min-h-[2rem] text-2xl font-bold text-amber-500">
           {message || "(click lights to spell)"}
         </p>
       </div>
 
-      <div className="grid grid-cols-7 sm:grid-cols-9 md:grid-cols-13 gap-2 mb-4">
+      <div className="md:grid-cols-13 mb-4 grid grid-cols-7 gap-2 sm:grid-cols-9">
         {alphabet.map((letter) => (
           <button
             key={letter}
             onClick={() => onLightClick(letter)}
-            className="aspect-square bg-amber-900/20 border border-amber-700/50 rounded hover:bg-amber-600/40 hover:border-amber-500 transition-all hover:shadow-lg hover:shadow-amber-500/20 flex items-center justify-center text-amber-500 font-bold text-sm"
+            className="flex aspect-square items-center justify-center rounded border border-amber-700/50 bg-amber-900/20 text-sm font-bold text-amber-500 transition-all hover:border-amber-500 hover:bg-amber-600/40 hover:shadow-lg hover:shadow-amber-500/20"
           >
             {letter}
           </button>
@@ -804,7 +808,7 @@ function ChristmasLights({
 
       <button
         onClick={onClear}
-        className="px-4 py-2 bg-red-900/40 text-slate-300 rounded border border-red-800/50 hover:bg-red-900/60 hover:border-red-700 transition-all"
+        className="rounded border border-red-800/50 bg-red-900/40 px-4 py-2 text-slate-300 transition-all hover:border-red-700 hover:bg-red-900/60"
       >
         Clear Message
       </button>
@@ -816,16 +820,16 @@ function OverflowDemo({ showPortalVersion }: { showPortalVersion: boolean }) {
   const [showModal, setShowModal] = useState(false);
 
   const modalContent = (
-    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-slate-900 border-2 border-red-500 rounded-lg p-6 shadow-2xl z-50 w-64">
-      <h4 className="text-lg font-bold text-red-500 mb-2">Modal Dialog</h4>
-      <p className="text-slate-300 text-sm mb-4">
+    <div className="absolute left-1/2 top-1/2 z-50 w-64 -translate-x-1/2 -translate-y-1/2 rounded-lg border-2 border-red-500 bg-slate-900 p-6 shadow-2xl">
+      <h4 className="mb-2 text-lg font-bold text-red-500">Modal Dialog</h4>
+      <p className="mb-4 text-sm text-slate-300">
         {showPortalVersion
           ? "This modal is rendered through a portal at document.body. It escapes the overflow container!"
           : "This modal is rendered normally. It's clipped by the parent's overflow: hidden."}
       </p>
       <button
         onClick={() => setShowModal(false)}
-        className="w-full px-3 py-1 bg-red-600 text-slate-100 rounded text-sm hover:bg-red-700 transition-colors"
+        className="w-full rounded bg-red-600 px-3 py-1 text-sm text-slate-100 transition-colors hover:bg-red-700"
       >
         Close
       </button>
@@ -834,18 +838,18 @@ function OverflowDemo({ showPortalVersion }: { showPortalVersion: boolean }) {
 
   return (
     <div className="relative">
-      <div className="bg-slate-950 border border-slate-700/30 rounded-lg p-4 h-64 overflow-hidden">
-        <p className="text-slate-400 text-sm mb-4">
+      <div className="h-64 overflow-hidden rounded-lg border border-slate-700/30 bg-slate-950 p-4">
+        <p className="mb-4 text-sm text-slate-400">
           Container with <code>overflow: hidden</code>
         </p>
         <div className="space-y-2">
-          <div className="h-8 bg-slate-800/50 rounded"></div>
-          <div className="h-8 bg-slate-800/50 rounded"></div>
-          <div className="h-8 bg-slate-800/50 rounded"></div>
+          <div className="h-8 rounded bg-slate-800/50"></div>
+          <div className="h-8 rounded bg-slate-800/50"></div>
+          <div className="h-8 rounded bg-slate-800/50"></div>
         </div>
         <button
           onClick={() => setShowModal(true)}
-          className="mt-4 px-4 py-2 bg-red-900/60 text-slate-100 rounded border border-red-700 hover:bg-red-900/80 transition-all"
+          className="mt-4 rounded border border-red-700 bg-red-900/60 px-4 py-2 text-slate-100 transition-all hover:bg-red-900/80"
         >
           Open Modal
         </button>
@@ -856,10 +860,10 @@ function OverflowDemo({ showPortalVersion }: { showPortalVersion: boolean }) {
       {showModal &&
         showPortalVersion &&
         createPortal(
-          <div className="fixed inset-0 bg-red-950/60 backdrop-blur-sm flex items-center justify-center z-50">
+          <div className="fixed inset-0 z-50 flex items-center justify-center bg-red-950/60 backdrop-blur-sm">
             {modalContent}
           </div>,
-          document.body
+          document.body,
         )}
     </div>
   );

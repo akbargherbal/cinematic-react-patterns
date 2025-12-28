@@ -1,5 +1,13 @@
 import { useState, useMemo, useEffect } from "react";
-import { Zap, Skull, Users, TrendingDown, TrendingUp, AlertTriangle, CheckCircle } from "lucide-react";
+import {
+  Zap,
+  Skull,
+  Users,
+  TrendingDown,
+  TrendingUp,
+  AlertTriangle,
+  CheckCircle,
+} from "lucide-react";
 
 interface Chapter {
   id: string;
@@ -168,35 +176,41 @@ The boring solution that works is better than the spectacular solution that kill
       case 0:
         // Chapter 1: Simple computation visualizer
         return (
-          <div className="bg-slate-900/50 border border-amber-500/30 rounded-lg p-8">
-            <h3 className="text-2xl font-bold text-amber-500 mb-4 flex items-center gap-2">
-              <TrendingDown className="w-6 h-6" />
+          <div className="rounded-lg border border-amber-500/30 bg-slate-900/50 p-8">
+            <h3 className="mb-4 flex items-center gap-2 text-2xl font-bold text-amber-500">
+              <TrendingDown className="h-6 w-6" />
               The Exhausting Computation
             </h3>
-            <p className="text-slate-300 mb-6">
-              Every performance, Angier runs beneath the stage. The same computation, over and over.
+            <p className="mb-6 text-slate-300">
+              Every performance, Angier runs beneath the stage. The same
+              computation, over and over.
             </p>
-            <div className="flex items-center justify-between bg-slate-800/50 p-6 rounded border border-slate-700">
+            <div className="flex items-center justify-between rounded border border-slate-700 bg-slate-800/50 p-6">
               <div className="text-center">
-                <div className="text-4xl mb-2">🎭</div>
+                <div className="mb-2 text-4xl">🎭</div>
                 <div className="text-sm text-slate-400">Stage Left</div>
               </div>
-              <div className="flex-1 mx-8">
-                <div className="relative h-2 bg-slate-700 rounded-full overflow-hidden">
-                  <div className="absolute inset-0 bg-amber-500 animate-pulse" style={{ width: '100%' }}></div>
+              <div className="mx-8 flex-1">
+                <div className="relative h-2 overflow-hidden rounded-full bg-slate-700">
+                  <div
+                    className="absolute inset-0 animate-pulse bg-amber-500"
+                    style={{ width: "100%" }}
+                  ></div>
                 </div>
-                <div className="text-center text-xs text-slate-400 mt-2">
+                <div className="mt-2 text-center text-xs text-slate-400">
                   Running... Computing... Exhausting...
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-4xl mb-2">🎭</div>
+                <div className="mb-2 text-4xl">🎭</div>
                 <div className="text-sm text-slate-400">Stage Right</div>
               </div>
             </div>
-            <div className="mt-6 text-center text-slate-400 text-sm">
-              Cost per render: <span className="text-amber-500 font-bold">High</span> • 
-              Sustainability: <span className="text-emerald-500 font-bold">Indefinite</span>
+            <div className="mt-6 text-center text-sm text-slate-400">
+              Cost per render:{" "}
+              <span className="font-bold text-amber-500">High</span> •
+              Sustainability:{" "}
+              <span className="font-bold text-emerald-500">Indefinite</span>
             </div>
           </div>
         );
@@ -204,46 +218,49 @@ The boring solution that works is better than the spectacular solution that kill
       case 1:
         // Chapter 2: Tesla machine magic
         return (
-          <div className="bg-slate-900/50 border border-amber-500/30 rounded-lg p-8">
-            <h3 className="text-2xl font-bold text-amber-500 mb-4 flex items-center gap-2">
-              <Zap className="w-6 h-6" />
+          <div className="rounded-lg border border-amber-500/30 bg-slate-900/50 p-8">
+            <h3 className="mb-4 flex items-center gap-2 text-2xl font-bold text-amber-500">
+              <Zap className="h-6 w-6" />
               The Tesla Machine: Instant Duplication
             </h3>
-            <p className="text-slate-300 mb-6">
+            <p className="mb-6 text-slate-300">
               Activate the machine. Watch the magic of memoization.
             </p>
-            <div className="relative bg-slate-800/50 p-8 rounded border border-slate-700">
+            <div className="relative rounded border border-slate-700 bg-slate-800/50 p-8">
               {isAnimating && (
-                <div className="absolute inset-0 bg-amber-500/20 animate-pulse rounded"></div>
+                <div className="absolute inset-0 animate-pulse rounded bg-amber-500/20"></div>
               )}
               <div className="flex items-center justify-between">
                 <div className="text-center">
-                  <div className="text-6xl mb-2">⚡</div>
+                  <div className="mb-2 text-6xl">⚡</div>
                   <div className="text-sm text-slate-400">Tesla Machine</div>
-                  <div className="text-xs text-amber-500 mt-2">useMemo()</div>
+                  <div className="mt-2 text-xs text-amber-500">useMemo()</div>
                 </div>
-                <div className="flex-1 mx-8 text-center">
+                <div className="mx-8 flex-1 text-center">
                   {isAnimating ? (
-                    <div className="text-amber-500 font-bold text-xl animate-pulse">
+                    <div className="animate-pulse text-xl font-bold text-amber-500">
                       ⚡ DUPLICATING ⚡
                     </div>
                   ) : (
-                    <div className="text-emerald-500 font-bold text-xl">
+                    <div className="text-xl font-bold text-emerald-500">
                       ✓ Cached Result Ready
                     </div>
                   )}
                 </div>
                 <div className="text-center">
-                  <div className="text-6xl mb-2">👤</div>
+                  <div className="mb-2 text-6xl">👤</div>
                   <div className="text-sm text-slate-400">Perfect Copy</div>
-                  <div className="text-xs text-emerald-500 mt-2">Instant Retrieval</div>
+                  <div className="mt-2 text-xs text-emerald-500">
+                    Instant Retrieval
+                  </div>
                 </div>
               </div>
             </div>
-            <div className="mt-6 p-4 bg-amber-950/20 border border-amber-500/30 rounded">
+            <div className="mt-6 rounded border border-amber-500/30 bg-amber-950/20 p-4">
               <div className="text-sm text-slate-300">
-                <strong className="text-amber-500">Cache Hit:</strong> 0.001ms • 
-                <strong className="text-slate-400 ml-4">Setup Cost:</strong> <span className="text-red-500">Hidden</span>
+                <strong className="text-amber-500">Cache Hit:</strong> 0.001ms •
+                <strong className="ml-4 text-slate-400">Setup Cost:</strong>{" "}
+                <span className="text-red-500">Hidden</span>
               </div>
             </div>
           </div>
@@ -252,60 +269,74 @@ The boring solution that works is better than the spectacular solution that kill
       case 2:
         // Chapter 3: Bodies in the tank
         return (
-          <div className="bg-slate-900/50 border border-red-500/30 rounded-lg p-8">
-            <h3 className="text-2xl font-bold text-red-500 mb-4 flex items-center gap-2">
-              <Skull className="w-6 h-6" />
+          <div className="rounded-lg border border-red-500/30 bg-slate-900/50 p-8">
+            <h3 className="mb-4 flex items-center gap-2 text-2xl font-bold text-red-500">
+              <Skull className="h-6 w-6" />
               The Hidden Cost: Bodies in the Tank
             </h3>
-            <p className="text-slate-300 mb-6">
+            <p className="mb-6 text-slate-300">
               Every cache entry has a price. Watch the cost accumulate.
             </p>
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className="bg-slate-800/50 p-6 rounded border border-slate-700">
-                <div className="text-center mb-4">
-                  <div className="text-4xl mb-2">🌊</div>
+            <div className="grid gap-6 md:grid-cols-2">
+              <div className="rounded border border-slate-700 bg-slate-800/50 p-6">
+                <div className="mb-4 text-center">
+                  <div className="mb-2 text-4xl">🌊</div>
                   <div className="text-sm text-slate-400">Water Tank</div>
                 </div>
                 <div className="space-y-2">
                   {[...Array(Math.min(performanceCount, 10))].map((_, i) => (
-                    <div key={i} className="flex items-center gap-2 text-red-400 text-sm">
-                      <Skull className="w-4 h-4" />
+                    <div
+                      key={i}
+                      className="flex items-center gap-2 text-sm text-red-400"
+                    >
+                      <Skull className="h-4 w-4" />
                       <span>Cache entry #{i + 1} - Cost: 100 units</span>
                     </div>
                   ))}
                 </div>
                 <button
-                  onClick={() => setPerformanceCount(c => c + 1)}
-                  className="mt-4 w-full px-4 py-2 bg-red-500/20 border border-red-500/50 text-red-400 rounded hover:bg-red-500/30 transition-colors"
+                  onClick={() => setPerformanceCount((c) => c + 1)}
+                  className="mt-4 w-full rounded border border-red-500/50 bg-red-500/20 px-4 py-2 text-red-400 transition-colors hover:bg-red-500/30"
                 >
                   Perform Again (+1 Body)
                 </button>
               </div>
-              <div className="bg-slate-800/50 p-6 rounded border border-slate-700">
-                <h4 className="text-lg font-bold text-amber-500 mb-4">Cost Analysis</h4>
+              <div className="rounded border border-slate-700 bg-slate-800/50 p-6">
+                <h4 className="mb-4 text-lg font-bold text-amber-500">
+                  Cost Analysis
+                </h4>
                 <div className="space-y-3 text-sm">
                   <div className="flex justify-between">
                     <span className="text-slate-400">Performances:</span>
-                    <span className="text-white font-bold">{performanceCount}</span>
+                    <span className="font-bold text-white">
+                      {performanceCount}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-400">Cache Entries:</span>
-                    <span className="text-red-400 font-bold">{performanceCount}</span>
+                    <span className="font-bold text-red-400">
+                      {performanceCount}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-400">Setup Cost Each:</span>
-                    <span className="text-red-400 font-bold">100 units</span>
+                    <span className="font-bold text-red-400">100 units</span>
                   </div>
-                  <div className="h-px bg-slate-700 my-2"></div>
+                  <div className="my-2 h-px bg-slate-700"></div>
                   <div className="flex justify-between text-lg">
-                    <span className="text-slate-300 font-bold">Total Cost:</span>
-                    <span className="text-red-500 font-bold">{performanceCount * 100}</span>
+                    <span className="font-bold text-slate-300">
+                      Total Cost:
+                    </span>
+                    <span className="font-bold text-red-500">
+                      {performanceCount * 100}
+                    </span>
                   </div>
                 </div>
-                <div className="mt-4 p-3 bg-red-950/30 border border-red-500/30 rounded">
+                <div className="mt-4 rounded border border-red-500/30 bg-red-950/30 p-3">
                   <p className="text-xs text-red-300">
-                    <AlertTriangle className="w-4 h-4 inline mr-1" />
-                    Dependencies change every render. Cache never reused. Cost accumulates indefinitely.
+                    <AlertTriangle className="mr-1 inline h-4 w-4" />
+                    Dependencies change every render. Cache never reused. Cost
+                    accumulates indefinitely.
                   </p>
                 </div>
               </div>
@@ -316,18 +347,18 @@ The boring solution that works is better than the spectacular solution that kill
       case 3:
         // Chapter 4: Side-by-side comparison
         return (
-          <div className="bg-slate-900/50 border border-amber-500/30 rounded-lg p-8">
-            <h3 className="text-2xl font-bold text-amber-500 mb-4 flex items-center gap-2">
-              <Users className="w-6 h-6" />
+          <div className="rounded-lg border border-amber-500/30 bg-slate-900/50 p-8">
+            <h3 className="mb-4 flex items-center gap-2 text-2xl font-bold text-amber-500">
+              <Users className="h-6 w-6" />
               The Comparison: Angier vs Borden
             </h3>
-            <p className="text-slate-300 mb-6">
+            <p className="mb-6 text-slate-300">
               Adjust the parameters to see which approach wins.
             </p>
-            
+
             <div className="mb-6 space-y-4">
               <div>
-                <label className="block text-sm text-slate-400 mb-2">
+                <label className="mb-2 block text-sm text-slate-400">
                   Computation Cost: {computationCost}
                 </label>
                 <input
@@ -340,7 +371,7 @@ The boring solution that works is better than the spectacular solution that kill
                 />
               </div>
               <div>
-                <label className="block text-sm text-slate-400 mb-2">
+                <label className="mb-2 block text-sm text-slate-400">
                   Dependency Stability: {dependencyStability}%
                 </label>
                 <input
@@ -348,18 +379,26 @@ The boring solution that works is better than the spectacular solution that kill
                   min="0"
                   max="100"
                   value={dependencyStability}
-                  onChange={(e) => setDependencyStability(Number(e.target.value))}
+                  onChange={(e) =>
+                    setDependencyStability(Number(e.target.value))
+                  }
                   className="w-full"
                 />
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <div className={`bg-slate-800/50 p-6 rounded border-2 ${optimalChoice === 'angier' ? 'border-emerald-500' : 'border-red-500/30'}`}>
-                <div className="text-center mb-4">
-                  <div className="text-4xl mb-2">⚡</div>
-                  <div className="text-lg font-bold text-amber-500">Angier's Approach</div>
-                  <div className="text-xs text-slate-400">useMemo Memoization</div>
+            <div className="grid gap-6 md:grid-cols-2">
+              <div
+                className={`rounded border-2 bg-slate-800/50 p-6 ${optimalChoice === "angier" ? "border-emerald-500" : "border-red-500/30"}`}
+              >
+                <div className="mb-4 text-center">
+                  <div className="mb-2 text-4xl">⚡</div>
+                  <div className="text-lg font-bold text-amber-500">
+                    Angier's Approach
+                  </div>
+                  <div className="text-xs text-slate-400">
+                    useMemo Memoization
+                  </div>
                 </div>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
@@ -372,21 +411,33 @@ The boring solution that works is better than the spectacular solution that kill
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-400">Invalidation Rate:</span>
-                    <span className="text-amber-400">{100 - dependencyStability}%</span>
+                    <span className="text-amber-400">
+                      {100 - dependencyStability}%
+                    </span>
                   </div>
-                  <div className="h-px bg-slate-700 my-2"></div>
+                  <div className="my-2 h-px bg-slate-700"></div>
                   <div className="flex justify-between text-lg">
-                    <span className="font-bold text-slate-300">Total Cost:</span>
-                    <span className="font-bold text-white">{angierCost.toFixed(1)}</span>
+                    <span className="font-bold text-slate-300">
+                      Total Cost:
+                    </span>
+                    <span className="font-bold text-white">
+                      {angierCost.toFixed(1)}
+                    </span>
                   </div>
                 </div>
               </div>
 
-              <div className={`bg-slate-800/50 p-6 rounded border-2 ${optimalChoice === 'borden' ? 'border-emerald-500' : 'border-slate-700'}`}>
-                <div className="text-center mb-4">
-                  <div className="text-4xl mb-2">👥</div>
-                  <div className="text-lg font-bold text-amber-500">Borden's Approach</div>
-                  <div className="text-xs text-slate-400">Simple Re-computation</div>
+              <div
+                className={`rounded border-2 bg-slate-800/50 p-6 ${optimalChoice === "borden" ? "border-emerald-500" : "border-slate-700"}`}
+              >
+                <div className="mb-4 text-center">
+                  <div className="mb-2 text-4xl">👥</div>
+                  <div className="text-lg font-bold text-amber-500">
+                    Borden's Approach
+                  </div>
+                  <div className="text-xs text-slate-400">
+                    Simple Re-computation
+                  </div>
                 </div>
                 <div className="space-y-2 text-sm">
                   <div className="flex justify-between">
@@ -395,30 +446,39 @@ The boring solution that works is better than the spectacular solution that kill
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-400">Computation Cost:</span>
-                    <span className="text-amber-400">{(computationCost / 10).toFixed(1)}</span>
+                    <span className="text-amber-400">
+                      {(computationCost / 10).toFixed(1)}
+                    </span>
                   </div>
                   <div className="flex justify-between">
                     <span className="text-slate-400">Overhead:</span>
                     <span className="text-emerald-400">0</span>
                   </div>
-                  <div className="h-px bg-slate-700 my-2"></div>
+                  <div className="my-2 h-px bg-slate-700"></div>
                   <div className="flex justify-between text-lg">
-                    <span className="font-bold text-slate-300">Total Cost:</span>
-                    <span className="font-bold text-white">{bordenCost.toFixed(1)}</span>
+                    <span className="font-bold text-slate-300">
+                      Total Cost:
+                    </span>
+                    <span className="font-bold text-white">
+                      {bordenCost.toFixed(1)}
+                    </span>
                   </div>
                 </div>
               </div>
             </div>
 
-            <div className="mt-6 p-4 bg-emerald-950/20 border border-emerald-500/30 rounded">
+            <div className="mt-6 rounded border border-emerald-500/30 bg-emerald-950/20 p-4">
               <div className="flex items-center gap-2 text-emerald-400">
-                <CheckCircle className="w-5 h-5" />
+                <CheckCircle className="h-5 w-5" />
                 <span className="font-bold">
-                  Optimal Choice: {optimalChoice === 'angier' ? "Angier's Memoization" : "Borden's Re-computation"}
+                  Optimal Choice:{" "}
+                  {optimalChoice === "angier"
+                    ? "Angier's Memoization"
+                    : "Borden's Re-computation"}
                 </span>
               </div>
-              <p className="text-sm text-slate-300 mt-2">
-                {optimalChoice === 'angier' 
+              <p className="mt-2 text-sm text-slate-300">
+                {optimalChoice === "angier"
                   ? "With stable dependencies and expensive computation, memoization pays off."
                   : "With unstable dependencies or cheap computation, simple re-computation wins."}
               </p>
@@ -429,73 +489,77 @@ The boring solution that works is better than the spectacular solution that kill
       case 4:
         // Chapter 5: Decision framework
         return (
-          <div className="bg-slate-900/50 border border-amber-500/30 rounded-lg p-8">
-            <h3 className="text-2xl font-bold text-amber-500 mb-4">
+          <div className="rounded-lg border border-amber-500/30 bg-slate-900/50 p-8">
+            <h3 className="mb-4 text-2xl font-bold text-amber-500">
               The Decision Framework
             </h3>
-            <p className="text-slate-300 mb-6">
+            <p className="mb-6 text-slate-300">
               When should you use useMemo? Let the data decide.
             </p>
 
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
-              <div className="bg-emerald-950/20 border border-emerald-500/30 rounded-lg p-6">
-                <h4 className="text-lg font-bold text-emerald-500 mb-3 flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5" />
+            <div className="mb-6 grid gap-6 md:grid-cols-2">
+              <div className="rounded-lg border border-emerald-500/30 bg-emerald-950/20 p-6">
+                <h4 className="mb-3 flex items-center gap-2 text-lg font-bold text-emerald-500">
+                  <CheckCircle className="h-5 w-5" />
                   Use useMemo When:
                 </h4>
                 <ul className="space-y-2 text-sm text-slate-300">
                   <li className="flex items-start gap-2">
-                    <span className="text-emerald-500 mt-1">✓</span>
+                    <span className="mt-1 text-emerald-500">✓</span>
                     <span>Computation is genuinely expensive (&gt; 1ms)</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-emerald-500 mt-1">✓</span>
+                    <span className="mt-1 text-emerald-500">✓</span>
                     <span>Dependencies are stable (rarely change)</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-emerald-500 mt-1">✓</span>
+                    <span className="mt-1 text-emerald-500">✓</span>
                     <span>Cache will be reused across many renders</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-emerald-500 mt-1">✓</span>
+                    <span className="mt-1 text-emerald-500">✓</span>
                     <span>You've profiled and confirmed the bottleneck</span>
                   </li>
                 </ul>
               </div>
 
-              <div className="bg-red-950/20 border border-red-500/30 rounded-lg p-6">
-                <h4 className="text-lg font-bold text-red-500 mb-3 flex items-center gap-2">
-                  <AlertTriangle className="w-5 h-5" />
+              <div className="rounded-lg border border-red-500/30 bg-red-950/20 p-6">
+                <h4 className="mb-3 flex items-center gap-2 text-lg font-bold text-red-500">
+                  <AlertTriangle className="h-5 w-5" />
                   Skip useMemo When:
                 </h4>
                 <ul className="space-y-2 text-sm text-slate-300">
                   <li className="flex items-start gap-2">
-                    <span className="text-red-500 mt-1">✗</span>
+                    <span className="mt-1 text-red-500">✗</span>
                     <span>Computation is cheap (&lt; 1ms)</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-red-500 mt-1">✗</span>
+                    <span className="mt-1 text-red-500">✗</span>
                     <span>Dependencies change frequently</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-red-500 mt-1">✗</span>
+                    <span className="mt-1 text-red-500">✗</span>
                     <span>You haven't measured the performance</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-red-500 mt-1">✗</span>
+                    <span className="mt-1 text-red-500">✗</span>
                     <span>Premature optimization (no proven bottleneck)</span>
                   </li>
                 </ul>
               </div>
             </div>
 
-            <div className="bg-slate-800/50 p-6 rounded border border-slate-700">
-              <h4 className="text-lg font-bold text-amber-500 mb-4">Code Comparison</h4>
-              <div className="grid md:grid-cols-2 gap-4">
+            <div className="rounded border border-slate-700 bg-slate-800/50 p-6">
+              <h4 className="mb-4 text-lg font-bold text-amber-500">
+                Code Comparison
+              </h4>
+              <div className="grid gap-4 md:grid-cols-2">
                 <div>
-                  <div className="text-xs text-red-400 mb-2 font-mono">// Angier's Mistake</div>
-                  <pre className="bg-slate-950 p-3 rounded text-xs text-slate-300 overflow-x-auto">
-{`// Memoizing cheap computation
+                  <div className="mb-2 font-mono text-xs text-red-400">
+                    // Angier's Mistake
+                  </div>
+                  <pre className="overflow-x-auto rounded bg-slate-950 p-3 text-xs text-slate-300">
+                    {`// Memoizing cheap computation
 const result = useMemo(() => {
   return data.filter(
     item => item.type === filter
@@ -506,9 +570,11 @@ const result = useMemo(() => {
                   </pre>
                 </div>
                 <div>
-                  <div className="text-xs text-emerald-400 mb-2 font-mono">// Borden's Wisdom</div>
-                  <pre className="bg-slate-950 p-3 rounded text-xs text-slate-300 overflow-x-auto">
-{`// Just compute it
+                  <div className="mb-2 font-mono text-xs text-emerald-400">
+                    // Borden's Wisdom
+                  </div>
+                  <pre className="overflow-x-auto rounded bg-slate-950 p-3 text-xs text-slate-300">
+                    {`// Just compute it
 const result = data.filter(
   item => item.type === filter
 );
@@ -519,11 +585,12 @@ const result = data.filter(
               </div>
             </div>
 
-            <div className="mt-6 p-4 bg-amber-950/20 border border-amber-500/30 rounded">
-              <p className="text-sm text-slate-300 italic">
-                "The boring solution that works is better than the spectacular solution that kills you."
+            <div className="mt-6 rounded border border-amber-500/30 bg-amber-950/20 p-4">
+              <p className="text-sm italic text-slate-300">
+                "The boring solution that works is better than the spectacular
+                solution that kills you."
               </p>
-              <p className="text-xs text-slate-400 mt-2 text-right">
+              <p className="mt-2 text-right text-xs text-slate-400">
                 — The Prestige, on performance optimization
               </p>
             </div>
@@ -536,16 +603,16 @@ const result = data.filter(
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-serif">
+    <div className="min-h-screen bg-slate-950 font-serif text-slate-300">
       {/* Header */}
       <header className="border-b border-amber-500/30 bg-slate-900/50 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto px-4 py-8">
+        <div className="mx-auto max-w-6xl px-4 py-8">
           <div className="flex items-start justify-between">
             <div>
-              <h1 className="text-4xl md:text-5xl font-bold text-amber-500 mb-2">
+              <h1 className="mb-2 text-4xl font-bold text-amber-500 md:text-5xl">
                 The Prestige
               </h1>
-              <p className="text-lg text-slate-400 mb-1">
+              <p className="mb-1 text-lg text-slate-400">
                 Robert Angier & Alfred Borden, Victorian London
               </p>
               <p className="text-sm text-amber-500/70">
@@ -553,22 +620,22 @@ const result = data.filter(
               </p>
             </div>
             <div className="hidden md:block">
-              <Zap className="w-16 h-16 text-amber-500/30" />
+              <Zap className="h-16 w-16 text-amber-500/30" />
             </div>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 py-12 pb-32">
+      <main className="mx-auto max-w-6xl px-4 py-12 pb-32">
         {/* Chapter Content */}
         <div className="mb-12">
-          <h2 className="text-3xl font-bold text-amber-500 mb-6">
+          <h2 className="mb-6 text-3xl font-bold text-amber-500">
             {currentChapter.title}
           </h2>
           <div className="prose prose-invert prose-slate max-w-none">
-            {currentChapter.content.split('\n\n').map((paragraph, i) => (
-              <p key={i} className="text-slate-300 leading-relaxed mb-4">
+            {currentChapter.content.split("\n\n").map((paragraph, i) => (
+              <p key={i} className="mb-4 leading-relaxed text-slate-300">
                 {paragraph}
               </p>
             ))}
@@ -580,39 +647,41 @@ const result = data.filter(
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-t border-amber-500/30">
-        <div className="max-w-6xl mx-auto px-4 py-4">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-amber-500/30 bg-slate-900/95 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-4">
           <div className="flex items-center justify-between">
             <button
-              onClick={() => setChapter(c => c - 1)}
+              onClick={() => setChapter((c) => c - 1)}
               disabled={chapter === 0}
-              className="px-6 py-2 bg-amber-500/20 border border-amber-500/50 text-amber-400 rounded hover:bg-amber-500/30 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-amber-500/20 transition-colors"
+              className="rounded border border-amber-500/50 bg-amber-500/20 px-6 py-2 text-amber-400 transition-colors hover:bg-amber-500/30 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-amber-500/20"
             >
               ← Previous
             </button>
-            
+
             <div className="text-center">
               <div className="text-sm text-slate-400">
                 Chapter {chapter + 1} of {chapters.length}
               </div>
-              <div className="flex gap-2 mt-2">
+              <div className="mt-2 flex gap-2">
                 {chapters.map((_, i) => (
                   <button
                     key={i}
                     onClick={() => setChapter(i)}
-                    className={`w-2 h-2 rounded-full transition-colors ${
-                      i === chapter ? 'bg-amber-500' : 'bg-slate-600 hover:bg-slate-500'
+                    className={`h-2 w-2 rounded-full transition-colors ${
+                      i === chapter
+                        ? "bg-amber-500"
+                        : "bg-slate-600 hover:bg-slate-500"
                     }`}
                     aria-label={`Go to chapter ${i + 1}`}
                   />
                 ))}
               </div>
             </div>
-            
+
             <button
-              onClick={() => setChapter(c => c + 1)}
+              onClick={() => setChapter((c) => c + 1)}
               disabled={chapter === chapters.length - 1}
-              className="px-6 py-2 bg-amber-500/20 border border-amber-500/50 text-amber-400 rounded hover:bg-amber-500/30 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-amber-500/20 transition-colors"
+              className="rounded border border-amber-500/50 bg-amber-500/20 px-6 py-2 text-amber-400 transition-colors hover:bg-amber-500/30 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-amber-500/20"
             >
               Next →
             </button>

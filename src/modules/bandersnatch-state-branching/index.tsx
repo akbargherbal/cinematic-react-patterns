@@ -35,15 +35,13 @@ export default function BandersnatchStateBranching() {
   const currentChapter = chapters[chapter];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-mono">
+    <div className="min-h-screen bg-slate-950 font-mono text-slate-300">
       {/* Header */}
       <header className="border-b border-red-900/30 bg-slate-900/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-6 py-8">
-          <div className="flex items-center gap-3 mb-2">
-            <Play className="w-8 h-8 text-red-500" />
-            <h1 className="text-4xl font-bold text-slate-100">
-              BANDERSNATCH
-            </h1>
+        <div className="mx-auto max-w-7xl px-6 py-8">
+          <div className="mb-2 flex items-center gap-3">
+            <Play className="h-8 w-8 text-red-500" />
+            <h1 className="text-4xl font-bold text-slate-100">BANDERSNATCH</h1>
           </div>
           <p className="text-lg text-pink-400">
             Stefan Butler, 1984 • State Machines & Branching Logic
@@ -52,11 +50,11 @@ export default function BandersnatchStateBranching() {
       </header>
 
       {/* Chapter Header */}
-      <div className="bg-slate-900/30 border-b border-slate-800">
-        <div className="max-w-7xl mx-auto px-6 py-6">
+      <div className="border-b border-slate-800 bg-slate-900/30">
+        <div className="mx-auto max-w-7xl px-6 py-6">
           <div className="flex items-center gap-3">
             {currentChapter.icon && (
-              <currentChapter.icon className="w-6 h-6 text-red-500" />
+              <currentChapter.icon className="h-6 w-6 text-red-500" />
             )}
             <h2 className="text-2xl font-bold text-slate-100">
               {currentChapter.title}
@@ -66,7 +64,7 @@ export default function BandersnatchStateBranching() {
       </div>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-6 py-12 pb-32">
+      <main className="mx-auto max-w-7xl px-6 py-12 pb-32">
         {chapter === 0 && <ChapterIntro />}
         {chapter === 1 && <ChapterBuild />}
         {chapter === 2 && <ChapterClimax />}
@@ -75,13 +73,13 @@ export default function BandersnatchStateBranching() {
       </main>
 
       {/* Navigation Footer */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-t border-red-900/30">
-        <div className="max-w-7xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-red-900/30 bg-slate-900/95 backdrop-blur-sm">
+        <div className="mx-auto max-w-7xl px-6 py-4">
+          <div className="flex items-center justify-between">
             <button
               onClick={() => setChapter((c) => c - 1)}
               disabled={chapter === 0}
-              className="px-6 py-2 bg-red-900/30 text-red-400 border border-red-500/30 hover:bg-red-900/50 hover:border-red-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              className="border border-red-500/30 bg-red-900/30 px-6 py-2 text-red-400 transition-all hover:border-red-500 hover:bg-red-900/50 disabled:cursor-not-allowed disabled:opacity-30"
             >
               ← Previous
             </button>
@@ -91,9 +89,9 @@ export default function BandersnatchStateBranching() {
                 <button
                   key={idx}
                   onClick={() => setChapter(idx)}
-                  className={`w-2 h-2 rounded-full transition-all ${
+                  className={`h-2 w-2 rounded-full transition-all ${
                     idx === chapter
-                      ? "bg-red-500 w-8"
+                      ? "w-8 bg-red-500"
                       : "bg-slate-700 hover:bg-slate-600"
                   }`}
                   aria-label={`Go to chapter ${idx + 1}`}
@@ -104,7 +102,7 @@ export default function BandersnatchStateBranching() {
             <button
               onClick={() => setChapter((c) => c + 1)}
               disabled={chapter === chapters.length - 1}
-              className="px-6 py-2 bg-red-900/30 text-red-400 border border-red-500/30 hover:bg-red-900/50 hover:border-red-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              className="border border-red-500/30 bg-red-900/30 px-6 py-2 text-red-400 transition-all hover:border-red-500 hover:bg-red-900/50 disabled:cursor-not-allowed disabled:opacity-30"
             >
               Next →
             </button>
@@ -119,7 +117,7 @@ function ChapterIntro() {
   const [choice, setChoice] = useState<string | null>(null);
 
   return (
-    <div className="grid lg:grid-cols-2 gap-8">
+    <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-6">
         <div className="prose prose-invert max-w-none">
           <p className="text-lg leading-relaxed">
@@ -135,7 +133,7 @@ function ChapterIntro() {
             possibilities. He types on his keyboard, defining the first decision
             point:
           </p>
-          <pre className="bg-slate-900 border border-slate-700 p-4 rounded text-sm overflow-x-auto">
+          <pre className="overflow-x-auto rounded border border-slate-700 bg-slate-900 p-4 text-sm">
             <code className="text-pink-400">
               {`IF player chooses LEFT THEN
   state = "forest_path"
@@ -144,13 +142,14 @@ ELSE
             </code>
           </pre>
           <p className="text-lg leading-relaxed">
-            It's simple. Elegant. One variable—<code className="text-pink-400">state</code>—determines
-            everything the player sees next. The forest path shows forest
-            descriptions, forest choices, forest consequences. The mountain path
-            shows mountains. The state is the source of truth. Change the state,
+            It's simple. Elegant. One variable—
+            <code className="text-pink-400">state</code>—determines everything
+            the player sees next. The forest path shows forest descriptions,
+            forest choices, forest consequences. The mountain path shows
+            mountains. The state is the source of truth. Change the state,
             change the reality.
           </p>
-          <p className="text-xl font-bold text-red-400 mt-8">
+          <p className="mt-8 text-xl font-bold text-red-400">
             This is how React works.
           </p>
           <p className="text-lg leading-relaxed">
@@ -163,11 +162,11 @@ ELSE
       </div>
 
       <div className="space-y-6">
-        <div className="bg-slate-900 border border-red-900/30 rounded-lg p-6">
-          <h3 className="text-xl font-bold text-slate-100 mb-4">
+        <div className="rounded-lg border border-red-900/30 bg-slate-900 p-6">
+          <h3 className="mb-4 text-xl font-bold text-slate-100">
             Interactive: The First Choice
           </h3>
-          <p className="text-sm text-slate-400 mb-6">
+          <p className="mb-6 text-sm text-slate-400">
             Stefan's game presents a simple choice. Click a button to see how
             state determines what renders.
           </p>
@@ -176,20 +175,20 @@ ELSE
             <div className="flex gap-4">
               <button
                 onClick={() => setChoice("frosties")}
-                className={`flex-1 py-4 px-6 border-2 transition-all ${
+                className={`flex-1 border-2 px-6 py-4 transition-all ${
                   choice === "frosties"
-                    ? "bg-red-900/50 border-red-500 text-red-300"
-                    : "bg-slate-800 border-slate-700 text-slate-300 hover:border-red-500/50"
+                    ? "border-red-500 bg-red-900/50 text-red-300"
+                    : "border-slate-700 bg-slate-800 text-slate-300 hover:border-red-500/50"
                 }`}
               >
                 Frosties
               </button>
               <button
                 onClick={() => setChoice("sugar_puffs")}
-                className={`flex-1 py-4 px-6 border-2 transition-all ${
+                className={`flex-1 border-2 px-6 py-4 transition-all ${
                   choice === "sugar_puffs"
-                    ? "bg-red-900/50 border-red-500 text-red-300"
-                    : "bg-slate-800 border-slate-700 text-slate-300 hover:border-red-500/50"
+                    ? "border-red-500 bg-red-900/50 text-red-300"
+                    : "border-slate-700 bg-slate-800 text-slate-300 hover:border-red-500/50"
                 }`}
               >
                 Sugar Puffs
@@ -197,25 +196,25 @@ ELSE
             </div>
 
             {choice && (
-              <div className="bg-slate-800 border border-pink-500/30 rounded p-4 animate-[fadeIn_0.3s_ease-in]">
-                <p className="text-sm text-slate-400 mb-2">Current State:</p>
-                <code className="text-pink-400 text-lg">
+              <div className="animate-[fadeIn_0.3s_ease-in] rounded border border-pink-500/30 bg-slate-800 p-4">
+                <p className="mb-2 text-sm text-slate-400">Current State:</p>
+                <code className="text-lg text-pink-400">
                   state = "{choice}"
                 </code>
-                <p className="text-sm text-slate-300 mt-4">
+                <p className="mt-4 text-sm text-slate-300">
                   {choice === "frosties"
                     ? "Stefan pours Frosties. The day begins with a sugary crunch. His mood: optimistic."
                     : "Stefan chooses Sugar Puffs. A safer choice. His mood: cautious."}
                 </p>
-                <p className="text-xs text-slate-500 mt-4 italic">
-                  The state variable determines what the user experiences. Change
-                  the state, change the reality.
+                <p className="mt-4 text-xs italic text-slate-500">
+                  The state variable determines what the user experiences.
+                  Change the state, change the reality.
                 </p>
               </div>
             )}
           </div>
 
-          <div className="mt-6 pt-6 border-t border-slate-700">
+          <div className="mt-6 border-t border-slate-700 pt-6">
             <p className="text-sm text-slate-400">
               <strong className="text-slate-300">The Core Truth:</strong> In
               React, state is not just data—it's the determinant of reality.
@@ -224,11 +223,11 @@ ELSE
           </div>
         </div>
 
-        <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
-          <h4 className="text-lg font-bold text-slate-100 mb-3">
+        <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+          <h4 className="mb-3 text-lg font-bold text-slate-100">
             React Equivalent
           </h4>
-          <pre className="bg-slate-950 border border-slate-700 p-4 rounded text-xs overflow-x-auto">
+          <pre className="overflow-x-auto rounded border border-slate-700 bg-slate-950 p-4 text-xs">
             <code className="text-slate-300">
               {`const [choice, setChoice] = useState(null);
 
@@ -266,7 +265,7 @@ function ChapterBuild() {
   const complexity = [cereal, music, job, colin].filter(Boolean).length;
 
   return (
-    <div className="grid lg:grid-cols-2 gap-8">
+    <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-6">
         <div className="prose prose-invert max-w-none">
           <p className="text-lg leading-relaxed">
@@ -281,7 +280,7 @@ function ChapterBuild() {
             whether to accept the job at Tuckersoft. Each choice seemed
             independent, but they weren't.
           </p>
-          <pre className="bg-slate-900 border border-slate-700 p-4 rounded text-sm overflow-x-auto">
+          <pre className="overflow-x-auto rounded border border-slate-700 bg-slate-900 p-4 text-sm">
             <code className="text-pink-400">
               {`IF cereal = "frosties" AND music = "thompson_twins" THEN
   IF job_accepted = true THEN
@@ -302,50 +301,50 @@ END IF`}
             if you chose Sugar Puffs? He thinks so, but he'd have to trace
             through dozens of IF statements to be sure.
           </p>
-          <p className="text-xl font-bold text-red-400 mt-8">
+          <p className="mt-8 text-xl font-bold text-red-400">
             This is the state management nightmare.
           </p>
           <p className="text-lg leading-relaxed">
-            You start with simple <code className="text-pink-400">useState</code> calls.
-            Then you add another. Then another. Soon your component is a maze of
-            conditional renders, and you're managing state dependencies in your
-            head.
+            You start with simple{" "}
+            <code className="text-pink-400">useState</code> calls. Then you add
+            another. Then another. Soon your component is a maze of conditional
+            renders, and you're managing state dependencies in your head.
           </p>
         </div>
       </div>
 
       <div className="space-y-6">
-        <div className="bg-slate-900 border border-red-900/30 rounded-lg p-6">
-          <h3 className="text-xl font-bold text-slate-100 mb-4">
+        <div className="rounded-lg border border-red-900/30 bg-slate-900 p-6">
+          <h3 className="mb-4 text-xl font-bold text-slate-100">
             Interactive: The Complexity Spiral
           </h3>
-          <p className="text-sm text-slate-400 mb-6">
+          <p className="mb-6 text-sm text-slate-400">
             Make choices and watch the conditional logic explode. This is what
             happens without proper state architecture.
           </p>
 
           <div className="space-y-4">
             <div>
-              <label className="text-sm text-slate-400 block mb-2">
+              <label className="mb-2 block text-sm text-slate-400">
                 Cereal:
               </label>
               <div className="flex gap-2">
                 <button
                   onClick={() => setCereal("frosties")}
-                  className={`flex-1 py-2 px-4 text-sm border transition-all ${
+                  className={`flex-1 border px-4 py-2 text-sm transition-all ${
                     cereal === "frosties"
-                      ? "bg-red-900/50 border-red-500"
-                      : "bg-slate-800 border-slate-700 hover:border-red-500/50"
+                      ? "border-red-500 bg-red-900/50"
+                      : "border-slate-700 bg-slate-800 hover:border-red-500/50"
                   }`}
                 >
                   Frosties
                 </button>
                 <button
                   onClick={() => setCereal("sugar_puffs")}
-                  className={`flex-1 py-2 px-4 text-sm border transition-all ${
+                  className={`flex-1 border px-4 py-2 text-sm transition-all ${
                     cereal === "sugar_puffs"
-                      ? "bg-red-900/50 border-red-500"
-                      : "bg-slate-800 border-slate-700 hover:border-red-500/50"
+                      ? "border-red-500 bg-red-900/50"
+                      : "border-slate-700 bg-slate-800 hover:border-red-500/50"
                   }`}
                 >
                   Sugar Puffs
@@ -354,26 +353,26 @@ END IF`}
             </div>
 
             <div>
-              <label className="text-sm text-slate-400 block mb-2">
+              <label className="mb-2 block text-sm text-slate-400">
                 Music:
               </label>
               <div className="flex gap-2">
                 <button
                   onClick={() => setMusic("thompson_twins")}
-                  className={`flex-1 py-2 px-4 text-sm border transition-all ${
+                  className={`flex-1 border px-4 py-2 text-sm transition-all ${
                     music === "thompson_twins"
-                      ? "bg-red-900/50 border-red-500"
-                      : "bg-slate-800 border-slate-700 hover:border-red-500/50"
+                      ? "border-red-500 bg-red-900/50"
+                      : "border-slate-700 bg-slate-800 hover:border-red-500/50"
                   }`}
                 >
                   Thompson Twins
                 </button>
                 <button
                   onClick={() => setMusic("now_2")}
-                  className={`flex-1 py-2 px-4 text-sm border transition-all ${
+                  className={`flex-1 border px-4 py-2 text-sm transition-all ${
                     music === "now_2"
-                      ? "bg-red-900/50 border-red-500"
-                      : "bg-slate-800 border-slate-700 hover:border-red-500/50"
+                      ? "border-red-500 bg-red-900/50"
+                      : "border-slate-700 bg-slate-800 hover:border-red-500/50"
                   }`}
                 >
                   Now 2
@@ -382,24 +381,24 @@ END IF`}
             </div>
 
             <div>
-              <label className="text-sm text-slate-400 block mb-2">Job:</label>
+              <label className="mb-2 block text-sm text-slate-400">Job:</label>
               <div className="flex gap-2">
                 <button
                   onClick={() => setJob("accept")}
-                  className={`flex-1 py-2 px-4 text-sm border transition-all ${
+                  className={`flex-1 border px-4 py-2 text-sm transition-all ${
                     job === "accept"
-                      ? "bg-red-900/50 border-red-500"
-                      : "bg-slate-800 border-slate-700 hover:border-red-500/50"
+                      ? "border-red-500 bg-red-900/50"
+                      : "border-slate-700 bg-slate-800 hover:border-red-500/50"
                   }`}
                 >
                   Accept
                 </button>
                 <button
                   onClick={() => setJob("refuse")}
-                  className={`flex-1 py-2 px-4 text-sm border transition-all ${
+                  className={`flex-1 border px-4 py-2 text-sm transition-all ${
                     job === "refuse"
-                      ? "bg-red-900/50 border-red-500"
-                      : "bg-slate-800 border-slate-700 hover:border-red-500/50"
+                      ? "border-red-500 bg-red-900/50"
+                      : "border-slate-700 bg-slate-800 hover:border-red-500/50"
                   }`}
                 >
                   Refuse
@@ -408,26 +407,26 @@ END IF`}
             </div>
 
             <div>
-              <label className="text-sm text-slate-400 block mb-2">
+              <label className="mb-2 block text-sm text-slate-400">
                 Colin:
               </label>
               <div className="flex gap-2">
                 <button
                   onClick={() => setColin("befriend")}
-                  className={`flex-1 py-2 px-4 text-sm border transition-all ${
+                  className={`flex-1 border px-4 py-2 text-sm transition-all ${
                     colin === "befriend"
-                      ? "bg-red-900/50 border-red-500"
-                      : "bg-slate-800 border-slate-700 hover:border-red-500/50"
+                      ? "border-red-500 bg-red-900/50"
+                      : "border-slate-700 bg-slate-800 hover:border-red-500/50"
                   }`}
                 >
                   Befriend
                 </button>
                 <button
                   onClick={() => setColin("ignore")}
-                  className={`flex-1 py-2 px-4 text-sm border transition-all ${
+                  className={`flex-1 border px-4 py-2 text-sm transition-all ${
                     colin === "ignore"
-                      ? "bg-red-900/50 border-red-500"
-                      : "bg-slate-800 border-slate-700 hover:border-red-500/50"
+                      ? "border-red-500 bg-red-900/50"
+                      : "border-slate-700 bg-slate-800 hover:border-red-500/50"
                   }`}
                 >
                   Ignore
@@ -436,22 +435,20 @@ END IF`}
             </div>
           </div>
 
-          <div className="mt-6 pt-6 border-t border-slate-700">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-sm text-slate-400">
-                Complexity Level:
-              </span>
+          <div className="mt-6 border-t border-slate-700 pt-6">
+            <div className="mb-2 flex items-center justify-between">
+              <span className="text-sm text-slate-400">Complexity Level:</span>
               <span className="text-lg font-bold text-red-400">
                 {complexity}/4
               </span>
             </div>
-            <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+            <div className="h-2 overflow-hidden rounded-full bg-slate-800">
               <div
                 className="h-full bg-gradient-to-r from-pink-500 to-red-500 transition-all duration-300"
                 style={{ width: `${(complexity / 4) * 100}%` }}
               />
             </div>
-            <p className="text-xs text-slate-500 mt-3">
+            <p className="mt-3 text-xs text-slate-500">
               {complexity === 0 && "No choices made yet."}
               {complexity === 1 && "Simple state. Easy to manage."}
               {complexity === 2 && "Getting complex. Dependencies emerging."}
@@ -463,11 +460,11 @@ END IF`}
           </div>
         </div>
 
-        <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
-          <h4 className="text-lg font-bold text-slate-100 mb-3">
+        <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+          <h4 className="mb-3 text-lg font-bold text-slate-100">
             The Anti-Pattern
           </h4>
-          <pre className="bg-slate-950 border border-slate-700 p-4 rounded text-xs overflow-x-auto">
+          <pre className="overflow-x-auto rounded border border-slate-700 bg-slate-950 p-4 text-xs">
             <code className="text-slate-300">
               {`const [cereal, setCereal] = useState(null);
 const [music, setMusic] = useState(null);
@@ -488,7 +485,7 @@ const [colin, setColin] = useState(null);
 )}`}
             </code>
           </pre>
-          <p className="text-xs text-slate-400 mt-3">
+          <p className="mt-3 text-xs text-slate-400">
             This is unmaintainable. You need explicit state management.
           </p>
         </div>
@@ -507,7 +504,7 @@ function ChapterClimax() {
   }, []);
 
   return (
-    <div className="grid lg:grid-cols-2 gap-8">
+    <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-6">
         <div className="prose prose-invert max-w-none">
           <p className="text-lg leading-relaxed">
@@ -518,8 +515,8 @@ function ChapterClimax() {
             compulsion, a sense that his words aren't entirely his own. Then the
             choice appears—not in the game he's coding, but in his reality:
           </p>
-          <div className="bg-slate-900 border border-red-500/50 p-6 rounded-lg my-6">
-            <p className="text-center text-xl font-bold text-red-400 mb-4">
+          <div className="my-6 rounded-lg border border-red-500/50 bg-slate-900 p-6">
+            <p className="mb-4 text-center text-xl font-bold text-red-400">
               TALK ABOUT MUM or REFUSE
             </p>
             <p className="text-center text-sm text-slate-400">
@@ -531,14 +528,14 @@ function ChapterClimax() {
             He sees it. Two buttons. Two possible state transitions. He's not
             choosing—someone else is choosing for him.
           </p>
-          <p className="text-xl font-bold text-red-400 mt-8">You are.</p>
+          <p className="mt-8 text-xl font-bold text-red-400">You are.</p>
           <p className="text-lg leading-relaxed">
             Stefan's reality branches based on your input. You click "TALK ABOUT
             MUM" and Stefan talks. You click "REFUSE" and Stefan refuses. His
             state changes. His behavior changes. His entire experienced reality
             changes.
           </p>
-          <p className="text-xl font-bold text-pink-400 mt-8">
+          <p className="mt-8 text-xl font-bold text-pink-400">
             He is a controlled component.
           </p>
           <p className="text-lg leading-relaxed">
@@ -555,25 +552,25 @@ function ChapterClimax() {
       </div>
 
       <div className="space-y-6">
-        <div className="bg-slate-900 border border-red-900/30 rounded-lg p-6">
-          <h3 className="text-xl font-bold text-slate-100 mb-4">
+        <div className="rounded-lg border border-red-900/30 bg-slate-900 p-6">
+          <h3 className="mb-4 text-xl font-bold text-slate-100">
             Interactive: You Are The Controller
           </h3>
-          <p className="text-sm text-slate-400 mb-6">
+          <p className="mb-6 text-sm text-slate-400">
             Make a choice for Stefan. Watch how he responds to YOUR state
             management.
           </p>
 
-          <div className="bg-slate-800 border border-pink-500/30 rounded-lg p-6 mb-6">
-            <div className="text-center mb-6">
-              <p className="text-sm text-slate-400 mb-2">Stefan's State:</p>
+          <div className="mb-6 rounded-lg border border-pink-500/30 bg-slate-800 p-6">
+            <div className="mb-6 text-center">
+              <p className="mb-2 text-sm text-slate-400">Stefan's State:</p>
               <code className="text-2xl font-bold text-pink-400">
                 {stefanState}
               </code>
             </div>
 
             {stefanState === "WAITING" && (
-              <div className="space-y-4 animate-[fadeIn_0.3s_ease-in]">
+              <div className="animate-[fadeIn_0.3s_ease-in] space-y-4">
                 <p className="text-center text-slate-300">
                   Stefan sits in the therapist's office, waiting for your
                   decision...
@@ -581,13 +578,13 @@ function ChapterClimax() {
                 <div className="flex gap-4">
                   <button
                     onClick={() => handleChoice("talk")}
-                    className="flex-1 py-4 px-6 bg-red-900/30 border-2 border-red-500 text-red-300 hover:bg-red-900/50 transition-all"
+                    className="flex-1 border-2 border-red-500 bg-red-900/30 px-6 py-4 text-red-300 transition-all hover:bg-red-900/50"
                   >
                     TALK ABOUT MUM
                   </button>
                   <button
                     onClick={() => handleChoice("refuse")}
-                    className="flex-1 py-4 px-6 bg-slate-700 border-2 border-slate-600 text-slate-300 hover:bg-slate-600 transition-all"
+                    className="flex-1 border-2 border-slate-600 bg-slate-700 px-6 py-4 text-slate-300 transition-all hover:bg-slate-600"
                   >
                     REFUSE
                   </button>
@@ -596,12 +593,12 @@ function ChapterClimax() {
             )}
 
             {stefanState === "TALKING" && (
-              <div className="space-y-4 animate-[fadeIn_0.3s_ease-in]">
+              <div className="animate-[fadeIn_0.3s_ease-in] space-y-4">
                 <p className="text-center text-slate-300">
                   Stefan begins talking about his mother. The words flow, but
                   they're not entirely his. He's responding to your choice.
                 </p>
-                <p className="text-center text-sm text-pink-400 italic">
+                <p className="text-center text-sm italic text-pink-400">
                   State changed by parent component (you)
                 </p>
                 <button
@@ -609,7 +606,7 @@ function ChapterClimax() {
                     setUserChoice(null);
                     setStefanState("WAITING");
                   }}
-                  className="w-full py-2 px-4 bg-slate-700 border border-slate-600 text-slate-300 hover:bg-slate-600 transition-all text-sm"
+                  className="w-full border border-slate-600 bg-slate-700 px-4 py-2 text-sm text-slate-300 transition-all hover:bg-slate-600"
                 >
                   Reset
                 </button>
@@ -617,12 +614,12 @@ function ChapterClimax() {
             )}
 
             {stefanState === "REFUSING" && (
-              <div className="space-y-4 animate-[fadeIn_0.3s_ease-in]">
+              <div className="animate-[fadeIn_0.3s_ease-in] space-y-4">
                 <p className="text-center text-slate-300">
                   Stefan refuses to talk. He crosses his arms. But even this
                   refusal was determined by your choice.
                 </p>
-                <p className="text-center text-sm text-pink-400 italic">
+                <p className="text-center text-sm italic text-pink-400">
                   State changed by parent component (you)
                 </p>
                 <button
@@ -630,7 +627,7 @@ function ChapterClimax() {
                     setUserChoice(null);
                     setStefanState("WAITING");
                   }}
-                  className="w-full py-2 px-4 bg-slate-700 border border-slate-600 text-slate-300 hover:bg-slate-600 transition-all text-sm"
+                  className="w-full border border-slate-600 bg-slate-700 px-4 py-2 text-sm text-slate-300 transition-all hover:bg-slate-600"
                 >
                   Reset
                 </button>
@@ -638,11 +635,11 @@ function ChapterClimax() {
             )}
           </div>
 
-          <div className="bg-slate-950 border border-slate-700 rounded p-4">
-            <p className="text-xs text-slate-400 mb-2">
+          <div className="rounded border border-slate-700 bg-slate-950 p-4">
+            <p className="mb-2 text-xs text-slate-400">
               Unidirectional Data Flow:
             </p>
-            <div className="space-y-2 text-xs font-mono">
+            <div className="space-y-2 font-mono text-xs">
               <div className="flex items-center gap-2">
                 <span className="text-pink-400">Parent (You)</span>
                 <span className="text-slate-600">→</span>
@@ -661,11 +658,11 @@ function ChapterClimax() {
           </div>
         </div>
 
-        <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
-          <h4 className="text-lg font-bold text-slate-100 mb-3">
+        <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+          <h4 className="mb-3 text-lg font-bold text-slate-100">
             Controlled Component Pattern
           </h4>
-          <pre className="bg-slate-950 border border-slate-700 p-4 rounded text-xs overflow-x-auto">
+          <pre className="overflow-x-auto rounded border border-slate-700 bg-slate-950 p-4 text-xs">
             <code className="text-slate-300">
               {`function StefanComponent({ state, onChoice }) {
   // Stefan doesn't own his state
@@ -740,7 +737,7 @@ function ChapterResolution() {
         setCurrentState(nextState);
       }
     },
-    [currentState]
+    [currentState],
   );
 
   const getAvailableTransitions = () => {
@@ -748,7 +745,7 @@ function ChapterResolution() {
   };
 
   return (
-    <div className="grid lg:grid-cols-2 gap-8">
+    <div className="grid gap-8 lg:grid-cols-2">
       <div className="space-y-6">
         <div className="prose prose-invert max-w-none">
           <p className="text-lg leading-relaxed">
@@ -774,7 +771,7 @@ function ChapterResolution() {
             <code className="text-pink-400">MORNING_AFTER</code> first. See? The
             transitions are defined. The paths are explicit."
           </p>
-          <p className="text-xl font-bold text-red-400 mt-8">
+          <p className="mt-8 text-xl font-bold text-red-400">
             This is the solution.
           </p>
           <p className="text-lg leading-relaxed">
@@ -793,18 +790,18 @@ function ChapterResolution() {
       </div>
 
       <div className="space-y-6">
-        <div className="bg-slate-900 border border-red-900/30 rounded-lg p-6">
-          <h3 className="text-xl font-bold text-slate-100 mb-4">
+        <div className="rounded-lg border border-red-900/30 bg-slate-900 p-6">
+          <h3 className="mb-4 text-xl font-bold text-slate-100">
             Interactive: The State Machine
           </h3>
-          <p className="text-sm text-slate-400 mb-6">
+          <p className="mb-6 text-sm text-slate-400">
             Navigate through an explicit state machine. Only valid transitions
             are allowed.
           </p>
 
-          <div className="bg-slate-800 border border-pink-500/30 rounded-lg p-6 mb-6">
-            <div className="text-center mb-6">
-              <p className="text-sm text-slate-400 mb-2">Current State:</p>
+          <div className="mb-6 rounded-lg border border-pink-500/30 bg-slate-800 p-6">
+            <div className="mb-6 text-center">
+              <p className="mb-2 text-sm text-slate-400">Current State:</p>
               <code className="text-2xl font-bold text-pink-400">
                 {currentState}
               </code>
@@ -813,14 +810,14 @@ function ChapterResolution() {
             <div className="space-y-3">
               {getAvailableTransitions().length > 0 ? (
                 <>
-                  <p className="text-sm text-slate-400 text-center mb-4">
+                  <p className="mb-4 text-center text-sm text-slate-400">
                     Available Transitions:
                   </p>
                   {getAvailableTransitions().map((event) => (
                     <button
                       key={event}
                       onClick={() => transition(event)}
-                      className="w-full py-3 px-4 bg-red-900/30 border border-red-500/50 text-red-300 hover:bg-red-900/50 hover:border-red-500 transition-all text-sm"
+                      className="w-full border border-red-500/50 bg-red-900/30 px-4 py-3 text-sm text-red-300 transition-all hover:border-red-500 hover:bg-red-900/50"
                     >
                       {event.replace(/_/g, " ")} →{" "}
                       {TRANSITIONS[currentState][event]}
@@ -828,13 +825,13 @@ function ChapterResolution() {
                   ))}
                 </>
               ) : (
-                <div className="text-center py-6">
-                  <p className="text-slate-300 mb-4">
+                <div className="py-6 text-center">
+                  <p className="mb-4 text-slate-300">
                     Terminal state reached. No more transitions available.
                   </p>
                   <button
                     onClick={() => setCurrentState("INIT")}
-                    className="py-2 px-6 bg-slate-700 border border-slate-600 text-slate-300 hover:bg-slate-600 transition-all text-sm"
+                    className="border border-slate-600 bg-slate-700 px-6 py-2 text-sm text-slate-300 transition-all hover:bg-slate-600"
                   >
                     Reset to INIT
                   </button>
@@ -843,9 +840,9 @@ function ChapterResolution() {
             </div>
           </div>
 
-          <div className="bg-slate-950 border border-slate-700 rounded p-4">
-            <p className="text-xs text-slate-400 mb-3">State Machine Map:</p>
-            <div className="space-y-2 text-xs font-mono">
+          <div className="rounded border border-slate-700 bg-slate-950 p-4">
+            <p className="mb-3 text-xs text-slate-400">State Machine Map:</p>
+            <div className="space-y-2 font-mono text-xs">
               <div className="text-pink-400">INIT</div>
               <div className="pl-4 text-slate-500">
                 ├─ ACCEPT_JOB → TUCKERSOFT
@@ -853,17 +850,13 @@ function ChapterResolution() {
               <div className="pl-4 text-slate-500">
                 └─ REFUSE_JOB → SOLO_DEV
               </div>
-              <div className="text-pink-400 mt-2">TUCKERSOFT</div>
-              <div className="pl-4 text-slate-500">
-                ├─ MEET_COLIN → PARTY
-              </div>
+              <div className="mt-2 text-pink-400">TUCKERSOFT</div>
+              <div className="pl-4 text-slate-500">├─ MEET_COLIN → PARTY</div>
               <div className="pl-4 text-slate-500">
                 └─ WORK_ALONE → SOLO_DEV
               </div>
-              <div className="text-pink-400 mt-2">PARTY</div>
-              <div className="pl-4 text-slate-500">
-                ├─ TAKE_DRUGS → THERAPY
-              </div>
+              <div className="mt-2 text-pink-400">PARTY</div>
+              <div className="pl-4 text-slate-500">├─ TAKE_DRUGS → THERAPY</div>
               <div className="pl-4 text-slate-500">
                 └─ LEAVE_EARLY → SOLO_DEV
               </div>
@@ -871,11 +864,11 @@ function ChapterResolution() {
           </div>
         </div>
 
-        <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
-          <h4 className="text-lg font-bold text-slate-100 mb-3">
+        <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+          <h4 className="mb-3 text-lg font-bold text-slate-100">
             Explicit State Machine
           </h4>
-          <pre className="bg-slate-950 border border-slate-700 p-4 rounded text-xs overflow-x-auto">
+          <pre className="overflow-x-auto rounded border border-slate-700 bg-slate-950 p-4 text-xs">
             <code className="text-slate-300">
               {`const STATES = {
   INIT: 'INIT',
@@ -898,7 +891,7 @@ const transition = (event) => {
 };`}
             </code>
           </pre>
-          <p className="text-xs text-slate-400 mt-3">
+          <p className="mt-3 text-xs text-slate-400">
             Predictable. Debuggable. Maintainable.
           </p>
         </div>
@@ -929,28 +922,28 @@ function ChapterSummary() {
         </p>
       </div>
 
-      <div className="bg-slate-900 border border-red-900/30 rounded-lg p-8">
-        <h3 className="text-2xl font-bold text-slate-100 mb-6 text-center">
+      <div className="rounded-lg border border-red-900/30 bg-slate-900 p-8">
+        <h3 className="mb-6 text-center text-2xl font-bold text-slate-100">
           The Contrast: Before vs After
         </h3>
 
-        <div className="flex justify-center gap-4 mb-8">
+        <div className="mb-8 flex justify-center gap-4">
           <button
             onClick={() => setView("before")}
-            className={`px-6 py-3 border-2 transition-all ${
+            className={`border-2 px-6 py-3 transition-all ${
               view === "before"
-                ? "bg-red-900/50 border-red-500 text-red-300"
-                : "bg-slate-800 border-slate-700 text-slate-400 hover:border-red-500/50"
+                ? "border-red-500 bg-red-900/50 text-red-300"
+                : "border-slate-700 bg-slate-800 text-slate-400 hover:border-red-500/50"
             }`}
           >
             Before (Chaos)
           </button>
           <button
             onClick={() => setView("after")}
-            className={`px-6 py-3 border-2 transition-all ${
+            className={`border-2 px-6 py-3 transition-all ${
               view === "after"
-                ? "bg-red-900/50 border-red-500 text-red-300"
-                : "bg-slate-800 border-slate-700 text-slate-400 hover:border-red-500/50"
+                ? "border-red-500 bg-red-900/50 text-red-300"
+                : "border-slate-700 bg-slate-800 text-slate-400 hover:border-red-500/50"
             }`}
           >
             After (Clarity)
@@ -958,12 +951,12 @@ function ChapterSummary() {
         </div>
 
         {view === "before" && (
-          <div className="space-y-6 animate-[fadeIn_0.3s_ease-in]">
-            <div className="bg-slate-950 border border-slate-700 rounded-lg p-6">
-              <h4 className="text-lg font-bold text-red-400 mb-4">
+          <div className="animate-[fadeIn_0.3s_ease-in] space-y-6">
+            <div className="rounded-lg border border-slate-700 bg-slate-950 p-6">
+              <h4 className="mb-4 text-lg font-bold text-red-400">
                 Scattered State (Anti-Pattern)
               </h4>
-              <pre className="text-xs overflow-x-auto">
+              <pre className="overflow-x-auto text-xs">
                 <code className="text-slate-300">
                   {`const [isLoggedIn, setIsLoggedIn] = useState(false);
 const [hasProfile, setHasProfile] = useState(false);
@@ -979,8 +972,8 @@ return <Dashboard />;`}
                 </code>
               </pre>
               <div className="mt-4 space-y-2 text-sm text-slate-400">
-                <p className="text-red-400 font-bold">Problems:</p>
-                <ul className="list-disc list-inside space-y-1">
+                <p className="font-bold text-red-400">Problems:</p>
+                <ul className="list-inside list-disc space-y-1">
                   <li>What if isLoading AND error are both true?</li>
                   <li>Can you be logged in without a profile?</li>
                   <li>How do you transition from isLoading to hasProfile?</li>
@@ -992,12 +985,12 @@ return <Dashboard />;`}
         )}
 
         {view === "after" && (
-          <div className="space-y-6 animate-[fadeIn_0.3s_ease-in]">
-            <div className="bg-slate-950 border border-slate-700 rounded-lg p-6">
-              <h4 className="text-lg font-bold text-pink-400 mb-4">
+          <div className="animate-[fadeIn_0.3s_ease-in] space-y-6">
+            <div className="rounded-lg border border-slate-700 bg-slate-950 p-6">
+              <h4 className="mb-4 text-lg font-bold text-pink-400">
                 Explicit State Machine (Correct Pattern)
               </h4>
-              <pre className="text-xs overflow-x-auto">
+              <pre className="overflow-x-auto text-xs">
                 <code className="text-slate-300">
                   {`const STATES = {
   LOADING: 'LOADING',
@@ -1025,8 +1018,8 @@ switch (state) {
                 </code>
               </pre>
               <div className="mt-4 space-y-2 text-sm text-slate-400">
-                <p className="text-pink-400 font-bold">Benefits:</p>
-                <ul className="list-disc list-inside space-y-1">
+                <p className="font-bold text-pink-400">Benefits:</p>
+                <ul className="list-inside list-disc space-y-1">
                   <li>Impossible states are impossible</li>
                   <li>Transitions are explicit and visible</li>
                   <li>Easy to test each state independently</li>
@@ -1038,8 +1031,8 @@ switch (state) {
         )}
       </div>
 
-      <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-8">
-        <h3 className="text-2xl font-bold text-slate-100 mb-6">
+      <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-8">
+        <h3 className="mb-6 text-2xl font-bold text-slate-100">
           The Synthesis
         </h3>
         <div className="space-y-4 text-lg text-slate-300">
@@ -1053,17 +1046,13 @@ switch (state) {
             Every state transition determines what renders next. Your job as a
             developer is to:
           </p>
-          <ol className="list-decimal list-inside space-y-2 pl-4">
+          <ol className="list-inside list-decimal space-y-2 pl-4">
             <li>
-              <strong className="text-red-400">
-                Define states explicitly
-              </strong>{" "}
+              <strong className="text-red-400">Define states explicitly</strong>{" "}
               - Not scattered booleans, but clear, named states
             </li>
             <li>
-              <strong className="text-red-400">
-                Define valid transitions
-              </strong>{" "}
+              <strong className="text-red-400">Define valid transitions</strong>{" "}
               - Not implicit logic, but explicit rules
             </li>
             <li>
@@ -1080,20 +1069,18 @@ switch (state) {
         </div>
       </div>
 
-      <div className="bg-gradient-to-r from-red-900/20 to-pink-900/20 border border-red-500/30 rounded-lg p-8 text-center">
-        <p className="text-2xl font-bold text-red-400 mb-4">The Final Choice</p>
-        <p className="text-lg text-slate-300 mb-6">
+      <div className="rounded-lg border border-red-500/30 bg-gradient-to-r from-red-900/20 to-pink-900/20 p-8 text-center">
+        <p className="mb-4 text-2xl font-bold text-red-400">The Final Choice</p>
+        <p className="mb-6 text-lg text-slate-300">
           You can continue managing state with scattered useState calls and
           nested conditionals, hoping you've covered all the edge cases...
         </p>
-        <p className="text-lg text-slate-300 mb-6">
+        <p className="mb-6 text-lg text-slate-300">
           Or you can architect a state machine. Define your states explicitly.
           Define your transitions clearly. Make the invisible visible.
         </p>
-        <p className="text-xl font-bold text-pink-400">
-          The choice is yours.
-        </p>
-        <p className="text-sm text-slate-400 mt-6 italic">
+        <p className="text-xl font-bold text-pink-400">The choice is yours.</p>
+        <p className="mt-6 text-sm italic text-slate-400">
           Choose carefully. Choose consciously. Because in React, as in
           Bandersnatch, you're not just writing code. You're defining reality
           itself.

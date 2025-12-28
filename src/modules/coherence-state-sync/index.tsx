@@ -1,5 +1,11 @@
 import { useState, useMemo, useCallback } from "react";
-import { Users, GitBranch, AlertTriangle, CheckCircle, Zap } from "lucide-react";
+import {
+  Users,
+  GitBranch,
+  AlertTriangle,
+  CheckCircle,
+  Zap,
+} from "lucide-react";
 
 interface Instance {
   id: string;
@@ -123,7 +129,7 @@ The synchronization problem is permanent. Once instances diverge, once state des
 Em realizes the truth: she's not in her original reality. She's in a close approximation, a version that's similar enough to pass, but not quite right. And she can never go back. Her original context is gone, locked in a bathroom somewhere, or wandering the streets, or sitting in some other version of this house wondering why nothing feels quite real.`,
       },
     ],
-    []
+    [],
   );
 
   const currentChapter = chapters[chapter];
@@ -153,71 +159,69 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
       { id: "E", state: 44, label: "Instance E" },
       { id: "F", state: 38, label: "Instance F" },
     ],
-    []
+    [],
   );
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-sans">
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-300">
       {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Users className="w-8 h-8 text-red-500" />
+      <header className="sticky top-0 z-10 border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-6">
+          <div className="mb-2 flex items-center gap-3">
+            <Users className="h-8 w-8 text-red-500" />
             <h1 className="text-4xl font-bold text-slate-100">Coherence</h1>
           </div>
           <p className="text-lg text-slate-400">
             State Synchronization Across Component Instances
           </p>
-          <p className="text-sm text-slate-500 mt-1">
+          <p className="mt-1 text-sm text-slate-500">
             Em, The Dinner Party, 2013
           </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 py-8 pb-32">
+      <main className="mx-auto max-w-6xl px-4 py-8 pb-32">
         {/* Chapter Title */}
         <div className="mb-8">
-          <h2 className="text-3xl font-semibold text-slate-100 mb-2">
+          <h2 className="mb-2 text-3xl font-semibold text-slate-100">
             {currentChapter.title}
           </h2>
-          <div className="h-1 w-24 bg-red-500 rounded-full"></div>
+          <div className="h-1 w-24 rounded-full bg-red-500"></div>
         </div>
 
         {/* Chapter Content */}
-        <div className="prose prose-invert prose-slate max-w-none mb-12">
-          <div className="text-slate-300 leading-relaxed whitespace-pre-line">
+        <div className="prose prose-invert prose-slate mb-12 max-w-none">
+          <div className="whitespace-pre-line leading-relaxed text-slate-300">
             {currentChapter.content}
           </div>
         </div>
 
         {/* Interactive Demonstrations */}
         {chapter === 0 && (
-          <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-8">
-            <h3 className="text-xl font-semibold text-slate-100 mb-6 flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-emerald-500" />
+          <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-8">
+            <h3 className="mb-6 flex items-center gap-2 text-xl font-semibold text-slate-100">
+              <CheckCircle className="h-5 w-5 text-emerald-500" />
               Synchronized Component Instances
             </h3>
-            <div className="grid grid-cols-4 gap-4 mb-6">
+            <div className="mb-6 grid grid-cols-4 gap-4">
               {[1, 2, 3, 4, 5, 6, 7, 8].map((i) => (
                 <div
                   key={i}
-                  className="aspect-square bg-emerald-950/30 border-2 border-emerald-500/50 rounded-lg flex items-center justify-center animate-pulse"
+                  className="flex aspect-square animate-pulse items-center justify-center rounded-lg border-2 border-emerald-500/50 bg-emerald-950/30"
                 >
                   <div className="text-center">
-                    <Users className="w-8 h-8 text-emerald-500 mx-auto mb-2" />
-                    <div className="text-xs text-emerald-400 font-mono">
+                    <Users className="mx-auto mb-2 h-8 w-8 text-emerald-500" />
+                    <div className="font-mono text-xs text-emerald-400">
                       state: 42
                     </div>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="bg-slate-950/50 border border-emerald-500/30 rounded p-4">
+            <div className="rounded border border-emerald-500/30 bg-slate-950/50 p-4">
               <p className="text-sm text-slate-400">
-                <strong className="text-emerald-400">
-                  Technical Reality:
-                </strong>{" "}
+                <strong className="text-emerald-400">Technical Reality:</strong>{" "}
                 When your application initializes, component instances start
                 with synchronized state. They share the same props, the same
                 initial values, the same context. They are, for this moment,
@@ -228,37 +232,37 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
         )}
 
         {chapter === 1 && (
-          <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-8">
-            <h3 className="text-xl font-semibold text-slate-100 mb-6 flex items-center gap-2">
-              <GitBranch className="w-5 h-5 text-red-500" />
+          <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-8">
+            <h3 className="mb-6 flex items-center gap-2 text-xl font-semibold text-slate-100">
+              <GitBranch className="h-5 w-5 text-red-500" />
               The Split: Watch Instances Diverge
             </h3>
             <div className="mb-6">
               <button
                 onClick={triggerSplit}
                 disabled={splitTriggered}
-                className="px-6 py-3 bg-red-600 hover:bg-red-700 disabled:bg-slate-700 disabled:cursor-not-allowed text-white rounded-lg font-semibold transition-colors flex items-center gap-2"
+                className="flex items-center gap-2 rounded-lg bg-red-600 px-6 py-3 font-semibold text-white transition-colors hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-slate-700"
               >
-                <Zap className="w-5 h-5" />
+                <Zap className="h-5 w-5" />
                 {splitTriggered ? "Split Triggered" : "Trigger the Comet Event"}
               </button>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6 mb-6">
+            <div className="mb-6 grid gap-6 md:grid-cols-2">
               <div
-                className={`bg-slate-950/50 border-2 rounded-lg p-6 transition-all duration-500 ${
+                className={`rounded-lg border-2 bg-slate-950/50 p-6 transition-all duration-500 ${
                   splitTriggered
-                    ? "border-red-500/50 translate-x-[-10px]"
+                    ? "translate-x-[-10px] border-red-500/50"
                     : "border-emerald-500/50"
                 }`}
               >
-                <div className="text-center mb-4">
-                  <Users className="w-12 h-12 text-emerald-500 mx-auto mb-2" />
+                <div className="mb-4 text-center">
+                  <Users className="mx-auto mb-2 h-12 w-12 text-emerald-500" />
                   <div className="text-sm font-semibold text-slate-300">
                     Instance A
                   </div>
                 </div>
-                <div className="bg-slate-900 rounded p-3 font-mono text-sm">
+                <div className="rounded bg-slate-900 p-3 font-mono text-sm">
                   <div className="text-slate-400">state:</div>
                   <div
                     className={`text-lg font-bold transition-colors ${
@@ -268,7 +272,7 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
                     {splitTriggered ? "42" : "42"}
                   </div>
                   {splitTriggered && (
-                    <div className="text-xs text-slate-500 mt-2">
+                    <div className="mt-2 text-xs text-slate-500">
                       Decided to stay inside
                     </div>
                   )}
@@ -276,19 +280,19 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
               </div>
 
               <div
-                className={`bg-slate-950/50 border-2 rounded-lg p-6 transition-all duration-500 ${
+                className={`rounded-lg border-2 bg-slate-950/50 p-6 transition-all duration-500 ${
                   splitTriggered
-                    ? "border-red-500/50 translate-x-[10px] opacity-100"
+                    ? "translate-x-[10px] border-red-500/50 opacity-100"
                     : "border-emerald-500/50 opacity-50"
                 }`}
               >
-                <div className="text-center mb-4">
-                  <Users className="w-12 h-12 text-red-500 mx-auto mb-2" />
+                <div className="mb-4 text-center">
+                  <Users className="mx-auto mb-2 h-12 w-12 text-red-500" />
                   <div className="text-sm font-semibold text-slate-300">
                     Instance B
                   </div>
                 </div>
-                <div className="bg-slate-900 rounded p-3 font-mono text-sm">
+                <div className="rounded bg-slate-900 p-3 font-mono text-sm">
                   <div className="text-slate-400">state:</div>
                   <div
                     className={`text-lg font-bold transition-colors ${
@@ -298,7 +302,7 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
                     {splitTriggered ? "37" : "42"}
                   </div>
                   {splitTriggered && (
-                    <div className="text-xs text-slate-500 mt-2">
+                    <div className="mt-2 text-xs text-slate-500">
                       Went outside to see comet
                     </div>
                   )}
@@ -307,11 +311,9 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
             </div>
 
             {splitTriggered && (
-              <div className="bg-red-950/20 border border-red-500/30 rounded p-4">
+              <div className="rounded border border-red-500/30 bg-red-950/20 p-4">
                 <p className="text-sm text-slate-400">
-                  <strong className="text-red-400">
-                    Technical Reality:
-                  </strong>{" "}
+                  <strong className="text-red-400">Technical Reality:</strong>{" "}
                   When component instances lose synchronization, they don't
                   freeze—they keep executing. Each instance continues to respond
                   to events, update its state, and make decisions based on its
@@ -324,25 +326,25 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
         )}
 
         {chapter === 2 && (
-          <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-8">
-            <h3 className="text-xl font-semibold text-slate-100 mb-6 flex items-center gap-2">
-              <AlertTriangle className="w-5 h-5 text-red-500" />
+          <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-8">
+            <h3 className="mb-6 flex items-center gap-2 text-xl font-semibold text-slate-100">
+              <AlertTriangle className="h-5 w-5 text-red-500" />
               Multiple Instances with Conflicting State
             </h3>
-            <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+            <div className="mb-6 grid grid-cols-2 gap-4 md:grid-cols-3">
               {instances.map((instance) => (
                 <button
                   key={instance.id}
                   onClick={() => setSelectedInstance(instance.id)}
-                  className={`bg-slate-950/50 border-2 rounded-lg p-4 transition-all hover:scale-105 ${
+                  className={`rounded-lg border-2 bg-slate-950/50 p-4 transition-all hover:scale-105 ${
                     selectedInstance === instance.id
                       ? "border-red-500 ring-2 ring-red-500/50"
                       : "border-slate-700 hover:border-slate-600"
                   }`}
                 >
                   <div className="text-center">
-                    <Users className="w-8 h-8 text-red-500 mx-auto mb-2" />
-                    <div className="text-sm font-semibold text-slate-300 mb-1">
+                    <Users className="mx-auto mb-2 h-8 w-8 text-red-500" />
+                    <div className="mb-1 text-sm font-semibold text-slate-300">
                       {instance.label}
                     </div>
                     <div className="font-mono text-xs text-slate-500">
@@ -354,12 +356,12 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
             </div>
 
             {selectedInstance && (
-              <div className="bg-red-950/20 border border-red-500/30 rounded-lg p-6">
-                <h4 className="text-lg font-semibold text-red-400 mb-3">
+              <div className="rounded-lg border border-red-500/30 bg-red-950/20 p-6">
+                <h4 className="mb-3 text-lg font-semibold text-red-400">
                   Instance {selectedInstance} Details
                 </h4>
-                <div className="bg-slate-950 rounded p-4 font-mono text-sm mb-4">
-                  <div className="text-slate-400 mb-2">Full State:</div>
+                <div className="mb-4 rounded bg-slate-950 p-4 font-mono text-sm">
+                  <div className="mb-2 text-slate-400">Full State:</div>
                   <pre className="text-slate-300">
                     {JSON.stringify(
                       {
@@ -372,12 +374,12 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
                         canReconcile: false,
                       },
                       null,
-                      2
+                      2,
                     )}
                   </pre>
                 </div>
                 <div className="flex items-start gap-2 text-sm text-slate-400">
-                  <AlertTriangle className="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />
+                  <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0 text-red-500" />
                   <p>
                     This instance has diverged from all others. Attempting to
                     reconcile states will cause conflicts. Each instance
@@ -387,11 +389,9 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
               </div>
             )}
 
-            <div className="bg-slate-950/50 border border-slate-700 rounded p-4 mt-6">
+            <div className="mt-6 rounded border border-slate-700 bg-slate-950/50 p-4">
               <p className="text-sm text-slate-400">
-                <strong className="text-slate-300">
-                  Technical Reality:
-                </strong>{" "}
+                <strong className="text-slate-300">Technical Reality:</strong>{" "}
                 Without proper state synchronization mechanisms, component
                 instances multiply uncontrollably. Every render cycle, every
                 event handler, every state update creates potential for further
@@ -403,15 +403,15 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
         )}
 
         {chapter === 3 && (
-          <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-8">
-            <h3 className="text-xl font-semibold text-slate-100 mb-6">
+          <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-8">
+            <h3 className="mb-6 text-xl font-semibold text-slate-100">
               Wrong vs Right: Synchronization Approaches
             </h3>
 
-            <div className="flex gap-4 mb-6">
+            <div className="mb-6 flex gap-4">
               <button
                 onClick={() => setApproach("wrong")}
-                className={`flex-1 px-4 py-3 rounded-lg font-semibold transition-all ${
+                className={`flex-1 rounded-lg px-4 py-3 font-semibold transition-all ${
                   approach === "wrong"
                     ? "bg-red-600 text-white"
                     : "bg-slate-800 text-slate-400 hover:bg-slate-700"
@@ -421,7 +421,7 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
               </button>
               <button
                 onClick={() => setApproach("right")}
-                className={`flex-1 px-4 py-3 rounded-lg font-semibold transition-all ${
+                className={`flex-1 rounded-lg px-4 py-3 font-semibold transition-all ${
                   approach === "right"
                     ? "bg-emerald-600 text-white"
                     : "bg-slate-800 text-slate-400 hover:bg-slate-700"
@@ -433,12 +433,12 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
 
             {approach === "wrong" && (
               <div className="space-y-4">
-                <div className="bg-red-950/20 border border-red-500/30 rounded-lg p-6">
-                  <h4 className="text-lg font-semibold text-red-400 mb-3 flex items-center gap-2">
-                    <AlertTriangle className="w-5 h-5" />
+                <div className="rounded-lg border border-red-500/30 bg-red-950/20 p-6">
+                  <h4 className="mb-3 flex items-center gap-2 text-lg font-semibold text-red-400">
+                    <AlertTriangle className="h-5 w-5" />
                     The Replacement Strategy (Wrong)
                   </h4>
-                  <div className="bg-slate-950 rounded p-4 font-mono text-sm mb-4 overflow-x-auto">
+                  <div className="mb-4 overflow-x-auto rounded bg-slate-950 p-4 font-mono text-sm">
                     <pre className="text-slate-300">
                       {`// Trying to force synchronization
 function BadComponent() {
@@ -458,7 +458,7 @@ function BadComponent() {
                     </pre>
                   </div>
                   <div className="flex items-start gap-2 text-sm text-slate-400">
-                    <AlertTriangle className="w-4 h-4 text-red-500 mt-0.5 flex-shrink-0" />
+                    <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0 text-red-500" />
                     <p>
                       This approach destroys the original state, creates race
                       conditions, and doesn't solve the underlying architecture
@@ -467,7 +467,7 @@ function BadComponent() {
                   </div>
                 </div>
 
-                <div className="bg-slate-950/50 border border-slate-700 rounded p-4">
+                <div className="rounded border border-slate-700 bg-slate-950/50 p-4">
                   <p className="text-sm text-slate-400">
                     <strong className="text-red-400">Em's Mistake:</strong> She
                     tried to replace herself with a "better" version, but
@@ -480,12 +480,12 @@ function BadComponent() {
 
             {approach === "right" && (
               <div className="space-y-4">
-                <div className="bg-emerald-950/20 border border-emerald-500/30 rounded-lg p-6">
-                  <h4 className="text-lg font-semibold text-emerald-400 mb-3 flex items-center gap-2">
-                    <CheckCircle className="w-5 h-5" />
+                <div className="rounded-lg border border-emerald-500/30 bg-emerald-950/20 p-6">
+                  <h4 className="mb-3 flex items-center gap-2 text-lg font-semibold text-emerald-400">
+                    <CheckCircle className="h-5 w-5" />
                     Single Source of Truth (Right)
                   </h4>
-                  <div className="bg-slate-950 rounded p-4 font-mono text-sm mb-4 overflow-x-auto">
+                  <div className="mb-4 overflow-x-auto rounded bg-slate-950 p-4 font-mono text-sm">
                     <pre className="text-slate-300">
                       {`// Proper state synchronization
 function ParentComponent() {
@@ -508,7 +508,7 @@ function ChildInstance({ state }) {
                     </pre>
                   </div>
                   <div className="flex items-start gap-2 text-sm text-slate-400">
-                    <CheckCircle className="w-4 h-4 text-emerald-500 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-500" />
                     <p>
                       Lift state to a common ancestor. One component owns the
                       state, all instances read from it. Synchronization is
@@ -517,7 +517,7 @@ function ChildInstance({ state }) {
                   </div>
                 </div>
 
-                <div className="bg-slate-950/50 border border-emerald-500/30 rounded p-4">
+                <div className="rounded border border-emerald-500/30 bg-slate-950/50 p-4">
                   <p className="text-sm text-slate-400">
                     <strong className="text-emerald-400">
                       The Right Solution:
@@ -533,22 +533,22 @@ function ChildInstance({ state }) {
         )}
 
         {chapter === 4 && (
-          <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-8">
-            <h3 className="text-xl font-semibold text-slate-100 mb-6 flex items-center gap-2">
-              <CheckCircle className="w-5 h-5 text-emerald-500" />
+          <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-8">
+            <h3 className="mb-6 flex items-center gap-2 text-xl font-semibold text-slate-100">
+              <CheckCircle className="h-5 w-5 text-emerald-500" />
               Proper State Synchronization Patterns
             </h3>
 
-            <div className="space-y-4 mb-6">
-              <div className="bg-slate-950/50 border border-emerald-500/30 rounded-lg p-4">
-                <h4 className="font-semibold text-emerald-400 mb-2">
+            <div className="mb-6 space-y-4">
+              <div className="rounded-lg border border-emerald-500/30 bg-slate-950/50 p-4">
+                <h4 className="mb-2 font-semibold text-emerald-400">
                   1. Single Source of Truth
                 </h4>
-                <p className="text-sm text-slate-400 mb-3">
+                <p className="mb-3 text-sm text-slate-400">
                   Lift state to a common ancestor. One component owns the state,
                   all instances read from it.
                 </p>
-                <div className="bg-slate-950 rounded p-3 font-mono text-xs overflow-x-auto">
+                <div className="overflow-x-auto rounded bg-slate-950 p-3 font-mono text-xs">
                   <pre className="text-slate-300">
                     {`const [state, setState] = useState(initial);
 <Child state={state} />
@@ -557,15 +557,15 @@ function ChildInstance({ state }) {
                 </div>
               </div>
 
-              <div className="bg-slate-950/50 border border-emerald-500/30 rounded-lg p-4">
-                <h4 className="font-semibold text-emerald-400 mb-2">
+              <div className="rounded-lg border border-emerald-500/30 bg-slate-950/50 p-4">
+                <h4 className="mb-2 font-semibold text-emerald-400">
                   2. Context for Global State
                 </h4>
-                <p className="text-sm text-slate-400 mb-3">
+                <p className="mb-3 text-sm text-slate-400">
                   When many components need the same state, use Context to
                   provide a single synchronized source.
                 </p>
-                <div className="bg-slate-950 rounded p-3 font-mono text-xs overflow-x-auto">
+                <div className="overflow-x-auto rounded bg-slate-950 p-3 font-mono text-xs">
                   <pre className="text-slate-300">
                     {`const StateContext = createContext();
 <StateContext.Provider value={state}>
@@ -575,15 +575,15 @@ function ChildInstance({ state }) {
                 </div>
               </div>
 
-              <div className="bg-slate-950/50 border border-emerald-500/30 rounded-lg p-4">
-                <h4 className="font-semibold text-emerald-400 mb-2">
+              <div className="rounded-lg border border-emerald-500/30 bg-slate-950/50 p-4">
+                <h4 className="mb-2 font-semibold text-emerald-400">
                   3. Controlled Components
                 </h4>
-                <p className="text-sm text-slate-400 mb-3">
+                <p className="mb-3 text-sm text-slate-400">
                   Let parent components own state, child components just render
                   and report events.
                 </p>
-                <div className="bg-slate-950 rounded p-3 font-mono text-xs overflow-x-auto">
+                <div className="overflow-x-auto rounded bg-slate-950 p-3 font-mono text-xs">
                   <pre className="text-slate-300">
                     {`function Child({ value, onChange }) {
   return <input value={value} onChange={onChange} />;
@@ -592,15 +592,15 @@ function ChildInstance({ state }) {
                 </div>
               </div>
 
-              <div className="bg-slate-950/50 border border-emerald-500/30 rounded-lg p-4">
-                <h4 className="font-semibold text-emerald-400 mb-2">
+              <div className="rounded-lg border border-emerald-500/30 bg-slate-950/50 p-4">
+                <h4 className="mb-2 font-semibold text-emerald-400">
                   4. Stable Keys for Identity
                 </h4>
-                <p className="text-sm text-slate-400 mb-3">
+                <p className="mb-3 text-sm text-slate-400">
                   Use stable, unique keys so React can track instances correctly
                   across renders.
                 </p>
-                <div className="bg-slate-950 rounded p-3 font-mono text-xs overflow-x-auto">
+                <div className="overflow-x-auto rounded bg-slate-950 p-3 font-mono text-xs">
                   <pre className="text-slate-300">
                     {`items.map(item => (
   <Component key={item.id} data={item} />
@@ -610,17 +610,17 @@ function ChildInstance({ state }) {
               </div>
             </div>
 
-            <div className="bg-emerald-950/20 border border-emerald-500/30 rounded-lg p-6">
-              <h4 className="text-lg font-semibold text-emerald-400 mb-3">
+            <div className="rounded-lg border border-emerald-500/30 bg-emerald-950/20 p-6">
+              <h4 className="mb-3 text-lg font-semibold text-emerald-400">
                 The Lesson of Coherence
               </h4>
-              <p className="text-slate-300 leading-relaxed">
+              <p className="leading-relaxed text-slate-300">
                 Prevent desynchronization from the start. Design your state
                 architecture so instances can't diverge. Establish a single
                 source of truth. Implement proper data flow. Make
                 synchronization automatic, not manual.
               </p>
-              <p className="text-slate-400 text-sm mt-3">
+              <p className="mt-3 text-sm text-slate-400">
                 Because once the comet passes, once the split happens, once your
                 instances start living in parallel realities with conflicting
                 state, there's no clean way back. You can only try to minimize
@@ -632,13 +632,13 @@ function ChildInstance({ state }) {
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-950/90 backdrop-blur-sm border-t border-slate-800">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-slate-800 bg-slate-950/90 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-4">
+          <div className="flex items-center justify-between">
             <button
               onClick={handlePrevious}
               disabled={chapter === 0}
-              className="px-6 py-2 bg-slate-800 hover:bg-slate-700 disabled:bg-slate-900 disabled:text-slate-600 disabled:cursor-not-allowed text-slate-300 rounded-lg font-semibold transition-colors"
+              className="rounded-lg bg-slate-800 px-6 py-2 font-semibold text-slate-300 transition-colors hover:bg-slate-700 disabled:cursor-not-allowed disabled:bg-slate-900 disabled:text-slate-600"
             >
               Previous
             </button>
@@ -647,11 +647,11 @@ function ChildInstance({ state }) {
               <div className="text-sm text-slate-500">
                 Chapter {chapter + 1} of {chapters.length}
               </div>
-              <div className="flex gap-1 mt-1">
+              <div className="mt-1 flex gap-1">
                 {chapters.map((_, i) => (
                   <div
                     key={i}
-                    className={`w-2 h-2 rounded-full transition-colors ${
+                    className={`h-2 w-2 rounded-full transition-colors ${
                       i === chapter ? "bg-red-500" : "bg-slate-700"
                     }`}
                   />
@@ -662,7 +662,7 @@ function ChildInstance({ state }) {
             <button
               onClick={handleNext}
               disabled={chapter === chapters.length - 1}
-              className="px-6 py-2 bg-red-600 hover:bg-red-700 disabled:bg-slate-900 disabled:text-slate-600 disabled:cursor-not-allowed text-white rounded-lg font-semibold transition-colors"
+              className="rounded-lg bg-red-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-red-700 disabled:cursor-not-allowed disabled:bg-slate-900 disabled:text-slate-600"
             >
               Next
             </button>

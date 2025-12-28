@@ -1,9 +1,18 @@
 import { useState, useRef, useMemo, useCallback } from "react";
-import { Camera, Pencil, AlertTriangle, CheckCircle, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Camera,
+  Pencil,
+  AlertTriangle,
+  CheckCircle,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 export default function MementoStateManagement() {
   const [chapter, setChapter] = useState(0);
-  const [memoryChoice, setMemoryChoice] = useState<"photo" | "tattoo" | null>(null);
+  const [memoryChoice, setMemoryChoice] = useState<"photo" | "tattoo" | null>(
+    null,
+  );
   const [manipulationDemo, setManipulationDemo] = useState({
     stateValue: "Teddy: Friend",
     refValue: "Teddy: Friend",
@@ -94,7 +103,7 @@ If the data drives your UI, if changes should make your component reconsider its
 If the data is supplementary, if it needs to persist but shouldn't trigger re-renders, if it's context rather than driver—use useRef.`,
       },
     ],
-    [chapter]
+    [chapter],
   );
 
   const currentChapter = chapters[chapter];
@@ -130,91 +139,100 @@ If the data is supplementary, if it needs to persist but shouldn't trigger re-re
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-mono">
+    <div className="min-h-screen bg-slate-950 font-mono text-slate-300">
       {/* Header */}
-      <header className="border-b border-amber-500/30 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <h1 className="text-3xl md:text-4xl font-bold text-amber-500 tracking-tight mb-2">
+      <header className="sticky top-0 z-10 border-b border-amber-500/30 bg-slate-950/80 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-6">
+          <h1 className="mb-2 text-3xl font-bold tracking-tight text-amber-500 md:text-4xl">
             MEMENTO
           </h1>
-          <p className="text-sm md:text-base text-slate-400">
+          <p className="text-sm text-slate-400 md:text-base">
             Leonard Shelby's Memory Systems
           </p>
-          <div className="mt-3 inline-block px-3 py-1 bg-amber-950/30 border border-amber-500/30 rounded text-xs text-amber-400">
+          <div className="mt-3 inline-block rounded border border-amber-500/30 bg-amber-950/30 px-3 py-1 text-xs text-amber-400">
             useState vs useRef
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 py-8 pb-32">
+      <main className="mx-auto max-w-6xl px-4 py-8 pb-32">
         {/* Chapter Title */}
         <div className="mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-amber-500 mb-2">
+          <h2 className="mb-2 text-2xl font-bold text-amber-500 md:text-3xl">
             {currentChapter.title}
           </h2>
           <div className="h-1 w-24 bg-amber-500/50"></div>
         </div>
 
         {/* Chapter Content */}
-        <article className="prose prose-invert prose-slate max-w-none mb-12">
-          <div className="text-slate-300 leading-relaxed whitespace-pre-line text-sm md:text-base">
+        <article className="prose prose-invert prose-slate mb-12 max-w-none">
+          <div className="whitespace-pre-line text-sm leading-relaxed text-slate-300 md:text-base">
             {currentChapter.content}
           </div>
         </article>
 
         {/* Interactive Demonstrations */}
         {chapter === 0 && (
-          <div className="bg-slate-900/50 border border-amber-500/30 rounded-lg p-6 mb-8">
-            <h3 className="text-xl font-bold text-amber-500 mb-4 flex items-center gap-2">
-              <Camera className="w-5 h-5" />
+          <div className="mb-8 rounded-lg border border-amber-500/30 bg-slate-900/50 p-6">
+            <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-amber-500">
+              <Camera className="h-5 w-5" />
               Leonard's Memory Systems
             </h3>
-            <p className="text-slate-400 text-sm mb-6">
-              In React terms, Leonard is a component that re-renders constantly. Choose how to store critical information:
+            <p className="mb-6 text-sm text-slate-400">
+              In React terms, Leonard is a component that re-renders constantly.
+              Choose how to store critical information:
             </p>
-            <div className="grid md:grid-cols-2 gap-4">
+            <div className="grid gap-4 md:grid-cols-2">
               <button
                 onClick={() => handleMemoryChoice("photo")}
-                className={`p-6 border-2 rounded-lg transition-all ${
+                className={`rounded-lg border-2 p-6 transition-all ${
                   memoryChoice === "photo"
                     ? "border-amber-500 bg-amber-950/30"
                     : "border-slate-700 hover:border-amber-500/50"
                 }`}
               >
-                <Camera className="w-8 h-8 text-amber-500 mb-3" />
-                <h4 className="font-bold text-amber-500 mb-2">Polaroid Photo (useState)</h4>
+                <Camera className="mb-3 h-8 w-8 text-amber-500" />
+                <h4 className="mb-2 font-bold text-amber-500">
+                  Polaroid Photo (useState)
+                </h4>
                 <p className="text-xs text-slate-400">
-                  Triggers re-evaluation. When you look at it, you reconsider everything. Changes force re-renders.
+                  Triggers re-evaluation. When you look at it, you reconsider
+                  everything. Changes force re-renders.
                 </p>
               </button>
               <button
                 onClick={() => handleMemoryChoice("tattoo")}
-                className={`p-6 border-2 rounded-lg transition-all ${
+                className={`rounded-lg border-2 p-6 transition-all ${
                   memoryChoice === "tattoo"
                     ? "border-amber-500 bg-amber-950/30"
                     : "border-slate-700 hover:border-amber-500/50"
                 }`}
               >
-                <Pencil className="w-8 h-8 text-amber-500 mb-3" />
-                <h4 className="font-bold text-amber-500 mb-2">Tattoo (useRef)</h4>
+                <Pencil className="mb-3 h-8 w-8 text-amber-500" />
+                <h4 className="mb-2 font-bold text-amber-500">
+                  Tattoo (useRef)
+                </h4>
                 <p className="text-xs text-slate-400">
-                  Persists silently. Always there, but doesn't trigger reconsideration. Mutations don't cause re-renders.
+                  Persists silently. Always there, but doesn't trigger
+                  reconsideration. Mutations don't cause re-renders.
                 </p>
               </button>
             </div>
             {memoryChoice && (
-              <div className="mt-6 p-4 bg-slate-950/50 border border-amber-500/20 rounded">
+              <div className="mt-6 rounded border border-amber-500/20 bg-slate-950/50 p-4">
                 <p className="text-sm text-slate-300">
                   {memoryChoice === "photo" ? (
                     <>
-                      <CheckCircle className="inline w-4 h-4 text-green-500 mr-2" />
-                      Good choice. Photos (useState) trigger re-evaluation when information changes.
+                      <CheckCircle className="mr-2 inline h-4 w-4 text-green-500" />
+                      Good choice. Photos (useState) trigger re-evaluation when
+                      information changes.
                     </>
                   ) : (
                     <>
-                      <AlertTriangle className="inline w-4 h-4 text-red-500 mr-2" />
-                      Dangerous. Tattoos (useRef) persist but don't trigger reconsideration of critical decisions.
+                      <AlertTriangle className="mr-2 inline h-4 w-4 text-red-500" />
+                      Dangerous. Tattoos (useRef) persist but don't trigger
+                      reconsideration of critical decisions.
                     </>
                   )}
                 </p>
@@ -224,16 +242,17 @@ If the data is supplementary, if it needs to persist but shouldn't trigger re-re
         )}
 
         {chapter === 1 && (
-          <div className="bg-slate-900/50 border border-red-500/30 rounded-lg p-6 mb-8">
-            <h3 className="text-xl font-bold text-red-500 mb-4 flex items-center gap-2">
-              <AlertTriangle className="w-5 h-5" />
+          <div className="mb-8 rounded-lg border border-red-500/30 bg-slate-900/50 p-6">
+            <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-red-500">
+              <AlertTriangle className="h-5 w-5" />
               The Anti-Pattern
             </h3>
-            <p className="text-slate-400 text-sm mb-6">
-              Leonard stores critical decision-making information in tattoos (useRef). This is dangerous:
+            <p className="mb-6 text-sm text-slate-400">
+              Leonard stores critical decision-making information in tattoos
+              (useRef). This is dangerous:
             </p>
-            <div className="bg-slate-950/50 border border-slate-700 rounded p-4 mb-4">
-              <pre className="text-xs text-slate-300 overflow-x-auto">
+            <div className="mb-4 rounded border border-slate-700 bg-slate-950/50 p-4">
+              <pre className="overflow-x-auto text-xs text-slate-300">
                 <code>{`// Leonard's mistake: using useRef for critical data
 const target = useRef('unknown');
 
@@ -245,34 +264,40 @@ target.current = 'Teddy';
 // He acts on stale assumptions`}</code>
               </pre>
             </div>
-            <div className="p-4 bg-red-950/20 border border-red-500/30 rounded">
+            <div className="rounded border border-red-500/30 bg-red-950/20 p-4">
               <p className="text-sm text-red-400">
-                <AlertTriangle className="inline w-4 h-4 mr-2" />
-                Critical data in refs means decisions based on information that can change without triggering re-evaluation.
+                <AlertTriangle className="mr-2 inline h-4 w-4" />
+                Critical data in refs means decisions based on information that
+                can change without triggering re-evaluation.
               </p>
             </div>
           </div>
         )}
 
         {chapter === 2 && (
-          <div className="bg-slate-900/50 border border-red-500/30 rounded-lg p-6 mb-8">
-            <h3 className="text-xl font-bold text-red-500 mb-4 flex items-center gap-2">
-              <AlertTriangle className="w-5 h-5" />
+          <div className="mb-8 rounded-lg border border-red-500/30 bg-slate-900/50 p-6">
+            <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-red-500">
+              <AlertTriangle className="h-5 w-5" />
               The Manipulation Simulator
             </h3>
-            <p className="text-slate-400 text-sm mb-6">
-              Watch what happens when Teddy manipulates Leonard's memory systems:
+            <p className="mb-6 text-sm text-slate-400">
+              Watch what happens when Teddy manipulates Leonard's memory
+              systems:
             </p>
-            <div className="grid md:grid-cols-2 gap-4 mb-6">
-              <div className="p-4 bg-slate-950/50 border border-amber-500/30 rounded">
-                <h4 className="font-bold text-amber-500 mb-3 text-sm">Photo System (useState)</h4>
-                <div className="mb-3 p-3 bg-amber-950/20 border border-amber-500/20 rounded">
-                  <p className="text-xs text-slate-300 font-mono">{manipulationDemo.stateValue}</p>
+            <div className="mb-6 grid gap-4 md:grid-cols-2">
+              <div className="rounded border border-amber-500/30 bg-slate-950/50 p-4">
+                <h4 className="mb-3 text-sm font-bold text-amber-500">
+                  Photo System (useState)
+                </h4>
+                <div className="mb-3 rounded border border-amber-500/20 bg-amber-950/20 p-3">
+                  <p className="font-mono text-xs text-slate-300">
+                    {manipulationDemo.stateValue}
+                  </p>
                 </div>
                 <p className="text-xs text-slate-400">
                   {manipulationDemo.hasManipulated ? (
                     <span className="text-green-400">
-                      <CheckCircle className="inline w-3 h-3 mr-1" />
+                      <CheckCircle className="mr-1 inline h-3 w-3" />
                       Re-rendered! Leonard reconsiders.
                     </span>
                   ) : (
@@ -280,15 +305,19 @@ target.current = 'Teddy';
                   )}
                 </p>
               </div>
-              <div className="p-4 bg-slate-950/50 border border-red-500/30 rounded">
-                <h4 className="font-bold text-red-500 mb-3 text-sm">Tattoo System (useRef)</h4>
-                <div className="mb-3 p-3 bg-red-950/20 border border-red-500/20 rounded">
-                  <p className="text-xs text-slate-300 font-mono">{manipulationDemo.refValue}</p>
+              <div className="rounded border border-red-500/30 bg-slate-950/50 p-4">
+                <h4 className="mb-3 text-sm font-bold text-red-500">
+                  Tattoo System (useRef)
+                </h4>
+                <div className="mb-3 rounded border border-red-500/20 bg-red-950/20 p-3">
+                  <p className="font-mono text-xs text-slate-300">
+                    {manipulationDemo.refValue}
+                  </p>
                 </div>
                 <p className="text-xs text-slate-400">
                   {manipulationDemo.hasManipulated ? (
                     <span className="text-red-400">
-                      <AlertTriangle className="inline w-3 h-3 mr-1" />
+                      <AlertTriangle className="mr-1 inline h-3 w-3" />
                       No re-render. Stale UI. Danger.
                     </span>
                   ) : (
@@ -301,22 +330,23 @@ target.current = 'Teddy';
               <button
                 onClick={handleManipulation}
                 disabled={manipulationDemo.hasManipulated}
-                className="px-4 py-2 bg-red-500 text-white rounded text-sm font-bold hover:bg-red-600 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+                className="rounded bg-red-500 px-4 py-2 text-sm font-bold text-white transition-all hover:bg-red-600 disabled:cursor-not-allowed disabled:opacity-30"
               >
                 Teddy Manipulates
               </button>
               <button
                 onClick={resetManipulation}
-                className="px-4 py-2 bg-slate-700 text-slate-300 rounded text-sm hover:bg-slate-600 transition-all"
+                className="rounded bg-slate-700 px-4 py-2 text-sm text-slate-300 transition-all hover:bg-slate-600"
               >
                 Reset
               </button>
             </div>
             {manipulationDemo.hasManipulated && (
-              <div className="mt-6 p-4 bg-red-950/20 border border-red-500/30 rounded">
+              <div className="mt-6 rounded border border-red-500/30 bg-red-950/20 p-4">
                 <p className="text-sm text-red-400">
-                  <AlertTriangle className="inline w-4 h-4 mr-2" />
-                  The ref was mutated (Teddy changed to Enemy), but the component didn't re-render. Leonard acts on stale information.
+                  <AlertTriangle className="mr-2 inline h-4 w-4" />
+                  The ref was mutated (Teddy changed to Enemy), but the
+                  component didn't re-render. Leonard acts on stale information.
                 </p>
               </div>
             )}
@@ -324,53 +354,58 @@ target.current = 'Teddy';
         )}
 
         {chapter === 3 && (
-          <div className="bg-slate-900/50 border border-green-500/30 rounded-lg p-6 mb-8">
-            <h3 className="text-xl font-bold text-green-500 mb-4 flex items-center gap-2">
-              <CheckCircle className="w-5 h-5" />
+          <div className="mb-8 rounded-lg border border-green-500/30 bg-slate-900/50 p-6">
+            <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-green-500">
+              <CheckCircle className="h-5 w-5" />
               The Correct Pattern
             </h3>
-            <p className="text-slate-400 text-sm mb-6">
-              Leonard should have used photos (useState) for critical information:
+            <p className="mb-6 text-sm text-slate-400">
+              Leonard should have used photos (useState) for critical
+              information:
             </p>
-            <div className="grid md:grid-cols-2 gap-4">
-              <div className="bg-slate-950/50 border border-green-500/30 rounded p-4">
-                <h4 className="font-bold text-green-500 mb-3 text-sm">Use useState for:</h4>
-                <ul className="text-xs text-slate-300 space-y-2">
+            <div className="grid gap-4 md:grid-cols-2">
+              <div className="rounded border border-green-500/30 bg-slate-950/50 p-4">
+                <h4 className="mb-3 text-sm font-bold text-green-500">
+                  Use useState for:
+                </h4>
+                <ul className="space-y-2 text-xs text-slate-300">
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-3 h-3 text-green-500 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="mt-0.5 h-3 w-3 flex-shrink-0 text-green-500" />
                     <span>Data that drives UI decisions</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-3 h-3 text-green-500 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="mt-0.5 h-3 w-3 flex-shrink-0 text-green-500" />
                     <span>Information that affects rendering</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-3 h-3 text-green-500 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="mt-0.5 h-3 w-3 flex-shrink-0 text-green-500" />
                     <span>Values that should trigger re-evaluation</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <CheckCircle className="w-3 h-3 text-green-500 mt-0.5 flex-shrink-0" />
+                    <CheckCircle className="mt-0.5 h-3 w-3 flex-shrink-0 text-green-500" />
                     <span>Critical decision-making data</span>
                   </li>
                 </ul>
               </div>
-              <div className="bg-slate-950/50 border border-amber-500/30 rounded p-4">
-                <h4 className="font-bold text-amber-500 mb-3 text-sm">Use useRef for:</h4>
-                <ul className="text-xs text-slate-300 space-y-2">
+              <div className="rounded border border-amber-500/30 bg-slate-950/50 p-4">
+                <h4 className="mb-3 text-sm font-bold text-amber-500">
+                  Use useRef for:
+                </h4>
+                <ul className="space-y-2 text-xs text-slate-300">
                   <li className="flex items-start gap-2">
-                    <Pencil className="w-3 h-3 text-amber-500 mt-0.5 flex-shrink-0" />
+                    <Pencil className="mt-0.5 h-3 w-3 flex-shrink-0 text-amber-500" />
                     <span>DOM element references</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <Pencil className="w-3 h-3 text-amber-500 mt-0.5 flex-shrink-0" />
+                    <Pencil className="mt-0.5 h-3 w-3 flex-shrink-0 text-amber-500" />
                     <span>Timer IDs and intervals</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <Pencil className="w-3 h-3 text-amber-500 mt-0.5 flex-shrink-0" />
+                    <Pencil className="mt-0.5 h-3 w-3 flex-shrink-0 text-amber-500" />
                     <span>Previous values for comparison</span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <Pencil className="w-3 h-3 text-amber-500 mt-0.5 flex-shrink-0" />
+                    <Pencil className="mt-0.5 h-3 w-3 flex-shrink-0 text-amber-500" />
                     <span>Supplementary, non-critical data</span>
                   </li>
                 </ul>
@@ -380,20 +415,21 @@ target.current = 'Teddy';
         )}
 
         {chapter === 4 && (
-          <div className="bg-slate-900/50 border border-amber-500/30 rounded-lg p-6 mb-8">
-            <h3 className="text-xl font-bold text-amber-500 mb-4">
+          <div className="mb-8 rounded-lg border border-amber-500/30 bg-slate-900/50 p-6">
+            <h3 className="mb-4 text-xl font-bold text-amber-500">
               The Critical Distinction
             </h3>
-            <p className="text-slate-400 text-sm mb-6">
-              Both useState and useRef persist across re-renders. The difference is reactivity:
+            <p className="mb-6 text-sm text-slate-400">
+              Both useState and useRef persist across re-renders. The difference
+              is reactivity:
             </p>
             <div className="space-y-4">
-              <div className="p-4 bg-amber-950/20 border border-amber-500/30 rounded">
-                <h4 className="font-bold text-amber-500 mb-2 text-sm flex items-center gap-2">
-                  <Camera className="w-4 h-4" />
+              <div className="rounded border border-amber-500/30 bg-amber-950/20 p-4">
+                <h4 className="mb-2 flex items-center gap-2 text-sm font-bold text-amber-500">
+                  <Camera className="h-4 w-4" />
                   useState: "When this changes, reconsider everything."
                 </h4>
-                <pre className="text-xs text-slate-300 overflow-x-auto mt-3">
+                <pre className="mt-3 overflow-x-auto text-xs text-slate-300">
                   <code>{`const [target, setTarget] = useState(null);
 const [trustLevel, setTrustLevel] = useState('unknown');
 
@@ -402,12 +438,13 @@ const [trustLevel, setTrustLevel] = useState('unknown');
 // UI updates automatically`}</code>
                 </pre>
               </div>
-              <div className="p-4 bg-slate-950/50 border border-slate-700 rounded">
-                <h4 className="font-bold text-slate-400 mb-2 text-sm flex items-center gap-2">
-                  <Pencil className="w-4 h-4" />
-                  useRef: "Keep this around, but don't reconsider when it changes."
+              <div className="rounded border border-slate-700 bg-slate-950/50 p-4">
+                <h4 className="mb-2 flex items-center gap-2 text-sm font-bold text-slate-400">
+                  <Pencil className="h-4 w-4" />
+                  useRef: "Keep this around, but don't reconsider when it
+                  changes."
                 </h4>
-                <pre className="text-xs text-slate-300 overflow-x-auto mt-3">
+                <pre className="mt-3 overflow-x-auto text-xs text-slate-300">
                   <code>{`const investigationNotes = useRef([]);
 const previousRender = useRef(null);
 
@@ -417,9 +454,10 @@ const previousRender = useRef(null);
                 </pre>
               </div>
             </div>
-            <div className="mt-6 p-4 bg-amber-950/20 border border-amber-500/30 rounded">
-              <p className="text-sm text-amber-400 font-bold">
-                Choose your persistence mechanism based on whether changes should trigger re-evaluation.
+            <div className="mt-6 rounded border border-amber-500/30 bg-amber-950/20 p-4">
+              <p className="text-sm font-bold text-amber-400">
+                Choose your persistence mechanism based on whether changes
+                should trigger re-evaluation.
               </p>
             </div>
           </div>
@@ -427,31 +465,31 @@ const previousRender = useRef(null);
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-950/90 backdrop-blur-sm border-t border-amber-500/30">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-amber-500/30 bg-slate-950/90 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-4">
+          <div className="flex items-center justify-between">
             <button
               onClick={handlePrevious}
               disabled={chapter === 0}
-              className="flex items-center gap-2 px-4 py-2 bg-amber-500 text-slate-950 rounded font-bold text-sm hover:bg-amber-600 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              className="flex items-center gap-2 rounded bg-amber-500 px-4 py-2 text-sm font-bold text-slate-950 transition-all hover:bg-amber-600 disabled:cursor-not-allowed disabled:opacity-30"
               aria-label="Previous chapter"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="h-4 w-4" />
               <span className="hidden sm:inline">Previous</span>
             </button>
 
-            <span className="text-xs text-slate-400 font-mono">
+            <span className="font-mono text-xs text-slate-400">
               Chapter {chapter + 1} of {chapters.length}
             </span>
 
             <button
               onClick={handleNext}
               disabled={chapter === chapters.length - 1}
-              className="flex items-center gap-2 px-4 py-2 bg-amber-500 text-slate-950 rounded font-bold text-sm hover:bg-amber-600 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              className="flex items-center gap-2 rounded bg-amber-500 px-4 py-2 text-sm font-bold text-slate-950 transition-all hover:bg-amber-600 disabled:cursor-not-allowed disabled:opacity-30"
               aria-label="Next chapter"
             >
               <span className="hidden sm:inline">Next</span>
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="h-4 w-4" />
             </button>
           </div>
         </div>

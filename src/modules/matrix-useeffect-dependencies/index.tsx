@@ -143,7 +143,10 @@ And now, you know kung fu.`,
 
   // Chapter 1 effect: Demonstrate dependency array
   useEffect(() => {
-    if (chapter === 0 && (watchedDeps.spoon || watchedDeps.apple || watchedDeps.rabbit)) {
+    if (
+      chapter === 0 &&
+      (watchedDeps.spoon || watchedDeps.apple || watchedDeps.rabbit)
+    ) {
       setDepEffectCount((c) => c + 1);
     }
   }, [watchedDeps.spoon, watchedDeps.apple, watchedDeps.rabbit, chapter]);
@@ -215,7 +218,7 @@ And now, you know kung fu.`,
 
   const changeBuildingLayout = useCallback(() => {
     setBuildingLayout((prev) =>
-      prev === "original" ? "trap" : prev === "trap" ? "sealed" : "original"
+      prev === "original" ? "trap" : prev === "trap" ? "sealed" : "original",
     );
   }, []);
 
@@ -236,54 +239,57 @@ And now, you know kung fu.`,
   }, [agentCount]);
 
   return (
-    <div className="min-h-screen bg-black text-green-500 font-mono relative overflow-hidden">
+    <div className="relative min-h-screen overflow-hidden bg-black font-mono text-green-500">
       {/* Matrix rain effect */}
-      <div className="fixed inset-0 opacity-10 pointer-events-none">
+      <div className="pointer-events-none fixed inset-0 opacity-10">
         <div className="matrix-rain" />
       </div>
 
       {/* Glitch overlay */}
       {glitchActive && (
-        <div className="fixed inset-0 bg-green-500 opacity-20 pointer-events-none animate-pulse z-50" />
+        <div className="pointer-events-none fixed inset-0 z-50 animate-pulse bg-green-500 opacity-20" />
       )}
 
       {/* Header */}
-      <header className="relative z-10 p-6 md:p-8 border-b border-green-500/30">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-3 mb-2">
-            <Zap className="w-8 h-8 text-green-400" />
-            <h1 className="text-3xl md:text-5xl font-bold tracking-tight">
+      <header className="relative z-10 border-b border-green-500/30 p-6 md:p-8">
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-2 flex items-center gap-3">
+            <Zap className="h-8 w-8 text-green-400" />
+            <h1 className="text-3xl font-bold tracking-tight md:text-5xl">
               THE MATRIX
             </h1>
           </div>
-          <p className="text-lg md:text-xl text-green-300 opacity-80">
+          <p className="text-lg text-green-300 opacity-80 md:text-xl">
             useEffect Dependency Array
           </p>
           <div className="mt-4 flex items-center gap-2 text-sm text-green-400">
-            <Code className="w-4 h-4" />
+            <Code className="h-4 w-4" />
             <span>Neo's Guide to Watching the Matrix</span>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="relative z-10 max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12 pb-32">
+      <main className="relative z-10 mx-auto max-w-6xl px-4 py-8 pb-32 md:px-6 md:py-12">
         {/* Chapter Title */}
         <div className="mb-8">
-          <h2 className="text-2xl md:text-4xl font-bold text-green-400 mb-2">
+          <h2 className="mb-2 text-2xl font-bold text-green-400 md:text-4xl">
             {currentChapter.title}
           </h2>
           <div className="h-1 w-24 bg-green-500" />
         </div>
 
         {/* Chapter Content */}
-        <div className="grid md:grid-cols-2 gap-8 mb-12">
+        <div className="mb-12 grid gap-8 md:grid-cols-2">
           {/* Narrative */}
           <div className="space-y-4">
-            <div className="bg-gray-950 border border-green-500/30 rounded-lg p-6">
+            <div className="rounded-lg border border-green-500/30 bg-gray-950 p-6">
               <div className="prose prose-invert prose-green max-w-none">
                 {currentChapter.content.split("\n\n").map((paragraph, i) => (
-                  <p key={i} className="text-green-300 leading-relaxed mb-4 last:mb-0">
+                  <p
+                    key={i}
+                    className="mb-4 leading-relaxed text-green-300 last:mb-0"
+                  >
                     {paragraph}
                   </p>
                 ))}
@@ -294,9 +300,9 @@ And now, you know kung fu.`,
           {/* Interactive Demo */}
           <div className="space-y-4">
             {chapter === 0 && (
-              <div className="bg-gray-950 border border-green-500/30 rounded-lg p-6">
-                <h3 className="text-xl font-bold text-green-400 mb-4 flex items-center gap-2">
-                  <Code className="w-5 h-5" />
+              <div className="rounded-lg border border-green-500/30 bg-gray-950 p-6">
+                <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-green-400">
+                  <Code className="h-5 w-5" />
                   The Construct: Choose Your Dependencies
                 </h3>
                 <div className="space-y-4">
@@ -304,38 +310,40 @@ And now, you know kung fu.`,
                     {(["spoon", "apple", "rabbit"] as const).map((item) => (
                       <label
                         key={item}
-                        className="flex items-center gap-3 cursor-pointer group"
+                        className="group flex cursor-pointer items-center gap-3"
                       >
                         <input
                           type="checkbox"
                           checked={watchedDeps[item]}
                           onChange={() => toggleDependency(item)}
-                          className="w-5 h-5 accent-green-500"
+                          className="h-5 w-5 accent-green-500"
                         />
                         <span
                           className={`text-lg capitalize transition-all ${
                             watchedDeps[item]
-                              ? "text-green-400 font-bold"
+                              ? "font-bold text-green-400"
                               : "text-green-600"
                           }`}
                         >
                           {item}
                         </span>
                         {watchedDeps[item] && (
-                          <span className="text-xs text-green-500 animate-pulse">
+                          <span className="animate-pulse text-xs text-green-500">
                             [watching]
                           </span>
                         )}
                       </label>
                     ))}
                   </div>
-                  <div className="mt-6 p-4 bg-black/50 border border-green-500/50 rounded">
-                    <div className="text-sm text-green-400 mb-2">Effect Executions:</div>
+                  <div className="mt-6 rounded border border-green-500/50 bg-black/50 p-4">
+                    <div className="mb-2 text-sm text-green-400">
+                      Effect Executions:
+                    </div>
                     <div className="text-3xl font-bold text-green-500">
                       {depEffectCount}
                     </div>
                   </div>
-                  <div className="mt-4 p-3 bg-green-950/20 border border-green-500/30 rounded text-xs">
+                  <div className="mt-4 rounded border border-green-500/30 bg-green-950/20 p-3 text-xs">
                     <code className="text-green-400">
                       useEffect(() =&gt; &#123;{"\n"}
                       {"  "}// Neo's awareness executes{"\n"}
@@ -353,18 +361,18 @@ And now, you know kung fu.`,
             )}
 
             {chapter === 1 && (
-              <div className="bg-gray-950 border border-green-500/30 rounded-lg p-6">
-                <h3 className="text-xl font-bold text-green-400 mb-4 flex items-center gap-2">
-                  <AlertTriangle className="w-5 h-5 text-red-500" />
+              <div className="rounded-lg border border-green-500/30 bg-gray-950 p-6">
+                <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-green-400">
+                  <AlertTriangle className="h-5 w-5 text-red-500" />
                   Training Simulation: Watch Everything
                 </h3>
                 <div className="space-y-4">
-                  <label className="flex items-center gap-3 cursor-pointer">
+                  <label className="flex cursor-pointer items-center gap-3">
                     <input
                       type="checkbox"
                       checked={watchEverything}
                       onChange={(e) => setWatchEverything(e.target.checked)}
-                      className="w-5 h-5 accent-red-500"
+                      className="h-5 w-5 accent-red-500"
                     />
                     <span className="text-lg text-green-300">
                       Watch Everything (No Dependency Array)
@@ -372,12 +380,12 @@ And now, you know kung fu.`,
                   </label>
 
                   {watchEverything && (
-                    <div className="p-4 bg-red-950/30 border border-red-500/50 rounded">
-                      <div className="text-sm text-red-400 mb-2 flex items-center gap-2">
-                        <AlertTriangle className="w-4 h-4" />
+                    <div className="rounded border border-red-500/50 bg-red-950/30 p-4">
+                      <div className="mb-2 flex items-center gap-2 text-sm text-red-400">
+                        <AlertTriangle className="h-4 w-4" />
                         SYSTEM OVERLOAD
                       </div>
-                      <div className="text-2xl font-bold text-red-500 mb-2">
+                      <div className="mb-2 text-2xl font-bold text-red-500">
                         Render Count: {renderCount}
                       </div>
                       <div className="text-sm text-red-400">
@@ -386,11 +394,11 @@ And now, you know kung fu.`,
                     </div>
                   )}
 
-                  <div className="grid grid-cols-5 gap-2 min-h-[120px]">
+                  <div className="grid min-h-[120px] grid-cols-5 gap-2">
                     {agentSmithIcons.map((i) => (
                       <div
                         key={i}
-                        className="w-full aspect-square bg-gray-900 border border-red-500/50 rounded flex items-center justify-center text-2xl animate-pulse"
+                        className="flex aspect-square w-full animate-pulse items-center justify-center rounded border border-red-500/50 bg-gray-900 text-2xl"
                       >
                         👤
                       </div>
@@ -400,13 +408,13 @@ And now, you know kung fu.`,
                   {watchEverything && (
                     <button
                       onClick={resetChapter2}
-                      className="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-black font-bold rounded transition-colors"
+                      className="w-full rounded bg-green-600 px-4 py-2 font-bold text-black transition-colors hover:bg-green-700"
                     >
                       Reset Simulation
                     </button>
                   )}
 
-                  <div className="mt-4 p-3 bg-red-950/20 border border-red-500/30 rounded text-xs">
+                  <div className="mt-4 rounded border border-red-500/30 bg-red-950/20 p-3 text-xs">
                     <code className="text-red-400">
                       useEffect(() =&gt; &#123;{"\n"}
                       {"  "}// Runs on EVERY render{"\n"}
@@ -419,40 +427,40 @@ And now, you know kung fu.`,
             )}
 
             {chapter === 2 && (
-              <div className="bg-gray-950 border border-green-500/30 rounded-lg p-6">
-                <h3 className="text-xl font-bold text-green-400 mb-4 flex items-center gap-2">
-                  <Zap className="w-5 h-5" />
+              <div className="rounded-lg border border-green-500/30 bg-gray-950 p-6">
+                <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-green-400">
+                  <Zap className="h-5 w-5" />
                   Glitch Detector: Déjà Vu
                 </h3>
                 <div className="space-y-4">
                   <button
                     onClick={changeBuildingLayout}
-                    className="w-full px-6 py-3 bg-green-600 hover:bg-green-700 text-black font-bold rounded transition-colors"
+                    className="w-full rounded bg-green-600 px-6 py-3 font-bold text-black transition-colors hover:bg-green-700"
                   >
                     Change Building Layout
                   </button>
 
-                  <div className="p-4 bg-black/50 border border-green-500/50 rounded">
-                    <div className="text-sm text-green-400 mb-2">
+                  <div className="rounded border border-green-500/50 bg-black/50 p-4">
+                    <div className="mb-2 text-sm text-green-400">
                       Current Layout:
                     </div>
-                    <div className="text-2xl font-bold text-green-500 uppercase">
+                    <div className="text-2xl font-bold uppercase text-green-500">
                       {buildingLayout}
                     </div>
                   </div>
 
                   {catVisible && (
-                    <div className="relative h-24 bg-gray-900 border border-green-500/50 rounded overflow-hidden">
-                      <div className="absolute inset-0 flex items-center justify-center animate-pulse">
+                    <div className="relative h-24 overflow-hidden rounded border border-green-500/50 bg-gray-900">
+                      <div className="absolute inset-0 flex animate-pulse items-center justify-center">
                         <span className="text-6xl">🐈</span>
                       </div>
-                      <div className="absolute inset-0 flex items-center justify-center opacity-50 animate-pulse delay-500">
+                      <div className="absolute inset-0 flex animate-pulse items-center justify-center opacity-50 delay-500">
                         <span className="text-6xl">🐈</span>
                       </div>
                     </div>
                   )}
 
-                  <div className="p-3 bg-black/70 border border-green-500/30 rounded font-mono text-xs space-y-1 max-h-32 overflow-y-auto">
+                  <div className="max-h-32 space-y-1 overflow-y-auto rounded border border-green-500/30 bg-black/70 p-3 font-mono text-xs">
                     {glitchLog.map((log, i) => (
                       <div key={i} className="text-green-400">
                         {log}
@@ -460,7 +468,7 @@ And now, you know kung fu.`,
                     ))}
                   </div>
 
-                  <div className="mt-4 p-3 bg-green-950/20 border border-green-500/30 rounded text-xs">
+                  <div className="mt-4 rounded border border-green-500/30 bg-green-950/20 p-3 text-xs">
                     <code className="text-green-400">
                       useEffect(() =&gt; &#123;{"\n"}
                       {"  "}// Runs when buildingLayout changes{"\n"}
@@ -473,41 +481,41 @@ And now, you know kung fu.`,
             )}
 
             {chapter === 3 && (
-              <div className="bg-gray-950 border border-green-500/30 rounded-lg p-6">
-                <h3 className="text-xl font-bold text-green-400 mb-4 flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5" />
+              <div className="rounded-lg border border-green-500/30 bg-gray-950 p-6">
+                <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-green-400">
+                  <CheckCircle className="h-5 w-5" />
                   Combat Training Upload
                 </h3>
                 <div className="space-y-4">
                   <button
                     onClick={startUpload}
                     disabled={uploadProgress > 0}
-                    className="w-full px-6 py-3 bg-green-600 hover:bg-green-700 disabled:bg-gray-700 disabled:cursor-not-allowed text-black font-bold rounded transition-colors"
+                    className="w-full rounded bg-green-600 px-6 py-3 font-bold text-black transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-gray-700"
                   >
                     {uploadProgress === 0
                       ? "Load Program"
                       : uploadComplete
-                      ? "Upload Complete"
-                      : "Uploading..."}
+                        ? "Upload Complete"
+                        : "Uploading..."}
                   </button>
 
                   {uploadProgress > 0 && (
                     <div className="space-y-2">
-                      <div className="w-full bg-gray-800 rounded-full h-4 overflow-hidden">
+                      <div className="h-4 w-full overflow-hidden rounded-full bg-gray-800">
                         <div
                           className="h-full bg-green-500 transition-all duration-200"
                           style={{ width: `${uploadProgress}%` }}
                         />
                       </div>
-                      <div className="text-center text-green-400 text-sm">
+                      <div className="text-center text-sm text-green-400">
                         {uploadProgress}%
                       </div>
                     </div>
                   )}
 
                   {uploadComplete && (
-                    <div className="p-4 bg-green-950/30 border border-green-500/50 rounded text-center">
-                      <div className="text-2xl font-bold text-green-400 mb-2">
+                    <div className="rounded border border-green-500/50 bg-green-950/30 p-4 text-center">
+                      <div className="mb-2 text-2xl font-bold text-green-400">
                         I know kung fu.
                       </div>
                       <div className="text-sm text-green-500">
@@ -516,7 +524,7 @@ And now, you know kung fu.`,
                     </div>
                   )}
 
-                  <div className="mt-4 p-3 bg-green-950/20 border border-green-500/30 rounded text-xs">
+                  <div className="mt-4 rounded border border-green-500/30 bg-green-950/20 p-3 text-xs">
                     <code className="text-green-400">
                       useEffect(() =&gt; &#123;{"\n"}
                       {"  "}// Runs once on mount{"\n"}
@@ -526,20 +534,22 @@ And now, you know kung fu.`,
                   </div>
 
                   <div className="mt-6 space-y-2 text-xs">
-                    <div className="p-2 bg-black/50 border border-green-500/30 rounded">
-                      <div className="text-green-400 font-bold mb-1">
+                    <div className="rounded border border-green-500/30 bg-black/50 p-2">
+                      <div className="mb-1 font-bold text-green-400">
                         ✓ Empty Array []
                       </div>
                       <div className="text-green-600">
                         Runs once on mount, never again
                       </div>
                     </div>
-                    <div className="p-2 bg-black/50 border border-red-500/30 rounded">
-                      <div className="text-red-400 font-bold mb-1">✗ No Array</div>
+                    <div className="rounded border border-red-500/30 bg-black/50 p-2">
+                      <div className="mb-1 font-bold text-red-400">
+                        ✗ No Array
+                      </div>
                       <div className="text-red-600">Runs on every render</div>
                     </div>
-                    <div className="p-2 bg-black/50 border border-green-500/30 rounded">
-                      <div className="text-green-400 font-bold mb-1">
+                    <div className="rounded border border-green-500/30 bg-black/50 p-2">
+                      <div className="mb-1 font-bold text-green-400">
                         ✓ [dependency]
                       </div>
                       <div className="text-green-600">
@@ -552,14 +562,14 @@ And now, you know kung fu.`,
             )}
 
             {chapter === 4 && (
-              <div className="bg-gray-950 border border-green-500/30 rounded-lg p-6">
-                <h3 className="text-xl font-bold text-green-400 mb-4 flex items-center gap-2">
-                  <Zap className="w-5 h-5" />
+              <div className="rounded-lg border border-green-500/30 bg-gray-950 p-6">
+                <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-green-400">
+                  <Zap className="h-5 w-5" />
                   The Rooftop Jump: Free Your Mind
                 </h3>
                 <div className="space-y-4">
                   <div>
-                    <label className="block text-sm text-green-400 mb-2">
+                    <label className="mb-2 block text-sm text-green-400">
                       Neo's Belief: {belief}%
                     </label>
                     <input
@@ -574,38 +584,40 @@ And now, you know kung fu.`,
 
                   <div className="grid grid-cols-3 gap-2 text-center text-xs">
                     <div
-                      className={`p-3 border rounded ${
+                      className={`rounded border p-3 ${
                         belief < 80
                           ? "border-red-500/50 bg-red-950/20"
                           : "border-gray-700 bg-gray-900"
                       }`}
                     >
-                      <div className="text-2xl mb-1">🧍</div>
-                      <div className="text-red-400 font-bold">Watch All</div>
+                      <div className="mb-1 text-2xl">🧍</div>
+                      <div className="font-bold text-red-400">Watch All</div>
                       <div className="text-red-600">Paralyzed</div>
                     </div>
                     <div
-                      className={`p-3 border rounded ${
+                      className={`rounded border p-3 ${
                         belief < 80
                           ? "border-red-500/50 bg-red-950/20"
                           : "border-gray-700 bg-gray-900"
                       }`}
                     >
-                      <div className="text-2xl mb-1">🧍</div>
-                      <div className="text-red-400 font-bold">Watch None</div>
+                      <div className="mb-1 text-2xl">🧍</div>
+                      <div className="font-bold text-red-400">Watch None</div>
                       <div className="text-red-600">Blind</div>
                     </div>
                     <div
-                      className={`p-3 border rounded ${
+                      className={`rounded border p-3 ${
                         belief >= 80
                           ? "border-green-500/50 bg-green-950/20"
                           : "border-gray-700 bg-gray-900"
                       }`}
                     >
-                      <div className="text-2xl mb-1">
+                      <div className="mb-1 text-2xl">
                         {jumpAttempted ? "🦸" : "🧍"}
                       </div>
-                      <div className="text-green-400 font-bold">Watch Belief</div>
+                      <div className="font-bold text-green-400">
+                        Watch Belief
+                      </div>
                       <div className="text-green-600">
                         {jumpAttempted ? "Jumps!" : "Ready"}
                       </div>
@@ -613,28 +625,30 @@ And now, you know kung fu.`,
                   </div>
 
                   {jumpAttempted && (
-                    <div className="p-4 bg-green-950/30 border border-green-500/50 rounded text-center animate-pulse">
+                    <div className="animate-pulse rounded border border-green-500/50 bg-green-950/30 p-4 text-center">
                       <div className="text-xl font-bold text-green-400">
                         Neo makes the jump!
                       </div>
-                      <div className="text-sm text-green-500 mt-1">
+                      <div className="mt-1 text-sm text-green-500">
                         Effect triggered when belief crossed threshold
                       </div>
                     </div>
                   )}
 
                   <div className="space-y-2 text-xs">
-                    <div className="p-2 bg-black/50 border border-red-500/30 rounded">
+                    <div className="rounded border border-red-500/30 bg-black/50 p-2">
                       <code className="text-red-400">
-                        useEffect(() =&gt; &#123; jump(); &#125;); // No deps = chaos
+                        useEffect(() =&gt; &#123; jump(); &#125;); // No deps =
+                        chaos
                       </code>
                     </div>
-                    <div className="p-2 bg-black/50 border border-red-500/30 rounded">
+                    <div className="rounded border border-red-500/30 bg-black/50 p-2">
                       <code className="text-red-400">
-                        useEffect(() =&gt; &#123; jump(); &#125;, []); // Empty = blind
+                        useEffect(() =&gt; &#123; jump(); &#125;, []); // Empty
+                        = blind
                       </code>
                     </div>
-                    <div className="p-2 bg-black/50 border border-green-500/30 rounded">
+                    <div className="rounded border border-green-500/30 bg-black/50 p-2">
                       <code className="text-green-400">
                         useEffect(() =&gt; &#123; if (belief) jump(); &#125;,
                         [belief]);
@@ -649,12 +663,12 @@ And now, you know kung fu.`,
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-black/90 backdrop-blur-sm border-t border-green-500/30 p-4 z-20">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
+      <footer className="fixed bottom-0 left-0 right-0 z-20 border-t border-green-500/30 bg-black/90 p-4 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-6xl items-center justify-between">
           <button
             onClick={handlePrevChapter}
             disabled={chapter === 0}
-            className="px-6 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-800 disabled:text-gray-600 disabled:cursor-not-allowed text-black font-bold rounded transition-colors"
+            className="rounded bg-green-600 px-6 py-2 font-bold text-black transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-gray-800 disabled:text-gray-600"
           >
             Previous
           </button>
@@ -663,7 +677,7 @@ And now, you know kung fu.`,
             <div className="text-sm text-green-400">
               Chapter {chapter + 1} of {chapters.length}
             </div>
-            <div className="text-xs text-green-600 mt-1">
+            <div className="mt-1 text-xs text-green-600">
               {currentChapter.title}
             </div>
           </div>
@@ -671,7 +685,7 @@ And now, you know kung fu.`,
           <button
             onClick={handleNextChapter}
             disabled={chapter === chapters.length - 1}
-            className="px-6 py-2 bg-green-600 hover:bg-green-700 disabled:bg-gray-800 disabled:text-gray-600 disabled:cursor-not-allowed text-black font-bold rounded transition-colors"
+            className="rounded bg-green-600 px-6 py-2 font-bold text-black transition-colors hover:bg-green-700 disabled:cursor-not-allowed disabled:bg-gray-800 disabled:text-gray-600"
           >
             Next
           </button>

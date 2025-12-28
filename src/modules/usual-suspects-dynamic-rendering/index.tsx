@@ -1,5 +1,12 @@
 import { useState, useMemo } from "react";
-import { Eye, User, MapPin, Calendar, ChevronLeft, ChevronRight } from "lucide-react";
+import {
+  Eye,
+  User,
+  MapPin,
+  Calendar,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 
 interface Chapter {
   title: string;
@@ -23,9 +30,9 @@ interface EventCardProps {
 }
 
 const CharacterCard = ({ name, role }: CharacterCardProps) => (
-  <div className="bg-slate-900 border border-amber-500/30 rounded-lg p-4">
-    <div className="flex items-center gap-3 mb-2">
-      <User className="w-5 h-5 text-amber-500" />
+  <div className="rounded-lg border border-amber-500/30 bg-slate-900 p-4">
+    <div className="mb-2 flex items-center gap-3">
+      <User className="h-5 w-5 text-amber-500" />
       <h3 className="text-xl font-bold text-amber-100">{name}</h3>
     </div>
     <p className="text-amber-200/70">{role}</p>
@@ -33,9 +40,9 @@ const CharacterCard = ({ name, role }: CharacterCardProps) => (
 );
 
 const LocationCard = ({ name, description }: LocationCardProps) => (
-  <div className="bg-slate-900 border border-amber-500/30 rounded-lg p-4">
-    <div className="flex items-center gap-3 mb-2">
-      <MapPin className="w-5 h-5 text-amber-500" />
+  <div className="rounded-lg border border-amber-500/30 bg-slate-900 p-4">
+    <div className="mb-2 flex items-center gap-3">
+      <MapPin className="h-5 w-5 text-amber-500" />
       <h3 className="text-xl font-bold text-amber-100">{name}</h3>
     </div>
     <p className="text-amber-200/70">{description}</p>
@@ -43,9 +50,9 @@ const LocationCard = ({ name, description }: LocationCardProps) => (
 );
 
 const EventCard = ({ name, date }: EventCardProps) => (
-  <div className="bg-slate-900 border border-amber-500/30 rounded-lg p-4">
-    <div className="flex items-center gap-3 mb-2">
-      <Calendar className="w-5 h-5 text-amber-500" />
+  <div className="rounded-lg border border-amber-500/30 bg-slate-900 p-4">
+    <div className="mb-2 flex items-center gap-3">
+      <Calendar className="h-5 w-5 text-amber-500" />
       <h3 className="text-xl font-bold text-amber-100">{name}</h3>
     </div>
     <p className="text-amber-200/70">{date}</p>
@@ -53,41 +60,63 @@ const EventCard = ({ name, date }: EventCardProps) => (
 );
 
 const CodeBlock = ({ children }: { children: string }) => (
-  <pre className="bg-slate-900 border border-amber-500/20 rounded-lg p-4 overflow-x-auto">
-    <code className="text-amber-300 text-sm font-mono">{children}</code>
+  <pre className="overflow-x-auto rounded-lg border border-amber-500/20 bg-slate-900 p-4">
+    <code className="font-mono text-sm text-amber-300">{children}</code>
   </pre>
 );
 
 export default function UsualSuspectsDynamicRendering() {
   const [chapter, setChapter] = useState(0);
-  
+
   // Chapter 0 demo state
   const [propName, setPropName] = useState("Kobayashi");
   const [propRole, setPropRole] = useState("Lawyer");
-  
+
   // Chapter 1 demo state
-  const [componentType, setComponentType] = useState<"character" | "location" | "event">("character");
-  
+  const [componentType, setComponentType] = useState<
+    "character" | "location" | "event"
+  >("character");
+
   // Chapter 2 demo state
   const [selectedItems, setSelectedItems] = useState<string[]>(["Kobayashi"]);
-  
+
   // Chapter 3 demo state
   const [showVillain, setShowVillain] = useState(false);
-  
+
   const componentMap = {
     character: CharacterCard,
     location: LocationCard,
     event: EventCard,
   };
-  
+
   const environmentItems = [
-    { id: "Kobayashi", type: "character", data: { name: "Kobayashi", role: "Lawyer" } },
-    { id: "Redfoot", type: "character", data: { name: "Redfoot", role: "Fence" } },
-    { id: "San Pedro", type: "location", data: { name: "San Pedro", description: "Harbor district" } },
-    { id: "Guatemala", type: "location", data: { name: "Guatemala", description: "Cocaine source" } },
-    { id: "The Lineup", type: "event", data: { name: "The Lineup", date: "Six weeks ago" } },
+    {
+      id: "Kobayashi",
+      type: "character",
+      data: { name: "Kobayashi", role: "Lawyer" },
+    },
+    {
+      id: "Redfoot",
+      type: "character",
+      data: { name: "Redfoot", role: "Fence" },
+    },
+    {
+      id: "San Pedro",
+      type: "location",
+      data: { name: "San Pedro", description: "Harbor district" },
+    },
+    {
+      id: "Guatemala",
+      type: "location",
+      data: { name: "Guatemala", description: "Cocaine source" },
+    },
+    {
+      id: "The Lineup",
+      type: "event",
+      data: { name: "The Lineup", date: "Six weeks ago" },
+    },
   ];
-  
+
   const chapters: Chapter[] = [
     {
       title: "The Interrogation Begins",
@@ -102,42 +131,50 @@ Verbal's eyes flicker—just for a moment—to the bulletin board behind Kujan. 
 What Kujan doesn't realize—what he can't realize yet—is that Verbal isn't recalling a story. He's constructing one. In real-time. Based on what he sees, what he's asked, what the environment provides.`,
       demo: () => (
         <div className="space-y-6">
-          <div className="bg-amber-900/10 border border-amber-500/30 rounded-lg p-6">
-            <h3 className="text-2xl font-bold text-amber-100 mb-4">The Bulletin Board: Props in Action</h3>
-            <p className="text-amber-200/80 mb-6">
-              Change the props below and watch the component render dynamically. Like Verbal reading from the bulletin board, the component adapts to what you give it.
+          <div className="rounded-lg border border-amber-500/30 bg-amber-900/10 p-6">
+            <h3 className="mb-4 text-2xl font-bold text-amber-100">
+              The Bulletin Board: Props in Action
+            </h3>
+            <p className="mb-6 text-amber-200/80">
+              Change the props below and watch the component render dynamically.
+              Like Verbal reading from the bulletin board, the component adapts
+              to what you give it.
             </p>
-            
-            <div className="grid md:grid-cols-2 gap-6">
+
+            <div className="grid gap-6 md:grid-cols-2">
               <div className="space-y-4">
                 <div>
-                  <label className="block text-amber-100 mb-2 text-sm font-semibold">Character Name</label>
+                  <label className="mb-2 block text-sm font-semibold text-amber-100">
+                    Character Name
+                  </label>
                   <input
                     type="text"
                     value={propName}
                     onChange={(e) => setPropName(e.target.value)}
-                    className="w-full bg-slate-900 border border-amber-500/30 rounded px-4 py-2 text-amber-100 focus:outline-none focus:border-amber-500"
+                    className="w-full rounded border border-amber-500/30 bg-slate-900 px-4 py-2 text-amber-100 focus:border-amber-500 focus:outline-none"
                     placeholder="Enter a name..."
                   />
                 </div>
                 <div>
-                  <label className="block text-amber-100 mb-2 text-sm font-semibold">Character Role</label>
+                  <label className="mb-2 block text-sm font-semibold text-amber-100">
+                    Character Role
+                  </label>
                   <input
                     type="text"
                     value={propRole}
                     onChange={(e) => setPropRole(e.target.value)}
-                    className="w-full bg-slate-900 border border-amber-500/30 rounded px-4 py-2 text-amber-100 focus:outline-none focus:border-amber-500"
+                    className="w-full rounded border border-amber-500/30 bg-slate-900 px-4 py-2 text-amber-100 focus:border-amber-500 focus:outline-none"
                     placeholder="Enter a role..."
                   />
                 </div>
               </div>
-              
+
               <div className="flex items-center justify-center">
                 <CharacterCard name={propName} role={propRole} />
               </div>
             </div>
           </div>
-          
+
           <CodeBlock>{`function Character({ name, role }) {
   return (
     <div>
@@ -167,44 +204,59 @@ Verbal doesn't hardcode. He adapts. Taking the props (Kujan's questions) and the
         const DynamicComponent = componentMap[componentType];
         const sampleData = {
           character: { name: "Kobayashi", role: "Keyser Söze's Lawyer" },
-          location: { name: "San Pedro Harbor", description: "Where the boat was docked" },
+          location: {
+            name: "San Pedro Harbor",
+            description: "Where the boat was docked",
+          },
           event: { name: "The Lineup", date: "Six weeks ago" },
         };
-        
+
         return (
           <div className="space-y-6">
-            <div className="bg-amber-900/10 border border-amber-500/30 rounded-lg p-6">
-              <h3 className="text-2xl font-bold text-amber-100 mb-4">The Coffee Cup: Dynamic Component Selection</h3>
-              <p className="text-amber-200/80 mb-6">
-                Select a component type and watch React dynamically choose which component to render. The component map pattern in action.
+            <div className="rounded-lg border border-amber-500/30 bg-amber-900/10 p-6">
+              <h3 className="mb-4 text-2xl font-bold text-amber-100">
+                The Coffee Cup: Dynamic Component Selection
+              </h3>
+              <p className="mb-6 text-amber-200/80">
+                Select a component type and watch React dynamically choose which
+                component to render. The component map pattern in action.
               </p>
-              
-              <div className="grid md:grid-cols-2 gap-6">
+
+              <div className="grid gap-6 md:grid-cols-2">
                 <div className="space-y-4">
-                  <label className="block text-amber-100 mb-2 text-sm font-semibold">Component Type</label>
+                  <label className="mb-2 block text-sm font-semibold text-amber-100">
+                    Component Type
+                  </label>
                   <select
                     value={componentType}
-                    onChange={(e) => setComponentType(e.target.value as "character" | "location" | "event")}
-                    className="w-full bg-slate-900 border border-amber-500/30 rounded px-4 py-2 text-amber-100 focus:outline-none focus:border-amber-500"
+                    onChange={(e) =>
+                      setComponentType(
+                        e.target.value as "character" | "location" | "event",
+                      )
+                    }
+                    className="w-full rounded border border-amber-500/30 bg-slate-900 px-4 py-2 text-amber-100 focus:border-amber-500 focus:outline-none"
                   >
                     <option value="character">Character</option>
                     <option value="location">Location</option>
                     <option value="event">Event</option>
                   </select>
-                  
-                  <div className="mt-4 p-4 bg-slate-900/50 rounded border border-amber-500/20">
-                    <p className="text-amber-200/70 text-sm">
-                      <span className="font-semibold text-amber-100">Selected:</span> {componentType}
+
+                  <div className="mt-4 rounded border border-amber-500/20 bg-slate-900/50 p-4">
+                    <p className="text-sm text-amber-200/70">
+                      <span className="font-semibold text-amber-100">
+                        Selected:
+                      </span>{" "}
+                      {componentType}
                     </p>
                   </div>
                 </div>
-                
+
                 <div className="flex items-center justify-center">
                   <DynamicComponent {...sampleData[componentType]} />
                 </div>
               </div>
             </div>
-            
+
             <CodeBlock>{`const componentMap = {
   character: CharacterCard,
   location: LocationCard,
@@ -236,23 +288,34 @@ Verbal's eyes scan the room. A poster on the wall—a shipping company advertise
 He's pulling from multiple context sources now—not just one bulletin board or one coffee mug, but the entire environment. Each question triggers a scan of available data, a selection of the most relevant detail, a rendering of an answer that fits.`,
       demo: () => {
         const selectedData = useMemo(() => {
-          return environmentItems.filter(item => selectedItems.includes(item.id));
+          return environmentItems.filter((item) =>
+            selectedItems.includes(item.id),
+          );
         }, [selectedItems]);
-        
+
         return (
           <div className="space-y-6">
-            <div className="bg-amber-900/10 border border-amber-500/30 rounded-lg p-6">
-              <h3 className="text-2xl font-bold text-amber-100 mb-4">The Story Builder: Multiple Context Sources</h3>
-              <p className="text-amber-200/80 mb-6">
-                Select items from the "environment" and watch the story dynamically assemble from multiple data sources. Context-driven rendering.
+            <div className="rounded-lg border border-amber-500/30 bg-amber-900/10 p-6">
+              <h3 className="mb-4 text-2xl font-bold text-amber-100">
+                The Story Builder: Multiple Context Sources
+              </h3>
+              <p className="mb-6 text-amber-200/80">
+                Select items from the "environment" and watch the story
+                dynamically assemble from multiple data sources. Context-driven
+                rendering.
               </p>
-              
-              <div className="grid md:grid-cols-2 gap-6">
+
+              <div className="grid gap-6 md:grid-cols-2">
                 <div className="space-y-4">
-                  <label className="block text-amber-100 mb-2 text-sm font-semibold">Environment Items</label>
+                  <label className="mb-2 block text-sm font-semibold text-amber-100">
+                    Environment Items
+                  </label>
                   <div className="space-y-2">
-                    {environmentItems.map(item => (
-                      <label key={item.id} className="flex items-center gap-3 p-3 bg-slate-900 border border-amber-500/20 rounded cursor-pointer hover:border-amber-500/40 transition-colors">
+                    {environmentItems.map((item) => (
+                      <label
+                        key={item.id}
+                        className="flex cursor-pointer items-center gap-3 rounded border border-amber-500/20 bg-slate-900 p-3 transition-colors hover:border-amber-500/40"
+                      >
                         <input
                           type="checkbox"
                           checked={selectedItems.includes(item.id)}
@@ -260,32 +323,41 @@ He's pulling from multiple context sources now—not just one bulletin board or 
                             if (e.target.checked) {
                               setSelectedItems([...selectedItems, item.id]);
                             } else {
-                              setSelectedItems(selectedItems.filter(id => id !== item.id));
+                              setSelectedItems(
+                                selectedItems.filter((id) => id !== item.id),
+                              );
                             }
                           }}
-                          className="w-4 h-4"
+                          className="h-4 w-4"
                         />
                         <span className="text-amber-100">{item.id}</span>
-                        <span className="text-amber-200/50 text-sm ml-auto">{item.type}</span>
+                        <span className="ml-auto text-sm text-amber-200/50">
+                          {item.type}
+                        </span>
                       </label>
                     ))}
                   </div>
                 </div>
-                
+
                 <div className="space-y-3">
-                  <p className="text-amber-100 text-sm font-semibold mb-3">Rendered Story Elements:</p>
+                  <p className="mb-3 text-sm font-semibold text-amber-100">
+                    Rendered Story Elements:
+                  </p>
                   {selectedData.length === 0 ? (
-                    <p className="text-amber-200/50 italic">Select items to build the story...</p>
+                    <p className="italic text-amber-200/50">
+                      Select items to build the story...
+                    </p>
                   ) : (
-                    selectedData.map(item => {
-                      const Component = componentMap[item.type as keyof typeof componentMap];
+                    selectedData.map((item) => {
+                      const Component =
+                        componentMap[item.type as keyof typeof componentMap];
                       return <Component key={item.id} {...item.data} />;
                     })
                   )}
                 </div>
               </div>
             </div>
-            
+
             <CodeBlock>{`function DynamicStory({ environment }) {
   const relevantData = environment.scan();
   
@@ -326,52 +398,68 @@ His blood runs cold.
 Keyser Söze—the villain, the mastermind, the boogeyman—was a conditionally rendered component. He only existed when the props demanded a villain. When the story needed a face, Verbal pulled from the sketch on the poster.`,
       demo: () => (
         <div className="space-y-6">
-          <div className="bg-amber-900/10 border border-amber-500/30 rounded-lg p-6">
-            <h3 className="text-2xl font-bold text-amber-100 mb-4">The Keyser Söze Principle: Conditional Rendering</h3>
-            <p className="text-amber-200/80 mb-6">
-              Toggle the villain's existence. When the condition is false, the component doesn't just hide—it doesn't exist in the component tree at all.
+          <div className="rounded-lg border border-amber-500/30 bg-amber-900/10 p-6">
+            <h3 className="mb-4 text-2xl font-bold text-amber-100">
+              The Keyser Söze Principle: Conditional Rendering
+            </h3>
+            <p className="mb-6 text-amber-200/80">
+              Toggle the villain's existence. When the condition is false, the
+              component doesn't just hide—it doesn't exist in the component tree
+              at all.
             </p>
-            
-            <div className="grid md:grid-cols-2 gap-6">
+
+            <div className="grid gap-6 md:grid-cols-2">
               <div className="space-y-4">
                 <button
                   onClick={() => setShowVillain(!showVillain)}
-                  className="w-full flex items-center justify-center gap-3 bg-amber-900/30 hover:bg-amber-800/40 border border-amber-500/30 hover:border-amber-500 rounded-lg px-6 py-4 text-amber-100 font-semibold transition-all"
+                  className="flex w-full items-center justify-center gap-3 rounded-lg border border-amber-500/30 bg-amber-900/30 px-6 py-4 font-semibold text-amber-100 transition-all hover:border-amber-500 hover:bg-amber-800/40"
                 >
-                  {showVillain ? <Eye className="w-5 h-5" /> : <Eye className="w-5 h-5 opacity-30" />}
+                  {showVillain ? (
+                    <Eye className="h-5 w-5" />
+                  ) : (
+                    <Eye className="h-5 w-5 opacity-30" />
+                  )}
                   {showVillain ? "Hide Keyser Söze" : "Reveal Keyser Söze"}
                 </button>
-                
-                <div className="p-4 bg-slate-900/50 rounded border border-amber-500/20">
-                  <p className="text-amber-200/70 text-sm">
-                    <span className="font-semibold text-amber-100">Component exists:</span> {showVillain ? "true" : "false"}
+
+                <div className="rounded border border-amber-500/20 bg-slate-900/50 p-4">
+                  <p className="text-sm text-amber-200/70">
+                    <span className="font-semibold text-amber-100">
+                      Component exists:
+                    </span>{" "}
+                    {showVillain ? "true" : "false"}
                   </p>
-                  <p className="text-amber-200/50 text-xs mt-2">
-                    {showVillain 
-                      ? "The villain component is mounted in the React tree" 
+                  <p className="mt-2 text-xs text-amber-200/50">
+                    {showVillain
+                      ? "The villain component is mounted in the React tree"
                       : "The villain component does not exist—not hidden, but unmounted"}
                   </p>
                 </div>
               </div>
-              
-              <div className="flex items-center justify-center min-h-[200px]">
+
+              <div className="flex min-h-[200px] items-center justify-center">
                 {showVillain ? (
-                  <div className="bg-slate-900 border border-red-500/50 rounded-lg p-6 animate-in fade-in duration-300">
-                    <div className="flex items-center gap-3 mb-3">
-                      <Eye className="w-6 h-6 text-red-500" />
-                      <h3 className="text-2xl font-bold text-red-100">Keyser Söze</h3>
+                  <div className="animate-in fade-in rounded-lg border border-red-500/50 bg-slate-900 p-6 duration-300">
+                    <div className="mb-3 flex items-center gap-3">
+                      <Eye className="h-6 w-6 text-red-500" />
+                      <h3 className="text-2xl font-bold text-red-100">
+                        Keyser Söze
+                      </h3>
                     </div>
-                    <p className="text-red-200/70">The greatest trick the devil ever pulled was convincing the world he didn't exist.</p>
+                    <p className="text-red-200/70">
+                      The greatest trick the devil ever pulled was convincing
+                      the world he didn't exist.
+                    </p>
                   </div>
                 ) : (
-                  <div className="text-center text-amber-200/30 italic">
+                  <div className="text-center italic text-amber-200/30">
                     Component not rendered
                   </div>
                 )}
               </div>
             </div>
           </div>
-          
+
           <CodeBlock>{`function Story({ needsVillain }) {
   return (
     <div>
@@ -403,35 +491,55 @@ The greatest trick the devil ever pulled was convincing the world he didn't exis
 The greatest power of dynamic rendering is convincing the user that the component was always there—when in reality, you just rendered it, right now, from the data at hand.`,
       demo: () => (
         <div className="space-y-6">
-          <div className="bg-amber-900/10 border border-amber-500/30 rounded-lg p-6">
-            <h3 className="text-2xl font-bold text-amber-100 mb-4">The Complete Pattern</h3>
-            <p className="text-amber-200/80 mb-6">
-              Dynamic rendering combines all these techniques: props-driven output, component selection, context awareness, and conditional existence.
+          <div className="rounded-lg border border-amber-500/30 bg-amber-900/10 p-6">
+            <h3 className="mb-4 text-2xl font-bold text-amber-100">
+              The Complete Pattern
+            </h3>
+            <p className="mb-6 text-amber-200/80">
+              Dynamic rendering combines all these techniques: props-driven
+              output, component selection, context awareness, and conditional
+              existence.
             </p>
-            
+
             <div className="grid gap-4">
-              <div className="bg-slate-900/50 border border-amber-500/20 rounded-lg p-4">
-                <h4 className="text-amber-100 font-semibold mb-2">✓ Props-Driven Rendering</h4>
-                <p className="text-amber-200/70 text-sm">Components adapt their output based on the props they receive</p>
+              <div className="rounded-lg border border-amber-500/20 bg-slate-900/50 p-4">
+                <h4 className="mb-2 font-semibold text-amber-100">
+                  ✓ Props-Driven Rendering
+                </h4>
+                <p className="text-sm text-amber-200/70">
+                  Components adapt their output based on the props they receive
+                </p>
               </div>
-              
-              <div className="bg-slate-900/50 border border-amber-500/20 rounded-lg p-4">
-                <h4 className="text-amber-100 font-semibold mb-2">✓ Dynamic Component Selection</h4>
-                <p className="text-amber-200/70 text-sm">Choose which component to render using maps and variables</p>
+
+              <div className="rounded-lg border border-amber-500/20 bg-slate-900/50 p-4">
+                <h4 className="mb-2 font-semibold text-amber-100">
+                  ✓ Dynamic Component Selection
+                </h4>
+                <p className="text-sm text-amber-200/70">
+                  Choose which component to render using maps and variables
+                </p>
               </div>
-              
-              <div className="bg-slate-900/50 border border-amber-500/20 rounded-lg p-4">
-                <h4 className="text-amber-100 font-semibold mb-2">✓ Context-Aware Rendering</h4>
-                <p className="text-amber-200/70 text-sm">Pull from multiple data sources to build complex UIs</p>
+
+              <div className="rounded-lg border border-amber-500/20 bg-slate-900/50 p-4">
+                <h4 className="mb-2 font-semibold text-amber-100">
+                  ✓ Context-Aware Rendering
+                </h4>
+                <p className="text-sm text-amber-200/70">
+                  Pull from multiple data sources to build complex UIs
+                </p>
               </div>
-              
-              <div className="bg-slate-900/50 border border-amber-500/20 rounded-lg p-4">
-                <h4 className="text-amber-100 font-semibold mb-2">✓ Conditional Existence</h4>
-                <p className="text-amber-200/70 text-sm">Components that only exist when conditions are met</p>
+
+              <div className="rounded-lg border border-amber-500/20 bg-slate-900/50 p-4">
+                <h4 className="mb-2 font-semibold text-amber-100">
+                  ✓ Conditional Existence
+                </h4>
+                <p className="text-sm text-amber-200/70">
+                  Components that only exist when conditions are met
+                </p>
               </div>
             </div>
           </div>
-          
+
           <CodeBlock>{`// The complete dynamic rendering pattern
 function VerbalStory({ questions, environment }) {
   return (
@@ -453,13 +561,16 @@ function VerbalStory({ questions, environment }) {
 }
 
 // The story adapts. It survives. It thrives.`}</CodeBlock>
-          
-          <div className="bg-amber-900/20 border-l-4 border-amber-500 rounded-r-lg p-6">
-            <p className="text-amber-100 text-lg italic">
-              "The greatest trick the devil ever pulled was convincing the world he didn't exist."
+
+          <div className="rounded-r-lg border-l-4 border-amber-500 bg-amber-900/20 p-6">
+            <p className="text-lg italic text-amber-100">
+              "The greatest trick the devil ever pulled was convincing the world
+              he didn't exist."
             </p>
-            <p className="text-amber-200/70 mt-4">
-              The greatest power of dynamic rendering is that components don't need to exist until they're needed. Choose your props wisely. Scan your context carefully. Render dynamically.
+            <p className="mt-4 text-amber-200/70">
+              The greatest power of dynamic rendering is that components don't
+              need to exist until they're needed. Choose your props wisely. Scan
+              your context carefully. Render dynamically.
             </p>
           </div>
         </div>
@@ -470,75 +581,77 @@ function VerbalStory({ questions, environment }) {
   const currentChapter = chapters[chapter];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-amber-100 font-sans pb-24">
-      <header className="border-b border-amber-500/20 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-6 sm:py-8">
+    <div className="min-h-screen bg-slate-950 pb-24 font-sans text-amber-100">
+      <header className="sticky top-0 z-10 border-b border-amber-500/20 bg-slate-950/80 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 sm:py-8 lg:px-8">
           <div className="flex items-start gap-4">
-            <Eye className="w-8 h-8 sm:w-10 sm:h-10 text-amber-500 flex-shrink-0 mt-1" />
+            <Eye className="mt-1 h-8 w-8 flex-shrink-0 text-amber-500 sm:h-10 sm:w-10" />
             <div>
-              <h1 className="text-3xl sm:text-4xl lg:text-5xl font-bold text-amber-100 mb-2">
+              <h1 className="mb-2 text-3xl font-bold text-amber-100 sm:text-4xl lg:text-5xl">
                 The Usual Suspects
               </h1>
-              <p className="text-base sm:text-lg text-amber-200/70">Verbal Kint, Interrogation Room, 1995</p>
-              <p className="text-sm sm:text-base text-amber-500 mt-1">Dynamic Component Rendering</p>
+              <p className="text-base text-amber-200/70 sm:text-lg">
+                Verbal Kint, Interrogation Room, 1995
+              </p>
+              <p className="mt-1 text-sm text-amber-500 sm:text-base">
+                Dynamic Component Rendering
+              </p>
             </div>
           </div>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+      <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 sm:py-12 lg:px-8">
         <div className="mb-8 sm:mb-12">
-          <h2 className="text-2xl sm:text-3xl font-bold text-amber-100 mb-4 sm:mb-6">
+          <h2 className="mb-4 text-2xl font-bold text-amber-100 sm:mb-6 sm:text-3xl">
             {currentChapter.title}
           </h2>
-          
-          <div className="prose prose-invert prose-amber max-w-none mb-8 sm:mb-12">
-            <div className="text-amber-200/90 leading-relaxed whitespace-pre-line text-base sm:text-lg">
+
+          <div className="prose prose-invert prose-amber mb-8 max-w-none sm:mb-12">
+            <div className="whitespace-pre-line text-base leading-relaxed text-amber-200/90 sm:text-lg">
               {currentChapter.content}
             </div>
           </div>
         </div>
 
-        <div className="mt-8 sm:mt-12">
-          {currentChapter.demo()}
-        </div>
+        <div className="mt-8 sm:mt-12">{currentChapter.demo()}</div>
       </main>
 
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-950/95 backdrop-blur-sm border-t border-amber-500/20 z-20">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <footer className="fixed bottom-0 left-0 right-0 z-20 border-t border-amber-500/20 bg-slate-950/95 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4">
             <button
-              onClick={() => setChapter(c => c - 1)}
+              onClick={() => setChapter((c) => c - 1)}
               disabled={chapter === 0}
-              className="flex items-center gap-2 px-4 sm:px-6 py-2 bg-amber-900/30 hover:bg-amber-800/40 border border-amber-500/30 hover:border-amber-500 rounded-lg text-amber-100 font-semibold disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-amber-900/30 disabled:hover:border-amber-500/30 transition-all"
+              className="flex items-center gap-2 rounded-lg border border-amber-500/30 bg-amber-900/30 px-4 py-2 font-semibold text-amber-100 transition-all hover:border-amber-500 hover:bg-amber-800/40 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-amber-500/30 disabled:hover:bg-amber-900/30 sm:px-6"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="h-4 w-4" />
               <span className="hidden sm:inline">Previous</span>
             </button>
-            
+
             <div className="text-center">
-              <div className="text-amber-100 font-semibold text-sm sm:text-base">
+              <div className="text-sm font-semibold text-amber-100 sm:text-base">
                 Chapter {chapter + 1} of {chapters.length}
               </div>
-              <div className="flex gap-1 sm:gap-2 mt-2">
+              <div className="mt-2 flex gap-1 sm:gap-2">
                 {chapters.map((_, idx) => (
                   <div
                     key={idx}
-                    className={`h-1 w-8 sm:w-12 rounded-full transition-colors ${
+                    className={`h-1 w-8 rounded-full transition-colors sm:w-12 ${
                       idx === chapter ? "bg-amber-500" : "bg-amber-500/20"
                     }`}
                   />
                 ))}
               </div>
             </div>
-            
+
             <button
-              onClick={() => setChapter(c => c + 1)}
+              onClick={() => setChapter((c) => c + 1)}
               disabled={chapter === chapters.length - 1}
-              className="flex items-center gap-2 px-4 sm:px-6 py-2 bg-amber-900/30 hover:bg-amber-800/40 border border-amber-500/30 hover:border-amber-500 rounded-lg text-amber-100 font-semibold disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-amber-900/30 disabled:hover:border-amber-500/30 transition-all"
+              className="flex items-center gap-2 rounded-lg border border-amber-500/30 bg-amber-900/30 px-4 py-2 font-semibold text-amber-100 transition-all hover:border-amber-500 hover:bg-amber-800/40 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:border-amber-500/30 disabled:hover:bg-amber-900/30 sm:px-6"
             >
               <span className="hidden sm:inline">Next</span>
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="h-4 w-4" />
             </button>
           </div>
         </div>

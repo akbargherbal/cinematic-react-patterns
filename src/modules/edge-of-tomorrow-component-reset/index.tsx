@@ -146,12 +146,12 @@ State resets. Knowledge compounds. And a developer who understands that differen
   }, [handlePrevious, handleNext]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-sans">
-      <header className="border-b border-orange-500/30 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <div className="flex items-center gap-3 mb-2">
-            <RotateCcw className="w-8 h-8 text-orange-500" />
-            <h1 className="text-3xl md:text-4xl font-bold text-orange-500">
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-300">
+      <header className="sticky top-0 z-10 border-b border-orange-500/30 bg-slate-950/80 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-6">
+          <div className="mb-2 flex items-center gap-3">
+            <RotateCcw className="h-8 w-8 text-orange-500" />
+            <h1 className="text-3xl font-bold text-orange-500 md:text-4xl">
               Edge of Tomorrow
             </h1>
           </div>
@@ -161,14 +161,14 @@ State resets. Knowledge compounds. And a developer who understands that differen
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 py-8 pb-32">
+      <main className="mx-auto max-w-6xl px-4 py-8 pb-32">
         <article className="mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-orange-400 mb-6">
+          <h2 className="mb-6 text-2xl font-bold text-orange-400 md:text-3xl">
             {currentChapter.title}
           </h2>
           <div className="prose prose-invert prose-slate max-w-none">
             {currentChapter.content.split("\n\n").map((paragraph, idx) => (
-              <p key={idx} className="text-slate-300 leading-relaxed mb-4">
+              <p key={idx} className="mb-4 leading-relaxed text-slate-300">
                 {paragraph}
               </p>
             ))}
@@ -176,19 +176,19 @@ State resets. Knowledge compounds. And a developer who understands that differen
         </article>
 
         {currentChapter.demo && (
-          <section className="bg-orange-950/20 border border-orange-500/30 rounded-lg p-6 md:p-8">
+          <section className="rounded-lg border border-orange-500/30 bg-orange-950/20 p-6 md:p-8">
             <currentChapter.demo />
           </section>
         )}
       </main>
 
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-t border-orange-500/30">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-orange-500/30 bg-slate-900/95 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-4">
+          <div className="flex items-center justify-between">
             <button
               onClick={handlePrevious}
               disabled={chapter === 0}
-              className="px-6 py-2 bg-orange-600 text-white rounded-lg font-medium transition-all hover:bg-orange-500 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-orange-600"
+              className="rounded-lg bg-orange-600 px-6 py-2 font-medium text-white transition-all hover:bg-orange-500 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-orange-600"
               aria-label="Previous chapter"
             >
               Previous
@@ -198,11 +198,11 @@ State resets. Knowledge compounds. And a developer who understands that differen
               <span className="text-sm text-slate-400">
                 Chapter {chapter + 1} of {chapters.length}
               </span>
-              <div className="flex gap-1 ml-2">
+              <div className="ml-2 flex gap-1">
                 {chapters.map((_, idx) => (
                   <div
                     key={idx}
-                    className={`w-2 h-2 rounded-full transition-colors ${
+                    className={`h-2 w-2 rounded-full transition-colors ${
                       idx === chapter ? "bg-orange-500" : "bg-slate-600"
                     }`}
                   />
@@ -213,7 +213,7 @@ State resets. Knowledge compounds. And a developer who understands that differen
             <button
               onClick={handleNext}
               disabled={chapter === chapters.length - 1}
-              className="px-6 py-2 bg-orange-600 text-white rounded-lg font-medium transition-all hover:bg-orange-500 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-orange-600"
+              className="rounded-lg bg-orange-600 px-6 py-2 font-medium text-white transition-all hover:bg-orange-500 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-orange-600"
               aria-label="Next chapter"
             >
               Next
@@ -238,46 +238,46 @@ function ResetCounterDemo() {
 
   return (
     <div>
-      <div className="flex items-center gap-3 mb-6">
-        <Skull className="w-6 h-6 text-orange-500" />
+      <div className="mb-6 flex items-center gap-3">
+        <Skull className="h-6 w-6 text-orange-500" />
         <h3 className="text-xl font-bold text-orange-400">
           Interactive Demo: State Reset on Unmount
         </h3>
       </div>
 
-      <p className="text-slate-300 mb-6">
+      <p className="mb-6 text-slate-300">
         Watch what happens when a component unmounts and remounts. The local
         state resets to initial values, but lifted state persists in the parent.
       </p>
 
-      <div className="grid md:grid-cols-2 gap-6 mb-6">
-        <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6">
-          <h4 className="text-lg font-semibold text-slate-200 mb-4">
+      <div className="mb-6 grid gap-6 md:grid-cols-2">
+        <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-6">
+          <h4 className="mb-4 text-lg font-semibold text-slate-200">
             Component State (Resets)
           </h4>
           {componentMounted ? (
             <ComponentCounter />
           ) : (
-            <div className="h-32 flex items-center justify-center text-slate-500">
+            <div className="flex h-32 items-center justify-center text-slate-500">
               Component Unmounted...
             </div>
           )}
         </div>
 
-        <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6">
-          <h4 className="text-lg font-semibold text-slate-200 mb-4">
+        <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-6">
+          <h4 className="mb-4 text-lg font-semibold text-slate-200">
             Lifted State (Persists)
           </h4>
           <div className="text-center">
-            <div className="text-5xl font-bold text-orange-500 mb-2">
+            <div className="mb-2 text-5xl font-bold text-orange-500">
               {liftedCount}
             </div>
-            <p className="text-sm text-slate-400 mb-4">
+            <p className="mb-4 text-sm text-slate-400">
               Lives in parent component
             </p>
             <button
               onClick={() => setLiftedCount((c) => c + 1)}
-              className="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-500 transition-colors"
+              className="rounded bg-orange-600 px-4 py-2 text-white transition-colors hover:bg-orange-500"
             >
               Increment
             </button>
@@ -285,18 +285,16 @@ function ResetCounterDemo() {
         </div>
       </div>
 
-      <div className="flex flex-col sm:flex-row items-center justify-between gap-4 p-4 bg-slate-900/50 border border-orange-500/30 rounded-lg">
+      <div className="flex flex-col items-center justify-between gap-4 rounded-lg border border-orange-500/30 bg-slate-900/50 p-4 sm:flex-row">
         <div className="text-center sm:text-left">
-          <div className="text-2xl font-bold text-orange-500">
-            {deathCount}
-          </div>
+          <div className="text-2xl font-bold text-orange-500">{deathCount}</div>
           <div className="text-sm text-slate-400">Deaths (Unmounts)</div>
         </div>
         <button
           onClick={handleKill}
-          className="px-6 py-3 bg-red-600 text-white rounded-lg font-medium hover:bg-red-500 transition-colors flex items-center gap-2"
+          className="flex items-center gap-2 rounded-lg bg-red-600 px-6 py-3 font-medium text-white transition-colors hover:bg-red-500"
         >
-          <Skull className="w-5 h-5" />
+          <Skull className="h-5 w-5" />
           Kill Component
         </button>
       </div>
@@ -309,11 +307,11 @@ function ComponentCounter() {
 
   return (
     <div className="text-center">
-      <div className="text-5xl font-bold text-orange-500 mb-2">{count}</div>
-      <p className="text-sm text-slate-400 mb-4">Lives in component state</p>
+      <div className="mb-2 text-5xl font-bold text-orange-500">{count}</div>
+      <p className="mb-4 text-sm text-slate-400">Lives in component state</p>
       <button
         onClick={() => setCount((c) => c + 1)}
-        className="px-4 py-2 bg-orange-600 text-white rounded hover:bg-orange-500 transition-colors"
+        className="rounded bg-orange-600 px-4 py-2 text-white transition-colors hover:bg-orange-500"
       >
         Increment
       </button>
@@ -327,7 +325,7 @@ function MemoryPersistenceDemo() {
   const [externalMounted, setExternalMounted] = useState(true);
   const [liftedValue, setLiftedValue] = useState("");
   const [externalValue, setExternalValue] = useState(
-    localStorage.getItem("cage-memory") || ""
+    localStorage.getItem("cage-memory") || "",
   );
 
   const killLocal = () => {
@@ -352,70 +350,70 @@ function MemoryPersistenceDemo() {
 
   return (
     <div>
-      <div className="flex items-center gap-3 mb-6">
-        <Brain className="w-6 h-6 text-orange-500" />
+      <div className="mb-6 flex items-center gap-3">
+        <Brain className="h-6 w-6 text-orange-500" />
         <h3 className="text-xl font-bold text-orange-400">
           Memory Persistence Patterns
         </h3>
       </div>
 
-      <p className="text-slate-300 mb-6">
+      <p className="mb-6 text-slate-300">
         Three approaches to state management. Watch what survives the unmount.
       </p>
 
-      <div className="grid md:grid-cols-3 gap-4">
-        <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
-          <h4 className="font-semibold text-slate-200 mb-3 text-sm">
+      <div className="grid gap-4 md:grid-cols-3">
+        <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-4">
+          <h4 className="mb-3 text-sm font-semibold text-slate-200">
             Local State
           </h4>
           {localMounted ? (
             <LocalMemory />
           ) : (
-            <div className="h-24 flex items-center justify-center text-slate-500 text-sm">
+            <div className="flex h-24 items-center justify-center text-sm text-slate-500">
               Unmounted...
             </div>
           )}
           <button
             onClick={killLocal}
-            className="w-full mt-3 px-3 py-2 bg-red-600 text-white text-sm rounded hover:bg-red-500 transition-colors"
+            className="mt-3 w-full rounded bg-red-600 px-3 py-2 text-sm text-white transition-colors hover:bg-red-500"
           >
             Kill
           </button>
         </div>
 
-        <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
-          <h4 className="font-semibold text-slate-200 mb-3 text-sm">
+        <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-4">
+          <h4 className="mb-3 text-sm font-semibold text-slate-200">
             Lifted State
           </h4>
           {liftedMounted ? (
             <LiftedMemory value={liftedValue} onChange={setLiftedValue} />
           ) : (
-            <div className="h-24 flex items-center justify-center text-slate-500 text-sm">
+            <div className="flex h-24 items-center justify-center text-sm text-slate-500">
               Unmounted...
             </div>
           )}
           <button
             onClick={killLifted}
-            className="w-full mt-3 px-3 py-2 bg-red-600 text-white text-sm rounded hover:bg-red-500 transition-colors"
+            className="mt-3 w-full rounded bg-red-600 px-3 py-2 text-sm text-white transition-colors hover:bg-red-500"
           >
             Kill
           </button>
         </div>
 
-        <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-4">
-          <h4 className="font-semibold text-slate-200 mb-3 text-sm">
+        <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-4">
+          <h4 className="mb-3 text-sm font-semibold text-slate-200">
             External Storage
           </h4>
           {externalMounted ? (
             <ExternalMemory value={externalValue} onChange={updateExternal} />
           ) : (
-            <div className="h-24 flex items-center justify-center text-slate-500 text-sm">
+            <div className="flex h-24 items-center justify-center text-sm text-slate-500">
               Unmounted...
             </div>
           )}
           <button
             onClick={killExternal}
-            className="w-full mt-3 px-3 py-2 bg-red-600 text-white text-sm rounded hover:bg-red-500 transition-colors"
+            className="mt-3 w-full rounded bg-red-600 px-3 py-2 text-sm text-white transition-colors hover:bg-red-500"
           >
             Kill
           </button>
@@ -433,7 +431,7 @@ function LocalMemory() {
       value={memory}
       onChange={(e) => setMemory(e.target.value)}
       placeholder="Type something..."
-      className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded text-slate-200 text-sm placeholder-slate-500"
+      className="w-full rounded border border-slate-600 bg-slate-800 px-3 py-2 text-sm text-slate-200 placeholder-slate-500"
     />
   );
 }
@@ -451,7 +449,7 @@ function LiftedMemory({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder="Type something..."
-      className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded text-slate-200 text-sm placeholder-slate-500"
+      className="w-full rounded border border-slate-600 bg-slate-800 px-3 py-2 text-sm text-slate-200 placeholder-slate-500"
     />
   );
 }
@@ -469,7 +467,7 @@ function ExternalMemory({
       value={value}
       onChange={(e) => onChange(e.target.value)}
       placeholder="Type something..."
-      className="w-full px-3 py-2 bg-slate-800 border border-slate-600 rounded text-slate-200 text-sm placeholder-slate-500"
+      className="w-full rounded border border-slate-600 bg-slate-800 px-3 py-2 text-sm text-slate-200 placeholder-slate-500"
     />
   );
 }
@@ -489,52 +487,52 @@ function StateCorruptionDemo() {
 
   return (
     <div>
-      <div className="flex items-center gap-3 mb-6">
-        <Skull className="w-6 h-6 text-red-500" />
+      <div className="mb-6 flex items-center gap-3">
+        <Skull className="h-6 w-6 text-red-500" />
         <h3 className="text-xl font-bold text-orange-400">
           State Corruption Without Reset
         </h3>
       </div>
 
-      <p className="text-slate-300 mb-6">
+      <p className="mb-6 text-slate-300">
         When a component can't unmount cleanly, errors accumulate. The reset
         isn't a limitation—it's protection.
       </p>
 
-      <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6">
+      <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-6">
         {hasError ? (
           <div className="text-center">
-            <div className="text-6xl mb-4">💀</div>
-            <div className="text-red-500 font-bold text-xl mb-2">
+            <div className="mb-4 text-6xl">💀</div>
+            <div className="mb-2 text-xl font-bold text-red-500">
               Corrupted State
             </div>
-            <p className="text-slate-400 mb-4">
+            <p className="mb-4 text-slate-400">
               Without the ability to reset, errors compound. Every mistake is
               permanent.
             </p>
-            <div className="text-3xl font-bold text-red-500 mb-4">
+            <div className="mb-4 text-3xl font-bold text-red-500">
               {errorCount} Accumulated Errors
             </div>
             <button
               onClick={reset}
-              className="px-6 py-3 bg-orange-600 text-white rounded-lg font-medium hover:bg-orange-500 transition-colors"
+              className="rounded-lg bg-orange-600 px-6 py-3 font-medium text-white transition-colors hover:bg-orange-500"
             >
               Manual Reset Required
             </button>
           </div>
         ) : (
           <div className="text-center">
-            <div className="text-6xl mb-4">✨</div>
-            <div className="text-orange-500 font-bold text-xl mb-2">
+            <div className="mb-4 text-6xl">✨</div>
+            <div className="mb-2 text-xl font-bold text-orange-500">
               Clean State
             </div>
-            <p className="text-slate-400 mb-4">
+            <p className="mb-4 text-slate-400">
               Component is healthy. But what happens when we can't reset?
             </p>
             <button
               onClick={triggerError}
-              className="px-6 py-3 bg-red-600 text-white rounded-lg font-medium hover:bg-red-500 transition-colors"
-              >
+              className="rounded-lg bg-red-600 px-6 py-3 font-medium text-white transition-colors hover:bg-red-500"
+            >
               Trigger Error (No Auto-Reset)
             </button>
           </div>
@@ -570,72 +568,72 @@ function LearningTimelineDemo() {
 
   return (
     <div>
-      <div className="flex items-center gap-3 mb-6">
-        <RotateCcw className="w-6 h-6 text-orange-500" />
+      <div className="mb-6 flex items-center gap-3">
+        <RotateCcw className="h-6 w-6 text-orange-500" />
         <h3 className="text-xl font-bold text-orange-400">
           Learning Across Iterations
         </h3>
       </div>
 
-      <p className="text-slate-300 mb-6">
+      <p className="mb-6 text-slate-300">
         Component state resets, but developer knowledge accumulates. Each
         iteration teaches something new.
       </p>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6">
-          <h4 className="font-semibold text-slate-200 mb-4">
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-6">
+          <h4 className="mb-4 font-semibold text-slate-200">
             Component State (Resets)
           </h4>
-          <div className="text-center mb-4">
-            <div className="text-5xl font-bold text-red-500 mb-2">
+          <div className="mb-4 text-center">
+            <div className="mb-2 text-5xl font-bold text-red-500">
               {iterations}
             </div>
             <div className="text-sm text-slate-400">Current Iteration</div>
           </div>
-          <div className="text-center text-slate-500 text-sm">
+          <div className="text-center text-sm text-slate-500">
             Resets to 0 on each unmount
           </div>
         </div>
 
-        <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6">
-          <h4 className="font-semibold text-slate-200 mb-4">
+        <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-6">
+          <h4 className="mb-4 font-semibold text-slate-200">
             Learned Patterns (Persist)
           </h4>
-          <div className="space-y-2 mb-4">
+          <div className="mb-4 space-y-2">
             {patterns.length === 0 ? (
-              <div className="text-slate-500 text-sm text-center py-4">
+              <div className="py-4 text-center text-sm text-slate-500">
                 No patterns learned yet
               </div>
             ) : (
               patterns.map((pattern, idx) => (
                 <div
                   key={idx}
-                  className="flex items-center gap-2 text-sm text-slate-300 bg-slate-800 px-3 py-2 rounded"
+                  className="flex items-center gap-2 rounded bg-slate-800 px-3 py-2 text-sm text-slate-300"
                 >
-                  <CheckCircle className="w-4 h-4 text-green-500" />
+                  <CheckCircle className="h-4 w-4 text-green-500" />
                   {pattern}
                 </div>
               ))
             )}
           </div>
-          <div className="text-center text-orange-500 text-sm font-medium">
+          <div className="text-center text-sm font-medium text-orange-500">
             {patterns.length} / {learnablePatterns.length} patterns learned
           </div>
         </div>
       </div>
 
-      <div className="flex gap-4 mt-6">
+      <div className="mt-6 flex gap-4">
         <button
           onClick={iterate}
           disabled={iterations >= learnablePatterns.length}
-          className="flex-1 px-6 py-3 bg-orange-600 text-white rounded-lg font-medium hover:bg-orange-500 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+          className="flex-1 rounded-lg bg-orange-600 px-6 py-3 font-medium text-white transition-colors hover:bg-orange-500 disabled:cursor-not-allowed disabled:opacity-30"
         >
           Die & Learn ({iterations + 1})
         </button>
         <button
           onClick={reset}
-          className="px-6 py-3 bg-slate-700 text-white rounded-lg font-medium hover:bg-slate-600 transition-colors"
+          className="rounded-lg bg-slate-700 px-6 py-3 font-medium text-white transition-colors hover:bg-slate-600"
         >
           Reset Demo
         </button>
@@ -647,20 +645,20 @@ function LearningTimelineDemo() {
 function PatternComparisonDemo() {
   return (
     <div>
-      <div className="flex items-center gap-3 mb-6">
-        <Code className="w-6 h-6 text-orange-500" />
+      <div className="mb-6 flex items-center gap-3">
+        <Code className="h-6 w-6 text-orange-500" />
         <h3 className="text-xl font-bold text-orange-400">
           Anti-Pattern vs Correct Pattern
         </h3>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-6">
-        <div className="bg-red-950/20 border border-red-500/30 rounded-lg p-6">
-          <h4 className="font-semibold text-red-400 mb-4 flex items-center gap-2">
+      <div className="grid gap-6 md:grid-cols-2">
+        <div className="rounded-lg border border-red-500/30 bg-red-950/20 p-6">
+          <h4 className="mb-4 flex items-center gap-2 font-semibold text-red-400">
             <span className="text-2xl">❌</span>
             Fighting the System
           </h4>
-          <pre className="bg-slate-900 p-4 rounded text-xs overflow-x-auto">
+          <pre className="overflow-x-auto rounded bg-slate-900 p-4 text-xs">
             <code className="text-slate-300">
               {`// Trying to persist state
 // across unmounts
@@ -683,18 +681,18 @@ function Cage() {
 }`}
             </code>
           </pre>
-          <p className="text-sm text-slate-400 mt-4">
+          <p className="mt-4 text-sm text-slate-400">
             Expecting component state to survive unmounting leads to bugs and
             unpredictable behavior.
           </p>
         </div>
 
-        <div className="bg-green-950/20 border border-green-500/30 rounded-lg p-6">
-          <h4 className="font-semibold text-green-400 mb-4 flex items-center gap-2">
+        <div className="rounded-lg border border-green-500/30 bg-green-950/20 p-6">
+          <h4 className="mb-4 flex items-center gap-2 font-semibold text-green-400">
             <span className="text-2xl">✅</span>
             Working With It
           </h4>
-          <pre className="bg-slate-900 p-4 rounded text-xs overflow-x-auto">
+          <pre className="overflow-x-auto rounded bg-slate-900 p-4 text-xs">
             <code className="text-slate-300">
               {`// Lift state to parent
 function BattleSystem() {
@@ -722,7 +720,7 @@ function Cage({ patterns }) {
 }`}
             </code>
           </pre>
-          <p className="text-sm text-slate-400 mt-4">
+          <p className="mt-4 text-sm text-slate-400">
             Separate ephemeral state from persistent data. Let components reset
             cleanly.
           </p>

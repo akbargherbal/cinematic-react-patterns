@@ -219,44 +219,40 @@ The lysine contingency is your return statement. Use it. Test it. Respect it.
 Or prepare for the T-Rex.`,
       },
     ],
-    []
+    [],
   );
 
   const currentChapter = chapters[chapter];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-sans">
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-300">
       {/* Header */}
       <header className="border-b border-amber-500/30 bg-slate-900/50 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto px-4 py-8">
-          <div className="flex items-center gap-3 mb-2">
-            <Zap className="w-8 h-8 text-amber-500" />
-            <h1 className="text-4xl font-bold text-amber-500">
-              Jurassic Park
-            </h1>
+        <div className="mx-auto max-w-6xl px-4 py-8">
+          <div className="mb-2 flex items-center gap-3">
+            <Zap className="h-8 w-8 text-amber-500" />
+            <h1 className="text-4xl font-bold text-amber-500">Jurassic Park</h1>
           </div>
-          <p className="text-lg text-slate-400 ml-11">
-            Isla Nublar, 1993
-          </p>
-          <p className="text-sm text-amber-400/70 ml-11 mt-1">
+          <p className="ml-11 text-lg text-slate-400">Isla Nublar, 1993</p>
+          <p className="ml-11 mt-1 text-sm text-amber-400/70">
             Side Effects & useEffect Cleanup
           </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 py-12 pb-32">
+      <main className="mx-auto max-w-6xl px-4 py-12 pb-32">
         {/* Chapter Title */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-amber-400 mb-2">
+          <h2 className="mb-2 text-3xl font-bold text-amber-400">
             {currentChapter.title}
           </h2>
-          <div className="h-1 w-24 bg-amber-500/50 rounded"></div>
+          <div className="h-1 w-24 rounded bg-amber-500/50"></div>
         </div>
 
         {/* Chapter Content */}
-        <article className="prose prose-invert prose-slate max-w-none mb-12">
-          <div className="text-slate-300 leading-relaxed whitespace-pre-line text-lg">
+        <article className="prose prose-invert prose-slate mb-12 max-w-none">
+          <div className="whitespace-pre-line text-lg leading-relaxed text-slate-300">
             {currentChapter.content}
           </div>
         </article>
@@ -270,13 +266,13 @@ Or prepare for the T-Rex.`,
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-t border-amber-500/30">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-amber-500/30 bg-slate-900/95 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-4">
+          <div className="flex items-center justify-between">
             <button
               onClick={() => setChapter((c) => c - 1)}
               disabled={chapter === 0}
-              className="px-6 py-2 bg-amber-600 hover:bg-amber-500 disabled:bg-slate-800 disabled:text-slate-600 disabled:cursor-not-allowed text-white font-semibold rounded transition-colors"
+              className="rounded bg-amber-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-amber-500 disabled:cursor-not-allowed disabled:bg-slate-800 disabled:text-slate-600"
             >
               Previous
             </button>
@@ -286,9 +282,9 @@ Or prepare for the T-Rex.`,
                 <button
                   key={idx}
                   onClick={() => setChapter(idx)}
-                  className={`w-2 h-2 rounded-full transition-all ${
+                  className={`h-2 w-2 rounded-full transition-all ${
                     idx === chapter
-                      ? "bg-amber-500 w-8"
+                      ? "w-8 bg-amber-500"
                       : "bg-slate-600 hover:bg-slate-500"
                   }`}
                   aria-label={`Go to chapter ${idx + 1}`}
@@ -299,13 +295,13 @@ Or prepare for the T-Rex.`,
             <button
               onClick={() => setChapter((c) => c + 1)}
               disabled={chapter === chapters.length - 1}
-              className="px-6 py-2 bg-amber-600 hover:bg-amber-500 disabled:bg-slate-800 disabled:text-slate-600 disabled:cursor-not-allowed text-white font-semibold rounded transition-colors"
+              className="rounded bg-amber-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-amber-500 disabled:cursor-not-allowed disabled:bg-slate-800 disabled:text-slate-600"
             >
               Next
             </button>
           </div>
 
-          <div className="text-center mt-2 text-sm text-slate-500">
+          <div className="mt-2 text-center text-sm text-slate-500">
             Chapter {chapter + 1} of {chapters.length}
           </div>
         </div>
@@ -318,33 +314,33 @@ Or prepare for the T-Rex.`,
 
 function ParkStatusDemo() {
   return (
-    <div className="bg-slate-900/50 border border-amber-500/30 rounded-lg p-6">
-      <h3 className="text-xl font-bold text-amber-400 mb-4 flex items-center gap-2">
-        <Shield className="w-5 h-5" />
+    <div className="rounded-lg border border-amber-500/30 bg-slate-900/50 p-6">
+      <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-amber-400">
+        <Shield className="h-5 w-5" />
         Park Status: All Systems Operational
       </h3>
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
         {["T-Rex Paddock", "Raptor Enclosure", "Brachiosaurus Field"].map(
           (paddock) => (
             <div
               key={paddock}
-              className="bg-slate-800/50 border border-emerald-500/50 rounded p-4"
+              className="rounded border border-emerald-500/50 bg-slate-800/50 p-4"
             >
-              <div className="flex items-center justify-between mb-2">
+              <div className="mb-2 flex items-center justify-between">
                 <span className="text-sm text-slate-400">{paddock}</span>
-                <CheckCircle className="w-4 h-4 text-emerald-500" />
+                <CheckCircle className="h-4 w-4 text-emerald-500" />
               </div>
               <div className="text-xs text-emerald-400">
                 Fence: 10,000V Active
               </div>
-              <div className="text-xs text-slate-500 mt-1">
+              <div className="mt-1 text-xs text-slate-500">
                 Containment: Secure
               </div>
             </div>
-          )
+          ),
         )}
       </div>
-      <p className="text-sm text-slate-500 mt-4 italic">
+      <p className="mt-4 text-sm italic text-slate-500">
         "We spared no expense." — John Hammond
       </p>
     </div>
@@ -376,19 +372,17 @@ function BreedingCounterDemo() {
   };
 
   return (
-    <div className="bg-slate-900/50 border border-amber-500/30 rounded-lg p-6">
-      <h3 className="text-xl font-bold text-amber-400 mb-4 flex items-center gap-2">
-        <AlertTriangle className="w-5 h-5" />
+    <div className="rounded-lg border border-amber-500/30 bg-slate-900/50 p-6">
+      <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-amber-400">
+        <AlertTriangle className="h-5 w-5" />
         Population Monitor
       </h3>
 
-      <div className="bg-slate-800/50 rounded-lg p-6 mb-4">
+      <div className="mb-4 rounded-lg bg-slate-800/50 p-6">
         <div className="text-center">
-          <div className="text-sm text-slate-400 mb-2">
-            Dinosaur Population
-          </div>
+          <div className="mb-2 text-sm text-slate-400">Dinosaur Population</div>
           <div
-            className={`text-6xl font-bold mb-2 ${
+            className={`mb-2 text-6xl font-bold ${
               population > 238 ? "text-red-500" : "text-emerald-500"
             }`}
           >
@@ -398,8 +392,8 @@ function BreedingCounterDemo() {
             Expected: 238 | Current: {population}
           </div>
           {population > 238 && (
-            <div className="mt-4 text-sm text-red-400 flex items-center justify-center gap-2">
-              <AlertTriangle className="w-4 h-4" />
+            <div className="mt-4 flex items-center justify-center gap-2 text-sm text-red-400">
+              <AlertTriangle className="h-4 w-4" />
               Unauthorized breeding detected!
             </div>
           )}
@@ -409,23 +403,23 @@ function BreedingCounterDemo() {
       <div className="flex gap-3">
         <button
           onClick={() => setIsMonitoring(!isMonitoring)}
-          className={`flex-1 px-4 py-2 rounded font-semibold transition-colors ${
+          className={`flex-1 rounded px-4 py-2 font-semibold transition-colors ${
             isMonitoring
-              ? "bg-red-600 hover:bg-red-500 text-white"
-              : "bg-amber-600 hover:bg-amber-500 text-white"
+              ? "bg-red-600 text-white hover:bg-red-500"
+              : "bg-amber-600 text-white hover:bg-amber-500"
           }`}
         >
           {isMonitoring ? "Stop Monitoring" : "Start Monitoring"}
         </button>
         <button
           onClick={handleReset}
-          className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded font-semibold transition-colors"
+          className="rounded bg-slate-700 px-4 py-2 font-semibold text-white transition-colors hover:bg-slate-600"
         >
           Reset
         </button>
       </div>
 
-      <p className="text-sm text-slate-500 mt-4 italic">
+      <p className="mt-4 text-sm italic text-slate-500">
         "Life finds a way." — Dr. Ian Malcolm
       </p>
     </div>
@@ -480,27 +474,27 @@ function PowerFailureDemo() {
   };
 
   return (
-    <div className="bg-slate-900/50 border border-amber-500/30 rounded-lg p-6">
-      <h3 className="text-xl font-bold text-amber-400 mb-4 flex items-center gap-2">
-        <Zap className="w-5 h-5" />
+    <div className="rounded-lg border border-amber-500/30 bg-slate-900/50 p-6">
+      <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-amber-400">
+        <Zap className="h-5 w-5" />
         Power Grid Simulator
       </h3>
 
       <div className="mb-4">
-        <label className="flex items-center gap-2 text-sm text-slate-400 cursor-pointer">
+        <label className="flex cursor-pointer items-center gap-2 text-sm text-slate-400">
           <input
             type="checkbox"
             checked={hasCleanup}
             onChange={(e) => setHasCleanup(e.target.checked)}
-            className="w-4 h-4"
+            className="h-4 w-4"
           />
           Enable Cleanup Function (Lysine Contingency)
         </label>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-        <div className="bg-slate-800/50 rounded-lg p-4">
-          <div className="text-sm text-slate-400 mb-2">Power Status</div>
+      <div className="mb-4 grid grid-cols-1 gap-4 md:grid-cols-2">
+        <div className="rounded-lg bg-slate-800/50 p-4">
+          <div className="mb-2 text-sm text-slate-400">Power Status</div>
           <div
             className={`text-2xl font-bold ${
               hasPower ? "text-emerald-500" : "text-red-500"
@@ -510,10 +504,10 @@ function PowerFailureDemo() {
           </div>
         </div>
 
-        <div className="bg-slate-800/50 rounded-lg p-4">
-          <div className="text-sm text-slate-400 mb-2">Escaped Dinosaurs</div>
+        <div className="rounded-lg bg-slate-800/50 p-4">
+          <div className="mb-2 text-sm text-slate-400">Escaped Dinosaurs</div>
           <div className="flex items-center gap-2">
-            <Skull className="w-5 h-5 text-red-500" />
+            <Skull className="h-5 w-5 text-red-500" />
             <span className="text-2xl font-bold text-red-500">
               {escapedDinosaurs}
             </span>
@@ -521,39 +515,39 @@ function PowerFailureDemo() {
         </div>
       </div>
 
-      <div className="bg-slate-800/50 rounded-lg p-4 mb-4">
-        <div className="text-sm text-slate-400 mb-2">
+      <div className="mb-4 rounded-lg bg-slate-800/50 p-4">
+        <div className="mb-2 text-sm text-slate-400">
           Resource Usage (Memory Leak)
         </div>
-        <div className="w-full bg-slate-700 rounded-full h-4 overflow-hidden">
+        <div className="h-4 w-full overflow-hidden rounded-full bg-slate-700">
           <div
-            className="bg-red-500 h-full transition-all duration-300"
+            className="h-full bg-red-500 transition-all duration-300"
             style={{ width: `${resourceUsage}%` }}
           ></div>
         </div>
-        <div className="text-xs text-slate-500 mt-1">{resourceUsage}%</div>
+        <div className="mt-1 text-xs text-slate-500">{resourceUsage}%</div>
       </div>
 
       <div className="flex gap-3">
         <button
           onClick={handlePowerToggle}
-          className={`flex-1 px-4 py-2 rounded font-semibold transition-colors ${
+          className={`flex-1 rounded px-4 py-2 font-semibold transition-colors ${
             hasPower
-              ? "bg-red-600 hover:bg-red-500 text-white"
-              : "bg-emerald-600 hover:bg-emerald-500 text-white"
+              ? "bg-red-600 text-white hover:bg-red-500"
+              : "bg-emerald-600 text-white hover:bg-emerald-500"
           }`}
         >
           {hasPower ? "Cut Power" : "Restore Power"}
         </button>
         <button
           onClick={handleReset}
-          className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded font-semibold transition-colors"
+          className="rounded bg-slate-700 px-4 py-2 font-semibold text-white transition-colors hover:bg-slate-600"
         >
           Reset
         </button>
       </div>
 
-      <p className="text-sm text-slate-500 mt-4 italic">
+      <p className="mt-4 text-sm italic text-slate-500">
         {hasCleanup
           ? "Cleanup function active. Side effects will be contained."
           : "No cleanup function. Side effects will persist after unmount."}
@@ -564,19 +558,19 @@ function PowerFailureDemo() {
 
 function CodeComparisonDemo() {
   return (
-    <div className="bg-slate-900/50 border border-amber-500/30 rounded-lg p-6">
-      <h3 className="text-xl font-bold text-amber-400 mb-4">
+    <div className="rounded-lg border border-amber-500/30 bg-slate-900/50 p-6">
+      <h3 className="mb-4 text-xl font-bold text-amber-400">
         The Lysine Contingency: Code Comparison
       </h3>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {/* Without Cleanup */}
-        <div className="bg-slate-800/50 border border-red-500/50 rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-3">
-            <AlertTriangle className="w-4 h-4 text-red-500" />
+        <div className="rounded-lg border border-red-500/50 bg-slate-800/50 p-4">
+          <div className="mb-3 flex items-center gap-2">
+            <AlertTriangle className="h-4 w-4 text-red-500" />
             <h4 className="font-bold text-red-400">Without Cleanup</h4>
           </div>
-          <pre className="text-xs text-slate-300 overflow-x-auto">
+          <pre className="overflow-x-auto text-xs text-slate-300">
             <code>{`useEffect(() => {
   // Create side effect
   const subscription = 
@@ -605,12 +599,12 @@ function CodeComparisonDemo() {
         </div>
 
         {/* With Cleanup */}
-        <div className="bg-slate-800/50 border border-emerald-500/50 rounded-lg p-4">
-          <div className="flex items-center gap-2 mb-3">
-            <CheckCircle className="w-4 h-4 text-emerald-500" />
+        <div className="rounded-lg border border-emerald-500/50 bg-slate-800/50 p-4">
+          <div className="mb-3 flex items-center gap-2">
+            <CheckCircle className="h-4 w-4 text-emerald-500" />
             <h4 className="font-bold text-emerald-400">With Cleanup</h4>
           </div>
-          <pre className="text-xs text-slate-300 overflow-x-auto">
+          <pre className="overflow-x-auto text-xs text-slate-300">
             <code>{`useEffect(() => {
   // Create side effect
   const subscription = 
@@ -644,7 +638,7 @@ function CodeComparisonDemo() {
         </div>
       </div>
 
-      <p className="text-sm text-slate-500 mt-4 italic">
+      <p className="mt-4 text-sm italic text-slate-500">
         "I was so preoccupied with whether I could, I didn't stop to think if I
         should." — John Hammond
       </p>
@@ -694,21 +688,21 @@ function SideBySideDemo() {
   }, [withCleanupMounted]);
 
   return (
-    <div className="bg-slate-900/50 border border-amber-500/30 rounded-lg p-6">
-      <h3 className="text-xl font-bold text-amber-400 mb-4">
+    <div className="rounded-lg border border-amber-500/30 bg-slate-900/50 p-6">
+      <h3 className="mb-4 text-xl font-bold text-amber-400">
         Two Parks: A Comparison
       </h3>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4">
+      <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
         {/* Without Cleanup Park */}
-        <div className="bg-slate-800/50 border border-red-500/50 rounded-lg p-4">
-          <div className="flex items-center justify-between mb-4">
+        <div className="rounded-lg border border-red-500/50 bg-slate-800/50 p-4">
+          <div className="mb-4 flex items-center justify-between">
             <h4 className="font-bold text-red-400">Park A: No Cleanup</h4>
-            <AlertTriangle className="w-5 h-5 text-red-500" />
+            <AlertTriangle className="h-5 w-5 text-red-500" />
           </div>
 
           <div className="mb-4">
-            <div className="text-sm text-slate-400 mb-2">Status</div>
+            <div className="mb-2 text-sm text-slate-400">Status</div>
             <div
               className={`text-lg font-bold ${
                 withoutCleanupMounted ? "text-emerald-500" : "text-red-500"
@@ -719,7 +713,7 @@ function SideBySideDemo() {
           </div>
 
           <div className="mb-4">
-            <div className="text-sm text-slate-400 mb-2">
+            <div className="mb-2 text-sm text-slate-400">
               Escaped Dinosaurs (Memory Leaks)
             </div>
             <div className="text-3xl font-bold text-red-500">
@@ -728,10 +722,8 @@ function SideBySideDemo() {
           </div>
 
           <button
-            onClick={() =>
-              setWithoutCleanupMounted(!withoutCleanupMounted)
-            }
-            className={`w-full px-4 py-2 rounded font-semibold transition-colors ${
+            onClick={() => setWithoutCleanupMounted(!withoutCleanupMounted)}
+            className={`w-full rounded px-4 py-2 font-semibold transition-colors ${
               withoutCleanupMounted
                 ? "bg-red-600 hover:bg-red-500"
                 : "bg-emerald-600 hover:bg-emerald-500"
@@ -740,20 +732,20 @@ function SideBySideDemo() {
             {withoutCleanupMounted ? "Unmount" : "Mount"}
           </button>
 
-          <p className="text-xs text-slate-500 mt-3 italic">
+          <p className="mt-3 text-xs italic text-slate-500">
             Side effects continue after unmount
           </p>
         </div>
 
         {/* With Cleanup Park */}
-        <div className="bg-slate-800/50 border border-emerald-500/50 rounded-lg p-4">
-          <div className="flex items-center justify-between mb-4">
+        <div className="rounded-lg border border-emerald-500/50 bg-slate-800/50 p-4">
+          <div className="mb-4 flex items-center justify-between">
             <h4 className="font-bold text-emerald-400">Park B: With Cleanup</h4>
-            <CheckCircle className="w-5 h-5 text-emerald-500" />
+            <CheckCircle className="h-5 w-5 text-emerald-500" />
           </div>
 
           <div className="mb-4">
-            <div className="text-sm text-slate-400 mb-2">Status</div>
+            <div className="mb-2 text-sm text-slate-400">Status</div>
             <div
               className={`text-lg font-bold ${
                 withCleanupMounted ? "text-emerald-500" : "text-slate-500"
@@ -764,7 +756,7 @@ function SideBySideDemo() {
           </div>
 
           <div className="mb-4">
-            <div className="text-sm text-slate-400 mb-2">
+            <div className="mb-2 text-sm text-slate-400">
               Escaped Dinosaurs (Memory Leaks)
             </div>
             <div className="text-3xl font-bold text-emerald-500">
@@ -774,7 +766,7 @@ function SideBySideDemo() {
 
           <button
             onClick={() => setWithCleanupMounted(!withCleanupMounted)}
-            className={`w-full px-4 py-2 rounded font-semibold transition-colors ${
+            className={`w-full rounded px-4 py-2 font-semibold transition-colors ${
               withCleanupMounted
                 ? "bg-red-600 hover:bg-red-500"
                 : "bg-emerald-600 hover:bg-emerald-500"
@@ -783,13 +775,13 @@ function SideBySideDemo() {
             {withCleanupMounted ? "Unmount" : "Mount"}
           </button>
 
-          <p className="text-xs text-slate-500 mt-3 italic">
+          <p className="mt-3 text-xs italic text-slate-500">
             Cleanup function runs on unmount
           </p>
         </div>
       </div>
 
-      <div className="mt-6 bg-amber-900/20 border border-amber-500/30 rounded-lg p-4">
+      <div className="mt-6 rounded-lg border border-amber-500/30 bg-amber-900/20 p-4">
         <p className="text-sm text-amber-300">
           <strong>Notice:</strong> Park A continues accumulating "escaped
           dinosaurs" even after unmounting. Park B properly cleans up when

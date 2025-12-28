@@ -107,68 +107,70 @@ Include your dependencies. Capture current values. Don't let your closures go st
   const currentChapter = chapters[chapter];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 text-slate-300 font-serif">
+    <div className="min-h-screen bg-gradient-to-b from-slate-900 to-slate-950 font-serif text-slate-300">
       {/* Header */}
       <header className="border-b border-slate-700/30 bg-slate-950/50 backdrop-blur-sm">
-        <div className="max-w-4xl mx-auto px-6 py-8">
-          <div className="flex items-center gap-3 mb-2">
-            <Anchor className="w-8 h-8 text-blue-400" />
-            <h1 className="text-4xl font-bold text-slate-100">Shutter Island</h1>
+        <div className="mx-auto max-w-4xl px-6 py-8">
+          <div className="mb-2 flex items-center gap-3">
+            <Anchor className="h-8 w-8 text-blue-400" />
+            <h1 className="text-4xl font-bold text-slate-100">
+              Shutter Island
+            </h1>
           </div>
           <p className="text-lg text-slate-400">
             Teddy Daniels, Ashecliffe Hospital, 1954
           </p>
-          <p className="text-sm text-blue-400 mt-2">
+          <p className="mt-2 text-sm text-blue-400">
             Understanding Stale Closures in useEffect
           </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-4xl mx-auto px-6 py-12 pb-32">
+      <main className="mx-auto max-w-4xl px-6 py-12 pb-32">
         {/* Chapter Title */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-slate-100 mb-2">
+          <h2 className="mb-2 text-3xl font-bold text-slate-100">
             {currentChapter.title}
           </h2>
-          <div className="h-1 w-24 bg-blue-500/50 rounded"></div>
+          <div className="h-1 w-24 rounded bg-blue-500/50"></div>
         </div>
 
         {/* Narrative Content */}
-        <article className="prose prose-invert prose-slate max-w-none mb-12">
-          {currentChapter.content.split('\n\n').map((paragraph, idx) => (
-            <p key={idx} className="text-slate-300 leading-relaxed mb-4">
+        <article className="prose prose-invert prose-slate mb-12 max-w-none">
+          {currentChapter.content.split("\n\n").map((paragraph, idx) => (
+            <p key={idx} className="mb-4 leading-relaxed text-slate-300">
               {paragraph}
             </p>
           ))}
         </article>
 
         {/* Interactive Demo */}
-        <div className="bg-slate-900/50 border border-slate-700/30 rounded-lg p-6">
+        <div className="rounded-lg border border-slate-700/30 bg-slate-900/50 p-6">
           <currentChapter.demo />
         </div>
       </main>
 
       {/* Chapter Navigation Footer */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-950/90 backdrop-blur-sm border-t border-slate-700/30">
-        <div className="max-w-4xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-slate-700/30 bg-slate-950/90 backdrop-blur-sm">
+        <div className="mx-auto max-w-4xl px-6 py-4">
+          <div className="flex items-center justify-between">
             <button
               onClick={() => setChapter((c) => c - 1)}
               disabled={chapter === 0}
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg font-sans text-sm font-medium hover:bg-blue-500 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-blue-600 transition-colors"
+              className="rounded-lg bg-blue-600 px-6 py-2 font-sans text-sm font-medium text-white transition-colors hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-blue-600"
             >
               Previous
             </button>
 
-            <span className="text-sm text-slate-400 font-sans">
+            <span className="font-sans text-sm text-slate-400">
               Chapter {chapter + 1} of {chapters.length}
             </span>
 
             <button
               onClick={() => setChapter((c) => c + 1)}
               disabled={chapter === chapters.length - 1}
-              className="px-6 py-2 bg-blue-600 text-white rounded-lg font-sans text-sm font-medium hover:bg-blue-500 disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-blue-600 transition-colors"
+              className="rounded-lg bg-blue-600 px-6 py-2 font-sans text-sm font-medium text-white transition-colors hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-blue-600"
             >
               Next
             </button>
@@ -187,32 +189,29 @@ function Demo1ClosureCapture() {
   useEffect(() => {
     // This captures 'count' from the current render
     const capturedCount = count;
-    setLog((prev) => [
-      ...prev,
-      `Effect ran. Captured count: ${capturedCount}`,
-    ]);
+    setLog((prev) => [...prev, `Effect ran. Captured count: ${capturedCount}`]);
   }, []); // Empty deps: only runs once
 
   return (
     <div>
-      <h3 className="text-xl font-bold text-slate-100 mb-4 font-sans">
+      <h3 className="mb-4 font-sans text-xl font-bold text-slate-100">
         Teddy's Notebook: Captured Values
       </h3>
-      <p className="text-sm text-slate-400 mb-4 font-sans">
+      <p className="mb-4 font-sans text-sm text-slate-400">
         The effect captures the count value when it first runs. Click the button
         to update state, but notice the effect never sees the new value.
       </p>
 
-      <div className="grid md:grid-cols-2 gap-4 mb-4">
-        <div className="bg-slate-800/50 border border-slate-700/50 rounded p-4">
-          <div className="text-xs text-slate-500 mb-2 font-sans">
+      <div className="mb-4 grid gap-4 md:grid-cols-2">
+        <div className="rounded border border-slate-700/50 bg-slate-800/50 p-4">
+          <div className="mb-2 font-sans text-xs text-slate-500">
             CURRENT STATE
           </div>
           <div className="text-3xl font-bold text-blue-400">{count}</div>
         </div>
 
-        <div className="bg-slate-800/50 border border-slate-700/50 rounded p-4">
-          <div className="text-xs text-slate-500 mb-2 font-sans">
+        <div className="rounded border border-slate-700/50 bg-slate-800/50 p-4">
+          <div className="mb-2 font-sans text-xs text-slate-500">
             TEDDY'S NOTEBOOK (CAPTURED)
           </div>
           <div className="text-3xl font-bold text-slate-500">0</div>
@@ -221,13 +220,13 @@ function Demo1ClosureCapture() {
 
       <button
         onClick={() => setCount((c) => c + 1)}
-        className="w-full px-4 py-2 bg-blue-600 text-white rounded font-sans text-sm font-medium hover:bg-blue-500 transition-colors mb-4"
+        className="mb-4 w-full rounded bg-blue-600 px-4 py-2 font-sans text-sm font-medium text-white transition-colors hover:bg-blue-500"
       >
         Update State (Reality Changes)
       </button>
 
-      <div className="bg-slate-950/50 border border-slate-700/50 rounded p-4 font-mono text-xs">
-        <div className="text-slate-500 mb-2">CONSOLE LOG:</div>
+      <div className="rounded border border-slate-700/50 bg-slate-950/50 p-4 font-mono text-xs">
+        <div className="mb-2 text-slate-500">CONSOLE LOG:</div>
         {log.map((entry, idx) => (
           <div key={idx} className="text-slate-400">
             {entry}
@@ -262,24 +261,24 @@ function Demo2StaleClosureProblem() {
 
   return (
     <div>
-      <h3 className="text-xl font-bold text-slate-100 mb-4 font-sans">
+      <h3 className="mb-4 font-sans text-xl font-bold text-slate-100">
         The Investigation: Stale vs. Current
       </h3>
-      <p className="text-sm text-slate-400 mb-4 font-sans">
+      <p className="mb-4 font-sans text-sm text-slate-400">
         State updates, but the effect keeps using the old captured value. Teddy
         investigates with outdated information.
       </p>
 
-      <div className="grid md:grid-cols-2 gap-4 mb-4">
-        <div className="bg-slate-800/50 border border-slate-700/50 rounded p-4">
-          <div className="text-xs text-slate-500 mb-2 font-sans">
+      <div className="mb-4 grid gap-4 md:grid-cols-2">
+        <div className="rounded border border-slate-700/50 bg-slate-800/50 p-4">
+          <div className="mb-2 font-sans text-xs text-slate-500">
             REALITY (CURRENT STATE)
           </div>
           <div className="text-sm text-emerald-400">{truth}</div>
         </div>
 
-        <div className="bg-slate-800/50 border border-red-900/30 rounded p-4">
-          <div className="text-xs text-slate-500 mb-2 font-sans">
+        <div className="rounded border border-red-900/30 bg-slate-800/50 p-4">
+          <div className="mb-2 font-sans text-xs text-slate-500">
             TEDDY'S VIEW (STALE CLOSURE)
           </div>
           <div className="text-sm text-red-400">{realityTruth}</div>
@@ -288,15 +287,15 @@ function Demo2StaleClosureProblem() {
 
       <button
         onClick={updateTruth}
-        className="w-full px-4 py-2 bg-blue-600 text-white rounded font-sans text-sm font-medium hover:bg-blue-500 transition-colors"
+        className="w-full rounded bg-blue-600 px-4 py-2 font-sans text-sm font-medium text-white transition-colors hover:bg-blue-500"
       >
         Reveal the Truth (Update State)
       </button>
 
-      <div className="mt-4 p-3 bg-red-950/20 border border-red-500/30 rounded">
+      <div className="mt-4 rounded border border-red-500/30 bg-red-950/20 p-3">
         <div className="flex items-start gap-2">
-          <AlertTriangle className="w-4 h-4 text-red-400 mt-0.5 flex-shrink-0" />
-          <p className="text-xs text-red-300 font-sans">
+          <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0 text-red-400" />
+          <p className="font-sans text-xs text-red-300">
             The effect's interval keeps logging the old value. Teddy can't see
             the updated truth because his closure is stale.
           </p>
@@ -339,17 +338,17 @@ function Demo3Consequences() {
 
   return (
     <div>
-      <h3 className="text-xl font-bold text-slate-100 mb-4 font-sans">
+      <h3 className="mb-4 font-sans text-xl font-bold text-slate-100">
         The Storm: Consequences of Stale Closures
       </h3>
-      <p className="text-sm text-slate-400 mb-4 font-sans">
+      <p className="mb-4 font-sans text-sm text-slate-400">
         The auto-save interval uses stale values. Even after deletion, it keeps
         trying to save with the old patient ID.
       </p>
 
-      <div className="grid md:grid-cols-2 gap-4 mb-4">
-        <div className="bg-slate-800/50 border border-slate-700/50 rounded p-4">
-          <div className="text-xs text-slate-500 mb-2 font-sans">
+      <div className="mb-4 grid gap-4 md:grid-cols-2">
+        <div className="rounded border border-slate-700/50 bg-slate-800/50 p-4">
+          <div className="mb-2 font-sans text-xs text-slate-500">
             PATIENT ID
           </div>
           <div className="text-2xl font-bold text-blue-400">
@@ -357,8 +356,8 @@ function Demo3Consequences() {
           </div>
         </div>
 
-        <div className="bg-slate-800/50 border border-slate-700/50 rounded p-4">
-          <div className="text-xs text-slate-500 mb-2 font-sans">STATUS</div>
+        <div className="rounded border border-slate-700/50 bg-slate-800/50 p-4">
+          <div className="mb-2 font-sans text-xs text-slate-500">STATUS</div>
           <div
             className={`text-2xl font-bold ${
               isDeleted ? "text-red-400" : "text-emerald-400"
@@ -372,18 +371,18 @@ function Demo3Consequences() {
       <button
         onClick={handleDelete}
         disabled={isDeleted}
-        className="w-full px-4 py-2 bg-red-600 text-white rounded font-sans text-sm font-medium hover:bg-red-500 disabled:opacity-30 disabled:cursor-not-allowed transition-colors mb-4"
+        className="mb-4 w-full rounded bg-red-600 px-4 py-2 font-sans text-sm font-medium text-white transition-colors hover:bg-red-500 disabled:cursor-not-allowed disabled:opacity-30"
       >
         Delete Patient
       </button>
 
-      <div className="bg-slate-950/50 border border-red-500/30 rounded p-4 font-mono text-xs max-h-40 overflow-y-auto">
-        <div className="text-red-400 mb-2">ERROR LOG:</div>
+      <div className="max-h-40 overflow-y-auto rounded border border-red-500/30 bg-slate-950/50 p-4 font-mono text-xs">
+        <div className="mb-2 text-red-400">ERROR LOG:</div>
         {errors.length === 0 ? (
           <div className="text-slate-500">No errors yet...</div>
         ) : (
           errors.map((error, idx) => (
-            <div key={idx} className="text-red-300 mb-1">
+            <div key={idx} className="mb-1 text-red-300">
               {error}
             </div>
           ))
@@ -404,10 +403,7 @@ function Demo4Solution() {
     // Proper dependencies: re-captures when values change
     if (!isDeleted && patientId !== null) {
       intervalRef.current = setInterval(() => {
-        setLogs((prev) => [
-          ...prev,
-          `Saving patient ${patientId}... SUCCESS!`,
-        ]);
+        setLogs((prev) => [...prev, `Saving patient ${patientId}... SUCCESS!`]);
       }, 3000);
     }
 
@@ -426,17 +422,17 @@ function Demo4Solution() {
 
   return (
     <div>
-      <h3 className="text-xl font-bold text-slate-100 mb-4 font-sans">
+      <h3 className="mb-4 font-sans text-xl font-bold text-slate-100">
         Ward C: The Solution
       </h3>
-      <p className="text-sm text-slate-400 mb-4 font-sans">
+      <p className="mb-4 font-sans text-sm text-slate-400">
         With proper dependencies, the effect re-runs when values change. It
         cleans up the old interval and creates a new one with current values.
       </p>
 
-      <div className="grid md:grid-cols-2 gap-4 mb-4">
-        <div className="bg-slate-800/50 border border-slate-700/50 rounded p-4">
-          <div className="text-xs text-slate-500 mb-2 font-sans">
+      <div className="mb-4 grid gap-4 md:grid-cols-2">
+        <div className="rounded border border-slate-700/50 bg-slate-800/50 p-4">
+          <div className="mb-2 font-sans text-xs text-slate-500">
             PATIENT ID
           </div>
           <div className="text-2xl font-bold text-blue-400">
@@ -444,8 +440,8 @@ function Demo4Solution() {
           </div>
         </div>
 
-        <div className="bg-slate-800/50 border border-slate-700/50 rounded p-4">
-          <div className="text-xs text-slate-500 mb-2 font-sans">STATUS</div>
+        <div className="rounded border border-slate-700/50 bg-slate-800/50 p-4">
+          <div className="mb-2 font-sans text-xs text-slate-500">STATUS</div>
           <div
             className={`text-2xl font-bold ${
               isDeleted ? "text-red-400" : "text-emerald-400"
@@ -459,28 +455,28 @@ function Demo4Solution() {
       <button
         onClick={handleDelete}
         disabled={isDeleted}
-        className="w-full px-4 py-2 bg-emerald-600 text-white rounded font-sans text-sm font-medium hover:bg-emerald-500 disabled:opacity-30 disabled:cursor-not-allowed transition-colors mb-4"
+        className="mb-4 w-full rounded bg-emerald-600 px-4 py-2 font-sans text-sm font-medium text-white transition-colors hover:bg-emerald-500 disabled:cursor-not-allowed disabled:opacity-30"
       >
         Delete Patient (Properly Handled)
       </button>
 
-      <div className="bg-slate-950/50 border border-emerald-500/30 rounded p-4 font-mono text-xs max-h-40 overflow-y-auto">
-        <div className="text-emerald-400 mb-2">SUCCESS LOG:</div>
+      <div className="max-h-40 overflow-y-auto rounded border border-emerald-500/30 bg-slate-950/50 p-4 font-mono text-xs">
+        <div className="mb-2 text-emerald-400">SUCCESS LOG:</div>
         {logs.length === 0 ? (
           <div className="text-slate-500">Waiting for activity...</div>
         ) : (
           logs.map((log, idx) => (
-            <div key={idx} className="text-emerald-300 mb-1">
+            <div key={idx} className="mb-1 text-emerald-300">
               {log}
             </div>
           ))
         )}
       </div>
 
-      <div className="mt-4 p-3 bg-emerald-950/20 border border-emerald-500/30 rounded">
+      <div className="mt-4 rounded border border-emerald-500/30 bg-emerald-950/20 p-3">
         <div className="flex items-start gap-2">
-          <CheckCircle className="w-4 h-4 text-emerald-400 mt-0.5 flex-shrink-0" />
-          <p className="text-xs text-emerald-300 font-sans">
+          <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-400" />
+          <p className="font-sans text-xs text-emerald-300">
             When you delete the patient, the effect sees the updated values,
             cleans up the interval, and stops trying to save. No stale closures!
           </p>
@@ -535,52 +531,54 @@ function Demo5Synthesis() {
 
   return (
     <div>
-      <h3 className="text-xl font-bold text-slate-100 mb-4 font-sans">
+      <h3 className="mb-4 font-sans text-xl font-bold text-slate-100">
         The Choice: Three Approaches
       </h3>
-      <p className="text-sm text-slate-400 mb-4 font-sans">
+      <p className="mb-4 font-sans text-sm text-slate-400">
         Compare three ways to handle state in effects. Watch how each approach
         behaves differently.
       </p>
 
-      <div className="grid md:grid-cols-3 gap-4 mb-4">
-        <div className="bg-red-950/20 border border-red-500/30 rounded p-4">
-          <div className="text-xs text-red-400 mb-2 font-sans font-bold">
+      <div className="mb-4 grid gap-4 md:grid-cols-3">
+        <div className="rounded border border-red-500/30 bg-red-950/20 p-4">
+          <div className="mb-2 font-sans text-xs font-bold text-red-400">
             STALE CLOSURE
           </div>
-          <div className="text-2xl font-bold text-slate-300 mb-2">{count1}</div>
+          <div className="mb-2 text-2xl font-bold text-slate-300">{count1}</div>
           <button
             onClick={() => setCount1((c) => c + 1)}
-            className="w-full px-3 py-1 bg-red-600 text-white rounded font-sans text-xs hover:bg-red-500 transition-colors"
+            className="w-full rounded bg-red-600 px-3 py-1 font-sans text-xs text-white transition-colors hover:bg-red-500"
           >
             Increment
           </button>
         </div>
 
-        <div className="bg-emerald-950/20 border border-emerald-500/30 rounded p-4">
-          <div className="text-xs text-emerald-400 mb-2 font-sans font-bold">
+        <div className="rounded border border-emerald-500/30 bg-emerald-950/20 p-4">
+          <div className="mb-2 font-sans text-xs font-bold text-emerald-400">
             PROPER DEPS
           </div>
-          <div className="text-2xl font-bold text-slate-300 mb-2">{count2}</div>
+          <div className="mb-2 text-2xl font-bold text-slate-300">{count2}</div>
           <button
             onClick={() => setCount2((c) => c + 1)}
-            className="w-full px-3 py-1 bg-emerald-600 text-white rounded font-sans text-xs hover:bg-emerald-500 transition-colors"
+            className="w-full rounded bg-emerald-600 px-3 py-1 font-sans text-xs text-white transition-colors hover:bg-emerald-500"
           >
             Increment
           </button>
         </div>
 
-        <div className="bg-blue-950/20 border border-blue-500/30 rounded p-4">
-          <div className="text-xs text-blue-400 mb-2 font-sans font-bold">
+        <div className="rounded border border-blue-500/30 bg-blue-950/20 p-4">
+          <div className="mb-2 font-sans text-xs font-bold text-blue-400">
             FUNCTIONAL UPDATE
           </div>
-          <div className="text-2xl font-bold text-slate-300 mb-2">{count3}</div>
-          <div className="text-xs text-slate-500 font-sans">Auto-incrementing</div>
+          <div className="mb-2 text-2xl font-bold text-slate-300">{count3}</div>
+          <div className="font-sans text-xs text-slate-500">
+            Auto-incrementing
+          </div>
         </div>
       </div>
 
-      <div className="bg-slate-950/50 border border-slate-700/50 rounded p-4 font-mono text-xs max-h-48 overflow-y-auto">
-        <div className="text-slate-400 mb-2">COMPARISON LOG:</div>
+      <div className="max-h-48 overflow-y-auto rounded border border-slate-700/50 bg-slate-950/50 p-4 font-mono text-xs">
+        <div className="mb-2 text-slate-400">COMPARISON LOG:</div>
         {logs.slice(-10).map((log, idx) => (
           <div
             key={idx}
@@ -588,8 +586,8 @@ function Demo5Synthesis() {
               log.type === "stale"
                 ? "text-red-300"
                 : log.type === "proper"
-                ? "text-emerald-300"
-                : "text-blue-300"
+                  ? "text-emerald-300"
+                  : "text-blue-300"
             }`}
           >
             {log.message}
@@ -597,10 +595,10 @@ function Demo5Synthesis() {
         ))}
       </div>
 
-      <div className="mt-4 p-3 bg-blue-950/20 border border-blue-500/30 rounded">
+      <div className="mt-4 rounded border border-blue-500/30 bg-blue-950/20 p-3">
         <div className="flex items-start gap-2">
-          <Zap className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
-          <p className="text-xs text-blue-300 font-sans">
+          <Zap className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-400" />
+          <p className="font-sans text-xs text-blue-300">
             Notice: Stale always logs the same value. Proper logs current value.
             Functional doesn't need to read state at all—it uses the updater
             function.

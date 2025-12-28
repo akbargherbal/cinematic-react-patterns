@@ -317,21 +317,23 @@ function MountUnmountDemo() {
   };
 
   return (
-    <div className="bg-slate-900/50 border border-blue-500/30 rounded-lg p-6">
-      <h3 className="text-xl font-semibold text-blue-400 mb-4 flex items-center gap-2">
-        <RotateCcw className="w-5 h-5" />
+    <div className="rounded-lg border border-blue-500/30 bg-slate-900/50 p-6">
+      <h3 className="mb-4 flex items-center gap-2 text-xl font-semibold text-blue-400">
+        <RotateCcw className="h-5 w-5" />
         The Eight-Minute Loop
       </h3>
       <div className="space-y-4">
         <div className="flex items-center justify-between">
           <span className="text-slate-300">Parent Loop Counter:</span>
-          <span className="text-orange-500 font-mono text-2xl">{parentLoops}</span>
+          <span className="font-mono text-2xl text-orange-500">
+            {parentLoops}
+          </span>
         </div>
         <button
           onClick={handleRemount}
-          className="w-full bg-blue-600 hover:bg-blue-500 text-white px-4 py-2 rounded transition-colors flex items-center justify-center gap-2"
+          className="flex w-full items-center justify-center gap-2 rounded bg-blue-600 px-4 py-2 text-white transition-colors hover:bg-blue-500"
         >
-          <RotateCcw className="w-4 h-4" />
+          <RotateCcw className="h-4 w-4" />
           Reset Loop (Unmount/Remount)
         </button>
         {isMounted && <LoopComponent />}
@@ -357,37 +359,41 @@ function LoopComponent() {
   }, [countdown]);
 
   return (
-    <div className="bg-slate-800/50 border border-slate-700 rounded p-4 space-y-3">
+    <div className="space-y-3 rounded border border-slate-700 bg-slate-800/50 p-4">
       <div className="text-center">
-        <div className="text-4xl font-bold text-orange-500 mb-1">{countdown}</div>
+        <div className="mb-1 text-4xl font-bold text-orange-500">
+          {countdown}
+        </div>
         <div className="text-xs text-slate-400">seconds until unmount</div>
       </div>
       <div className="grid grid-cols-2 gap-3">
-        <div className="bg-slate-900/50 p-3 rounded">
-          <div className="text-xs text-slate-400 mb-1">useState (dies)</div>
-          <div className="text-2xl font-mono text-red-400">{stateCounter}</div>
+        <div className="rounded bg-slate-900/50 p-3">
+          <div className="mb-1 text-xs text-slate-400">useState (dies)</div>
+          <div className="font-mono text-2xl text-red-400">{stateCounter}</div>
           <button
             onClick={() => setStateCounter((c) => c + 1)}
-            className="mt-2 w-full bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-1 rounded"
+            className="mt-2 w-full rounded bg-slate-700 px-2 py-1 text-xs text-white hover:bg-slate-600"
           >
             Increment
           </button>
         </div>
-        <div className="bg-slate-900/50 p-3 rounded">
-          <div className="text-xs text-slate-400 mb-1">useRef (persists)</div>
-          <div className="text-2xl font-mono text-green-400">{refCounter.current}</div>
+        <div className="rounded bg-slate-900/50 p-3">
+          <div className="mb-1 text-xs text-slate-400">useRef (persists)</div>
+          <div className="font-mono text-2xl text-green-400">
+            {refCounter.current}
+          </div>
           <button
             onClick={() => {
               refCounter.current += 1;
               setStateCounter((c) => c + 1); // Force re-render
             }}
-            className="mt-2 w-full bg-slate-700 hover:bg-slate-600 text-white text-xs px-2 py-1 rounded"
+            className="mt-2 w-full rounded bg-slate-700 px-2 py-1 text-xs text-white hover:bg-slate-600"
           >
             Increment
           </button>
         </div>
       </div>
-      <div className="text-xs text-slate-400 text-center">
+      <div className="text-center text-xs text-slate-400">
         Watch what happens when the loop resets
       </div>
     </div>
@@ -408,25 +414,31 @@ function LoopIterationDemo() {
   };
 
   return (
-    <div className="bg-slate-900/50 border border-blue-500/30 rounded-lg p-6">
-      <h3 className="text-xl font-semibold text-blue-400 mb-4">Loop Iteration Counter</h3>
+    <div className="rounded-lg border border-blue-500/30 bg-slate-900/50 p-6">
+      <h3 className="mb-4 text-xl font-semibold text-blue-400">
+        Loop Iteration Counter
+      </h3>
       <div className="space-y-4">
-        <div className="bg-slate-800/50 border border-slate-700 rounded p-4">
-          <div className="text-sm text-slate-400 mb-2">Parent Component (Capsule)</div>
+        <div className="rounded border border-slate-700 bg-slate-800/50 p-4">
+          <div className="mb-2 text-sm text-slate-400">
+            Parent Component (Capsule)
+          </div>
           <div className="flex items-center justify-between">
             <span className="text-slate-300">Total Loops:</span>
-            <span className="text-green-400 font-mono text-3xl">{totalLoops}</span>
+            <span className="font-mono text-3xl text-green-400">
+              {totalLoops}
+            </span>
           </div>
-          <div className="text-xs text-slate-400 mt-2">
+          <div className="mt-2 text-xs text-slate-400">
             ✓ Persists across child remounts
           </div>
         </div>
         {childMounted && <ChildLoopComponent />}
         <button
           onClick={resetLoop}
-          className="w-full bg-orange-600 hover:bg-orange-500 text-white px-4 py-2 rounded transition-colors flex items-center justify-center gap-2"
+          className="flex w-full items-center justify-center gap-2 rounded bg-orange-600 px-4 py-2 text-white transition-colors hover:bg-orange-500"
         >
-          <RotateCcw className="w-4 h-4" />
+          <RotateCcw className="h-4 w-4" />
           Reset Loop (Remount Child)
         </button>
       </div>
@@ -438,19 +450,19 @@ function ChildLoopComponent() {
   const [attempts, setAttempts] = useState(0);
 
   return (
-    <div className="bg-slate-800/50 border border-red-500/30 rounded p-4">
-      <div className="text-sm text-slate-400 mb-2">Child Component (Train)</div>
-      <div className="flex items-center justify-between mb-3">
+    <div className="rounded border border-red-500/30 bg-slate-800/50 p-4">
+      <div className="mb-2 text-sm text-slate-400">Child Component (Train)</div>
+      <div className="mb-3 flex items-center justify-between">
         <span className="text-slate-300">Attempts This Loop:</span>
-        <span className="text-red-400 font-mono text-3xl">{attempts}</span>
+        <span className="font-mono text-3xl text-red-400">{attempts}</span>
       </div>
       <button
         onClick={() => setAttempts((a) => a + 1)}
-        className="w-full bg-slate-700 hover:bg-slate-600 text-white px-3 py-2 rounded text-sm"
+        className="w-full rounded bg-slate-700 px-3 py-2 text-sm text-white hover:bg-slate-600"
       >
         Try Something Different
       </button>
-      <div className="text-xs text-slate-400 mt-2">
+      <div className="mt-2 text-xs text-slate-400">
         ✗ Resets to 0 on remount
       </div>
     </div>
@@ -476,23 +488,31 @@ function ImmutablePropsDemo() {
   };
 
   return (
-    <div className="bg-slate-900/50 border border-blue-500/30 rounded-lg p-6">
-      <h3 className="text-xl font-semibold text-blue-400 mb-4">Immutable Train Props</h3>
+    <div className="rounded-lg border border-blue-500/30 bg-slate-900/50 p-6">
+      <h3 className="mb-4 text-xl font-semibold text-blue-400">
+        Immutable Train Props
+      </h3>
       <div className="space-y-4">
-        <div className="bg-slate-800/50 border border-slate-700 rounded p-4">
-          <div className="text-sm text-slate-400 mb-3">Parent Component (Source Code Machine)</div>
+        <div className="rounded border border-slate-700 bg-slate-800/50 p-4">
+          <div className="mb-3 text-sm text-slate-400">
+            Parent Component (Source Code Machine)
+          </div>
           <div className="space-y-2 text-sm">
             <div className="flex justify-between">
               <span className="text-slate-300">Passengers:</span>
-              <span className="text-blue-400 font-mono">{trainProps.passengers}</span>
+              <span className="font-mono text-blue-400">
+                {trainProps.passengers}
+              </span>
             </div>
             <div className="flex justify-between">
               <span className="text-slate-300">Detonation Time:</span>
-              <span className="text-blue-400 font-mono">{trainProps.time}</span>
+              <span className="font-mono text-blue-400">{trainProps.time}</span>
             </div>
             <div className="flex justify-between">
               <span className="text-slate-300">Bomber:</span>
-              <span className="text-blue-400 font-mono">{trainProps.bomber}</span>
+              <span className="font-mono text-blue-400">
+                {trainProps.bomber}
+              </span>
             </div>
           </div>
         </div>
@@ -502,7 +522,7 @@ function ImmutablePropsDemo() {
           onError={setErrorMessage}
         />
         {errorMessage && (
-          <div className="bg-red-900/30 border border-red-500/50 rounded p-3 text-red-300 text-sm">
+          <div className="rounded border border-red-500/50 bg-red-900/30 p-3 text-sm text-red-300">
             {errorMessage}
           </div>
         )}
@@ -517,9 +537,15 @@ interface TrainChildComponentProps {
   onError: (msg: string) => void;
 }
 
-function TrainChildComponent({ trainProps, onRequestChange, onError }: TrainChildComponentProps) {
+function TrainChildComponent({
+  trainProps,
+  onRequestChange,
+  onError,
+}: TrainChildComponentProps) {
   const tryToModifyProps = () => {
-    onError("❌ Error: Cannot modify props directly! Props are read-only from child's perspective.");
+    onError(
+      "❌ Error: Cannot modify props directly! Props are read-only from child's perspective.",
+    );
   };
 
   const requestParentChange = () => {
@@ -528,32 +554,36 @@ function TrainChildComponent({ trainProps, onRequestChange, onError }: TrainChil
   };
 
   return (
-    <div className="bg-slate-800/50 border border-orange-500/30 rounded p-4">
-      <div className="text-sm text-slate-400 mb-3">Child Component (Colter on Train)</div>
-      <div className="space-y-2 mb-3 text-sm">
+    <div className="rounded border border-orange-500/30 bg-slate-800/50 p-4">
+      <div className="mb-3 text-sm text-slate-400">
+        Child Component (Colter on Train)
+      </div>
+      <div className="mb-3 space-y-2 text-sm">
         <div className="flex justify-between">
           <span className="text-slate-300">Received Passengers:</span>
-          <span className="text-orange-400 font-mono">{trainProps.passengers}</span>
+          <span className="font-mono text-orange-400">
+            {trainProps.passengers}
+          </span>
         </div>
         <div className="flex justify-between">
           <span className="text-slate-300">Received Time:</span>
-          <span className="text-orange-400 font-mono">{trainProps.time}</span>
+          <span className="font-mono text-orange-400">{trainProps.time}</span>
         </div>
         <div className="flex justify-between">
           <span className="text-slate-300">Received Bomber:</span>
-          <span className="text-orange-400 font-mono">{trainProps.bomber}</span>
+          <span className="font-mono text-orange-400">{trainProps.bomber}</span>
         </div>
       </div>
       <div className="grid grid-cols-2 gap-2">
         <button
           onClick={tryToModifyProps}
-          className="bg-red-600 hover:bg-red-500 text-white px-3 py-2 rounded text-sm transition-colors"
+          className="rounded bg-red-600 px-3 py-2 text-sm text-white transition-colors hover:bg-red-500"
         >
           Try to Change Props
         </button>
         <button
           onClick={requestParentChange}
-          className="bg-green-600 hover:bg-green-500 text-white px-3 py-2 rounded text-sm transition-colors"
+          className="rounded bg-green-600 px-3 py-2 text-sm text-white transition-colors hover:bg-green-500"
         >
           Request Parent Change
         </button>
@@ -572,18 +602,20 @@ function PersistenceMechanismsDemo() {
   };
 
   return (
-    <div className="bg-slate-900/50 border border-blue-500/30 rounded-lg p-6">
-      <h3 className="text-xl font-semibold text-blue-400 mb-4">Persistence Mechanisms</h3>
+    <div className="rounded-lg border border-blue-500/30 bg-slate-900/50 p-6">
+      <h3 className="mb-4 text-xl font-semibold text-blue-400">
+        Persistence Mechanisms
+      </h3>
       <div className="space-y-4">
         {componentMounted && <PersistenceComponent />}
         <button
           onClick={remount}
-          className="w-full bg-orange-600 hover:bg-orange-500 text-white px-4 py-2 rounded transition-colors flex items-center justify-center gap-2"
+          className="flex w-full items-center justify-center gap-2 rounded bg-orange-600 px-4 py-2 text-white transition-colors hover:bg-orange-500"
         >
-          <RotateCcw className="w-4 h-4" />
+          <RotateCcw className="h-4 w-4" />
           Unmount/Remount Component
         </button>
-        <div className="text-xs text-slate-400 text-center">
+        <div className="text-center text-xs text-slate-400">
           Type messages and see what survives the remount
         </div>
       </div>
@@ -595,7 +627,7 @@ function PersistenceComponent() {
   const [stateMessage, setStateMessage] = useState("");
   const refMessage = useRef("");
   const [sessionMessage, setSessionMessage] = useState(
-    () => sessionStorage.getItem("sourceCodeMessage") || ""
+    () => sessionStorage.getItem("sourceCodeMessage") || "",
   );
 
   useEffect(() => {
@@ -604,27 +636,29 @@ function PersistenceComponent() {
 
   return (
     <div className="space-y-3">
-      <div className="bg-slate-800/50 border border-red-500/30 rounded p-3">
-        <div className="flex items-center gap-2 mb-2">
-          <Trash2 className="w-4 h-4 text-red-400" />
-          <span className="text-sm font-semibold text-red-400">useState (Dies)</span>
+      <div className="rounded border border-red-500/30 bg-slate-800/50 p-3">
+        <div className="mb-2 flex items-center gap-2">
+          <Trash2 className="h-4 w-4 text-red-400" />
+          <span className="text-sm font-semibold text-red-400">
+            useState (Dies)
+          </span>
         </div>
         <input
           type="text"
           value={stateMessage}
           onChange={(e) => setStateMessage(e.target.value)}
           placeholder="Type a message..."
-          className="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-slate-300 text-sm"
+          className="w-full rounded border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-300"
         />
-        <div className="text-xs text-slate-400 mt-1">
-          ✗ Lost on unmount
-        </div>
+        <div className="mt-1 text-xs text-slate-400">✗ Lost on unmount</div>
       </div>
 
-      <div className="bg-slate-800/50 border border-yellow-500/30 rounded p-3">
-        <div className="flex items-center gap-2 mb-2">
-          <Save className="w-4 h-4 text-yellow-400" />
-          <span className="text-sm font-semibold text-yellow-400">useRef (Persists)</span>
+      <div className="rounded border border-yellow-500/30 bg-slate-800/50 p-3">
+        <div className="mb-2 flex items-center gap-2">
+          <Save className="h-4 w-4 text-yellow-400" />
+          <span className="text-sm font-semibold text-yellow-400">
+            useRef (Persists)
+          </span>
         </div>
         <input
           type="text"
@@ -633,26 +667,28 @@ function PersistenceComponent() {
             refMessage.current = e.target.value;
           }}
           placeholder="Type a message..."
-          className="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-slate-300 text-sm"
+          className="w-full rounded border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-300"
         />
-        <div className="text-xs text-slate-400 mt-1">
+        <div className="mt-1 text-xs text-slate-400">
           ✓ Survives remount (but doesn't trigger re-render)
         </div>
       </div>
 
-      <div className="bg-slate-800/50 border border-green-500/30 rounded p-3">
-        <div className="flex items-center gap-2 mb-2">
-          <Database className="w-4 h-4 text-green-400" />
-          <span className="text-sm font-semibold text-green-400">sessionStorage (Persists)</span>
+      <div className="rounded border border-green-500/30 bg-slate-800/50 p-3">
+        <div className="mb-2 flex items-center gap-2">
+          <Database className="h-4 w-4 text-green-400" />
+          <span className="text-sm font-semibold text-green-400">
+            sessionStorage (Persists)
+          </span>
         </div>
         <input
           type="text"
           value={sessionMessage}
           onChange={(e) => setSessionMessage(e.target.value)}
           placeholder="Type a message..."
-          className="w-full bg-slate-900 border border-slate-700 rounded px-3 py-2 text-slate-300 text-sm"
+          className="w-full rounded border border-slate-700 bg-slate-900 px-3 py-2 text-sm text-slate-300"
         />
-        <div className="text-xs text-slate-400 mt-1">
+        <div className="mt-1 text-xs text-slate-400">
           ✓ Survives remount AND page refresh
         </div>
       </div>
@@ -662,7 +698,9 @@ function PersistenceComponent() {
 
 // Demo component for Chapter 5
 function LifecycleSimulator() {
-  const [phase, setPhase] = useState<"unmounted" | "mounting" | "mounted" | "unmounting">("unmounted");
+  const [phase, setPhase] = useState<
+    "unmounted" | "mounting" | "mounted" | "unmounting"
+  >("unmounted");
   const [hasCleanup, setHasCleanup] = useState(true);
   const [leaks, setLeaks] = useState<string[]>([]);
 
@@ -674,7 +712,11 @@ function LifecycleSimulator() {
   const unmount = () => {
     setPhase("unmounting");
     if (!hasCleanup) {
-      setLeaks((prev) => [...prev, "Timer not cleared", "Listener not removed"]);
+      setLeaks((prev) => [
+        ...prev,
+        "Timer not cleared",
+        "Listener not removed",
+      ]);
     }
     setTimeout(() => {
       setPhase("unmounted");
@@ -687,27 +729,33 @@ function LifecycleSimulator() {
   };
 
   return (
-    <div className="bg-slate-900/50 border border-blue-500/30 rounded-lg p-6">
-      <h3 className="text-xl font-semibold text-blue-400 mb-4">Complete Lifecycle Simulator</h3>
+    <div className="rounded-lg border border-blue-500/30 bg-slate-900/50 p-6">
+      <h3 className="mb-4 text-xl font-semibold text-blue-400">
+        Complete Lifecycle Simulator
+      </h3>
       <div className="space-y-4">
-        <div className="bg-slate-800/50 border border-slate-700 rounded p-4">
-          <div className="flex items-center justify-between mb-4">
+        <div className="rounded border border-slate-700 bg-slate-800/50 p-4">
+          <div className="mb-4 flex items-center justify-between">
             <span className="text-slate-300">Current Phase:</span>
-            <span className={`font-mono text-lg ${
-              phase === "mounted" ? "text-green-400" :
-              phase === "unmounted" ? "text-slate-500" :
-              "text-orange-400"
-            }`}>
+            <span
+              className={`font-mono text-lg ${
+                phase === "mounted"
+                  ? "text-green-400"
+                  : phase === "unmounted"
+                    ? "text-slate-500"
+                    : "text-orange-400"
+              }`}
+            >
               {phase.toUpperCase()}
             </span>
           </div>
-          <div className="flex items-center gap-2 mb-4">
+          <div className="mb-4 flex items-center gap-2">
             <input
               type="checkbox"
               id="cleanup"
               checked={hasCleanup}
               onChange={(e) => setHasCleanup(e.target.checked)}
-              className="w-4 h-4"
+              className="h-4 w-4"
             />
             <label htmlFor="cleanup" className="text-sm text-slate-300">
               Include cleanup function
@@ -717,31 +765,31 @@ function LifecycleSimulator() {
             <button
               onClick={mount}
               disabled={phase !== "unmounted"}
-              className="bg-green-600 hover:bg-green-500 disabled:bg-slate-700 disabled:text-slate-500 text-white px-3 py-2 rounded text-sm transition-colors flex items-center justify-center gap-1"
+              className="flex items-center justify-center gap-1 rounded bg-green-600 px-3 py-2 text-sm text-white transition-colors hover:bg-green-500 disabled:bg-slate-700 disabled:text-slate-500"
             >
-              <Play className="w-3 h-3" />
+              <Play className="h-3 w-3" />
               Mount
             </button>
             <button
               onClick={unmount}
               disabled={phase !== "mounted"}
-              className="bg-red-600 hover:bg-red-500 disabled:bg-slate-700 disabled:text-slate-500 text-white px-3 py-2 rounded text-sm transition-colors flex items-center justify-center gap-1"
+              className="flex items-center justify-center gap-1 rounded bg-red-600 px-3 py-2 text-sm text-white transition-colors hover:bg-red-500 disabled:bg-slate-700 disabled:text-slate-500"
             >
-              <Pause className="w-3 h-3" />
+              <Pause className="h-3 w-3" />
               Unmount
             </button>
             <button
               onClick={reset}
-              className="bg-slate-600 hover:bg-slate-500 text-white px-3 py-2 rounded text-sm transition-colors flex items-center justify-center gap-1"
+              className="flex items-center justify-center gap-1 rounded bg-slate-600 px-3 py-2 text-sm text-white transition-colors hover:bg-slate-500"
             >
-              <RotateCcw className="w-3 h-3" />
+              <RotateCcw className="h-3 w-3" />
               Reset
             </button>
           </div>
         </div>
 
         {phase === "mounted" && (
-          <div className="bg-green-900/30 border border-green-500/50 rounded p-3 text-green-300 text-sm">
+          <div className="rounded border border-green-500/50 bg-green-900/30 p-3 text-sm text-green-300">
             ✓ Component is mounted
             <br />✓ State initialized
             <br />✓ Effects running
@@ -750,7 +798,7 @@ function LifecycleSimulator() {
         )}
 
         {phase === "unmounting" && (
-          <div className="bg-orange-900/30 border border-orange-500/50 rounded p-3 text-orange-300 text-sm">
+          <div className="rounded border border-orange-500/50 bg-orange-900/30 p-3 text-sm text-orange-300">
             ⚠ Component unmounting...
             <br />⚠ Running cleanup functions
             <br />⚠ Clearing timers
@@ -759,10 +807,12 @@ function LifecycleSimulator() {
         )}
 
         {leaks.length > 0 && (
-          <div className="bg-red-900/30 border border-red-500/50 rounded p-3">
-            <div className="text-red-300 font-semibold mb-2">Memory Leaks Detected:</div>
+          <div className="rounded border border-red-500/50 bg-red-900/30 p-3">
+            <div className="mb-2 font-semibold text-red-300">
+              Memory Leaks Detected:
+            </div>
             {leaks.map((leak, i) => (
-              <div key={i} className="text-red-400 text-sm">
+              <div key={i} className="text-sm text-red-400">
                 ✗ {leak}
               </div>
             ))}
@@ -770,7 +820,7 @@ function LifecycleSimulator() {
         )}
 
         {phase === "unmounted" && leaks.length === 0 && (
-          <div className="bg-slate-800/50 border border-slate-700 rounded p-3 text-slate-400 text-sm text-center">
+          <div className="rounded border border-slate-700 bg-slate-800/50 p-3 text-center text-sm text-slate-400">
             Component unmounted cleanly. Ready to mount again.
           </div>
         )}
@@ -802,47 +852,45 @@ export default function SourceCodeRemountingLoop() {
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-sans">
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-300">
       {/* Header */}
       <header className="border-b border-slate-800 p-8">
-        <h1 className="text-4xl md:text-5xl font-bold text-blue-400 mb-2">
+        <h1 className="mb-2 text-4xl font-bold text-blue-400 md:text-5xl">
           Source Code: The Remounting Loop
         </h1>
         <p className="text-lg text-slate-400">
           Colter Stevens, The Train, 2011
         </p>
-        <p className="text-sm text-orange-500 mt-2">
+        <p className="mt-2 text-sm text-orange-500">
           Component Remounting & Cleanup
         </p>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-8 pb-24">
-        <div className="grid lg:grid-cols-2 gap-8">
+      <main className="mx-auto max-w-7xl px-4 py-8 pb-24">
+        <div className="grid gap-8 lg:grid-cols-2">
           {/* Narrative */}
           <article className="prose prose-invert max-w-none">
-            <h2 className="text-2xl font-semibold text-blue-400 mb-4">
+            <h2 className="mb-4 text-2xl font-semibold text-blue-400">
               {currentChapter.title}
             </h2>
-            <div className="text-slate-300 leading-relaxed whitespace-pre-line">
+            <div className="whitespace-pre-line leading-relaxed text-slate-300">
               {currentChapter.content}
             </div>
           </article>
 
           {/* Interactive Demo */}
-          <aside className="lg:sticky lg:top-8 h-fit">
-            {renderDemo()}
-          </aside>
+          <aside className="h-fit lg:sticky lg:top-8">{renderDemo()}</aside>
         </div>
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-t border-slate-800 p-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-slate-800 bg-slate-900/95 p-4 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-7xl items-center justify-between">
           <button
             onClick={() => setChapter((c) => c - 1)}
             disabled={chapter === 0}
-            className="px-6 py-2 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed text-white rounded transition-colors"
+            className="rounded bg-blue-600 px-6 py-2 text-white transition-colors hover:bg-blue-500 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-500"
           >
             Previous
           </button>
@@ -852,8 +900,10 @@ export default function SourceCodeRemountingLoop() {
               <button
                 key={i}
                 onClick={() => setChapter(i)}
-                className={`w-2 h-2 rounded-full transition-colors ${
-                  i === chapter ? "bg-blue-400" : "bg-slate-600 hover:bg-slate-500"
+                className={`h-2 w-2 rounded-full transition-colors ${
+                  i === chapter
+                    ? "bg-blue-400"
+                    : "bg-slate-600 hover:bg-slate-500"
                 }`}
                 aria-label={`Go to chapter ${i + 1}`}
               />
@@ -863,7 +913,7 @@ export default function SourceCodeRemountingLoop() {
           <button
             onClick={() => setChapter((c) => c + 1)}
             disabled={chapter === chapters.length - 1}
-            className="px-6 py-2 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed text-white rounded transition-colors"
+            className="rounded bg-blue-600 px-6 py-2 text-white transition-colors hover:bg-blue-500 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-500"
           >
             Next
           </button>

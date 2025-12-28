@@ -10,7 +10,9 @@ interface Chapter {
 export default function VillageModule() {
   const [chapter, setChapter] = useState(0);
   const [boundaryPosition, setBoundaryPosition] = useState(0);
-  const [selectedComponent, setSelectedComponent] = useState<string | null>(null);
+  const [selectedComponent, setSelectedComponent] = useState<string | null>(
+    null,
+  );
 
   const chapters: Chapter[] = useMemo(
     () => [
@@ -106,7 +108,7 @@ Place your Providers intentionally: Too high in the tree? You're providing conte
 The architecture should serve your application's needs, just as the village's architecture served the elders' goals.`,
       },
     ],
-    []
+    [],
   );
 
   const currentChapter = chapters[chapter];
@@ -120,96 +122,97 @@ The architecture should serve your application's needs, just as the village's ar
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-serif">
+    <div className="min-h-screen bg-slate-950 font-serif text-slate-300">
       {/* Header */}
       <header className="border-b border-amber-900/30 bg-slate-900/50 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto px-6 py-8">
-          <div className="flex items-center gap-3 mb-2">
-            <Shield className="w-8 h-8 text-amber-600" />
+        <div className="mx-auto max-w-6xl px-6 py-8">
+          <div className="mb-2 flex items-center gap-3">
+            <Shield className="h-8 w-8 text-amber-600" />
             <h1 className="text-4xl font-bold text-amber-500">The Village</h1>
           </div>
           <p className="text-lg text-slate-400">
             Ivy Walker, Covington, 1897 (2004)
           </p>
-          <p className="text-sm text-amber-600/80 mt-1">
+          <p className="mt-1 text-sm text-amber-600/80">
             Context Scope & Provider Boundaries
           </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-6 py-12 pb-32">
+      <main className="mx-auto max-w-6xl px-6 py-12 pb-32">
         {/* Chapter Title */}
         <div className="mb-8">
-          <h2 className="text-3xl font-bold text-amber-400 mb-2">
+          <h2 className="mb-2 text-3xl font-bold text-amber-400">
             {currentChapter.title}
           </h2>
-          <div className="h-1 w-24 bg-amber-600/50 rounded"></div>
+          <div className="h-1 w-24 rounded bg-amber-600/50"></div>
         </div>
 
         {/* Chapter Content */}
-        <div className="prose prose-invert prose-slate max-w-none mb-12">
-          <div className="text-slate-300 leading-relaxed whitespace-pre-line text-lg">
+        <div className="prose prose-invert prose-slate mb-12 max-w-none">
+          <div className="whitespace-pre-line text-lg leading-relaxed text-slate-300">
             {currentChapter.content}
           </div>
         </div>
 
         {/* Interactive Demonstrations */}
-        <div className="bg-slate-900/50 border border-amber-900/30 rounded-lg p-8">
+        <div className="rounded-lg border border-amber-900/30 bg-slate-900/50 p-8">
           {chapter === 0 && (
             <div>
-              <h3 className="text-xl font-bold text-amber-400 mb-6 flex items-center gap-2">
-                <Shield className="w-5 h-5" />
+              <h3 className="mb-6 flex items-center gap-2 text-xl font-bold text-amber-400">
+                <Shield className="h-5 w-5" />
                 The Provider Boundary
               </h3>
               <div className="relative">
-                <div className="border-4 border-amber-600/50 rounded-lg p-8 bg-amber-950/20">
-                  <div className="text-center mb-6">
-                    <div className="inline-block px-4 py-2 bg-amber-600/20 border border-amber-600/50 rounded text-amber-400 font-mono text-sm mb-4">
-                      &lt;VillageProvider value=&#123;&#123; creatures: true, year: 1897 &#125;&#125;&gt;
+                <div className="rounded-lg border-4 border-amber-600/50 bg-amber-950/20 p-8">
+                  <div className="mb-6 text-center">
+                    <div className="mb-4 inline-block rounded border border-amber-600/50 bg-amber-600/20 px-4 py-2 font-mono text-sm text-amber-400">
+                      &lt;VillageProvider value=&#123;&#123; creatures: true,
+                      year: 1897 &#125;&#125;&gt;
                     </div>
                   </div>
-                  <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
                     {["Ivy", "Lucius", "Noah"].map((name) => (
                       <div
                         key={name}
-                        className="bg-slate-800/50 border border-amber-600/30 rounded p-4 text-center"
+                        className="rounded border border-amber-600/30 bg-slate-800/50 p-4 text-center"
                       >
-                        <Users className="w-6 h-6 text-amber-500 mx-auto mb-2" />
-                        <div className="text-amber-300 font-semibold mb-1">
+                        <Users className="mx-auto mb-2 h-6 w-6 text-amber-500" />
+                        <div className="mb-1 font-semibold text-amber-300">
                           {name}
                         </div>
-                        <div className="text-xs text-slate-400 font-mono">
+                        <div className="font-mono text-xs text-slate-400">
                           useContext(VillageContext)
                         </div>
-                        <div className="text-xs text-emerald-400 mt-2">
+                        <div className="mt-2 text-xs text-emerald-400">
                           ✓ Has access
                         </div>
                       </div>
                     ))}
                   </div>
-                  <div className="text-center mt-6">
-                    <div className="inline-block px-4 py-2 bg-amber-600/20 border border-amber-600/50 rounded text-amber-400 font-mono text-sm">
+                  <div className="mt-6 text-center">
+                    <div className="inline-block rounded border border-amber-600/50 bg-amber-600/20 px-4 py-2 font-mono text-sm text-amber-400">
                       &lt;/VillageProvider&gt;
                     </div>
                   </div>
                 </div>
-                <div className="mt-6 p-4 bg-slate-800/30 border border-slate-700/50 rounded">
+                <div className="mt-6 rounded border border-slate-700/50 bg-slate-800/30 p-4">
                   <div className="text-center">
-                    <Users className="w-6 h-6 text-slate-600 mx-auto mb-2" />
-                    <div className="text-slate-500 font-semibold mb-1">
+                    <Users className="mx-auto mb-2 h-6 w-6 text-slate-600" />
+                    <div className="mb-1 font-semibold text-slate-500">
                       Park Ranger
                     </div>
-                    <div className="text-xs text-slate-600 font-mono">
+                    <div className="font-mono text-xs text-slate-600">
                       useContext(VillageContext)
                     </div>
-                    <div className="text-xs text-red-400 mt-2">
+                    <div className="mt-2 text-xs text-red-400">
                       ✗ Returns undefined
                     </div>
                   </div>
                 </div>
               </div>
-              <p className="text-sm text-slate-400 mt-6 text-center">
+              <p className="mt-6 text-center text-sm text-slate-400">
                 Components inside the Provider can access context. Components
                 outside cannot.
               </p>
@@ -218,21 +221,21 @@ The architecture should serve your application's needs, just as the village's ar
 
           {chapter === 1 && (
             <div>
-              <h3 className="text-xl font-bold text-amber-400 mb-6 flex items-center gap-2">
-                <GitBranch className="w-5 h-5" />
+              <h3 className="mb-6 flex items-center gap-2 text-xl font-bold text-amber-400">
+                <GitBranch className="h-5 w-5" />
                 Context Inheritance Tree
               </h3>
               <div className="space-y-4">
                 <div className="border-l-4 border-amber-600/50 pl-6">
                   <div
-                    className={`p-4 rounded cursor-pointer transition-all ${
+                    className={`cursor-pointer rounded p-4 transition-all ${
                       selectedComponent === "provider"
-                        ? "bg-amber-600/20 border-2 border-amber-600/50"
-                        : "bg-slate-800/30 border border-slate-700/50"
+                        ? "border-2 border-amber-600/50 bg-amber-600/20"
+                        : "border border-slate-700/50 bg-slate-800/30"
                     }`}
                     onClick={() => setSelectedComponent("provider")}
                   >
-                    <div className="font-mono text-sm text-amber-400 mb-2">
+                    <div className="mb-2 font-mono text-sm text-amber-400">
                       VillageProvider
                     </div>
                     <div className="text-xs text-slate-400">
@@ -244,21 +247,21 @@ The architecture should serve your application's needs, just as the village's ar
                     {["Ivy", "Lucius", "Noah"].map((name) => (
                       <div
                         key={name}
-                        className={`p-3 rounded cursor-pointer transition-all ${
+                        className={`cursor-pointer rounded p-3 transition-all ${
                           selectedComponent === name
-                            ? "bg-amber-600/20 border-2 border-amber-600/50"
-                            : "bg-slate-800/30 border border-slate-700/50"
+                            ? "border-2 border-amber-600/50 bg-amber-600/20"
+                            : "border border-slate-700/50 bg-slate-800/30"
                         }`}
                         onClick={() => setSelectedComponent(name)}
                       >
                         <div className="font-mono text-sm text-amber-300">
                           {name} Component
                         </div>
-                        <div className="text-xs text-slate-400 mt-1">
+                        <div className="mt-1 text-xs text-slate-400">
                           const context = useContext(VillageContext)
                         </div>
                         {selectedComponent === name && (
-                          <div className="mt-2 p-2 bg-slate-900/50 rounded text-xs text-emerald-400 font-mono">
+                          <div className="mt-2 rounded bg-slate-900/50 p-2 font-mono text-xs text-emerald-400">
                             context.creatures === true
                             <br />
                             context.danger === "woods"
@@ -271,7 +274,7 @@ The architecture should serve your application's needs, just as the village's ar
                   </div>
                 </div>
               </div>
-              <p className="text-sm text-slate-400 mt-6 text-center">
+              <p className="mt-6 text-center text-sm text-slate-400">
                 Click components to see how they inherit context automatically.
                 No prop drilling needed.
               </p>
@@ -280,13 +283,13 @@ The architecture should serve your application's needs, just as the village's ar
 
           {chapter === 2 && (
             <div>
-              <h3 className="text-xl font-bold text-amber-400 mb-6 flex items-center gap-2">
-                <ArrowRight className="w-5 h-5" />
+              <h3 className="mb-6 flex items-center gap-2 text-xl font-bold text-amber-400">
+                <ArrowRight className="h-5 w-5" />
                 Crossing the Boundary
               </h3>
               <div className="space-y-6">
                 <div className="flex items-center gap-4">
-                  <span className="text-sm text-slate-400 whitespace-nowrap">
+                  <span className="whitespace-nowrap text-sm text-slate-400">
                     Inside Village
                   </span>
                   <input
@@ -297,28 +300,28 @@ The architecture should serve your application's needs, just as the village's ar
                     onChange={(e) =>
                       setBoundaryPosition(Number(e.target.value))
                     }
-                    className="flex-1 h-2 bg-slate-700 rounded-lg appearance-none cursor-pointer"
+                    className="h-2 flex-1 cursor-pointer appearance-none rounded-lg bg-slate-700"
                     style={{
                       background: `linear-gradient(to right, rgb(217 119 6 / 0.3) 0%, rgb(217 119 6 / 0.3) ${boundaryPosition}%, rgb(51 65 85) ${boundaryPosition}%, rgb(51 65 85) 100%)`,
                     }}
                   />
-                  <span className="text-sm text-slate-400 whitespace-nowrap">
+                  <span className="whitespace-nowrap text-sm text-slate-400">
                     Outside Village
                   </span>
                 </div>
-                <div className="relative h-64 bg-slate-800/30 rounded-lg overflow-hidden">
+                <div className="relative h-64 overflow-hidden rounded-lg bg-slate-800/30">
                   <div
-                    className="absolute inset-y-0 left-0 bg-amber-950/30 border-r-4 border-amber-600/50 transition-all duration-300"
+                    className="absolute inset-y-0 left-0 border-r-4 border-amber-600/50 bg-amber-950/30 transition-all duration-300"
                     style={{ width: `${100 - boundaryPosition}%` }}
                   >
-                    <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-                      <Users className="w-12 h-12 text-amber-500 mx-auto mb-2" />
-                      <div className="text-amber-300 font-semibold">Ivy</div>
-                      <div className="text-xs text-slate-400 font-mono mt-2">
+                    <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                      <Users className="mx-auto mb-2 h-12 w-12 text-amber-500" />
+                      <div className="font-semibold text-amber-300">Ivy</div>
+                      <div className="mt-2 font-mono text-xs text-slate-400">
                         useContext(VillageContext)
                       </div>
                       {boundaryPosition < 50 && (
-                        <div className="mt-2 p-2 bg-slate-900/50 rounded text-xs text-emerald-400">
+                        <div className="mt-2 rounded bg-slate-900/50 p-2 text-xs text-emerald-400">
                           ✓ Context available
                         </div>
                       )}
@@ -329,13 +332,13 @@ The architecture should serve your application's needs, just as the village's ar
                     style={{ width: `${boundaryPosition}%` }}
                   >
                     {boundaryPosition > 50 && (
-                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
-                        <Users className="w-12 h-12 text-slate-600 mx-auto mb-2" />
-                        <div className="text-slate-500 font-semibold">Ivy</div>
-                        <div className="text-xs text-slate-600 font-mono mt-2">
+                      <div className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
+                        <Users className="mx-auto mb-2 h-12 w-12 text-slate-600" />
+                        <div className="font-semibold text-slate-500">Ivy</div>
+                        <div className="mt-2 font-mono text-xs text-slate-600">
                           useContext(VillageContext)
                         </div>
-                        <div className="mt-2 p-2 bg-slate-900/50 rounded text-xs text-red-400">
+                        <div className="mt-2 rounded bg-slate-900/50 p-2 text-xs text-red-400">
                           ✗ Returns undefined
                         </div>
                       </div>
@@ -343,7 +346,7 @@ The architecture should serve your application's needs, just as the village's ar
                   </div>
                 </div>
               </div>
-              <p className="text-sm text-slate-400 mt-6 text-center">
+              <p className="mt-6 text-center text-sm text-slate-400">
                 Drag the slider to simulate crossing the Provider boundary.
                 Watch context dissolve.
               </p>
@@ -352,71 +355,71 @@ The architecture should serve your application's needs, just as the village's ar
 
           {chapter === 3 && (
             <div>
-              <h3 className="text-xl font-bold text-amber-400 mb-6 flex items-center gap-2">
-                <Layers className="w-5 h-5" />
+              <h3 className="mb-6 flex items-center gap-2 text-xl font-bold text-amber-400">
+                <Layers className="h-5 w-5" />
                 Two Contexts, Two Truths
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="border-2 border-amber-600/50 rounded-lg p-6 bg-amber-950/20">
-                  <div className="text-center mb-4">
-                    <Shield className="w-8 h-8 text-amber-500 mx-auto mb-2" />
-                    <div className="font-mono text-sm text-amber-400 mb-2">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                <div className="rounded-lg border-2 border-amber-600/50 bg-amber-950/20 p-6">
+                  <div className="mb-4 text-center">
+                    <Shield className="mx-auto mb-2 h-8 w-8 text-amber-500" />
+                    <div className="mb-2 font-mono text-sm text-amber-400">
                       VillageProvider
                     </div>
                   </div>
                   <div className="space-y-2 text-sm">
-                    <div className="flex justify-between p-2 bg-slate-900/30 rounded">
+                    <div className="flex justify-between rounded bg-slate-900/30 p-2">
                       <span className="text-slate-400">creatures:</span>
-                      <span className="text-emerald-400 font-mono">true</span>
+                      <span className="font-mono text-emerald-400">true</span>
                     </div>
-                    <div className="flex justify-between p-2 bg-slate-900/30 rounded">
+                    <div className="flex justify-between rounded bg-slate-900/30 p-2">
                       <span className="text-slate-400">danger:</span>
-                      <span className="text-amber-400 font-mono">"woods"</span>
+                      <span className="font-mono text-amber-400">"woods"</span>
                     </div>
-                    <div className="flex justify-between p-2 bg-slate-900/30 rounded">
+                    <div className="flex justify-between rounded bg-slate-900/30 p-2">
                       <span className="text-slate-400">year:</span>
-                      <span className="text-amber-400 font-mono">1897</span>
+                      <span className="font-mono text-amber-400">1897</span>
                     </div>
                   </div>
-                  <div className="mt-4 p-3 bg-slate-800/50 rounded">
-                    <Users className="w-6 h-6 text-amber-500 mx-auto mb-2" />
-                    <div className="text-center text-amber-300 text-sm">
+                  <div className="mt-4 rounded bg-slate-800/50 p-3">
+                    <Users className="mx-auto mb-2 h-6 w-6 text-amber-500" />
+                    <div className="text-center text-sm text-amber-300">
                       Ivy (inside village)
                     </div>
                   </div>
                 </div>
-                <div className="border-2 border-slate-600/50 rounded-lg p-6 bg-slate-900/50">
-                  <div className="text-center mb-4">
-                    <Users className="w-8 h-8 text-slate-500 mx-auto mb-2" />
-                    <div className="font-mono text-sm text-slate-400 mb-2">
+                <div className="rounded-lg border-2 border-slate-600/50 bg-slate-900/50 p-6">
+                  <div className="mb-4 text-center">
+                    <Users className="mx-auto mb-2 h-8 w-8 text-slate-500" />
+                    <div className="mb-2 font-mono text-sm text-slate-400">
                       ModernWorldProvider
                     </div>
                   </div>
                   <div className="space-y-2 text-sm">
-                    <div className="flex justify-between p-2 bg-slate-800/30 rounded">
+                    <div className="flex justify-between rounded bg-slate-800/30 p-2">
                       <span className="text-slate-400">creatures:</span>
-                      <span className="text-red-400 font-mono">false</span>
+                      <span className="font-mono text-red-400">false</span>
                     </div>
-                    <div className="flex justify-between p-2 bg-slate-800/30 rounded">
+                    <div className="flex justify-between rounded bg-slate-800/30 p-2">
                       <span className="text-slate-400">danger:</span>
-                      <span className="text-slate-400 font-mono">
+                      <span className="font-mono text-slate-400">
                         "traffic"
                       </span>
                     </div>
-                    <div className="flex justify-between p-2 bg-slate-800/30 rounded">
+                    <div className="flex justify-between rounded bg-slate-800/30 p-2">
                       <span className="text-slate-400">year:</span>
-                      <span className="text-slate-400 font-mono">2004</span>
+                      <span className="font-mono text-slate-400">2004</span>
                     </div>
                   </div>
-                  <div className="mt-4 p-3 bg-slate-800/50 rounded">
-                    <Users className="w-6 h-6 text-slate-500 mx-auto mb-2" />
-                    <div className="text-center text-slate-400 text-sm">
+                  <div className="mt-4 rounded bg-slate-800/50 p-3">
+                    <Users className="mx-auto mb-2 h-6 w-6 text-slate-500" />
+                    <div className="text-center text-sm text-slate-400">
                       Park Ranger (outside village)
                     </div>
                   </div>
                 </div>
               </div>
-              <p className="text-sm text-slate-400 mt-6 text-center">
+              <p className="mt-6 text-center text-sm text-slate-400">
                 Two different Providers, two different contexts. Both valid
                 within their scopes.
               </p>
@@ -425,63 +428,63 @@ The architecture should serve your application's needs, just as the village's ar
 
           {chapter === 4 && (
             <div>
-              <h3 className="text-xl font-bold text-amber-400 mb-6 flex items-center gap-2">
-                <Layers className="w-5 h-5" />
+              <h3 className="mb-6 flex items-center gap-2 text-xl font-bold text-amber-400">
+                <Layers className="h-5 w-5" />
                 Nested Provider Architecture
               </h3>
               <div className="space-y-4">
-                <div className="border-2 border-amber-600/50 rounded-lg p-6 bg-amber-950/20">
-                  <div className="font-mono text-sm text-amber-400 mb-4">
+                <div className="rounded-lg border-2 border-amber-600/50 bg-amber-950/20 p-6">
+                  <div className="mb-4 font-mono text-sm text-amber-400">
                     &lt;AppProvider&gt;
                   </div>
-                  <div className="ml-6 border-2 border-amber-600/40 rounded-lg p-4 bg-amber-950/10">
-                    <div className="font-mono text-sm text-amber-400 mb-4">
+                  <div className="ml-6 rounded-lg border-2 border-amber-600/40 bg-amber-950/10 p-4">
+                    <div className="mb-4 font-mono text-sm text-amber-400">
                       &lt;ThemeProvider&gt;
                     </div>
-                    <div className="ml-6 border-2 border-amber-600/30 rounded-lg p-4 bg-amber-950/10">
-                      <div className="font-mono text-sm text-amber-400 mb-4">
+                    <div className="ml-6 rounded-lg border-2 border-amber-600/30 bg-amber-950/10 p-4">
+                      <div className="mb-4 font-mono text-sm text-amber-400">
                         &lt;UserProvider&gt;
                       </div>
-                      <div className="ml-6 p-3 bg-slate-800/50 rounded border border-amber-600/20">
-                        <Users className="w-6 h-6 text-amber-500 mx-auto mb-2" />
-                        <div className="text-center text-amber-300 text-sm">
+                      <div className="ml-6 rounded border border-amber-600/20 bg-slate-800/50 p-3">
+                        <Users className="mx-auto mb-2 h-6 w-6 text-amber-500" />
+                        <div className="text-center text-sm text-amber-300">
                           Component
                         </div>
-                        <div className="text-xs text-slate-400 text-center mt-2">
+                        <div className="mt-2 text-center text-xs text-slate-400">
                           Can access all three contexts
                         </div>
                       </div>
-                      <div className="font-mono text-sm text-amber-400 mt-4">
+                      <div className="mt-4 font-mono text-sm text-amber-400">
                         &lt;/UserProvider&gt;
                       </div>
                     </div>
-                    <div className="font-mono text-sm text-amber-400 mt-4">
+                    <div className="mt-4 font-mono text-sm text-amber-400">
                       &lt;/ThemeProvider&gt;
                     </div>
                   </div>
-                  <div className="font-mono text-sm text-amber-400 mt-4">
+                  <div className="mt-4 font-mono text-sm text-amber-400">
                     &lt;/AppProvider&gt;
                   </div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-6">
-                  <div className="p-4 bg-slate-800/30 border border-slate-700/50 rounded">
-                    <div className="text-amber-400 font-semibold mb-2 text-sm">
+                <div className="mt-6 grid grid-cols-1 gap-4 md:grid-cols-3">
+                  <div className="rounded border border-slate-700/50 bg-slate-800/30 p-4">
+                    <div className="mb-2 text-sm font-semibold text-amber-400">
                       Outer Provider
                     </div>
                     <div className="text-xs text-slate-400">
                       Widest scope, available to all nested components
                     </div>
                   </div>
-                  <div className="p-4 bg-slate-800/30 border border-slate-700/50 rounded">
-                    <div className="text-amber-400 font-semibold mb-2 text-sm">
+                  <div className="rounded border border-slate-700/50 bg-slate-800/30 p-4">
+                    <div className="mb-2 text-sm font-semibold text-amber-400">
                       Middle Provider
                     </div>
                     <div className="text-xs text-slate-400">
                       Can override outer values, adds new context
                     </div>
                   </div>
-                  <div className="p-4 bg-slate-800/30 border border-slate-700/50 rounded">
-                    <div className="text-amber-400 font-semibold mb-2 text-sm">
+                  <div className="rounded border border-slate-700/50 bg-slate-800/30 p-4">
+                    <div className="mb-2 text-sm font-semibold text-amber-400">
                       Inner Provider
                     </div>
                     <div className="text-xs text-slate-400">
@@ -490,7 +493,7 @@ The architecture should serve your application's needs, just as the village's ar
                   </div>
                 </div>
               </div>
-              <p className="text-sm text-slate-400 mt-6 text-center">
+              <p className="mt-6 text-center text-sm text-slate-400">
                 Providers can be nested. Inner Providers can override outer
                 values. Design your scope hierarchy intentionally.
               </p>
@@ -500,13 +503,13 @@ The architecture should serve your application's needs, just as the village's ar
       </main>
 
       {/* Chapter Navigation Footer */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-t border-amber-900/30">
-        <div className="max-w-6xl mx-auto px-6 py-4">
-          <div className="flex justify-between items-center">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-amber-900/30 bg-slate-900/95 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-6 py-4">
+          <div className="flex items-center justify-between">
             <button
               onClick={handlePrevious}
               disabled={chapter === 0}
-              className="px-6 py-2 bg-amber-600/20 border border-amber-600/50 rounded text-amber-400 font-semibold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-amber-600/30 transition-colors"
+              className="rounded border border-amber-600/50 bg-amber-600/20 px-6 py-2 font-semibold text-amber-400 transition-colors hover:bg-amber-600/30 disabled:cursor-not-allowed disabled:opacity-30"
             >
               Previous
             </button>
@@ -516,9 +519,9 @@ The architecture should serve your application's needs, just as the village's ar
                 <button
                   key={idx}
                   onClick={() => setChapter(idx)}
-                  className={`w-2 h-2 rounded-full transition-all ${
+                  className={`h-2 w-2 rounded-full transition-all ${
                     idx === chapter
-                      ? "bg-amber-500 w-8"
+                      ? "w-8 bg-amber-500"
                       : "bg-amber-900/50 hover:bg-amber-700/50"
                   }`}
                   aria-label={`Go to chapter ${idx + 1}`}
@@ -529,12 +532,12 @@ The architecture should serve your application's needs, just as the village's ar
             <button
               onClick={handleNext}
               disabled={chapter === chapters.length - 1}
-              className="px-6 py-2 bg-amber-600/20 border border-amber-600/50 rounded text-amber-400 font-semibold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-amber-600/30 transition-colors"
+              className="rounded border border-amber-600/50 bg-amber-600/20 px-6 py-2 font-semibold text-amber-400 transition-colors hover:bg-amber-600/30 disabled:cursor-not-allowed disabled:opacity-30"
             >
               Next
             </button>
           </div>
-          <div className="text-center mt-2">
+          <div className="mt-2 text-center">
             <span className="text-sm text-slate-400">
               Chapter {chapter + 1} of {chapters.length}
             </span>

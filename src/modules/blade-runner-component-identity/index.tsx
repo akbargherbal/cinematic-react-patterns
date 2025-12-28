@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { Eye, AlertTriangle, CheckCircle, XCircle, Shuffle } from "lucide-react";
+import {
+  Eye,
+  AlertTriangle,
+  CheckCircle,
+  XCircle,
+  Shuffle,
+} from "lucide-react";
 
 interface Replicant {
   id: string;
@@ -194,37 +200,35 @@ With a stable, unique key, I persist. My state survives. My identity is maintain
   const currentChapter = chapters[chapter];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-mono">
+    <div className="min-h-screen bg-slate-950 font-mono text-slate-300">
       {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Eye className="w-8 h-8 text-cyan-400" />
-            <h1 className="text-3xl md:text-4xl font-bold text-cyan-400">
+      <header className="sticky top-0 z-10 border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm">
+        <div className="mx-auto max-w-7xl px-4 py-6">
+          <div className="mb-2 flex items-center gap-3">
+            <Eye className="h-8 w-8 text-cyan-400" />
+            <h1 className="text-3xl font-bold text-cyan-400 md:text-4xl">
               Blade Runner
             </h1>
           </div>
-          <p className="text-lg text-slate-400">
-            Component Keys & Identity
-          </p>
+          <p className="text-lg text-slate-400">Component Keys & Identity</p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-8 pb-32">
+      <main className="mx-auto max-w-7xl px-4 py-8 pb-32">
         <div className="mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-cyan-400 mb-4">
+          <h2 className="mb-4 text-2xl font-bold text-cyan-400 md:text-3xl">
             {currentChapter.title}
           </h2>
           <div className="prose prose-invert prose-slate max-w-none">
-            {currentChapter.content.split('\n\n').map((paragraph, idx) => {
-              if (paragraph.startsWith('---')) {
+            {currentChapter.content.split("\n\n").map((paragraph, idx) => {
+              if (paragraph.startsWith("---")) {
                 return (
                   <div key={idx} className="my-8 border-t border-slate-700" />
                 );
               }
               return (
-                <p key={idx} className="mb-4 text-slate-300 leading-relaxed">
+                <p key={idx} className="mb-4 leading-relaxed text-slate-300">
                   {paragraph}
                 </p>
               );
@@ -233,31 +237,29 @@ With a stable, unique key, I persist. My state survives. My identity is maintain
         </div>
 
         {/* Interactive Demo */}
-        <div className="mt-12">
-          {currentChapter.demo}
-        </div>
+        <div className="mt-12">{currentChapter.demo}</div>
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-slate-800 bg-slate-900/95 backdrop-blur-sm">
+        <div className="mx-auto max-w-7xl px-4 py-4">
+          <div className="flex items-center justify-between">
             <button
-              onClick={() => setChapter(c => c - 1)}
+              onClick={() => setChapter((c) => c - 1)}
               disabled={chapter === 0}
-              className="px-6 py-2 bg-cyan-600 hover:bg-cyan-500 disabled:bg-slate-800 disabled:text-slate-600 disabled:cursor-not-allowed text-white font-semibold rounded transition-colors"
+              className="rounded bg-cyan-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-cyan-500 disabled:cursor-not-allowed disabled:bg-slate-800 disabled:text-slate-600"
             >
               Previous
             </button>
-            
+
             <span className="text-sm text-slate-400">
               Chapter {chapter + 1} of {chapters.length}
             </span>
-            
+
             <button
-              onClick={() => setChapter(c => c + 1)}
+              onClick={() => setChapter((c) => c + 1)}
               disabled={chapter === chapters.length - 1}
-              className="px-6 py-2 bg-cyan-600 hover:bg-cyan-500 disabled:bg-slate-800 disabled:text-slate-600 disabled:cursor-not-allowed text-white font-semibold rounded transition-colors"
+              className="rounded bg-cyan-600 px-6 py-2 font-semibold text-white transition-colors hover:bg-cyan-500 disabled:cursor-not-allowed disabled:bg-slate-800 disabled:text-slate-600"
             >
               Next
             </button>
@@ -279,19 +281,19 @@ function VoightKampffDemo() {
   };
 
   return (
-    <div className="bg-slate-900 border border-slate-700 rounded-lg p-6">
-      <h3 className="text-xl font-bold text-cyan-400 mb-4 flex items-center gap-2">
-        <Eye className="w-5 h-5" />
+    <div className="rounded-lg border border-slate-700 bg-slate-900 p-6">
+      <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-cyan-400">
+        <Eye className="h-5 w-5" />
         Voight-Kampff Identity Test
       </h3>
-      
+
       <div className="mb-6">
-        <label className="flex items-center gap-3 cursor-pointer">
+        <label className="flex cursor-pointer items-center gap-3">
           <input
             type="checkbox"
             checked={useKeys}
             onChange={(e) => setUseKeys(e.target.checked)}
-            className="w-5 h-5 accent-cyan-500"
+            className="h-5 w-5 accent-cyan-500"
           />
           <span className="text-slate-300">
             Use proper keys for identity verification
@@ -299,20 +301,20 @@ function VoightKampffDemo() {
         </label>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-4 mb-6">
-        <div className="bg-slate-800 border border-slate-700 rounded p-4">
-          <div className="text-sm text-slate-400 mb-2">Component A</div>
-          <div className="text-cyan-400 font-semibold mb-1">Replicant #1</div>
+      <div className="mb-6 grid gap-4 md:grid-cols-2">
+        <div className="rounded border border-slate-700 bg-slate-800 p-4">
+          <div className="mb-2 text-sm text-slate-400">Component A</div>
+          <div className="mb-1 font-semibold text-cyan-400">Replicant #1</div>
           <div className="text-xs text-slate-500">
-            {useKeys ? 'Key: N6MAA10816' : 'Key: undefined'}
+            {useKeys ? "Key: N6MAA10816" : "Key: undefined"}
           </div>
         </div>
-        
-        <div className="bg-slate-800 border border-slate-700 rounded p-4">
-          <div className="text-sm text-slate-400 mb-2">Component B</div>
-          <div className="text-cyan-400 font-semibold mb-1">Replicant #1</div>
+
+        <div className="rounded border border-slate-700 bg-slate-800 p-4">
+          <div className="mb-2 text-sm text-slate-400">Component B</div>
+          <div className="mb-1 font-semibold text-cyan-400">Replicant #1</div>
           <div className="text-xs text-slate-500">
-            {useKeys ? 'Key: N6MAA10819' : 'Key: undefined'}
+            {useKeys ? "Key: N6MAA10819" : "Key: undefined"}
           </div>
         </div>
       </div>
@@ -320,36 +322,40 @@ function VoightKampffDemo() {
       <button
         onClick={handleScan}
         disabled={scanning}
-        className="w-full py-3 bg-cyan-600 hover:bg-cyan-500 disabled:bg-slate-700 text-white font-semibold rounded transition-colors mb-4"
+        className="mb-4 w-full rounded bg-cyan-600 py-3 font-semibold text-white transition-colors hover:bg-cyan-500 disabled:bg-slate-700"
       >
-        {scanning ? 'Scanning...' : 'Run Identity Test'}
+        {scanning ? "Scanning..." : "Run Identity Test"}
       </button>
 
       {scanning && (
-        <div className="bg-slate-800 border border-cyan-500/30 rounded p-4 animate-pulse">
-          <div className="text-cyan-400 text-sm mb-2">Analyzing...</div>
-          <div className="h-2 bg-slate-700 rounded overflow-hidden">
-            <div className="h-full bg-cyan-500 animate-[scan_2s_ease-in-out]" />
+        <div className="animate-pulse rounded border border-cyan-500/30 bg-slate-800 p-4">
+          <div className="mb-2 text-sm text-cyan-400">Analyzing...</div>
+          <div className="h-2 overflow-hidden rounded bg-slate-700">
+            <div className="h-full animate-[scan_2s_ease-in-out] bg-cyan-500" />
           </div>
         </div>
       )}
 
       {!scanning && (
-        <div className={`border rounded p-4 ${useKeys ? 'bg-emerald-950/20 border-emerald-500/30' : 'bg-red-950/20 border-red-500/30'}`}>
+        <div
+          className={`rounded border p-4 ${useKeys ? "border-emerald-500/30 bg-emerald-950/20" : "border-red-500/30 bg-red-950/20"}`}
+        >
           <div className="flex items-start gap-3">
             {useKeys ? (
-              <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+              <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-emerald-500" />
             ) : (
-              <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+              <XCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-500" />
             )}
             <div>
-              <div className={`font-semibold mb-1 ${useKeys ? 'text-emerald-400' : 'text-red-400'}`}>
-                {useKeys ? 'Identity Verified' : 'Identity Uncertain'}
+              <div
+                className={`mb-1 font-semibold ${useKeys ? "text-emerald-400" : "text-red-400"}`}
+              >
+                {useKeys ? "Identity Verified" : "Identity Uncertain"}
               </div>
               <div className="text-sm text-slate-400">
-                {useKeys 
-                  ? 'React can distinguish between these components. Each maintains its own identity and state.'
-                  : 'React cannot reliably distinguish between these components. Identity confusion may occur during re-renders.'}
+                {useKeys
+                  ? "React can distinguish between these components. Each maintains its own identity and state."
+                  : "React cannot reliably distinguish between these components. Identity confusion may occur during re-renders."}
               </div>
             </div>
           </div>
@@ -365,58 +371,65 @@ function ImplantedMemoriesDemo() {
   const [countB, setCountB] = useState(0);
 
   return (
-    <div className="bg-slate-900 border border-slate-700 rounded-lg p-6">
-      <h3 className="text-xl font-bold text-cyan-400 mb-4">
+    <div className="rounded-lg border border-slate-700 bg-slate-900 p-6">
+      <h3 className="mb-4 text-xl font-bold text-cyan-400">
         Memory Implantation Lab
       </h3>
-      
-      <p className="text-slate-400 mb-6 text-sm">
-        Both components receive identical props (memories), but they maintain separate identities and state because they have different keys.
+
+      <p className="mb-6 text-sm text-slate-400">
+        Both components receive identical props (memories), but they maintain
+        separate identities and state because they have different keys.
       </p>
 
-      <div className="grid md:grid-cols-2 gap-4">
-        <div className="bg-slate-800 border border-cyan-500/30 rounded p-4">
-          <div className="text-xs text-slate-500 mb-2">Key: "rachael-1"</div>
-          <div className="text-cyan-400 font-semibold mb-3">Rachael (Instance 1)</div>
-          <div className="text-sm text-slate-400 mb-4">
+      <div className="grid gap-4 md:grid-cols-2">
+        <div className="rounded border border-cyan-500/30 bg-slate-800 p-4">
+          <div className="mb-2 text-xs text-slate-500">Key: "rachael-1"</div>
+          <div className="mb-3 font-semibold text-cyan-400">
+            Rachael (Instance 1)
+          </div>
+          <div className="mb-4 text-sm text-slate-400">
             Props: name="Rachael", memories="Tyrell's niece"
           </div>
-          <div className="bg-slate-900 rounded p-3 mb-3">
-            <div className="text-xs text-slate-500 mb-1">Internal State:</div>
+          <div className="mb-3 rounded bg-slate-900 p-3">
+            <div className="mb-1 text-xs text-slate-500">Internal State:</div>
             <div className="text-2xl font-bold text-cyan-400">{countA}</div>
           </div>
           <button
-            onClick={() => setCountA(c => c + 1)}
-            className="w-full py-2 bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-semibold rounded transition-colors"
+            onClick={() => setCountA((c) => c + 1)}
+            className="w-full rounded bg-cyan-600 py-2 text-sm font-semibold text-white transition-colors hover:bg-cyan-500"
           >
             Increment State
           </button>
         </div>
 
-        <div className="bg-slate-800 border border-cyan-500/30 rounded p-4">
-          <div className="text-xs text-slate-500 mb-2">Key: "rachael-2"</div>
-          <div className="text-cyan-400 font-semibold mb-3">Rachael (Instance 2)</div>
-          <div className="text-sm text-slate-400 mb-4">
+        <div className="rounded border border-cyan-500/30 bg-slate-800 p-4">
+          <div className="mb-2 text-xs text-slate-500">Key: "rachael-2"</div>
+          <div className="mb-3 font-semibold text-cyan-400">
+            Rachael (Instance 2)
+          </div>
+          <div className="mb-4 text-sm text-slate-400">
             Props: name="Rachael", memories="Tyrell's niece"
           </div>
-          <div className="bg-slate-900 rounded p-3 mb-3">
-            <div className="text-xs text-slate-500 mb-1">Internal State:</div>
+          <div className="mb-3 rounded bg-slate-900 p-3">
+            <div className="mb-1 text-xs text-slate-500">Internal State:</div>
             <div className="text-2xl font-bold text-cyan-400">{countB}</div>
           </div>
           <button
-            onClick={() => setCountB(c => c + 1)}
-            className="w-full py-2 bg-cyan-600 hover:bg-cyan-500 text-white text-sm font-semibold rounded transition-colors"
+            onClick={() => setCountB((c) => c + 1)}
+            className="w-full rounded bg-cyan-600 py-2 text-sm font-semibold text-white transition-colors hover:bg-cyan-500"
           >
             Increment State
           </button>
         </div>
       </div>
 
-      <div className="mt-4 bg-amber-950/20 border border-amber-500/30 rounded p-4">
+      <div className="mt-4 rounded border border-amber-500/30 bg-amber-950/20 p-4">
         <div className="flex items-start gap-3">
-          <AlertTriangle className="w-5 h-5 text-amber-500 flex-shrink-0 mt-0.5" />
+          <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-500" />
           <div className="text-sm text-slate-400">
-            <strong className="text-amber-400">Key Insight:</strong> Identical props don't mean identical identity. Each component maintains its own state because each has a unique key.
+            <strong className="text-amber-400">Key Insight:</strong> Identical
+            props don't mean identical identity. Each component maintains its
+            own state because each has a unique key.
           </div>
         </div>
       </div>
@@ -428,29 +441,39 @@ function ImplantedMemoriesDemo() {
 function RetirementListDemo() {
   const [useStableKeys, setUseStableKeys] = useState(false);
   const [replicants, setReplicants] = useState<Replicant[]>([
-    { id: 'N6MAA10816', name: 'Roy Batty', model: 'Nexus-6', color: 'bg-red-900' },
-    { id: 'N6MAA10819', name: 'Pris', model: 'Nexus-6', color: 'bg-purple-900' },
-    { id: 'N6MAC41717', name: 'Zhora', model: 'Nexus-6', color: 'bg-blue-900' },
+    {
+      id: "N6MAA10816",
+      name: "Roy Batty",
+      model: "Nexus-6",
+      color: "bg-red-900",
+    },
+    {
+      id: "N6MAA10819",
+      name: "Pris",
+      model: "Nexus-6",
+      color: "bg-purple-900",
+    },
+    { id: "N6MAC41717", name: "Zhora", model: "Nexus-6", color: "bg-blue-900" },
   ]);
 
   const shuffleList = () => {
-    setReplicants(prev => [...prev].sort(() => Math.random() - 0.5));
+    setReplicants((prev) => [...prev].sort(() => Math.random() - 0.5));
   };
 
   return (
-    <div className="bg-slate-900 border border-slate-700 rounded-lg p-6">
-      <h3 className="text-xl font-bold text-cyan-400 mb-4 flex items-center gap-2">
-        <Shuffle className="w-5 h-5" />
+    <div className="rounded-lg border border-slate-700 bg-slate-900 p-6">
+      <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-cyan-400">
+        <Shuffle className="h-5 w-5" />
         Retirement Tracker
       </h3>
 
       <div className="mb-6">
-        <label className="flex items-center gap-3 cursor-pointer">
+        <label className="flex cursor-pointer items-center gap-3">
           <input
             type="checkbox"
             checked={useStableKeys}
             onChange={(e) => setUseStableKeys(e.target.checked)}
-            className="w-5 h-5 accent-cyan-500"
+            className="h-5 w-5 accent-cyan-500"
           />
           <span className="text-slate-300">
             Use stable keys (serial numbers) instead of array indices
@@ -458,7 +481,7 @@ function RetirementListDemo() {
         </label>
       </div>
 
-      <div className="space-y-3 mb-6">
+      <div className="mb-6 space-y-3">
         {replicants.map((replicant, index) => (
           <ReplicantCard
             key={useStableKeys ? replicant.id : index}
@@ -471,22 +494,24 @@ function RetirementListDemo() {
 
       <button
         onClick={shuffleList}
-        className="w-full py-3 bg-cyan-600 hover:bg-cyan-500 text-white font-semibold rounded transition-colors mb-4"
+        className="mb-4 w-full rounded bg-cyan-600 py-3 font-semibold text-white transition-colors hover:bg-cyan-500"
       >
         Reorder List (Simulate Re-render)
       </button>
 
-      <div className={`border rounded p-4 ${useStableKeys ? 'bg-emerald-950/20 border-emerald-500/30' : 'bg-red-950/20 border-red-500/30'}`}>
+      <div
+        className={`rounded border p-4 ${useStableKeys ? "border-emerald-500/30 bg-emerald-950/20" : "border-red-500/30 bg-red-950/20"}`}
+      >
         <div className="flex items-start gap-3">
           {useStableKeys ? (
-            <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+            <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-emerald-500" />
           ) : (
-            <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+            <XCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-500" />
           )}
           <div className="text-sm text-slate-400">
-            {useStableKeys 
-              ? 'With stable keys, each component maintains its state when the list reorders. React tracks identity correctly.'
-              : 'With array indices as keys, state gets attached to positions, not components. When the list reorders, components get the wrong state.'}
+            {useStableKeys
+              ? "With stable keys, each component maintains its state when the list reorders. React tracks identity correctly."
+              : "With array indices as keys, state gets attached to positions, not components. When the list reorders, components get the wrong state."}
           </div>
         </div>
       </div>
@@ -494,14 +519,22 @@ function RetirementListDemo() {
   );
 }
 
-function ReplicantCard({ replicant, useStableKeys, position }: { replicant: Replicant; useStableKeys: boolean; position: number }) {
+function ReplicantCard({
+  replicant,
+  useStableKeys,
+  position,
+}: {
+  replicant: Replicant;
+  useStableKeys: boolean;
+  position: number;
+}) {
   const [internalState] = useState(Math.floor(Math.random() * 100));
 
   return (
-    <div className={`${replicant.color} border border-slate-700 rounded p-4`}>
-      <div className="flex justify-between items-start mb-2">
+    <div className={`${replicant.color} rounded border border-slate-700 p-4`}>
+      <div className="mb-2 flex items-start justify-between">
         <div>
-          <div className="text-cyan-400 font-semibold">{replicant.name}</div>
+          <div className="font-semibold text-cyan-400">{replicant.name}</div>
           <div className="text-xs text-slate-500">
             {useStableKeys ? `Key: ${replicant.id}` : `Key: ${position}`}
           </div>
@@ -522,18 +555,18 @@ function TearsInRainDemo() {
   const [useProperKey, setUseProperKey] = useState(true);
 
   return (
-    <div className="bg-slate-900 border border-slate-700 rounded-lg p-6">
-      <h3 className="text-xl font-bold text-cyan-400 mb-4">
+    <div className="rounded-lg border border-slate-700 bg-slate-900 p-6">
+      <h3 className="mb-4 text-xl font-bold text-cyan-400">
         State Preservation Test
       </h3>
 
       <div className="mb-6">
-        <label className="flex items-center gap-3 cursor-pointer mb-4">
+        <label className="mb-4 flex cursor-pointer items-center gap-3">
           <input
             type="checkbox"
             checked={useProperKey}
             onChange={(e) => setUseProperKey(e.target.checked)}
-            className="w-5 h-5 accent-cyan-500"
+            className="h-5 w-5 accent-cyan-500"
           />
           <span className="text-slate-300">
             Use stable key to preserve identity
@@ -542,9 +575,7 @@ function TearsInRainDemo() {
       </div>
 
       <div className="mb-6">
-        {mounted && (
-          <RoyBattyComponent useProperKey={useProperKey} />
-        )}
+        {mounted && <RoyBattyComponent useProperKey={useProperKey} />}
       </div>
 
       <button
@@ -552,17 +583,21 @@ function TearsInRainDemo() {
           setMounted(false);
           setTimeout(() => setMounted(true), 100);
         }}
-        className="w-full py-3 bg-red-600 hover:bg-red-500 text-white font-semibold rounded transition-colors mb-4"
+        className="mb-4 w-full rounded bg-red-600 py-3 font-semibold text-white transition-colors hover:bg-red-500"
       >
         Trigger Unmount/Remount
       </button>
 
-      <div className="bg-slate-800 border border-slate-700 rounded p-4 text-sm text-slate-400">
+      <div className="rounded border border-slate-700 bg-slate-800 p-4 text-sm text-slate-400">
         <p className="mb-2">
-          <strong className="text-cyan-400">With proper key:</strong> Component maintains identity across unmount/remount cycles. State can be preserved if managed externally.
+          <strong className="text-cyan-400">With proper key:</strong> Component
+          maintains identity across unmount/remount cycles. State can be
+          preserved if managed externally.
         </p>
         <p>
-          <strong className="text-cyan-400">Without proper key:</strong> Component loses identity. All internal state is lost, like tears in rain.
+          <strong className="text-cyan-400">Without proper key:</strong>{" "}
+          Component loses identity. All internal state is lost, like tears in
+          rain.
         </p>
       </div>
     </div>
@@ -571,18 +606,18 @@ function TearsInRainDemo() {
 
 function RoyBattyComponent({ useProperKey }: { useProperKey: boolean }) {
   const [memories] = useState([
-    'Attack ships on fire off the shoulder of Orion',
-    'C-beams glitter in the dark near the Tannhäuser Gate',
+    "Attack ships on fire off the shoulder of Orion",
+    "C-beams glitter in the dark near the Tannhäuser Gate",
   ]);
 
   return (
-    <div className="bg-slate-800 border border-cyan-500/30 rounded p-4">
-      <div className="text-xs text-slate-500 mb-2">
-        {useProperKey ? 'Key: N6MAA10816' : 'Key: undefined'}
+    <div className="rounded border border-cyan-500/30 bg-slate-800 p-4">
+      <div className="mb-2 text-xs text-slate-500">
+        {useProperKey ? "Key: N6MAA10816" : "Key: undefined"}
       </div>
-      <div className="text-cyan-400 font-semibold mb-3">Roy Batty</div>
-      <div className="text-sm text-slate-400 mb-2">Memories:</div>
-      <ul className="text-xs text-slate-500 space-y-1">
+      <div className="mb-3 font-semibold text-cyan-400">Roy Batty</div>
+      <div className="mb-2 text-sm text-slate-400">Memories:</div>
+      <ul className="space-y-1 text-xs text-slate-500">
         {memories.map((memory, idx) => (
           <li key={idx}>• {memory}</li>
         ))}
@@ -594,8 +629,8 @@ function RoyBattyComponent({ useProperKey }: { useProperKey: boolean }) {
 // Chapter 5 Demo: Key Patterns
 function KeyPatternsDemo() {
   return (
-    <div className="bg-slate-900 border border-slate-700 rounded-lg p-6">
-      <h3 className="text-xl font-bold text-cyan-400 mb-6">
+    <div className="rounded-lg border border-slate-700 bg-slate-900 p-6">
+      <h3 className="mb-6 text-xl font-bold text-cyan-400">
         The Voight-Kampff Test for Keys
       </h3>
 
@@ -637,13 +672,28 @@ function KeyPatternsDemo() {
         />
       </div>
 
-      <div className="mt-8 bg-cyan-950/20 border border-cyan-500/30 rounded p-4">
-        <h4 className="text-cyan-400 font-semibold mb-3">The Four Questions:</h4>
+      <div className="mt-8 rounded border border-cyan-500/30 bg-cyan-950/20 p-4">
+        <h4 className="mb-3 font-semibold text-cyan-400">
+          The Four Questions:
+        </h4>
         <ul className="space-y-2 text-sm text-slate-400">
-          <li>1. Is this key <strong className="text-cyan-400">stable</strong>? (Same on next render?)</li>
-          <li>2. Is this key <strong className="text-cyan-400">unique</strong>? (No siblings share it?)</li>
-          <li>3. Is this key <strong className="text-cyan-400">meaningful</strong>? (Represents the data entity?)</li>
-          <li>4. Is this key <strong className="text-cyan-400">position-independent</strong>? (Stays same if item moves?)</li>
+          <li>
+            1. Is this key <strong className="text-cyan-400">stable</strong>?
+            (Same on next render?)
+          </li>
+          <li>
+            2. Is this key <strong className="text-cyan-400">unique</strong>?
+            (No siblings share it?)
+          </li>
+          <li>
+            3. Is this key <strong className="text-cyan-400">meaningful</strong>
+            ? (Represents the data entity?)
+          </li>
+          <li>
+            4. Is this key{" "}
+            <strong className="text-cyan-400">position-independent</strong>?
+            (Stays same if item moves?)
+          </li>
         </ul>
         <p className="mt-4 text-sm text-slate-400">
           If you answer "no" to any question, your keys will fail the test.
@@ -653,25 +703,37 @@ function KeyPatternsDemo() {
   );
 }
 
-function KeyPattern({ title, code, status, explanation }: { title: string; code: string; status: 'pass' | 'fail'; explanation: string }) {
+function KeyPattern({
+  title,
+  code,
+  status,
+  explanation,
+}: {
+  title: string;
+  code: string;
+  status: "pass" | "fail";
+  explanation: string;
+}) {
   return (
-    <div className={`border rounded p-4 ${status === 'pass' ? 'bg-emerald-950/20 border-emerald-500/30' : 'bg-red-950/20 border-red-500/30'}`}>
-      <div className="flex items-start gap-3 mb-3">
-        {status === 'pass' ? (
-          <CheckCircle className="w-5 h-5 text-emerald-500 flex-shrink-0 mt-0.5" />
+    <div
+      className={`rounded border p-4 ${status === "pass" ? "border-emerald-500/30 bg-emerald-950/20" : "border-red-500/30 bg-red-950/20"}`}
+    >
+      <div className="mb-3 flex items-start gap-3">
+        {status === "pass" ? (
+          <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-emerald-500" />
         ) : (
-          <XCircle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
+          <XCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-500" />
         )}
         <div className="flex-1">
-          <div className={`font-semibold mb-2 ${status === 'pass' ? 'text-emerald-400' : 'text-red-400'}`}>
+          <div
+            className={`mb-2 font-semibold ${status === "pass" ? "text-emerald-400" : "text-red-400"}`}
+          >
             {title}
           </div>
-          <pre className="bg-slate-900 rounded p-3 text-xs text-slate-300 overflow-x-auto mb-2">
+          <pre className="mb-2 overflow-x-auto rounded bg-slate-900 p-3 text-xs text-slate-300">
             <code>{code}</code>
           </pre>
-          <div className="text-sm text-slate-400">
-            {explanation}
-          </div>
+          <div className="text-sm text-slate-400">{explanation}</div>
         </div>
       </div>
     </div>

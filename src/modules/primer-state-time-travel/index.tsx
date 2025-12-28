@@ -1,5 +1,11 @@
 import { useState, useEffect } from "react";
-import { Clock, GitBranch, AlertTriangle, CheckCircle, Zap } from "lucide-react";
+import {
+  Clock,
+  GitBranch,
+  AlertTriangle,
+  CheckCircle,
+  Zap,
+} from "lucide-react";
 
 interface StateSnapshot {
   id: number;
@@ -17,7 +23,9 @@ interface Action {
 
 export default function PrimerStateTimeTravel() {
   const [chapter, setChapter] = useState(0);
-  const [timelineMode, setTimelineMode] = useState<"clean" | "chaotic">("clean");
+  const [timelineMode, setTimelineMode] = useState<"clean" | "chaotic">(
+    "clean",
+  );
   const [currentSnapshotIndex, setCurrentSnapshotIndex] = useState(0);
   const [showConflict, setShowConflict] = useState(false);
 
@@ -100,18 +108,66 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
   ];
 
   const cleanTimeline: StateSnapshot[] = [
-    { id: 0, timestamp: "10:00:00", data: { userId: 42, email: "user@example.com", cartItems: 0 }, isClean: true },
-    { id: 1, timestamp: "10:05:00", data: { userId: 42, email: "user@example.com", cartItems: 2 }, isClean: true },
-    { id: 2, timestamp: "10:10:00", data: { userId: 42, email: "user@example.com", cartItems: 3 }, isClean: true },
-    { id: 3, timestamp: "10:15:00", data: { userId: 42, email: "user@example.com", cartItems: 5 }, isClean: true },
+    {
+      id: 0,
+      timestamp: "10:00:00",
+      data: { userId: 42, email: "user@example.com", cartItems: 0 },
+      isClean: true,
+    },
+    {
+      id: 1,
+      timestamp: "10:05:00",
+      data: { userId: 42, email: "user@example.com", cartItems: 2 },
+      isClean: true,
+    },
+    {
+      id: 2,
+      timestamp: "10:10:00",
+      data: { userId: 42, email: "user@example.com", cartItems: 3 },
+      isClean: true,
+    },
+    {
+      id: 3,
+      timestamp: "10:15:00",
+      data: { userId: 42, email: "user@example.com", cartItems: 5 },
+      isClean: true,
+    },
   ];
 
   const chaoticTimeline: StateSnapshot[] = [
-    { id: 0, timestamp: "10:00:00", data: { userId: 42, email: "user@example.com", cartItems: 0 }, isClean: true },
-    { id: 1, timestamp: "10:05:00", data: { userId: 42, email: "user@example.com", cartItems: 2 }, isClean: true },
-    { id: 2, timestamp: "10:10:00", data: { userId: 42, email: "modified@example.com", cartItems: 3 }, isClean: false, parentId: 1 },
-    { id: 3, timestamp: "10:10:00", data: { userId: 42, email: "user@example.com", cartItems: 7 }, isClean: false, parentId: 1 },
-    { id: 4, timestamp: "10:15:00", data: { userId: 42, email: "user@example.com", cartItems: 5 }, isClean: true, parentId: 1 },
+    {
+      id: 0,
+      timestamp: "10:00:00",
+      data: { userId: 42, email: "user@example.com", cartItems: 0 },
+      isClean: true,
+    },
+    {
+      id: 1,
+      timestamp: "10:05:00",
+      data: { userId: 42, email: "user@example.com", cartItems: 2 },
+      isClean: true,
+    },
+    {
+      id: 2,
+      timestamp: "10:10:00",
+      data: { userId: 42, email: "modified@example.com", cartItems: 3 },
+      isClean: false,
+      parentId: 1,
+    },
+    {
+      id: 3,
+      timestamp: "10:10:00",
+      data: { userId: 42, email: "user@example.com", cartItems: 7 },
+      isClean: false,
+      parentId: 1,
+    },
+    {
+      id: 4,
+      timestamp: "10:15:00",
+      data: { userId: 42, email: "user@example.com", cartItems: 5 },
+      isClean: true,
+      parentId: 1,
+    },
   ];
 
   const actions: Action[] = [
@@ -150,47 +206,54 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-mono">
+    <div className="min-h-screen bg-slate-950 font-mono text-slate-300">
       {/* Header */}
       <header className="border-b border-slate-800 p-6 md:p-8">
-        <div className="max-w-6xl mx-auto">
-          <div className="flex items-center gap-3 mb-2">
-            <Clock className="w-8 h-8 text-blue-400" />
-            <h1 className="text-3xl md:text-4xl font-bold text-slate-100">Primer: State Time-Travel</h1>
+        <div className="mx-auto max-w-6xl">
+          <div className="mb-2 flex items-center gap-3">
+            <Clock className="h-8 w-8 text-blue-400" />
+            <h1 className="text-3xl font-bold text-slate-100 md:text-4xl">
+              Primer: State Time-Travel
+            </h1>
           </div>
           <p className="text-lg text-slate-400">Aaron & Abe, 2004</p>
-          <p className="text-sm text-blue-400 mt-1">Time-Travel Debugging & State History</p>
+          <p className="mt-1 text-sm text-blue-400">
+            Time-Travel Debugging & State History
+          </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 md:px-6 py-8 pb-32">
+      <main className="mx-auto max-w-6xl px-4 py-8 pb-32 md:px-6">
         {/* Chapter Title */}
         <div className="mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-2">{currentChapter.title}</h2>
+          <h2 className="mb-2 text-2xl font-bold text-slate-100 md:text-3xl">
+            {currentChapter.title}
+          </h2>
           <div className="h-1 w-20 bg-blue-500"></div>
         </div>
 
         {/* Narrative Content */}
-        <div className="prose prose-invert prose-slate max-w-none mb-12">
-          <div className="text-slate-300 leading-relaxed whitespace-pre-line text-sm md:text-base">
+        <div className="prose prose-invert prose-slate mb-12 max-w-none">
+          <div className="whitespace-pre-line text-sm leading-relaxed text-slate-300 md:text-base">
             {currentChapter.content}
           </div>
         </div>
 
         {/* Interactive Demonstrations */}
-        <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6 md:p-8">
+        <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6 md:p-8">
           {/* Chapter 0: The Discovery */}
           {chapter === 0 && (
             <div>
-              <h3 className="text-xl font-bold text-blue-400 mb-4 flex items-center gap-2">
-                <Zap className="w-5 h-5" />
+              <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-blue-400">
+                <Zap className="h-5 w-5" />
                 Time-Travel Debugging Interface
               </h3>
-              <p className="text-sm text-slate-400 mb-6">
-                Click any snapshot to rewind. Observe the state at that moment in time.
+              <p className="mb-6 text-sm text-slate-400">
+                Click any snapshot to rewind. Observe the state at that moment
+                in time.
               </p>
-              
+
               {/* Timeline Visualization */}
               <div className="mb-8">
                 <div className="flex items-center gap-2 overflow-x-auto pb-4">
@@ -198,17 +261,21 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
                     <div key={snapshot.id} className="flex items-center">
                       <button
                         onClick={() => handleRewind(index)}
-                        className={`flex-shrink-0 w-16 h-16 rounded-lg border-2 transition-all ${
+                        className={`h-16 w-16 flex-shrink-0 rounded-lg border-2 transition-all ${
                           currentSnapshotIndex === index
-                            ? "border-blue-500 bg-blue-500/20 scale-110"
+                            ? "scale-110 border-blue-500 bg-blue-500/20"
                             : "border-slate-700 bg-slate-800 hover:border-blue-400"
                         }`}
                       >
-                        <div className="text-xs text-slate-400">{snapshot.timestamp}</div>
-                        <div className="text-lg font-bold text-slate-200">{index}</div>
+                        <div className="text-xs text-slate-400">
+                          {snapshot.timestamp}
+                        </div>
+                        <div className="text-lg font-bold text-slate-200">
+                          {index}
+                        </div>
                       </button>
                       {index < cleanTimeline.length - 1 && (
-                        <div className="w-8 h-0.5 bg-slate-700"></div>
+                        <div className="h-0.5 w-8 bg-slate-700"></div>
                       )}
                     </div>
                   ))}
@@ -216,10 +283,12 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
               </div>
 
               {/* State Inspector */}
-              <div className="bg-slate-950 border border-slate-800 rounded p-4">
-                <div className="text-xs text-slate-500 mb-2">STATE SNAPSHOT #{currentSnapshotIndex}</div>
+              <div className="rounded border border-slate-800 bg-slate-950 p-4">
+                <div className="mb-2 text-xs text-slate-500">
+                  STATE SNAPSHOT #{currentSnapshotIndex}
+                </div>
                 <pre className="text-sm text-emerald-400">
-{`{
+                  {`{
   userId: ${timeline[currentSnapshotIndex].data.userId},
   email: "${timeline[currentSnapshotIndex].data.email}",
   cartItems: ${timeline[currentSnapshotIndex].data.cartItems}
@@ -232,55 +301,62 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
           {/* Chapter 1: The Multiplication */}
           {chapter === 1 && (
             <div>
-              <h3 className="text-xl font-bold text-amber-400 mb-4 flex items-center gap-2">
-                <GitBranch className="w-5 h-5" />
+              <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-amber-400">
+                <GitBranch className="h-5 w-5" />
                 Timeline Branching (Mutation Detected)
               </h3>
-              <p className="text-sm text-slate-400 mb-6">
-                When you mutate state during replay, timelines branch. Multiple versions exist simultaneously.
+              <p className="mb-6 text-sm text-slate-400">
+                When you mutate state during replay, timelines branch. Multiple
+                versions exist simultaneously.
               </p>
 
               {/* Chaotic Timeline */}
               <div className="mb-8 overflow-x-auto">
-                <div className="inline-flex flex-col gap-4 min-w-max">
+                <div className="inline-flex min-w-max flex-col gap-4">
                   {/* Main timeline */}
                   <div className="flex items-center gap-2">
                     {chaoticTimeline.slice(0, 2).map((snapshot, index) => (
                       <div key={snapshot.id} className="flex items-center">
-                        <div className={`w-12 h-12 rounded border-2 flex items-center justify-center text-xs ${
-                          snapshot.isClean ? "border-emerald-500 bg-emerald-500/10" : "border-red-500 bg-red-500/10"
-                        }`}>
+                        <div
+                          className={`flex h-12 w-12 items-center justify-center rounded border-2 text-xs ${
+                            snapshot.isClean
+                              ? "border-emerald-500 bg-emerald-500/10"
+                              : "border-red-500 bg-red-500/10"
+                          }`}
+                        >
                           {index}
                         </div>
-                        {index < 1 && <div className="w-8 h-0.5 bg-slate-700"></div>}
+                        {index < 1 && (
+                          <div className="h-0.5 w-8 bg-slate-700"></div>
+                        )}
                       </div>
                     ))}
-                    <div className="w-8 h-0.5 bg-slate-700"></div>
-                    <div className="text-amber-400 text-xs">BRANCH POINT</div>
+                    <div className="h-0.5 w-8 bg-slate-700"></div>
+                    <div className="text-xs text-amber-400">BRANCH POINT</div>
                   </div>
 
                   {/* Branch 1 */}
-                  <div className="flex items-center gap-2 ml-20">
-                    <div className="w-0.5 h-8 bg-slate-700 -mt-8"></div>
-                    <div className="w-12 h-12 rounded border-2 border-red-500 bg-red-500/10 flex items-center justify-center text-xs">
+                  <div className="ml-20 flex items-center gap-2">
+                    <div className="-mt-8 h-8 w-0.5 bg-slate-700"></div>
+                    <div className="flex h-12 w-12 items-center justify-center rounded border-2 border-red-500 bg-red-500/10 text-xs">
                       2a
                     </div>
                     <div className="text-xs text-red-400">mutated email</div>
                   </div>
 
                   {/* Branch 2 */}
-                  <div className="flex items-center gap-2 ml-20">
-                    <div className="w-0.5 h-8 bg-slate-700 -mt-8"></div>
-                    <div className="w-12 h-12 rounded border-2 border-red-500 bg-red-500/10 flex items-center justify-center text-xs">
+                  <div className="ml-20 flex items-center gap-2">
+                    <div className="-mt-8 h-8 w-0.5 bg-slate-700"></div>
+                    <div className="flex h-12 w-12 items-center justify-center rounded border-2 border-red-500 bg-red-500/10 text-xs">
                       2b
                     </div>
                     <div className="text-xs text-red-400">mutated cart</div>
                   </div>
 
                   {/* Branch 3 */}
-                  <div className="flex items-center gap-2 ml-20">
-                    <div className="w-0.5 h-8 bg-slate-700 -mt-8"></div>
-                    <div className="w-12 h-12 rounded border-2 border-emerald-500 bg-emerald-500/10 flex items-center justify-center text-xs">
+                  <div className="ml-20 flex items-center gap-2">
+                    <div className="-mt-8 h-8 w-0.5 bg-slate-700"></div>
+                    <div className="flex h-12 w-12 items-center justify-center rounded border-2 border-emerald-500 bg-emerald-500/10 text-xs">
                       2c
                     </div>
                     <div className="text-xs text-emerald-400">clean replay</div>
@@ -288,8 +364,9 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
                 </div>
               </div>
 
-              <div className="bg-amber-950/30 border border-amber-500/30 rounded p-4 text-sm text-amber-200">
-                <strong>Warning:</strong> 3 conflicting timelines detected. State integrity compromised.
+              <div className="rounded border border-amber-500/30 bg-amber-950/30 p-4 text-sm text-amber-200">
+                <strong>Warning:</strong> 3 conflicting timelines detected.
+                State integrity compromised.
               </div>
             </div>
           )}
@@ -297,22 +374,27 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
           {/* Chapter 2: The Paradox */}
           {chapter === 2 && (
             <div>
-              <h3 className="text-xl font-bold text-red-400 mb-4 flex items-center gap-2">
-                <AlertTriangle className="w-5 h-5" />
+              <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-red-400">
+                <AlertTriangle className="h-5 w-5" />
                 State Paradox Detected
               </h3>
-              <p className="text-sm text-slate-400 mb-6">
-                Multiple versions of the same data exist simultaneously. Which one is real?
+              <p className="mb-6 text-sm text-slate-400">
+                Multiple versions of the same data exist simultaneously. Which
+                one is real?
               </p>
 
               {/* Conflicting States */}
-              <div className="grid md:grid-cols-3 gap-4 mb-6">
-                <div className={`bg-slate-950 border rounded p-4 transition-all ${
-                  showConflict ? "border-red-500 animate-pulse" : "border-slate-800"
-                }`}>
-                  <div className="text-xs text-slate-500 mb-2">TIMELINE A</div>
+              <div className="mb-6 grid gap-4 md:grid-cols-3">
+                <div
+                  className={`rounded border bg-slate-950 p-4 transition-all ${
+                    showConflict
+                      ? "animate-pulse border-red-500"
+                      : "border-slate-800"
+                  }`}
+                >
+                  <div className="mb-2 text-xs text-slate-500">TIMELINE A</div>
                   <pre className="text-xs text-red-400">
-{`{
+                    {`{
   userId: 42,
   email: "user@example.com",
   cartItems: 2
@@ -320,12 +402,16 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
                   </pre>
                 </div>
 
-                <div className={`bg-slate-950 border rounded p-4 transition-all ${
-                  showConflict ? "border-red-500 animate-pulse" : "border-slate-800"
-                }`}>
-                  <div className="text-xs text-slate-500 mb-2">TIMELINE B</div>
+                <div
+                  className={`rounded border bg-slate-950 p-4 transition-all ${
+                    showConflict
+                      ? "animate-pulse border-red-500"
+                      : "border-slate-800"
+                  }`}
+                >
+                  <div className="mb-2 text-xs text-slate-500">TIMELINE B</div>
                   <pre className="text-xs text-red-400">
-{`{
+                    {`{
   userId: 42,
   email: "modified@example.com",
   cartItems: 5
@@ -333,12 +419,16 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
                   </pre>
                 </div>
 
-                <div className={`bg-slate-950 border rounded p-4 transition-all ${
-                  showConflict ? "border-red-500 animate-pulse" : "border-slate-800"
-                }`}>
-                  <div className="text-xs text-slate-500 mb-2">TIMELINE C</div>
+                <div
+                  className={`rounded border bg-slate-950 p-4 transition-all ${
+                    showConflict
+                      ? "animate-pulse border-red-500"
+                      : "border-slate-800"
+                  }`}
+                >
+                  <div className="mb-2 text-xs text-slate-500">TIMELINE C</div>
                   <pre className="text-xs text-red-400">
-{`{
+                    {`{
   userId: 42,
   email: "user@example.com",
   cartItems: 7
@@ -347,8 +437,9 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
                 </div>
               </div>
 
-              <div className="bg-red-950/30 border border-red-500/30 rounded p-4 text-sm text-red-200">
-                <strong>Critical Error:</strong> Causality violated. State history is incomprehensible. Application behavior unpredictable.
+              <div className="rounded border border-red-500/30 bg-red-950/30 p-4 text-sm text-red-200">
+                <strong>Critical Error:</strong> Causality violated. State
+                history is incomprehensible. Application behavior unpredictable.
               </div>
             </div>
           )}
@@ -356,19 +447,23 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
           {/* Chapter 3: The Protocol */}
           {chapter === 3 && (
             <div>
-              <h3 className="text-xl font-bold text-emerald-400 mb-4 flex items-center gap-2">
-                <CheckCircle className="w-5 h-5" />
+              <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-emerald-400">
+                <CheckCircle className="h-5 w-5" />
                 State Time-Travel Protocol
               </h3>
-              <p className="text-sm text-slate-400 mb-6">
-                Six rules for safe time-travel debugging. Follow them, and the timeline stays clean.
+              <p className="mb-6 text-sm text-slate-400">
+                Six rules for safe time-travel debugging. Follow them, and the
+                timeline stays clean.
               </p>
 
               {/* Protocol Rules */}
-              <div className="space-y-3 mb-8">
+              <div className="mb-8 space-y-3">
                 {protocol.map((rule, index) => (
-                  <div key={index} className="flex items-start gap-3 bg-slate-950 border border-emerald-500/30 rounded p-3">
-                    <div className="flex-shrink-0 w-6 h-6 rounded-full bg-emerald-500/20 border border-emerald-500 flex items-center justify-center text-xs text-emerald-400 font-bold">
+                  <div
+                    key={index}
+                    className="flex items-start gap-3 rounded border border-emerald-500/30 bg-slate-950 p-3"
+                  >
+                    <div className="flex h-6 w-6 flex-shrink-0 items-center justify-center rounded-full border border-emerald-500 bg-emerald-500/20 text-xs font-bold text-emerald-400">
                       {index + 1}
                     </div>
                     <div className="text-sm text-slate-300">{rule}</div>
@@ -377,16 +472,18 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
               </div>
 
               {/* Clean Timeline Demo */}
-              <div className="bg-slate-950 border border-emerald-500/30 rounded p-4">
-                <div className="text-xs text-emerald-400 mb-3">CLEAN TIMELINE (Protocol Followed)</div>
+              <div className="rounded border border-emerald-500/30 bg-slate-950 p-4">
+                <div className="mb-3 text-xs text-emerald-400">
+                  CLEAN TIMELINE (Protocol Followed)
+                </div>
                 <div className="flex items-center gap-2 overflow-x-auto">
                   {cleanTimeline.map((snapshot, index) => (
                     <div key={snapshot.id} className="flex items-center">
-                      <div className="w-12 h-12 rounded border-2 border-emerald-500 bg-emerald-500/10 flex items-center justify-center text-xs">
+                      <div className="flex h-12 w-12 items-center justify-center rounded border-2 border-emerald-500 bg-emerald-500/10 text-xs">
                         {index}
                       </div>
                       {index < cleanTimeline.length - 1 && (
-                        <div className="w-8 h-0.5 bg-emerald-500"></div>
+                        <div className="h-0.5 w-8 bg-emerald-500"></div>
                       )}
                     </div>
                   ))}
@@ -398,15 +495,20 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
           {/* Chapter 4: The Lesson */}
           {chapter === 4 && (
             <div>
-              <h3 className="text-xl font-bold text-blue-400 mb-4">Comparison: Wrong vs Right</h3>
-              <p className="text-sm text-slate-400 mb-6">
-                Time-travel debugging is powerful, but only with discipline. Compare the approaches.
+              <h3 className="mb-4 text-xl font-bold text-blue-400">
+                Comparison: Wrong vs Right
+              </h3>
+              <p className="mb-6 text-sm text-slate-400">
+                Time-travel debugging is powerful, but only with discipline.
+                Compare the approaches.
               </p>
 
-              <div className="grid md:grid-cols-2 gap-6">
+              <div className="grid gap-6 md:grid-cols-2">
                 {/* Wrong Approach */}
-                <div className="bg-red-950/20 border border-red-500/30 rounded-lg p-4">
-                  <h4 className="text-lg font-bold text-red-400 mb-3">❌ Wrong Approach</h4>
+                <div className="rounded-lg border border-red-500/30 bg-red-950/20 p-4">
+                  <h4 className="mb-3 text-lg font-bold text-red-400">
+                    ❌ Wrong Approach
+                  </h4>
                   <ul className="space-y-2 text-sm text-slate-300">
                     <li className="flex items-start gap-2">
                       <span className="text-red-400">•</span>
@@ -429,14 +531,16 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
                       <span>No documentation</span>
                     </li>
                   </ul>
-                  <div className="mt-4 text-xs text-red-300 italic">
+                  <div className="mt-4 text-xs italic text-red-300">
                     Result: Chaos, paradoxes, unpredictable behavior
                   </div>
                 </div>
 
                 {/* Right Approach */}
-                <div className="bg-emerald-950/20 border border-emerald-500/30 rounded-lg p-4">
-                  <h4 className="text-lg font-bold text-emerald-400 mb-3">✓ Right Approach</h4>
+                <div className="rounded-lg border border-emerald-500/30 bg-emerald-950/20 p-4">
+                  <h4 className="mb-3 text-lg font-bold text-emerald-400">
+                    ✓ Right Approach
+                  </h4>
                   <ul className="space-y-2 text-sm text-slate-300">
                     <li className="flex items-start gap-2">
                       <span className="text-emerald-400">•</span>
@@ -459,14 +563,16 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
                       <span>Keep failsafe backups</span>
                     </li>
                   </ul>
-                  <div className="mt-4 text-xs text-emerald-300 italic">
+                  <div className="mt-4 text-xs italic text-emerald-300">
                     Result: Clean, predictable, comprehensible state history
                   </div>
                 </div>
               </div>
 
-              <div className="mt-6 bg-blue-950/30 border border-blue-500/30 rounded p-4 text-sm text-blue-200">
-                <strong>Key Insight:</strong> Time-travel debugging is the art of learning from history without trying to change it. Observe, understand, then fix in the present.
+              <div className="mt-6 rounded border border-blue-500/30 bg-blue-950/30 p-4 text-sm text-blue-200">
+                <strong>Key Insight:</strong> Time-travel debugging is the art
+                of learning from history without trying to change it. Observe,
+                understand, then fix in the present.
               </div>
             </div>
           )}
@@ -474,24 +580,24 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-t border-slate-800 p-4">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-slate-800 bg-slate-900/95 p-4 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-6xl items-center justify-between">
           <button
-            onClick={() => setChapter(c => c - 1)}
+            onClick={() => setChapter((c) => c - 1)}
             disabled={chapter === 0}
-            className="px-4 md:px-6 py-2 bg-blue-600 text-white rounded font-mono text-sm disabled:opacity-30 disabled:cursor-not-allowed hover:bg-blue-500 transition-colors"
+            className="rounded bg-blue-600 px-4 py-2 font-mono text-sm text-white transition-colors hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-30 md:px-6"
           >
             ← Previous
           </button>
-          
-          <div className="text-sm text-slate-400 font-mono">
+
+          <div className="font-mono text-sm text-slate-400">
             Chapter {chapter + 1} of {chapters.length}
           </div>
-          
+
           <button
-            onClick={() => setChapter(c => c + 1)}
+            onClick={() => setChapter((c) => c + 1)}
             disabled={chapter === chapters.length - 1}
-            className="px-4 md:px-6 py-2 bg-blue-600 text-white rounded font-mono text-sm disabled:opacity-30 disabled:cursor-not-allowed hover:bg-blue-500 transition-colors"
+            className="rounded bg-blue-600 px-4 py-2 font-mono text-sm text-white transition-colors hover:bg-blue-500 disabled:cursor-not-allowed disabled:opacity-30 md:px-6"
           >
             Next →
           </button>

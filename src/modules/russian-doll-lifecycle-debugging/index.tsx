@@ -1,5 +1,11 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { RefreshCw, Terminal, AlertTriangle, Users, CheckCircle2 } from "lucide-react";
+import {
+  RefreshCw,
+  Terminal,
+  AlertTriangle,
+  Users,
+  CheckCircle2,
+} from "lucide-react";
 
 interface LogEntry {
   id: number;
@@ -144,31 +150,33 @@ The bug isn't always where you think it is. But if you're systematic, if you're 
   const currentChapter = chapters[chapter];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-sans">
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-300">
       {/* Header */}
       <header className="border-b border-slate-800 bg-slate-900/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 py-8">
-          <div className="flex items-center gap-3 mb-2">
-            <RefreshCw className="w-8 h-8 text-orange-500" />
+        <div className="mx-auto max-w-7xl px-4 py-8">
+          <div className="mb-2 flex items-center gap-3">
+            <RefreshCw className="h-8 w-8 text-orange-500" />
             <h1 className="text-4xl font-bold text-orange-500">Russian Doll</h1>
           </div>
-          <p className="text-lg text-teal-400">Debugging Component Lifecycle Issues</p>
-          <p className="text-sm text-slate-400 mt-1">Nadia Vulvokov, 2019</p>
+          <p className="text-lg text-teal-400">
+            Debugging Component Lifecycle Issues
+          </p>
+          <p className="mt-1 text-sm text-slate-400">Nadia Vulvokov, 2019</p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-8 pb-32">
-        <div className="grid lg:grid-cols-2 gap-8">
+      <main className="mx-auto max-w-7xl px-4 py-8 pb-32">
+        <div className="grid gap-8 lg:grid-cols-2">
           {/* Narrative Column */}
           <div className="space-y-6">
-            <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
-              <h2 className="text-2xl font-bold text-orange-400 mb-4">
+            <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+              <h2 className="mb-4 text-2xl font-bold text-orange-400">
                 {currentChapter.title}
               </h2>
               <div className="prose prose-invert prose-slate max-w-none">
                 {currentChapter.content.split("\n\n").map((paragraph, idx) => (
-                  <p key={idx} className="text-slate-300 leading-relaxed mb-4">
+                  <p key={idx} className="mb-4 leading-relaxed text-slate-300">
                     {paragraph}
                   </p>
                 ))}
@@ -178,10 +186,12 @@ The bug isn't always where you think it is. But if you're systematic, if you're 
 
           {/* Demo Column */}
           <div className="space-y-6">
-            <div className="bg-slate-900/50 border border-teal-500/30 rounded-lg p-6">
-              <div className="flex items-center gap-2 mb-4">
-                <Terminal className="w-5 h-5 text-teal-400" />
-                <h3 className="text-xl font-bold text-teal-400">Interactive Demo</h3>
+            <div className="rounded-lg border border-teal-500/30 bg-slate-900/50 p-6">
+              <div className="mb-4 flex items-center gap-2">
+                <Terminal className="h-5 w-5 text-teal-400" />
+                <h3 className="text-xl font-bold text-teal-400">
+                  Interactive Demo
+                </h3>
               </div>
               <currentChapter.demo />
             </div>
@@ -190,13 +200,13 @@ The bug isn't always where you think it is. But if you're systematic, if you're 
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-t border-slate-800">
-        <div className="max-w-7xl mx-auto px-4 py-4">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-slate-800 bg-slate-900/95 backdrop-blur-sm">
+        <div className="mx-auto max-w-7xl px-4 py-4">
           <div className="flex items-center justify-between">
             <button
               onClick={() => setChapter((c) => c - 1)}
               disabled={chapter === 0}
-              className="px-6 py-2 bg-orange-600 hover:bg-orange-500 disabled:bg-slate-800 disabled:text-slate-600 disabled:cursor-not-allowed rounded-lg font-medium transition-colors"
+              className="rounded-lg bg-orange-600 px-6 py-2 font-medium transition-colors hover:bg-orange-500 disabled:cursor-not-allowed disabled:bg-slate-800 disabled:text-slate-600"
             >
               Previous
             </button>
@@ -206,12 +216,12 @@ The bug isn't always where you think it is. But if you're systematic, if you're 
                 <button
                   key={idx}
                   onClick={() => setChapter(idx)}
-                  className={`w-2 h-2 rounded-full transition-all ${
+                  className={`h-2 w-2 rounded-full transition-all ${
                     idx === chapter
-                      ? "bg-orange-500 w-8"
+                      ? "w-8 bg-orange-500"
                       : idx < chapter
-                      ? "bg-teal-500"
-                      : "bg-slate-700"
+                        ? "bg-teal-500"
+                        : "bg-slate-700"
                   }`}
                   aria-label={`Go to chapter ${idx + 1}`}
                 />
@@ -221,12 +231,12 @@ The bug isn't always where you think it is. But if you're systematic, if you're 
             <button
               onClick={() => setChapter((c) => c + 1)}
               disabled={chapter === chapters.length - 1}
-              className="px-6 py-2 bg-orange-600 hover:bg-orange-500 disabled:bg-slate-800 disabled:text-slate-600 disabled:cursor-not-allowed rounded-lg font-medium transition-colors"
+              className="rounded-lg bg-orange-600 px-6 py-2 font-medium transition-colors hover:bg-orange-500 disabled:cursor-not-allowed disabled:bg-slate-800 disabled:text-slate-600"
             >
               Next
             </button>
           </div>
-          <div className="text-center mt-2 text-sm text-slate-400">
+          <div className="mt-2 text-center text-sm text-slate-400">
             Chapter {chapter + 1} of {chapters.length}
           </div>
         </div>
@@ -278,11 +288,13 @@ function LoopCounterDemo() {
 
   return (
     <div className="space-y-4">
-      <div className="bg-slate-950 border border-orange-500/30 rounded-lg p-6 text-center">
-        <div className="text-6xl font-bold text-orange-500 mb-2">{loopCount}</div>
+      <div className="rounded-lg border border-orange-500/30 bg-slate-950 p-6 text-center">
+        <div className="mb-2 text-6xl font-bold text-orange-500">
+          {loopCount}
+        </div>
         <div className="text-sm text-slate-400">Loop Count</div>
         {isLooping && (
-          <div className="mt-4 text-orange-400 animate-pulse">
+          <div className="mt-4 animate-pulse text-orange-400">
             Component remounting...
           </div>
         )}
@@ -290,7 +302,7 @@ function LoopCounterDemo() {
 
       <button
         onClick={handleToggle}
-        className={`w-full py-3 rounded-lg font-medium transition-colors ${
+        className={`w-full rounded-lg py-3 font-medium transition-colors ${
           isLooping
             ? "bg-red-600 hover:bg-red-500"
             : "bg-teal-600 hover:bg-teal-500"
@@ -299,8 +311,8 @@ function LoopCounterDemo() {
         {isLooping ? "Stop Loop" : "Start Loop"}
       </button>
 
-      <div className="bg-slate-950 border border-slate-700 rounded-lg p-4 font-mono text-xs space-y-1 max-h-40 overflow-y-auto">
-        <div className="text-slate-500 mb-2">Console Output:</div>
+      <div className="max-h-40 space-y-1 overflow-y-auto rounded-lg border border-slate-700 bg-slate-950 p-4 font-mono text-xs">
+        <div className="mb-2 text-slate-500">Console Output:</div>
         {logs.map((log) => (
           <div
             key={log.id}
@@ -308,8 +320,8 @@ function LoopCounterDemo() {
               log.type === "mount"
                 ? "text-teal-400"
                 : log.type === "unmount"
-                ? "text-orange-400"
-                : "text-slate-400"
+                  ? "text-orange-400"
+                  : "text-slate-400"
             }`}
           >
             {log.message}
@@ -370,7 +382,7 @@ function LifecycleLoggerDemo() {
             type="checkbox"
             checked={logMount}
             onChange={(e) => setLogMount(e.target.checked)}
-            className="w-4 h-4 rounded border-slate-600 bg-slate-800 text-teal-500 focus:ring-teal-500"
+            className="h-4 w-4 rounded border-slate-600 bg-slate-800 text-teal-500 focus:ring-teal-500"
           />
           <span>Log mount/unmount</span>
         </label>
@@ -379,7 +391,7 @@ function LifecycleLoggerDemo() {
             type="checkbox"
             checked={logEffect}
             onChange={(e) => setLogEffect(e.target.checked)}
-            className="w-4 h-4 rounded border-slate-600 bg-slate-800 text-teal-500 focus:ring-teal-500"
+            className="h-4 w-4 rounded border-slate-600 bg-slate-800 text-teal-500 focus:ring-teal-500"
           />
           <span>Log effect execution</span>
         </label>
@@ -388,7 +400,7 @@ function LifecycleLoggerDemo() {
             type="checkbox"
             checked={logCleanup}
             onChange={(e) => setLogCleanup(e.target.checked)}
-            className="w-4 h-4 rounded border-slate-600 bg-slate-800 text-teal-500 focus:ring-teal-500"
+            className="h-4 w-4 rounded border-slate-600 bg-slate-800 text-teal-500 focus:ring-teal-500"
           />
           <span>Log cleanup functions</span>
         </label>
@@ -396,13 +408,13 @@ function LifecycleLoggerDemo() {
 
       <button
         onClick={() => setTriggerCount((c) => c + 1)}
-        className="w-full py-3 bg-orange-600 hover:bg-orange-500 rounded-lg font-medium transition-colors"
+        className="w-full rounded-lg bg-orange-600 py-3 font-medium transition-colors hover:bg-orange-500"
       >
         Trigger Re-render
       </button>
 
-      <div className="bg-slate-950 border border-slate-700 rounded-lg p-4 font-mono text-xs space-y-1 max-h-48 overflow-y-auto">
-        <div className="text-slate-500 mb-2">Lifecycle Logs:</div>
+      <div className="max-h-48 space-y-1 overflow-y-auto rounded-lg border border-slate-700 bg-slate-950 p-4 font-mono text-xs">
+        <div className="mb-2 text-slate-500">Lifecycle Logs:</div>
         {logs.map((log) => (
           <div
             key={log.id}
@@ -410,10 +422,10 @@ function LifecycleLoggerDemo() {
               log.type === "mount"
                 ? "text-teal-400"
                 : log.type === "effect"
-                ? "text-blue-400"
-                : log.type === "cleanup"
-                ? "text-yellow-400"
-                : "text-orange-400"
+                  ? "text-blue-400"
+                  : log.type === "cleanup"
+                    ? "text-yellow-400"
+                    : "text-orange-400"
             }`}
           >
             {log.message}
@@ -430,9 +442,7 @@ function LifecycleLoggerDemo() {
 function DegradationDemo() {
   const [hasCleanup, setHasCleanup] = useState(false);
   const [isRunning, setIsRunning] = useState(false);
-  const [components, setComponents] = useState<boolean[]>(
-    Array(12).fill(true)
-  );
+  const [components, setComponents] = useState<boolean[]>(Array(12).fill(true));
 
   useEffect(() => {
     if (!isRunning) return;
@@ -454,7 +464,7 @@ function DegradationDemo() {
           .slice(0, removeCount);
 
         return prev.map((active, idx) =>
-          toRemove.includes(idx) ? false : active
+          toRemove.includes(idx) ? false : active,
         );
       });
     }, 1000);
@@ -478,7 +488,7 @@ function DegradationDemo() {
             checked={hasCleanup}
             onChange={(e) => setHasCleanup(e.target.checked)}
             disabled={isRunning}
-            className="w-4 h-4 rounded border-slate-600 bg-slate-800 text-teal-500 focus:ring-teal-500 disabled:opacity-50"
+            className="h-4 w-4 rounded border-slate-600 bg-slate-800 text-teal-500 focus:ring-teal-500 disabled:opacity-50"
           />
           <span>Proper cleanup functions</span>
         </label>
@@ -493,12 +503,12 @@ function DegradationDemo() {
             key={idx}
             className={`aspect-square rounded-lg border-2 transition-all duration-500 ${
               active
-                ? "bg-teal-500/20 border-teal-500/50"
-                : "bg-red-500/10 border-red-500/30 opacity-30"
+                ? "border-teal-500/50 bg-teal-500/20"
+                : "border-red-500/30 bg-red-500/10 opacity-30"
             }`}
           >
             {active && (
-              <div className="w-full h-full flex items-center justify-center text-teal-400 text-xs">
+              <div className="flex h-full w-full items-center justify-center text-xs text-teal-400">
                 ✓
               </div>
             )}
@@ -509,14 +519,14 @@ function DegradationDemo() {
       <button
         onClick={handleStart}
         disabled={isRunning}
-        className="w-full py-3 bg-orange-600 hover:bg-orange-500 disabled:bg-slate-800 disabled:text-slate-600 disabled:cursor-not-allowed rounded-lg font-medium transition-colors"
+        className="w-full rounded-lg bg-orange-600 py-3 font-medium transition-colors hover:bg-orange-500 disabled:cursor-not-allowed disabled:bg-slate-800 disabled:text-slate-600"
       >
         {isRunning ? "Cascading unmounts..." : "Start Degradation"}
       </button>
 
       {activeCount === 0 && !isRunning && (
-        <div className="text-center text-red-400 text-sm">
-          <AlertTriangle className="w-4 h-4 inline mr-1" />
+        <div className="text-center text-sm text-red-400">
+          <AlertTriangle className="mr-1 inline h-4 w-4" />
           All components unmounted
         </div>
       )}
@@ -559,68 +569,68 @@ function CoupledComponentsDemo() {
           type="checkbox"
           checked={coordinated}
           onChange={(e) => setCoordinated(e.target.checked)}
-          className="w-4 h-4 rounded border-slate-600 bg-slate-800 text-teal-500 focus:ring-teal-500"
+          className="h-4 w-4 rounded border-slate-600 bg-slate-800 text-teal-500 focus:ring-teal-500"
         />
         <span>Coordinated cleanup (prevents coupling)</span>
       </label>
 
       <div className="grid grid-cols-2 gap-4">
         <div
-          className={`border-2 rounded-lg p-4 transition-all ${
+          className={`rounded-lg border-2 p-4 transition-all ${
             nadiaAlive
-              ? "bg-orange-500/20 border-orange-500/50"
-              : "bg-slate-800/50 border-slate-700 opacity-50"
+              ? "border-orange-500/50 bg-orange-500/20"
+              : "border-slate-700 bg-slate-800/50 opacity-50"
           }`}
         >
-          <div className="text-center mb-3">
+          <div className="mb-3 text-center">
             <div className="text-lg font-bold text-orange-400">Nadia</div>
             <div className="text-xs text-slate-400">Component A</div>
           </div>
           <button
             onClick={killNadia}
             disabled={!nadiaAlive}
-            className="w-full py-2 bg-red-600 hover:bg-red-500 disabled:bg-slate-700 disabled:cursor-not-allowed rounded text-sm transition-colors"
+            className="w-full rounded bg-red-600 py-2 text-sm transition-colors hover:bg-red-500 disabled:cursor-not-allowed disabled:bg-slate-700"
           >
             {nadiaAlive ? "Unmount" : "Unmounted"}
           </button>
         </div>
 
         <div
-          className={`border-2 rounded-lg p-4 transition-all ${
+          className={`rounded-lg border-2 p-4 transition-all ${
             alanAlive
-              ? "bg-teal-500/20 border-teal-500/50"
-              : "bg-slate-800/50 border-slate-700 opacity-50"
+              ? "border-teal-500/50 bg-teal-500/20"
+              : "border-slate-700 bg-slate-800/50 opacity-50"
           }`}
         >
-          <div className="text-center mb-3">
+          <div className="mb-3 text-center">
             <div className="text-lg font-bold text-teal-400">Alan</div>
             <div className="text-xs text-slate-400">Component B</div>
           </div>
           <button
             onClick={killAlan}
             disabled={!alanAlive}
-            className="w-full py-2 bg-red-600 hover:bg-red-500 disabled:bg-slate-700 disabled:cursor-not-allowed rounded text-sm transition-colors"
+            className="w-full rounded bg-red-600 py-2 text-sm transition-colors hover:bg-red-500 disabled:cursor-not-allowed disabled:bg-slate-700"
           >
             {alanAlive ? "Unmount" : "Unmounted"}
           </button>
         </div>
       </div>
 
-      <div className="bg-slate-950 border border-slate-700 rounded-lg p-3 text-center">
-        <div className="text-xs text-slate-400 mb-1">Shared State</div>
+      <div className="rounded-lg border border-slate-700 bg-slate-950 p-3 text-center">
+        <div className="mb-1 text-xs text-slate-400">Shared State</div>
         <div className="text-2xl font-bold text-slate-300">{sharedState}</div>
       </div>
 
       <button
         onClick={reset}
-        className="w-full py-3 bg-teal-600 hover:bg-teal-500 rounded-lg font-medium transition-colors"
+        className="w-full rounded-lg bg-teal-600 py-3 font-medium transition-colors hover:bg-teal-500"
       >
         Reset Both Components
       </button>
 
       {!nadiaAlive && !alanAlive && (
-        <div className="text-center text-orange-400 text-sm">
-          <Users className="w-4 h-4 inline mr-1" />
+        <div className="text-center text-sm text-orange-400">
+          <Users className="mr-1 inline h-4 w-4" />
           {coordinated
             ? "Both unmounted independently"
             : "Cascading unmount detected!"}
@@ -664,37 +674,37 @@ function DebuggingChecklistDemo() {
         {checklistItems.map((item, idx) => (
           <label
             key={idx}
-            className="flex items-start gap-3 p-3 bg-slate-950 border border-slate-700 rounded-lg hover:border-teal-500/50 transition-colors cursor-pointer"
+            className="flex cursor-pointer items-start gap-3 rounded-lg border border-slate-700 bg-slate-950 p-3 transition-colors hover:border-teal-500/50"
           >
             <input
               type="checkbox"
               checked={checkedItems.has(idx)}
               onChange={() => toggleItem(idx)}
-              className="w-5 h-5 mt-0.5 rounded border-slate-600 bg-slate-800 text-teal-500 focus:ring-teal-500"
+              className="mt-0.5 h-5 w-5 rounded border-slate-600 bg-slate-800 text-teal-500 focus:ring-teal-500"
             />
-            <span className="text-sm flex-1">{item}</span>
+            <span className="flex-1 text-sm">{item}</span>
           </label>
         ))}
       </div>
 
-      <div className="bg-slate-950 border border-slate-700 rounded-lg p-4">
-        <div className="flex items-center justify-between mb-2">
+      <div className="rounded-lg border border-slate-700 bg-slate-950 p-4">
+        <div className="mb-2 flex items-center justify-between">
           <span className="text-sm text-slate-400">Debugging Progress</span>
           <span className="text-sm font-bold text-teal-400">
             {Math.round(progress)}%
           </span>
         </div>
-        <div className="w-full bg-slate-800 rounded-full h-2">
+        <div className="h-2 w-full rounded-full bg-slate-800">
           <div
-            className="bg-gradient-to-r from-orange-500 to-teal-500 h-2 rounded-full transition-all duration-500"
+            className="h-2 rounded-full bg-gradient-to-r from-orange-500 to-teal-500 transition-all duration-500"
             style={{ width: `${progress}%` }}
           />
         </div>
       </div>
 
       {progress === 100 && (
-        <div className="text-center text-teal-400 text-sm flex items-center justify-center gap-2">
-          <CheckCircle2 className="w-4 h-4" />
+        <div className="flex items-center justify-center gap-2 text-center text-sm text-teal-400">
+          <CheckCircle2 className="h-4 w-4" />
           Loop broken! You've mastered lifecycle debugging.
         </div>
       )}

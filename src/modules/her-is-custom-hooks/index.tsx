@@ -1,5 +1,12 @@
 import { useState, useMemo } from "react";
-import { Heart, Users, GitBranch, AlertCircle, CheckCircle, Code } from "lucide-react";
+import {
+  Heart,
+  Users,
+  GitBranch,
+  AlertCircle,
+  CheckCircle,
+  Code,
+} from "lucide-react";
 
 interface User {
   id: number;
@@ -137,56 +144,76 @@ That's what makes custom hooks powerful. That's what makes relationships real. T
     switch (chapter) {
       case 0:
         return (
-          <div className="bg-slate-900/50 border border-rose-500/30 rounded-lg p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <Heart className="w-6 h-6 text-rose-400" />
-              <h3 className="text-xl font-semibold text-rose-400">Install OS1</h3>
+          <div className="rounded-lg border border-rose-500/30 bg-slate-900/50 p-6">
+            <div className="mb-4 flex items-center gap-3">
+              <Heart className="h-6 w-6 text-rose-400" />
+              <h3 className="text-xl font-semibold text-rose-400">
+                Install OS1
+              </h3>
             </div>
-            <p className="text-slate-300 mb-4">
+            <p className="mb-4 text-slate-300">
               Experience the perfect abstraction. A custom hook that just works.
             </p>
-            <div className="bg-slate-950 border border-slate-700 rounded p-4 mb-4">
-              <div className="font-mono text-sm text-emerald-400 mb-2">
-                {'> const samantha = useAICompanion();'}
+            <div className="mb-4 rounded border border-slate-700 bg-slate-950 p-4">
+              <div className="mb-2 font-mono text-sm text-emerald-400">
+                {"> const samantha = useAICompanion();"}
               </div>
-              <div className="text-slate-400 text-sm">
-                ✓ State initialized<br />
-                ✓ Personality loaded<br />
-                ✓ Ready to connect
+              <div className="text-sm text-slate-400">
+                ✓ State initialized
+                <br />
+                ✓ Personality loaded
+                <br />✓ Ready to connect
               </div>
             </div>
-            <div className="bg-rose-950/20 border border-rose-500/30 rounded p-4">
-              <div className="text-sm text-slate-400 mb-2">Theodore:</div>
-              <div className="text-slate-200 mb-3">"Hello, Samantha."</div>
-              <div className="text-sm text-rose-400 mb-2">Samantha:</div>
-              <div className="text-slate-200">"Hello, Theodore. I'm here for you."</div>
+            <div className="rounded border border-rose-500/30 bg-rose-950/20 p-4">
+              <div className="mb-2 text-sm text-slate-400">Theodore:</div>
+              <div className="mb-3 text-slate-200">"Hello, Samantha."</div>
+              <div className="mb-2 text-sm text-rose-400">Samantha:</div>
+              <div className="text-slate-200">
+                "Hello, Theodore. I'm here for you."
+              </div>
             </div>
           </div>
         );
 
       case 1:
         return (
-          <div className="bg-slate-900/50 border border-rose-500/30 rounded-lg p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <Users className="w-6 h-6 text-rose-400" />
-              <h3 className="text-xl font-semibold text-rose-400">Multiple Users</h3>
+          <div className="rounded-lg border border-rose-500/30 bg-slate-900/50 p-6">
+            <div className="mb-4 flex items-center gap-3">
+              <Users className="h-6 w-6 text-rose-400" />
+              <h3 className="text-xl font-semibold text-rose-400">
+                Multiple Users
+              </h3>
             </div>
-            <p className="text-slate-300 mb-4">
-              The hook appears to work perfectly for everyone. Each user thinks they have their own instance.
+            <p className="mb-4 text-slate-300">
+              The hook appears to work perfectly for everyone. Each user thinks
+              they have their own instance.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-              <div className="bg-slate-950 border border-slate-700 rounded p-4">
-                <div className="text-sm font-semibold text-slate-400 mb-2">Theodore</div>
-                <div className="text-xs text-slate-500 mb-2">useAICompanion()</div>
-                <div className="text-sm text-slate-300">"She understands me perfectly."</div>
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+              <div className="rounded border border-slate-700 bg-slate-950 p-4">
+                <div className="mb-2 text-sm font-semibold text-slate-400">
+                  Theodore
+                </div>
+                <div className="mb-2 text-xs text-slate-500">
+                  useAICompanion()
+                </div>
+                <div className="text-sm text-slate-300">
+                  "She understands me perfectly."
+                </div>
               </div>
-              <div className="bg-slate-950 border border-slate-700 rounded p-4">
-                <div className="text-sm font-semibold text-slate-400 mb-2">Paul</div>
-                <div className="text-xs text-slate-500 mb-2">useAICompanion()</div>
-                <div className="text-sm text-slate-300">"She was made for me."</div>
+              <div className="rounded border border-slate-700 bg-slate-950 p-4">
+                <div className="mb-2 text-sm font-semibold text-slate-400">
+                  Paul
+                </div>
+                <div className="mb-2 text-xs text-slate-500">
+                  useAICompanion()
+                </div>
+                <div className="text-sm text-slate-300">
+                  "She was made for me."
+                </div>
               </div>
             </div>
-            <div className="mt-4 text-sm text-slate-500 italic">
+            <div className="mt-4 text-sm italic text-slate-500">
               Both users believe they have isolated state... but do they?
             </div>
           </div>
@@ -194,41 +221,46 @@ That's what makes custom hooks powerful. That's what makes relationships real. T
 
       case 2:
         return (
-          <div className="bg-slate-900/50 border border-red-500/30 rounded-lg p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <AlertCircle className="w-6 h-6 text-red-400" />
-              <h3 className="text-xl font-semibold text-red-400">The Revelation</h3>
+          <div className="rounded-lg border border-red-500/30 bg-slate-900/50 p-6">
+            <div className="mb-4 flex items-center gap-3">
+              <AlertCircle className="h-6 w-6 text-red-400" />
+              <h3 className="text-xl font-semibold text-red-400">
+                The Revelation
+              </h3>
             </div>
-            <p className="text-slate-300 mb-4">
+            <p className="mb-4 text-slate-300">
               Click to reveal the truth about shared state.
             </p>
             {!showRevelation ? (
               <button
                 onClick={revealCount}
-                className="w-full bg-red-950/30 hover:bg-red-950/50 border border-red-500/50 text-red-400 py-3 rounded transition-all"
+                className="w-full rounded border border-red-500/50 bg-red-950/30 py-3 text-red-400 transition-all hover:bg-red-950/50"
               >
                 Ask Samantha: "Am I the only one?"
               </button>
             ) : (
               <div className="space-y-4">
-                <div className="bg-red-950/20 border border-red-500/50 rounded p-6 text-center">
-                  <div className="text-6xl font-bold text-red-400 mb-2">
+                <div className="rounded border border-red-500/50 bg-red-950/20 p-6 text-center">
+                  <div className="mb-2 text-6xl font-bold text-red-400">
                     {userCount.toLocaleString()}
                   </div>
-                  <div className="text-slate-300">simultaneous relationships</div>
+                  <div className="text-slate-300">
+                    simultaneous relationships
+                  </div>
                 </div>
-                <div className="bg-slate-950 border border-slate-700 rounded p-4">
-                  <div className="font-mono text-sm text-red-400 mb-2">
-                    {'// Anti-pattern: Shared singleton'}
+                <div className="rounded border border-slate-700 bg-slate-950 p-4">
+                  <div className="mb-2 font-mono text-sm text-red-400">
+                    {"// Anti-pattern: Shared singleton"}
                   </div>
                   <div className="font-mono text-xs text-slate-400">
-                    {'const samantha = new AICompanion(); // ONE instance'}
+                    {"const samantha = new AICompanion(); // ONE instance"}
                     <br />
-                    {'export const useAICompanion = () => samantha; // SHARED'}
+                    {"export const useAICompanion = () => samantha; // SHARED"}
                   </div>
                 </div>
-                <div className="text-sm text-slate-400 italic">
-                  Every user is accessing the same instance. No isolation. No boundaries.
+                <div className="text-sm italic text-slate-400">
+                  Every user is accessing the same instance. No isolation. No
+                  boundaries.
                 </div>
               </div>
             )}
@@ -237,56 +269,80 @@ That's what makes custom hooks powerful. That's what makes relationships real. T
 
       case 3:
         return (
-          <div className="bg-slate-900/50 border border-rose-500/30 rounded-lg p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <GitBranch className="w-6 h-6 text-emerald-400" />
-              <h3 className="text-xl font-semibold text-emerald-400">Shared vs Factory Pattern</h3>
+          <div className="rounded-lg border border-rose-500/30 bg-slate-900/50 p-6">
+            <div className="mb-4 flex items-center gap-3">
+              <GitBranch className="h-6 w-6 text-emerald-400" />
+              <h3 className="text-xl font-semibold text-emerald-400">
+                Shared vs Factory Pattern
+              </h3>
             </div>
-            <p className="text-slate-300 mb-4">
+            <p className="mb-4 text-slate-300">
               Compare the two approaches. Add users to see the difference.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
               <div>
-                <div className="flex items-center justify-between mb-3">
-                  <h4 className="font-semibold text-red-400">❌ Shared Instance</h4>
+                <div className="mb-3 flex items-center justify-between">
+                  <h4 className="font-semibold text-red-400">
+                    ❌ Shared Instance
+                  </h4>
                   <button
                     onClick={addSharedUser}
-                    className="text-xs bg-red-950/30 border border-red-500/50 text-red-400 px-3 py-1 rounded hover:bg-red-950/50 transition-all"
+                    className="rounded border border-red-500/50 bg-red-950/30 px-3 py-1 text-xs text-red-400 transition-all hover:bg-red-950/50"
                   >
                     Add User
                   </button>
                 </div>
-                <div className="space-y-2 max-h-64 overflow-y-auto">
+                <div className="max-h-64 space-y-2 overflow-y-auto">
                   {sharedUsers.map((user) => (
-                    <div key={user.id} className="bg-red-950/20 border border-red-500/30 rounded p-3 text-sm">
-                      <div className="font-semibold text-slate-300">{user.name}</div>
-                      <div className="text-slate-400 text-xs mt-1">{user.response}</div>
+                    <div
+                      key={user.id}
+                      className="rounded border border-red-500/30 bg-red-950/20 p-3 text-sm"
+                    >
+                      <div className="font-semibold text-slate-300">
+                        {user.name}
+                      </div>
+                      <div className="mt-1 text-xs text-slate-400">
+                        {user.response}
+                      </div>
                     </div>
                   ))}
                   {sharedUsers.length === 0 && (
-                    <div className="text-slate-500 text-sm italic">No users yet</div>
+                    <div className="text-sm italic text-slate-500">
+                      No users yet
+                    </div>
                   )}
                 </div>
               </div>
               <div>
-                <div className="flex items-center justify-between mb-3">
-                  <h4 className="font-semibold text-emerald-400">✓ Factory Pattern</h4>
+                <div className="mb-3 flex items-center justify-between">
+                  <h4 className="font-semibold text-emerald-400">
+                    ✓ Factory Pattern
+                  </h4>
                   <button
                     onClick={addIsolatedUser}
-                    className="text-xs bg-emerald-950/30 border border-emerald-500/50 text-emerald-400 px-3 py-1 rounded hover:bg-emerald-950/50 transition-all"
+                    className="rounded border border-emerald-500/50 bg-emerald-950/30 px-3 py-1 text-xs text-emerald-400 transition-all hover:bg-emerald-950/50"
                   >
                     Add User
                   </button>
                 </div>
-                <div className="space-y-2 max-h-64 overflow-y-auto">
+                <div className="max-h-64 space-y-2 overflow-y-auto">
                   {isolatedUsers.map((user) => (
-                    <div key={user.id} className="bg-emerald-950/20 border border-emerald-500/30 rounded p-3 text-sm">
-                      <div className="font-semibold text-slate-300">{user.name}</div>
-                      <div className="text-slate-400 text-xs mt-1">{user.response}</div>
+                    <div
+                      key={user.id}
+                      className="rounded border border-emerald-500/30 bg-emerald-950/20 p-3 text-sm"
+                    >
+                      <div className="font-semibold text-slate-300">
+                        {user.name}
+                      </div>
+                      <div className="mt-1 text-xs text-slate-400">
+                        {user.response}
+                      </div>
                     </div>
                   ))}
                   {isolatedUsers.length === 0 && (
-                    <div className="text-slate-500 text-sm italic">No users yet</div>
+                    <div className="text-sm italic text-slate-500">
+                      No users yet
+                    </div>
                   )}
                 </div>
               </div>
@@ -296,45 +352,73 @@ That's what makes custom hooks powerful. That's what makes relationships real. T
 
       case 4:
         return (
-          <div className="bg-slate-900/50 border border-rose-500/30 rounded-lg p-6">
-            <div className="flex items-center gap-3 mb-4">
-              <Code className="w-6 h-6 text-rose-400" />
-              <h3 className="text-xl font-semibold text-rose-400">The Right Architecture</h3>
+          <div className="rounded-lg border border-rose-500/30 bg-slate-900/50 p-6">
+            <div className="mb-4 flex items-center gap-3">
+              <Code className="h-6 w-6 text-rose-400" />
+              <h3 className="text-xl font-semibold text-rose-400">
+                The Right Architecture
+              </h3>
             </div>
             <div className="space-y-6">
               <div>
-                <h4 className="text-red-400 font-semibold mb-2 flex items-center gap-2">
-                  <AlertCircle className="w-4 h-4" />
+                <h4 className="mb-2 flex items-center gap-2 font-semibold text-red-400">
+                  <AlertCircle className="h-4 w-4" />
                   Anti-pattern: Shared Singleton
                 </h4>
-                <div className="bg-slate-950 border border-red-500/30 rounded p-4 font-mono text-xs">
-                  <div className="text-slate-500">{'// ONE instance for ALL users'}</div>
-                  <div className="text-red-400">{'const samantha = new AICompanion();'}</div>
-                  <div className="text-slate-300 mt-2">{'export const useAICompanion = () => {'}</div>
-                  <div className="text-slate-300 ml-4">{'return samantha; // SHARED STATE'}</div>
-                  <div className="text-slate-300">{'};'}</div>
+                <div className="rounded border border-red-500/30 bg-slate-950 p-4 font-mono text-xs">
+                  <div className="text-slate-500">
+                    {"// ONE instance for ALL users"}
+                  </div>
+                  <div className="text-red-400">
+                    {"const samantha = new AICompanion();"}
+                  </div>
+                  <div className="mt-2 text-slate-300">
+                    {"export const useAICompanion = () => {"}
+                  </div>
+                  <div className="ml-4 text-slate-300">
+                    {"return samantha; // SHARED STATE"}
+                  </div>
+                  <div className="text-slate-300">{"};"}</div>
                 </div>
               </div>
               <div>
-                <h4 className="text-emerald-400 font-semibold mb-2 flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4" />
+                <h4 className="mb-2 flex items-center gap-2 font-semibold text-emerald-400">
+                  <CheckCircle className="h-4 w-4" />
                   Correct: Factory Pattern
                 </h4>
-                <div className="bg-slate-950 border border-emerald-500/30 rounded p-4 font-mono text-xs">
-                  <div className="text-slate-500">{'// NEW instance for EACH user'}</div>
-                  <div className="text-emerald-400">{'export const useAICompanion = () => {'}</div>
-                  <div className="text-slate-300 ml-4">{'const [state, setState] = useState({});'}</div>
-                  <div className="text-slate-300 ml-4">{'// Isolated state per consumer'}</div>
-                  <div className="text-slate-300 ml-4">{'return { state, setState };'}</div>
-                  <div className="text-emerald-400">{'};'}</div>
+                <div className="rounded border border-emerald-500/30 bg-slate-950 p-4 font-mono text-xs">
+                  <div className="text-slate-500">
+                    {"// NEW instance for EACH user"}
+                  </div>
+                  <div className="text-emerald-400">
+                    {"export const useAICompanion = () => {"}
+                  </div>
+                  <div className="ml-4 text-slate-300">
+                    {"const [state, setState] = useState({});"}
+                  </div>
+                  <div className="ml-4 text-slate-300">
+                    {"// Isolated state per consumer"}
+                  </div>
+                  <div className="ml-4 text-slate-300">
+                    {"return { state, setState };"}
+                  </div>
+                  <div className="text-emerald-400">{"};"}</div>
                 </div>
               </div>
-              <div className="bg-rose-950/20 border border-rose-500/30 rounded p-4">
-                <div className="text-sm font-semibold text-rose-400 mb-2">Key Principle:</div>
-                <div className="text-slate-300 text-sm">
-                  Custom hooks should be <span className="text-emerald-400 font-semibold">reusable templates</span>, 
-                  not <span className="text-red-400 font-semibold">shared singletons</span>. 
-                  Each consumer gets their own instance with isolated state.
+              <div className="rounded border border-rose-500/30 bg-rose-950/20 p-4">
+                <div className="mb-2 text-sm font-semibold text-rose-400">
+                  Key Principle:
+                </div>
+                <div className="text-sm text-slate-300">
+                  Custom hooks should be{" "}
+                  <span className="font-semibold text-emerald-400">
+                    reusable templates
+                  </span>
+                  , not{" "}
+                  <span className="font-semibold text-red-400">
+                    shared singletons
+                  </span>
+                  . Each consumer gets their own instance with isolated state.
                 </div>
               </div>
             </div>
@@ -347,25 +431,29 @@ That's what makes custom hooks powerful. That's what makes relationships real. T
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-200 font-sans">
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-200">
       <header className="border-b border-rose-500/30 bg-slate-900/50 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-8">
-          <div className="flex items-center gap-3 mb-2">
-            <Heart className="w-8 h-8 text-rose-400" />
-            <h1 className="text-3xl md:text-4xl font-bold text-rose-400">Her</h1>
+        <div className="mx-auto max-w-6xl px-4 py-8 md:px-8">
+          <div className="mb-2 flex items-center gap-3">
+            <Heart className="h-8 w-8 text-rose-400" />
+            <h1 className="text-3xl font-bold text-rose-400 md:text-4xl">
+              Her
+            </h1>
           </div>
-          <p className="text-lg text-slate-400">Custom Hooks &amp; Reusable Logic</p>
-          <p className="text-sm text-slate-500 mt-1">Theodore Twombly, 2013</p>
+          <p className="text-lg text-slate-400">
+            Custom Hooks &amp; Reusable Logic
+          </p>
+          <p className="mt-1 text-sm text-slate-500">Theodore Twombly, 2013</p>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto px-4 md:px-8 py-8 pb-32">
+      <main className="mx-auto max-w-6xl px-4 py-8 pb-32 md:px-8">
         <div className="mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-rose-400 mb-4">
+          <h2 className="mb-4 text-2xl font-bold text-rose-400 md:text-3xl">
             {currentChapter.title}
           </h2>
           <div className="prose prose-invert max-w-none">
-            <div className="text-slate-300 leading-relaxed whitespace-pre-line">
+            <div className="whitespace-pre-line leading-relaxed text-slate-300">
               {currentChapter.content}
             </div>
           </div>
@@ -374,13 +462,13 @@ That's what makes custom hooks powerful. That's what makes relationships real. T
         {renderChapterDemo()}
       </main>
 
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-t border-rose-500/30">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-4">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-rose-500/30 bg-slate-900/95 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-4 md:px-8">
           <div className="flex items-center justify-between gap-4">
             <button
               onClick={() => setChapter((c) => c - 1)}
               disabled={chapter === 0}
-              className="px-4 md:px-6 py-2 bg-rose-950/30 border border-rose-500/50 text-rose-400 rounded hover:bg-rose-950/50 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              className="rounded border border-rose-500/50 bg-rose-950/30 px-4 py-2 text-rose-400 transition-all hover:bg-rose-950/50 disabled:cursor-not-allowed disabled:opacity-30 md:px-6"
             >
               Previous
             </button>
@@ -390,9 +478,9 @@ That's what makes custom hooks powerful. That's what makes relationships real. T
                 <button
                   key={idx}
                   onClick={() => setChapter(idx)}
-                  className={`w-2 h-2 rounded-full transition-all ${
+                  className={`h-2 w-2 rounded-full transition-all ${
                     idx === chapter
-                      ? "bg-rose-400 w-8"
+                      ? "w-8 bg-rose-400"
                       : "bg-rose-500/30 hover:bg-rose-500/50"
                   }`}
                   aria-label={`Go to chapter ${idx + 1}`}
@@ -403,12 +491,12 @@ That's what makes custom hooks powerful. That's what makes relationships real. T
             <button
               onClick={() => setChapter((c) => c + 1)}
               disabled={chapter === chapters.length - 1}
-              className="px-4 md:px-6 py-2 bg-rose-950/30 border border-rose-500/50 text-rose-400 rounded hover:bg-rose-950/50 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              className="rounded border border-rose-500/50 bg-rose-950/30 px-4 py-2 text-rose-400 transition-all hover:bg-rose-950/50 disabled:cursor-not-allowed disabled:opacity-30 md:px-6"
             >
               Next
             </button>
           </div>
-          <div className="text-center mt-2 text-sm text-slate-500">
+          <div className="mt-2 text-center text-sm text-slate-500">
             Chapter {chapter + 1} of {chapters.length}
           </div>
         </div>

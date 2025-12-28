@@ -49,12 +49,12 @@ const ModuleWrapper = ({
       {/* Universal Exit Button */}
       <Link
         to="/"
-        className="fixed top-4 left-3 z-[100] opacity-30 hover:opacity-100 transition-opacity p-2 bg-black/70 hover:bg-black text-white rounded-full text-xs font-mono uppercase tracking-widest shadow-lg"
+        className="fixed left-3 top-4 z-[100] rounded-full bg-black/70 p-2 font-mono text-xs uppercase tracking-widest text-white opacity-30 shadow-lg transition-opacity hover:bg-black hover:opacity-100"
         title="Return to Home"
       >
         ← EXIT
       </Link>
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 lg:py-6">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-12 lg:py-6">
         {children}
       </div>
     </div>
@@ -78,26 +78,26 @@ function ScrollToTop() {
  * Loading Component for Lazy-Loaded Modules
  */
 const ModuleLoader = () => (
-  <div className="min-h-screen flex items-center justify-center">
+  <div className="flex min-h-screen items-center justify-center">
     <div className="text-center">
-      <div className="animate-spin rounded-full h-16 w-16 border-b-2 border-white mx-auto mb-4"></div>
-      <p className="text-zinc-400 font-mono text-sm">Loading module...</p>
+      <div className="mx-auto mb-4 h-16 w-16 animate-spin rounded-full border-b-2 border-white"></div>
+      <p className="font-mono text-sm text-zinc-400">Loading module...</p>
     </div>
   </div>
 );
 
 /**
  * Main App Router
- * 
+ *
  * 🔌 SWITCHBOARD ARCHITECTURE
- * 
+ *
  * Routes are now dynamically generated from the module registry.
  * To enable/disable a module:
  * 1. Open src/config/moduleRegistry.ts
  * 2. Find the module you want to toggle
  * 3. Set `enabled: true` or `enabled: false`
  * 4. Restart the dev server
- * 
+ *
  * The module will automatically be:
  * - Added/removed from routing
  * - Shown/hidden on the home page
@@ -150,15 +150,15 @@ export default function App() {
           path="*"
           element={
             <ModuleWrapper bgClass="bg-zinc-950">
-              <div className="min-h-screen flex items-center justify-center">
+              <div className="flex min-h-screen items-center justify-center">
                 <div className="text-center">
-                  <h1 className="text-6xl font-black text-zinc-800 mb-4">
+                  <h1 className="mb-4 text-6xl font-black text-zinc-800">
                     404
                   </h1>
-                  <p className="text-zinc-500 mb-8">This route doesn't exist</p>
+                  <p className="mb-8 text-zinc-500">This route doesn't exist</p>
                   <Link
                     to="/"
-                    className="bg-zinc-800 hover:bg-zinc-700 text-white px-6 py-3 rounded-lg font-bold transition-colors"
+                    className="rounded-lg bg-zinc-800 px-6 py-3 font-bold text-white transition-colors hover:bg-zinc-700"
                   >
                     Go Home
                   </Link>

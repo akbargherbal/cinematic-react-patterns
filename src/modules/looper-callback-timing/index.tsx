@@ -1,5 +1,11 @@
 import { useState, useEffect, useRef } from "react";
-import { Clock, AlertTriangle, CheckCircle, XCircle, Timer } from "lucide-react";
+import {
+  Clock,
+  AlertTriangle,
+  CheckCircle,
+  XCircle,
+  Timer,
+} from "lucide-react";
 
 export default function LooperCallbackTiming() {
   const [chapter, setChapter] = useState(0);
@@ -90,9 +96,9 @@ The solution wasn't to let the callback run. It was to cancel it. To clean up. T
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
       if (e.key === "ArrowLeft" && chapter > 0) {
-        setChapter(c => c - 1);
+        setChapter((c) => c - 1);
       } else if (e.key === "ArrowRight" && chapter < chapters.length - 1) {
-        setChapter(c => c + 1);
+        setChapter((c) => c + 1);
       }
     };
 
@@ -101,28 +107,29 @@ The solution wasn't to let the callback run. It was to cancel it. To clean up. T
   }, [chapter, chapters.length]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-sans">
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-300">
       {/* Header */}
       <header className="border-b border-amber-500/30 bg-slate-900/50 backdrop-blur-sm">
-        <div className="max-w-6xl mx-auto px-4 py-8">
-          <h1 className="text-4xl md:text-5xl font-bold text-amber-500 mb-2">
+        <div className="mx-auto max-w-6xl px-4 py-8">
+          <h1 className="mb-2 text-4xl font-bold text-amber-500 md:text-5xl">
             Looper
           </h1>
-          <p className="text-lg md:text-xl text-slate-400">
+          <p className="text-lg text-slate-400 md:text-xl">
             Callback Execution Timing
           </p>
-          <p className="text-sm text-slate-500 mt-2">
-            When callbacks execute in a different context than they were scheduled
+          <p className="mt-2 text-sm text-slate-500">
+            When callbacks execute in a different context than they were
+            scheduled
           </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 py-12 pb-32">
+      <main className="mx-auto max-w-6xl px-4 py-12 pb-32">
         <article className="space-y-8">
           {/* Chapter Title */}
           <div className="border-l-4 border-amber-500 pl-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-amber-400 mb-2">
+            <h2 className="mb-2 text-3xl font-bold text-amber-400 md:text-4xl">
               {currentChapter.title}
             </h2>
             <p className="text-sm text-slate-500">
@@ -132,43 +139,44 @@ The solution wasn't to let the callback run. It was to cancel it. To clean up. T
 
           {/* Narrative Content */}
           <div className="prose prose-invert prose-slate max-w-none">
-            {currentChapter.content.split('\n\n').map((paragraph, idx) => (
-              <p key={idx} className="text-lg leading-relaxed mb-4 text-slate-300">
+            {currentChapter.content.split("\n\n").map((paragraph, idx) => (
+              <p
+                key={idx}
+                className="mb-4 text-lg leading-relaxed text-slate-300"
+              >
                 {paragraph}
               </p>
             ))}
           </div>
 
           {/* Interactive Demo */}
-          <div className="mt-12">
-            {currentChapter.demo}
-          </div>
+          <div className="mt-12">{currentChapter.demo}</div>
         </article>
       </main>
 
       {/* Navigation Footer */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/90 backdrop-blur-sm border-t border-amber-500/30">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-amber-500/30 bg-slate-900/90 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-4">
+          <div className="flex items-center justify-between">
             <button
-              onClick={() => setChapter(c => c - 1)}
+              onClick={() => setChapter((c) => c - 1)}
               disabled={chapter === 0}
-              className="px-6 py-2 bg-amber-950/50 text-amber-500 border border-amber-500/30 rounded hover:bg-amber-950 hover:border-amber-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              className="rounded border border-amber-500/30 bg-amber-950/50 px-6 py-2 text-amber-500 transition-all hover:border-amber-500 hover:bg-amber-950 disabled:cursor-not-allowed disabled:opacity-30"
             >
               Previous
             </button>
 
             <div className="flex items-center gap-2 text-sm text-slate-400">
-              <Clock className="w-4 h-4" />
+              <Clock className="h-4 w-4" />
               <span>
                 Chapter {chapter + 1} of {chapters.length}
               </span>
             </div>
 
             <button
-              onClick={() => setChapter(c => c + 1)}
+              onClick={() => setChapter((c) => c + 1)}
               disabled={chapter === chapters.length - 1}
-              className="px-6 py-2 bg-amber-950/50 text-amber-500 border border-amber-500/30 rounded hover:bg-amber-950 hover:border-amber-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              className="rounded border border-amber-500/30 bg-amber-950/50 px-6 py-2 text-amber-500 transition-all hover:border-amber-500 hover:bg-amber-950 disabled:cursor-not-allowed disabled:opacity-30"
             >
               Next
             </button>
@@ -195,7 +203,7 @@ function TimelineDemo() {
     setCapturedValue(currentValue);
 
     const interval = setInterval(() => {
-      setProgress(p => {
+      setProgress((p) => {
         if (p >= 100) {
           clearInterval(interval);
           setIsExecuting(true);
@@ -214,17 +222,17 @@ function TimelineDemo() {
   };
 
   return (
-    <div className="bg-amber-950/20 border border-amber-500/30 rounded-lg p-6">
-      <h3 className="text-2xl font-bold text-amber-400 mb-4 flex items-center gap-2">
-        <Timer className="w-6 h-6" />
+    <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-6">
+      <h3 className="mb-4 flex items-center gap-2 text-2xl font-bold text-amber-400">
+        <Timer className="h-6 w-6" />
         The React Pattern: Callback Scheduling
       </h3>
 
       <div className="space-y-6">
         {/* Code Example */}
-        <div className="bg-slate-900 rounded p-4 font-mono text-sm overflow-x-auto">
+        <div className="overflow-x-auto rounded bg-slate-900 p-4 font-mono text-sm">
           <pre className="text-slate-300">
-{`function YoungJoe() {
+            {`function YoungJoe() {
   const [target, setTarget] = useState('${currentValue}');
   
   // Schedule a callback for 3 seconds from now
@@ -243,7 +251,7 @@ function TimelineDemo() {
         {/* Interactive Controls */}
         <div className="space-y-4">
           <div>
-            <label className="block text-sm text-slate-400 mb-2">
+            <label className="mb-2 block text-sm text-slate-400">
               Current Target:
             </label>
             <input
@@ -251,7 +259,7 @@ function TimelineDemo() {
               value={currentValue}
               onChange={(e) => setCurrentValue(e.target.value)}
               disabled={isScheduled}
-              className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded text-slate-300 disabled:opacity-50"
+              className="w-full rounded border border-slate-700 bg-slate-900 px-4 py-2 text-slate-300 disabled:opacity-50"
               placeholder="Enter target name"
             />
           </div>
@@ -260,13 +268,13 @@ function TimelineDemo() {
             <button
               onClick={scheduleCallback}
               disabled={isScheduled}
-              className="px-6 py-2 bg-amber-600 text-white rounded hover:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="rounded bg-amber-600 px-6 py-2 text-white hover:bg-amber-700 disabled:cursor-not-allowed disabled:opacity-50"
             >
               Schedule Callback
             </button>
             <button
               onClick={reset}
-              className="px-6 py-2 bg-slate-700 text-slate-300 rounded hover:bg-slate-600"
+              className="rounded bg-slate-700 px-6 py-2 text-slate-300 hover:bg-slate-600"
             >
               Reset
             </button>
@@ -281,34 +289,37 @@ function TimelineDemo() {
               <span className="text-slate-400">Executing...</span>
               <span className="text-slate-400">Complete</span>
             </div>
-            <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+            <div className="h-2 overflow-hidden rounded-full bg-slate-800">
               <div
                 className="h-full bg-amber-500 transition-all duration-300"
                 style={{ width: `${progress}%` }}
               />
             </div>
-            <div className="grid grid-cols-2 gap-4 mt-4">
-              <div className="bg-slate-900 rounded p-4">
-                <p className="text-xs text-slate-500 mb-1">Captured at schedule time:</p>
-                <p className="text-amber-400 font-mono">{capturedValue}</p>
+            <div className="mt-4 grid grid-cols-2 gap-4">
+              <div className="rounded bg-slate-900 p-4">
+                <p className="mb-1 text-xs text-slate-500">
+                  Captured at schedule time:
+                </p>
+                <p className="font-mono text-amber-400">{capturedValue}</p>
               </div>
-              <div className="bg-slate-900 rounded p-4">
-                <p className="text-xs text-slate-500 mb-1">Current value:</p>
-                <p className="text-slate-300 font-mono">{currentValue}</p>
+              <div className="rounded bg-slate-900 p-4">
+                <p className="mb-1 text-xs text-slate-500">Current value:</p>
+                <p className="font-mono text-slate-300">{currentValue}</p>
               </div>
             </div>
           </div>
         )}
 
         {isExecuting && (
-          <div className="bg-slate-900 border border-amber-500/50 rounded p-4">
-            <p className="text-amber-400 font-mono text-sm">
+          <div className="rounded border border-amber-500/50 bg-slate-900 p-4">
+            <p className="font-mono text-sm text-amber-400">
               Console: Executing hit on: {capturedValue}
             </p>
             {capturedValue !== currentValue && (
-              <p className="text-red-400 text-sm mt-2 flex items-center gap-2">
-                <AlertTriangle className="w-4 h-4" />
-                Warning: Callback executed with stale data! Current target is "{currentValue}"
+              <p className="mt-2 flex items-center gap-2 text-sm text-red-400">
+                <AlertTriangle className="h-4 w-4" />
+                Warning: Callback executed with stale data! Current target is "
+                {currentValue}"
               </p>
             )}
           </div>
@@ -335,15 +346,15 @@ function StaleClosureDemo() {
   };
 
   return (
-    <div className="bg-amber-950/20 border border-amber-500/30 rounded-lg p-6">
-      <h3 className="text-2xl font-bold text-amber-400 mb-4">
+    <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-6">
+      <h3 className="mb-4 text-2xl font-bold text-amber-400">
         Stale Closure Problem
       </h3>
 
       <div className="space-y-6">
-        <div className="bg-slate-900 rounded p-4 font-mono text-sm overflow-x-auto">
+        <div className="overflow-x-auto rounded bg-slate-900 p-4 font-mono text-sm">
           <pre className="text-slate-300">
-{`useEffect(() => {
+            {`useEffect(() => {
   const timeoutId = setTimeout(() => {
     // By the time this runs, mission might have changed
     console.log(\`Executing mission: \${mission}\`);
@@ -357,14 +368,14 @@ function StaleClosureDemo() {
 
         <div className="space-y-4">
           <div>
-            <label className="block text-sm text-slate-400 mb-2">
+            <label className="mb-2 block text-sm text-slate-400">
               Young Joe's Mission:
             </label>
             <select
               value={mission}
               onChange={(e) => setMission(e.target.value)}
               disabled={isScheduled && !hasExecuted}
-              className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded text-slate-300 disabled:opacity-50"
+              className="w-full rounded border border-slate-700 bg-slate-900 px-4 py-2 text-slate-300 disabled:opacity-50"
             >
               <option value="close loop">Close Loop (retire peacefully)</option>
               <option value="kill Rainmaker">Kill Rainmaker (save wife)</option>
@@ -375,32 +386,44 @@ function StaleClosureDemo() {
           <button
             onClick={scheduleCallback}
             disabled={isScheduled && !hasExecuted}
-            className="px-6 py-2 bg-amber-600 text-white rounded hover:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed"
+            className="rounded bg-amber-600 px-6 py-2 text-white hover:bg-amber-700 disabled:cursor-not-allowed disabled:opacity-50"
           >
-            {isScheduled && !hasExecuted ? "Callback Scheduled..." : "Schedule Callback"}
+            {isScheduled && !hasExecuted
+              ? "Callback Scheduled..."
+              : "Schedule Callback"}
           </button>
 
           {isScheduled && (
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
-                <div className="bg-slate-900 rounded p-4 border-l-4 border-amber-500">
-                  <p className="text-xs text-slate-500 mb-1">Old Joe's Mission (captured):</p>
-                  <p className="text-amber-400 font-mono text-sm">{scheduledMission}</p>
+                <div className="rounded border-l-4 border-amber-500 bg-slate-900 p-4">
+                  <p className="mb-1 text-xs text-slate-500">
+                    Old Joe's Mission (captured):
+                  </p>
+                  <p className="font-mono text-sm text-amber-400">
+                    {scheduledMission}
+                  </p>
                 </div>
-                <div className="bg-slate-900 rounded p-4 border-l-4 border-slate-500">
-                  <p className="text-xs text-slate-500 mb-1">Young Joe's Mission (current):</p>
-                  <p className="text-slate-300 font-mono text-sm">{mission}</p>
+                <div className="rounded border-l-4 border-slate-500 bg-slate-900 p-4">
+                  <p className="mb-1 text-xs text-slate-500">
+                    Young Joe's Mission (current):
+                  </p>
+                  <p className="font-mono text-sm text-slate-300">{mission}</p>
                 </div>
               </div>
 
               {hasExecuted && (
-                <div className={`rounded p-4 ${scheduledMission !== mission ? 'bg-red-950/50 border border-red-500/50' : 'bg-emerald-950/50 border border-emerald-500/50'}`}>
-                  <p className={`font-mono text-sm ${scheduledMission !== mission ? 'text-red-400' : 'text-emerald-400'}`}>
+                <div
+                  className={`rounded p-4 ${scheduledMission !== mission ? "border border-red-500/50 bg-red-950/50" : "border border-emerald-500/50 bg-emerald-950/50"}`}
+                >
+                  <p
+                    className={`font-mono text-sm ${scheduledMission !== mission ? "text-red-400" : "text-emerald-400"}`}
+                  >
                     Callback executed: {scheduledMission}
                   </p>
                   {scheduledMission !== mission && (
-                    <p className="text-red-400 text-sm mt-2 flex items-center gap-2">
-                      <XCircle className="w-4 h-4" />
+                    <p className="mt-2 flex items-center gap-2 text-sm text-red-400">
+                      <XCircle className="h-4 w-4" />
                       Context mismatch! Old Joe is executing the wrong mission.
                     </p>
                   )}
@@ -422,34 +445,43 @@ function MemoryLeakDemo() {
 
   const scheduleWithoutCleanup = () => {
     const callbackId = Date.now();
-    setLogs(prev => [...prev, `[${new Date().toLocaleTimeString()}] Scheduled callback #${callbackId}`]);
+    setLogs((prev) => [
+      ...prev,
+      `[${new Date().toLocaleTimeString()}] Scheduled callback #${callbackId}`,
+    ]);
 
     setTimeout(() => {
       if (!mountedRef.current) {
-        setLeakedCallbacks(prev => prev + 1);
-        setLogs(prev => [...prev, `[${new Date().toLocaleTimeString()}] ⚠️ Callback #${callbackId} executed after unmount!`]);
+        setLeakedCallbacks((prev) => prev + 1);
+        setLogs((prev) => [
+          ...prev,
+          `[${new Date().toLocaleTimeString()}] ⚠️ Callback #${callbackId} executed after unmount!`,
+        ]);
       } else {
-        setLogs(prev => [...prev, `[${new Date().toLocaleTimeString()}] ✓ Callback #${callbackId} executed safely`]);
+        setLogs((prev) => [
+          ...prev,
+          `[${new Date().toLocaleTimeString()}] ✓ Callback #${callbackId} executed safely`,
+        ]);
       }
     }, 2000);
   };
 
   const toggleMount = () => {
-    setIsMounted(prev => !prev);
+    setIsMounted((prev) => !prev);
     mountedRef.current = !mountedRef.current;
   };
 
   return (
-    <div className="bg-amber-950/20 border border-amber-500/30 rounded-lg p-6">
-      <h3 className="text-2xl font-bold text-amber-400 mb-4 flex items-center gap-2">
-        <AlertTriangle className="w-6 h-6" />
+    <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-6">
+      <h3 className="mb-4 flex items-center gap-2 text-2xl font-bold text-amber-400">
+        <AlertTriangle className="h-6 w-6" />
         Memory Leak: The Rainmaker Problem
       </h3>
 
       <div className="space-y-6">
-        <div className="bg-slate-900 rounded p-4 font-mono text-sm overflow-x-auto">
+        <div className="overflow-x-auto rounded bg-slate-900 p-4 font-mono text-sm">
           <pre className="text-slate-300">
-{`useEffect(() => {
+            {`useEffect(() => {
   setTimeout(() => {
     // DANGER: Component might be unmounted
     // DANGER: This might trigger a cascade of bugs
@@ -464,11 +496,13 @@ function MemoryLeakDemo() {
           </pre>
         </div>
 
-        <div className="flex items-center justify-between bg-slate-900 rounded p-4">
+        <div className="flex items-center justify-between rounded bg-slate-900 p-4">
           <div>
             <p className="text-sm text-slate-400">Component Status:</p>
-            <p className={`text-lg font-bold ${isMounted ? 'text-emerald-400' : 'text-red-400'}`}>
-              {isMounted ? 'Mounted' : 'Unmounted'}
+            <p
+              className={`text-lg font-bold ${isMounted ? "text-emerald-400" : "text-red-400"}`}
+            >
+              {isMounted ? "Mounted" : "Unmounted"}
             </p>
           </div>
           <div>
@@ -480,26 +514,33 @@ function MemoryLeakDemo() {
         <div className="flex gap-4">
           <button
             onClick={scheduleWithoutCleanup}
-            className="px-6 py-2 bg-amber-600 text-white rounded hover:bg-amber-700"
+            className="rounded bg-amber-600 px-6 py-2 text-white hover:bg-amber-700"
           >
             Schedule Callback (No Cleanup)
           </button>
           <button
             onClick={toggleMount}
-            className={`px-6 py-2 rounded ${isMounted ? 'bg-red-600 hover:bg-red-700' : 'bg-emerald-600 hover:bg-emerald-700'} text-white`}
+            className={`rounded px-6 py-2 ${isMounted ? "bg-red-600 hover:bg-red-700" : "bg-emerald-600 hover:bg-emerald-700"} text-white`}
           >
-            {isMounted ? 'Unmount Component' : 'Mount Component'}
+            {isMounted ? "Unmount Component" : "Mount Component"}
           </button>
         </div>
 
-        <div className="bg-slate-900 rounded p-4 max-h-64 overflow-y-auto">
-          <p className="text-xs text-slate-500 mb-2">Console Output:</p>
+        <div className="max-h-64 overflow-y-auto rounded bg-slate-900 p-4">
+          <p className="mb-2 text-xs text-slate-500">Console Output:</p>
           {logs.length === 0 ? (
-            <p className="text-slate-600 text-sm">No callbacks scheduled yet...</p>
+            <p className="text-sm text-slate-600">
+              No callbacks scheduled yet...
+            </p>
           ) : (
             <div className="space-y-1 font-mono text-xs">
               {logs.map((log, idx) => (
-                <p key={idx} className={log.includes('⚠️') ? 'text-red-400' : 'text-slate-400'}>
+                <p
+                  key={idx}
+                  className={
+                    log.includes("⚠️") ? "text-red-400" : "text-slate-400"
+                  }
+                >
                   {log}
                 </p>
               ))}
@@ -512,15 +553,23 @@ function MemoryLeakDemo() {
 }
 
 function CleanupDemo() {
-  const [withCleanup, setWithCleanup] = useState({ mounted: true, scheduled: false, executed: false });
-  const [withoutCleanup, setWithoutCleanup] = useState({ mounted: true, scheduled: false, executed: false });
+  const [withCleanup, setWithCleanup] = useState({
+    mounted: true,
+    scheduled: false,
+    executed: false,
+  });
+  const [withoutCleanup, setWithoutCleanup] = useState({
+    mounted: true,
+    scheduled: false,
+    executed: false,
+  });
 
   const scheduleWithCleanup = () => {
-    setWithCleanup(prev => ({ ...prev, scheduled: true, executed: false }));
+    setWithCleanup((prev) => ({ ...prev, scheduled: true, executed: false }));
 
     const timeoutId = setTimeout(() => {
       if (withCleanup.mounted) {
-        setWithCleanup(prev => ({ ...prev, executed: true }));
+        setWithCleanup((prev) => ({ ...prev, executed: true }));
       }
     }, 2000);
 
@@ -529,38 +578,42 @@ function CleanupDemo() {
   };
 
   const scheduleWithoutCleanup = () => {
-    setWithoutCleanup(prev => ({ ...prev, scheduled: true, executed: false }));
+    setWithoutCleanup((prev) => ({
+      ...prev,
+      scheduled: true,
+      executed: false,
+    }));
 
     setTimeout(() => {
-      setWithoutCleanup(prev => ({ ...prev, executed: true }));
+      setWithoutCleanup((prev) => ({ ...prev, executed: true }));
     }, 2000);
   };
 
   const unmountWithCleanup = () => {
-    setWithCleanup(prev => ({ ...prev, mounted: false }));
+    setWithCleanup((prev) => ({ ...prev, mounted: false }));
   };
 
   const unmountWithoutCleanup = () => {
-    setWithoutCleanup(prev => ({ ...prev, mounted: false }));
+    setWithoutCleanup((prev) => ({ ...prev, mounted: false }));
   };
 
   return (
-    <div className="bg-amber-950/20 border border-amber-500/30 rounded-lg p-6">
-      <h3 className="text-2xl font-bold text-amber-400 mb-4">
+    <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-6">
+      <h3 className="mb-4 text-2xl font-bold text-amber-400">
         Breaking the Loop: Cleanup Functions
       </h3>
 
-      <div className="grid md:grid-cols-2 gap-6">
+      <div className="grid gap-6 md:grid-cols-2">
         {/* Without Cleanup */}
-        <div className="bg-red-950/20 border border-red-500/30 rounded-lg p-4">
-          <h4 className="text-lg font-bold text-red-400 mb-4 flex items-center gap-2">
-            <XCircle className="w-5 h-5" />
+        <div className="rounded-lg border border-red-500/30 bg-red-950/20 p-4">
+          <h4 className="mb-4 flex items-center gap-2 text-lg font-bold text-red-400">
+            <XCircle className="h-5 w-5" />
             Without Cleanup
           </h4>
 
-          <div className="bg-slate-900 rounded p-3 font-mono text-xs mb-4 overflow-x-auto">
+          <div className="mb-4 overflow-x-auto rounded bg-slate-900 p-3 font-mono text-xs">
             <pre className="text-slate-300">
-{`useEffect(() => {
+              {`useEffect(() => {
   setTimeout(() => {
     execute();
   }, 2000);
@@ -573,15 +626,19 @@ function CleanupDemo() {
           <div className="space-y-3">
             <div className="flex items-center justify-between text-sm">
               <span className="text-slate-400">Status:</span>
-              <span className={withoutCleanup.mounted ? 'text-emerald-400' : 'text-red-400'}>
-                {withoutCleanup.mounted ? 'Mounted' : 'Unmounted'}
+              <span
+                className={
+                  withoutCleanup.mounted ? "text-emerald-400" : "text-red-400"
+                }
+              >
+                {withoutCleanup.mounted ? "Mounted" : "Unmounted"}
               </span>
             </div>
 
             <button
               onClick={scheduleWithoutCleanup}
               disabled={withoutCleanup.scheduled}
-              className="w-full px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 disabled:opacity-50 text-sm"
+              className="w-full rounded bg-red-600 px-4 py-2 text-sm text-white hover:bg-red-700 disabled:opacity-50"
             >
               Schedule Callback
             </button>
@@ -589,15 +646,15 @@ function CleanupDemo() {
             <button
               onClick={unmountWithoutCleanup}
               disabled={!withoutCleanup.mounted}
-              className="w-full px-4 py-2 bg-slate-700 text-slate-300 rounded hover:bg-slate-600 disabled:opacity-50 text-sm"
+              className="w-full rounded bg-slate-700 px-4 py-2 text-sm text-slate-300 hover:bg-slate-600 disabled:opacity-50"
             >
               Unmount Component
             </button>
 
             {withoutCleanup.executed && !withoutCleanup.mounted && (
-              <div className="bg-red-900/50 border border-red-500 rounded p-3 text-sm">
-                <p className="text-red-400 flex items-center gap-2">
-                  <AlertTriangle className="w-4 h-4" />
+              <div className="rounded border border-red-500 bg-red-900/50 p-3 text-sm">
+                <p className="flex items-center gap-2 text-red-400">
+                  <AlertTriangle className="h-4 w-4" />
                   Callback executed after unmount!
                 </p>
               </div>
@@ -606,15 +663,15 @@ function CleanupDemo() {
         </div>
 
         {/* With Cleanup */}
-        <div className="bg-emerald-950/20 border border-emerald-500/30 rounded-lg p-4">
-          <h4 className="text-lg font-bold text-emerald-400 mb-4 flex items-center gap-2">
-            <CheckCircle className="w-5 h-5" />
+        <div className="rounded-lg border border-emerald-500/30 bg-emerald-950/20 p-4">
+          <h4 className="mb-4 flex items-center gap-2 text-lg font-bold text-emerald-400">
+            <CheckCircle className="h-5 w-5" />
             With Cleanup
           </h4>
 
-          <div className="bg-slate-900 rounded p-3 font-mono text-xs mb-4 overflow-x-auto">
+          <div className="mb-4 overflow-x-auto rounded bg-slate-900 p-3 font-mono text-xs">
             <pre className="text-slate-300">
-{`useEffect(() => {
+              {`useEffect(() => {
   const id = setTimeout(() => {
     execute();
   }, 2000);
@@ -629,15 +686,19 @@ function CleanupDemo() {
           <div className="space-y-3">
             <div className="flex items-center justify-between text-sm">
               <span className="text-slate-400">Status:</span>
-              <span className={withCleanup.mounted ? 'text-emerald-400' : 'text-red-400'}>
-                {withCleanup.mounted ? 'Mounted' : 'Unmounted'}
+              <span
+                className={
+                  withCleanup.mounted ? "text-emerald-400" : "text-red-400"
+                }
+              >
+                {withCleanup.mounted ? "Mounted" : "Unmounted"}
               </span>
             </div>
 
             <button
               onClick={scheduleWithCleanup}
               disabled={withCleanup.scheduled}
-              className="w-full px-4 py-2 bg-emerald-600 text-white rounded hover:bg-emerald-700 disabled:opacity-50 text-sm"
+              className="w-full rounded bg-emerald-600 px-4 py-2 text-sm text-white hover:bg-emerald-700 disabled:opacity-50"
             >
               Schedule Callback
             </button>
@@ -645,15 +706,15 @@ function CleanupDemo() {
             <button
               onClick={unmountWithCleanup}
               disabled={!withCleanup.mounted}
-              className="w-full px-4 py-2 bg-slate-700 text-slate-300 rounded hover:bg-slate-600 disabled:opacity-50 text-sm"
+              className="w-full rounded bg-slate-700 px-4 py-2 text-sm text-slate-300 hover:bg-slate-600 disabled:opacity-50"
             >
               Unmount Component
             </button>
 
             {!withCleanup.mounted && withCleanup.scheduled && (
-              <div className="bg-emerald-900/50 border border-emerald-500 rounded p-3 text-sm">
-                <p className="text-emerald-400 flex items-center gap-2">
-                  <CheckCircle className="w-4 h-4" />
+              <div className="rounded border border-emerald-500 bg-emerald-900/50 p-3 text-sm">
+                <p className="flex items-center gap-2 text-emerald-400">
+                  <CheckCircle className="h-4 w-4" />
                   Callback cancelled on unmount!
                 </p>
               </div>
@@ -662,10 +723,13 @@ function CleanupDemo() {
         </div>
       </div>
 
-      <div className="mt-6 bg-slate-900 rounded p-4">
-        <p className="text-sm text-slate-400 mb-2">The Pattern:</p>
-        <p className="text-slate-300 text-sm leading-relaxed">
-          Young Joe killing himself is the cleanup function. By returning a function from useEffect that cancels the scheduled callback, you prevent it from executing in corrupted state. The loop is broken. The timeline is clean.
+      <div className="mt-6 rounded bg-slate-900 p-4">
+        <p className="mb-2 text-sm text-slate-400">The Pattern:</p>
+        <p className="text-sm leading-relaxed text-slate-300">
+          Young Joe killing himself is the cleanup function. By returning a
+          function from useEffect that cancels the scheduled callback, you
+          prevent it from executing in corrupted state. The loop is broken. The
+          timeline is clean.
         </p>
       </div>
     </div>
@@ -674,15 +738,17 @@ function CleanupDemo() {
 
 function PatternComparison() {
   return (
-    <div className="bg-amber-950/20 border border-amber-500/30 rounded-lg p-6">
-      <h3 className="text-2xl font-bold text-amber-400 mb-6">
+    <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-6">
+      <h3 className="mb-6 text-2xl font-bold text-amber-400">
         The Rules of Temporal Hygiene
       </h3>
 
       <div className="space-y-8">
         {/* Best Practices Checklist */}
-        <div className="bg-slate-900 rounded-lg p-6">
-          <h4 className="text-xl font-bold text-amber-400 mb-4">Best Practices</h4>
+        <div className="rounded-lg bg-slate-900 p-6">
+          <h4 className="mb-4 text-xl font-bold text-amber-400">
+            Best Practices
+          </h4>
           <div className="space-y-3">
             {[
               "Always return a cleanup function from useEffect",
@@ -692,10 +758,10 @@ function PatternComparison() {
               "Check mounted state before updating state in callbacks",
               "Use cancellation flags for async operations",
               "Understand closure capture timing",
-              "Test component unmounting scenarios"
+              "Test component unmounting scenarios",
             ].map((practice, idx) => (
               <div key={idx} className="flex items-start gap-3">
-                <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
+                <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-emerald-400" />
                 <p className="text-slate-300">{practice}</p>
               </div>
             ))}
@@ -703,15 +769,15 @@ function PatternComparison() {
         </div>
 
         {/* Code Comparison */}
-        <div className="grid md:grid-cols-2 gap-6">
+        <div className="grid gap-6 md:grid-cols-2">
           <div>
-            <h4 className="text-lg font-bold text-red-400 mb-3 flex items-center gap-2">
-              <XCircle className="w-5 h-5" />
+            <h4 className="mb-3 flex items-center gap-2 text-lg font-bold text-red-400">
+              <XCircle className="h-5 w-5" />
               Wrong Way
             </h4>
-            <div className="bg-slate-900 rounded p-4 font-mono text-xs overflow-x-auto">
+            <div className="overflow-x-auto rounded bg-slate-900 p-4 font-mono text-xs">
               <pre className="text-slate-300">
-{`useEffect(() => {
+                {`useEffect(() => {
   setTimeout(() => {
     // No checks
     setState(newValue);
@@ -724,13 +790,13 @@ function PatternComparison() {
           </div>
 
           <div>
-            <h4 className="text-lg font-bold text-emerald-400 mb-3 flex items-center gap-2">
-              <CheckCircle className="w-5 h-5" />
+            <h4 className="mb-3 flex items-center gap-2 text-lg font-bold text-emerald-400">
+              <CheckCircle className="h-5 w-5" />
               Right Way
             </h4>
-            <div className="bg-slate-900 rounded p-4 font-mono text-xs overflow-x-auto">
+            <div className="overflow-x-auto rounded bg-slate-900 p-4 font-mono text-xs">
               <pre className="text-slate-300">
-{`useEffect(() => {
+                {`useEffect(() => {
   let cancelled = false;
   
   const id = setTimeout(() => {
@@ -750,12 +816,16 @@ function PatternComparison() {
         </div>
 
         {/* Final Wisdom */}
-        <div className="bg-amber-950/30 border-l-4 border-amber-500 p-6">
-          <p className="text-lg text-amber-400 font-bold mb-2">
+        <div className="border-l-4 border-amber-500 bg-amber-950/30 p-6">
+          <p className="mb-2 text-lg font-bold text-amber-400">
             "Close your own loop."
           </p>
-          <p className="text-slate-300 leading-relaxed">
-            Joe learned that being a looper isn't about executing every callback that's scheduled. It's about knowing when to cancel. When to clean up. When to break the loop before it corrupts everything. In React, you're a looper every time you use useEffect. The question is: will you close your loop properly?
+          <p className="leading-relaxed text-slate-300">
+            Joe learned that being a looper isn't about executing every callback
+            that's scheduled. It's about knowing when to cancel. When to clean
+            up. When to break the loop before it corrupts everything. In React,
+            you're a looper every time you use useEffect. The question is: will
+            you close your loop properly?
           </p>
         </div>
       </div>

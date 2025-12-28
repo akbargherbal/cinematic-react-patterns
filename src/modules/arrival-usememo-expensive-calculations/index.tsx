@@ -175,13 +175,15 @@ The gift of memory, whether across time or across renders, is the gift of sustai
   // Memoized version
   const memoizedAnalysis = useMemo(
     () => expensiveLanguageAnalysis(symbols),
-    [symbols]
+    [symbols],
   );
 
   // Non-memoized version (runs on every render)
   const nonMemoizedAnalysis = expensiveLanguageAnalysis(symbols);
 
-  const analysisResult = useMemoEnabled ? memoizedAnalysis : nonMemoizedAnalysis;
+  const analysisResult = useMemoEnabled
+    ? memoizedAnalysis
+    : nonMemoizedAnalysis;
 
   // Trigger a "render" (simulates component re-rendering)
   const triggerRender = () => {
@@ -207,32 +209,32 @@ The gift of memory, whether across time or across renders, is the gift of sustai
   ];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-sans">
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-300">
       {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4 py-6 sm:px-6 lg:px-8">
-          <div className="flex items-center gap-3 mb-2">
-            <Brain className="w-8 h-8 text-teal-400" />
-            <h1 className="text-3xl sm:text-4xl font-bold text-slate-100">
+      <header className="sticky top-0 z-10 border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-6 sm:px-6 lg:px-8">
+          <div className="mb-2 flex items-center gap-3">
+            <Brain className="h-8 w-8 text-teal-400" />
+            <h1 className="text-3xl font-bold text-slate-100 sm:text-4xl">
               Arrival: useMemo
             </h1>
           </div>
-          <p className="text-base sm:text-lg text-slate-400">
+          <p className="text-base text-slate-400 sm:text-lg">
             Dr. Louise Banks, Montana, 2016 • Performance Optimization
           </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 py-8 pb-32 sm:px-6 lg:px-8">
+      <main className="mx-auto max-w-6xl px-4 py-8 pb-32 sm:px-6 lg:px-8">
         {/* Chapter Content */}
         <div className="mb-12">
-          <h2 className="text-2xl sm:text-3xl font-bold text-teal-400 mb-6">
+          <h2 className="mb-6 text-2xl font-bold text-teal-400 sm:text-3xl">
             {currentChapter.title}
           </h2>
           <div className="prose prose-invert prose-slate max-w-none">
             {currentChapter.content.split("\n\n").map((paragraph, idx) => (
-              <p key={idx} className="text-slate-300 leading-relaxed mb-4">
+              <p key={idx} className="mb-4 leading-relaxed text-slate-300">
                 {paragraph}
               </p>
             ))}
@@ -241,24 +243,24 @@ The gift of memory, whether across time or across renders, is the gift of sustai
 
         {/* Interactive Demonstrations */}
         {chapter === 0 && (
-          <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 sm:p-8">
-            <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
-              <Brain className="w-5 h-5 text-teal-400" />
+          <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-6 sm:p-8">
+            <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-100">
+              <Brain className="h-5 w-5 text-teal-400" />
               Heptapod Symbols
             </h3>
-            <div className="flex flex-wrap gap-4 justify-center">
+            <div className="flex flex-wrap justify-center gap-4">
               {["circle", "wave", "spiral"].map((symbol) => (
                 <div
                   key={symbol}
-                  className="w-24 h-24 rounded-full border-2 border-teal-500/30 bg-teal-950/20 flex items-center justify-center"
+                  className="flex h-24 w-24 items-center justify-center rounded-full border-2 border-teal-500/30 bg-teal-950/20"
                 >
-                  <span className="text-teal-400 text-sm font-mono">
+                  <span className="font-mono text-sm text-teal-400">
                     {symbol}
                   </span>
                 </div>
               ))}
             </div>
-            <p className="text-slate-400 text-sm mt-6 text-center">
+            <p className="mt-6 text-center text-sm text-slate-400">
               Each symbol requires deep analysis to understand. The question is:
               how often must we analyze them?
             </p>
@@ -266,10 +268,10 @@ The gift of memory, whether across time or across renders, is the gift of sustai
         )}
 
         {chapter >= 1 && chapter <= 2 && (
-          <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 sm:p-8">
-            <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
-              <h3 className="text-xl font-bold text-slate-100 flex items-center gap-2">
-                <AlertCircle className="w-5 h-5 text-amber-400" />
+          <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-6 sm:p-8">
+            <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+              <h3 className="flex items-center gap-2 text-xl font-bold text-slate-100">
+                <AlertCircle className="h-5 w-5 text-amber-400" />
                 Language Learning Simulator
               </h3>
               <div className="flex items-center gap-2 text-sm">
@@ -278,23 +280,21 @@ The gift of memory, whether across time or across renders, is the gift of sustai
               </div>
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-              <div className="bg-slate-800/50 rounded p-4 border border-slate-700">
-                <div className="text-slate-400 text-sm mb-1">Renders</div>
+            <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+              <div className="rounded border border-slate-700 bg-slate-800/50 p-4">
+                <div className="mb-1 text-sm text-slate-400">Renders</div>
                 <div className="text-2xl font-bold text-slate-100">
                   {renderCount}
                 </div>
               </div>
-              <div className="bg-slate-800/50 rounded p-4 border border-amber-500/30">
-                <div className="text-slate-400 text-sm mb-1">
-                  Calculations
-                </div>
+              <div className="rounded border border-amber-500/30 bg-slate-800/50 p-4">
+                <div className="mb-1 text-sm text-slate-400">Calculations</div>
                 <div className="text-2xl font-bold text-amber-400">
                   {calculationCount}
                 </div>
               </div>
-              <div className="bg-slate-800/50 rounded p-4 border border-slate-700">
-                <div className="text-slate-400 text-sm mb-1">Efficiency</div>
+              <div className="rounded border border-slate-700 bg-slate-800/50 p-4">
+                <div className="mb-1 text-sm text-slate-400">Efficiency</div>
                 <div className="text-2xl font-bold text-red-400">
                   {renderCount > 0
                     ? `${((calculationCount / renderCount) * 100).toFixed(0)}%`
@@ -304,17 +304,17 @@ The gift of memory, whether across time or across renders, is the gift of sustai
             </div>
 
             <div className="mb-6">
-              <div className="flex items-center justify-between mb-2">
+              <div className="mb-2 flex items-center justify-between">
                 <span className="text-sm text-slate-400">
                   Analysis Progress
                 </span>
                 {isCalculating && (
-                  <span className="text-xs text-amber-400 animate-pulse">
+                  <span className="animate-pulse text-xs text-amber-400">
                     Computing...
                   </span>
                 )}
               </div>
-              <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+              <div className="h-2 overflow-hidden rounded-full bg-slate-800">
                 <div
                   className="h-full bg-amber-400 transition-all duration-300"
                   style={{
@@ -324,18 +324,18 @@ The gift of memory, whether across time or across renders, is the gift of sustai
               </div>
             </div>
 
-            <div className="bg-slate-800/30 rounded p-4 mb-6 font-mono text-sm text-slate-300 border border-slate-700">
+            <div className="mb-6 rounded border border-slate-700 bg-slate-800/30 p-4 font-mono text-sm text-slate-300">
               {analysisResult}
             </div>
 
             <button
               onClick={triggerRender}
-              className="w-full sm:w-auto px-6 py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded transition-colors"
+              className="w-full rounded bg-amber-500 px-6 py-3 font-semibold text-slate-950 transition-colors hover:bg-amber-600 sm:w-auto"
             >
               Trigger Session (Re-render)
             </button>
 
-            <p className="text-slate-400 text-sm mt-6">
+            <p className="mt-6 text-sm text-slate-400">
               {chapter === 1
                 ? "Notice: Every session requires full re-analysis. The calculation runs every time, even though the symbols haven't changed."
                 : "Crisis mode: Each interruption forces Louise to start over. Watch the calculation count climb with each render."}
@@ -345,10 +345,10 @@ The gift of memory, whether across time or across renders, is the gift of sustai
 
         {chapter === 3 && (
           <div className="space-y-6">
-            <div className="bg-slate-900/50 border border-teal-500/30 rounded-lg p-6 sm:p-8">
-              <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
-                <h3 className="text-xl font-bold text-slate-100 flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5 text-teal-400" />
+            <div className="rounded-lg border border-teal-500/30 bg-slate-900/50 p-6 sm:p-8">
+              <div className="mb-6 flex flex-wrap items-center justify-between gap-4">
+                <h3 className="flex items-center gap-2 text-xl font-bold text-slate-100">
+                  <CheckCircle className="h-5 w-5 text-teal-400" />
                   Optimized Language Learning
                 </h3>
                 <div className="flex items-center gap-2 text-sm">
@@ -357,23 +357,23 @@ The gift of memory, whether across time or across renders, is the gift of sustai
                 </div>
               </div>
 
-              <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
-                <div className="bg-slate-800/50 rounded p-4 border border-slate-700">
-                  <div className="text-slate-400 text-sm mb-1">Renders</div>
+              <div className="mb-6 grid grid-cols-1 gap-4 sm:grid-cols-3">
+                <div className="rounded border border-slate-700 bg-slate-800/50 p-4">
+                  <div className="mb-1 text-sm text-slate-400">Renders</div>
                   <div className="text-2xl font-bold text-slate-100">
                     {renderCount}
                   </div>
                 </div>
-                <div className="bg-slate-800/50 rounded p-4 border border-teal-500/30">
-                  <div className="text-slate-400 text-sm mb-1">
+                <div className="rounded border border-teal-500/30 bg-slate-800/50 p-4">
+                  <div className="mb-1 text-sm text-slate-400">
                     Calculations
                   </div>
                   <div className="text-2xl font-bold text-teal-400">
                     {calculationCount}
                   </div>
                 </div>
-                <div className="bg-slate-800/50 rounded p-4 border border-slate-700">
-                  <div className="text-slate-400 text-sm mb-1">Efficiency</div>
+                <div className="rounded border border-slate-700 bg-slate-800/50 p-4">
+                  <div className="mb-1 text-sm text-slate-400">Efficiency</div>
                   <div className="text-2xl font-bold text-teal-400">
                     {renderCount > 0
                       ? `${(100 - (calculationCount / renderCount) * 100).toFixed(0)}%`
@@ -382,9 +382,9 @@ The gift of memory, whether across time or across renders, is the gift of sustai
                 </div>
               </div>
 
-              <div className="bg-teal-950/20 border border-teal-500/30 rounded p-4 mb-6">
-                <div className="text-teal-400 text-sm mb-2 flex items-center gap-2">
-                  <Zap className="w-4 h-4" />
+              <div className="mb-6 rounded border border-teal-500/30 bg-teal-950/20 p-4">
+                <div className="mb-2 flex items-center gap-2 text-sm text-teal-400">
+                  <Zap className="h-4 w-4" />
                   Cached Result
                 </div>
                 <div className="font-mono text-sm text-slate-300">
@@ -392,10 +392,10 @@ The gift of memory, whether across time or across renders, is the gift of sustai
                 </div>
               </div>
 
-              <div className="flex flex-col sm:flex-row gap-4 mb-6">
+              <div className="mb-6 flex flex-col gap-4 sm:flex-row">
                 <button
                   onClick={triggerRender}
-                  className="flex-1 px-6 py-3 bg-teal-500 hover:bg-teal-600 text-slate-950 font-semibold rounded transition-colors"
+                  className="flex-1 rounded bg-teal-500 px-6 py-3 font-semibold text-slate-950 transition-colors hover:bg-teal-600"
                 >
                   Trigger Session (Re-render)
                 </button>
@@ -404,24 +404,24 @@ The gift of memory, whether across time or across renders, is the gift of sustai
                     updateSymbols(
                       symbolOptions[
                         Math.floor(Math.random() * symbolOptions.length)
-                      ]
+                      ],
                     )
                   }
-                  className="flex-1 px-6 py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded transition-colors"
+                  className="flex-1 rounded bg-amber-500 px-6 py-3 font-semibold text-slate-950 transition-colors hover:bg-amber-600"
                 >
                   Change Symbols (Dependencies)
                 </button>
               </div>
 
-              <div className="bg-slate-800/30 rounded p-4 border border-slate-700">
-                <div className="text-slate-400 text-sm mb-2">
+              <div className="rounded border border-slate-700 bg-slate-800/30 p-4">
+                <div className="mb-2 text-sm text-slate-400">
                   Current Dependencies:
                 </div>
                 <div className="flex flex-wrap gap-2">
                   {symbols.map((symbol, idx) => (
                     <span
                       key={idx}
-                      className="px-3 py-1 bg-teal-950/30 border border-teal-500/30 rounded text-teal-400 text-sm font-mono"
+                      className="rounded border border-teal-500/30 bg-teal-950/30 px-3 py-1 font-mono text-sm text-teal-400"
                     >
                       {symbol}
                     </span>
@@ -429,19 +429,19 @@ The gift of memory, whether across time or across renders, is the gift of sustai
                 </div>
               </div>
 
-              <p className="text-slate-400 text-sm mt-6">
+              <p className="mt-6 text-sm text-slate-400">
                 Notice: The calculation only runs when symbols change. Multiple
                 renders with the same dependencies return the cached result
                 instantly.
               </p>
             </div>
 
-            <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 sm:p-8">
-              <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
-                <Clock className="w-5 h-5 text-teal-400" />
+            <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-6 sm:p-8">
+              <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-100">
+                <Clock className="h-5 w-5 text-teal-400" />
                 The useMemo Pattern
               </h3>
-              <pre className="bg-slate-950 border border-slate-700 rounded p-4 overflow-x-auto text-sm">
+              <pre className="overflow-x-auto rounded border border-slate-700 bg-slate-950 p-4 text-sm">
                 <code className="text-slate-300">
                   {`const languageUnderstanding = useMemo(() => {
   // Expensive calculation: learn the Heptapod language
@@ -457,53 +457,53 @@ The gift of memory, whether across time or across renders, is the gift of sustai
 
         {chapter === 4 && (
           <div className="space-y-6">
-            <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 sm:p-8">
-              <h3 className="text-xl font-bold text-slate-100 mb-6">
+            <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-6 sm:p-8">
+              <h3 className="mb-6 text-xl font-bold text-slate-100">
                 Performance Comparison
               </h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <div className="bg-red-950/20 border border-red-500/30 rounded-lg p-6">
-                  <h4 className="text-lg font-bold text-red-400 mb-4">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                <div className="rounded-lg border border-red-500/30 bg-red-950/20 p-6">
+                  <h4 className="mb-4 text-lg font-bold text-red-400">
                     Without useMemo
                   </h4>
                   <ul className="space-y-3 text-sm text-slate-300">
                     <li className="flex items-start gap-2">
-                      <span className="text-red-400 mt-1">✗</span>
+                      <span className="mt-1 text-red-400">✗</span>
                       <span>Calculation runs on every render</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-red-400 mt-1">✗</span>
+                      <span className="mt-1 text-red-400">✗</span>
                       <span>Wasted computational resources</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-red-400 mt-1">✗</span>
+                      <span className="mt-1 text-red-400">✗</span>
                       <span>Performance degradation over time</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-red-400 mt-1">✗</span>
+                      <span className="mt-1 text-red-400">✗</span>
                       <span>User experience suffers</span>
                     </li>
                   </ul>
                 </div>
-                <div className="bg-teal-950/20 border border-teal-500/30 rounded-lg p-6">
-                  <h4 className="text-lg font-bold text-teal-400 mb-4">
+                <div className="rounded-lg border border-teal-500/30 bg-teal-950/20 p-6">
+                  <h4 className="mb-4 text-lg font-bold text-teal-400">
                     With useMemo
                   </h4>
                   <ul className="space-y-3 text-sm text-slate-300">
                     <li className="flex items-start gap-2">
-                      <span className="text-teal-400 mt-1">✓</span>
+                      <span className="mt-1 text-teal-400">✓</span>
                       <span>Calculation runs only when needed</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-teal-400 mt-1">✓</span>
+                      <span className="mt-1 text-teal-400">✓</span>
                       <span>Cached results returned instantly</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-teal-400 mt-1">✓</span>
+                      <span className="mt-1 text-teal-400">✓</span>
                       <span>Consistent performance</span>
                     </li>
                     <li className="flex items-start gap-2">
-                      <span className="text-teal-400 mt-1">✓</span>
+                      <span className="mt-1 text-teal-400">✓</span>
                       <span>Smooth user experience</span>
                     </li>
                   </ul>
@@ -511,13 +511,13 @@ The gift of memory, whether across time or across renders, is the gift of sustai
               </div>
             </div>
 
-            <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 sm:p-8">
-              <h3 className="text-xl font-bold text-slate-100 mb-4">
+            <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-6 sm:p-8">
+              <h3 className="mb-4 text-xl font-bold text-slate-100">
                 When to Use useMemo
               </h3>
               <div className="space-y-4 text-slate-300">
                 <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-teal-400 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-teal-400" />
                   <div>
                     <div className="font-semibold text-slate-100">
                       Expensive Calculations
@@ -529,7 +529,7 @@ The gift of memory, whether across time or across renders, is the gift of sustai
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-teal-400 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-teal-400" />
                   <div>
                     <div className="font-semibold text-slate-100">
                       Stable Dependencies
@@ -541,7 +541,7 @@ The gift of memory, whether across time or across renders, is the gift of sustai
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-teal-400 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-teal-400" />
                   <div>
                     <div className="font-semibold text-slate-100">
                       Frequent Re-renders
@@ -553,7 +553,7 @@ The gift of memory, whether across time or across renders, is the gift of sustai
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <CheckCircle className="w-5 h-5 text-teal-400 mt-0.5 flex-shrink-0" />
+                  <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-teal-400" />
                   <div>
                     <div className="font-semibold text-slate-100">
                       Measured Performance Issues
@@ -567,14 +567,14 @@ The gift of memory, whether across time or across renders, is the gift of sustai
               </div>
             </div>
 
-            <div className="bg-slate-900/50 border border-amber-500/30 rounded-lg p-6 sm:p-8">
-              <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
-                <AlertCircle className="w-5 h-5 text-amber-400" />
+            <div className="rounded-lg border border-amber-500/30 bg-slate-900/50 p-6 sm:p-8">
+              <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-100">
+                <AlertCircle className="h-5 w-5 text-amber-400" />
                 Common Pitfalls
               </h3>
               <div className="space-y-4 text-slate-300">
                 <div className="flex items-start gap-3">
-                  <span className="text-amber-400 mt-0.5">⚠</span>
+                  <span className="mt-0.5 text-amber-400">⚠</span>
                   <div>
                     <div className="font-semibold text-slate-100">
                       Over-memoization
@@ -585,7 +585,7 @@ The gift of memory, whether across time or across renders, is the gift of sustai
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-amber-400 mt-0.5">⚠</span>
+                  <span className="mt-0.5 text-amber-400">⚠</span>
                   <div>
                     <div className="font-semibold text-slate-100">
                       Incorrect Dependencies
@@ -596,7 +596,7 @@ The gift of memory, whether across time or across renders, is the gift of sustai
                   </div>
                 </div>
                 <div className="flex items-start gap-3">
-                  <span className="text-amber-400 mt-0.5">⚠</span>
+                  <span className="mt-0.5 text-amber-400">⚠</span>
                   <div>
                     <div className="font-semibold text-slate-100">
                       Premature Optimization
@@ -610,11 +610,11 @@ The gift of memory, whether across time or across renders, is the gift of sustai
               </div>
             </div>
 
-            <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 sm:p-8">
-              <h3 className="text-xl font-bold text-slate-100 mb-4">
+            <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-6 sm:p-8">
+              <h3 className="mb-4 text-xl font-bold text-slate-100">
                 The Complete Pattern
               </h3>
-              <pre className="bg-slate-950 border border-slate-700 rounded p-4 overflow-x-auto text-sm">
+              <pre className="overflow-x-auto rounded border border-slate-700 bg-slate-950 p-4 text-sm">
                 <code className="text-slate-300">
                   {`import { useMemo } from 'react';
 
@@ -643,22 +643,22 @@ function LanguageAnalyzer({ symbols }) {
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-t border-slate-800">
-        <div className="max-w-6xl mx-auto px-4 py-4 sm:px-6 lg:px-8">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-slate-800 bg-slate-900/95 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between gap-4">
             <button
               onClick={() => setChapter((c) => c - 1)}
               disabled={chapter === 0}
-              className="px-4 sm:px-6 py-2 bg-teal-500 hover:bg-teal-600 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed text-slate-950 font-semibold rounded transition-colors text-sm sm:text-base"
+              className="rounded bg-teal-500 px-4 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-teal-600 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-500 sm:px-6 sm:text-base"
             >
               Previous
             </button>
 
             <div className="text-center">
-              <div className="text-xs sm:text-sm text-slate-400">
+              <div className="text-xs text-slate-400 sm:text-sm">
                 Chapter {chapter + 1} of {chapters.length}
               </div>
-              <div className="text-xs text-slate-500 hidden sm:block">
+              <div className="hidden text-xs text-slate-500 sm:block">
                 {currentChapter.title}
               </div>
             </div>
@@ -666,7 +666,7 @@ function LanguageAnalyzer({ symbols }) {
             <button
               onClick={() => setChapter((c) => c + 1)}
               disabled={chapter === chapters.length - 1}
-              className="px-4 sm:px-6 py-2 bg-teal-500 hover:bg-teal-600 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed text-slate-950 font-semibold rounded transition-colors text-sm sm:text-base"
+              className="rounded bg-teal-500 px-4 py-2 text-sm font-semibold text-slate-950 transition-colors hover:bg-teal-600 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-500 sm:px-6 sm:text-base"
             >
               Next
             </button>

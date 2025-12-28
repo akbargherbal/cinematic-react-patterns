@@ -1,5 +1,16 @@
 import { useState, useReducer, useMemo } from "react";
-import { Lock, Unlock, Camera, CameraOff, Briefcase, Zap, AlertTriangle, CheckCircle, Users, ArrowRight } from "lucide-react";
+import {
+  Lock,
+  Unlock,
+  Camera,
+  CameraOff,
+  Briefcase,
+  Zap,
+  AlertTriangle,
+  CheckCircle,
+  Users,
+  ArrowRight,
+} from "lucide-react";
 
 // Types
 interface HeistState {
@@ -9,7 +20,13 @@ interface HeistState {
   yenPosition: "OUTSIDE_VAULT" | "IN_SHAFT_WAITING" | "INSIDE_VAULT";
   power: "NORMAL" | "BACKUP";
   benedictStatus: "ALERT" | "DISTRACTED";
-  stage: "PREPARATION" | "POSITIONING" | "INFILTRATION" | "VAULT_ACCESS" | "EXTRACTION" | "COMPLETE";
+  stage:
+    | "PREPARATION"
+    | "POSITIONING"
+    | "INFILTRATION"
+    | "VAULT_ACCESS"
+    | "EXTRACTION"
+    | "COMPLETE";
 }
 
 type HeistAction =
@@ -60,7 +77,8 @@ function heistReducer(state: HeistState, action: HeistAction): HeistState {
       };
 
     case "TRIGGER_EXPLOSION":
-      if (state.power !== "BACKUP" || state.security !== "DISABLED") return state;
+      if (state.power !== "BACKUP" || state.security !== "DISABLED")
+        return state;
       return {
         ...state,
         vault: "UNLOCKED",
@@ -74,7 +92,8 @@ function heistReducer(state: HeistState, action: HeistAction): HeistState {
       };
 
     case "SWAP_BRIEFCASE":
-      if (state.vault !== "UNLOCKED" || state.benedictStatus !== "DISTRACTED") return state;
+      if (state.vault !== "UNLOCKED" || state.benedictStatus !== "DISTRACTED")
+        return state;
       return {
         ...state,
         briefcase: "WITH_LINUS",
@@ -90,52 +109,70 @@ function heistReducer(state: HeistState, action: HeistAction): HeistState {
 }
 
 // State display component
-function HeistStateDisplay({ state, isValid = true }: { state: HeistState; isValid?: boolean }) {
+function HeistStateDisplay({
+  state,
+  isValid = true,
+}: {
+  state: HeistState;
+  isValid?: boolean;
+}) {
   const borderColor = isValid ? "border-emerald-500/30" : "border-red-500/30";
   const bgColor = isValid ? "bg-emerald-500/5" : "bg-red-500/5";
 
   return (
-    <div className={`${bgColor} border ${borderColor} rounded-lg p-4 space-y-2 transition-colors duration-300`}>
+    <div
+      className={`${bgColor} border ${borderColor} space-y-2 rounded-lg p-4 transition-colors duration-300`}
+    >
       <div className="flex items-center justify-between text-sm">
         <span className="text-slate-400">Vault:</span>
-        <span className="flex items-center gap-2 text-amber-400 font-medium">
-          {state.vault === "LOCKED" ? <Lock className="w-4 h-4" /> : <Unlock className="w-4 h-4" />}
+        <span className="flex items-center gap-2 font-medium text-amber-400">
+          {state.vault === "LOCKED" ? (
+            <Lock className="h-4 w-4" />
+          ) : (
+            <Unlock className="h-4 w-4" />
+          )}
           {state.vault}
         </span>
       </div>
       <div className="flex items-center justify-between text-sm">
         <span className="text-slate-400">Security:</span>
-        <span className="flex items-center gap-2 text-amber-400 font-medium">
-          {state.security === "ACTIVE" ? <Camera className="w-4 h-4" /> : <CameraOff className="w-4 h-4" />}
+        <span className="flex items-center gap-2 font-medium text-amber-400">
+          {state.security === "ACTIVE" ? (
+            <Camera className="h-4 w-4" />
+          ) : (
+            <CameraOff className="h-4 w-4" />
+          )}
           {state.security}
         </span>
       </div>
       <div className="flex items-center justify-between text-sm">
         <span className="text-slate-400">Briefcase:</span>
-        <span className="flex items-center gap-2 text-amber-400 font-medium">
-          <Briefcase className="w-4 h-4" />
+        <span className="flex items-center gap-2 font-medium text-amber-400">
+          <Briefcase className="h-4 w-4" />
           {state.briefcase}
         </span>
       </div>
       <div className="flex items-center justify-between text-sm">
         <span className="text-slate-400">Yen Position:</span>
-        <span className="text-amber-400 font-medium">{state.yenPosition}</span>
+        <span className="font-medium text-amber-400">{state.yenPosition}</span>
       </div>
       <div className="flex items-center justify-between text-sm">
         <span className="text-slate-400">Power:</span>
-        <span className="flex items-center gap-2 text-amber-400 font-medium">
-          <Zap className="w-4 h-4" />
+        <span className="flex items-center gap-2 font-medium text-amber-400">
+          <Zap className="h-4 w-4" />
           {state.power}
         </span>
       </div>
       <div className="flex items-center justify-between text-sm">
         <span className="text-slate-400">Benedict:</span>
-        <span className="text-amber-400 font-medium">{state.benedictStatus}</span>
+        <span className="font-medium text-amber-400">
+          {state.benedictStatus}
+        </span>
       </div>
-      <div className="pt-2 border-t border-slate-700">
+      <div className="border-t border-slate-700 pt-2">
         <div className="flex items-center justify-between text-sm">
           <span className="text-slate-400">Stage:</span>
-          <span className="text-amber-500 font-bold">{state.stage}</span>
+          <span className="font-bold text-amber-500">{state.stage}</span>
         </div>
       </div>
     </div>
@@ -154,15 +191,23 @@ function ActionButton({
   children: React.ReactNode;
   variant?: "default" | "success" | "danger";
 }) {
-  const baseClasses = "px-4 py-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed";
+  const baseClasses =
+    "px-4 py-2 rounded-lg font-medium transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed";
   const variantClasses = {
-    default: "bg-amber-500/20 border border-amber-500/50 text-amber-400 hover:bg-amber-500/30 active:scale-95",
-    success: "bg-emerald-500/20 border border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/30 active:scale-95",
-    danger: "bg-red-500/20 border border-red-500/50 text-red-400 hover:bg-red-500/30 active:scale-95",
+    default:
+      "bg-amber-500/20 border border-amber-500/50 text-amber-400 hover:bg-amber-500/30 active:scale-95",
+    success:
+      "bg-emerald-500/20 border border-emerald-500/50 text-emerald-400 hover:bg-emerald-500/30 active:scale-95",
+    danger:
+      "bg-red-500/20 border border-red-500/50 text-red-400 hover:bg-red-500/30 active:scale-95",
   };
 
   return (
-    <button onClick={onClick} disabled={disabled} className={`${baseClasses} ${variantClasses[variant]}`}>
+    <button
+      onClick={onClick}
+      disabled={disabled}
+      className={`${baseClasses} ${variantClasses[variant]}`}
+    >
       {children}
     </button>
   );
@@ -172,10 +217,16 @@ function ActionButton({
 function ChaosDemo() {
   const [vault, setVault] = useState<"LOCKED" | "UNLOCKED">("LOCKED");
   const [security, setSecurity] = useState<"ACTIVE" | "DISABLED">("ACTIVE");
-  const [briefcase, setBriefcase] = useState<"WITH_BENEDICT" | "WITH_LINUS">("WITH_BENEDICT");
-  const [yenPosition, setYenPosition] = useState<"OUTSIDE_VAULT" | "IN_SHAFT_WAITING" | "INSIDE_VAULT">("OUTSIDE_VAULT");
+  const [briefcase, setBriefcase] = useState<"WITH_BENEDICT" | "WITH_LINUS">(
+    "WITH_BENEDICT",
+  );
+  const [yenPosition, setYenPosition] = useState<
+    "OUTSIDE_VAULT" | "IN_SHAFT_WAITING" | "INSIDE_VAULT"
+  >("OUTSIDE_VAULT");
   const [power, setPower] = useState<"NORMAL" | "BACKUP">("NORMAL");
-  const [benedictStatus, setBenedictStatus] = useState<"ALERT" | "DISTRACTED">("ALERT");
+  const [benedictStatus, setBenedictStatus] = useState<"ALERT" | "DISTRACTED">(
+    "ALERT",
+  );
 
   // Check for invalid states
   const hasInvalidState =
@@ -204,18 +255,21 @@ function ChaosDemo() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-2 mb-4">
-        <AlertTriangle className="w-5 h-5 text-red-400" />
-        <h3 className="text-lg font-bold text-red-400">Uncoordinated Approach (useState)</h3>
+      <div className="mb-4 flex items-center gap-2">
+        <AlertTriangle className="h-5 w-5 text-red-400" />
+        <h3 className="text-lg font-bold text-red-400">
+          Uncoordinated Approach (useState)
+        </h3>
       </div>
 
       <HeistStateDisplay state={chaosState} isValid={!hasInvalidState} />
 
       {hasInvalidState && (
-        <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 flex items-start gap-2">
-          <AlertTriangle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+        <div className="flex items-start gap-2 rounded-lg border border-red-500/30 bg-red-500/10 p-3">
+          <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-400" />
           <div className="text-sm text-red-300">
-            <strong>INVALID STATE DETECTED:</strong> Multiple independent updates have created an impossible state combination.
+            <strong>INVALID STATE DETECTED:</strong> Multiple independent
+            updates have created an impossible state combination.
           </div>
         </div>
       )}
@@ -224,19 +278,28 @@ function ChaosDemo() {
         <ActionButton onClick={() => setSecurity("DISABLED")} variant="danger">
           Disable Security
         </ActionButton>
-        <ActionButton onClick={() => setYenPosition("INSIDE_VAULT")} variant="danger">
+        <ActionButton
+          onClick={() => setYenPosition("INSIDE_VAULT")}
+          variant="danger"
+        >
           Move Yen to Vault
         </ActionButton>
         <ActionButton onClick={() => setVault("UNLOCKED")} variant="danger">
           Unlock Vault
         </ActionButton>
-        <ActionButton onClick={() => setBriefcase("WITH_LINUS")} variant="danger">
+        <ActionButton
+          onClick={() => setBriefcase("WITH_LINUS")}
+          variant="danger"
+        >
           Swap Briefcase
         </ActionButton>
         <ActionButton onClick={() => setPower("BACKUP")} variant="danger">
           Cut Power
         </ActionButton>
-        <ActionButton onClick={() => setBenedictStatus("DISTRACTED")} variant="danger">
+        <ActionButton
+          onClick={() => setBenedictStatus("DISTRACTED")}
+          variant="danger"
+        >
           Distract Benedict
         </ActionButton>
       </div>
@@ -252,7 +315,9 @@ function ChaosDemo() {
 function CoordinatedDemo() {
   const [state, dispatch] = useReducer(heistReducer, initialHeistState);
   const [lastAction, setLastAction] = useState<string>("");
-  const [actionResult, setActionResult] = useState<"success" | "rejected" | null>(null);
+  const [actionResult, setActionResult] = useState<
+    "success" | "rejected" | null
+  >(null);
 
   const handleAction = (action: HeistAction, actionName: string) => {
     const prevState = state;
@@ -270,9 +335,11 @@ function CoordinatedDemo() {
 
   return (
     <div className="space-y-4">
-      <div className="flex items-center gap-2 mb-4">
-        <CheckCircle className="w-5 h-5 text-emerald-400" />
-        <h3 className="text-lg font-bold text-emerald-400">Coordinated Approach (useReducer)</h3>
+      <div className="mb-4 flex items-center gap-2">
+        <CheckCircle className="h-5 w-5 text-emerald-400" />
+        <h3 className="text-lg font-bold text-emerald-400">
+          Coordinated Approach (useReducer)
+        </h3>
       </div>
 
       <HeistStateDisplay state={state} isValid={true} />
@@ -280,22 +347,26 @@ function CoordinatedDemo() {
       {actionResult && (
         <div
           className={`${
-            actionResult === "success" ? "bg-emerald-500/10 border-emerald-500/30" : "bg-amber-500/10 border-amber-500/30"
-          } border rounded-lg p-3 flex items-start gap-2 transition-all duration-300`}
+            actionResult === "success"
+              ? "border-emerald-500/30 bg-emerald-500/10"
+              : "border-amber-500/30 bg-amber-500/10"
+          } flex items-start gap-2 rounded-lg border p-3 transition-all duration-300`}
         >
           {actionResult === "success" ? (
-            <CheckCircle className="w-5 h-5 text-emerald-400 flex-shrink-0 mt-0.5" />
+            <CheckCircle className="mt-0.5 h-5 w-5 flex-shrink-0 text-emerald-400" />
           ) : (
-            <AlertTriangle className="w-5 h-5 text-amber-400 flex-shrink-0 mt-0.5" />
+            <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-amber-400" />
           )}
           <div className="text-sm">
             {actionResult === "success" ? (
               <span className="text-emerald-300">
-                <strong>ACTION APPROVED:</strong> {lastAction} executed successfully.
+                <strong>ACTION APPROVED:</strong> {lastAction} executed
+                successfully.
               </span>
             ) : (
               <span className="text-amber-300">
-                <strong>ACTION REJECTED:</strong> {lastAction} failed validation. Prerequisites not met.
+                <strong>ACTION REJECTED:</strong> {lastAction} failed
+                validation. Prerequisites not met.
               </span>
             )}
           </div>
@@ -303,11 +374,13 @@ function CoordinatedDemo() {
       )}
 
       {isComplete && (
-        <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 flex items-center gap-3">
-          <CheckCircle className="w-6 h-6 text-emerald-400" />
+        <div className="flex items-center gap-3 rounded-lg border border-emerald-500/30 bg-emerald-500/10 p-4">
+          <CheckCircle className="h-6 w-6 text-emerald-400" />
           <div>
-            <div className="text-emerald-400 font-bold">HEIST COMPLETE</div>
-            <div className="text-sm text-emerald-300">All actions coordinated successfully. $160 million secured.</div>
+            <div className="font-bold text-emerald-400">HEIST COMPLETE</div>
+            <div className="text-sm text-emerald-300">
+              All actions coordinated successfully. $160 million secured.
+            </div>
           </div>
         </div>
       )}
@@ -321,7 +394,9 @@ function CoordinatedDemo() {
           Position Yen
         </ActionButton>
         <ActionButton
-          onClick={() => handleAction({ type: "DISABLE_SECURITY" }, "Disable Security")}
+          onClick={() =>
+            handleAction({ type: "DISABLE_SECURITY" }, "Disable Security")
+          }
           disabled={state.yenPosition !== "IN_SHAFT_WAITING"}
           variant="success"
         >
@@ -335,29 +410,40 @@ function CoordinatedDemo() {
           Cut Power
         </ActionButton>
         <ActionButton
-          onClick={() => handleAction({ type: "TRIGGER_EXPLOSION" }, "Trigger Explosion")}
+          onClick={() =>
+            handleAction({ type: "TRIGGER_EXPLOSION" }, "Trigger Explosion")
+          }
           disabled={state.power !== "BACKUP" || state.security !== "DISABLED"}
           variant="success"
         >
           Trigger Explosion
         </ActionButton>
         <ActionButton
-          onClick={() => handleAction({ type: "DISTRACT_BENEDICT" }, "Distract Benedict")}
+          onClick={() =>
+            handleAction({ type: "DISTRACT_BENEDICT" }, "Distract Benedict")
+          }
           disabled={state.benedictStatus === "DISTRACTED"}
           variant="success"
         >
           Distract Benedict
         </ActionButton>
         <ActionButton
-          onClick={() => handleAction({ type: "SWAP_BRIEFCASE" }, "Swap Briefcase")}
-          disabled={state.vault !== "UNLOCKED" || state.benedictStatus !== "DISTRACTED"}
+          onClick={() =>
+            handleAction({ type: "SWAP_BRIEFCASE" }, "Swap Briefcase")
+          }
+          disabled={
+            state.vault !== "UNLOCKED" || state.benedictStatus !== "DISTRACTED"
+          }
           variant="success"
         >
           Swap Briefcase
         </ActionButton>
       </div>
 
-      <ActionButton onClick={() => dispatch({ type: "RESET" })} variant="default">
+      <ActionButton
+        onClick={() => dispatch({ type: "RESET" })}
+        variant="default"
+      >
         Reset Heist
       </ActionButton>
     </div>
@@ -482,7 +568,7 @@ Not because of luck. Not because of improvisation. But because every action went
 
 The heist worked because we understood: complexity requires coordination. When you have multiple moving parts, multiple dependencies—you need a master plan. You need a single source of truth. You need a reducer.`,
         demo: (
-          <div className="grid md:grid-cols-2 gap-6">
+          <div className="grid gap-6 md:grid-cols-2">
             <div>
               <ChaosDemo />
             </div>
@@ -493,23 +579,27 @@ The heist worked because we understood: complexity requires coordination. When y
         ),
       },
     ],
-    []
+    [],
   );
 
   const currentChapter = chapters[chapter];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-sans">
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-300">
       {/* Header */}
-      <header className="border-b border-amber-500/30 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 py-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Users className="w-8 h-8 text-amber-500" />
-            <h1 className="text-3xl md:text-4xl font-bold text-amber-500">Ocean's Eleven</h1>
+      <header className="sticky top-0 z-10 border-b border-amber-500/30 bg-slate-950/80 backdrop-blur-sm">
+        <div className="mx-auto max-w-7xl px-4 py-6">
+          <div className="mb-2 flex items-center gap-3">
+            <Users className="h-8 w-8 text-amber-500" />
+            <h1 className="text-3xl font-bold text-amber-500 md:text-4xl">
+              Ocean's Eleven
+            </h1>
           </div>
           <p className="text-lg text-slate-400">Coordinated State Management</p>
           <div className="mt-3 flex items-center gap-2 text-sm text-amber-400">
-            <span className="px-3 py-1 bg-amber-500/10 border border-amber-500/30 rounded-full">useReducer</span>
+            <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1">
+              useReducer
+            </span>
             <span className="text-slate-500">•</span>
             <span>Complex State Logic</span>
           </div>
@@ -517,38 +607,52 @@ The heist worked because we understood: complexity requires coordination. When y
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 py-8 pb-24">
+      <main className="mx-auto max-w-7xl px-4 py-8 pb-24">
         <div className="mb-6">
-          <h2 className="text-2xl md:text-3xl font-bold text-amber-400 mb-4">{currentChapter.title}</h2>
+          <h2 className="mb-4 text-2xl font-bold text-amber-400 md:text-3xl">
+            {currentChapter.title}
+          </h2>
         </div>
 
-        <div className="grid lg:grid-cols-2 gap-8">
+        <div className="grid gap-8 lg:grid-cols-2">
           {/* Narrative */}
           <div className="prose prose-invert max-w-none">
-            <div className="text-slate-300 leading-relaxed whitespace-pre-line">{currentChapter.content}</div>
+            <div className="whitespace-pre-line leading-relaxed text-slate-300">
+              {currentChapter.content}
+            </div>
           </div>
 
           {/* Interactive Demo */}
           {currentChapter.demo && (
-            <div className="lg:sticky lg:top-24 h-fit">
-              <div className="bg-slate-900/50 border border-amber-500/20 rounded-lg p-6">{currentChapter.demo}</div>
+            <div className="h-fit lg:sticky lg:top-24">
+              <div className="rounded-lg border border-amber-500/20 bg-slate-900/50 p-6">
+                {currentChapter.demo}
+              </div>
             </div>
           )}
         </div>
 
         {/* Key Takeaway */}
         {chapter === 4 && (
-          <div className="mt-12 bg-amber-500/5 border border-amber-500/30 rounded-lg p-6">
+          <div className="mt-12 rounded-lg border border-amber-500/30 bg-amber-500/5 p-6">
             <div className="flex items-start gap-4">
-              <CheckCircle className="w-6 h-6 text-amber-500 flex-shrink-0 mt-1" />
+              <CheckCircle className="mt-1 h-6 w-6 flex-shrink-0 text-amber-500" />
               <div>
-                <h3 className="text-xl font-bold text-amber-400 mb-2">The Power of useReducer</h3>
-                <p className="text-slate-300 mb-4">
-                  When state is complex and interdependent, coordination isn't optional—it's survival. The reducer pattern ensures that every state transition is validated, preventing impossible states and race conditions.
+                <h3 className="mb-2 text-xl font-bold text-amber-400">
+                  The Power of useReducer
+                </h3>
+                <p className="mb-4 text-slate-300">
+                  When state is complex and interdependent, coordination isn't
+                  optional—it's survival. The reducer pattern ensures that every
+                  state transition is validated, preventing impossible states
+                  and race conditions.
                 </p>
                 <div className="flex items-center gap-2 text-sm text-amber-400">
-                  <ArrowRight className="w-4 h-4" />
-                  <span>Single source of truth • Validated transitions • Predictable behavior</span>
+                  <ArrowRight className="h-4 w-4" />
+                  <span>
+                    Single source of truth • Validated transitions • Predictable
+                    behavior
+                  </span>
                 </div>
               </div>
             </div>
@@ -557,12 +661,12 @@ The heist worked because we understood: complexity requires coordination. When y
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-950/95 backdrop-blur-sm border-t border-amber-500/30 p-4">
-        <div className="max-w-7xl mx-auto flex items-center justify-between">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-amber-500/30 bg-slate-950/95 p-4 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-7xl items-center justify-between">
           <button
             onClick={() => setChapter((c) => c - 1)}
             disabled={chapter === 0}
-            className="px-6 py-2 bg-amber-500/20 border border-amber-500/50 text-amber-400 rounded-lg font-medium transition-all duration-200 hover:bg-amber-500/30 disabled:opacity-30 disabled:cursor-not-allowed active:scale-95"
+            className="rounded-lg border border-amber-500/50 bg-amber-500/20 px-6 py-2 font-medium text-amber-400 transition-all duration-200 hover:bg-amber-500/30 active:scale-95 disabled:cursor-not-allowed disabled:opacity-30"
           >
             Previous
           </button>
@@ -575,7 +679,7 @@ The heist worked because we understood: complexity requires coordination. When y
               {chapters.map((_, idx) => (
                 <div
                   key={idx}
-                  className={`w-2 h-2 rounded-full transition-colors duration-300 ${
+                  className={`h-2 w-2 rounded-full transition-colors duration-300 ${
                     idx === chapter ? "bg-amber-500" : "bg-slate-700"
                   }`}
                 />
@@ -586,7 +690,7 @@ The heist worked because we understood: complexity requires coordination. When y
           <button
             onClick={() => setChapter((c) => c + 1)}
             disabled={chapter === chapters.length - 1}
-            className="px-6 py-2 bg-amber-500/20 border border-amber-500/50 text-amber-400 rounded-lg font-medium transition-all duration-200 hover:bg-amber-500/30 disabled:opacity-30 disabled:cursor-not-allowed active:scale-95"
+            className="rounded-lg border border-amber-500/50 bg-amber-500/20 px-6 py-2 font-medium text-amber-400 transition-all duration-200 hover:bg-amber-500/30 active:scale-95 disabled:cursor-not-allowed disabled:opacity-30"
           >
             Next
           </button>

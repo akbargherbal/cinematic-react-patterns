@@ -85,7 +85,7 @@ The key principles are clear: Components are containers. Props must be passed ex
 The dream is over. The lesson remains. Welcome back to reality.`,
       },
     ],
-    []
+    [],
   );
 
   const currentChapter = chapters[chapter];
@@ -142,13 +142,13 @@ The dream is over. The lesson remains. Welcome back to reality.`,
   }, [canGoNext, canGoPrevious, handleNext, handlePrevious]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-sans">
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-300">
       {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Layers className="w-8 h-8 text-blue-400" />
-            <h1 className="text-3xl md:text-4xl font-bold tracking-tight text-slate-100">
+      <header className="sticky top-0 z-10 border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-6 md:px-8">
+          <div className="mb-2 flex items-center gap-3">
+            <Layers className="h-8 w-8 text-blue-400" />
+            <h1 className="text-3xl font-bold tracking-tight text-slate-100 md:text-4xl">
               Inception
             </h1>
           </div>
@@ -159,21 +159,26 @@ The dream is over. The lesson remains. Welcome back to reality.`,
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 md:px-8 py-12 pb-32">
+      <main className="mx-auto max-w-6xl px-4 py-12 pb-32 md:px-8">
         {/* Chapter Title */}
         <div className="mb-8">
-          <div className="flex items-center gap-2 text-sm text-blue-400 mb-2">
-            <span>Chapter {chapter + 1} of {chapters.length}</span>
+          <div className="mb-2 flex items-center gap-2 text-sm text-blue-400">
+            <span>
+              Chapter {chapter + 1} of {chapters.length}
+            </span>
           </div>
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-100 mb-4">
+          <h2 className="mb-4 text-3xl font-bold text-slate-100 md:text-4xl">
             {currentChapter.title}
           </h2>
         </div>
 
         {/* Chapter Content */}
-        <div className="prose prose-invert prose-slate max-w-none mb-12">
+        <div className="prose prose-invert prose-slate mb-12 max-w-none">
           {currentChapter.content.split("\n\n").map((paragraph, idx) => (
-            <p key={idx} className="text-lg leading-relaxed mb-4 text-slate-300">
+            <p
+              key={idx}
+              className="mb-4 text-lg leading-relaxed text-slate-300"
+            >
               {paragraph}
             </p>
           ))}
@@ -181,26 +186,27 @@ The dream is over. The lesson remains. Welcome back to reality.`,
 
         {/* Interactive Demonstrations */}
         {chapter === 0 && (
-          <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6 md:p-8">
-            <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
-              <Layers className="w-5 h-5 text-blue-400" />
+          <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6 md:p-8">
+            <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-100">
+              <Layers className="h-5 w-5 text-blue-400" />
               Nested Component Visualizer
             </h3>
-            <p className="text-slate-400 mb-6">
-              Click each layer to toggle visibility. Notice how components nest inside each other.
+            <p className="mb-6 text-slate-400">
+              Click each layer to toggle visibility. Notice how components nest
+              inside each other.
             </p>
 
             <div className="space-y-4">
               {/* Van Layer */}
               <div
-                className={`border-2 rounded-lg p-6 transition-all cursor-pointer ${
+                className={`cursor-pointer rounded-lg border-2 p-6 transition-all ${
                   nestedLayers.van
                     ? "border-blue-500/50 bg-blue-500/5"
                     : "border-slate-700 bg-slate-800/30 opacity-50"
                 }`}
                 onClick={() => toggleLayer("van")}
               >
-                <div className="flex items-center justify-between mb-4">
+                <div className="mb-4 flex items-center justify-between">
                   <span className="font-mono text-sm text-blue-400">
                     {"<Van>"}
                   </span>
@@ -211,7 +217,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                   <div className="ml-6 space-y-4">
                     {/* Hotel Layer */}
                     <div
-                      className={`border-2 rounded-lg p-6 transition-all cursor-pointer ${
+                      className={`cursor-pointer rounded-lg border-2 p-6 transition-all ${
                         nestedLayers.hotel
                           ? "border-blue-400/50 bg-blue-400/5"
                           : "border-slate-700 bg-slate-800/30 opacity-50"
@@ -221,7 +227,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                         toggleLayer("hotel");
                       }}
                     >
-                      <div className="flex items-center justify-between mb-4">
+                      <div className="mb-4 flex items-center justify-between">
                         <span className="font-mono text-sm text-blue-300">
                           {"<Hotel>"}
                         </span>
@@ -232,7 +238,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                         <div className="ml-6">
                           {/* Fortress Layer */}
                           <div
-                            className={`border-2 rounded-lg p-6 transition-all cursor-pointer ${
+                            className={`cursor-pointer rounded-lg border-2 p-6 transition-all ${
                               nestedLayers.fortress
                                 ? "border-blue-300/50 bg-blue-300/5"
                                 : "border-slate-700 bg-slate-800/30 opacity-50"
@@ -254,24 +260,24 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                         </div>
                       )}
 
-                      <span className="font-mono text-sm text-blue-300 block mt-4">
+                      <span className="mt-4 block font-mono text-sm text-blue-300">
                         {"</Hotel>"}
                       </span>
                     </div>
                   </div>
                 )}
 
-                <span className="font-mono text-sm text-blue-400 block mt-4">
+                <span className="mt-4 block font-mono text-sm text-blue-400">
                   {"</Van>"}
                 </span>
               </div>
             </div>
 
-            <div className="mt-6 p-4 bg-slate-800/50 rounded border border-slate-700">
+            <div className="mt-6 rounded border border-slate-700 bg-slate-800/50 p-4">
               <p className="text-sm text-slate-400">
                 <strong className="text-slate-300">Key Concept:</strong> Each
                 component can contain other components through the{" "}
-                <code className="text-blue-400 font-mono">children</code> prop.
+                <code className="font-mono text-blue-400">children</code> prop.
                 The parent doesn't need to know what's inside—it just provides
                 the structure.
               </p>
@@ -280,38 +286,38 @@ The dream is over. The lesson remains. Welcome back to reality.`,
         )}
 
         {chapter === 1 && (
-          <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6 md:p-8">
-            <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
-              <Zap className="w-5 h-5 text-blue-400" />
+          <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6 md:p-8">
+            <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-100">
+              <Zap className="h-5 w-5 text-blue-400" />
               Prop Drilling Simulator
             </h3>
-            <p className="text-slate-400 mb-6">
+            <p className="mb-6 text-slate-400">
               Toggle whether each level passes the "kick" callback to its
               children. Watch what happens when the chain breaks.
             </p>
 
             <div className="space-y-6">
               {/* Van Level */}
-              <div className="border-2 border-blue-500/50 bg-blue-500/5 rounded-lg p-6">
-                <div className="flex items-center justify-between mb-4">
+              <div className="rounded-lg border-2 border-blue-500/50 bg-blue-500/5 p-6">
+                <div className="mb-4 flex items-center justify-between">
                   <div>
-                    <span className="font-mono text-sm text-blue-400 block">
+                    <span className="block font-mono text-sm text-blue-400">
                       Van Component
                     </span>
                     <span className="text-xs text-slate-500">
                       Receives: onKick callback
                     </span>
                   </div>
-                  <Check className="w-5 h-5 text-emerald-400" />
+                  <Check className="h-5 w-5 text-emerald-400" />
                 </div>
 
-                <div className="flex items-center gap-3 mb-4">
+                <div className="mb-4 flex items-center gap-3">
                   <button
                     onClick={() => toggleProp("vanToHotel")}
-                    className={`px-4 py-2 rounded text-sm font-medium transition-colors ${
+                    className={`rounded px-4 py-2 text-sm font-medium transition-colors ${
                       propsPassed.vanToHotel
-                        ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
-                        : "bg-red-500/20 text-red-400 border border-red-500/30"
+                        ? "border border-emerald-500/30 bg-emerald-500/20 text-emerald-400"
+                        : "border border-red-500/30 bg-red-500/20 text-red-400"
                     }`}
                   >
                     {propsPassed.vanToHotel
@@ -322,15 +328,15 @@ The dream is over. The lesson remains. Welcome back to reality.`,
 
                 {/* Hotel Level */}
                 <div
-                  className={`ml-6 border-2 rounded-lg p-6 transition-all ${
+                  className={`ml-6 rounded-lg border-2 p-6 transition-all ${
                     propsPassed.vanToHotel
                       ? "border-blue-400/50 bg-blue-400/5"
                       : "border-red-500/50 bg-red-500/5"
                   }`}
                 >
-                  <div className="flex items-center justify-between mb-4">
+                  <div className="mb-4 flex items-center justify-between">
                     <div>
-                      <span className="font-mono text-sm text-blue-300 block">
+                      <span className="block font-mono text-sm text-blue-300">
                         Hotel Component
                       </span>
                       <span className="text-xs text-slate-500">
@@ -340,20 +346,20 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                       </span>
                     </div>
                     {propsPassed.vanToHotel ? (
-                      <Check className="w-5 h-5 text-emerald-400" />
+                      <Check className="h-5 w-5 text-emerald-400" />
                     ) : (
-                      <X className="w-5 h-5 text-red-400" />
+                      <X className="h-5 w-5 text-red-400" />
                     )}
                   </div>
 
                   {propsPassed.vanToHotel && (
-                    <div className="flex items-center gap-3 mb-4">
+                    <div className="mb-4 flex items-center gap-3">
                       <button
                         onClick={() => toggleProp("hotelToFortress")}
-                        className={`px-4 py-2 rounded text-sm font-medium transition-colors ${
+                        className={`rounded px-4 py-2 text-sm font-medium transition-colors ${
                           propsPassed.hotelToFortress
-                            ? "bg-emerald-500/20 text-emerald-400 border border-emerald-500/30"
-                            : "bg-red-500/20 text-red-400 border border-red-500/30"
+                            ? "border border-emerald-500/30 bg-emerald-500/20 text-emerald-400"
+                            : "border border-red-500/30 bg-red-500/20 text-red-400"
                         }`}
                       >
                         {propsPassed.hotelToFortress
@@ -365,7 +371,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
 
                   {/* Fortress Level */}
                   <div
-                    className={`ml-6 border-2 rounded-lg p-6 transition-all ${
+                    className={`ml-6 rounded-lg border-2 p-6 transition-all ${
                       propsPassed.vanToHotel && propsPassed.hotelToFortress
                         ? "border-blue-300/50 bg-blue-300/5"
                         : "border-red-500/50 bg-red-500/5"
@@ -373,21 +379,19 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                   >
                     <div className="flex items-center justify-between">
                       <div>
-                        <span className="font-mono text-sm text-blue-200 block">
+                        <span className="block font-mono text-sm text-blue-200">
                           Fortress Component
                         </span>
                         <span className="text-xs text-slate-500">
-                          {propsPassed.vanToHotel &&
-                          propsPassed.hotelToFortress
+                          {propsPassed.vanToHotel && propsPassed.hotelToFortress
                             ? "Receives: onKick callback"
                             : "Missing: onKick callback"}
                         </span>
                       </div>
-                      {propsPassed.vanToHotel &&
-                      propsPassed.hotelToFortress ? (
-                        <Check className="w-5 h-5 text-emerald-400" />
+                      {propsPassed.vanToHotel && propsPassed.hotelToFortress ? (
+                        <Check className="h-5 w-5 text-emerald-400" />
                       ) : (
-                        <X className="w-5 h-5 text-red-400" />
+                        <X className="h-5 w-5 text-red-400" />
                       )}
                     </div>
                   </div>
@@ -395,7 +399,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
               </div>
             </div>
 
-            <div className="mt-6 p-4 bg-slate-800/50 rounded border border-slate-700">
+            <div className="mt-6 rounded border border-slate-700 bg-slate-800/50 p-4">
               <p className="text-sm text-slate-400">
                 <strong className="text-slate-300">Key Concept:</strong> Props
                 must be explicitly passed at every level. If any component
@@ -407,47 +411,47 @@ The dream is over. The lesson remains. Welcome back to reality.`,
         )}
 
         {chapter === 2 && (
-          <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6 md:p-8">
-            <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
-              <X className="w-5 h-5 text-red-400" />
+          <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6 md:p-8">
+            <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-100">
+              <X className="h-5 w-5 text-red-400" />
               Limbo: Broken Composition
             </h3>
-            <p className="text-slate-400 mb-6">
+            <p className="mb-6 text-slate-400">
               When the prop chain breaks, components become orphaned—still
               mounted, but disconnected from the tree.
             </p>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid gap-6 md:grid-cols-2">
               {/* Broken Composition */}
-              <div className="border-2 border-red-500/50 bg-red-500/5 rounded-lg p-6">
-                <h4 className="font-bold text-red-400 mb-4">
+              <div className="rounded-lg border-2 border-red-500/50 bg-red-500/5 p-6">
+                <h4 className="mb-4 font-bold text-red-400">
                   Broken Composition
                 </h4>
                 <div className="space-y-3">
-                  <div className="bg-slate-800/50 rounded p-3">
-                    <div className="font-mono text-xs text-slate-300 mb-1">
+                  <div className="rounded bg-slate-800/50 p-3">
+                    <div className="mb-1 font-mono text-xs text-slate-300">
                       Van Component
                     </div>
                     <div className="text-xs text-emerald-400">
                       ✓ Has onKick callback
                     </div>
                   </div>
-                  <div className="ml-4 bg-slate-800/50 rounded p-3">
-                    <div className="font-mono text-xs text-slate-300 mb-1">
+                  <div className="ml-4 rounded bg-slate-800/50 p-3">
+                    <div className="mb-1 font-mono text-xs text-slate-300">
                       Hotel Component
                     </div>
                     <div className="text-xs text-red-400">
                       ✗ onKick not passed down
                     </div>
                   </div>
-                  <div className="ml-8 bg-red-900/20 border border-red-500/30 rounded p-3">
-                    <div className="font-mono text-xs text-slate-300 mb-1">
+                  <div className="ml-8 rounded border border-red-500/30 bg-red-900/20 p-3">
+                    <div className="mb-1 font-mono text-xs text-slate-300">
                       Fortress Component
                     </div>
                     <div className="text-xs text-red-400">
                       ✗ Orphaned - no callback
                     </div>
-                    <div className="text-xs text-slate-500 mt-2">
+                    <div className="mt-2 text-xs text-slate-500">
                       Stuck in limbo...
                     </div>
                   </div>
@@ -455,35 +459,35 @@ The dream is over. The lesson remains. Welcome back to reality.`,
               </div>
 
               {/* Correct Composition */}
-              <div className="border-2 border-emerald-500/50 bg-emerald-500/5 rounded-lg p-6">
-                <h4 className="font-bold text-emerald-400 mb-4">
+              <div className="rounded-lg border-2 border-emerald-500/50 bg-emerald-500/5 p-6">
+                <h4 className="mb-4 font-bold text-emerald-400">
                   Correct Composition
                 </h4>
                 <div className="space-y-3">
-                  <div className="bg-slate-800/50 rounded p-3">
-                    <div className="font-mono text-xs text-slate-300 mb-1">
+                  <div className="rounded bg-slate-800/50 p-3">
+                    <div className="mb-1 font-mono text-xs text-slate-300">
                       Van Component
                     </div>
                     <div className="text-xs text-emerald-400">
                       ✓ Has onKick callback
                     </div>
                   </div>
-                  <div className="ml-4 bg-slate-800/50 rounded p-3">
-                    <div className="font-mono text-xs text-slate-300 mb-1">
+                  <div className="ml-4 rounded bg-slate-800/50 p-3">
+                    <div className="mb-1 font-mono text-xs text-slate-300">
                       Hotel Component
                     </div>
                     <div className="text-xs text-emerald-400">
                       ✓ Receives & passes onKick
                     </div>
                   </div>
-                  <div className="ml-8 bg-emerald-900/20 border border-emerald-500/30 rounded p-3">
-                    <div className="font-mono text-xs text-slate-300 mb-1">
+                  <div className="ml-8 rounded border border-emerald-500/30 bg-emerald-900/20 p-3">
+                    <div className="mb-1 font-mono text-xs text-slate-300">
                       Fortress Component
                     </div>
                     <div className="text-xs text-emerald-400">
                       ✓ Receives onKick callback
                     </div>
-                    <div className="text-xs text-slate-500 mt-2">
+                    <div className="mt-2 text-xs text-slate-500">
                       Connected to tree
                     </div>
                   </div>
@@ -491,24 +495,24 @@ The dream is over. The lesson remains. Welcome back to reality.`,
               </div>
             </div>
 
-            <div className="mt-6 p-4 bg-slate-800/50 rounded border border-slate-700">
+            <div className="mt-6 rounded border border-slate-700 bg-slate-800/50 p-4">
               <p className="text-sm text-slate-400">
                 <strong className="text-slate-300">Key Concept:</strong> Broken
                 prop chains create orphaned components that can't communicate
-                with parents. This leads to bugs, memory leaks, and unpredictable
-                behavior—the "limbo" of React applications.
+                with parents. This leads to bugs, memory leaks, and
+                unpredictable behavior—the "limbo" of React applications.
               </p>
             </div>
           </div>
         )}
 
         {chapter === 3 && (
-          <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6 md:p-8">
-            <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
-              <Zap className="w-5 h-5 text-emerald-400" />
+          <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6 md:p-8">
+            <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-slate-100">
+              <Zap className="h-5 w-5 text-emerald-400" />
               The Synchronized Kick
             </h3>
-            <p className="text-slate-400 mb-6">
+            <p className="mb-6 text-slate-400">
               Watch the kick propagate through all three levels in perfect
               synchronization. Each component executes its logic and passes the
               callback along.
@@ -518,7 +522,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
               <button
                 onClick={triggerKick}
                 disabled={kickTriggered}
-                className="px-6 py-3 bg-blue-500 hover:bg-blue-600 disabled:bg-slate-700 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
+                className="rounded-lg bg-blue-500 px-6 py-3 font-medium text-white transition-colors hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-slate-700"
               >
                 {kickTriggered ? "Kick in Progress..." : "Trigger the Kick"}
               </button>
@@ -527,15 +531,15 @@ The dream is over. The lesson remains. Welcome back to reality.`,
             <div className="space-y-4">
               {/* Van */}
               <div
-                className={`border-2 rounded-lg p-6 transition-all ${
+                className={`rounded-lg border-2 p-6 transition-all ${
                   kickTimeline.includes(0)
-                    ? "border-emerald-500 bg-emerald-500/10 scale-105"
+                    ? "scale-105 border-emerald-500 bg-emerald-500/10"
                     : "border-slate-700 bg-slate-800/30"
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="font-mono text-sm text-blue-400 block">
+                    <span className="block font-mono text-sm text-blue-400">
                       Van Component
                     </span>
                     <span className="text-xs text-slate-500">
@@ -543,22 +547,22 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                     </span>
                   </div>
                   {kickTimeline.includes(0) && (
-                    <Zap className="w-5 h-5 text-emerald-400 animate-pulse" />
+                    <Zap className="h-5 w-5 animate-pulse text-emerald-400" />
                   )}
                 </div>
               </div>
 
               {/* Hotel */}
               <div
-                className={`ml-6 border-2 rounded-lg p-6 transition-all ${
+                className={`ml-6 rounded-lg border-2 p-6 transition-all ${
                   kickTimeline.includes(1)
-                    ? "border-emerald-500 bg-emerald-500/10 scale-105"
+                    ? "scale-105 border-emerald-500 bg-emerald-500/10"
                     : "border-slate-700 bg-slate-800/30"
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="font-mono text-sm text-blue-300 block">
+                    <span className="block font-mono text-sm text-blue-300">
                       Hotel Component
                     </span>
                     <span className="text-xs text-slate-500">
@@ -566,22 +570,22 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                     </span>
                   </div>
                   {kickTimeline.includes(1) && (
-                    <Zap className="w-5 h-5 text-emerald-400 animate-pulse" />
+                    <Zap className="h-5 w-5 animate-pulse text-emerald-400" />
                   )}
                 </div>
               </div>
 
               {/* Fortress */}
               <div
-                className={`ml-12 border-2 rounded-lg p-6 transition-all ${
+                className={`ml-12 rounded-lg border-2 p-6 transition-all ${
                   kickTimeline.includes(2)
-                    ? "border-emerald-500 bg-emerald-500/10 scale-105"
+                    ? "scale-105 border-emerald-500 bg-emerald-500/10"
                     : "border-slate-700 bg-slate-800/30"
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="font-mono text-sm text-blue-200 block">
+                    <span className="block font-mono text-sm text-blue-200">
                       Fortress Component
                     </span>
                     <span className="text-xs text-slate-500">
@@ -589,22 +593,22 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                     </span>
                   </div>
                   {kickTimeline.includes(2) && (
-                    <Zap className="w-5 h-5 text-emerald-400 animate-pulse" />
+                    <Zap className="h-5 w-5 animate-pulse text-emerald-400" />
                   )}
                 </div>
               </div>
 
               {/* Wake Up */}
               <div
-                className={`ml-18 border-2 rounded-lg p-6 transition-all ${
+                className={`ml-18 rounded-lg border-2 p-6 transition-all ${
                   kickTimeline.includes(3)
-                    ? "border-emerald-500 bg-emerald-500/10 scale-105"
+                    ? "scale-105 border-emerald-500 bg-emerald-500/10"
                     : "border-slate-700 bg-slate-800/30"
                 }`}
               >
                 <div className="flex items-center justify-between">
                   <div>
-                    <span className="font-mono text-sm text-emerald-400 block">
+                    <span className="block font-mono text-sm text-emerald-400">
                       Reality
                     </span>
                     <span className="text-xs text-slate-500">
@@ -612,13 +616,13 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                     </span>
                   </div>
                   {kickTimeline.includes(3) && (
-                    <Check className="w-5 h-5 text-emerald-400" />
+                    <Check className="h-5 w-5 text-emerald-400" />
                   )}
                 </div>
               </div>
             </div>
 
-            <div className="mt-6 p-4 bg-slate-800/50 rounded border border-slate-700">
+            <div className="mt-6 rounded border border-slate-700 bg-slate-800/50 p-4">
               <p className="text-sm text-slate-400">
                 <strong className="text-slate-300">Key Concept:</strong> Proper
                 composition means callbacks propagate correctly through the
@@ -630,26 +634,26 @@ The dream is over. The lesson remains. Welcome back to reality.`,
         )}
 
         {chapter === 4 && (
-          <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6 md:p-8">
-            <h3 className="text-xl font-bold text-slate-100 mb-4">
+          <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6 md:p-8">
+            <h3 className="mb-4 text-xl font-bold text-slate-100">
               Key Takeaways
             </h3>
 
             <div className="space-y-6">
               <div className="border-l-4 border-blue-500 pl-4">
-                <h4 className="font-bold text-slate-100 mb-2">
+                <h4 className="mb-2 font-bold text-slate-100">
                   Component Composition
                 </h4>
                 <p className="text-slate-400">
                   Components can contain other components through the{" "}
-                  <code className="text-blue-400 font-mono">children</code>{" "}
+                  <code className="font-mono text-blue-400">children</code>{" "}
                   prop. This creates nested structures like dream levels—each
                   self-contained but connected.
                 </p>
               </div>
 
               <div className="border-l-4 border-blue-500 pl-4">
-                <h4 className="font-bold text-slate-100 mb-2">
+                <h4 className="mb-2 font-bold text-slate-100">
                   Explicit Prop Passing
                 </h4>
                 <p className="text-slate-400">
@@ -660,7 +664,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
               </div>
 
               <div className="border-l-4 border-blue-500 pl-4">
-                <h4 className="font-bold text-slate-100 mb-2">
+                <h4 className="mb-2 font-bold text-slate-100">
                   Callback Propagation
                 </h4>
                 <p className="text-slate-400">
@@ -671,7 +675,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
               </div>
 
               <div className="border-l-4 border-red-500 pl-4">
-                <h4 className="font-bold text-slate-100 mb-2">
+                <h4 className="mb-2 font-bold text-slate-100">
                   Broken Composition = Limbo
                 </h4>
                 <p className="text-slate-400">
@@ -682,7 +686,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
               </div>
 
               <div className="border-l-4 border-emerald-500 pl-4">
-                <h4 className="font-bold text-slate-100 mb-2">
+                <h4 className="mb-2 font-bold text-slate-100">
                   Proper Architecture
                 </h4>
                 <p className="text-slate-400">
@@ -693,8 +697,8 @@ The dream is over. The lesson remains. Welcome back to reality.`,
               </div>
             </div>
 
-            <div className="mt-8 p-6 bg-blue-500/10 border border-blue-500/30 rounded-lg">
-              <p className="text-slate-300 text-center italic">
+            <div className="mt-8 rounded-lg border border-blue-500/30 bg-blue-500/10 p-6">
+              <p className="text-center italic text-slate-300">
                 "The dream is over. The lesson remains. Welcome back to
                 reality."
               </p>
@@ -704,16 +708,16 @@ The dream is over. The lesson remains. Welcome back to reality.`,
       </main>
 
       {/* Chapter Navigation Footer */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-t border-slate-800">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-4">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-slate-800 bg-slate-900/95 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-4 md:px-8">
           <div className="flex items-center justify-between">
             <button
               onClick={handlePrevious}
               disabled={!canGoPrevious}
-              className="flex items-center gap-2 px-4 py-2 bg-slate-800 hover:bg-slate-700 disabled:bg-slate-800/50 disabled:cursor-not-allowed disabled:opacity-50 text-slate-300 rounded-lg transition-colors"
+              className="flex items-center gap-2 rounded-lg bg-slate-800 px-4 py-2 text-slate-300 transition-colors hover:bg-slate-700 disabled:cursor-not-allowed disabled:bg-slate-800/50 disabled:opacity-50"
               aria-label="Previous chapter"
             >
-              <ChevronLeft className="w-4 h-4" />
+              <ChevronLeft className="h-4 w-4" />
               <span className="hidden sm:inline">Previous</span>
             </button>
 
@@ -725,9 +729,9 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                     setChapter(idx);
                     window.scrollTo({ top: 0, behavior: "smooth" });
                   }}
-                  className={`w-2 h-2 rounded-full transition-all ${
+                  className={`h-2 w-2 rounded-full transition-all ${
                     idx === chapter
-                      ? "bg-blue-400 w-8"
+                      ? "w-8 bg-blue-400"
                       : "bg-slate-700 hover:bg-slate-600"
                   }`}
                   aria-label={`Go to chapter ${idx + 1}`}
@@ -738,11 +742,11 @@ The dream is over. The lesson remains. Welcome back to reality.`,
             <button
               onClick={handleNext}
               disabled={!canGoNext}
-              className="flex items-center gap-2 px-4 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-slate-800/50 disabled:cursor-not-allowed disabled:opacity-50 text-white rounded-lg transition-colors"
+              className="flex items-center gap-2 rounded-lg bg-blue-500 px-4 py-2 text-white transition-colors hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-slate-800/50 disabled:opacity-50"
               aria-label="Next chapter"
             >
               <span className="hidden sm:inline">Next</span>
-              <ChevronRight className="w-4 h-4" />
+              <ChevronRight className="h-4 w-4" />
             </button>
           </div>
         </div>

@@ -15,7 +15,7 @@ function AngierComponent({ stage }: { stage: string }) {
   const renders = useRenderCount();
   return (
     <div className="text-center">
-      <div className="text-2xl font-bold text-red-400 mb-2">{renders}</div>
+      <div className="mb-2 text-2xl font-bold text-red-400">{renders}</div>
       <div className="text-sm text-slate-400">Renders (Drownings)</div>
     </div>
   );
@@ -26,18 +26,24 @@ const BordenComponent = memo(({ stage }: { stage: string }) => {
   const renders = useRenderCount();
   return (
     <div className="text-center">
-      <div className="text-2xl font-bold text-blue-400 mb-2">{renders}</div>
+      <div className="mb-2 text-2xl font-bold text-blue-400">{renders}</div>
       <div className="text-sm text-slate-400">Renders (Efficient)</div>
     </div>
   );
 });
 
 // Toggle-able component for demo
-function ToggleableComponent({ stage, useMemo }: { stage: string; useMemo: boolean }) {
+function ToggleableComponent({
+  stage,
+  useMemo,
+}: {
+  stage: string;
+  useMemo: boolean;
+}) {
   const renders = useRenderCount();
   return (
     <div className="text-center">
-      <div className="text-3xl font-bold text-blue-400 mb-2">{renders}</div>
+      <div className="mb-2 text-3xl font-bold text-blue-400">{renders}</div>
       <div className="text-sm text-slate-400">
         {useMemo ? "With React.memo" : "Without React.memo"}
       </div>
@@ -215,37 +221,38 @@ The prestige isn't in creating something new every time. It's in knowing when th
     switch (currentChapter.demo) {
       case "counter":
         return (
-          <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-8">
-            <div className="text-center mb-6">
-              <Zap className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-slate-200 mb-2">
+          <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-8">
+            <div className="mb-6 text-center">
+              <Zap className="mx-auto mb-4 h-12 w-12 text-blue-400" />
+              <h3 className="mb-2 text-2xl font-bold text-slate-200">
                 The Nightly Performance
               </h3>
               <p className="text-slate-400">
-                Parent component updates every 2 seconds. Watch Angier re-render every time.
+                Parent component updates every 2 seconds. Watch Angier re-render
+                every time.
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-slate-800/50 border border-slate-600 rounded-lg p-6">
-                <div className="text-center mb-4">
-                  <div className="text-lg font-semibold text-slate-300 mb-2">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              <div className="rounded-lg border border-slate-600 bg-slate-800/50 p-6">
+                <div className="mb-4 text-center">
+                  <div className="mb-2 text-lg font-semibold text-slate-300">
                     Parent (Theatre)
                   </div>
                   <div className="text-3xl font-bold text-blue-400">
                     {parentRenders}
                   </div>
-                  <div className="text-sm text-slate-400 mt-2">
+                  <div className="mt-2 text-sm text-slate-400">
                     Nightly performances
                   </div>
                 </div>
               </div>
-              <div className="bg-slate-800/50 border border-red-500/30 rounded-lg p-6">
-                <div className="text-center mb-4">
-                  <div className="text-lg font-semibold text-slate-300 mb-2">
+              <div className="rounded-lg border border-red-500/30 bg-slate-800/50 p-6">
+                <div className="mb-4 text-center">
+                  <div className="mb-2 text-lg font-semibold text-slate-300">
                     Child (Angier)
                   </div>
                   <AngierComponent stage="main" />
-                  <div className="text-xs text-red-400 mt-4">
+                  <div className="mt-4 text-xs text-red-400">
                     Re-renders on every parent update
                   </div>
                 </div>
@@ -256,21 +263,23 @@ The prestige isn't in creating something new every time. It's in knowing when th
 
       case "tank":
         return (
-          <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-8">
-            <div className="text-center mb-6">
-              <Droplet className="w-12 h-12 text-red-400 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-slate-200 mb-2">
+          <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-8">
+            <div className="mb-6 text-center">
+              <Droplet className="mx-auto mb-4 h-12 w-12 text-red-400" />
+              <h3 className="mb-2 text-2xl font-bold text-slate-200">
                 The Tank Beneath the Stage
               </h3>
               <p className="text-slate-400">
                 Each unnecessary render adds another drowned Angier to the tank.
               </p>
             </div>
-            <div className="bg-slate-800/50 border border-slate-600 rounded-lg p-6">
-              <div className="flex justify-between items-center mb-4">
+            <div className="rounded-lg border border-slate-600 bg-slate-800/50 p-6">
+              <div className="mb-4 flex items-center justify-between">
                 <div className="text-slate-300">
                   <div className="text-sm">Parent renders:</div>
-                  <div className="text-2xl font-bold text-blue-400">{parentRenders}</div>
+                  <div className="text-2xl font-bold text-blue-400">
+                    {parentRenders}
+                  </div>
                 </div>
                 <div className="text-slate-300">
                   <div className="text-sm">Drowned Angiers:</div>
@@ -279,23 +288,25 @@ The prestige isn't in creating something new every time. It's in knowing when th
                   </div>
                 </div>
               </div>
-              <div className="relative h-48 bg-slate-950 border border-slate-700 rounded overflow-hidden">
+              <div className="relative h-48 overflow-hidden rounded border border-slate-700 bg-slate-950">
                 <div
                   className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-blue-900/50 to-blue-500/20 transition-all duration-500"
                   style={{
                     height: `${Math.min((parentRenders / 20) * 100, 100)}%`,
                   }}
                 >
-                  <div className="absolute inset-0 flex flex-wrap items-end justify-center p-2 gap-1">
-                    {Array.from({ length: Math.min(parentRenders, 50) }).map((_, i) => (
-                      <Droplet
-                        key={i}
-                        className="w-4 h-4 text-red-400 opacity-70"
-                      />
-                    ))}
+                  <div className="absolute inset-0 flex flex-wrap items-end justify-center gap-1 p-2">
+                    {Array.from({ length: Math.min(parentRenders, 50) }).map(
+                      (_, i) => (
+                        <Droplet
+                          key={i}
+                          className="h-4 w-4 text-red-400 opacity-70"
+                        />
+                      ),
+                    )}
                   </div>
                 </div>
-                <div className="absolute top-2 left-2 text-xs text-slate-500">
+                <div className="absolute left-2 top-2 text-xs text-slate-500">
                   Tank capacity: {Math.min(parentRenders, 50)}/50
                 </div>
               </div>
@@ -308,23 +319,24 @@ The prestige isn't in creating something new every time. It's in knowing when th
 
       case "comparison":
         return (
-          <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-8">
-            <div className="text-center mb-6">
-              <Users className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-slate-200 mb-2">
+          <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-8">
+            <div className="mb-6 text-center">
+              <Users className="mx-auto mb-4 h-12 w-12 text-blue-400" />
+              <h3 className="mb-2 text-2xl font-bold text-slate-200">
                 Two Methods, Same Trick
               </h3>
               <p className="text-slate-400">
-                Angier's machine vs. Borden's twins. Same props, different costs.
+                Angier's machine vs. Borden's twins. Same props, different
+                costs.
               </p>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              <div className="bg-slate-800/50 border border-red-500/30 rounded-lg p-6">
-                <div className="text-center mb-4">
-                  <div className="text-xl font-bold text-red-400 mb-2">
+            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+              <div className="rounded-lg border border-red-500/30 bg-slate-800/50 p-6">
+                <div className="mb-4 text-center">
+                  <div className="mb-2 text-xl font-bold text-red-400">
                     Angier's Method
                   </div>
-                  <div className="text-sm text-slate-400 mb-4">
+                  <div className="mb-4 text-sm text-slate-400">
                     No React.memo
                   </div>
                   <AngierComponent stage="main" />
@@ -332,8 +344,8 @@ The prestige isn't in creating something new every time. It's in knowing when th
                     Creates new clone every night
                   </div>
                 </div>
-                <div className="mt-6 p-3 bg-slate-950 rounded border border-red-500/20">
-                  <div className="text-xs font-mono text-red-300">
+                <div className="mt-6 rounded border border-red-500/20 bg-slate-950 p-3">
+                  <div className="font-mono text-xs text-red-300">
                     function Angier(props) {"{"}
                     <br />
                     &nbsp;&nbsp;// Expensive operation
@@ -344,12 +356,12 @@ The prestige isn't in creating something new every time. It's in knowing when th
                   </div>
                 </div>
               </div>
-              <div className="bg-slate-800/50 border border-blue-500/30 rounded-lg p-6">
-                <div className="text-center mb-4">
-                  <div className="text-xl font-bold text-blue-400 mb-2">
+              <div className="rounded-lg border border-blue-500/30 bg-slate-800/50 p-6">
+                <div className="mb-4 text-center">
+                  <div className="mb-2 text-xl font-bold text-blue-400">
                     Borden's Method
                   </div>
-                  <div className="text-sm text-slate-400 mb-4">
+                  <div className="mb-4 text-sm text-slate-400">
                     With React.memo
                   </div>
                   <BordenComponent stage="main" />
@@ -357,8 +369,8 @@ The prestige isn't in creating something new every time. It's in knowing when th
                     Reuses existing twin
                   </div>
                 </div>
-                <div className="mt-6 p-3 bg-slate-950 rounded border border-blue-500/20">
-                  <div className="text-xs font-mono text-blue-300">
+                <div className="mt-6 rounded border border-blue-500/20 bg-slate-950 p-3">
+                  <div className="font-mono text-xs text-blue-300">
                     const Borden = memo((props) =&gt; {"{"}
                     <br />
                     &nbsp;&nbsp;// Expensive operation
@@ -371,9 +383,11 @@ The prestige isn't in creating something new every time. It's in knowing when th
               </div>
             </div>
             <div className="mt-6 text-center">
-              <div className="inline-block bg-slate-800 border border-slate-600 rounded-lg px-6 py-3">
-                <div className="text-sm text-slate-400 mb-1">Props (identical):</div>
-                <div className="text-xs font-mono text-slate-300">
+              <div className="inline-block rounded-lg border border-slate-600 bg-slate-800 px-6 py-3">
+                <div className="mb-1 text-sm text-slate-400">
+                  Props (identical):
+                </div>
+                <div className="font-mono text-xs text-slate-300">
                   stage: "main", audience: "standard"
                 </div>
               </div>
@@ -383,24 +397,24 @@ The prestige isn't in creating something new every time. It's in knowing when th
 
       case "toggle":
         return (
-          <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-8">
-            <div className="text-center mb-6">
+          <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-8">
+            <div className="mb-6 text-center">
               {memoEnabled ? (
-                <ToggleRight className="w-12 h-12 text-blue-400 mx-auto mb-4" />
+                <ToggleRight className="mx-auto mb-4 h-12 w-12 text-blue-400" />
               ) : (
-                <ToggleLeft className="w-12 h-12 text-red-400 mx-auto mb-4" />
+                <ToggleLeft className="mx-auto mb-4 h-12 w-12 text-red-400" />
               )}
-              <h3 className="text-2xl font-bold text-slate-200 mb-2">
+              <h3 className="mb-2 text-2xl font-bold text-slate-200">
                 The Optimization Toggle
               </h3>
               <p className="text-slate-400">
                 Add or remove React.memo and watch the render count change.
               </p>
             </div>
-            <div className="flex justify-center mb-6">
+            <div className="mb-6 flex justify-center">
               <button
                 onClick={() => setMemoEnabled(!memoEnabled)}
-                className={`px-8 py-4 rounded-lg font-semibold transition-all ${
+                className={`rounded-lg px-8 py-4 font-semibold transition-all ${
                   memoEnabled
                     ? "bg-blue-500 text-white hover:bg-blue-600"
                     : "bg-red-500 text-white hover:bg-red-600"
@@ -409,9 +423,9 @@ The prestige isn't in creating something new every time. It's in knowing when th
                 {memoEnabled ? "React.memo Enabled" : "React.memo Disabled"}
               </button>
             </div>
-            <div className="bg-slate-800/50 border border-slate-600 rounded-lg p-6">
-              <div className="text-center mb-4">
-                <div className="text-lg font-semibold text-slate-300 mb-4">
+            <div className="rounded-lg border border-slate-600 bg-slate-800/50 p-6">
+              <div className="mb-4 text-center">
+                <div className="mb-4 text-lg font-semibold text-slate-300">
                   Component Renders
                 </div>
                 {memoEnabled ? (
@@ -420,31 +434,39 @@ The prestige isn't in creating something new every time. It's in knowing when th
                   <ToggleableComponent stage="main" useMemo={false} />
                 )}
               </div>
-              <div className="mt-6 p-4 bg-slate-950 rounded border border-slate-700">
-                <div className="text-xs font-mono text-slate-300">
+              <div className="mt-6 rounded border border-slate-700 bg-slate-950 p-4">
+                <div className="font-mono text-xs text-slate-300">
                   {memoEnabled ? (
                     <>
                       <span className="text-blue-400">const</span> Component ={" "}
-                      <span className="text-blue-400">memo</span>((props) =&gt; {"{"}
+                      <span className="text-blue-400">memo</span>((props) =&gt;{" "}
+                      {"{"}
                       <br />
-                      &nbsp;&nbsp;<span className="text-slate-500">
+                      &nbsp;&nbsp;
+                      <span className="text-slate-500">
                         // Only re-renders when props change
                       </span>
                       <br />
-                      &nbsp;&nbsp;<span className="text-blue-400">return</span>{" "}
+                      &nbsp;&nbsp;<span className="text-blue-400">
+                        return
+                      </span>{" "}
                       &lt;div&gt;...&lt;/div&gt;;
                       <br />
                       {"}"});
                     </>
                   ) : (
                     <>
-                      <span className="text-red-400">function</span> Component(props) {"{"}
+                      <span className="text-red-400">function</span>{" "}
+                      Component(props) {"{"}
                       <br />
-                      &nbsp;&nbsp;<span className="text-slate-500">
+                      &nbsp;&nbsp;
+                      <span className="text-slate-500">
                         // Re-renders on every parent update
                       </span>
                       <br />
-                      &nbsp;&nbsp;<span className="text-red-400">return</span>{" "}
+                      &nbsp;&nbsp;<span className="text-red-400">
+                        return
+                      </span>{" "}
                       &lt;div&gt;...&lt;/div&gt;;
                       <br />
                       {"}"}
@@ -461,72 +483,76 @@ The prestige isn't in creating something new every time. It's in knowing when th
 
       case "summary":
         return (
-          <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-8">
-            <div className="text-center mb-8">
-              <Zap className="w-12 h-12 text-blue-400 mx-auto mb-4" />
-              <h3 className="text-2xl font-bold text-slate-200 mb-2">
+          <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-8">
+            <div className="mb-8 text-center">
+              <Zap className="mx-auto mb-4 h-12 w-12 text-blue-400" />
+              <h3 className="mb-2 text-2xl font-bold text-slate-200">
                 The Prestige: When to Optimize
               </h3>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
-              <div className="bg-slate-800/50 border border-blue-500/30 rounded-lg p-6">
-                <h4 className="text-lg font-bold text-blue-400 mb-4">
+            <div className="mb-8 grid grid-cols-1 gap-6 md:grid-cols-2">
+              <div className="rounded-lg border border-blue-500/30 bg-slate-800/50 p-6">
+                <h4 className="mb-4 text-lg font-bold text-blue-400">
                   ✓ Use React.memo when:
                 </h4>
                 <ul className="space-y-2 text-sm text-slate-300">
                   <li className="flex items-start">
-                    <span className="text-blue-400 mr-2">•</span>
+                    <span className="mr-2 text-blue-400">•</span>
                     Component is expensive to render
                   </li>
                   <li className="flex items-start">
-                    <span className="text-blue-400 mr-2">•</span>
+                    <span className="mr-2 text-blue-400">•</span>
                     Props are stable between renders
                   </li>
                   <li className="flex items-start">
-                    <span className="text-blue-400 mr-2">•</span>
+                    <span className="mr-2 text-blue-400">•</span>
                     Parent re-renders frequently
                   </li>
                   <li className="flex items-start">
-                    <span className="text-blue-400 mr-2">•</span>
+                    <span className="mr-2 text-blue-400">•</span>
                     Profiling shows performance issues
                   </li>
                 </ul>
               </div>
-              <div className="bg-slate-800/50 border border-red-500/30 rounded-lg p-6">
-                <h4 className="text-lg font-bold text-red-400 mb-4">
+              <div className="rounded-lg border border-red-500/30 bg-slate-800/50 p-6">
+                <h4 className="mb-4 text-lg font-bold text-red-400">
                   ✗ Don't use React.memo when:
                 </h4>
                 <ul className="space-y-2 text-sm text-slate-300">
                   <li className="flex items-start">
-                    <span className="text-red-400 mr-2">•</span>
+                    <span className="mr-2 text-red-400">•</span>
                     Component is cheap to render
                   </li>
                   <li className="flex items-start">
-                    <span className="text-red-400 mr-2">•</span>
+                    <span className="mr-2 text-red-400">•</span>
                     Props change on every render
                   </li>
                   <li className="flex items-start">
-                    <span className="text-red-400 mr-2">•</span>
+                    <span className="mr-2 text-red-400">•</span>
                     Props are objects without memoization
                   </li>
                   <li className="flex items-start">
-                    <span className="text-red-400 mr-2">•</span>
+                    <span className="mr-2 text-red-400">•</span>
                     Comparison cost exceeds render cost
                   </li>
                 </ul>
               </div>
             </div>
-            <div className="bg-slate-800/50 border border-slate-600 rounded-lg p-6">
-              <h4 className="text-lg font-bold text-slate-200 mb-4 text-center">
+            <div className="rounded-lg border border-slate-600 bg-slate-800/50 p-6">
+              <h4 className="mb-4 text-center text-lg font-bold text-slate-200">
                 Live Comparison
               </h4>
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
                 <div className="text-center">
-                  <div className="text-sm text-red-400 mb-2">Angier (No memo)</div>
+                  <div className="mb-2 text-sm text-red-400">
+                    Angier (No memo)
+                  </div>
                   <AngierComponent stage="main" />
                 </div>
                 <div className="text-center">
-                  <div className="text-sm text-blue-400 mb-2">Borden (With memo)</div>
+                  <div className="mb-2 text-sm text-blue-400">
+                    Borden (With memo)
+                  </div>
                   <BordenComponent stage="main" />
                 </div>
               </div>
@@ -543,37 +569,37 @@ The prestige isn't in creating something new every time. It's in knowing when th
   };
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-serif">
+    <div className="min-h-screen bg-slate-950 font-serif text-slate-300">
       {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4 py-6 md:py-8">
-          <div className="flex items-center gap-4 mb-2">
-            <Zap className="w-8 h-8 md:w-10 md:h-10 text-blue-400" />
-            <h1 className="text-3xl md:text-5xl font-bold text-slate-100">
+      <header className="sticky top-0 z-10 border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-6 md:py-8">
+          <div className="mb-2 flex items-center gap-4">
+            <Zap className="h-8 w-8 text-blue-400 md:h-10 md:w-10" />
+            <h1 className="text-3xl font-bold text-slate-100 md:text-5xl">
               The Prestige
             </h1>
           </div>
-          <p className="text-base md:text-lg text-slate-400 ml-12 md:ml-14">
+          <p className="ml-12 text-base text-slate-400 md:ml-14 md:text-lg">
             Robert Angier, Victorian London, 1899
           </p>
-          <p className="text-sm md:text-base text-blue-400 ml-12 md:ml-14 mt-1">
+          <p className="ml-12 mt-1 text-sm text-blue-400 md:ml-14 md:text-base">
             React.memo & Performance Optimization
           </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 py-8 md:py-12 pb-32">
+      <main className="mx-auto max-w-6xl px-4 py-8 pb-32 md:py-12">
         {/* Chapter Title */}
         <div className="mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-slate-100 mb-4">
+          <h2 className="mb-4 text-3xl font-bold text-slate-100 md:text-4xl">
             {currentChapter.title}
           </h2>
         </div>
 
         {/* Narrative Content */}
-        <article className="prose prose-invert prose-slate max-w-none mb-12">
-          <div className="text-base md:text-lg leading-relaxed whitespace-pre-line text-slate-300">
+        <article className="prose prose-invert prose-slate mb-12 max-w-none">
+          <div className="whitespace-pre-line text-base leading-relaxed text-slate-300 md:text-lg">
             {currentChapter.content}
           </div>
         </article>
@@ -583,13 +609,13 @@ The prestige isn't in creating something new every time. It's in knowing when th
       </main>
 
       {/* Chapter Navigation Footer */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-t border-slate-800 z-20">
-        <div className="max-w-6xl mx-auto px-4 py-4">
-          <div className="flex justify-between items-center">
+      <footer className="fixed bottom-0 left-0 right-0 z-20 border-t border-slate-800 bg-slate-900/95 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-4">
+          <div className="flex items-center justify-between">
             <button
               onClick={() => setChapter((c) => c - 1)}
               disabled={chapter === 0}
-              className="px-4 md:px-6 py-2 bg-slate-800 text-slate-300 rounded-lg font-semibold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-slate-700 transition-colors"
+              className="rounded-lg bg-slate-800 px-4 py-2 font-semibold text-slate-300 transition-colors hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-30 md:px-6"
             >
               ← Previous
             </button>
@@ -598,7 +624,7 @@ The prestige isn't in creating something new every time. It's in knowing when th
               <div className="text-sm text-slate-400">
                 Chapter {chapter + 1} of {chapters.length}
               </div>
-              <div className="text-xs text-slate-500 mt-1">
+              <div className="mt-1 text-xs text-slate-500">
                 {currentChapter.title}
               </div>
             </div>
@@ -606,7 +632,7 @@ The prestige isn't in creating something new every time. It's in knowing when th
             <button
               onClick={() => setChapter((c) => c + 1)}
               disabled={chapter === chapters.length - 1}
-              className="px-4 md:px-6 py-2 bg-blue-500 text-white rounded-lg font-semibold disabled:opacity-30 disabled:cursor-not-allowed hover:bg-blue-600 transition-colors"
+              className="rounded-lg bg-blue-500 px-4 py-2 font-semibold text-white transition-colors hover:bg-blue-600 disabled:cursor-not-allowed disabled:opacity-30 md:px-6"
             >
               Next →
             </button>

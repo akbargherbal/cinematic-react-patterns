@@ -1,5 +1,12 @@
 import { useState, useCallback, useEffect } from "react";
-import { Eye, AlertTriangle, CheckCircle, XCircle, Loader2, Zap } from "lucide-react";
+import {
+  Eye,
+  AlertTriangle,
+  CheckCircle,
+  XCircle,
+  Loader2,
+  Zap,
+} from "lucide-react";
 
 interface PendingAction {
   id: string;
@@ -32,7 +39,9 @@ export default function MinorityReportOptimisticRendering() {
   const [deleteError, setDeleteError] = useState<string | null>(null);
 
   // Demo 4: Anderton's Choice
-  const [accountStatus, setAccountStatus] = useState<"active" | "deleting" | "deleted">("active");
+  const [accountStatus, setAccountStatus] = useState<
+    "active" | "deleting" | "deleted"
+  >("active");
   const [deleteTimer, setDeleteTimer] = useState<number | null>(null);
   const [canCancel, setCanCancel] = useState(false);
 
@@ -142,8 +151,8 @@ Render the future, but mark it as tentative. Always preserve the previous state.
         prev.map((h) =>
           h.id === newHalo.id
             ? { ...h, status: Math.random() > 0.3 ? "confirmed" : "failed" }
-            : h
-        )
+            : h,
+        ),
       );
 
       // Remove after animation
@@ -182,12 +191,14 @@ Render the future, but mark it as tentative. Always preserve the previous state.
             next.delete(id);
             return next;
           });
-          setDeleteError("Minority report detected. Arrest cancelled. State rolled back.");
+          setDeleteError(
+            "Minority report detected. Arrest cancelled. State rolled back.",
+          );
           setTimeout(() => setDeleteError(null), 4000);
         }
       }, 2000);
     },
-    [items, deletePending]
+    [items, deletePending],
   );
 
   // Demo 4: Anderton's Choice - Cancellable Action
@@ -212,7 +223,9 @@ Render the future, but mark it as tentative. Always preserve the previous state.
 
     // Auto-confirm after 5 seconds
     setTimeout(() => {
-      setAccountStatus((current) => (current === "deleting" ? "deleted" : current));
+      setAccountStatus((current) =>
+        current === "deleting" ? "deleted" : current,
+      );
       setCanCancel(false);
     }, 5000);
   }, [accountStatus]);
@@ -231,24 +244,25 @@ Render the future, but mark it as tentative. Always preserve the previous state.
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-sans">
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-300">
       {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <div className="flex items-center gap-3 mb-2">
-            <Eye className="w-8 h-8 text-blue-400" />
-            <h1 className="text-3xl md:text-4xl font-bold text-slate-100">
+      <header className="sticky top-0 z-10 border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-6">
+          <div className="mb-2 flex items-center gap-3">
+            <Eye className="h-8 w-8 text-blue-400" />
+            <h1 className="text-3xl font-bold text-slate-100 md:text-4xl">
               Minority Report
             </h1>
           </div>
           <p className="text-lg text-slate-400">
-            Pre-Crime Division, 2054 • Optimistic Updates & Speculative Rendering
+            Pre-Crime Division, 2054 • Optimistic Updates & Speculative
+            Rendering
           </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 py-8 pb-32">
+      <main className="mx-auto max-w-6xl px-4 py-8 pb-32">
         <div
           className={`transition-opacity duration-300 ${
             fadeIn ? "opacity-100" : "opacity-0"
@@ -256,121 +270,133 @@ Render the future, but mark it as tentative. Always preserve the previous state.
         >
           {/* Chapter Header */}
           <div className="mb-8">
-            <h2 className="text-3xl font-bold text-slate-100 mb-2">
+            <h2 className="mb-2 text-3xl font-bold text-slate-100">
               {currentChapter.title}
             </h2>
             <p className="text-lg text-blue-400">{currentChapter.subtitle}</p>
           </div>
 
           {/* Chapter Content */}
-          <div className="prose prose-invert prose-slate max-w-none mb-12">
-            <div className="text-base leading-relaxed whitespace-pre-line">
+          <div className="prose prose-invert prose-slate mb-12 max-w-none">
+            <div className="whitespace-pre-line text-base leading-relaxed">
               {currentChapter.content}
             </div>
           </div>
 
           {/* Interactive Demonstrations */}
           {chapter === 0 && (
-            <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-slate-100 mb-4 flex items-center gap-2">
-                <Zap className="w-5 h-5 text-blue-400" />
+            <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+              <h3 className="mb-4 flex items-center gap-2 text-xl font-semibold text-slate-100">
+                <Zap className="h-5 w-5 text-blue-400" />
                 Pre-Cog Vision Simulator
               </h3>
-              <p className="text-sm text-slate-400 mb-6">
-                Click the button to trigger an optimistic update. The UI renders the future
-                state immediately, but the server might reject it (20% failure rate).
+              <p className="mb-6 text-sm text-slate-400">
+                Click the button to trigger an optimistic update. The UI renders
+                the future state immediately, but the server might reject it
+                (20% failure rate).
               </p>
 
               <div className="flex flex-col items-center gap-6">
-                <div className="bg-slate-800/50 rounded-lg p-8 w-full max-w-md">
-                  <div className="flex items-center justify-between mb-4">
-                    <span className="text-slate-300">Post by John Anderton</span>
-                    <span className="text-sm text-slate-500">{likeCount} likes</span>
+                <div className="w-full max-w-md rounded-lg bg-slate-800/50 p-8">
+                  <div className="mb-4 flex items-center justify-between">
+                    <span className="text-slate-300">
+                      Post by John Anderton
+                    </span>
+                    <span className="text-sm text-slate-500">
+                      {likeCount} likes
+                    </span>
                   </div>
 
                   <button
                     onClick={handleLike}
                     disabled={likePending}
-                    className={`w-full py-3 px-6 rounded-lg font-semibold transition-all ${
+                    className={`w-full rounded-lg px-6 py-3 font-semibold transition-all ${
                       liked
                         ? "bg-blue-500 text-white hover:bg-blue-600"
                         : "bg-slate-700 text-slate-300 hover:bg-slate-600"
                     } ${
-                      likePending ? "opacity-50 cursor-not-allowed" : ""
-                    } disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2`}
+                      likePending ? "cursor-not-allowed opacity-50" : ""
+                    } flex items-center justify-center gap-2 disabled:cursor-not-allowed disabled:opacity-50`}
                   >
-                    {likePending && <Loader2 className="w-4 h-4 animate-spin" />}
+                    {likePending && (
+                      <Loader2 className="h-4 w-4 animate-spin" />
+                    )}
                     {liked ? "Unlike" : "Like"}
-                    {likePending && <span className="text-xs">(pending...)</span>}
+                    {likePending && (
+                      <span className="text-xs">(pending...)</span>
+                    )}
                   </button>
 
                   {likeError && (
-                    <div className="mt-4 p-3 bg-red-900/30 border border-red-500/50 rounded text-red-400 text-sm flex items-start gap-2">
-                      <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
+                    <div className="mt-4 flex items-start gap-2 rounded border border-red-500/50 bg-red-900/30 p-3 text-sm text-red-400">
+                      <AlertTriangle className="mt-0.5 h-4 w-4 flex-shrink-0" />
                       <span>{likeError}</span>
                     </div>
                   )}
                 </div>
 
-                <div className="text-xs text-slate-500 text-center max-w-md">
-                  <strong>Optimistic Update:</strong> The UI changes immediately (future
-                  state rendered). If the server rejects it, the state rolls back to the
-                  previous value.
+                <div className="max-w-md text-center text-xs text-slate-500">
+                  <strong>Optimistic Update:</strong> The UI changes immediately
+                  (future state rendered). If the server rejects it, the state
+                  rolls back to the previous value.
                 </div>
               </div>
             </div>
           )}
 
           {chapter === 1 && (
-            <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-slate-100 mb-4 flex items-center gap-2">
-                <AlertTriangle className="w-5 h-5 text-amber-400" />
+            <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+              <h3 className="mb-4 flex items-center gap-2 text-xl font-semibold text-slate-100">
+                <AlertTriangle className="h-5 w-5 text-amber-400" />
                 Halo Data Tracker
               </h3>
-              <p className="text-sm text-slate-400 mb-6">
-                Each "halo" represents a pending optimistic update. Watch how the system
-                treats them as confirmed immediately, with no indication of uncertainty.
+              <p className="mb-6 text-sm text-slate-400">
+                Each "halo" represents a pending optimistic update. Watch how
+                the system treats them as confirmed immediately, with no
+                indication of uncertainty.
               </p>
 
               <div className="flex flex-col items-center gap-6">
                 <button
                   onClick={dropHalo}
-                  className="px-6 py-3 bg-amber-500 hover:bg-amber-600 text-slate-950 font-semibold rounded-lg transition-colors"
+                  className="rounded-lg bg-amber-500 px-6 py-3 font-semibold text-slate-950 transition-colors hover:bg-amber-600"
                 >
                   Drop Halo (Dispatch Arrest)
                 </button>
 
-                <div className="w-full max-w-2xl min-h-[200px] bg-slate-800/30 rounded-lg p-4 border border-slate-700">
+                <div className="min-h-[200px] w-full max-w-2xl rounded-lg border border-slate-700 bg-slate-800/30 p-4">
                   {halos.length === 0 ? (
-                    <div className="text-center text-slate-500 py-12">
+                    <div className="py-12 text-center text-slate-500">
                       No active arrests. System idle.
                     </div>
                   ) : (
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-3">
+                    <div className="grid grid-cols-1 gap-3 md:grid-cols-2">
                       {halos.map((halo) => (
                         <div
                           key={halo.id}
-                          className={`p-4 rounded-lg border-2 transition-all ${
+                          className={`rounded-lg border-2 p-4 transition-all ${
                             halo.status === "pending"
-                              ? "bg-amber-900/20 border-amber-500/50 animate-pulse"
+                              ? "animate-pulse border-amber-500/50 bg-amber-900/20"
                               : halo.status === "confirmed"
-                              ? "bg-emerald-900/20 border-emerald-500/50"
-                              : "bg-red-900/20 border-red-500/50"
+                                ? "border-emerald-500/50 bg-emerald-900/20"
+                                : "border-red-500/50 bg-red-900/20"
                           }`}
                         >
                           <div className="flex items-center justify-between">
-                            <span className="font-mono text-sm">{halo.type}</span>
+                            <span className="font-mono text-sm">
+                              {halo.type}
+                            </span>
                             {halo.status === "pending" && (
-                              <Loader2 className="w-4 h-4 text-amber-400 animate-spin" />
+                              <Loader2 className="h-4 w-4 animate-spin text-amber-400" />
                             )}
                             {halo.status === "confirmed" && (
-                              <CheckCircle className="w-4 h-4 text-emerald-400" />
+                              <CheckCircle className="h-4 w-4 text-emerald-400" />
                             )}
                             {halo.status === "failed" && (
-                              <XCircle className="w-4 h-4 text-red-400" />
+                              <XCircle className="h-4 w-4 text-red-400" />
                             )}
                           </div>
-                          <div className="text-xs text-slate-500 mt-1 uppercase">
+                          <div className="mt-1 text-xs uppercase text-slate-500">
                             {halo.status}
                           </div>
                         </div>
@@ -379,39 +405,41 @@ Render the future, but mark it as tentative. Always preserve the previous state.
                   )}
                 </div>
 
-                <div className="text-xs text-slate-500 text-center max-w-md">
-                  <strong>Anti-Pattern:</strong> The system shows arrests as "GUILTY"
-                  immediately, with no indication that they're pending server confirmation.
+                <div className="max-w-md text-center text-xs text-slate-500">
+                  <strong>Anti-Pattern:</strong> The system shows arrests as
+                  "GUILTY" immediately, with no indication that they're pending
+                  server confirmation.
                 </div>
               </div>
             </div>
           )}
 
           {chapter === 2 && (
-            <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-slate-100 mb-4 flex items-center gap-2">
-                <XCircle className="w-5 h-5 text-red-400" />
+            <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+              <h3 className="mb-4 flex items-center gap-2 text-xl font-semibold text-slate-100">
+                <XCircle className="h-5 w-5 text-red-400" />
                 Minority Report: Rollback Demo
               </h3>
-              <p className="text-sm text-slate-400 mb-6">
-                Delete a suspect from the list. The UI updates optimistically, but there's a
-                30% chance the server will reject it (minority report), forcing a rollback.
+              <p className="mb-6 text-sm text-slate-400">
+                Delete a suspect from the list. The UI updates optimistically,
+                but there's a 30% chance the server will reject it (minority
+                report), forcing a rollback.
               </p>
 
               <div className="space-y-4">
                 {items.map((item) => (
                   <div
                     key={item.id}
-                    className="flex items-center justify-between p-4 bg-slate-800/50 rounded-lg border border-slate-700"
+                    className="flex items-center justify-between rounded-lg border border-slate-700 bg-slate-800/50 p-4"
                   >
                     <span className="text-slate-300">{item.name}</span>
                     <button
                       onClick={() => handleDelete(item.id)}
                       disabled={deletePending.has(item.id)}
-                      className="px-4 py-2 bg-red-500 hover:bg-red-600 disabled:bg-red-500/50 disabled:cursor-not-allowed text-white rounded transition-colors flex items-center gap-2"
+                      className="flex items-center gap-2 rounded bg-red-500 px-4 py-2 text-white transition-colors hover:bg-red-600 disabled:cursor-not-allowed disabled:bg-red-500/50"
                     >
                       {deletePending.has(item.id) && (
-                        <Loader2 className="w-4 h-4 animate-spin" />
+                        <Loader2 className="h-4 w-4 animate-spin" />
                       )}
                       {deletePending.has(item.id) ? "Arresting..." : "Arrest"}
                     </button>
@@ -419,42 +447,46 @@ Render the future, but mark it as tentative. Always preserve the previous state.
                 ))}
 
                 {deleteError && (
-                  <div className="p-4 bg-red-900/30 border border-red-500/50 rounded text-red-400 text-sm flex items-start gap-2">
-                    <AlertTriangle className="w-5 h-5 flex-shrink-0" />
+                  <div className="flex items-start gap-2 rounded border border-red-500/50 bg-red-900/30 p-4 text-sm text-red-400">
+                    <AlertTriangle className="h-5 w-5 flex-shrink-0" />
                     <span>{deleteError}</span>
                   </div>
                 )}
 
-                <div className="text-xs text-slate-500 text-center pt-4">
-                  <strong>Proper Rollback:</strong> When the server rejects the deletion,
-                  the item reappears in the list. The optimistic update is reversed.
+                <div className="pt-4 text-center text-xs text-slate-500">
+                  <strong>Proper Rollback:</strong> When the server rejects the
+                  deletion, the item reappears in the list. The optimistic
+                  update is reversed.
                 </div>
               </div>
             </div>
           )}
 
           {chapter === 3 && (
-            <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-slate-100 mb-4 flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-emerald-400" />
+            <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+              <h3 className="mb-4 flex items-center gap-2 text-xl font-semibold text-slate-100">
+                <CheckCircle className="h-5 w-5 text-emerald-400" />
                 Anderton's Choice: Cancellable Action
               </h3>
-              <p className="text-sm text-slate-400 mb-6">
-                Trigger a critical action. The UI shows the optimistic state immediately, but
-                you have 5 seconds to cancel before the server confirms it.
+              <p className="mb-6 text-sm text-slate-400">
+                Trigger a critical action. The UI shows the optimistic state
+                immediately, but you have 5 seconds to cancel before the server
+                confirms it.
               </p>
 
               <div className="flex flex-col items-center gap-6">
-                <div className="w-full max-w-md bg-slate-800/50 rounded-lg p-6 border border-slate-700">
-                  <div className="text-center mb-6">
-                    <div className="text-sm text-slate-400 mb-2">Account Status</div>
+                <div className="w-full max-w-md rounded-lg border border-slate-700 bg-slate-800/50 p-6">
+                  <div className="mb-6 text-center">
+                    <div className="mb-2 text-sm text-slate-400">
+                      Account Status
+                    </div>
                     <div
                       className={`text-2xl font-bold ${
                         accountStatus === "active"
                           ? "text-emerald-400"
                           : accountStatus === "deleting"
-                          ? "text-amber-400"
-                          : "text-red-400"
+                            ? "text-amber-400"
+                            : "text-red-400"
                       }`}
                     >
                       {accountStatus === "active" && "ACTIVE"}
@@ -466,7 +498,7 @@ Render the future, but mark it as tentative. Always preserve the previous state.
                   {accountStatus === "active" && (
                     <button
                       onClick={handleAccountDelete}
-                      className="w-full py-3 px-6 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition-colors"
+                      className="w-full rounded-lg bg-red-500 px-6 py-3 font-semibold text-white transition-colors hover:bg-red-600"
                     >
                       Delete Account
                     </button>
@@ -475,7 +507,7 @@ Render the future, but mark it as tentative. Always preserve the previous state.
                   {accountStatus === "deleting" && (
                     <div className="space-y-4">
                       <div className="text-center">
-                        <div className="text-4xl font-bold text-amber-400 mb-2">
+                        <div className="mb-2 text-4xl font-bold text-amber-400">
                           {deleteTimer}
                         </div>
                         <div className="text-sm text-slate-400">
@@ -484,7 +516,7 @@ Render the future, but mark it as tentative. Always preserve the previous state.
                       </div>
                       <button
                         onClick={handleCancelDelete}
-                        className="w-full py-3 px-6 bg-emerald-500 hover:bg-emerald-600 text-white font-semibold rounded-lg transition-colors"
+                        className="w-full rounded-lg bg-emerald-500 px-6 py-3 font-semibold text-white transition-colors hover:bg-emerald-600"
                       >
                         Cancel Deletion (Lower the Gun)
                       </button>
@@ -493,12 +525,12 @@ Render the future, but mark it as tentative. Always preserve the previous state.
 
                   {accountStatus === "deleted" && (
                     <div className="space-y-4">
-                      <div className="text-center text-slate-400 text-sm">
+                      <div className="text-center text-sm text-slate-400">
                         Account permanently deleted. The prediction came true.
                       </div>
                       <button
                         onClick={resetAccountDemo}
-                        className="w-full py-2 px-4 bg-slate-700 hover:bg-slate-600 text-slate-300 rounded-lg transition-colors text-sm"
+                        className="w-full rounded-lg bg-slate-700 px-4 py-2 text-sm text-slate-300 transition-colors hover:bg-slate-600"
                       >
                         Reset Demo
                       </button>
@@ -506,27 +538,28 @@ Render the future, but mark it as tentative. Always preserve the previous state.
                   )}
                 </div>
 
-                <div className="text-xs text-slate-500 text-center max-w-md">
-                  <strong>Cancellation Window:</strong> Like Anderton choosing not to pull
-                  the trigger, you can invalidate the optimistic update before it's confirmed.
+                <div className="max-w-md text-center text-xs text-slate-500">
+                  <strong>Cancellation Window:</strong> Like Anderton choosing
+                  not to pull the trigger, you can invalidate the optimistic
+                  update before it's confirmed.
                 </div>
               </div>
             </div>
           )}
 
           {chapter === 4 && (
-            <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
-              <h3 className="text-xl font-semibold text-slate-100 mb-4">
+            <div className="rounded-lg border border-slate-800 bg-slate-900/50 p-6">
+              <h3 className="mb-4 text-xl font-semibold text-slate-100">
                 The Pre-Crime Principles
               </h3>
               <div className="space-y-6">
-                <div className="grid md:grid-cols-2 gap-4">
-                  <div className="bg-emerald-900/20 border border-emerald-500/30 rounded-lg p-4">
-                    <h4 className="font-semibold text-emerald-400 mb-2 flex items-center gap-2">
-                      <CheckCircle className="w-4 h-4" />
+                <div className="grid gap-4 md:grid-cols-2">
+                  <div className="rounded-lg border border-emerald-500/30 bg-emerald-900/20 p-4">
+                    <h4 className="mb-2 flex items-center gap-2 font-semibold text-emerald-400">
+                      <CheckCircle className="h-4 w-4" />
                       Use Optimistic Updates For:
                     </h4>
-                    <ul className="text-sm text-slate-300 space-y-1 list-disc list-inside">
+                    <ul className="list-inside list-disc space-y-1 text-sm text-slate-300">
                       <li>High-confidence predictions (like/unlike)</li>
                       <li>Reversible actions (add/remove from list)</li>
                       <li>Non-critical operations (UI preferences)</li>
@@ -534,12 +567,12 @@ Render the future, but mark it as tentative. Always preserve the previous state.
                     </ul>
                   </div>
 
-                  <div className="bg-red-900/20 border border-red-500/30 rounded-lg p-4">
-                    <h4 className="font-semibold text-red-400 mb-2 flex items-center gap-2">
-                      <XCircle className="w-4 h-4" />
+                  <div className="rounded-lg border border-red-500/30 bg-red-900/20 p-4">
+                    <h4 className="mb-2 flex items-center gap-2 font-semibold text-red-400">
+                      <XCircle className="h-4 w-4" />
                       Don't Use Them For:
                     </h4>
-                    <ul className="text-sm text-slate-300 space-y-1 list-disc list-inside">
+                    <ul className="list-inside list-disc space-y-1 text-sm text-slate-300">
                       <li>Financial transactions (payments)</li>
                       <li>Destructive operations (permanent deletes)</li>
                       <li>Security-critical actions (permissions)</li>
@@ -548,54 +581,54 @@ Render the future, but mark it as tentative. Always preserve the previous state.
                   </div>
                 </div>
 
-                <div className="bg-blue-900/20 border border-blue-500/30 rounded-lg p-4">
-                  <h4 className="font-semibold text-blue-400 mb-3">
+                <div className="rounded-lg border border-blue-500/30 bg-blue-900/20 p-4">
+                  <h4 className="mb-3 font-semibold text-blue-400">
                     Implementation Checklist:
                   </h4>
                   <div className="space-y-2 text-sm text-slate-300">
                     <div className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                      <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-400" />
                       <span>
-                        <strong>Mark as tentative:</strong> Use visual indicators (opacity,
-                        loading states, pending flags)
+                        <strong>Mark as tentative:</strong> Use visual
+                        indicators (opacity, loading states, pending flags)
                       </span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                      <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-400" />
                       <span>
-                        <strong>Preserve previous state:</strong> Store a snapshot before
-                        applying the optimistic update
+                        <strong>Preserve previous state:</strong> Store a
+                        snapshot before applying the optimistic update
                       </span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                      <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-400" />
                       <span>
-                        <strong>Handle errors gracefully:</strong> Show user-friendly messages
-                        when rollback occurs
+                        <strong>Handle errors gracefully:</strong> Show
+                        user-friendly messages when rollback occurs
                       </span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                      <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-400" />
                       <span>
-                        <strong>Reconcile with server:</strong> The server's response is the
-                        source of truth
+                        <strong>Reconcile with server:</strong> The server's
+                        response is the source of truth
                       </span>
                     </div>
                     <div className="flex items-start gap-2">
-                      <CheckCircle className="w-4 h-4 text-blue-400 mt-0.5 flex-shrink-0" />
+                      <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-blue-400" />
                       <span>
-                        <strong>Test failure scenarios:</strong> Ensure rollback works
-                        correctly in all edge cases
+                        <strong>Test failure scenarios:</strong> Ensure rollback
+                        works correctly in all edge cases
                       </span>
                     </div>
                   </div>
                 </div>
 
-                <div className="bg-slate-800/50 rounded-lg p-4 border border-slate-700">
-                  <h4 className="font-semibold text-slate-100 mb-3 font-mono text-sm">
+                <div className="rounded-lg border border-slate-700 bg-slate-800/50 p-4">
+                  <h4 className="mb-3 font-mono text-sm font-semibold text-slate-100">
                     Code Pattern:
                   </h4>
-                  <pre className="text-xs text-slate-300 overflow-x-auto">
+                  <pre className="overflow-x-auto text-xs text-slate-300">
                     <code>{`// 1. Store previous state
 const previousState = currentState;
 
@@ -624,12 +657,12 @@ apiCall()
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-t border-slate-800 p-4">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-slate-800 bg-slate-900/95 p-4 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-6xl items-center justify-between">
           <button
             onClick={() => setChapter((c) => c - 1)}
             disabled={chapter === 0}
-            className="px-6 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
+            className="rounded-lg bg-blue-500 px-6 py-2 font-semibold text-white transition-colors hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-500"
           >
             Previous
           </button>
@@ -638,13 +671,15 @@ apiCall()
             <div className="text-sm text-slate-400">
               Chapter {chapter + 1} of {chapters.length}
             </div>
-            <div className="text-xs text-slate-500 mt-1">{currentChapter.title}</div>
+            <div className="mt-1 text-xs text-slate-500">
+              {currentChapter.title}
+            </div>
           </div>
 
           <button
             onClick={() => setChapter((c) => c + 1)}
             disabled={chapter === chapters.length - 1}
-            className="px-6 py-2 bg-blue-500 hover:bg-blue-600 disabled:bg-slate-700 disabled:text-slate-500 disabled:cursor-not-allowed text-white font-semibold rounded-lg transition-colors"
+            className="rounded-lg bg-blue-500 px-6 py-2 font-semibold text-white transition-colors hover:bg-blue-600 disabled:cursor-not-allowed disabled:bg-slate-700 disabled:text-slate-500"
           >
             Next
           </button>

@@ -1,5 +1,12 @@
 import { useState, useRef, useCallback, useMemo } from "react";
-import { Zap, Eye, EyeOff, AlertTriangle, CheckCircle, Link2 } from "lucide-react";
+import {
+  Zap,
+  Eye,
+  EyeOff,
+  AlertTriangle,
+  CheckCircle,
+  Link2,
+} from "lucide-react";
 
 interface Chapter {
   id: string;
@@ -172,7 +179,7 @@ The choice is yours. The covenant is offered. Will you accept the responsibility
 Victor Frankenstein hoped you would choose wisely. He had learned, too late, that hope is not a strategy.`,
       },
     ],
-    []
+    [],
   );
 
   const currentChapter = chapters[chapter];
@@ -192,40 +199,40 @@ Victor Frankenstein hoped you would choose wisely. He had learned, too late, tha
   }, [chapter]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-serif">
+    <div className="min-h-screen bg-slate-950 font-serif text-slate-300">
       {/* Header */}
       <header className="border-b border-emerald-500/20 bg-slate-900/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-          <div className="flex items-center gap-3 mb-2">
-            <Zap className="w-8 h-8 text-emerald-500" />
-            <h1 className="text-3xl sm:text-4xl font-bold text-emerald-400">
+        <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+          <div className="mb-2 flex items-center gap-3">
+            <Zap className="h-8 w-8 text-emerald-500" />
+            <h1 className="text-3xl font-bold text-emerald-400 sm:text-4xl">
               Frankenstein's Covenant
             </h1>
           </div>
-          <p className="text-lg text-slate-400 ml-11">
+          <p className="ml-11 text-lg text-slate-400">
             Victor Frankenstein, Geneva, 1818
           </p>
-          <p className="text-sm text-emerald-500/70 ml-11 mt-1">
+          <p className="ml-11 mt-1 text-sm text-emerald-500/70">
             Controlled vs Uncontrolled Components
           </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 pb-32">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+      <main className="mx-auto max-w-7xl px-4 py-8 pb-32 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
           {/* Narrative Section */}
           <article className="prose prose-invert prose-slate max-w-none">
-            <h2 className="text-2xl sm:text-3xl font-bold text-emerald-400 mb-6">
+            <h2 className="mb-6 text-2xl font-bold text-emerald-400 sm:text-3xl">
               {currentChapter.title}
             </h2>
-            <div className="text-slate-300 leading-relaxed space-y-4 whitespace-pre-line">
+            <div className="space-y-4 whitespace-pre-line leading-relaxed text-slate-300">
               {currentChapter.content}
             </div>
           </article>
 
           {/* Interactive Demo Section */}
-          <aside className="lg:sticky lg:top-8 h-fit">
+          <aside className="h-fit lg:sticky lg:top-8">
             {chapter === 0 && <IntroDemo />}
             {chapter === 1 && <UnboundWillDemo />}
             {chapter === 2 && <RampageDemo />}
@@ -236,13 +243,13 @@ Victor Frankenstein hoped you would choose wisely. He had learned, too late, tha
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-t border-emerald-500/20">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-emerald-500/20 bg-slate-900/95 backdrop-blur-sm">
+        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between">
             <button
               onClick={prevChapter}
               disabled={chapter === 0}
-              className="px-4 sm:px-6 py-2 bg-emerald-900/30 text-emerald-400 border border-emerald-500/30 rounded hover:bg-emerald-900/50 hover:border-emerald-500/50 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              className="rounded border border-emerald-500/30 bg-emerald-900/30 px-4 py-2 text-emerald-400 transition-all hover:border-emerald-500/50 hover:bg-emerald-900/50 disabled:cursor-not-allowed disabled:opacity-30 sm:px-6"
               aria-label="Previous chapter"
             >
               Previous
@@ -256,9 +263,9 @@ Victor Frankenstein hoped you would choose wisely. He had learned, too late, tha
                     setChapter(idx);
                     window.scrollTo({ top: 0, behavior: "smooth" });
                   }}
-                  className={`w-2 h-2 rounded-full transition-all ${
+                  className={`h-2 w-2 rounded-full transition-all ${
                     idx === chapter
-                      ? "bg-emerald-500 w-8"
+                      ? "w-8 bg-emerald-500"
                       : "bg-slate-600 hover:bg-slate-500"
                   }`}
                   aria-label={`Go to chapter ${idx + 1}`}
@@ -269,14 +276,14 @@ Victor Frankenstein hoped you would choose wisely. He had learned, too late, tha
             <button
               onClick={nextChapter}
               disabled={chapter === chapters.length - 1}
-              className="px-4 sm:px-6 py-2 bg-emerald-900/30 text-emerald-400 border border-emerald-500/30 rounded hover:bg-emerald-900/50 hover:border-emerald-500/50 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
+              className="rounded border border-emerald-500/30 bg-emerald-900/30 px-4 py-2 text-emerald-400 transition-all hover:border-emerald-500/50 hover:bg-emerald-900/50 disabled:cursor-not-allowed disabled:opacity-30 sm:px-6"
               aria-label="Next chapter"
             >
               Next
             </button>
           </div>
 
-          <div className="text-center mt-2 text-sm text-slate-500">
+          <div className="mt-2 text-center text-sm text-slate-500">
             Chapter {chapter + 1} of {chapters.length}
           </div>
         </div>
@@ -293,16 +300,16 @@ function IntroDemo() {
   const [showUncontrolled, setShowUncontrolled] = useState(false);
 
   return (
-    <div className="bg-slate-900/50 border border-emerald-500/30 rounded-lg p-6">
-      <h3 className="text-xl font-bold text-emerald-400 mb-4 flex items-center gap-2">
-        <Zap className="w-5 h-5" />
+    <div className="rounded-lg border border-emerald-500/30 bg-slate-900/50 p-6">
+      <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-emerald-400">
+        <Zap className="h-5 w-5" />
         The Laboratory Experiment
       </h3>
 
       <div className="space-y-6">
         {/* Controlled Input */}
-        <div className="bg-slate-800/50 border border-emerald-500/20 rounded p-4">
-          <label className="block text-sm font-semibold text-emerald-400 mb-2">
+        <div className="rounded border border-emerald-500/20 bg-slate-800/50 p-4">
+          <label className="mb-2 block text-sm font-semibold text-emerald-400">
             Controlled Creature (Bound to Victor)
           </label>
           <input
@@ -310,13 +317,13 @@ function IntroDemo() {
             value={controlledValue}
             onChange={(e) => setControlledValue(e.target.value)}
             placeholder="Type here..."
-            className="w-full px-3 py-2 bg-slate-900 border border-emerald-500/30 rounded text-slate-200 placeholder-slate-500 focus:outline-none focus:border-emerald-500"
+            className="w-full rounded border border-emerald-500/30 bg-slate-900 px-3 py-2 text-slate-200 placeholder-slate-500 focus:border-emerald-500 focus:outline-none"
           />
           <div className="mt-3 flex items-center gap-2 text-sm">
-            <Eye className="w-4 h-4 text-emerald-500" />
+            <Eye className="h-4 w-4 text-emerald-500" />
             <span className="text-slate-400">
               Victor sees:{" "}
-              <span className="text-emerald-400 font-mono">
+              <span className="font-mono text-emerald-400">
                 "{controlledValue}"
               </span>
             </span>
@@ -324,8 +331,8 @@ function IntroDemo() {
         </div>
 
         {/* Uncontrolled Input */}
-        <div className="bg-slate-800/50 border border-amber-500/20 rounded p-4">
-          <label className="block text-sm font-semibold text-amber-400 mb-2">
+        <div className="rounded border border-amber-500/20 bg-slate-800/50 p-4">
+          <label className="mb-2 block text-sm font-semibold text-amber-400">
             Uncontrolled Creature (Independent)
           </label>
           <input
@@ -333,13 +340,13 @@ function IntroDemo() {
             type="text"
             defaultValue=""
             placeholder="Type here..."
-            className="w-full px-3 py-2 bg-slate-900 border border-amber-500/30 rounded text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-500"
+            className="w-full rounded border border-amber-500/30 bg-slate-900 px-3 py-2 text-slate-200 placeholder-slate-500 focus:border-amber-500 focus:outline-none"
           />
           <div className="mt-3 flex items-center gap-2 text-sm">
-            <EyeOff className="w-4 h-4 text-amber-500" />
+            <EyeOff className="h-4 w-4 text-amber-500" />
             <span className="text-slate-400">
               Victor sees:{" "}
-              <span className="text-amber-400 font-mono">
+              <span className="font-mono text-amber-400">
                 {showUncontrolled
                   ? `"${uncontrolledRef.current?.value || ""}"`
                   : "???"}
@@ -348,14 +355,14 @@ function IntroDemo() {
           </div>
           <button
             onClick={() => setShowUncontrolled(!showUncontrolled)}
-            className="mt-2 px-3 py-1 bg-amber-900/30 text-amber-400 border border-amber-500/30 rounded text-sm hover:bg-amber-900/50"
+            className="mt-2 rounded border border-amber-500/30 bg-amber-900/30 px-3 py-1 text-sm text-amber-400 hover:bg-amber-900/50"
           >
             {showUncontrolled ? "Hide" : "Query DOM"}
           </button>
         </div>
 
-        <div className="text-sm text-slate-400 bg-slate-800/30 rounded p-3 border-l-2 border-emerald-500/50">
-          <p className="font-semibold text-emerald-400 mb-1">The Pattern:</p>
+        <div className="rounded border-l-2 border-emerald-500/50 bg-slate-800/30 p-3 text-sm text-slate-400">
+          <p className="mb-1 font-semibold text-emerald-400">The Pattern:</p>
           <p>
             The controlled input's value flows through React state. Victor
             (parent component) always knows its current state. The uncontrolled
@@ -381,15 +388,15 @@ function UnboundWillDemo() {
   };
 
   return (
-    <div className="bg-slate-900/50 border border-amber-500/30 rounded-lg p-6">
-      <h3 className="text-xl font-bold text-amber-400 mb-4 flex items-center gap-2">
-        <EyeOff className="w-5 h-5" />
+    <div className="rounded-lg border border-amber-500/30 bg-slate-900/50 p-6">
+      <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-amber-400">
+        <EyeOff className="h-5 w-5" />
         The Unbound Will
       </h3>
 
       <div className="space-y-4">
-        <div className="bg-slate-800/50 border border-amber-500/20 rounded p-4">
-          <label className="block text-sm font-semibold text-amber-400 mb-2">
+        <div className="rounded border border-amber-500/20 bg-slate-800/50 p-4">
+          <label className="mb-2 block text-sm font-semibold text-amber-400">
             The Creature's Thoughts (Uncontrolled)
           </label>
           <input
@@ -397,20 +404,20 @@ function UnboundWillDemo() {
             type="text"
             defaultValue=""
             placeholder="The Creature thinks..."
-            className="w-full px-3 py-2 bg-slate-900 border border-amber-500/30 rounded text-slate-200 placeholder-slate-500 focus:outline-none focus:border-amber-500"
+            className="w-full rounded border border-amber-500/30 bg-slate-900 px-3 py-2 text-slate-200 placeholder-slate-500 focus:border-amber-500 focus:outline-none"
           />
         </div>
 
-        <div className="bg-slate-800/30 rounded p-4 border border-slate-700">
-          <p className="text-sm text-slate-400 mb-3">
+        <div className="rounded border border-slate-700 bg-slate-800/30 p-4">
+          <p className="mb-3 text-sm text-slate-400">
             Victor's Knowledge (requires tracking):
           </p>
-          <div className="flex items-center gap-2 mb-3">
+          <div className="mb-3 flex items-center gap-2">
             <button
               onClick={queryCreature}
-              className="px-4 py-2 bg-amber-900/30 text-amber-400 border border-amber-500/30 rounded hover:bg-amber-900/50 flex items-center gap-2"
+              className="flex items-center gap-2 rounded border border-amber-500/30 bg-amber-900/30 px-4 py-2 text-amber-400 hover:bg-amber-900/50"
             >
-              <Eye className="w-4 h-4" />
+              <Eye className="h-4 w-4" />
               Track the Creature
             </button>
             <span className="text-xs text-slate-500">
@@ -418,26 +425,26 @@ function UnboundWillDemo() {
             </span>
           </div>
           {queriedValue !== null ? (
-            <div className="bg-slate-900/50 rounded p-3 border border-amber-500/20">
-              <p className="text-sm text-amber-400 font-mono">
+            <div className="rounded border border-amber-500/20 bg-slate-900/50 p-3">
+              <p className="font-mono text-sm text-amber-400">
                 Last known state: "{queriedValue}"
               </p>
-              <p className="text-xs text-slate-500 mt-1">
+              <p className="mt-1 text-xs text-slate-500">
                 But is this still accurate? Victor has no way to know without
                 querying again...
               </p>
             </div>
           ) : (
-            <div className="bg-slate-900/50 rounded p-3 border border-slate-700">
-              <p className="text-sm text-slate-500 italic">
+            <div className="rounded border border-slate-700 bg-slate-900/50 p-3">
+              <p className="text-sm italic text-slate-500">
                 Victor has no knowledge of the Creature's current state.
               </p>
             </div>
           )}
         </div>
 
-        <div className="text-sm text-slate-400 bg-slate-800/30 rounded p-3 border-l-2 border-amber-500/50">
-          <p className="font-semibold text-amber-400 mb-1">The Problem:</p>
+        <div className="rounded border-l-2 border-amber-500/50 bg-slate-800/30 p-3 text-sm text-slate-400">
+          <p className="mb-1 font-semibold text-amber-400">The Problem:</p>
           <p>
             With uncontrolled components, you must use refs to access the DOM
             directly. You have no real-time connection to the input's state—you
@@ -467,18 +474,19 @@ function RampageDemo() {
     setSubmitted(true);
   };
 
-  const isEmailValid = formData?.email.includes("@") && formData?.email.includes(".");
+  const isEmailValid =
+    formData?.email.includes("@") && formData?.email.includes(".");
 
   return (
-    <div className="bg-slate-900/50 border border-red-500/30 rounded-lg p-6">
-      <h3 className="text-xl font-bold text-red-400 mb-4 flex items-center gap-2">
-        <AlertTriangle className="w-5 h-5" />
+    <div className="rounded-lg border border-red-500/30 bg-slate-900/50 p-6">
+      <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-red-400">
+        <AlertTriangle className="h-5 w-5" />
         The Rampage
       </h3>
 
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
-          <label className="block text-sm font-semibold text-slate-300 mb-2">
+          <label className="mb-2 block text-sm font-semibold text-slate-300">
             Name
           </label>
           <input
@@ -486,12 +494,12 @@ function RampageDemo() {
             type="text"
             defaultValue=""
             placeholder="Enter name..."
-            className="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded text-slate-200 placeholder-slate-500 focus:outline-none focus:border-slate-500"
+            className="w-full rounded border border-slate-600 bg-slate-900 px-3 py-2 text-slate-200 placeholder-slate-500 focus:border-slate-500 focus:outline-none"
           />
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-slate-300 mb-2">
+          <label className="mb-2 block text-sm font-semibold text-slate-300">
             Email
           </label>
           <input
@@ -499,13 +507,13 @@ function RampageDemo() {
             type="text"
             defaultValue=""
             placeholder="Enter email..."
-            className="w-full px-3 py-2 bg-slate-900 border border-slate-600 rounded text-slate-200 placeholder-slate-500 focus:outline-none focus:border-slate-500"
+            className="w-full rounded border border-slate-600 bg-slate-900 px-3 py-2 text-slate-200 placeholder-slate-500 focus:border-slate-500 focus:outline-none"
           />
         </div>
 
         <button
           type="submit"
-          className="w-full px-4 py-2 bg-red-900/30 text-red-400 border border-red-500/30 rounded hover:bg-red-900/50"
+          className="w-full rounded border border-red-500/30 bg-red-900/30 px-4 py-2 text-red-400 hover:bg-red-900/50"
         >
           Submit Form (Discover the Chaos)
         </button>
@@ -513,33 +521,39 @@ function RampageDemo() {
 
       {submitted && formData && (
         <div className="mt-4 space-y-3">
-          <div className="bg-slate-800/50 rounded p-4 border border-slate-700">
-            <p className="text-sm font-semibold text-slate-300 mb-2">
+          <div className="rounded border border-slate-700 bg-slate-800/50 p-4">
+            <p className="mb-2 text-sm font-semibold text-slate-300">
               Submitted Data:
             </p>
-            <div className="space-y-1 text-sm font-mono">
+            <div className="space-y-1 font-mono text-sm">
               <p className="text-slate-400">
-                Name: <span className="text-slate-200">{formData.name || "(empty)"}</span>
+                Name:{" "}
+                <span className="text-slate-200">
+                  {formData.name || "(empty)"}
+                </span>
               </p>
               <p className="text-slate-400">
-                Email: <span className="text-slate-200">{formData.email || "(empty)"}</span>
+                Email:{" "}
+                <span className="text-slate-200">
+                  {formData.email || "(empty)"}
+                </span>
               </p>
             </div>
           </div>
 
           {(!formData.name || !isEmailValid) && (
-            <div className="bg-red-900/20 border border-red-500/30 rounded p-4">
+            <div className="rounded border border-red-500/30 bg-red-900/20 p-4">
               <div className="flex items-start gap-2">
-                <AlertTriangle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
+                <AlertTriangle className="mt-0.5 h-5 w-5 flex-shrink-0 text-red-400" />
                 <div>
-                  <p className="text-sm font-semibold text-red-400 mb-1">
+                  <p className="mb-1 text-sm font-semibold text-red-400">
                     Validation Failed!
                   </p>
-                  <ul className="text-sm text-red-300 space-y-1">
+                  <ul className="space-y-1 text-sm text-red-300">
                     {!formData.name && <li>• Name is required</li>}
                     {!isEmailValid && <li>• Email is invalid</li>}
                   </ul>
-                  <p className="text-xs text-slate-400 mt-2">
+                  <p className="mt-2 text-xs text-slate-400">
                     Victor discovers the errors only after submission—too late
                     to prevent the tragedy.
                   </p>
@@ -549,9 +563,9 @@ function RampageDemo() {
           )}
 
           {formData.name && isEmailValid && (
-            <div className="bg-emerald-900/20 border border-emerald-500/30 rounded p-4">
+            <div className="rounded border border-emerald-500/30 bg-emerald-900/20 p-4">
               <div className="flex items-center gap-2">
-                <CheckCircle className="w-5 h-5 text-emerald-400" />
+                <CheckCircle className="h-5 w-5 text-emerald-400" />
                 <p className="text-sm text-emerald-400">
                   Success! But only by luck—no validation prevented errors.
                 </p>
@@ -561,8 +575,8 @@ function RampageDemo() {
         </div>
       )}
 
-      <div className="mt-4 text-sm text-slate-400 bg-slate-800/30 rounded p-3 border-l-2 border-red-500/50">
-        <p className="font-semibold text-red-400 mb-1">The Consequence:</p>
+      <div className="mt-4 rounded border-l-2 border-red-500/50 bg-slate-800/30 p-3 text-sm text-slate-400">
+        <p className="mb-1 font-semibold text-red-400">The Consequence:</p>
         <p>
           Without real-time access to input state, you cannot validate as the
           user types. You discover errors only on submission—after the user has
@@ -585,18 +599,19 @@ function CovenantDemo() {
       ? "Invalid email"
       : "";
 
-  const isValid = name.length >= 2 && email.includes("@") && email.includes(".");
+  const isValid =
+    name.length >= 2 && email.includes("@") && email.includes(".");
 
   return (
-    <div className="bg-slate-900/50 border border-emerald-500/30 rounded-lg p-6">
-      <h3 className="text-xl font-bold text-emerald-400 mb-4 flex items-center gap-2">
-        <Link2 className="w-5 h-5" />
+    <div className="rounded-lg border border-emerald-500/30 bg-slate-900/50 p-6">
+      <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-emerald-400">
+        <Link2 className="h-5 w-5" />
         The Binding Covenant
       </h3>
 
       <div className="space-y-4">
         <div>
-          <label className="block text-sm font-semibold text-slate-300 mb-2">
+          <label className="mb-2 block text-sm font-semibold text-slate-300">
             Name (Controlled)
           </label>
           <input
@@ -604,28 +619,29 @@ function CovenantDemo() {
             value={name}
             onChange={(e) => setName(e.target.value)}
             placeholder="Enter name..."
-            className={`w-full px-3 py-2 bg-slate-900 border rounded text-slate-200 placeholder-slate-500 focus:outline-none ${
+            className={`w-full rounded border bg-slate-900 px-3 py-2 text-slate-200 placeholder-slate-500 focus:outline-none ${
               nameError
                 ? "border-red-500/50 focus:border-red-500"
                 : "border-emerald-500/30 focus:border-emerald-500"
             }`}
           />
           {nameError && (
-            <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
-              <AlertTriangle className="w-3 h-3" />
+            <p className="mt-1 flex items-center gap-1 text-xs text-red-400">
+              <AlertTriangle className="h-3 w-3" />
               {nameError}
             </p>
           )}
           <div className="mt-2 flex items-center gap-2 text-xs text-slate-500">
-            <Link2 className="w-3 h-3 text-emerald-500" />
+            <Link2 className="h-3 w-3 text-emerald-500" />
             <span>
-              Victor observes: <span className="text-emerald-400 font-mono">"{name}"</span>
+              Victor observes:{" "}
+              <span className="font-mono text-emerald-400">"{name}"</span>
             </span>
           </div>
         </div>
 
         <div>
-          <label className="block text-sm font-semibold text-slate-300 mb-2">
+          <label className="mb-2 block text-sm font-semibold text-slate-300">
             Email (Controlled)
           </label>
           <input
@@ -633,68 +649,69 @@ function CovenantDemo() {
             value={email}
             onChange={(e) => setEmail(e.target.value)}
             placeholder="Enter email..."
-            className={`w-full px-3 py-2 bg-slate-900 border rounded text-slate-200 placeholder-slate-500 focus:outline-none ${
+            className={`w-full rounded border bg-slate-900 px-3 py-2 text-slate-200 placeholder-slate-500 focus:outline-none ${
               emailError
                 ? "border-red-500/50 focus:border-red-500"
                 : "border-emerald-500/30 focus:border-emerald-500"
             }`}
           />
           {emailError && (
-            <p className="text-xs text-red-400 mt-1 flex items-center gap-1">
-              <AlertTriangle className="w-3 h-3" />
+            <p className="mt-1 flex items-center gap-1 text-xs text-red-400">
+              <AlertTriangle className="h-3 w-3" />
               {emailError}
             </p>
           )}
           <div className="mt-2 flex items-center gap-2 text-xs text-slate-500">
-            <Link2 className="w-3 h-3 text-emerald-500" />
+            <Link2 className="h-3 w-3 text-emerald-500" />
             <span>
-              Victor observes: <span className="text-emerald-400 font-mono">"{email}"</span>
+              Victor observes:{" "}
+              <span className="font-mono text-emerald-400">"{email}"</span>
             </span>
           </div>
         </div>
 
         <button
           disabled={!isValid}
-          className={`w-full px-4 py-2 rounded transition-all ${
+          className={`w-full rounded px-4 py-2 transition-all ${
             isValid
-              ? "bg-emerald-900/30 text-emerald-400 border border-emerald-500/30 hover:bg-emerald-900/50"
-              : "bg-slate-800/30 text-slate-600 border border-slate-700 cursor-not-allowed"
+              ? "border border-emerald-500/30 bg-emerald-900/30 text-emerald-400 hover:bg-emerald-900/50"
+              : "cursor-not-allowed border border-slate-700 bg-slate-800/30 text-slate-600"
           }`}
         >
           {isValid ? "Submit (Validated)" : "Submit (Validation Required)"}
         </button>
 
-        <div className="bg-slate-800/30 rounded p-4 border border-emerald-500/20">
-          <p className="text-sm font-semibold text-emerald-400 mb-2">
+        <div className="rounded border border-emerald-500/20 bg-slate-800/30 p-4">
+          <p className="mb-2 text-sm font-semibold text-emerald-400">
             The Covenant in Action:
           </p>
-          <ul className="text-sm text-slate-400 space-y-1">
+          <ul className="space-y-1 text-sm text-slate-400">
             <li className="flex items-start gap-2">
-              <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+              <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-500" />
               <span>Victor observes every change in real-time</span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+              <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-500" />
               <span>Validation happens as the user types</span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+              <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-500" />
               <span>Submit button disabled until form is valid</span>
             </li>
             <li className="flex items-start gap-2">
-              <CheckCircle className="w-4 h-4 text-emerald-500 flex-shrink-0 mt-0.5" />
+              <CheckCircle className="mt-0.5 h-4 w-4 flex-shrink-0 text-emerald-500" />
               <span>No surprises on submission—state is always known</span>
             </li>
           </ul>
         </div>
 
-        <div className="text-sm text-slate-400 bg-slate-800/30 rounded p-3 border-l-2 border-emerald-500/50">
-          <p className="font-semibold text-emerald-400 mb-1">The Pattern:</p>
+        <div className="rounded border-l-2 border-emerald-500/50 bg-slate-800/30 p-3 text-sm text-slate-400">
+          <p className="mb-1 font-semibold text-emerald-400">The Pattern:</p>
           <p>
             Controlled components bind input values to React state via the{" "}
-            <code className="text-emerald-400 font-mono">value</code> prop and
+            <code className="font-mono text-emerald-400">value</code> prop and
             handle changes via{" "}
-            <code className="text-emerald-400 font-mono">onChange</code>. This
+            <code className="font-mono text-emerald-400">onChange</code>. This
             creates a two-way covenant: the input reports changes, the parent
             decides whether to accept them. The result is complete observability
             and control.
@@ -706,42 +723,44 @@ function CovenantDemo() {
 }
 
 function LessonDemo() {
-  const [pattern, setPattern] = useState<"uncontrolled" | "controlled">("controlled");
+  const [pattern, setPattern] = useState<"uncontrolled" | "controlled">(
+    "controlled",
+  );
 
   return (
-    <div className="bg-slate-900/50 border border-emerald-500/30 rounded-lg p-6">
-      <h3 className="text-xl font-bold text-emerald-400 mb-4">
+    <div className="rounded-lg border border-emerald-500/30 bg-slate-900/50 p-6">
+      <h3 className="mb-4 text-xl font-bold text-emerald-400">
         The Decision Tree
       </h3>
 
       <div className="space-y-4">
-        <div className="bg-slate-800/50 rounded p-4 border border-slate-700">
-          <p className="text-sm font-semibold text-slate-300 mb-3">
+        <div className="rounded border border-slate-700 bg-slate-800/50 p-4">
+          <p className="mb-3 text-sm font-semibold text-slate-300">
             Choose your pattern:
           </p>
           <div className="space-y-2">
             <button
               onClick={() => setPattern("controlled")}
-              className={`w-full px-4 py-3 rounded text-left transition-all ${
+              className={`w-full rounded px-4 py-3 text-left transition-all ${
                 pattern === "controlled"
-                  ? "bg-emerald-900/30 border-2 border-emerald-500/50 text-emerald-400"
-                  : "bg-slate-800/30 border border-slate-600 text-slate-400 hover:border-slate-500"
+                  ? "border-2 border-emerald-500/50 bg-emerald-900/30 text-emerald-400"
+                  : "border border-slate-600 bg-slate-800/30 text-slate-400 hover:border-slate-500"
               }`}
             >
-              <div className="font-semibold mb-1">Controlled Component</div>
+              <div className="mb-1 font-semibold">Controlled Component</div>
               <div className="text-xs opacity-80">
                 Parent holds state, complete control
               </div>
             </button>
             <button
               onClick={() => setPattern("uncontrolled")}
-              className={`w-full px-4 py-3 rounded text-left transition-all ${
+              className={`w-full rounded px-4 py-3 text-left transition-all ${
                 pattern === "uncontrolled"
-                  ? "bg-amber-900/30 border-2 border-amber-500/50 text-amber-400"
-                  : "bg-slate-800/30 border border-slate-600 text-slate-400 hover:border-slate-500"
+                  ? "border-2 border-amber-500/50 bg-amber-900/30 text-amber-400"
+                  : "border border-slate-600 bg-slate-800/30 text-slate-400 hover:border-slate-500"
               }`}
             >
-              <div className="font-semibold mb-1">Uncontrolled Component</div>
+              <div className="mb-1 font-semibold">Uncontrolled Component</div>
               <div className="text-xs opacity-80">
                 DOM holds state, minimal code
               </div>
@@ -750,11 +769,11 @@ function LessonDemo() {
         </div>
 
         {pattern === "controlled" && (
-          <div className="bg-emerald-900/20 border border-emerald-500/30 rounded p-4">
-            <p className="text-sm font-semibold text-emerald-400 mb-2">
+          <div className="rounded border border-emerald-500/30 bg-emerald-900/20 p-4">
+            <p className="mb-2 text-sm font-semibold text-emerald-400">
               Use Controlled When:
             </p>
-            <ul className="text-sm text-slate-300 space-y-1">
+            <ul className="space-y-1 text-sm text-slate-300">
               <li>✓ You need real-time validation</li>
               <li>✓ You need to coordinate multiple inputs</li>
               <li>✓ You need conditional logic based on input values</li>
@@ -762,12 +781,12 @@ function LessonDemo() {
               <li>✓ You're submitting to an API with validation</li>
               <li>✓ You need to debug form state easily</li>
             </ul>
-            <div className="mt-3 bg-slate-900/50 rounded p-3 border border-emerald-500/20">
-              <p className="text-xs font-mono text-emerald-400 mb-1">
+            <div className="mt-3 rounded border border-emerald-500/20 bg-slate-900/50 p-3">
+              <p className="mb-1 font-mono text-xs text-emerald-400">
                 Example:
               </p>
-              <pre className="text-xs text-slate-300 overflow-x-auto">
-{`const [value, setValue] = useState("");
+              <pre className="overflow-x-auto text-xs text-slate-300">
+                {`const [value, setValue] = useState("");
 
 <input
   value={value}
@@ -779,22 +798,20 @@ function LessonDemo() {
         )}
 
         {pattern === "uncontrolled" && (
-          <div className="bg-amber-900/20 border border-amber-500/30 rounded p-4">
-            <p className="text-sm font-semibold text-amber-400 mb-2">
+          <div className="rounded border border-amber-500/30 bg-amber-900/20 p-4">
+            <p className="mb-2 text-sm font-semibold text-amber-400">
               Use Uncontrolled When:
             </p>
-            <ul className="text-sm text-slate-300 space-y-1">
+            <ul className="space-y-1 text-sm text-slate-300">
               <li>✓ Simple form, read only on submit</li>
               <li>✓ Integrating with third-party DOM libraries</li>
               <li>✓ File inputs (must be uncontrolled)</li>
               <li>✓ Performance is critical and you accept tradeoffs</li>
             </ul>
-            <div className="mt-3 bg-slate-900/50 rounded p-3 border border-amber-500/20">
-              <p className="text-xs font-mono text-amber-400 mb-1">
-                Example:
-              </p>
-              <pre className="text-xs text-slate-300 overflow-x-auto">
-{`const inputRef = useRef(null);
+            <div className="mt-3 rounded border border-amber-500/20 bg-slate-900/50 p-3">
+              <p className="mb-1 font-mono text-xs text-amber-400">Example:</p>
+              <pre className="overflow-x-auto text-xs text-slate-300">
+                {`const inputRef = useRef(null);
 
 <input
   ref={inputRef}
@@ -804,7 +821,7 @@ function LessonDemo() {
 // Access via: inputRef.current.value`}
               </pre>
             </div>
-            <div className="mt-3 bg-amber-900/20 rounded p-2 border-l-2 border-amber-500">
+            <div className="mt-3 rounded border-l-2 border-amber-500 bg-amber-900/20 p-2">
               <p className="text-xs text-amber-400">
                 ⚠️ Warning: You lose real-time observability and control.
               </p>
@@ -812,8 +829,8 @@ function LessonDemo() {
           </div>
         )}
 
-        <div className="text-sm text-slate-400 bg-slate-800/30 rounded p-3 border-l-2 border-emerald-500/50">
-          <p className="font-semibold text-emerald-400 mb-1">
+        <div className="rounded border-l-2 border-emerald-500/50 bg-slate-800/30 p-3 text-sm text-slate-400">
+          <p className="mb-1 font-semibold text-emerald-400">
             Victor's Final Wisdom:
           </p>
           <p>

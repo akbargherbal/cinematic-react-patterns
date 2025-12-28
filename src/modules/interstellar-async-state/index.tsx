@@ -1,5 +1,14 @@
 import { useState, useEffect, useRef, useCallback } from "react";
-import { Clock, Send, Zap, CheckCircle, AlertTriangle, Play, Pause, RotateCcw } from "lucide-react";
+import {
+  Clock,
+  Send,
+  Zap,
+  CheckCircle,
+  AlertTriangle,
+  Play,
+  Pause,
+  RotateCcw,
+} from "lucide-react";
 
 interface Message {
   id: number;
@@ -46,27 +55,27 @@ export default function InterstellarAsyncState() {
   const currentChapter = chapters[chapter];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 to-slate-900 text-slate-100 font-sans">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 to-slate-900 font-sans text-slate-100">
       {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-950/50 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-6">
-          <h1 className="text-3xl md:text-4xl font-bold text-blue-400 mb-2">
+      <header className="sticky top-0 z-10 border-b border-slate-800 bg-slate-950/50 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-6 md:px-8">
+          <h1 className="mb-2 text-3xl font-bold text-blue-400 md:text-4xl">
             Interstellar: Async State
           </h1>
-          <p className="text-slate-400 text-sm md:text-base">
+          <p className="text-sm text-slate-400 md:text-base">
             Cooper, Gargantua, 2014 • Asynchronous State & Race Conditions
           </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 md:px-8 py-8 pb-32">
+      <main className="mx-auto max-w-6xl px-4 py-8 pb-32 md:px-8">
         {/* Chapter Header */}
         <div className="mb-8">
-          <h2 className="text-2xl md:text-3xl font-bold text-blue-300 mb-2">
+          <h2 className="mb-2 text-2xl font-bold text-blue-300 md:text-3xl">
             {currentChapter.title}
           </h2>
-          <p className="text-slate-400 text-lg">{currentChapter.subtitle}</p>
+          <p className="text-lg text-slate-400">{currentChapter.subtitle}</p>
         </div>
 
         {/* Chapter Content */}
@@ -78,12 +87,12 @@ export default function InterstellarAsyncState() {
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-950/90 backdrop-blur-sm border-t border-slate-800">
-        <div className="max-w-6xl mx-auto px-4 md:px-8 py-4 flex justify-between items-center">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-slate-800 bg-slate-950/90 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-6xl items-center justify-between px-4 py-4 md:px-8">
           <button
             onClick={() => setChapter((c) => c - 1)}
             disabled={chapter === 0}
-            className="px-4 md:px-6 py-2 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-800 disabled:text-slate-600 disabled:cursor-not-allowed rounded-lg transition-all duration-200 text-sm md:text-base font-medium"
+            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium transition-all duration-200 hover:bg-blue-500 disabled:cursor-not-allowed disabled:bg-slate-800 disabled:text-slate-600 md:px-6 md:text-base"
           >
             Previous
           </button>
@@ -93,9 +102,9 @@ export default function InterstellarAsyncState() {
               <button
                 key={idx}
                 onClick={() => setChapter(idx)}
-                className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                className={`h-2 w-2 rounded-full transition-all duration-200 ${
                   idx === chapter
-                    ? "bg-blue-400 w-8"
+                    ? "w-8 bg-blue-400"
                     : "bg-slate-700 hover:bg-slate-600"
                 }`}
                 aria-label={`Go to chapter ${idx + 1}`}
@@ -106,7 +115,7 @@ export default function InterstellarAsyncState() {
           <button
             onClick={() => setChapter((c) => c + 1)}
             disabled={chapter === chapters.length - 1}
-            className="px-4 md:px-6 py-2 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-800 disabled:text-slate-600 disabled:cursor-not-allowed rounded-lg transition-all duration-200 text-sm md:text-base font-medium"
+            className="rounded-lg bg-blue-600 px-4 py-2 text-sm font-medium transition-all duration-200 hover:bg-blue-500 disabled:cursor-not-allowed disabled:bg-slate-800 disabled:text-slate-600 md:px-6 md:text-base"
           >
             Next
           </button>
@@ -156,61 +165,61 @@ function ChapterOne() {
         </p>
       </div>
 
-      <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 shadow-lg shadow-blue-500/10">
-        <h3 className="text-xl font-bold text-blue-300 mb-4 flex items-center gap-2">
-          <Clock className="w-5 h-5" />
+      <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-6 shadow-lg shadow-blue-500/10">
+        <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-blue-300">
+          <Clock className="h-5 w-5" />
           Time Dilation Simulator
         </h3>
 
-        <div className="grid md:grid-cols-2 gap-6 mb-6">
+        <div className="mb-6 grid gap-6 md:grid-cols-2">
           {/* Miller's Planet Clock */}
-          <div className="bg-slate-950 border border-blue-500/30 rounded-lg p-6 text-center">
-            <div className="text-sm text-blue-400 mb-2 font-medium">
+          <div className="rounded-lg border border-blue-500/30 bg-slate-950 p-6 text-center">
+            <div className="mb-2 text-sm font-medium text-blue-400">
               Miller's Planet (Async Context)
             </div>
-            <div className="text-5xl font-bold text-blue-300 mb-2 font-mono">
+            <div className="mb-2 font-mono text-5xl font-bold text-blue-300">
               {planetTime}s
             </div>
             <div className="text-xs text-slate-500">Inside the callback</div>
           </div>
 
           {/* Earth Clock */}
-          <div className="bg-slate-950 border border-amber-500/30 rounded-lg p-6 text-center">
-            <div className="text-sm text-amber-400 mb-2 font-medium">
+          <div className="rounded-lg border border-amber-500/30 bg-slate-950 p-6 text-center">
+            <div className="mb-2 text-sm font-medium text-amber-400">
               Earth (Main Thread)
             </div>
-            <div className="text-5xl font-bold text-amber-300 mb-2 font-mono">
+            <div className="mb-2 font-mono text-5xl font-bold text-amber-300">
               {earthTime}s
             </div>
             <div className="text-xs text-slate-500">Outside the callback</div>
           </div>
         </div>
 
-        <div className="flex gap-3 justify-center">
+        <div className="flex justify-center gap-3">
           <button
             onClick={() => setIsRunning(!isRunning)}
-            className="px-6 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-all duration-200 font-medium flex items-center gap-2"
+            className="flex items-center gap-2 rounded-lg bg-blue-600 px-6 py-2 font-medium transition-all duration-200 hover:bg-blue-500"
           >
             {isRunning ? (
               <>
-                <Pause className="w-4 h-4" /> Pause
+                <Pause className="h-4 w-4" /> Pause
               </>
             ) : (
               <>
-                <Play className="w-4 h-4" /> Start Mission
+                <Play className="h-4 w-4" /> Start Mission
               </>
             )}
           </button>
           <button
             onClick={reset}
-            className="px-6 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-all duration-200 font-medium flex items-center gap-2"
+            className="flex items-center gap-2 rounded-lg bg-slate-700 px-6 py-2 font-medium transition-all duration-200 hover:bg-slate-600"
           >
-            <RotateCcw className="w-4 h-4" /> Reset
+            <RotateCcw className="h-4 w-4" /> Reset
           </button>
         </div>
 
-        <div className="mt-6 p-4 bg-blue-950/30 border border-blue-500/20 rounded-lg">
-          <p className="text-sm text-slate-300 leading-relaxed">
+        <div className="mt-6 rounded-lg border border-blue-500/20 bg-blue-950/30 p-4">
+          <p className="text-sm leading-relaxed text-slate-300">
             <strong className="text-blue-300">The Lesson:</strong> Inside your
             async callback, execution feels normal. But outside—in the main
             thread, in your component's lifecycle—time doesn't wait. State
@@ -246,8 +255,8 @@ function ChapterTwo() {
     setTimeout(() => {
       setMessages((prev) =>
         prev.map((msg) =>
-          msg.id === messageId ? { ...msg, receivedAt: Date.now() } : msg
-        )
+          msg.id === messageId ? { ...msg, receivedAt: Date.now() } : msg,
+        ),
       );
     }, 3000);
   }, [tomAge]);
@@ -273,57 +282,57 @@ function ChapterTwo() {
         </p>
       </div>
 
-      <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 shadow-lg shadow-amber-500/10">
-        <h3 className="text-xl font-bold text-amber-300 mb-4 flex items-center gap-2">
-          <Send className="w-5 h-5" />
+      <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-6 shadow-lg shadow-amber-500/10">
+        <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-amber-300">
+          <Send className="h-5 w-5" />
           Stale Closure Visualizer
         </h3>
 
-        <div className="bg-slate-950 border border-amber-500/30 rounded-lg p-6 mb-6 text-center">
-          <div className="text-sm text-amber-400 mb-2 font-medium">
+        <div className="mb-6 rounded-lg border border-amber-500/30 bg-slate-950 p-6 text-center">
+          <div className="mb-2 text-sm font-medium text-amber-400">
             Tom's Current Age (State)
           </div>
-          <div className="text-5xl font-bold text-amber-300 mb-4 font-mono">
+          <div className="mb-4 font-mono text-5xl font-bold text-amber-300">
             {tomAge}
           </div>
-          <div className="flex gap-3 justify-center">
+          <div className="flex justify-center gap-3">
             <button
               onClick={sendMessage}
-              className="px-6 py-2 bg-amber-600 hover:bg-amber-500 rounded-lg transition-all duration-200 font-medium flex items-center gap-2"
+              className="flex items-center gap-2 rounded-lg bg-amber-600 px-6 py-2 font-medium transition-all duration-200 hover:bg-amber-500"
             >
-              <Send className="w-4 h-4" /> Send Message (Capture State)
+              <Send className="h-4 w-4" /> Send Message (Capture State)
             </button>
             <button
               onClick={ageUp}
-              className="px-6 py-2 bg-blue-600 hover:bg-blue-500 rounded-lg transition-all duration-200 font-medium"
+              className="rounded-lg bg-blue-600 px-6 py-2 font-medium transition-all duration-200 hover:bg-blue-500"
             >
               +5 Years Pass
             </button>
             <button
               onClick={reset}
-              className="px-4 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-all duration-200"
+              className="rounded-lg bg-slate-700 px-4 py-2 transition-all duration-200 hover:bg-slate-600"
             >
-              <RotateCcw className="w-4 h-4" />
+              <RotateCcw className="h-4 w-4" />
             </button>
           </div>
         </div>
 
-        <div className="space-y-3 max-h-64 overflow-y-auto">
+        <div className="max-h-64 space-y-3 overflow-y-auto">
           {messages.length === 0 ? (
-            <div className="text-center text-slate-500 py-8">
+            <div className="py-8 text-center text-slate-500">
               No messages yet. Send a message and watch time pass...
             </div>
           ) : (
             messages.map((msg) => (
               <div
                 key={msg.id}
-                className={`p-4 rounded-lg border transition-all duration-300 ${
+                className={`rounded-lg border p-4 transition-all duration-300 ${
                   msg.receivedAt
-                    ? "bg-red-950/30 border-red-500/30"
-                    : "bg-slate-800 border-slate-600 opacity-50"
+                    ? "border-red-500/30 bg-red-950/30"
+                    : "border-slate-600 bg-slate-800 opacity-50"
                 }`}
               >
-                <div className="flex justify-between items-start mb-2">
+                <div className="mb-2 flex items-start justify-between">
                   <div className="text-sm font-medium text-slate-300">
                     Message #{msg.id}
                   </div>
@@ -332,13 +341,17 @@ function ChapterTwo() {
                   </div>
                 </div>
                 <div className="text-sm text-slate-400">
-                  Captured age: <span className="text-amber-400 font-mono">{msg.capturedAge}</span>
+                  Captured age:{" "}
+                  <span className="font-mono text-amber-400">
+                    {msg.capturedAge}
+                  </span>
                 </div>
                 {msg.receivedAt && (
-                  <div className="mt-2 pt-2 border-t border-red-500/20">
-                    <div className="text-sm text-red-400 flex items-center gap-2">
-                      <AlertTriangle className="w-4 h-4" />
-                      Current age is {tomAge}, but message says {msg.capturedAge}!
+                  <div className="mt-2 border-t border-red-500/20 pt-2">
+                    <div className="flex items-center gap-2 text-sm text-red-400">
+                      <AlertTriangle className="h-4 w-4" />
+                      Current age is {tomAge}, but message says{" "}
+                      {msg.capturedAge}!
                     </div>
                   </div>
                 )}
@@ -347,8 +360,8 @@ function ChapterTwo() {
           )}
         </div>
 
-        <div className="mt-6 p-4 bg-amber-950/30 border border-amber-500/20 rounded-lg">
-          <p className="text-sm text-slate-300 leading-relaxed">
+        <div className="mt-6 rounded-lg border border-amber-500/20 bg-amber-950/30 p-4">
+          <p className="text-sm leading-relaxed text-slate-300">
             <strong className="text-amber-300">The Problem:</strong> Each
             message captures Tom's age in a closure. By the time the async
             operation completes (3 seconds), the state has changed. The callback
@@ -382,8 +395,8 @@ function ChapterThree() {
     setTimeout(() => {
       setOperations((prev) =>
         prev.map((op) =>
-          op.id === opId ? { ...op, endTime: Date.now() } : op
-        )
+          op.id === opId ? { ...op, endTime: Date.now() } : op,
+        ),
       );
 
       if (useProtection) {
@@ -431,19 +444,19 @@ function ChapterThree() {
         </p>
       </div>
 
-      <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 shadow-lg shadow-blue-500/10">
-        <h3 className="text-xl font-bold text-blue-300 mb-4 flex items-center gap-2">
-          <Zap className="w-5 h-5" />
+      <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-6 shadow-lg shadow-blue-500/10">
+        <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-blue-300">
+          <Zap className="h-5 w-5" />
           Race Condition Simulator
         </h3>
 
-        <div className="mb-6 flex items-center gap-4 p-4 bg-slate-950 border border-slate-700 rounded-lg">
-          <label className="flex items-center gap-2 cursor-pointer">
+        <div className="mb-6 flex items-center gap-4 rounded-lg border border-slate-700 bg-slate-950 p-4">
+          <label className="flex cursor-pointer items-center gap-2">
             <input
               type="checkbox"
               checked={useProtection}
               onChange={(e) => setUseProtection(e.target.checked)}
-              className="w-4 h-4"
+              className="h-4 w-4"
             />
             <span className="text-sm text-slate-300">
               Enable Version Protection (Tesseract Mode)
@@ -451,26 +464,26 @@ function ChapterThree() {
           </label>
         </div>
 
-        <div className="bg-slate-950 border border-blue-500/30 rounded-lg p-6 mb-6">
-          <div className="text-sm text-blue-400 mb-2 font-medium text-center">
+        <div className="mb-6 rounded-lg border border-blue-500/30 bg-slate-950 p-6">
+          <div className="mb-2 text-center text-sm font-medium text-blue-400">
             Final State
           </div>
-          <div className="text-3xl font-bold text-center text-blue-300 font-mono">
+          <div className="text-center font-mono text-3xl font-bold text-blue-300">
             {finalState}
           </div>
         </div>
 
-        <div className="space-y-3 mb-6 max-h-48 overflow-y-auto">
+        <div className="mb-6 max-h-48 space-y-3 overflow-y-auto">
           {operations.map((op) => (
             <div
               key={op.id}
-              className={`p-4 rounded-lg border transition-all duration-300 ${
+              className={`rounded-lg border p-4 transition-all duration-300 ${
                 op.endTime
-                  ? "bg-green-950/30 border-green-500/30"
-                  : "bg-slate-800 border-slate-600"
+                  ? "border-green-500/30 bg-green-950/30"
+                  : "border-slate-600 bg-slate-800"
               }`}
             >
-              <div className="flex justify-between items-start mb-2">
+              <div className="mb-2 flex items-start justify-between">
                 <div className="text-sm font-medium text-slate-300">
                   {op.name}
                 </div>
@@ -482,8 +495,8 @@ function ChapterThree() {
                 Duration: {op.duration}ms • Result: {op.result}
               </div>
               {op.endTime && (
-                <div className="mt-2 text-xs text-green-400 flex items-center gap-2">
-                  <CheckCircle className="w-3 h-3" />
+                <div className="mt-2 flex items-center gap-2 text-xs text-green-400">
+                  <CheckCircle className="h-3 w-3" />
                   Completed at {new Date(op.endTime).toLocaleTimeString()}
                 </div>
               )}
@@ -495,20 +508,20 @@ function ChapterThree() {
           <button
             onClick={runRaceCondition}
             disabled={operations.some((op) => !op.endTime)}
-            className="flex-1 px-6 py-2 bg-blue-600 hover:bg-blue-500 disabled:bg-slate-700 disabled:cursor-not-allowed rounded-lg transition-all duration-200 font-medium"
+            className="flex-1 rounded-lg bg-blue-600 px-6 py-2 font-medium transition-all duration-200 hover:bg-blue-500 disabled:cursor-not-allowed disabled:bg-slate-700"
           >
             Start Race Condition
           </button>
           <button
             onClick={reset}
-            className="px-6 py-2 bg-slate-700 hover:bg-slate-600 rounded-lg transition-all duration-200 font-medium flex items-center gap-2"
+            className="flex items-center gap-2 rounded-lg bg-slate-700 px-6 py-2 font-medium transition-all duration-200 hover:bg-slate-600"
           >
-            <RotateCcw className="w-4 h-4" /> Reset
+            <RotateCcw className="h-4 w-4" /> Reset
           </button>
         </div>
 
-        <div className="mt-6 p-4 bg-blue-950/30 border border-blue-500/20 rounded-lg">
-          <p className="text-sm text-slate-300 leading-relaxed">
+        <div className="mt-6 rounded-lg border border-blue-500/20 bg-blue-950/30 p-4">
+          <p className="text-sm leading-relaxed text-slate-300">
             <strong className="text-blue-300">The Race:</strong> Operation A
             starts first but takes 3 seconds. Operation B starts later but
             completes in 1 second. Without protection, B's result is overwritten
@@ -647,17 +660,17 @@ function ChapterFour() {
         </p>
       </div>
 
-      <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 shadow-lg shadow-blue-500/10">
-        <h3 className="text-xl font-bold text-blue-300 mb-4">
+      <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-6 shadow-lg shadow-blue-500/10">
+        <h3 className="mb-4 text-xl font-bold text-blue-300">
           The Tesseract Toolkit
         </h3>
 
-        <div className="flex gap-2 mb-6 overflow-x-auto pb-2">
+        <div className="mb-6 flex gap-2 overflow-x-auto pb-2">
           {patterns.map((pattern, idx) => (
             <button
               key={idx}
               onClick={() => setSelectedPattern(idx)}
-              className={`px-4 py-2 rounded-lg transition-all duration-200 whitespace-nowrap text-sm font-medium ${
+              className={`whitespace-nowrap rounded-lg px-4 py-2 text-sm font-medium transition-all duration-200 ${
                 selectedPattern === idx
                   ? "bg-blue-600 text-white"
                   : "bg-slate-800 text-slate-400 hover:bg-slate-700"
@@ -668,9 +681,9 @@ function ChapterFour() {
           ))}
         </div>
 
-        <div className="bg-slate-950 border border-blue-500/30 rounded-lg p-6 mb-4">
-          <div className="flex items-center gap-3 mb-4">
-            <Icon className="w-6 h-6 text-blue-400" />
+        <div className="mb-4 rounded-lg border border-blue-500/30 bg-slate-950 p-6">
+          <div className="mb-4 flex items-center gap-3">
+            <Icon className="h-6 w-6 text-blue-400" />
             <div>
               <h4 className="text-lg font-bold text-blue-300">
                 {currentPattern.name}
@@ -681,15 +694,15 @@ function ChapterFour() {
             </div>
           </div>
 
-          <pre className="bg-slate-900 border border-slate-700 rounded-lg p-4 overflow-x-auto">
-            <code className="text-sm text-slate-300 font-mono">
+          <pre className="overflow-x-auto rounded-lg border border-slate-700 bg-slate-900 p-4">
+            <code className="font-mono text-sm text-slate-300">
               {currentPattern.code}
             </code>
           </pre>
         </div>
 
-        <div className="p-4 bg-blue-950/30 border border-blue-500/20 rounded-lg">
-          <p className="text-sm text-slate-300 leading-relaxed">
+        <div className="rounded-lg border border-blue-500/20 bg-blue-950/30 p-4">
+          <p className="text-sm leading-relaxed text-slate-300">
             <strong className="text-blue-300">The Principle:</strong> All these
             patterns share one insight—async operations must be aware of their
             temporal context. Check if you're still relevant. Cancel if needed.
@@ -716,39 +729,39 @@ function ChapterFive() {
         </p>
       </div>
 
-      <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 shadow-lg shadow-blue-500/10">
-        <h3 className="text-xl font-bold text-blue-300 mb-4">
+      <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-6 shadow-lg shadow-blue-500/10">
+        <h3 className="mb-4 text-xl font-bold text-blue-300">
           The Three Truths of Async State
         </h3>
 
-        <div className="space-y-4 mb-6">
-          <div className="bg-slate-950 border border-blue-500/30 rounded-lg p-4">
-            <h4 className="text-lg font-bold text-blue-300 mb-2">
+        <div className="mb-6 space-y-4">
+          <div className="rounded-lg border border-blue-500/30 bg-slate-950 p-4">
+            <h4 className="mb-2 text-lg font-bold text-blue-300">
               Truth 1: Your closure is a time capsule
             </h4>
-            <p className="text-sm text-slate-300 leading-relaxed">
+            <p className="text-sm leading-relaxed text-slate-300">
               When you capture variables in an async callback, you're capturing
               a snapshot. By the time your callback executes, that moment is in
               the past. Always check if captured values are still current.
             </p>
           </div>
 
-          <div className="bg-slate-950 border border-amber-500/30 rounded-lg p-4">
-            <h4 className="text-lg font-bold text-amber-300 mb-2">
+          <div className="rounded-lg border border-amber-500/30 bg-slate-950 p-4">
+            <h4 className="mb-2 text-lg font-bold text-amber-300">
               Truth 2: Operations complete out of order
             </h4>
-            <p className="text-sm text-slate-300 leading-relaxed">
+            <p className="text-sm leading-relaxed text-slate-300">
               You dispatch operation A, then B. B might complete first. If both
               update the same state, you have a race condition. The order you
               dispatch is not the order they complete.
             </p>
           </div>
 
-          <div className="bg-slate-950 border border-green-500/30 rounded-lg p-4">
-            <h4 className="text-lg font-bold text-green-300 mb-2">
+          <div className="rounded-lg border border-green-500/30 bg-slate-950 p-4">
+            <h4 className="mb-2 text-lg font-bold text-green-300">
               Truth 3: Only the current update matters
             </h4>
-            <p className="text-sm text-slate-300 leading-relaxed">
+            <p className="text-sm leading-relaxed text-slate-300">
               Your component might dispatch dozens of async operations. Only the
               most recent one should update state. The others should recognize
               they're stale and abort.
@@ -758,21 +771,21 @@ function ChapterFive() {
 
         <button
           onClick={() => setShowComparison(!showComparison)}
-          className="w-full px-6 py-3 bg-blue-600 hover:bg-blue-500 rounded-lg transition-all duration-200 font-medium mb-6"
+          className="mb-6 w-full rounded-lg bg-blue-600 px-6 py-3 font-medium transition-all duration-200 hover:bg-blue-500"
         >
           {showComparison ? "Hide" : "Show"} Incorrect vs Correct Comparison
         </button>
 
         {showComparison && (
-          <div className="grid md:grid-cols-2 gap-4 mb-6">
-            <div className="bg-red-950/30 border border-red-500/30 rounded-lg p-4">
-              <h4 className="text-lg font-bold text-red-400 mb-3 flex items-center gap-2">
-                <AlertTriangle className="w-5 h-5" />
+          <div className="mb-6 grid gap-4 md:grid-cols-2">
+            <div className="rounded-lg border border-red-500/30 bg-red-950/30 p-4">
+              <h4 className="mb-3 flex items-center gap-2 text-lg font-bold text-red-400">
+                <AlertTriangle className="h-5 w-5" />
                 Incorrect: No Protection
               </h4>
-              <pre className="bg-slate-900 border border-red-500/20 rounded p-3 overflow-x-auto mb-3">
-                <code className="text-xs text-slate-300 font-mono">
-{`useEffect(() => {
+              <pre className="mb-3 overflow-x-auto rounded border border-red-500/20 bg-slate-900 p-3">
+                <code className="font-mono text-xs text-slate-300">
+                  {`useEffect(() => {
   async function fetchData() {
     const data = await fetch('/api');
     setState(data);
@@ -788,20 +801,21 @@ function ChapterFive() {
                 </code>
               </pre>
               <div className="text-xs text-red-400">
-                ❌ Memory leaks<br />
-                ❌ Race conditions<br />
-                ❌ Stale state updates
+                ❌ Memory leaks
+                <br />
+                ❌ Race conditions
+                <br />❌ Stale state updates
               </div>
             </div>
 
-            <div className="bg-green-950/30 border border-green-500/30 rounded-lg p-4">
-              <h4 className="text-lg font-bold text-green-400 mb-3 flex items-center gap-2">
-                <CheckCircle className="w-5 h-5" />
+            <div className="rounded-lg border border-green-500/30 bg-green-950/30 p-4">
+              <h4 className="mb-3 flex items-center gap-2 text-lg font-bold text-green-400">
+                <CheckCircle className="h-5 w-5" />
                 Correct: Full Protection
               </h4>
-              <pre className="bg-slate-900 border border-green-500/20 rounded p-3 overflow-x-auto mb-3">
-                <code className="text-xs text-slate-300 font-mono">
-{`useEffect(() => {
+              <pre className="mb-3 overflow-x-auto rounded border border-green-500/20 bg-slate-900 p-3">
+                <code className="font-mono text-xs text-slate-300">
+                  {`useEffect(() => {
   let ignore = false;
   const controller = new AbortController();
   
@@ -822,23 +836,24 @@ function ChapterFive() {
                 </code>
               </pre>
               <div className="text-xs text-green-400">
-                ✓ Mounted check<br />
-                ✓ Request cancellation<br />
-                ✓ Race protection
+                ✓ Mounted check
+                <br />
+                ✓ Request cancellation
+                <br />✓ Race protection
               </div>
             </div>
           </div>
         )}
 
-        <div className="p-4 bg-blue-950/30 border border-blue-500/20 rounded-lg">
-          <p className="text-sm text-slate-300 leading-relaxed mb-3">
+        <div className="rounded-lg border border-blue-500/20 bg-blue-950/30 p-4">
+          <p className="mb-3 text-sm leading-relaxed text-slate-300">
             <strong className="text-blue-300">The Mission Continues:</strong>{" "}
             Cooper steals a ship and heads toward Edmunds' planet. It will take
             decades, but Brand is waiting. The async operation completes
             successfully—not because it was fast, but because it was handled
             correctly.
           </p>
-          <p className="text-sm text-slate-300 leading-relaxed">
+          <p className="text-sm leading-relaxed text-slate-300">
             Your applications are the same. They're not fast—network requests
             take time, computations take time. But they can be correct. Every
             async operation is a journey through time dilation. The tesseract
@@ -847,16 +862,16 @@ function ChapterFive() {
         </div>
       </div>
 
-      <div className="bg-gradient-to-r from-blue-950/50 to-amber-950/50 border border-blue-500/30 rounded-lg p-6 text-center">
-        <p className="text-2xl font-bold text-blue-300 mb-2">
+      <div className="rounded-lg border border-blue-500/30 bg-gradient-to-r from-blue-950/50 to-amber-950/50 p-6 text-center">
+        <p className="mb-2 text-2xl font-bold text-blue-300">
           One Hour There, Seven Years Here
         </p>
-        <p className="text-slate-300 leading-relaxed">
+        <p className="leading-relaxed text-slate-300">
           That's the fundamental equation of async state. Inside your callback,
           time feels normal. Outside, the world races forward. You can't change
           the equation. But you can account for it.
         </p>
-        <p className="text-sm text-slate-400 mt-4 italic">
+        <p className="mt-4 text-sm italic text-slate-400">
           Choose the tesseract. Stay synchronized. Handle async correctly.
         </p>
       </div>

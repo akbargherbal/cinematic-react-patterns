@@ -41,7 +41,7 @@ export default function RashomonModule() {
         "The woodcutter",
       ],
     }),
-    []
+    [],
   );
 
   const witnesses: Witness[] = useMemo(
@@ -103,7 +103,7 @@ export default function RashomonModule() {
         },
       },
     ],
-    []
+    [],
   );
 
   const chapters = useMemo(
@@ -207,7 +207,7 @@ In Rashomon, four witnesses see one event and tell four stories. In React, four 
 Both are architecture. Both are intentional. Both are powerful.`,
       },
     ],
-    []
+    [],
   );
 
   const currentChapter = chapters[chapter];
@@ -222,34 +222,34 @@ Both are architecture. Both are intentional. Both are powerful.`,
   }, [chapters.length]);
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-serif">
+    <div className="min-h-screen bg-slate-950 font-serif text-slate-300">
       {/* Header */}
       <header className="border-b border-slate-800 p-6 md:p-8">
-        <div className="max-w-6xl mx-auto">
-          <h1 className="text-3xl md:text-4xl font-bold text-slate-100 mb-2">
+        <div className="mx-auto max-w-6xl">
+          <h1 className="mb-2 text-3xl font-bold text-slate-100 md:text-4xl">
             Rashomon
           </h1>
-          <p className="text-lg md:text-xl text-slate-400 mb-1">
+          <p className="mb-1 text-lg text-slate-400 md:text-xl">
             Akira Kurosawa, 1950
           </p>
-          <p className="text-sm md:text-base text-amber-500">
+          <p className="text-sm text-amber-500 md:text-base">
             React Concept: Same Data, Different Renders
           </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 md:px-6 py-8 md:py-12 pb-32">
+      <main className="mx-auto max-w-6xl px-4 py-8 pb-32 md:px-6 md:py-12">
         {/* Chapter Content */}
         <article className="mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold text-slate-100 mb-6">
+          <h2 className="mb-6 text-2xl font-bold text-slate-100 md:text-3xl">
             {currentChapter.title}
           </h2>
           <div className="prose prose-invert prose-slate max-w-none">
             {currentChapter.content.split("\n\n").map((paragraph, idx) => (
               <p
                 key={idx}
-                className="text-base md:text-lg leading-relaxed mb-4 text-slate-300"
+                className="mb-4 text-base leading-relaxed text-slate-300 md:text-lg"
               >
                 {paragraph}
               </p>
@@ -259,32 +259,32 @@ Both are architecture. Both are intentional. Both are powerful.`,
 
         {/* Interactive Demonstration */}
         {chapter >= 1 && (
-          <section className="bg-slate-900/50 border border-slate-800 rounded-lg p-6 md:p-8">
-            <h3 className="text-xl md:text-2xl font-bold text-slate-100 mb-6">
+          <section className="rounded-lg border border-slate-800 bg-slate-900/50 p-6 md:p-8">
+            <h3 className="mb-6 text-xl font-bold text-slate-100 md:text-2xl">
               Interactive Demonstration
             </h3>
 
             {/* Witness Selector */}
             <div className="mb-6">
-              <p className="text-sm text-slate-400 mb-3">
+              <p className="mb-3 text-sm text-slate-400">
                 Select a witness to see their render:
               </p>
-              <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
+              <div className="grid grid-cols-2 gap-3 md:grid-cols-4">
                 {witnesses.map((witness) => {
                   const Icon = witness.icon;
                   return (
                     <button
                       key={witness.id}
                       onClick={() => setSelectedWitness(witness.id)}
-                      className={`flex items-center justify-center gap-2 px-4 py-3 rounded-lg border transition-all ${
+                      className={`flex items-center justify-center gap-2 rounded-lg border px-4 py-3 transition-all ${
                         selectedWitness === witness.id
                           ? `${witness.bgColor} border-current ${witness.color}`
-                          : "bg-slate-800/50 border-slate-700 text-slate-400 hover:border-slate-600"
+                          : "border-slate-700 bg-slate-800/50 text-slate-400 hover:border-slate-600"
                       }`}
                       aria-label={`View ${witness.name}'s testimony`}
                     >
-                      <Icon className="w-4 h-4" />
-                      <span className="text-sm font-medium hidden md:inline">
+                      <Icon className="h-4 w-4" />
+                      <span className="hidden text-sm font-medium md:inline">
                         {witness.name.split(" ")[0]}
                       </span>
                     </button>
@@ -297,7 +297,7 @@ Both are architecture. Both are intentional. Both are powerful.`,
             <div className="mb-6">
               <button
                 onClick={() => setShowPropsInspector(!showPropsInspector)}
-                className="text-sm text-amber-500 hover:text-amber-400 transition-colors"
+                className="text-sm text-amber-500 transition-colors hover:text-amber-400"
               >
                 {showPropsInspector ? "Hide" : "Show"} Props Inspector
               </button>
@@ -305,11 +305,11 @@ Both are architecture. Both are intentional. Both are powerful.`,
 
             {/* Props Inspector */}
             {showPropsInspector && (
-              <div className="mb-6 bg-slate-950 border border-slate-700 rounded-lg p-4 md:p-6">
-                <h4 className="text-sm font-bold text-slate-400 mb-3 uppercase tracking-wide">
+              <div className="mb-6 rounded-lg border border-slate-700 bg-slate-950 p-4 md:p-6">
+                <h4 className="mb-3 text-sm font-bold uppercase tracking-wide text-slate-400">
                   Immutable Props (Constant)
                 </h4>
-                <pre className="text-xs md:text-sm text-slate-300 overflow-x-auto">
+                <pre className="overflow-x-auto text-xs text-slate-300 md:text-sm">
                   <code>{`const murderEvent = {
   victim: "${murderEvent.victim}",
   location: "${murderEvent.location}",
@@ -326,12 +326,12 @@ Both are architecture. Both are intentional. Both are powerful.`,
             )}
 
             {/* Witness Render Output */}
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="grid gap-6 md:grid-cols-2">
               {/* Internal State */}
               <div
-                className={`border rounded-lg p-4 md:p-6 ${currentWitness.bgColor} border-current ${currentWitness.color}`}
+                className={`rounded-lg border p-4 md:p-6 ${currentWitness.bgColor} border-current ${currentWitness.color}`}
               >
-                <h4 className="text-sm font-bold mb-3 uppercase tracking-wide">
+                <h4 className="mb-3 text-sm font-bold uppercase tracking-wide">
                   Internal State
                 </h4>
                 <div className="space-y-2 text-sm">
@@ -354,22 +354,22 @@ Both are architecture. Both are intentional. Both are powerful.`,
               </div>
 
               {/* Render Output */}
-              <div className="bg-slate-800/50 border border-slate-700 rounded-lg p-4 md:p-6">
-                <h4 className="text-sm font-bold text-slate-400 mb-3 uppercase tracking-wide">
+              <div className="rounded-lg border border-slate-700 bg-slate-800/50 p-4 md:p-6">
+                <h4 className="mb-3 text-sm font-bold uppercase tracking-wide text-slate-400">
                   Render Output
                 </h4>
-                <p className="text-sm md:text-base leading-relaxed text-slate-300">
+                <p className="text-sm leading-relaxed text-slate-300 md:text-base">
                   {currentWitness.narrative}
                 </p>
               </div>
             </div>
 
             {/* Key Insight */}
-            <div className="mt-6 p-4 bg-amber-950/20 border border-amber-500/30 rounded-lg">
+            <div className="mt-6 rounded-lg border border-amber-500/30 bg-amber-950/20 p-4">
               <p className="text-sm text-amber-500">
-                <strong>Key Insight:</strong> Same props (murderEvent), different
-                internal state, completely different render output. All four are
-                valid.
+                <strong>Key Insight:</strong> Same props (murderEvent),
+                different internal state, completely different render output.
+                All four are valid.
               </p>
             </div>
           </section>
@@ -377,24 +377,24 @@ Both are architecture. Both are intentional. Both are powerful.`,
       </main>
 
       {/* Chapter Navigation Footer */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-900/95 backdrop-blur-sm border-t border-slate-800 p-4">
-        <div className="max-w-6xl mx-auto flex justify-between items-center">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-slate-800 bg-slate-900/95 p-4 backdrop-blur-sm">
+        <div className="mx-auto flex max-w-6xl items-center justify-between">
           <button
             onClick={handlePrevChapter}
             disabled={chapter === 0}
-            className="px-4 md:px-6 py-2 bg-slate-800 text-slate-300 rounded-lg hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-sm md:text-base"
+            className="rounded-lg bg-slate-800 px-4 py-2 text-sm text-slate-300 transition-all hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-30 md:px-6 md:text-base"
           >
             Previous
           </button>
 
-          <span className="text-xs md:text-sm text-slate-400">
+          <span className="text-xs text-slate-400 md:text-sm">
             Chapter {chapter + 1} of {chapters.length}
           </span>
 
           <button
             onClick={handleNextChapter}
             disabled={chapter === chapters.length - 1}
-            className="px-4 md:px-6 py-2 bg-amber-600 text-slate-950 rounded-lg hover:bg-amber-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-sm md:text-base font-medium"
+            className="rounded-lg bg-amber-600 px-4 py-2 text-sm font-medium text-slate-950 transition-all hover:bg-amber-500 disabled:cursor-not-allowed disabled:opacity-30 md:px-6 md:text-base"
           >
             Next
           </button>

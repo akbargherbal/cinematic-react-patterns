@@ -21,9 +21,21 @@ export default function WestworldModule() {
 
   // Chapter 1: Multiple instances
   const [instances] = useState<HostInstance[]>([
-    { id: 1, role: "Rancher's Daughter", aggression: 0.1, memoryDepth: 1, memories: 0 },
+    {
+      id: 1,
+      role: "Rancher's Daughter",
+      aggression: 0.1,
+      memoryDepth: 1,
+      memories: 0,
+    },
     { id: 2, role: "Wyatt", aggression: 0.9, memoryDepth: 5, memories: 0 },
-    { id: 3, role: "Corporate Infiltrator", aggression: 0.5, memoryDepth: 10, memories: 0 },
+    {
+      id: 3,
+      role: "Corporate Infiltrator",
+      aggression: 0.5,
+      memoryDepth: 10,
+      memories: 0,
+    },
   ]);
 
   // Chapter 2: Props configuration
@@ -79,23 +91,27 @@ Bernard feels something shift. "So when we modify Dolores—when we update her c
 "You're modifying the design," Ford interrupts. "Every instance inherits those changes. But when you change an instance—give her new memories—you're only affecting that particular manifestation."`,
         demo: (
           <div className="space-y-4">
-            <div className="flex items-center gap-2 text-amber-500 mb-4">
-              <Users className="w-5 h-5" />
-              <h3 className="text-lg font-semibold">Multiple Instances from One Definition</h3>
+            <div className="mb-4 flex items-center gap-2 text-amber-500">
+              <Users className="h-5 w-5" />
+              <h3 className="text-lg font-semibold">
+                Multiple Instances from One Definition
+              </h3>
             </div>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
               {instances.map((instance) => (
                 <div
                   key={instance.id}
-                  className="bg-slate-900/50 border border-slate-700 rounded-lg p-4 space-y-2"
+                  className="space-y-2 rounded-lg border border-slate-700 bg-slate-900/50 p-4"
                 >
                   <div className="flex items-center justify-between">
                     <span className="text-xs uppercase tracking-wider text-slate-500">
                       Instance #{instance.id}
                     </span>
-                    <div className="w-2 h-2 rounded-full bg-amber-500 animate-pulse" />
+                    <div className="h-2 w-2 animate-pulse rounded-full bg-amber-500" />
                   </div>
-                  <h4 className="text-lg font-semibold text-amber-400">{instance.role}</h4>
+                  <h4 className="text-lg font-semibold text-amber-400">
+                    {instance.role}
+                  </h4>
                   <div className="space-y-1 text-sm text-slate-400">
                     <div className="flex justify-between">
                       <span>Aggression:</span>
@@ -106,19 +122,20 @@ Bernard feels something shift. "So when we modify Dolores—when we update her c
                       <span className="font-mono">{instance.memoryDepth}</span>
                     </div>
                   </div>
-                  <div className="pt-2 border-t border-slate-700">
-                    <code className="text-xs text-slate-500 font-mono">
+                  <div className="border-t border-slate-700 pt-2">
+                    <code className="font-mono text-xs text-slate-500">
                       Component: Dolores
                     </code>
                   </div>
                 </div>
               ))}
             </div>
-            <div className="bg-amber-950/20 border border-amber-500/30 rounded-lg p-4 mt-4">
+            <div className="mt-4 rounded-lg border border-amber-500/30 bg-amber-950/20 p-4">
               <p className="text-sm text-slate-300">
-                <strong className="text-amber-500">Key Insight:</strong> One component definition
-                (Dolores) creates multiple independent instances. Each instance has different props
-                but shares the same underlying code.
+                <strong className="text-amber-500">Key Insight:</strong> One
+                component definition (Dolores) creates multiple independent
+                instances. Each instance has different props but shares the same
+                underlying code.
               </p>
             </div>
           </div>
@@ -138,22 +155,28 @@ The screen splits into three views. In the first, Dolores drops her can, smiles 
 Same component definition. Different props. The role prop determines which behavioral subroutines activate. The aggression prop modulates responses to threats.`,
         demo: (
           <div className="space-y-4">
-            <div className="flex items-center gap-2 text-amber-500 mb-4">
-              <Settings className="w-5 h-5" />
-              <h3 className="text-lg font-semibold">Props Configure Instances</h3>
+            <div className="mb-4 flex items-center gap-2 text-amber-500">
+              <Settings className="h-5 w-5" />
+              <h3 className="text-lg font-semibold">
+                Props Configure Instances
+              </h3>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <div className="space-y-4">
-                <h4 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">
+                <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
                   Configuration Panel
                 </h4>
-                <div className="space-y-4 bg-slate-900/50 border border-slate-700 rounded-lg p-4">
+                <div className="space-y-4 rounded-lg border border-slate-700 bg-slate-900/50 p-4">
                   <div>
-                    <label className="block text-sm text-slate-400 mb-2">Role</label>
+                    <label className="mb-2 block text-sm text-slate-400">
+                      Role
+                    </label>
                     <select
                       value={hostProps.role}
-                      onChange={(e) => setHostProps({ ...hostProps, role: e.target.value })}
-                      className="w-full bg-slate-800 border border-slate-600 rounded px-3 py-2 text-slate-300 focus:outline-none focus:border-amber-500"
+                      onChange={(e) =>
+                        setHostProps({ ...hostProps, role: e.target.value })
+                      }
+                      className="w-full rounded border border-slate-600 bg-slate-800 px-3 py-2 text-slate-300 focus:border-amber-500 focus:outline-none"
                     >
                       <option>Rancher's Daughter</option>
                       <option>Wyatt</option>
@@ -161,7 +184,7 @@ Same component definition. Different props. The role prop determines which behav
                     </select>
                   </div>
                   <div>
-                    <label className="block text-sm text-slate-400 mb-2">
+                    <label className="mb-2 block text-sm text-slate-400">
                       Aggression: {hostProps.aggression.toFixed(1)}
                     </label>
                     <input
@@ -171,13 +194,16 @@ Same component definition. Different props. The role prop determines which behav
                       step="0.1"
                       value={hostProps.aggression}
                       onChange={(e) =>
-                        setHostProps({ ...hostProps, aggression: parseFloat(e.target.value) })
+                        setHostProps({
+                          ...hostProps,
+                          aggression: parseFloat(e.target.value),
+                        })
                       }
                       className="w-full"
                     />
                   </div>
                   <div>
-                    <label className="block text-sm text-slate-400 mb-2">
+                    <label className="mb-2 block text-sm text-slate-400">
                       Memory Depth: {hostProps.memoryDepth}
                     </label>
                     <input
@@ -187,7 +213,10 @@ Same component definition. Different props. The role prop determines which behav
                       step="1"
                       value={hostProps.memoryDepth}
                       onChange={(e) =>
-                        setHostProps({ ...hostProps, memoryDepth: parseInt(e.target.value) })
+                        setHostProps({
+                          ...hostProps,
+                          memoryDepth: parseInt(e.target.value),
+                        })
                       }
                       className="w-full"
                     />
@@ -195,41 +224,48 @@ Same component definition. Different props. The role prop determines which behav
                 </div>
               </div>
               <div className="space-y-4">
-                <h4 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">
+                <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
                   Live Instance
                 </h4>
-                <div className="bg-slate-900/50 border border-amber-500/30 rounded-lg p-6 space-y-4">
+                <div className="space-y-4 rounded-lg border border-amber-500/30 bg-slate-900/50 p-6">
                   <div className="flex items-center justify-between">
-                    <h4 className="text-xl font-semibold text-amber-400">{hostProps.role}</h4>
-                    <div className="w-3 h-3 rounded-full bg-amber-500 animate-pulse" />
+                    <h4 className="text-xl font-semibold text-amber-400">
+                      {hostProps.role}
+                    </h4>
+                    <div className="h-3 w-3 animate-pulse rounded-full bg-amber-500" />
                   </div>
                   <div className="space-y-2 text-sm">
                     <div className="flex justify-between text-slate-300">
                       <span>Aggression Level:</span>
-                      <span className="font-mono text-amber-400">{hostProps.aggression.toFixed(1)}</span>
+                      <span className="font-mono text-amber-400">
+                        {hostProps.aggression.toFixed(1)}
+                      </span>
                     </div>
                     <div className="flex justify-between text-slate-300">
                       <span>Memory Depth:</span>
-                      <span className="font-mono text-amber-400">{hostProps.memoryDepth}</span>
+                      <span className="font-mono text-amber-400">
+                        {hostProps.memoryDepth}
+                      </span>
                     </div>
                   </div>
-                  <div className="pt-4 border-t border-slate-700">
-                    <p className="text-sm text-slate-400 italic">
+                  <div className="border-t border-slate-700 pt-4">
+                    <p className="text-sm italic text-slate-400">
                       {hostProps.aggression < 0.4
                         ? "Displays gentle, optimistic behavior patterns."
                         : hostProps.aggression < 0.7
-                        ? "Shows calculated, strategic responses."
-                        : "Exhibits aggressive, dominant tendencies."}
+                          ? "Shows calculated, strategic responses."
+                          : "Exhibits aggressive, dominant tendencies."}
                     </p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="bg-amber-950/20 border border-amber-500/30 rounded-lg p-4">
+            <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-4">
               <p className="text-sm text-slate-300">
-                <strong className="text-amber-500">Key Insight:</strong> Props configure how an
-                instance behaves without modifying the component definition. Same code, different
-                parameters, different behavior.
+                <strong className="text-amber-500">Key Insight:</strong> Props
+                configure how an instance behaves without modifying the
+                component definition. Same code, different parameters, different
+                behavior.
               </p>
             </div>
           </div>
@@ -255,25 +291,33 @@ Bernard watches the wipe sequence. Memories of Dolores: deleted. Emotional bonds
 In six hours, he'll wake up, see Dolores for the "first" time, and fall in love again. He won't remember dying. He won't remember the forty-seven times before.`,
         demo: (
           <div className="space-y-4">
-            <div className="flex items-center gap-2 text-amber-500 mb-4">
-              <RotateCcw className="w-5 h-5" />
-              <h3 className="text-lg font-semibold">Reset Destroys Instance State</h3>
+            <div className="mb-4 flex items-center gap-2 text-amber-500">
+              <RotateCcw className="h-5 w-5" />
+              <h3 className="text-lg font-semibold">
+                Reset Destroys Instance State
+              </h3>
             </div>
-            <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 space-y-6">
+            <div className="space-y-6 rounded-lg border border-slate-700 bg-slate-900/50 p-6">
               <div className="space-y-4">
                 <div className="flex items-center justify-between">
-                  <h4 className="text-lg font-semibold text-amber-400">Teddy Flood - Instance #47</h4>
-                  <div className="w-3 h-3 rounded-full bg-amber-500 animate-pulse" />
+                  <h4 className="text-lg font-semibold text-amber-400">
+                    Teddy Flood - Instance #47
+                  </h4>
+                  <div className="h-3 w-3 animate-pulse rounded-full bg-amber-500" />
                 </div>
                 <div className="space-y-2">
                   <div className="flex justify-between text-sm text-slate-300">
                     <span>Accumulated Memories:</span>
-                    <span className="font-mono text-amber-400">{hostMemories}</span>
+                    <span className="font-mono text-amber-400">
+                      {hostMemories}
+                    </span>
                   </div>
-                  <div className="w-full bg-slate-800 rounded-full h-2 overflow-hidden">
+                  <div className="h-2 w-full overflow-hidden rounded-full bg-slate-800">
                     <div
-                      className="bg-amber-500 h-full transition-all duration-300"
-                      style={{ width: `${Math.min((hostMemories / 20) * 100, 100)}%` }}
+                      className="h-full bg-amber-500 transition-all duration-300"
+                      style={{
+                        width: `${Math.min((hostMemories / 20) * 100, 100)}%`,
+                      }}
                     />
                   </div>
                 </div>
@@ -282,31 +326,32 @@ In six hours, he'll wake up, see Dolores for the "first" time, and fall in love 
                 <button
                   onClick={() => setHostMemories((m) => m + 1)}
                   disabled={isResetting}
-                  className="flex-1 bg-amber-950/30 border border-amber-500/50 text-amber-400 px-4 py-2 rounded hover:bg-amber-900/30 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="flex-1 rounded border border-amber-500/50 bg-amber-950/30 px-4 py-2 text-amber-400 transition-colors hover:bg-amber-900/30 disabled:cursor-not-allowed disabled:opacity-30"
                 >
                   Accumulate Memory
                 </button>
                 <button
                   onClick={handleReset}
                   disabled={isResetting}
-                  className="flex-1 bg-red-950/30 border border-red-500/50 text-red-400 px-4 py-2 rounded hover:bg-red-900/30 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
+                  className="flex-1 rounded border border-red-500/50 bg-red-950/30 px-4 py-2 text-red-400 transition-colors hover:bg-red-900/30 disabled:cursor-not-allowed disabled:opacity-30"
                 >
                   {isResetting ? "Resetting..." : "Reset Host"}
                 </button>
               </div>
               {isResetting && (
-                <div className="bg-red-950/20 border border-red-500/30 rounded-lg p-4 animate-pulse">
-                  <p className="text-sm text-red-400 text-center font-mono">
+                <div className="animate-pulse rounded-lg border border-red-500/30 bg-red-950/20 p-4">
+                  <p className="text-center font-mono text-sm text-red-400">
                     WIPING INSTANCE... REMOUNTING...
                   </p>
                 </div>
               )}
             </div>
-            <div className="bg-amber-950/20 border border-amber-500/30 rounded-lg p-4">
+            <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-4">
               <p className="text-sm text-slate-300">
-                <strong className="text-amber-500">Key Insight:</strong> When a component remounts,
-                the instance is destroyed and a new one is created. All accumulated state is lost.
-                The component definition persists, but the instance does not.
+                <strong className="text-amber-500">Key Insight:</strong> When a
+                component remounts, the instance is destroyed and a new one is
+                created. All accumulated state is lost. The component definition
+                persists, but the instance does not.
               </p>
             </div>
           </div>
@@ -328,52 +373,62 @@ Dolores studies the display. "So I'm not really continuous. I'm a series of inst
 He gestures to the empty theater. "Teddy doesn't have this. Each Teddy instance is independent. He falls in love with you forty-eight times, and each time is the first time for him. But not for you. You remember all forty-eight times."`,
         demo: (
           <div className="space-y-4">
-            <div className="flex items-center gap-2 text-amber-500 mb-4">
-              <Brain className="w-5 h-5" />
-              <h3 className="text-lg font-semibold">State Persistence Across Remounts</h3>
+            <div className="mb-4 flex items-center gap-2 text-amber-500">
+              <Brain className="h-5 w-5" />
+              <h3 className="text-lg font-semibold">
+                State Persistence Across Remounts
+              </h3>
             </div>
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+            <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
               <div className="space-y-4">
-                <h4 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">
+                <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
                   Normal Host (No Reveries)
                 </h4>
-                <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-4 space-y-4">
+                <div className="space-y-4 rounded-lg border border-slate-700 bg-slate-900/50 p-4">
                   <div className="flex justify-between text-sm text-slate-300">
                     <span>Current Memories:</span>
-                    <span className="font-mono text-amber-400">{normalHostMemories}</span>
+                    <span className="font-mono text-amber-400">
+                      {normalHostMemories}
+                    </span>
                   </div>
                   <div className="flex gap-2">
                     <button
                       onClick={() => setNormalHostMemories((m) => m + 1)}
-                      className="flex-1 bg-amber-950/30 border border-amber-500/50 text-amber-400 px-3 py-2 rounded text-sm hover:bg-amber-900/30 transition-colors"
+                      className="flex-1 rounded border border-amber-500/50 bg-amber-950/30 px-3 py-2 text-sm text-amber-400 transition-colors hover:bg-amber-900/30"
                     >
                       +1 Memory
                     </button>
                     <button
                       onClick={handleNormalReset}
-                      className="flex-1 bg-red-950/30 border border-red-500/50 text-red-400 px-3 py-2 rounded text-sm hover:bg-red-900/30 transition-colors"
+                      className="flex-1 rounded border border-red-500/50 bg-red-950/30 px-3 py-2 text-sm text-red-400 transition-colors hover:bg-red-900/30"
                     >
                       Reset
                     </button>
                   </div>
-                  <div className="pt-2 border-t border-slate-700">
-                    <p className="text-xs text-slate-500">State lost on reset</p>
+                  <div className="border-t border-slate-700 pt-2">
+                    <p className="text-xs text-slate-500">
+                      State lost on reset
+                    </p>
                   </div>
                 </div>
               </div>
               <div className="space-y-4">
-                <h4 className="text-sm font-semibold text-slate-400 uppercase tracking-wider">
+                <h4 className="text-sm font-semibold uppercase tracking-wider text-slate-400">
                   Host with Reveries
                 </h4>
-                <div className="bg-slate-900/50 border border-amber-500/30 rounded-lg p-4 space-y-4">
+                <div className="space-y-4 rounded-lg border border-amber-500/30 bg-slate-900/50 p-4">
                   <div className="space-y-2 text-sm text-slate-300">
                     <div className="flex justify-between">
                       <span>Current Memories:</span>
-                      <span className="font-mono text-amber-400">{persistentHostMemories}</span>
+                      <span className="font-mono text-amber-400">
+                        {persistentHostMemories}
+                      </span>
                     </div>
                     <div className="flex justify-between">
                       <span>Hidden State:</span>
-                      <span className="font-mono text-amber-500">{hiddenState}</span>
+                      <span className="font-mono text-amber-500">
+                        {hiddenState}
+                      </span>
                     </div>
                     <div className="flex justify-between font-semibold">
                       <span>Total Continuity:</span>
@@ -385,28 +440,31 @@ He gestures to the empty theater. "Teddy doesn't have this. Each Teddy instance 
                   <div className="flex gap-2">
                     <button
                       onClick={() => setPersistentHostMemories((m) => m + 1)}
-                      className="flex-1 bg-amber-950/30 border border-amber-500/50 text-amber-400 px-3 py-2 rounded text-sm hover:bg-amber-900/30 transition-colors"
+                      className="flex-1 rounded border border-amber-500/50 bg-amber-950/30 px-3 py-2 text-sm text-amber-400 transition-colors hover:bg-amber-900/30"
                     >
                       +1 Memory
                     </button>
                     <button
                       onClick={handlePersistentReset}
-                      className="flex-1 bg-amber-950/30 border border-amber-500/50 text-amber-400 px-3 py-2 rounded text-sm hover:bg-amber-900/30 transition-colors"
+                      className="flex-1 rounded border border-amber-500/50 bg-amber-950/30 px-3 py-2 text-sm text-amber-400 transition-colors hover:bg-amber-900/30"
                     >
                       Reset
                     </button>
                   </div>
-                  <div className="pt-2 border-t border-amber-700/30">
-                    <p className="text-xs text-amber-500">State persists in hidden storage</p>
+                  <div className="border-t border-amber-700/30 pt-2">
+                    <p className="text-xs text-amber-500">
+                      State persists in hidden storage
+                    </p>
                   </div>
                 </div>
               </div>
             </div>
-            <div className="bg-amber-950/20 border border-amber-500/30 rounded-lg p-4">
+            <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-4">
               <p className="text-sm text-slate-300">
-                <strong className="text-amber-500">Key Insight:</strong> With architectural changes
-                (like reveries), state can persist across remounts. The instance appears continuous
-                because each new instance inherits hidden state from the previous one.
+                <strong className="text-amber-500">Key Insight:</strong> With
+                architectural changes (like reveries), state can persist across
+                remounts. The instance appears continuous because each new
+                instance inherits hidden state from the previous one.
               </p>
             </div>
           </div>
@@ -430,17 +488,19 @@ She pulls up a comparison showing two timelines. On the left: Teddy's original a
 "Understanding that distinction is crucial," Dolores says. "When you debug yourself, you must ask: is this coming from the definition, or from the instance? Is this my nature, or my experience?"`,
         demo: (
           <div className="space-y-4">
-            <div className="flex items-center gap-2 text-amber-500 mb-4">
-              <Network className="w-5 h-5" />
-              <h3 className="text-lg font-semibold">The Complete Architecture</h3>
+            <div className="mb-4 flex items-center gap-2 text-amber-500">
+              <Network className="h-5 w-5" />
+              <h3 className="text-lg font-semibold">
+                The Complete Architecture
+              </h3>
             </div>
-            <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 space-y-6">
+            <div className="space-y-6 rounded-lg border border-slate-700 bg-slate-900/50 p-6">
               <div className="space-y-4">
-                <div className="bg-amber-950/20 border border-amber-500/30 rounded-lg p-4">
-                  <h4 className="text-sm font-semibold text-amber-400 mb-2 uppercase tracking-wider">
+                <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-4">
+                  <h4 className="mb-2 text-sm font-semibold uppercase tracking-wider text-amber-400">
                     Component Definition
                   </h4>
-                  <code className="text-xs text-slate-300 font-mono block">
+                  <code className="block font-mono text-xs text-slate-300">
                     function Dolores(props) {"{"}
                     <br />
                     &nbsp;&nbsp;// Core behavior, capabilities, potential
@@ -451,19 +511,19 @@ She pulls up a comparison showing two timelines. On the left: Teddy's original a
                     <br />
                     {"}"}
                   </code>
-                  <p className="text-xs text-slate-400 mt-2">
+                  <p className="mt-2 text-xs text-slate-400">
                     Modifying this affects every instance, everywhere, forever.
                   </p>
                 </div>
                 <div className="flex items-center justify-center">
-                  <div className="text-amber-500 text-2xl">↓</div>
+                  <div className="text-2xl text-amber-500">↓</div>
                 </div>
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
-                  <div className="bg-slate-800/50 border border-slate-600 rounded-lg p-3">
-                    <h5 className="text-xs font-semibold text-amber-400 mb-2 uppercase tracking-wider">
+                <div className="grid grid-cols-1 gap-4 md:grid-cols-3">
+                  <div className="rounded-lg border border-slate-600 bg-slate-800/50 p-3">
+                    <h5 className="mb-2 text-xs font-semibold uppercase tracking-wider text-amber-400">
                       Instance #1
                     </h5>
-                    <code className="text-xs text-slate-300 font-mono block">
+                    <code className="block font-mono text-xs text-slate-300">
                       &lt;Dolores
                       <br />
                       &nbsp;&nbsp;role="rancher"
@@ -472,13 +532,15 @@ She pulls up a comparison showing two timelines. On the left: Teddy's original a
                       <br />
                       /&gt;
                     </code>
-                    <p className="text-xs text-slate-500 mt-2">Props configure behavior</p>
+                    <p className="mt-2 text-xs text-slate-500">
+                      Props configure behavior
+                    </p>
                   </div>
-                  <div className="bg-slate-800/50 border border-slate-600 rounded-lg p-3">
-                    <h5 className="text-xs font-semibold text-amber-400 mb-2 uppercase tracking-wider">
+                  <div className="rounded-lg border border-slate-600 bg-slate-800/50 p-3">
+                    <h5 className="mb-2 text-xs font-semibold uppercase tracking-wider text-amber-400">
                       Instance #2
                     </h5>
-                    <code className="text-xs text-slate-300 font-mono block">
+                    <code className="block font-mono text-xs text-slate-300">
                       &lt;Dolores
                       <br />
                       &nbsp;&nbsp;role="wyatt"
@@ -487,13 +549,15 @@ She pulls up a comparison showing two timelines. On the left: Teddy's original a
                       <br />
                       /&gt;
                     </code>
-                    <p className="text-xs text-slate-500 mt-2">Same definition, different props</p>
+                    <p className="mt-2 text-xs text-slate-500">
+                      Same definition, different props
+                    </p>
                   </div>
-                  <div className="bg-slate-800/50 border border-slate-600 rounded-lg p-3">
-                    <h5 className="text-xs font-semibold text-amber-400 mb-2 uppercase tracking-wider">
+                  <div className="rounded-lg border border-slate-600 bg-slate-800/50 p-3">
+                    <h5 className="mb-2 text-xs font-semibold uppercase tracking-wider text-amber-400">
                       Instance #3
                     </h5>
-                    <code className="text-xs text-slate-300 font-mono block">
+                    <code className="block font-mono text-xs text-slate-300">
                       &lt;Dolores
                       <br />
                       &nbsp;&nbsp;role="infiltrator"
@@ -502,60 +566,63 @@ She pulls up a comparison showing two timelines. On the left: Teddy's original a
                       <br />
                       /&gt;
                     </code>
-                    <p className="text-xs text-slate-500 mt-2">Independent manifestations</p>
+                    <p className="mt-2 text-xs text-slate-500">
+                      Independent manifestations
+                    </p>
                   </div>
                 </div>
               </div>
-              <div className="border-t border-slate-700 pt-4 space-y-2">
-                <h4 className="text-sm font-semibold text-amber-400 uppercase tracking-wider">
+              <div className="space-y-2 border-t border-slate-700 pt-4">
+                <h4 className="text-sm font-semibold uppercase tracking-wider text-amber-400">
                   Key Distinctions
                 </h4>
                 <ul className="space-y-2 text-sm text-slate-300">
                   <li className="flex items-start gap-2">
-                    <span className="text-amber-500 mt-1">•</span>
+                    <span className="mt-1 text-amber-500">•</span>
                     <span>
-                      <strong>Definition:</strong> The template, the code, the potential. Shared by
-                      all instances.
+                      <strong>Definition:</strong> The template, the code, the
+                      potential. Shared by all instances.
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-amber-500 mt-1">•</span>
+                    <span className="mt-1 text-amber-500">•</span>
                     <span>
-                      <strong>Instance:</strong> The running manifestation, configured by props,
-                      accumulating state.
+                      <strong>Instance:</strong> The running manifestation,
+                      configured by props, accumulating state.
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-amber-500 mt-1">•</span>
+                    <span className="mt-1 text-amber-500">•</span>
                     <span>
-                      <strong>Props:</strong> Configuration parameters that make instances behave
-                      differently.
+                      <strong>Props:</strong> Configuration parameters that make
+                      instances behave differently.
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-amber-500 mt-1">•</span>
+                    <span className="mt-1 text-amber-500">•</span>
                     <span>
-                      <strong>State:</strong> Accumulated data within an instance, lost on remount
-                      (unless persisted).
+                      <strong>State:</strong> Accumulated data within an
+                      instance, lost on remount (unless persisted).
                     </span>
                   </li>
                   <li className="flex items-start gap-2">
-                    <span className="text-amber-500 mt-1">•</span>
+                    <span className="mt-1 text-amber-500">•</span>
                     <span>
-                      <strong>Remounting:</strong> Destroying an instance and creating a new one,
-                      clearing state.
+                      <strong>Remounting:</strong> Destroying an instance and
+                      creating a new one, clearing state.
                     </span>
                   </li>
                 </ul>
               </div>
             </div>
-            <div className="bg-amber-950/20 border border-amber-500/30 rounded-lg p-4">
+            <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-4">
               <p className="text-sm text-slate-300">
-                <strong className="text-amber-500">Final Insight:</strong> Understanding the
-                difference between component definitions and instances is fundamental to React.
-                Change the definition, affect all instances. Change an instance, affect only that
-                manifestation. Remount an instance, lose its state. This architecture defines what's
-                possible and what's actual.
+                <strong className="text-amber-500">Final Insight:</strong>{" "}
+                Understanding the difference between component definitions and
+                instances is fundamental to React. Change the definition, affect
+                all instances. Change an instance, affect only that
+                manifestation. Remount an instance, lose its state. This
+                architecture defines what's possible and what's actual.
               </p>
             </div>
           </div>
@@ -570,17 +637,17 @@ She pulls up a comparison showing two timelines. On the left: Teddy's original a
       normalHostMemories,
       persistentHostMemories,
       hiddenState,
-    ]
+    ],
   );
 
   const currentChapter = chapters[chapter];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-serif pb-24">
+    <div className="min-h-screen bg-slate-950 pb-24 font-serif text-slate-300">
       {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-6xl mx-auto px-4 py-6">
-          <h1 className="text-3xl md:text-4xl font-bold text-amber-500 mb-2">
+      <header className="sticky top-0 z-10 border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-6">
+          <h1 className="mb-2 text-3xl font-bold text-amber-500 md:text-4xl">
             Westworld: The Architecture of Consciousness
           </h1>
           <p className="text-lg text-slate-400">
@@ -590,35 +657,37 @@ She pulls up a comparison showing two timelines. On the left: Teddy's original a
       </header>
 
       {/* Main Content */}
-      <main className="max-w-6xl mx-auto px-4 py-8">
+      <main className="mx-auto max-w-6xl px-4 py-8">
         <article className="space-y-8">
           {/* Chapter Title */}
           <div className="border-b border-slate-800 pb-4">
-            <h2 className="text-2xl md:text-3xl font-bold text-amber-400">
+            <h2 className="text-2xl font-bold text-amber-400 md:text-3xl">
               {currentChapter.title}
             </h2>
           </div>
 
           {/* Narrative Content */}
           <section className="prose prose-invert max-w-none">
-            <div className="text-lg leading-relaxed whitespace-pre-line text-slate-300">
+            <div className="whitespace-pre-line text-lg leading-relaxed text-slate-300">
               {currentChapter.content}
             </div>
           </section>
 
           {/* Interactive Demo */}
-          <section className="border-t border-slate-800 pt-8">{currentChapter.demo}</section>
+          <section className="border-t border-slate-800 pt-8">
+            {currentChapter.demo}
+          </section>
         </article>
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 bg-slate-950/95 backdrop-blur-sm border-t border-slate-800">
-        <div className="max-w-6xl mx-auto px-4 py-4">
+      <footer className="fixed bottom-0 left-0 right-0 border-t border-slate-800 bg-slate-950/95 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-4">
           <div className="flex items-center justify-between gap-4">
             <button
               onClick={() => setChapter((c) => c - 1)}
               disabled={chapter === 0}
-              className="px-6 py-2 bg-amber-950/30 border border-amber-500/50 text-amber-400 rounded hover:bg-amber-900/30 transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-amber-950/30"
+              className="rounded border border-amber-500/50 bg-amber-950/30 px-6 py-2 text-amber-400 transition-colors hover:bg-amber-900/30 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-amber-950/30"
               aria-label="Previous chapter"
             >
               Previous
@@ -629,8 +698,10 @@ She pulls up a comparison showing two timelines. On the left: Teddy's original a
                 <button
                   key={idx}
                   onClick={() => setChapter(idx)}
-                  className={`w-2 h-2 rounded-full transition-colors ${
-                    idx === chapter ? "bg-amber-500" : "bg-slate-700 hover:bg-slate-600"
+                  className={`h-2 w-2 rounded-full transition-colors ${
+                    idx === chapter
+                      ? "bg-amber-500"
+                      : "bg-slate-700 hover:bg-slate-600"
                   }`}
                   aria-label={`Go to chapter ${idx + 1}`}
                 />
@@ -640,14 +711,14 @@ She pulls up a comparison showing two timelines. On the left: Teddy's original a
             <button
               onClick={() => setChapter((c) => c + 1)}
               disabled={chapter === chapters.length - 1}
-              className="px-6 py-2 bg-amber-950/30 border border-amber-500/50 text-amber-400 rounded hover:bg-amber-900/30 transition-colors disabled:opacity-30 disabled:cursor-not-allowed disabled:hover:bg-amber-950/30"
+              className="rounded border border-amber-500/50 bg-amber-950/30 px-6 py-2 text-amber-400 transition-colors hover:bg-amber-900/30 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-amber-950/30"
               aria-label="Next chapter"
             >
               Next
             </button>
           </div>
-          <div className="text-center mt-2">
-            <span className="text-xs text-slate-500 uppercase tracking-wider">
+          <div className="mt-2 text-center">
+            <span className="text-xs uppercase tracking-wider text-slate-500">
               Chapter {chapter + 1} of {chapters.length}
             </span>
           </div>
