@@ -12,6 +12,9 @@ import Home from "@modules/home";
 import DrFrank from "@modules/dr-frank";
 import FightClub from "@modules/fight-club";
 import MeanGirls from "@modules/mean-girls";
+import ClockworkOrangeModule from "@modules/clockwork-orange-forced-rerenders";
+import MatrixDependencies from "@modules/matrix-dependencies";
+import LooperCallbackTiming from "@modules/looper-callback-timing";
 
 /**
  * Module Wrapper Component
@@ -49,12 +52,14 @@ const ModuleWrapper = ({
       {/* Universal Exit Button */}
       <Link
         to="/"
-        className="fixed top-4 left-4 z-[100] opacity-30 hover:opacity-100 transition-opacity p-2 bg-black/70 hover:bg-black text-white rounded-full text-xs font-mono uppercase tracking-widest shadow-lg"
+        className="fixed top-4 left-3 z-[100] opacity-30 hover:opacity-100 transition-opacity p-2 bg-black/70 hover:bg-black text-white rounded-full text-xs font-mono uppercase tracking-widest shadow-lg"
         title="Return to Home"
       >
         ← EXIT
       </Link>
-      {children}
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 lg:py-6">
+        {children}
+      </div>
     </div>
   );
 };
@@ -128,6 +133,45 @@ export default function App() {
               fontClass="font-sans"
             >
               <MeanGirls />
+            </ModuleWrapper>
+          }
+        />
+
+        <Route
+          path="/clockwork-orange-forced-rerenders"
+          element={
+            <ModuleWrapper
+              bgClass="bg-slate-950"
+              textClass="text-slate-200"
+              fontClass="font-sans"
+            >
+              <ClockworkOrangeModule />
+            </ModuleWrapper>
+          }
+        />
+
+        <Route
+          path="/matrix-dependencies"
+          element={
+            <ModuleWrapper
+              bgClass="bg-emerald-950"
+              textClass="text-slate-300"
+              fontClass="font-serif"
+            >
+              <MatrixDependencies />
+            </ModuleWrapper>
+          }
+        />
+
+        <Route
+          path="/looper-callback-timing"
+          element={
+            <ModuleWrapper
+              bgClass="bg-slate-950"
+              textClass="text-slate-200"
+              fontClass="font-sans"
+            >
+              <LooperCallbackTiming />
             </ModuleWrapper>
           }
         />

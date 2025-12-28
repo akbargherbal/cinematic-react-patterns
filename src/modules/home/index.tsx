@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import { FlaskConical, Zap, Book, Film } from "lucide-react";
+import { FlaskConical, Zap, Book, Film, Clock } from "lucide-react";
 
 interface Module {
   path: string;
@@ -38,6 +38,36 @@ const modules: Module[] = [
     icon: Book,
     colorClass: "text-pink-500",
     bgClass: "bg-pink-950/20 border-pink-500/30 hover:border-pink-500",
+  },
+
+  {
+    path: "/clockwork-orange-forced-rerenders",
+    title: "A Clockwork Orange",
+    subtitle: "Alex DeLarge, 1971",
+    concept: "forceUpdate & Forced Re-renders",
+    icon: Zap,
+    colorClass: "text-red-500",
+    bgClass: "bg-red-950/20 border-red-500/30 hover:border-red-500",
+  },
+
+  {
+    path: "/matrix-dependencies",
+    title: "The Matrix Reloaded",
+    subtitle: "Neo, The One, 2003",
+    concept: "useEffect Dependencies",
+    icon: Zap,
+    colorClass: "text-emerald-500",
+    bgClass: "bg-emerald-950/20 border-emerald-500/30 hover:border-emerald-500",
+  },
+
+  {
+    path: "/looper-callback-timing",
+    title: "Looper",
+    subtitle: "Joe, Kansas, 2044",
+    concept: "Callback Execution Timing",
+    icon: Clock,
+    colorClass: "text-amber-500",
+    bgClass: "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
   },
 ];
 

@@ -1,0 +1,12 @@
+<Route
+  path="/matrix-dependencies"
+  element={
+    <ModuleWrapper
+      bgClass="bg-emerald-950"
+      textClass="text-slate-300"
+      fontClass="font-serif"
+    >
+      <MatrixDependencies />
+    </ModuleWrapper>
+  }
+/>

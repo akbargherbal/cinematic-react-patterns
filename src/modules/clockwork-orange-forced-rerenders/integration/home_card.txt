@@ -1,0 +1,9 @@
+{
+  path: "/clockwork-orange-forced-rerenders",
+  title: "A Clockwork Orange",
+  subtitle: "Alex DeLarge, 1971",
+  concept: "forceUpdate & Forced Re-renders",
+  icon: Zap,
+  colorClass: "text-red-500",
+  bgClass: "bg-red-950/20 border-red-500/30 hover:border-red-500"
+}

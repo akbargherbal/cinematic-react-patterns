@@ -1,0 +1,9 @@
+{
+  path: "/looper-callback-timing",
+  title: "Looper",
+  subtitle: "Joe, Kansas, 2044",
+  concept: "Callback Execution Timing",
+  icon: Clock,
+  colorClass: "text-amber-500",
+  bgClass: "bg-amber-950/20 border-amber-500/30 hover:border-amber-500"
+}
