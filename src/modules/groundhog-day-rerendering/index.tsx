@@ -109,23 +109,28 @@ export default function GroundhogDayRerendering() {
       {/* Header */}
       <header className="border-b border-slate-700/30 bg-slate-900/50 backdrop-blur-sm">
         <div className="mx-auto max-w-6xl px-4 py-8">
-          <div className="mb-2 flex items-center gap-3">
-            <Clock className="h-8 w-8 text-sky-500" />
-            <h1 className="text-4xl font-bold text-white">Groundhog Day</h1>
+          <div className="flex items-center justify-between px-8">
+            <div>
+              <div className="mb-2 flex items-center gap-3">
+                <Clock className="h-8 w-8 text-sky-500" />
+                <h1 className="text-4xl font-bold text-white">Groundhog Day</h1>
+              </div>
+
+              <p className="mt-1 text-sm text-sky-400 px-2">
+                Re-rendering &amp; Pure Functions
+              </p>
+            </div>
+            <p className="text-lg text-slate-400">
+              Phil Connors, Punxsutawney, 1993
+            </p>
           </div>
-          <p className="text-lg text-slate-400">
-            Phil Connors, Punxsutawney, 1993
-          </p>
-          <p className="mt-1 text-sm text-sky-400">
-            Re-rendering &amp; Pure Functions
-          </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="mx-auto max-w-6xl px-4 py-12 pb-32">
+      <main className="mx-auto max-w-6xl p-8 pb-32">
         {/* Render Counter Badge */}
-        <div className="mb-6 flex justify-end">
+        <div className="mb-6 flex justify-end mr-8">
           <div className="inline-flex items-center gap-2 rounded-full border border-sky-500/30 bg-sky-500/10 px-4 py-2 text-sm text-sky-400">
             <RotateCcw className="h-4 w-4" />
             <span>Render #{renderCount}</span>
@@ -137,7 +142,7 @@ export default function GroundhogDayRerendering() {
           <h2 className="mb-4 text-3xl font-bold text-white">
             {currentChapter.title}
           </h2>
-          <div className="whitespace-pre-line leading-relaxed text-slate-300">
+          <div className="leading-relaxed whitespace-pre-line text-slate-300">
             {currentChapter.content}
           </div>
         </article>
@@ -167,7 +172,7 @@ export default function GroundhogDayRerendering() {
                 <div className="ml-4 text-slate-400">
                   // location: "Punxsutawney" (always)
                 </div>
-                <div className="ml-4 mt-2 text-slate-300">
+                <div className="mt-2 ml-4 text-slate-300">
                   return &lt;Day /&gt;;
                 </div>
                 <div className="text-sky-400">{"}"}</div>
@@ -447,7 +452,7 @@ export default function GroundhogDayRerendering() {
                 </div>
 
                 <div className="rounded border border-amber-500/30 bg-amber-950/20 p-4">
-                  <p className="text-sm italic text-amber-300">
+                  <p className="text-sm text-amber-300 italic">
                     "Write every render like it's the first time, but learn from
                     the past."
                   </p>
@@ -462,7 +467,7 @@ export default function GroundhogDayRerendering() {
       </main>
 
       {/* Chapter Navigation Footer */}
-      <footer className="fixed bottom-0 left-0 right-0 border-t border-slate-700/30 bg-slate-900/90 backdrop-blur-sm">
+      <footer className="fixed right-0 bottom-0 left-0 border-t border-slate-700/30 bg-slate-900/90 backdrop-blur-sm">
         <div className="mx-auto max-w-6xl px-4 py-4">
           <div className="flex items-center justify-between">
             <button

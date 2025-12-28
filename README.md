@@ -7,142 +7,413 @@ An interactive educational platform that transforms complex React concepts into 
 **📊 Project Scale:**
 
 - 🎬 **48 fiction sources** mapped to React concepts
-- ✅ **3 modules complete** (Frankenstein, Fight Club, Mean Girls)
-- 🚧 **45 modules configured** and ready for implementation
+- ✅ **48 modules complete** - Full curriculum implemented
 - 📚 **Every major React concept** covered from hooks to advanced patterns
 - 🌍 **200+ years of stories** (1818-2019) teaching modern React
 
-**Status:** Active Development - Contributors Welcome!
+**Status:** Complete Educational Platform - Ready for Learning!
 
 ## 🎯 Project Vision
 
-**Cinematic React Patterns** is an educational platform that teaches React through the power of storytelling. We've mapped **48 iconic works of fiction**—from Mary Shelley's Frankenstein (1818) to Netflix's Russian Doll (2019)—to create the most comprehensive and memorable React learning experience ever built.
+**Cinematic React Patterns** is a comprehensive educational platform that teaches React through the power of storytelling. We've mapped **48 iconic works of fiction**—from Mary Shelley's Frankenstein (1818) to Netflix's Russian Doll (2019)—to create the most comprehensive and memorable React learning experience ever built.
 
 **The Philosophy:** Abstract programming concepts become concrete and unforgettable when taught through stories we already know and love. Why memorize useEffect dependency rules when you can learn them from Neo dodging bullets in The Matrix?
 
 ### Current Status
 
-- ✅ **48 modules configured** - Complete React curriculum mapped to fiction
-- ✅ **3 modules fully implemented** - Frankenstein, Fight Club, Mean Girls
-- ✅ **45+ modules ready for development** - Architecture and metadata complete
+- ✅ **48 modules fully implemented** - Complete React curriculum
+- ✅ **All major React concepts covered** - From basics to advanced patterns
 - ✅ **Centralized module registry** - Single source of truth for all modules
-- 🚧 **Active development** - Module implementations in progress
-- 📢 **Open for contributions** - Claim a module and bring it to life!
+- ✅ **Production ready** - Deployed and available for learning
+- 🎓 **Comprehensive curriculum** - Every concept with its perfect cinematic metaphor
 
-### Long-term Goal
+### Achievement Unlocked
 
-Build the **most comprehensive React learning platform** where every concept—from basic hooks to advanced patterns—has its own fiction-themed module. With 48 modules spanning classic literature to modern cinema, we're creating an educational experience that makes React fundamentals truly unforgettable.
+We've built the **most comprehensive React learning platform** where every concept—from basic hooks to advanced patterns—has its own fiction-themed module. With 48 completed modules spanning classic literature to modern cinema, this is an educational experience that makes React fundamentals truly unforgettable.
 
 **Coverage:** useState to useReducer, controlled components to portals, prop drilling to Context API, and everything in between—each concept paired with the perfect cinematic metaphor.
 
-## 📚 Module Library
+## 📚 Complete Module Library (48/48)
 
-### ✅ Fully Implemented Modules
+### 🎣 Core Hooks & State Management
 
 #### 🧪 Frankenstein's Forms
-
-- **Fiction:** Mary Shelley's _Frankenstein_ (1818)
+- **Fiction:** Mary Shelley's *Frankenstein* (1818)
 - **Concept:** Controlled vs Uncontrolled Components
 - **Path:** `/frankenstein-controlled-components`
 - **Learning:** Dr. Frankenstein's failed uncontrolled component (The Creature) teaches the importance of controlling your inputs
 
-#### ⚡ Project Mayhem
+#### ⚡ The Matrix: Dependency Array
+- **Fiction:** *The Matrix* (1999)
+- **Concept:** useEffect Dependencies
+- **Path:** `/matrix-useeffect-dependencies`
+- **Learning:** Like Neo learning to see the Matrix code, master the dependency array to control when your effects run
 
-- **Fiction:** _Fight Club_ (1996/1999)
-- **Concept:** Strict Mode & Cleanup Functions
-- **Path:** `/fight-club-strict-mode`
-- **Learning:** Tyler Durden forces double-mounts to expose your side effects—learn to write proper cleanup
+#### 🧠 Memento: Memory Management
+- **Fiction:** *Memento* (2000)
+- **Concept:** useState vs useRef
+- **Path:** `/memento-usestate-vs-useref`
+- **Learning:** Leonard's polaroids (useRef) persist without triggering new scenes, while his actions (useState) restart the investigation
 
-#### 💖 The Burn Book
+#### 🔁 Groundhog Day: The Re-render Loop
+- **Fiction:** *Groundhog Day* (1993)
+- **Concept:** Re-rendering & Pure Functions
+- **Path:** `/groundhog-day-rerendering`
+- **Learning:** Phil Connors teaches why pure functions prevent infinite re-render loops
 
-- **Fiction:** _Mean Girls_ (2004)
+#### 🧮 Arrival: Expensive Calculations
+- **Fiction:** *Arrival* (2016)
+- **Concept:** useMemo for Performance
+- **Path:** `/arrival-usememo`
+- **Learning:** Like learning the Heptapod language, some computations are expensive—cache them with useMemo
+
+#### ⏰ Looper: Callback Timing
+- **Fiction:** *Looper* (2012)
+- **Concept:** useCallback Timing
+- **Path:** `/looper-usecallback`
+- **Learning:** Prevent future you from creating unnecessary function instances
+
+#### 💝 Her: Custom Hooks
+- **Fiction:** *Her* (2013)
+- **Concept:** Custom Hooks
+- **Path:** `/her-custom-hooks`
+- **Learning:** Create your own OS-like interfaces by composing React's built-in hooks
+
+#### ⏳ Donnie Darko: Effect Dependencies
+- **Fiction:** *Donnie Darko* (2001)
+- **Concept:** Effect Dependencies & Timing
+- **Path:** `/donnie-darko-effect-dependencies`
+- **Learning:** Understanding the timeline of effects and their dependencies
+
+### 🗂️ Component Patterns & Architecture
+
+#### 🌀 Inception: Component Composition
+- **Fiction:** *Inception* (2010)
+- **Concept:** Component Composition
+- **Path:** `/inception-component-composition`
+- **Learning:** Build dreams within dreams—master nested component architecture
+
+#### 🤖 Blade Runner: Component Identity
+- **Fiction:** *Blade Runner* (1982)
+- **Concept:** Component Identity & Keys
+- **Path:** `/blade-runner-keys`
+- **Learning:** Replicants need identifiers—learn why React keys are essential for component identity
+
+#### 🎭 Westworld: Component vs Instance
+- **Fiction:** *Westworld* (2016)
+- **Concept:** Component vs Instance
+- **Path:** `/westworld-component-instance`
+- **Learning:** Understand the difference between host design (component) and individual hosts (instances)
+
+#### 👽 The Thing: Component Swapping
+- **Fiction:** *The Thing* (1982)
+- **Concept:** Dynamic Component Rendering
+- **Path:** `/the-thing-component-swapping`
+- **Learning:** Like The Thing taking different forms, dynamically swap components based on state
+
+#### 🎬 Rashomon: Multiple Perspectives
+- **Fiction:** *Rashomon* (1950)
+- **Concept:** Multiple Component Perspectives
+- **Path:** `/rashomon-component-perspectives`
+- **Learning:** Same data, different renderers—master rendering the same state multiple ways
+
+#### 🕵️ The Usual Suspects: Dynamic Rendering
+- **Fiction:** *The Usual Suspects* (1995)
+- **Concept:** Conditional Rendering Patterns
+- **Path:** `/usual-suspects-dynamic-rendering`
+- **Learning:** The greatest trick React ever pulled was making you think conditional rendering was simple
+
+#### 👻 The Sixth Sense: Conditional Rendering
+- **Fiction:** *The Sixth Sense* (1999)
+- **Concept:** Conditional Rendering
+- **Path:** `/sixth-sense-conditional-rendering`
+- **Learning:** Some components see dead code—master conditional rendering to show only what's alive
+
+#### 👨‍👨‍👦‍👦 Multiplicity: Component Cloning
+- **Fiction:** *Multiplicity* (1996)
+- **Concept:** Component Replication Patterns
+- **Path:** `/multiplicity-component-cloning`
+- **Learning:** Clone components effectively while maintaining state integrity
+
+### 📦 State Management & Data Flow
+
+#### 📖 1984: Immutable State
+- **Fiction:** *1984* by George Orwell
+- **Concept:** Immutable State Updates
+- **Path:** `/1984-immutable-state`
+- **Learning:** Big Brother watches state mutations—learn to update immutably
+
+#### 💰 Ocean's Eleven: Complex State
+- **Fiction:** *Ocean's 11* (2001)
+- **Concept:** useReducer for Complex State
+- **Path:** `/oceans-eleven-usereducer`
+- **Learning:** Orchestrate complex state heists with useReducer's action-based pattern
+
+#### 🗻 Lord of the Rings: Prop Drilling
+- **Fiction:** *The Lord of the Rings* (2001-2003)
+- **Concept:** Prop Drilling Problem
+- **Path:** `/lotr-prop-drilling`
+- **Learning:** Like passing the Ring through Middle-earth, prop drilling is painful—learn why Context is the Eagle
+
+#### 🏘️ The Village: Scoped Context
+- **Fiction:** *The Village* (2004)
+- **Concept:** Scoped Context Providers
+- **Path:** `/village-scoped-context`
+- **Learning:** Create isolated context boundaries like the village's borders
+
+#### 💖 Mean Girls: Context API
+- **Fiction:** *Mean Girls* (2004)
 - **Concept:** Context API & Prop Drilling
 - **Path:** `/mean-girls-context-api`
 - **Learning:** Stop passing gossip through every Plastic—use the Burn Book (Context) for global state
 
+#### 💼 The Social Network: State Sync
+- **Fiction:** *The Social Network* (2010)
+- **Concept:** State Synchronization
+- **Path:** `/social-network-state-sync`
+- **Learning:** Like syncing Harvard's social graph, master keeping distributed state in sync
+
+#### 🌌 Coherence: State Sync Crisis
+- **Fiction:** *Coherence* (2013)
+- **Concept:** State Sync Across Instances
+- **Path:** `/coherence-state-sync`
+- **Learning:** When reality splits, state must stay coherent across parallel instances
+
+#### 📺 Black Mirror Bandersnatch: State Branching
+- **Fiction:** *Black Mirror: Bandersnatch* (2018)
+- **Concept:** State Branching & History
+- **Path:** `/bandersnatch-state-branching`
+- **Learning:** Navigate branching state paths like the film's choose-your-own-adventure
+
+#### 🔬 Primer: State Time Travel
+- **Fiction:** *Primer* (2004)
+- **Concept:** State Time Travel & Debugging
+- **Path:** `/primer-state-time-travel`
+- **Learning:** Build your own time machine for state debugging
+
+#### 🦋 The Butterfly Effect: State Purity
+- **Fiction:** *The Butterfly Effect* (2004)
+- **Concept:** State Mutation Side Effects
+- **Path:** `/butterfly-effect-state-purity`
+- **Learning:** Small mutations create chaos—maintain pure state updates
+
+### ⚡ Performance & Optimization
+
+#### 🎩 The Prestige: React.memo
+- **Fiction:** *The Prestige* (2006)
+- **Concept:** React.memo Optimization
+- **Path:** `/prestige-react-memo`
+- **Learning:** Every magic trick has a cost—learn when memoization's prestige is worth the pledge
+
+#### 🎩 The Prestige: Memoization Cost
+- **Fiction:** *The Prestige* (2006)
+- **Concept:** React.memo Cost Analysis
+- **Path:** `/prestige-cost-analysis`
+- **Learning:** The transported man pays a price—understand when React.memo costs more than it saves
+
+#### 🍊 A Clockwork Orange: Forced Re-renders
+- **Fiction:** *A Clockwork Orange* (1971)
+- **Concept:** Force Re-render Patterns
+- **Path:** `/clockwork-orange-forced-rerenders`
+- **Learning:** Sometimes you need to force a re-render—learn the Ludovico Technique for components
+
+#### 🏝️ Shutter Island: Stale Closures
+- **Fiction:** *Shutter Island* (2010)
+- **Concept:** Stale Closures in Effects
+- **Path:** `/shutter-island-stale-closures`
+- **Learning:** Like Teddy's false memories, closures can trap stale values—learn to break free
+
+### 🎯 Advanced Patterns & Architecture
+
+#### 🔮 Stranger Things: Portals
+- **Fiction:** *Stranger Things* (2016)
+- **Concept:** React Portals
+- **Path:** `/stranger-things-portals`
+- **Learning:** Render into the Upside Down—master React Portals for rendering outside the DOM hierarchy
+
+#### 🏠 Parasite: Component Injection
+- **Fiction:** *Parasite* (2019)
+- **Concept:** Component Injection Patterns
+- **Path:** `/parasite-component-injection`
+- **Learning:** Infiltrate the component tree like the Kim family—master dependency injection
+
+#### 😱 Get Out: Higher-Order Components
+- **Fiction:** *Get Out* (2017)
+- **Concept:** Higher-Order Components (HOCs)
+- **Path:** `/get-out-hocs`
+- **Learning:** Like the Sunken Place, HOCs wrap and transform components
+
+#### 🤖 Ex Machina: Component Testing
+- **Fiction:** *Ex Machina* (2014)
+- **Concept:** Component Testing Strategies
+- **Path:** `/ex-machina-testing`
+- **Learning:** Ava's Turing test teaches how to properly test component behavior
+
+#### 🌙 Moon: Singleton Pattern
+- **Fiction:** *Moon* (2009)
+- **Concept:** Singleton Pattern in React
+- **Path:** `/moon-singleton`
+- **Learning:** Like Sam Bell's solitary station, some instances should be truly singular
+
+#### ⏮️ Tenet: Reverse Data Flow
+- **Fiction:** *Tenet* (2020)
+- **Concept:** Inverse Data Flow Patterns
+- **Path:** `/tenet-reverse-data-flow`
+- **Learning:** Master inverted data flow where children communicate back up to parents
+
+### ♻️ Lifecycle & Effects Management
+
+#### 📺 The Truman Show: Component Lifecycle
+- **Fiction:** *The Truman Show* (1998)
+- **Concept:** Component Lifecycle
+- **Path:** `/truman-show-lifecycle`
+- **Learning:** From birth to exit, understand every stage of a component's life on the dome
+
+#### 🦖 Jurassic Park: Side Effects
+- **Fiction:** *Jurassic Park* (1993)
+- **Concept:** Side Effects & Cleanup
+- **Path:** `/jurassic-park-side-effects`
+- **Learning:** Life finds a way—and side effects need cleanup before they escape
+
+#### 💔 Eternal Sunshine: State Reset
+- **Fiction:** *Eternal Sunshine of the Spotless Mind* (2004)
+- **Concept:** State Reset Patterns
+- **Path:** `/eternal-sunshine-state-reset`
+- **Learning:** Erase state cleanly using the key prop for component reset
+
+#### 🔁 Edge of Tomorrow: Component Reset Loop
+- **Fiction:** *Edge of Tomorrow* (2014)
+- **Concept:** Component Reset Patterns
+- **Path:** `/edge-of-tomorrow-reset-loop`
+- **Learning:** Die, reset, repeat—master component remounting strategies
+
+#### 🚇 Source Code: Remounting Loop
+- **Fiction:** *Source Code* (2011)
+- **Concept:** Strategic Component Remounting
+- **Path:** `/source-code-remounting`
+- **Learning:** Each 8-minute loop remounts the simulation—control component lifecycle deliberately
+
+#### 🪆 Russian Doll: Lifecycle Debugging
+- **Fiction:** *Russian Doll* (2019)
+- **Concept:** Lifecycle Debugging Patterns
+- **Path:** `/russian-doll-lifecycle-debugging`
+- **Learning:** Trapped in a birthday loop, Nadia teaches how to debug lifecycle issues
+
+#### 🔄 The Matrix Reloaded: System Exit
+- **Fiction:** *The Matrix Reloaded* (2003)
+- **Concept:** Cleanup & Unmounting
+- **Path:** `/matrix-reloaded-system-exit`
+- **Learning:** Architect teaches the critical importance of proper component cleanup before exit
+
+### 🔄 Time & Async Patterns
+
+#### ⚡ Back to the Future: Props Changes
+- **Fiction:** *Back to the Future* (1985)
+- **Concept:** Props Changes & Re-renders
+- **Path:** `/back-to-future-props-changes`
+- **Learning:** When props change, components re-render—understand the ripple effects through time
+
+#### 🌠 Interstellar: Async State
+- **Fiction:** *Interstellar* (2014)
+- **Concept:** Async State & Race Conditions
+- **Path:** `/interstellar-async-state`
+- **Learning:** Time dilation on Miller's planet teaches race conditions—one hour there is seven years of updates
+
+#### 🐒 12 Monkeys: Circular Dependencies
+- **Fiction:** *12 Monkeys* (1995)
+- **Concept:** Circular Dependencies
+- **Path:** `/12-monkeys-circular-dependencies`
+- **Learning:** Break free from circular dependency paradoxes
+
+#### 👁️ Minority Report: Optimistic Rendering
+- **Fiction:** *Minority Report* (2002)
+- **Concept:** Optimistic UI Updates
+- **Path:** `/minority-report-optimistic-rendering`
+- **Learning:** Predict the future state before the server confirms—optimistic UI patterns
+
+### ⚔️ Rules & Best Practices
+
+#### 💥 Fight Club: Strict Mode
+- **Fiction:** *Fight Club* (1999)
+- **Concept:** React Strict Mode & Cleanup
+- **Path:** `/fight-club-strict-mode`
+- **Learning:** Tyler Durden forces double-mounts to expose your side effects—learn to write proper cleanup
+
 ---
 
-### 🚧 Configured Modules (45+ Ready for Implementation)
+## 🎓 Complete Learning Outcomes
 
-Our complete curriculum covers **every major React concept** through cinematic storytelling:
+### Fundamentals Mastery
+- ✅ Controlled vs Uncontrolled Components (Frankenstein)
+- ✅ Component Lifecycle (Truman Show)
+- ✅ Re-rendering & Pure Functions (Groundhog Day)
+- ✅ Conditional Rendering (Sixth Sense)
+- ✅ Props Changes & Updates (Back to the Future)
 
-**🎣 Core Hooks & State**
+### Hooks Deep Dive
+- ✅ useState vs useRef (Memento)
+- ✅ useEffect Dependencies (Matrix)
+- ✅ Effect Dependencies & Timing (Donnie Darko)
+- ✅ useMemo for Performance (Arrival)
+- ✅ useCallback Timing (Looper)
+- ✅ Custom Hooks (Her)
+- ✅ useReducer for Complex State (Ocean's 11)
 
-- The Matrix → useEffect Dependencies
-- Memento → useState vs useRef
-- Groundhog Day → Re-rendering & Pure Functions
-- Arrival → useMemo for Performance
-- Looper → useCallback Timing
-- Her → Custom Hooks
-- Donnie Darko → Effect Dependencies & Timing
+### Component Architecture
+- ✅ Component Composition (Inception)
+- ✅ Component Identity & Keys (Blade Runner)
+- ✅ Component vs Instance (Westworld)
+- ✅ Dynamic Component Rendering (The Thing)
+- ✅ Multiple Perspectives (Rashomon)
+- ✅ Component Cloning (Multiplicity)
+- ✅ Higher-Order Components (Get Out)
 
-**🏗️ Component Patterns**
+### State Management
+- ✅ Immutable State Updates (1984)
+- ✅ State Synchronization (Social Network, Coherence)
+- ✅ State Branching (Bandersnatch)
+- ✅ State Time Travel (Primer)
+- ✅ State Purity (Butterfly Effect)
+- ✅ Prop Drilling vs Context (LOTR, Mean Girls)
+- ✅ Scoped Context (The Village)
 
-- Inception → Component Composition
-- Blade Runner → Component Identity & Keys
-- Westworld → Component vs Instance
-- The Thing → Component Swapping
-- Rashomon → Multiple Component Perspectives
-- Usual Suspects → Dynamic Rendering
-- Sixth Sense → Conditional Rendering
-- Multiplicity → Component Cloning
+### Performance Optimization
+- ✅ React.memo Strategies (Prestige)
+- ✅ Memoization Cost Analysis (Prestige Cost)
+- ✅ Force Re-renders (Clockwork Orange)
+- ✅ Stale Closures (Shutter Island)
 
-**📦 State Management**
+### Advanced Patterns
+- ✅ React Portals (Stranger Things)
+- ✅ Component Injection (Parasite)
+- ✅ Component Testing (Ex Machina)
+- ✅ Singleton Pattern (Moon)
+- ✅ Reverse Data Flow (Tenet)
 
-- 1984 → Immutable State Updates
-- Ocean's 11 → useReducer for Complex State
-- LOTR → Prop Drilling Problem
-- The Village → Scoped Context
-- Social Network → State Synchronization
-- Coherence → State Sync Across Instances
-- Bandersnatch → State Branching
-- Primer → State Time Travel
-- Butterfly Effect → State Purity
+### Lifecycle & Effects
+- ✅ Strict Mode & Cleanup (Fight Club)
+- ✅ Side Effects & Cleanup (Jurassic Park)
+- ✅ State Reset Patterns (Eternal Sunshine)
+- ✅ Component Reset Loops (Edge of Tomorrow, Source Code)
+- ✅ Lifecycle Debugging (Russian Doll)
+- ✅ Cleanup & Unmounting (Matrix Reloaded)
 
-**⚡ Performance & Optimization**
+### Async & Time Patterns
+- ✅ Async State & Race Conditions (Interstellar)
+- ✅ Circular Dependencies (12 Monkeys)
+- ✅ Optimistic UI Updates (Minority Report)
 
-- The Prestige → React.memo (x2 for cost analysis)
-- Clockwork Orange → Forced Re-renders
-- Shutter Island → Stale Closures
+---
 
-**🎯 Advanced Patterns**
+**📊 Coverage Statistics:**
+- 🎬 **48 Fiction Sources** (1818-2019)
+- 🎭 **15+ Genres** represented
+- 🌍 **International Cinema** included
+- ⚛️ **Every React Concept** covered
 
-- Stranger Things → React Portals
-- Parasite → Component Injection
-- Get Out → Higher-Order Components
-- Ex Machina → Component Testing
-- Moon → Singleton Pattern
-- Tenet → Reverse Data Flow
+## 🗂️ Architecture
 
-**♻️ Lifecycle & Effects**
-
-- Truman Show → Component Lifecycle
-- Jurassic Park → Side Effects & Cleanup
-- Eternal Sunshine → State Reset & Key Prop
-- Edge of Tomorrow → Component Reset Loop
-- Source Code → Remounting Loop
-- Russian Doll → Lifecycle Debugging
-- Matrix Reloaded → System Exit
-
-**🔄 Time & Async**
-
-- Back to the Future → Props Changes & Re-renders
-- Interstellar → Async State & Race Conditions
-- 12 Monkeys → Circular Dependencies
-- Minority Report → Optimistic Rendering
-
-**📊 Complete Coverage:**
-
-- 📽️ **48 fiction sources** from 1818 to 2019
-- 🎭 **15+ genres** - Sci-fi, horror, comedy, drama, thriller, fantasy
-- 🌍 **International** - American, Japanese, Korean, British cinema
-- 🎬 **Every React concept** - Hooks, patterns, state, performance, lifecycle
-
-Each module transforms abstract programming into memorable storytelling. From Frankenstein's uncontrolled creation to Neo's dependency arrays, every concept has its perfect cinematic metaphor.
-
-## 🏗️ Architecture
-
-This project follows a **Modular Monolith** architecture with a **centralized module registry** for easy management and troubleshooting.
+This project follows a **Modular Monolith** architecture with a **centralized module registry** for easy management.
 
 ### Core Principles
 
@@ -153,7 +424,7 @@ This project follows a **Modular Monolith** architecture with a **centralized mo
 5. **Thematic Consistency:** Each module has its own visual theme tied to its fiction source
 6. **Lazy Loading:** Modules load on-demand for optimal performance
 
-### 🔌 Module Switchboard System
+### 📌 Module Switchboard System
 
 The project uses a **centralized module registry** that acts like an electrical switchboard:
 
@@ -173,11 +444,10 @@ export const moduleRegistry = [
 ```
 
 **Benefits:**
-
 - ✅ **One-line toggle** - Enable/disable any module instantly
 - ✅ **Single source of truth** - Zero duplication across files
 - ✅ **Easy troubleshooting** - Quickly isolate problematic modules
-- ✅ **Clean architecture** - 80% less code in App.tsx and home page
+- ✅ **Clean architecture** - Minimal routing boilerplate
 - ✅ **Type-safe** - Full TypeScript support
 
 ### Directory Structure
@@ -189,13 +459,10 @@ cinematic-react-patterns/
 │   │   └── moduleRegistry.ts  # 🔌 SWITCHBOARD - All 48 modules
 │   ├── modules/
 │   │   ├── home/              # Landing page (module showcase)
-│   │   ├── frankenstein.../   # ✅ COMPLETED
-│   │   ├── fight-club.../     # ✅ COMPLETED
-│   │   ├── mean-girls.../     # ✅ COMPLETED
-│   │   ├── matrix.../         # 🚧 Ready for implementation
-│   │   ├── inception.../      # 🚧 Ready for implementation
-│   │   ├── memento.../        # 🚧 Ready for implementation
-│   │   └── [42+ more]/        # 🚧 All configured, claim one!
+│   │   ├── frankenstein.../   # ✅ Controlled Components
+│   │   ├── matrix.../         # ✅ useEffect Dependencies
+│   │   ├── inception.../      # ✅ Component Composition
+│   │   └── [45 more modules]/ # ✅ All implemented
 │   ├── App.tsx                # Router - auto-generates routes
 │   ├── main.tsx               # Entry point
 │   └── index.css              # Global styles
@@ -207,7 +474,7 @@ cinematic-react-patterns/
 
 ### Module Anatomy
 
-Each module should be **completely self-contained**:
+Each module is **completely self-contained**:
 
 ```
 src/modules/your-module/
@@ -216,75 +483,6 @@ src/modules/your-module/
 ├── utils/                 # Module-specific utilities (optional)
 └── README.md              # Module documentation (optional)
 ```
-
-### Adding a New Module
-
-With the switchboard system, adding modules is streamlined:
-
-#### 1. Create module directory and component
-
-```bash
-mkdir src/modules/your-concept-name
-```
-
-```tsx
-// src/modules/your-concept-name/index.tsx
-export default function YourModule() {
-  return (
-    <div className="min-h-screen">{/* Your fiction-themed React lesson */}</div>
-  );
-}
-```
-
-#### 2. Register in module registry (ONLY place needed!)
-
-```typescript
-// src/config/moduleRegistry.ts
-
-export const moduleRegistry: ModuleConfig[] = [
-  // ... existing modules ...
-
-  {
-    id: "your-concept-name",
-    path: "/your-concept-name",
-    title: "Your Film Title",
-    subtitle: "Context, Year",
-    concept: "React Concept You're Teaching",
-    icon: YourIcon, // from lucide-react
-    colorClass: "text-blue-500",
-    bgClass: "bg-blue-950/20 border-blue-500/30 hover:border-blue-500",
-    component: () => import("@modules/your-concept-name"),
-    wrapperProps: {
-      bgClass: "bg-slate-950",
-      textClass: "text-slate-300",
-      fontClass: "font-sans",
-    },
-    enabled: true, // 🔌 Set to false while developing if needed
-  },
-];
-```
-
-**That's it!** The module is now:
-
-- ✅ Automatically added to routing
-- ✅ Automatically displayed on home page
-- ✅ Lazy-loaded for performance
-- ✅ Toggleable via the `enabled` flag
-
-### Disabling a Module for Troubleshooting
-
-If a module is causing issues:
-
-```typescript
-// src/config/moduleRegistry.ts
-{
-  id: "problematic-module",
-  enabled: false, // 🔌 Module now disabled everywhere
-  // ...
-}
-```
-
-Restart dev server → Module hidden from home page and routes!
 
 ## 🛠️ Local Development
 
@@ -308,22 +506,7 @@ cd cinematic-react-patterns
 
 # Install dependencies
 pnpm install
-
-# Create environment file (only needed for modules using external APIs)
-cp .env.example .env
 ```
-
-### Environment Variables
-
-Create a `.env` file in the root directory (only required if using modules with external API integrations):
-
-```env
-VITE_GEMINI_API_KEY=your_gemini_api_key_here
-```
-
-_Note: The Gemini API is only used in the Fight Club module for the AI mentor feature._
-
-Get your Gemini API key from [Google AI Studio](https://makersuite.google.com/app/apikey).
 
 ### Running Locally
 
@@ -342,28 +525,6 @@ pnpm build
 
 # Preview production build locally
 pnpm preview
-```
-
-### Troubleshooting with the Switchboard
-
-If the app crashes or a module misbehaves:
-
-1. Open `src/config/moduleRegistry.ts`
-2. Set `enabled: false` for the suspicious module
-3. Restart dev server
-4. If crash resolved, you found the problem!
-5. Fix the module and set `enabled: true` again
-
-**Binary search approach** for unknown issues:
-
-```typescript
-// Disable half the modules
-enabled: false, // modules 1-24
-enabled: true,  // modules 25-48
-
-// Crash gone? Problem is in first half
-// Still crashes? Problem is in second half
-// Repeat until isolated
 ```
 
 ## 🚢 Deployment
@@ -399,33 +560,6 @@ The `firebase.json` configuration handles SPA routing:
 }
 ```
 
-## 📁 Project Structure
-
-```
-src/
-├── config/
-│   └── moduleRegistry.ts  # 🔌 Single source of truth for all modules
-├── modules/
-│   ├── home/              # Landing page (reads from registry)
-│   ├── frankenstein.../   # Module 1: Controlled/Uncontrolled Components
-│   ├── fight-club.../     # Module 2: Strict Mode & Cleanup
-│   ├── mean-girls.../     # Module 3: Context API & Prop Drilling
-│   └── [48+ modules]/     # All configured, ready for development
-├── App.tsx                # Router (generates routes from registry)
-├── main.tsx               # Application entry point
-└── index.css              # Global styles & animations
-```
-
-### Module Pattern
-
-Each module follows these principles:
-
-1. **Self-Contained:** All code lives within the module directory
-2. **Single Export:** Module exports one default component
-3. **Independent:** No imports from other modules
-4. **Themed:** Unique visual design tied to fiction source
-5. **Registry-Configured:** Metadata lives in moduleRegistry.ts
-
 ## 🎨 Design Philosophy
 
 ### Visual Themes
@@ -435,6 +569,9 @@ Each module has a unique aesthetic that reflects its fiction source:
 - **Frankenstein:** Gothic serif typography (Crimson Pro), dark slate with emerald accents
 - **Fight Club:** Industrial monospace (JetBrains Mono), pure black with red highlights
 - **Mean Girls:** Modern sans-serif (Inter), pink pastels with vibrant accents
+- **Matrix:** Digital green-on-black terminal aesthetic
+- **Inception:** Dream-like layered interfaces
+- **And 43 more unique themes...**
 
 ### Custom Animations
 
@@ -520,199 +657,17 @@ Configured in `tsconfig.json` and `vite.config.ts`:
 
 Import modules: `import YourModule from "@modules/your-module";`
 
-### Environment Handling
-
-Only modules using external APIs need environment variables. Core functionality works without them.
-
-## 🎯 Learning Outcomes
-
-By exploring our 48-module curriculum, developers will master the complete React ecosystem through unforgettable cinematic storytelling:
-
-### 🎓 Core Fundamentals (Completed)
-
-**Frankenstein - Controlled vs Uncontrolled Components**
-
-- Difference between controlled and uncontrolled components
-- When to use each pattern
-- State synchronization between React and DOM
-- Input validation strategies
-
-**Fight Club - Strict Mode & Effect Cleanup**
-
-- Why React Strict Mode double-mounts components
-- How to write proper cleanup functions
-- Managing side effects safely
-- AbortController for async operations
-
-**Mean Girls - Context API**
-
-- Problems with prop drilling
-- Context API implementation
-- Provider/Consumer pattern
-- Performance optimization with Context
-
-### 🚀 Advanced Topics (Ready to Implement)
-
-**State Management Mastery**
-
-- Immutable updates (1984)
-- Complex state with useReducer (Ocean's 11)
-- State synchronization (Social Network, Coherence)
-- State time travel debugging (Primer)
-- Optimistic rendering (Minority Report)
-
-**Performance Optimization**
-
-- React.memo strategies (Prestige)
-- useMemo cost-benefit analysis (Prestige cost analysis)
-- Preventing unnecessary re-renders (Groundhog Day)
-- Stale closure pitfalls (Shutter Island)
-
-**Component Architecture**
-
-- Deep composition patterns (Inception)
-- Component identity and keys (Blade Runner)
-- Higher-order components (Get Out)
-- Dynamic component rendering (Usual Suspects)
-- Portal rendering (Stranger Things)
-
-**Hooks Deep Dive**
-
-- useEffect dependency mastery (Matrix)
-- useState vs useRef (Memento)
-- Custom hooks abstraction (Her)
-- useCallback timing (Looper)
-- Effect cleanup lifecycle (Jurassic Park)
-
-**Advanced Patterns**
-
-- Singleton patterns (Moon)
-- Component testing strategies (Ex Machina)
-- Error boundaries and resilience
-- Circular dependency resolution (12 Monkeys)
-- Async state management (Interstellar)
-
-**Real-World Scenarios**
-
-- Prop changes causing cascading updates (Back to the Future)
-- Component lifecycle debugging (Russian Doll)
-- State reset strategies (Eternal Sunshine, Edge of Tomorrow)
-- Multiple component perspectives (Rashomon)
-- Reverse data flow (Tenet)
-
----
-
-With **48 modules covering 48 fiction sources**, this isn't just a React course—it's a comprehensive journey through modern React development, where every concept becomes a story you'll never forget. 🎬
-
 ## 🤝 Contributing
 
-We're actively seeking contributors to expand this platform! Each React concept deserves its own fiction-themed module.
+We welcome contributions to enhance existing modules or add new variations!
 
-### Contribution Guidelines
+### Ways to Contribute
 
-1. **Choose a React concept** not yet covered (check `moduleRegistry.ts` for placeholders)
-2. **Select a work of fiction** that serves as a good metaphor
-3. **Create a self-contained module** following the architecture above
-4. **Add your module to the registry** with `enabled: true`
-5. **Submit a PR** with your module
-
-### Module Requirements
-
-- ✅ **Isolated:** Lives entirely in `/src/modules/your-module/`
-- ✅ **Registry-configured:** Added to `moduleRegistry.ts` with complete metadata
-- ✅ **Educational:** Clearly teaches the React concept
-- ✅ **Themed:** Visual design reflects the fiction source
-- ✅ **Interactive:** Includes working demonstrations
-- ✅ **Documented:** Code comments explaining key patterns
-
-### Adding Your Module
-
-```typescript
-// 1. Create your module
-// src/modules/your-module/index.tsx
-
-export default function YourModule() {
-  // Your implementation
-}
-
-// 2. Add to registry
-// src/config/moduleRegistry.ts
-
-{
-  id: "your-module",
-  path: "/your-module",
-  title: "Your Fiction Title",
-  subtitle: "Context, Year",
-  concept: "React Concept",
-  icon: YourIcon,
-  colorClass: "text-color",
-  bgClass: "bg-color...",
-  component: () => import("@modules/your-module"),
-  wrapperProps: {
-    bgClass: "bg-slate-950",
-    textClass: "text-slate-300",
-    fontClass: "font-sans",
-  },
-  enabled: true,
-}
-
-// 3. Done! Module automatically appears in routing and home page
-```
-
-### Module Ideas (48 Configured - Claim Yours!)
-
-All 48 modules are **already configured** in `moduleRegistry.ts` with complete metadata! Browse the registry and claim one to implement:
-
-**🔥 High-Priority Core Concepts:**
-
-- ✅ The Matrix → useEffect Dependencies
-- ✅ Inception → Component Composition
-- ✅ Memento → useState vs useRef
-- ✅ Groundhog Day → Re-rendering & Pure Functions
-- ✅ Interstellar → Async State & Race Conditions
-
-**⚡ Performance & Optimization:**
-
-- ✅ The Prestige → React.memo
-- ✅ Arrival → useMemo for Expensive Calculations
-- ✅ Shutter Island → Stale Closures
-- ✅ Clockwork Orange → Forced Re-renders
-
-**🏗️ Component Patterns:**
-
-- ✅ Blade Runner → Component Identity & Keys
-- ✅ Westworld → Component vs Instance
-- ✅ Rashomon → Multiple Component Perspectives
-- ✅ Stranger Things → React Portals
-- ✅ Get Out → Higher-Order Components
-
-**📦 State Management:**
-
-- ✅ 1984 → Immutable State Updates
-- ✅ Ocean's 11 → useReducer for Complex State
-- ✅ LOTR → Prop Drilling Problem
-- ✅ Primer → State Time Travel
-- ✅ Minority Report → Optimistic Updates
-
-**And 28+ more!** Check `src/config/moduleRegistry.ts` for the complete list.
-
-**How to claim a module:**
-
-1. Browse `moduleRegistry.ts` to see all 48 modules
-2. Open an issue: "Claiming [Module Name]"
-3. Implement following the pattern in completed modules
-4. Set `enabled: true` in registry
-5. Submit your PR!
-
-Each module already has:
-
-- ✅ Fiction source identified
-- ✅ React concept mapped
-- ✅ Icon, colors, and styling configured
-- ✅ Route path defined
-- ✅ Metadata complete
-
-You just need to build the educational content! 🎬
+1. **Enhance Existing Modules:** Add interactive demos, improve explanations, polish UI
+2. **Fix Bugs:** Report or fix issues in any of the 48 modules
+3. **Add New Features:** Suggest and implement new teaching approaches
+4. **Improve Documentation:** Help make the learning experience clearer
+5. **Create Variations:** Same concept, different fiction source
 
 ### Development Workflow
 
@@ -721,30 +676,23 @@ You just need to build the educational content! 🎬
 git clone https://github.com/YOUR_USERNAME/cinematic-react-patterns.git
 
 # 2. Create branch
-git checkout -b module/your-concept-name
+git checkout -b feature/your-enhancement
 
 # 3. Install dependencies
 pnpm install
 
-# 4. Find your module slot in moduleRegistry.ts
-# Look for modules with enabled: false or create a new entry
+# 4. Make your changes
+# Work in the relevant module directory
 
-# 5. Create your module
-mkdir src/modules/your-concept-name
-# Build your module...
-
-# 6. Update registry
-# Set enabled: true and verify all metadata
-
-# 7. Test locally
+# 5. Test locally
 pnpm dev
 
-# 8. Commit and push
+# 6. Commit and push
 git add .
-git commit -m "feat: add [Your Concept] module based on [Fiction Work]"
-git push origin module/your-concept-name
+git commit -m "feat: enhance [Module Name] with [your changes]"
+git push origin feature/your-enhancement
 
-# 9. Open Pull Request
+# 7. Open Pull Request
 ```
 
 ### Code Standards
@@ -754,19 +702,9 @@ git push origin module/your-concept-name
 - **Formatting:** Follow existing code style
 - **Components:** Functional components with hooks
 - **Comments:** Explain complex logic and metaphor connections
-- **Registry:** Complete all metadata fields accurately
+- **Registry:** Maintain accurate metadata
 
-### What Makes a Great Module?
-
-1. **Clear Metaphor:** Fiction narrative naturally maps to React concept
-2. **Interactive Demo:** Users can experiment with the concept
-3. **Progressive Learning:** Concept builds from simple to complex
-4. **Visual Polish:** Design reflects the fiction's aesthetic
-5. **Code Examples:** Live, editable code demonstrations
-6. **Memorable:** The fiction helps cement the concept in memory
-7. **Complete Registry Entry:** All fields properly configured
-
-## 🔌 Module Management
+## 📌 Module Management
 
 ### Enabling/Disabling Modules
 
@@ -781,33 +719,13 @@ git push origin module/your-concept-name
 }
 ```
 
-### Module Statistics
-
-In development mode, the home page shows:
-
-```
-Total: 48  Enabled: 45  Disabled: 3
-```
-
-This helps you track which modules are currently active.
-
 ### Best Practices
 
-- ✅ Keep completed modules `enabled: true`
-- ✅ Set `enabled: false` while developing to avoid distractions
-- ✅ Disable problematic modules immediately for troubleshooting
-- ✅ Use comments to explain disabled modules
-- ✅ Re-enable modules once tested and working
+- ✅ Keep all production modules `enabled: true`
+- ✅ Set `enabled: false` only for maintenance or testing
+- ✅ Use comments to explain temporary disabling
 
-```typescript
-{
-  id: "my-module",
-  enabled: false, // 🚧 TODO: Fix stale closure bug
-  // ...
-}
-```
-
-## 📝 License
+## 📄 License
 
 MIT License - feel free to use this for educational purposes.
 
@@ -824,12 +742,14 @@ MIT License - feel free to use this for educational purposes.
 - **Issues:** [Open an issue](https://github.com/akbargherbal/cinematic-react-patterns/issues)
 - **Discussions:** [GitHub Discussions](https://github.com/akbargherbal/cinematic-react-patterns/discussions)
 
-For questions, bug reports, or module proposals, please use GitHub Issues or Discussions.
+For questions, bug reports, or suggestions, please use GitHub Issues or Discussions.
 
 ---
 
-**Remember:** The first rule of React development is you _do_ talk about React development. 🎬
+**The Achievement:** 48 React concepts. 48 unforgettable stories. One complete curriculum. From Frankenstein's uncontrolled components to Neo's dependency arrays—every concept has its perfect cinematic metaphor.
 
-**The Achievement:** 48 React concepts. 48 unforgettable stories. One comprehensive curriculum. From Frankenstein's uncontrolled components to Neo's dependency arrays—every concept has its perfect cinematic metaphor.
+**Your Turn:** Explore all 48 modules and master React through the stories you love. 🎬✨
 
-**Your Turn:** With 45 modules ready for implementation, the stage is set. Claim your favorite film and teach the world React. 🔌✨
+---
+
+*"The first rule of React development is you do talk about React development."* - Tyler Durden, probably

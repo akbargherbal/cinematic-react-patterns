@@ -145,8 +145,10 @@ The dream is over. The lesson remains. Welcome back to reality.`,
     <div className="min-h-screen bg-slate-950 font-sans text-slate-300">
       {/* Header */}
       <header className="sticky top-0 z-10 border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm">
-        <div className="mx-auto max-w-6xl px-4 py-6 md:px-8">
-          <div className="mb-2 flex items-center gap-3">
+        <div className="mx-auto max-w-6xl p-4 md:px-8">
+<div className="flex justify-between items-center px-8">
+
+            <div className="mb-2 flex items-center gap-3">
             <Layers className="h-8 w-8 text-blue-400" />
             <h1 className="text-3xl font-bold tracking-tight text-slate-100 md:text-4xl">
               Inception
@@ -155,6 +157,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
           <p className="text-lg text-slate-400">
             Component Composition & Children Props
           </p>
+</div>
         </div>
       </header>
 

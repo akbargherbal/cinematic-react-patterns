@@ -142,15 +142,20 @@ If the data is supplementary, if it needs to persist but shouldn't trigger re-re
     <div className="min-h-screen bg-slate-950 font-mono text-slate-300">
       {/* Header */}
       <header className="sticky top-0 z-10 border-b border-amber-500/30 bg-slate-950/80 backdrop-blur-sm">
-        <div className="mx-auto max-w-6xl px-4 py-6">
-          <h1 className="mb-2 text-3xl font-bold tracking-tight text-amber-500 md:text-4xl">
-            MEMENTO
-          </h1>
-          <p className="text-sm text-slate-400 md:text-base">
-            Leonard Shelby's Memory Systems
-          </p>
-          <div className="mt-3 inline-block rounded border border-amber-500/30 bg-amber-950/30 px-3 py-1 text-xs text-amber-400">
-            useState vs useRef
+        <div className="mx-auto max-w-6xl p-4">
+          <div className="flex justify-between px-12 items-center">
+            <div>
+              <h1 className="mb-2 text-3xl font-bold tracking-tight text-amber-500 md:text-4xl">
+                MEMENTO
+              </h1>
+
+              <div className="inline-block rounded border border-amber-500/30 bg-amber-950/30 px-3 py-1 text-xs text-amber-400">
+                useState vs useRef
+              </div>
+            </div>
+            <p className="text-sm text-slate-400 md:text-xl">
+              Leonard Shelby's Memory Systems
+            </p>
           </div>
         </div>
       </header>
@@ -167,7 +172,7 @@ If the data is supplementary, if it needs to persist but shouldn't trigger re-re
 
         {/* Chapter Content */}
         <article className="prose prose-invert prose-slate mb-12 max-w-none">
-          <div className="whitespace-pre-line text-sm leading-relaxed text-slate-300 md:text-base">
+          <div className="text-sm leading-relaxed whitespace-pre-line text-slate-300 md:text-base">
             {currentChapter.content}
           </div>
         </article>
@@ -465,7 +470,7 @@ const previousRender = useRef(null);
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 border-t border-amber-500/30 bg-slate-950/90 backdrop-blur-sm">
+      <footer className="fixed right-0 bottom-0 left-0 border-t border-amber-500/30 bg-slate-950/90 backdrop-blur-sm">
         <div className="mx-auto max-w-6xl px-4 py-4">
           <div className="flex items-center justify-between">
             <button
