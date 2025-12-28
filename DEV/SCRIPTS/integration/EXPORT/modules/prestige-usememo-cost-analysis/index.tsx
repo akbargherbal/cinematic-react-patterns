@@ -156,7 +156,7 @@ The boring solution that works is better than the spectacular solution that kill
   const optimalChoice = angierCost < bordenCost ? "angier" : "borden";
 
   useEffect(() => {
-    if (chapter === 2 &amp;&amp; !isAnimating) {
+    if (chapter === 2 && !isAnimating) {
       setIsAnimating(true);
       const timer = setTimeout(() => setIsAnimating(false), 2000);
       return () => clearTimeout(timer);
@@ -213,7 +213,7 @@ The boring solution that works is better than the spectacular solution that kill
               Activate the machine. Watch the magic of memoization.
             </p>
             <div className="relative bg-slate-800/50 p-8 rounded border border-slate-700">
-              {isAnimating &amp;&amp; (
+              {isAnimating && (
                 <div className="absolute inset-0 bg-amber-500/20 animate-pulse rounded"></div>
               )}
               <div className="flex items-center justify-between">
@@ -546,7 +546,7 @@ const result = data.filter(
                 The Prestige
               </h1>
               <p className="text-lg text-slate-400 mb-1">
-                Robert Angier &amp; Alfred Borden, Victorian London
+                Robert Angier & Alfred Borden, Victorian London
               </p>
               <p className="text-sm text-amber-500/70">
                 Performance Optimization Trade-offs • useMemo Cost Analysis

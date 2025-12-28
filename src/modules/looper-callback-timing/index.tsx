@@ -89,9 +89,9 @@ The solution wasn't to let the callback run. It was to cancel it. To clean up. T
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowLeft" &amp;&amp; chapter > 0) {
+      if (e.key === "ArrowLeft" && chapter > 0) {
         setChapter(c => c - 1);
-      } else if (e.key === "ArrowRight" &amp;&amp; chapter < chapters.length - 1) {
+      } else if (e.key === "ArrowRight" && chapter < chapters.length - 1) {
         setChapter(c => c + 1);
       }
     };
@@ -274,7 +274,7 @@ function TimelineDemo() {
         </div>
 
         {/* Timeline Visualization */}
-        {isScheduled &amp;&amp; (
+        {isScheduled && (
           <div className="space-y-4">
             <div className="flex items-center justify-between text-sm">
               <span className="text-slate-400">Scheduled</span>
@@ -300,12 +300,12 @@ function TimelineDemo() {
           </div>
         )}
 
-        {isExecuting &amp;&amp; (
+        {isExecuting && (
           <div className="bg-slate-900 border border-amber-500/50 rounded p-4">
             <p className="text-amber-400 font-mono text-sm">
               Console: Executing hit on: {capturedValue}
             </p>
-            {capturedValue !== currentValue &amp;&amp; (
+            {capturedValue !== currentValue && (
               <p className="text-red-400 text-sm mt-2 flex items-center gap-2">
                 <AlertTriangle className="w-4 h-4" />
                 Warning: Callback executed with stale data! Current target is "{currentValue}"
@@ -363,7 +363,7 @@ function StaleClosureDemo() {
             <select
               value={mission}
               onChange={(e) => setMission(e.target.value)}
-              disabled={isScheduled &amp;&amp; !hasExecuted}
+              disabled={isScheduled && !hasExecuted}
               className="w-full px-4 py-2 bg-slate-900 border border-slate-700 rounded text-slate-300 disabled:opacity-50"
             >
               <option value="close loop">Close Loop (retire peacefully)</option>
@@ -374,13 +374,13 @@ function StaleClosureDemo() {
 
           <button
             onClick={scheduleCallback}
-            disabled={isScheduled &amp;&amp; !hasExecuted}
+            disabled={isScheduled && !hasExecuted}
             className="px-6 py-2 bg-amber-600 text-white rounded hover:bg-amber-700 disabled:opacity-50 disabled:cursor-not-allowed"
           >
-            {isScheduled &amp;&amp; !hasExecuted ? "Callback Scheduled..." : "Schedule Callback"}
+            {isScheduled && !hasExecuted ? "Callback Scheduled..." : "Schedule Callback"}
           </button>
 
-          {isScheduled &amp;&amp; (
+          {isScheduled && (
             <div className="space-y-4">
               <div className="grid grid-cols-2 gap-4">
                 <div className="bg-slate-900 rounded p-4 border-l-4 border-amber-500">
@@ -393,12 +393,12 @@ function StaleClosureDemo() {
                 </div>
               </div>
 
-              {hasExecuted &amp;&amp; (
+              {hasExecuted && (
                 <div className={`rounded p-4 ${scheduledMission !== mission ? 'bg-red-950/50 border border-red-500/50' : 'bg-emerald-950/50 border border-emerald-500/50'}`}>
                   <p className={`font-mono text-sm ${scheduledMission !== mission ? 'text-red-400' : 'text-emerald-400'}`}>
                     Callback executed: {scheduledMission}
                   </p>
-                  {scheduledMission !== mission &amp;&amp; (
+                  {scheduledMission !== mission && (
                     <p className="text-red-400 text-sm mt-2 flex items-center gap-2">
                       <XCircle className="w-4 h-4" />
                       Context mismatch! Old Joe is executing the wrong mission.
@@ -594,7 +594,7 @@ function CleanupDemo() {
               Unmount Component
             </button>
 
-            {withoutCleanup.executed &amp;&amp; !withoutCleanup.mounted &amp;&amp; (
+            {withoutCleanup.executed && !withoutCleanup.mounted && (
               <div className="bg-red-900/50 border border-red-500 rounded p-3 text-sm">
                 <p className="text-red-400 flex items-center gap-2">
                   <AlertTriangle className="w-4 h-4" />
@@ -650,7 +650,7 @@ function CleanupDemo() {
               Unmount Component
             </button>
 
-            {!withCleanup.mounted &amp;&amp; withCleanup.scheduled &amp;&amp; (
+            {!withCleanup.mounted && withCleanup.scheduled && (
               <div className="bg-emerald-900/50 border border-emerald-500 rounded p-3 text-sm">
                 <p className="text-emerald-400 flex items-center gap-2">
                   <CheckCircle className="w-4 h-4" />

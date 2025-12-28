@@ -147,7 +147,7 @@ Before rendering a component, ask: Should this component exist right now? Is the
         </article>
 
         {/* Interactive Demonstrations */}
-        {chapter === 0 &amp;&amp; (
+        {chapter === 0 && (
           <section className="space-y-6">
             <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6">
               <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
@@ -185,7 +185,7 @@ Before rendering a component, ask: Should this component exist right now? Is the
                   </div>
                   <div className="bg-slate-950 border border-emerald-500/30 rounded p-4 font-mono text-sm">
                     <div className="text-slate-500">{'// Only renders when true'}</div>
-                    <div className="text-emerald-400">{'isAlive &amp;&amp; <MalcolmTherapist />'}</div>
+                    <div className="text-emerald-400">{'isAlive && <MalcolmTherapist />'}</div>
                   </div>
                   {isAlive ? (
                     <div className="border border-emerald-500 rounded p-4 bg-emerald-950/20">
@@ -225,7 +225,7 @@ Before rendering a component, ask: Should this component exist right now? Is the
           </section>
         )}
 
-        {chapter === 1 &amp;&amp; (
+        {chapter === 1 && (
           <section className="space-y-6">
             <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6">
               <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
@@ -265,7 +265,7 @@ Before rendering a component, ask: Should this component exist right now? Is the
           </section>
         )}
 
-        {chapter === 2 &amp;&amp; (
+        {chapter === 2 && (
           <section className="space-y-6">
             <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6">
               <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
@@ -324,12 +324,12 @@ Before rendering a component, ask: Should this component exist right now? Is the
           </section>
         )}
 
-        {chapter === 3 &amp;&amp; (
+        {chapter === 3 && (
           <section className="space-y-6">
             <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6">
               <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
                 <Eye className="w-6 h-6 text-amber-500" />
-                The Revelation: Before &amp; After
+                The Revelation: Before & After
               </h3>
               
               <div className="grid md:grid-cols-2 gap-6">
@@ -364,7 +364,7 @@ Before rendering a component, ask: Should this component exist right now? Is the
                   <div className="bg-slate-950 border border-emerald-500/30 rounded p-4 font-mono text-xs">
                     <div className="text-slate-500">{'const isAlive = false;'}</div>
                     <div className="text-emerald-400 mt-2">{'// Properly conditional'}</div>
-                    <div className="text-emerald-400">{'isAlive &amp;&amp; <MalcolmTherapist />'}</div>
+                    <div className="text-emerald-400">{'isAlive && <MalcolmTherapist />'}</div>
                   </div>
                   <div className="border border-emerald-500/50 rounded p-3 bg-emerald-950/20">
                     <p className="text-xs text-slate-300 mb-2">Results:</p>
@@ -387,7 +387,7 @@ Before rendering a component, ask: Should this component exist right now? Is the
           </section>
         )}
 
-        {chapter === 4 &amp;&amp; (
+        {chapter === 4 && (
           <section className="space-y-6">
             <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6">
               <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
@@ -403,7 +403,7 @@ Before rendering a component, ask: Should this component exist right now? Is the
                     <span className="text-xs text-slate-500">Recommended</span>
                   </div>
                   <div className="bg-slate-950 rounded p-3 font-mono text-xs mb-2">
-                    <div className="text-emerald-400">{'condition &amp;&amp; <Component />'}</div>
+                    <div className="text-emerald-400">{'condition && <Component />'}</div>
                   </div>
                   <p className="text-xs text-slate-400">
                     Component only exists when condition is true. Removed from tree when false. Effects don't run. Memory freed.

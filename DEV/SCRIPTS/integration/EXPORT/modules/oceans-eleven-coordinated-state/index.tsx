@@ -179,9 +179,9 @@ function ChaosDemo() {
 
   // Check for invalid states
   const hasInvalidState =
-    (vault === "UNLOCKED" &amp;&amp; security === "ACTIVE") ||
-    (briefcase === "WITH_LINUS" &amp;&amp; vault === "LOCKED") ||
-    (yenPosition === "INSIDE_VAULT" &amp;&amp; vault === "LOCKED");
+    (vault === "UNLOCKED" && security === "ACTIVE") ||
+    (briefcase === "WITH_LINUS" && vault === "LOCKED") ||
+    (yenPosition === "INSIDE_VAULT" && vault === "LOCKED");
 
   const chaosState: HeistState = {
     vault,
@@ -211,7 +211,7 @@ function ChaosDemo() {
 
       <HeistStateDisplay state={chaosState} isValid={!hasInvalidState} />
 
-      {hasInvalidState &amp;&amp; (
+      {hasInvalidState && (
         <div className="bg-red-500/10 border border-red-500/30 rounded-lg p-3 flex items-start gap-2">
           <AlertTriangle className="w-5 h-5 text-red-400 flex-shrink-0 mt-0.5" />
           <div className="text-sm text-red-300">
@@ -277,7 +277,7 @@ function CoordinatedDemo() {
 
       <HeistStateDisplay state={state} isValid={true} />
 
-      {actionResult &amp;&amp; (
+      {actionResult && (
         <div
           className={`${
             actionResult === "success" ? "bg-emerald-500/10 border-emerald-500/30" : "bg-amber-500/10 border-amber-500/30"
@@ -302,7 +302,7 @@ function CoordinatedDemo() {
         </div>
       )}
 
-      {isComplete &amp;&amp; (
+      {isComplete && (
         <div className="bg-emerald-500/10 border border-emerald-500/30 rounded-lg p-4 flex items-center gap-3">
           <CheckCircle className="w-6 h-6 text-emerald-400" />
           <div>
@@ -529,7 +529,7 @@ The heist worked because we understood: complexity requires coordination. When y
           </div>
 
           {/* Interactive Demo */}
-          {currentChapter.demo &amp;&amp; (
+          {currentChapter.demo && (
             <div className="lg:sticky lg:top-24 h-fit">
               <div className="bg-slate-900/50 border border-amber-500/20 rounded-lg p-6">{currentChapter.demo}</div>
             </div>
@@ -537,7 +537,7 @@ The heist worked because we understood: complexity requires coordination. When y
         </div>
 
         {/* Key Takeaway */}
-        {chapter === 4 &amp;&amp; (
+        {chapter === 4 && (
           <div className="mt-12 bg-amber-500/5 border border-amber-500/30 rounded-lg p-6">
             <div className="flex items-start gap-4">
               <CheckCircle className="w-6 h-6 text-amber-500 flex-shrink-0 mt-1" />

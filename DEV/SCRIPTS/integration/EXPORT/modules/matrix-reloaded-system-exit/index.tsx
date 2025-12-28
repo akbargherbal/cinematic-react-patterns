@@ -70,7 +70,7 @@ export default function MatrixReloadedSystemExit() {
 
   // Smith replication effect
   useEffect(() => {
-    if (smiths.length > 0 &amp;&amp; !cleanupEnabled) {
+    if (smiths.length > 0 && !cleanupEnabled) {
       const timer = setTimeout(() => {
         if (smiths.length < 50) {
           setSmiths(prev => [...prev, { id: Date.now(), timestamp: Date.now() }]);
@@ -126,7 +126,7 @@ export default function MatrixReloadedSystemExit() {
             <Zap className="w-8 h-8 text-green-500" />
             <div>
               <h1 className="text-3xl md:text-4xl font-bold text-white">The Matrix Reloaded</h1>
-              <p className="text-sm md:text-base text-green-400 mt-1">Neo's Choice, 2003 • useEffect Cleanup &amp; Component Lifecycle</p>
+              <p className="text-sm md:text-base text-green-400 mt-1">Neo's Choice, 2003 • useEffect Cleanup & Component Lifecycle</p>
             </div>
           </div>
         </div>
@@ -144,7 +144,7 @@ export default function MatrixReloadedSystemExit() {
           </div>
 
           {/* Chapter-specific content */}
-          {chapter === 0 &amp;&amp; (
+          {chapter === 0 && (
             <div className="space-y-8">
               <div className="prose prose-invert max-w-none">
                 <p className="text-slate-300 leading-relaxed mb-4">
@@ -168,13 +168,13 @@ export default function MatrixReloadedSystemExit() {
                     <code className="text-green-400 text-sm">
                       <span className="text-slate-500">// Every component follows this cycle</span><br/>
                       <span className="text-blue-400">useEffect</span>(() =&gt; &#123;<br/>
-                      &amp;nbsp;&amp;nbsp;<span className="text-slate-500">// Mount: Component initializes</span><br/>
-                      &amp;nbsp;&amp;nbsp;<span className="text-purple-400">const</span> mission = <span className="text-yellow-400">initializeTheOne</span>();<br/>
+                      &nbsp;&nbsp;<span className="text-slate-500">// Mount: Component initializes</span><br/>
+                      &nbsp;&nbsp;<span className="text-purple-400">const</span> mission = <span className="text-yellow-400">initializeTheOne</span>();<br/>
                       <br/>
-                      &amp;nbsp;&amp;nbsp;<span className="text-slate-500">// Unmount: Component must clean up</span><br/>
-                      &amp;nbsp;&amp;nbsp;<span className="text-pink-400">return</span> () =&gt; &#123;<br/>
-                      &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;mission.<span className="text-yellow-400">cleanup</span>();<br/>
-                      &amp;nbsp;&amp;nbsp;&#125;;<br/>
+                      &nbsp;&nbsp;<span className="text-slate-500">// Unmount: Component must clean up</span><br/>
+                      &nbsp;&nbsp;<span className="text-pink-400">return</span> () =&gt; &#123;<br/>
+                      &nbsp;&nbsp;&nbsp;&nbsp;mission.<span className="text-yellow-400">cleanup</span>();<br/>
+                      &nbsp;&nbsp;&#125;;<br/>
                       &#125;, []);
                     </code>
                   </div>
@@ -186,7 +186,7 @@ export default function MatrixReloadedSystemExit() {
             </div>
           )}
 
-          {chapter === 1 &amp;&amp; (
+          {chapter === 1 && (
             <div className="space-y-8">
               <div className="prose prose-invert max-w-none">
                 <p className="text-slate-300 leading-relaxed mb-4">
@@ -214,11 +214,11 @@ export default function MatrixReloadedSystemExit() {
                     <div className="bg-black/50 p-3 rounded mb-4 text-xs">
                       <code className="text-green-400">
                         <span className="text-blue-400">useEffect</span>(() =&gt; &#123;<br/>
-                        &amp;nbsp;&amp;nbsp;<span className="text-purple-400">const</span> listener = ...;<br/>
-                        &amp;nbsp;&amp;nbsp;<span className="text-pink-400">return</span> () =&gt; &#123;<br/>
-                        &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span className="text-slate-500">// Cleanup!</span><br/>
-                        &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;remove(listener);<br/>
-                        &amp;nbsp;&amp;nbsp;&#125;;<br/>
+                        &nbsp;&nbsp;<span className="text-purple-400">const</span> listener = ...;<br/>
+                        &nbsp;&nbsp;<span className="text-pink-400">return</span> () =&gt; &#123;<br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-slate-500">// Cleanup!</span><br/>
+                        &nbsp;&nbsp;&nbsp;&nbsp;remove(listener);<br/>
+                        &nbsp;&nbsp;&#125;;<br/>
                         &#125;);
                       </code>
                     </div>
@@ -253,9 +253,9 @@ export default function MatrixReloadedSystemExit() {
                     <div className="bg-black/50 p-3 rounded mb-4 text-xs">
                       <code className="text-red-400">
                         <span className="text-blue-400">useEffect</span>(() =&gt; &#123;<br/>
-                        &amp;nbsp;&amp;nbsp;<span className="text-purple-400">const</span> listener = ...;<br/>
-                        &amp;nbsp;&amp;nbsp;<span className="text-slate-500">// No cleanup!</span><br/>
-                        &amp;nbsp;&amp;nbsp;<span className="text-slate-500">// Memory leak</span><br/>
+                        &nbsp;&nbsp;<span className="text-purple-400">const</span> listener = ...;<br/>
+                        &nbsp;&nbsp;<span className="text-slate-500">// No cleanup!</span><br/>
+                        &nbsp;&nbsp;<span className="text-slate-500">// Memory leak</span><br/>
                         &#125;);
                       </code>
                     </div>
@@ -290,7 +290,7 @@ export default function MatrixReloadedSystemExit() {
             </div>
           )}
 
-          {chapter === 2 &amp;&amp; (
+          {chapter === 2 && (
             <div className="space-y-8">
               <div className="prose prose-invert max-w-none">
                 <p className="text-slate-300 leading-relaxed mb-4">
@@ -348,7 +348,7 @@ export default function MatrixReloadedSystemExit() {
                         </div>
                       ))}
                     </div>
-                    {smiths.length === 0 &amp;&amp; (
+                    {smiths.length === 0 && (
                       <div className="flex items-center justify-center h-full text-slate-500">
                         Click "Mount Without Cleanup" to see Smith replicate
                       </div>
@@ -359,10 +359,10 @@ export default function MatrixReloadedSystemExit() {
                 <div className="bg-black/50 p-4 rounded mb-4 text-xs">
                   <code className="text-red-400">
                     <span className="text-blue-400">useEffect</span>(() =&gt; &#123;<br/>
-                    &amp;nbsp;&amp;nbsp;<span className="text-purple-400">const</span> smithEffect = <span className="text-yellow-400">createSmithCopy</span>();<br/>
-                    &amp;nbsp;&amp;nbsp;<span className="text-slate-500">// Each Smith creates more Smiths</span><br/>
-                    &amp;nbsp;&amp;nbsp;<span className="text-slate-500">// No cleanup, so they all persist</span><br/>
-                    &amp;nbsp;&amp;nbsp;smithEffect.<span className="text-yellow-400">replicate</span>();<br/>
+                    &nbsp;&nbsp;<span className="text-purple-400">const</span> smithEffect = <span className="text-yellow-400">createSmithCopy</span>();<br/>
+                    &nbsp;&nbsp;<span className="text-slate-500">// Each Smith creates more Smiths</span><br/>
+                    &nbsp;&nbsp;<span className="text-slate-500">// No cleanup, so they all persist</span><br/>
+                    &nbsp;&nbsp;smithEffect.<span className="text-yellow-400">replicate</span>();<br/>
                     &#125;, []);
                   </code>
                 </div>
@@ -376,7 +376,7 @@ export default function MatrixReloadedSystemExit() {
             </div>
           )}
 
-          {chapter === 3 &amp;&amp; (
+          {chapter === 3 && (
             <div className="space-y-8">
               <div className="prose prose-invert max-w-none">
                 <p className="text-slate-300 leading-relaxed mb-4">
@@ -397,10 +397,10 @@ export default function MatrixReloadedSystemExit() {
                       <div className="bg-black/50 p-3 rounded text-xs">
                         <code className="text-green-400">
                           <span className="text-blue-400">useEffect</span>(() =&gt; &#123;<br/>
-                          &amp;nbsp;&amp;nbsp;<span className="text-purple-400">const</span> effect = ...;<br/>
-                          &amp;nbsp;&amp;nbsp;<span className="text-pink-400">return</span> () =&gt; &#123;<br/>
-                          &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;effect.<span className="text-yellow-400">cleanup</span>();<br/>
-                          &amp;nbsp;&amp;nbsp;&#125;;<br/>
+                          &nbsp;&nbsp;<span className="text-purple-400">const</span> effect = ...;<br/>
+                          &nbsp;&nbsp;<span className="text-pink-400">return</span> () =&gt; &#123;<br/>
+                          &nbsp;&nbsp;&nbsp;&nbsp;effect.<span className="text-yellow-400">cleanup</span>();<br/>
+                          &nbsp;&nbsp;&#125;;<br/>
                           &#125;);
                         </code>
                       </div>
@@ -412,8 +412,8 @@ export default function MatrixReloadedSystemExit() {
                       <div className="bg-black/50 p-3 rounded text-xs">
                         <code className="text-red-400">
                           <span className="text-blue-400">useEffect</span>(() =&gt; &#123;<br/>
-                          &amp;nbsp;&amp;nbsp;<span className="text-purple-400">const</span> effect = ...;<br/>
-                          &amp;nbsp;&amp;nbsp;<span className="text-slate-500">// No cleanup</span><br/>
+                          &nbsp;&nbsp;<span className="text-purple-400">const</span> effect = ...;<br/>
+                          &nbsp;&nbsp;<span className="text-slate-500">// No cleanup</span><br/>
                           &#125;);<br/>
                           <br/>
                           <span className="text-slate-500">// Later: forced cleanup</span><br/>
@@ -424,7 +424,7 @@ export default function MatrixReloadedSystemExit() {
                     </div>
                   </div>
 
-                  {leftDoorListeners > 0 &amp;&amp; (
+                  {leftDoorListeners > 0 && (
                     <div className="bg-red-950/20 border border-red-500/30 rounded p-4">
                       <div className="flex items-center justify-between mb-4">
                         <div>
@@ -454,7 +454,7 @@ export default function MatrixReloadedSystemExit() {
             </div>
           )}
 
-          {chapter === 4 &amp;&amp; (
+          {chapter === 4 && (
             <div className="space-y-8">
               <div className="prose prose-invert max-w-none">
                 <p className="text-slate-300 leading-relaxed mb-4">
@@ -543,15 +543,15 @@ export default function MatrixReloadedSystemExit() {
                   <div className="bg-black/50 p-3 rounded text-xs">
                     <code className="text-green-400">
                       <span className="text-blue-400">useEffect</span>(() =&gt; &#123;<br/>
-                      &amp;nbsp;&amp;nbsp;<span className="text-purple-400">const</span> subscription = api.<span className="text-yellow-400">subscribe</span>();<br/>
-                      &amp;nbsp;&amp;nbsp;<span className="text-purple-400">const</span> timer = <span className="text-yellow-400">setInterval</span>(update, 1000);<br/>
-                      &amp;nbsp;&amp;nbsp;window.<span className="text-yellow-400">addEventListener</span>(<span className="text-orange-400">'resize'</span>, handler);<br/>
+                      &nbsp;&nbsp;<span className="text-purple-400">const</span> subscription = api.<span className="text-yellow-400">subscribe</span>();<br/>
+                      &nbsp;&nbsp;<span className="text-purple-400">const</span> timer = <span className="text-yellow-400">setInterval</span>(update, 1000);<br/>
+                      &nbsp;&nbsp;window.<span className="text-yellow-400">addEventListener</span>(<span className="text-orange-400">'resize'</span>, handler);<br/>
                       <br/>
-                      &amp;nbsp;&amp;nbsp;<span className="text-pink-400">return</span> () =&gt; &#123;<br/>
-                      &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;subscription.<span className="text-yellow-400">unsubscribe</span>();<br/>
-                      &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;<span className="text-yellow-400">clearInterval</span>(timer);<br/>
-                      &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;window.<span className="text-yellow-400">removeEventListener</span>(<span className="text-orange-400">'resize'</span>, handler);<br/>
-                      &amp;nbsp;&amp;nbsp;&#125;;<br/>
+                      &nbsp;&nbsp;<span className="text-pink-400">return</span> () =&gt; &#123;<br/>
+                      &nbsp;&nbsp;&nbsp;&nbsp;subscription.<span className="text-yellow-400">unsubscribe</span>();<br/>
+                      &nbsp;&nbsp;&nbsp;&nbsp;<span className="text-yellow-400">clearInterval</span>(timer);<br/>
+                      &nbsp;&nbsp;&nbsp;&nbsp;window.<span className="text-yellow-400">removeEventListener</span>(<span className="text-orange-400">'resize'</span>, handler);<br/>
+                      &nbsp;&nbsp;&#125;;<br/>
                       &#125;, []);
                     </code>
                   </div>

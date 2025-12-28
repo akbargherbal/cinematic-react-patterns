@@ -336,9 +336,9 @@ The prestige isn't in creating something new every time. It's in knowing when th
                   <div className="text-xs font-mono text-red-300">
                     function Angier(props) {"{"}
                     <br />
-                    &amp;nbsp;&amp;nbsp;// Expensive operation
+                    &nbsp;&nbsp;// Expensive operation
                     <br />
-                    &amp;nbsp;&amp;nbsp;return &lt;div&gt;...&lt;/div&gt;;
+                    &nbsp;&nbsp;return &lt;div&gt;...&lt;/div&gt;;
                     <br />
                     {"}"}
                   </div>
@@ -361,9 +361,9 @@ The prestige isn't in creating something new every time. It's in knowing when th
                   <div className="text-xs font-mono text-blue-300">
                     const Borden = memo((props) =&gt; {"{"}
                     <br />
-                    &amp;nbsp;&amp;nbsp;// Expensive operation
+                    &nbsp;&nbsp;// Expensive operation
                     <br />
-                    &amp;nbsp;&amp;nbsp;return &lt;div&gt;...&lt;/div&gt;;
+                    &nbsp;&nbsp;return &lt;div&gt;...&lt;/div&gt;;
                     <br />
                     {"}"});
                   </div>
@@ -427,11 +427,11 @@ The prestige isn't in creating something new every time. It's in knowing when th
                       <span className="text-blue-400">const</span> Component ={" "}
                       <span className="text-blue-400">memo</span>((props) =&gt; {"{"}
                       <br />
-                      &amp;nbsp;&amp;nbsp;<span className="text-slate-500">
+                      &nbsp;&nbsp;<span className="text-slate-500">
                         // Only re-renders when props change
                       </span>
                       <br />
-                      &amp;nbsp;&amp;nbsp;<span className="text-blue-400">return</span>{" "}
+                      &nbsp;&nbsp;<span className="text-blue-400">return</span>{" "}
                       &lt;div&gt;...&lt;/div&gt;;
                       <br />
                       {"}"});
@@ -440,11 +440,11 @@ The prestige isn't in creating something new every time. It's in knowing when th
                     <>
                       <span className="text-red-400">function</span> Component(props) {"{"}
                       <br />
-                      &amp;nbsp;&amp;nbsp;<span className="text-slate-500">
+                      &nbsp;&nbsp;<span className="text-slate-500">
                         // Re-renders on every parent update
                       </span>
                       <br />
-                      &amp;nbsp;&amp;nbsp;<span className="text-red-400">return</span>{" "}
+                      &nbsp;&nbsp;<span className="text-red-400">return</span>{" "}
                       &lt;div&gt;...&lt;/div&gt;;
                       <br />
                       {"}"}
@@ -557,7 +557,7 @@ The prestige isn't in creating something new every time. It's in knowing when th
             Robert Angier, Victorian London, 1899
           </p>
           <p className="text-sm md:text-base text-blue-400 ml-12 md:ml-14 mt-1">
-            React.memo &amp; Performance Optimization
+            React.memo & Performance Optimization
           </p>
         </div>
       </header>

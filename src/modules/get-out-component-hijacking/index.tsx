@@ -80,7 +80,7 @@ const HijackedComponent = forwardRef<HijackedComponentRef, HijackedComponentProp
             <span className="text-slate-300 font-mono text-sm block">
               {isActive ? "Active (via ref)" : "Inactive (via ref)"}
             </span>
-            {isHijacked &amp;&amp; (
+            {isHijacked && (
               <span className="text-xs text-red-400 mt-2 block">
                 Internal state: {internalState ? "true" : "false"} (ignored)
               </span>
@@ -479,7 +479,7 @@ The lesson is clear: Use refs when you need them. But never let them become your
           </div>
           <p className="text-lg text-slate-400">Chris Washington, The Armitage Estate, 2017</p>
           <p className="text-sm text-red-400 mt-1">
-            Ref Forwarding &amp; Imperatively Controlling Children
+            Ref Forwarding & Imperatively Controlling Children
           </p>
         </div>
       </header>
@@ -506,7 +506,7 @@ The lesson is clear: Use refs when you need them. But never let them become your
         </div>
 
         {/* Interactive Demo */}
-        {currentChapter.demo &amp;&amp; (
+        {currentChapter.demo && (
           <div className="mt-8">
             {currentChapter.demo()}
           </div>

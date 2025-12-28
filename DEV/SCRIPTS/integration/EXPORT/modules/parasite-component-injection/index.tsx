@@ -107,7 +107,7 @@ Component composition through children props is one of React's most powerful pat
             <Users className="w-8 h-8 text-emerald-500" />
             <h1 className="text-4xl font-bold text-white">Parasite</h1>
           </div>
-          <p className="text-lg text-slate-400">Component Injection &amp; Children Props</p>
+          <p className="text-lg text-slate-400">Component Injection & Children Props</p>
           <p className="text-sm text-emerald-500 mt-1">The Kim Family • 2019</p>
         </div>
       </header>
@@ -140,7 +140,7 @@ Component composition through children props is one of React's most powerful pat
                 </h3>
 
                 {/* Chapter 0: Basic Composition */}
-                {chapter === 0 &amp;&amp; (
+                {chapter === 0 && (
                   <div className="space-y-4">
                     <div className="text-sm text-slate-400 mb-4">
                       Click to inject Ki-woo into the Park household component tree:
@@ -151,7 +151,7 @@ Component composition through children props is one of React's most powerful pat
                         {'<ParkHousehold>'}
                       </div>
                       
-                      {injected &amp;&amp; (
+                      {injected && (
                         <div className="ml-4 font-mono text-xs text-emerald-400 animate-fade-in">
                           {'  <EnglishTutor'}
                           <br />
@@ -175,7 +175,7 @@ Component composition through children props is one of React's most powerful pat
                       {injected ? 'Remove Ki-woo' : 'Inject Ki-woo'}
                     </button>
 
-                    {injected &amp;&amp; (
+                    {injected && (
                       <div className="text-xs text-emerald-400 animate-fade-in">
                         ✓ Component successfully mounted as child
                       </div>
@@ -184,7 +184,7 @@ Component composition through children props is one of React's most powerful pat
                 )}
 
                 {/* Chapter 1: Cascading Injection */}
-                {chapter === 1 &amp;&amp; (
+                {chapter === 1 && (
                   <div className="space-y-4">
                     <div className="text-sm text-slate-400 mb-4">
                       Watch the component tree grow as each Kim family member is injected:
@@ -193,25 +193,25 @@ Component composition through children props is one of React's most powerful pat
                     <div className="bg-slate-900/50 border border-slate-700 rounded p-4 font-mono text-xs">
                       <div className="text-slate-400">{'<ParkHousehold>'}</div>
                       
-                      {injectedMembers.includes('Ki-woo') &amp;&amp; (
+                      {injectedMembers.includes('Ki-woo') && (
                         <div className="ml-4 text-emerald-400 animate-fade-in">
                           {'<EnglishTutor name="Ki-woo" />'}
                         </div>
                       )}
                       
-                      {injectedMembers.includes('Ki-jung') &amp;&amp; (
+                      {injectedMembers.includes('Ki-jung') && (
                         <div className="ml-4 text-emerald-400 animate-fade-in">
                           {'<ArtTherapist name="Ki-jung" />'}
                         </div>
                       )}
                       
-                      {injectedMembers.includes('Ki-taek') &amp;&amp; (
+                      {injectedMembers.includes('Ki-taek') && (
                         <div className="ml-4 text-emerald-400 animate-fade-in">
                           {'<Driver name="Ki-taek" />'}
                         </div>
                       )}
                       
-                      {injectedMembers.includes('Chung-sook') &amp;&amp; (
+                      {injectedMembers.includes('Chung-sook') && (
                         <div className="ml-4 text-emerald-400 animate-fade-in">
                           {'<Housekeeper name="Chung-sook" />'}
                         </div>
@@ -240,7 +240,7 @@ Component composition through children props is one of React's most powerful pat
                 )}
 
                 {/* Chapter 2: Memory Leak */}
-                {chapter === 2 &amp;&amp; (
+                {chapter === 2 && (
                   <div className="space-y-4">
                     <div className="text-sm text-slate-400 mb-4">
                       Toggle cleanup behavior to see memory impact:
@@ -293,7 +293,7 @@ Component composition through children props is one of React's most powerful pat
                         <div className="text-slate-400">{'}, []);'}</div>
                       </div>
 
-                      {!cleanupEnabled &amp;&amp; (
+                      {!cleanupEnabled && (
                         <div className="flex items-start gap-2 text-xs text-red-400 animate-fade-in">
                           <AlertTriangle className="w-4 h-4 flex-shrink-0 mt-0.5" />
                           <span>Memory leak detected: Component unmounted but side effects persist</span>
@@ -304,7 +304,7 @@ Component composition through children props is one of React's most powerful pat
                 )}
 
                 {/* Chapter 3: Collision */}
-                {chapter === 3 &amp;&amp; (
+                {chapter === 3 && (
                   <div className="space-y-4">
                     <div className="text-sm text-slate-400 mb-4">
                       Simulate race condition with multiple component trees:
@@ -350,7 +350,7 @@ Component composition through children props is one of React's most powerful pat
                         {collisionActive ? 'Stop Collision' : 'Trigger Collision'}
                       </button>
 
-                      {collisionActive &amp;&amp; (
+                      {collisionActive && (
                         <div className="flex items-start gap-2 text-xs text-red-400 animate-fade-in">
                           <AlertTriangle className="w-4 h-4 flex-shrink-0 mt-0.5" />
                           <span>Race condition: Multiple component instances competing for same parent container</span>
@@ -361,7 +361,7 @@ Component composition through children props is one of React's most powerful pat
                 )}
 
                 {/* Chapter 4: Best Practices */}
-                {chapter === 4 &amp;&amp; (
+                {chapter === 4 && (
                   <div className="space-y-4">
                     <div className="text-sm font-semibold text-emerald-400 mb-3">
                       Proper Composition Checklist:

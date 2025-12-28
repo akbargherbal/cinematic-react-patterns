@@ -192,7 +192,7 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
         </div>
 
         {/* Interactive Demonstrations */}
-        {chapter === 0 &amp;&amp; (
+        {chapter === 0 && (
           <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-8">
             <h3 className="text-xl font-semibold text-slate-100 mb-6 flex items-center gap-2">
               <CheckCircle className="w-5 h-5 text-emerald-500" />
@@ -227,7 +227,7 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
           </div>
         )}
 
-        {chapter === 1 &amp;&amp; (
+        {chapter === 1 && (
           <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-8">
             <h3 className="text-xl font-semibold text-slate-100 mb-6 flex items-center gap-2">
               <GitBranch className="w-5 h-5 text-red-500" />
@@ -267,7 +267,7 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
                   >
                     {splitTriggered ? "42" : "42"}
                   </div>
-                  {splitTriggered &amp;&amp; (
+                  {splitTriggered && (
                     <div className="text-xs text-slate-500 mt-2">
                       Decided to stay inside
                     </div>
@@ -297,7 +297,7 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
                   >
                     {splitTriggered ? "37" : "42"}
                   </div>
-                  {splitTriggered &amp;&amp; (
+                  {splitTriggered && (
                     <div className="text-xs text-slate-500 mt-2">
                       Went outside to see comet
                     </div>
@@ -306,7 +306,7 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
               </div>
             </div>
 
-            {splitTriggered &amp;&amp; (
+            {splitTriggered && (
               <div className="bg-red-950/20 border border-red-500/30 rounded p-4">
                 <p className="text-sm text-slate-400">
                   <strong className="text-red-400">
@@ -323,7 +323,7 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
           </div>
         )}
 
-        {chapter === 2 &amp;&amp; (
+        {chapter === 2 && (
           <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-8">
             <h3 className="text-xl font-semibold text-slate-100 mb-6 flex items-center gap-2">
               <AlertTriangle className="w-5 h-5 text-red-500" />
@@ -353,7 +353,7 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
               ))}
             </div>
 
-            {selectedInstance &amp;&amp; (
+            {selectedInstance && (
               <div className="bg-red-950/20 border border-red-500/30 rounded-lg p-6">
                 <h4 className="text-lg font-semibold text-red-400 mb-3">
                   Instance {selectedInstance} Details
@@ -402,7 +402,7 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
           </div>
         )}
 
-        {chapter === 3 &amp;&amp; (
+        {chapter === 3 && (
           <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-8">
             <h3 className="text-xl font-semibold text-slate-100 mb-6">
               Wrong vs Right: Synchronization Approaches
@@ -431,7 +431,7 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
               </button>
             </div>
 
-            {approach === "wrong" &amp;&amp; (
+            {approach === "wrong" && (
               <div className="space-y-4">
                 <div className="bg-red-950/20 border border-red-500/30 rounded-lg p-6">
                   <h4 className="text-lg font-semibold text-red-400 mb-3 flex items-center gap-2">
@@ -478,7 +478,7 @@ function BadComponent() {
               </div>
             )}
 
-            {approach === "right" &amp;&amp; (
+            {approach === "right" && (
               <div className="space-y-4">
                 <div className="bg-emerald-950/20 border border-emerald-500/30 rounded-lg p-6">
                   <h4 className="text-lg font-semibold text-emerald-400 mb-3 flex items-center gap-2">
@@ -532,7 +532,7 @@ function ChildInstance({ state }) {
           </div>
         )}
 
-        {chapter === 4 &amp;&amp; (
+        {chapter === 4 && (
           <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-8">
             <h3 className="text-xl font-semibold text-slate-100 mb-6 flex items-center gap-2">
               <CheckCircle className="w-5 h-5 text-emerald-500" />

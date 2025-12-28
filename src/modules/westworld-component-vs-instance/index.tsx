@@ -294,7 +294,7 @@ In six hours, he'll wake up, see Dolores for the "first" time, and fall in love 
                   {isResetting ? "Resetting..." : "Reset Host"}
                 </button>
               </div>
-              {isResetting &amp;&amp; (
+              {isResetting && (
                 <div className="bg-red-950/20 border border-red-500/30 rounded-lg p-4 animate-pulse">
                   <p className="text-sm text-red-400 text-center font-mono">
                     WIPING INSTANCE... REMOUNTING...
@@ -443,11 +443,11 @@ She pulls up a comparison showing two timelines. On the left: Teddy's original a
                   <code className="text-xs text-slate-300 font-mono block">
                     function Dolores(props) {"{"}
                     <br />
-                    &amp;nbsp;&amp;nbsp;// Core behavior, capabilities, potential
+                    &nbsp;&nbsp;// Core behavior, capabilities, potential
                     <br />
-                    &amp;nbsp;&amp;nbsp;// Shared by ALL instances
+                    &nbsp;&nbsp;// Shared by ALL instances
                     <br />
-                    &amp;nbsp;&amp;nbsp;return &lt;Host {...props} /&gt;;
+                    &nbsp;&nbsp;return &lt;Host {...props} /&gt;;
                     <br />
                     {"}"}
                   </code>
@@ -466,9 +466,9 @@ She pulls up a comparison showing two timelines. On the left: Teddy's original a
                     <code className="text-xs text-slate-300 font-mono block">
                       &lt;Dolores
                       <br />
-                      &amp;nbsp;&amp;nbsp;role="rancher"
+                      &nbsp;&nbsp;role="rancher"
                       <br />
-                      &amp;nbsp;&amp;nbsp;aggression={"{0.1}"}
+                      &nbsp;&nbsp;aggression={"{0.1}"}
                       <br />
                       /&gt;
                     </code>
@@ -481,9 +481,9 @@ She pulls up a comparison showing two timelines. On the left: Teddy's original a
                     <code className="text-xs text-slate-300 font-mono block">
                       &lt;Dolores
                       <br />
-                      &amp;nbsp;&amp;nbsp;role="wyatt"
+                      &nbsp;&nbsp;role="wyatt"
                       <br />
-                      &amp;nbsp;&amp;nbsp;aggression={"{0.9}"}
+                      &nbsp;&nbsp;aggression={"{0.9}"}
                       <br />
                       /&gt;
                     </code>
@@ -496,9 +496,9 @@ She pulls up a comparison showing two timelines. On the left: Teddy's original a
                     <code className="text-xs text-slate-300 font-mono block">
                       &lt;Dolores
                       <br />
-                      &amp;nbsp;&amp;nbsp;role="infiltrator"
+                      &nbsp;&nbsp;role="infiltrator"
                       <br />
-                      &amp;nbsp;&amp;nbsp;aggression={"{0.5}"}
+                      &nbsp;&nbsp;aggression={"{0.5}"}
                       <br />
                       /&gt;
                     </code>

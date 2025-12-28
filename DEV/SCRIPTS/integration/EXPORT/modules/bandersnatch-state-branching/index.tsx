@@ -46,7 +46,7 @@ export default function BandersnatchStateBranching() {
             </h1>
           </div>
           <p className="text-lg text-pink-400">
-            Stefan Butler, 1984 • State Machines &amp; Branching Logic
+            Stefan Butler, 1984 • State Machines & Branching Logic
           </p>
         </div>
       </header>
@@ -55,7 +55,7 @@ export default function BandersnatchStateBranching() {
       <div className="bg-slate-900/30 border-b border-slate-800">
         <div className="max-w-7xl mx-auto px-6 py-6">
           <div className="flex items-center gap-3">
-            {currentChapter.icon &amp;&amp; (
+            {currentChapter.icon && (
               <currentChapter.icon className="w-6 h-6 text-red-500" />
             )}
             <h2 className="text-2xl font-bold text-slate-100">
@@ -67,11 +67,11 @@ export default function BandersnatchStateBranching() {
 
       {/* Main Content */}
       <main className="max-w-7xl mx-auto px-6 py-12 pb-32">
-        {chapter === 0 &amp;&amp; <ChapterIntro />}
-        {chapter === 1 &amp;&amp; <ChapterBuild />}
-        {chapter === 2 &amp;&amp; <ChapterClimax />}
-        {chapter === 3 &amp;&amp; <ChapterResolution />}
-        {chapter === 4 &amp;&amp; <ChapterSummary />}
+        {chapter === 0 && <ChapterIntro />}
+        {chapter === 1 && <ChapterBuild />}
+        {chapter === 2 && <ChapterClimax />}
+        {chapter === 3 && <ChapterResolution />}
+        {chapter === 4 && <ChapterSummary />}
       </main>
 
       {/* Navigation Footer */}
@@ -196,7 +196,7 @@ ELSE
               </button>
             </div>
 
-            {choice &amp;&amp; (
+            {choice && (
               <div className="bg-slate-800 border border-pink-500/30 rounded p-4 animate-[fadeIn_0.3s_ease-in]">
                 <p className="text-sm text-slate-400 mb-2">Current State:</p>
                 <code className="text-pink-400 text-lg">
@@ -241,10 +241,10 @@ return (
       Sugar Puffs
     </button>
     
-    {choice === 'frosties' &amp;&amp; (
+    {choice === 'frosties' && (
       <p>Optimistic mood...</p>
     )}
-    {choice === 'sugar_puffs' &amp;&amp; (
+    {choice === 'sugar_puffs' && (
       <p>Cautious mood...</p>
     )}
   </div>
@@ -452,12 +452,12 @@ END IF`}
               />
             </div>
             <p className="text-xs text-slate-500 mt-3">
-              {complexity === 0 &amp;&amp; "No choices made yet."}
-              {complexity === 1 &amp;&amp; "Simple state. Easy to manage."}
-              {complexity === 2 &amp;&amp; "Getting complex. Dependencies emerging."}
-              {complexity === 3 &amp;&amp;
+              {complexity === 0 && "No choices made yet."}
+              {complexity === 1 && "Simple state. Easy to manage."}
+              {complexity === 2 && "Getting complex. Dependencies emerging."}
+              {complexity === 3 &&
                 "Nested conditionals. Hard to track all paths."}
-              {complexity === 4 &amp;&amp;
+              {complexity === 4 &&
                 "Chaos. You've lost track of which states are possible."}
             </p>
           </div>
@@ -475,7 +475,7 @@ const [job, setJob] = useState(null);
 const [colin, setColin] = useState(null);
 
 // Implicit state machine hidden in conditionals
-{cereal === 'frosties' &amp;&amp; music === 'thompson_twins' &amp;&amp; (
+{cereal === 'frosties' && music === 'thompson_twins' && (
   job === 'accept' ? (
     colin === 'befriend' ? (
       <PartyScene />
@@ -572,7 +572,7 @@ function ChapterClimax() {
               </code>
             </div>
 
-            {stefanState === "WAITING" &amp;&amp; (
+            {stefanState === "WAITING" && (
               <div className="space-y-4 animate-[fadeIn_0.3s_ease-in]">
                 <p className="text-center text-slate-300">
                   Stefan sits in the therapist's office, waiting for your
@@ -595,7 +595,7 @@ function ChapterClimax() {
               </div>
             )}
 
-            {stefanState === "TALKING" &amp;&amp; (
+            {stefanState === "TALKING" && (
               <div className="space-y-4 animate-[fadeIn_0.3s_ease-in]">
                 <p className="text-center text-slate-300">
                   Stefan begins talking about his mother. The words flow, but
@@ -616,7 +616,7 @@ function ChapterClimax() {
               </div>
             )}
 
-            {stefanState === "REFUSING" &amp;&amp; (
+            {stefanState === "REFUSING" && (
               <div className="space-y-4 animate-[fadeIn_0.3s_ease-in]">
                 <p className="text-center text-slate-300">
                   Stefan refuses to talk. He crosses his arms. But even this
@@ -674,7 +674,7 @@ function ChapterClimax() {
   
   return (
     <div>
-      {state === 'WAITING' &amp;&amp; (
+      {state === 'WAITING' && (
         <>
           <button onClick={() => onChoice('talk')}>
             Talk About Mum
@@ -684,8 +684,8 @@ function ChapterClimax() {
           </button>
         </>
       )}
-      {state === 'TALKING' &amp;&amp; <p>Talking...</p>}
-      {state === 'REFUSING' &amp;&amp; <p>Refusing...</p>}
+      {state === 'TALKING' && <p>Talking...</p>}
+      {state === 'REFUSING' && <p>Refusing...</p>}
     </div>
   );
 }`}
@@ -957,7 +957,7 @@ function ChapterSummary() {
           </button>
         </div>
 
-        {view === "before" &amp;&amp; (
+        {view === "before" && (
           <div className="space-y-6 animate-[fadeIn_0.3s_ease-in]">
             <div className="bg-slate-950 border border-slate-700 rounded-lg p-6">
               <h4 className="text-lg font-bold text-red-400 mb-4">
@@ -991,7 +991,7 @@ return <Dashboard />;`}
           </div>
         )}
 
-        {view === "after" &amp;&amp; (
+        {view === "after" && (
           <div className="space-y-6 animate-[fadeIn_0.3s_ease-in]">
             <div className="bg-slate-950 border border-slate-700 rounded-lg p-6">
               <h4 className="text-lg font-bold text-pink-400 mb-4">

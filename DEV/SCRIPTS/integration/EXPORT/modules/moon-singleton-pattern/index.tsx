@@ -116,7 +116,7 @@ export default function MoonSingletonPattern() {
           {/* Interactive Demo */}
           <div className="space-y-6">
             {/* Chapter 0-1: Single Instance Demo */}
-            {(chapter === 0 || chapter === 1) &amp;&amp; (
+            {(chapter === 0 || chapter === 1) && (
               <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
                 <div className="flex items-center gap-2 mb-4">
                   <Eye className="w-5 h-5 text-yellow-400" />
@@ -165,7 +165,7 @@ export default function MoonSingletonPattern() {
                   </div>
                 </div>
 
-                {chapter === 1 &amp;&amp; (
+                {chapter === 1 && (
                   <div className="mt-4 space-y-2">
                     <button
                       onClick={createInstance}
@@ -185,7 +185,7 @@ export default function MoonSingletonPattern() {
             )}
 
             {/* Chapter 2: State Conflict Demo */}
-            {chapter === 2 &amp;&amp; (
+            {chapter === 2 && (
               <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
                 <div className="flex items-center gap-2 mb-4">
                   <AlertTriangle className="w-5 h-5 text-red-400" />
@@ -221,7 +221,7 @@ export default function MoonSingletonPattern() {
             )}
 
             {/* Chapter 3-4: Pattern Comparison */}
-            {(chapter === 3 || chapter === 4) &amp;&amp; (
+            {(chapter === 3 || chapter === 4) && (
               <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
                 <div className="flex items-center gap-2 mb-4">
                   <Code className="w-5 h-5 text-blue-400" />
@@ -298,7 +298,7 @@ function App() {
             )}
 
             {/* Chapter 4: Best Practices */}
-            {chapter === 4 &amp;&amp; (
+            {chapter === 4 && (
               <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6 mt-6">
                 <h3 className="text-lg font-semibold text-slate-100 mb-4">
                   When to Use Each Pattern
@@ -332,7 +332,7 @@ function App() {
         </div>
 
         {/* Key Takeaway */}
-        {chapter === 4 &amp;&amp; (
+        {chapter === 4 && (
           <div className="bg-blue-500/10 border border-blue-500/30 rounded-lg p-6">
             <div className="flex items-start gap-3">
               <Moon className="w-6 h-6 text-blue-400 flex-shrink-0 mt-1" />

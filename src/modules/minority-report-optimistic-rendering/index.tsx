@@ -242,7 +242,7 @@ Render the future, but mark it as tentative. Always preserve the previous state.
             </h1>
           </div>
           <p className="text-lg text-slate-400">
-            Pre-Crime Division, 2054 • Optimistic Updates &amp; Speculative Rendering
+            Pre-Crime Division, 2054 • Optimistic Updates & Speculative Rendering
           </p>
         </div>
       </header>
@@ -270,7 +270,7 @@ Render the future, but mark it as tentative. Always preserve the previous state.
           </div>
 
           {/* Interactive Demonstrations */}
-          {chapter === 0 &amp;&amp; (
+          {chapter === 0 && (
             <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-slate-100 mb-4 flex items-center gap-2">
                 <Zap className="w-5 h-5 text-blue-400" />
@@ -299,12 +299,12 @@ Render the future, but mark it as tentative. Always preserve the previous state.
                       likePending ? "opacity-50 cursor-not-allowed" : ""
                     } disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2`}
                   >
-                    {likePending &amp;&amp; <Loader2 className="w-4 h-4 animate-spin" />}
+                    {likePending && <Loader2 className="w-4 h-4 animate-spin" />}
                     {liked ? "Unlike" : "Like"}
-                    {likePending &amp;&amp; <span className="text-xs">(pending...)</span>}
+                    {likePending && <span className="text-xs">(pending...)</span>}
                   </button>
 
-                  {likeError &amp;&amp; (
+                  {likeError && (
                     <div className="mt-4 p-3 bg-red-900/30 border border-red-500/50 rounded text-red-400 text-sm flex items-start gap-2">
                       <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
                       <span>{likeError}</span>
@@ -321,7 +321,7 @@ Render the future, but mark it as tentative. Always preserve the previous state.
             </div>
           )}
 
-          {chapter === 1 &amp;&amp; (
+          {chapter === 1 && (
             <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-slate-100 mb-4 flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5 text-amber-400" />
@@ -360,13 +360,13 @@ Render the future, but mark it as tentative. Always preserve the previous state.
                         >
                           <div className="flex items-center justify-between">
                             <span className="font-mono text-sm">{halo.type}</span>
-                            {halo.status === "pending" &amp;&amp; (
+                            {halo.status === "pending" && (
                               <Loader2 className="w-4 h-4 text-amber-400 animate-spin" />
                             )}
-                            {halo.status === "confirmed" &amp;&amp; (
+                            {halo.status === "confirmed" && (
                               <CheckCircle className="w-4 h-4 text-emerald-400" />
                             )}
-                            {halo.status === "failed" &amp;&amp; (
+                            {halo.status === "failed" && (
                               <XCircle className="w-4 h-4 text-red-400" />
                             )}
                           </div>
@@ -387,7 +387,7 @@ Render the future, but mark it as tentative. Always preserve the previous state.
             </div>
           )}
 
-          {chapter === 2 &amp;&amp; (
+          {chapter === 2 && (
             <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-slate-100 mb-4 flex items-center gap-2">
                 <XCircle className="w-5 h-5 text-red-400" />
@@ -410,7 +410,7 @@ Render the future, but mark it as tentative. Always preserve the previous state.
                       disabled={deletePending.has(item.id)}
                       className="px-4 py-2 bg-red-500 hover:bg-red-600 disabled:bg-red-500/50 disabled:cursor-not-allowed text-white rounded transition-colors flex items-center gap-2"
                     >
-                      {deletePending.has(item.id) &amp;&amp; (
+                      {deletePending.has(item.id) && (
                         <Loader2 className="w-4 h-4 animate-spin" />
                       )}
                       {deletePending.has(item.id) ? "Arresting..." : "Arrest"}
@@ -418,7 +418,7 @@ Render the future, but mark it as tentative. Always preserve the previous state.
                   </div>
                 ))}
 
-                {deleteError &amp;&amp; (
+                {deleteError && (
                   <div className="p-4 bg-red-900/30 border border-red-500/50 rounded text-red-400 text-sm flex items-start gap-2">
                     <AlertTriangle className="w-5 h-5 flex-shrink-0" />
                     <span>{deleteError}</span>
@@ -433,7 +433,7 @@ Render the future, but mark it as tentative. Always preserve the previous state.
             </div>
           )}
 
-          {chapter === 3 &amp;&amp; (
+          {chapter === 3 && (
             <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-slate-100 mb-4 flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-emerald-400" />
@@ -457,13 +457,13 @@ Render the future, but mark it as tentative. Always preserve the previous state.
                           : "text-red-400"
                       }`}
                     >
-                      {accountStatus === "active" &amp;&amp; "ACTIVE"}
-                      {accountStatus === "deleting" &amp;&amp; "DELETING..."}
-                      {accountStatus === "deleted" &amp;&amp; "DELETED"}
+                      {accountStatus === "active" && "ACTIVE"}
+                      {accountStatus === "deleting" && "DELETING..."}
+                      {accountStatus === "deleted" && "DELETED"}
                     </div>
                   </div>
 
-                  {accountStatus === "active" &amp;&amp; (
+                  {accountStatus === "active" && (
                     <button
                       onClick={handleAccountDelete}
                       className="w-full py-3 px-6 bg-red-500 hover:bg-red-600 text-white font-semibold rounded-lg transition-colors"
@@ -472,7 +472,7 @@ Render the future, but mark it as tentative. Always preserve the previous state.
                     </button>
                   )}
 
-                  {accountStatus === "deleting" &amp;&amp; (
+                  {accountStatus === "deleting" && (
                     <div className="space-y-4">
                       <div className="text-center">
                         <div className="text-4xl font-bold text-amber-400 mb-2">
@@ -491,7 +491,7 @@ Render the future, but mark it as tentative. Always preserve the previous state.
                     </div>
                   )}
 
-                  {accountStatus === "deleted" &amp;&amp; (
+                  {accountStatus === "deleted" && (
                     <div className="space-y-4">
                       <div className="text-center text-slate-400 text-sm">
                         Account permanently deleted. The prediction came true.
@@ -514,7 +514,7 @@ Render the future, but mark it as tentative. Always preserve the previous state.
             </div>
           )}
 
-          {chapter === 4 &amp;&amp; (
+          {chapter === 4 && (
             <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-slate-100 mb-4">
                 The Pre-Crime Principles

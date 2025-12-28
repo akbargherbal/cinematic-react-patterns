@@ -281,7 +281,7 @@ function LoopCounterDemo() {
       <div className="bg-slate-950 border border-orange-500/30 rounded-lg p-6 text-center">
         <div className="text-6xl font-bold text-orange-500 mb-2">{loopCount}</div>
         <div className="text-sm text-slate-400">Loop Count</div>
-        {isLooping &amp;&amp; (
+        {isLooping && (
           <div className="mt-4 text-orange-400 animate-pulse">
             Component remounting...
           </div>
@@ -315,7 +315,7 @@ function LoopCounterDemo() {
             {log.message}
           </div>
         ))}
-        {logs.length === 0 &amp;&amp; (
+        {logs.length === 0 && (
           <div className="text-slate-600">No logs yet...</div>
         )}
       </div>
@@ -356,7 +356,7 @@ function LifecycleLoggerDemo() {
     }
 
     return () => {
-      if (logEffect &amp;&amp; logCleanup) {
+      if (logEffect && logCleanup) {
         addLog("🟡 Effect cleanup", "cleanup");
       }
     };
@@ -419,7 +419,7 @@ function LifecycleLoggerDemo() {
             {log.message}
           </div>
         ))}
-        {logs.length === 0 &amp;&amp; (
+        {logs.length === 0 && (
           <div className="text-slate-600">Enable logging options above...</div>
         )}
       </div>
@@ -497,7 +497,7 @@ function DegradationDemo() {
                 : "bg-red-500/10 border-red-500/30 opacity-30"
             }`}
           >
-            {active &amp;&amp; (
+            {active && (
               <div className="w-full h-full flex items-center justify-center text-teal-400 text-xs">
                 ✓
               </div>
@@ -514,7 +514,7 @@ function DegradationDemo() {
         {isRunning ? "Cascading unmounts..." : "Start Degradation"}
       </button>
 
-      {activeCount === 0 &amp;&amp; !isRunning &amp;&amp; (
+      {activeCount === 0 && !isRunning && (
         <div className="text-center text-red-400 text-sm">
           <AlertTriangle className="w-4 h-4 inline mr-1" />
           All components unmounted
@@ -618,7 +618,7 @@ function CoupledComponentsDemo() {
         Reset Both Components
       </button>
 
-      {!nadiaAlive &amp;&amp; !alanAlive &amp;&amp; (
+      {!nadiaAlive && !alanAlive && (
         <div className="text-center text-orange-400 text-sm">
           <Users className="w-4 h-4 inline mr-1" />
           {coordinated
@@ -692,7 +692,7 @@ function DebuggingChecklistDemo() {
         </div>
       </div>
 
-      {progress === 100 &amp;&amp; (
+      {progress === 100 && (
         <div className="text-center text-teal-400 text-sm flex items-center justify-center gap-2">
           <CheckCircle2 className="w-4 h-4" />
           Loop broken! You've mastered lifecycle debugging.

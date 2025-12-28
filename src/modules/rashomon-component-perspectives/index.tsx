@@ -258,7 +258,7 @@ Both are architecture. Both are intentional. Both are powerful.`,
         </article>
 
         {/* Interactive Demonstration */}
-        {chapter >= 1 &amp;&amp; (
+        {chapter >= 1 && (
           <section className="bg-slate-900/50 border border-slate-800 rounded-lg p-6 md:p-8">
             <h3 className="text-xl md:text-2xl font-bold text-slate-100 mb-6">
               Interactive Demonstration
@@ -304,7 +304,7 @@ Both are architecture. Both are intentional. Both are powerful.`,
             </div>
 
             {/* Props Inspector */}
-            {showPropsInspector &amp;&amp; (
+            {showPropsInspector && (
               <div className="mb-6 bg-slate-950 border border-slate-700 rounded-lg p-4 md:p-6">
                 <h4 className="text-sm font-bold text-slate-400 mb-3 uppercase tracking-wide">
                   Immutable Props (Constant)

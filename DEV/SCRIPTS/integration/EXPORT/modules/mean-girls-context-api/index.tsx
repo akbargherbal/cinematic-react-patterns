@@ -45,7 +45,7 @@ export default function MeanGirlsContextAPI() {
             <div className="bg-pink-500 text-white px-6 py-3 rounded-lg font-bold shadow-md">
               Regina (Parent)
             </div>
-            {messageHops >= 1 &amp;&amp; (
+            {messageHops >= 1 && (
               <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs text-pink-600 font-semibold animate-pulse">
                 "Janis is a lesbian"
               </div>
@@ -83,7 +83,7 @@ export default function MeanGirlsContextAPI() {
             <div className="bg-slate-600 text-white px-6 py-3 rounded-lg font-bold shadow-md">
               Damian (Consumer)
             </div>
-            {messageHops >= 4 &amp;&amp; (
+            {messageHops >= 4 && (
               <div className="absolute -bottom-8 left-1/2 transform -translate-x-1/2 text-xs text-green-600 font-semibold animate-pulse">
                 "I already knew that!"
               </div>
@@ -300,7 +300,7 @@ function Damian() {
         <div className="bg-yellow-50 border-l-4 border-yellow-500 p-4 rounded">
           <p className="text-sm text-slate-700">
             <strong>The Problem:</strong> Every context update triggers re-renders in ALL {consumers} consumers, 
-            even if they don't care about the specific change. {isOptimized &amp;&amp; "With React.memo, only components with changed props re-render."}
+            even if they don't care about the specific change. {isOptimized && "With React.memo, only components with changed props re-render."}
           </p>
         </div>
       </div>
@@ -372,7 +372,7 @@ function Damian() {
             </div>
           </div>
           
-          {selected === 'frequency' &amp;&amp; (
+          {selected === 'frequency' && (
             <div className="bg-slate-100 p-6 rounded-lg border-2 border-slate-300 animate-fadeIn">
               <div className="text-sm font-semibold text-slate-600 mb-2">Next Question:</div>
               <div className="text-lg font-bold text-slate-800 mb-4">
@@ -395,7 +395,7 @@ function Damian() {
             </div>
           )}
           
-          {selected &amp;&amp; outcomes[selected as keyof typeof outcomes] &amp;&amp; (
+          {selected && outcomes[selected as keyof typeof outcomes] && (
             <div className={`bg-${outcomes[selected as keyof typeof outcomes].color}-50 border-2 border-${outcomes[selected as keyof typeof outcomes].color}-300 p-6 rounded-lg animate-fadeIn`}>
               <div className="text-2xl font-bold text-slate-800 mb-2">
                 ✓ {outcomes[selected as keyof typeof outcomes].title}
@@ -586,7 +586,7 @@ In React, as in high school, there's no one-size-fits-all solution. There's only
             <h1 className="text-4xl md:text-5xl font-bold">Mean Girls</h1>
           </div>
           <p className="text-xl md:text-2xl opacity-90 font-semibold">
-            Context API &amp; Prop Drilling
+            Context API & Prop Drilling
           </p>
           <p className="text-sm md:text-base opacity-75 mt-2">
             North Shore High School, 2004

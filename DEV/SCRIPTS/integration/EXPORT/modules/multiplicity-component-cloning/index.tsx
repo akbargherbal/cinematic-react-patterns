@@ -323,7 +323,7 @@ export default function MultiplicityModule() {
         </div>
 
         {/* Chapter 0: Introduction */}
-        {chapter === 0 &amp;&amp; (
+        {chapter === 0 && (
           <div className="space-y-8">
             <div className="prose prose-invert max-w-none">
               <p className="text-lg leading-relaxed">
@@ -375,7 +375,7 @@ export default function MultiplicityModule() {
         )}
 
         {/* Chapter 1: Shared Mind Problem */}
-        {chapter === 1 &amp;&amp; (
+        {chapter === 1 && (
           <div className="space-y-8">
             <div className="prose prose-invert max-w-none">
               <p className="text-lg leading-relaxed">
@@ -413,7 +413,7 @@ export default function MultiplicityModule() {
                   isCorrupted={false}
                 />
                 
-                {shallowClone &amp;&amp; (
+                {shallowClone && (
                   <CloneCard
                     doug={shallowClone}
                     label="Doug #2 (Shallow Clone)"
@@ -462,7 +462,7 @@ export default function MultiplicityModule() {
         )}
 
         {/* Chapter 2: Degradation Cascade */}
-        {chapter === 2 &amp;&amp; (
+        {chapter === 2 && (
           <div className="space-y-8">
             <div className="prose prose-invert max-w-none">
               <p className="text-lg leading-relaxed">
@@ -491,7 +491,7 @@ export default function MultiplicityModule() {
 
               <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
                 {clones.map((clone, index) => (
-                  clone &amp;&amp; (
+                  clone && (
                     <CloneCard
                       key={index}
                       doug={clone}
@@ -504,7 +504,7 @@ export default function MultiplicityModule() {
               </div>
 
               <div className="flex flex-wrap gap-3">
-                {!clones[1] &amp;&amp; (
+                {!clones[1] && (
                   <button
                     onClick={() => createClone(0)}
                     className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded transition-colors flex items-center gap-2"
@@ -513,7 +513,7 @@ export default function MultiplicityModule() {
                     Create Doug #2
                   </button>
                 )}
-                {clones[1] &amp;&amp; !clones[2] &amp;&amp; (
+                {clones[1] && !clones[2] && (
                   <button
                     onClick={() => createClone(1)}
                     className="bg-yellow-600 hover:bg-yellow-700 text-white font-semibold py-2 px-4 rounded transition-colors flex items-center gap-2"
@@ -522,7 +522,7 @@ export default function MultiplicityModule() {
                     Create Doug #3
                   </button>
                 )}
-                {clones[2] &amp;&amp; !clones[3] &amp;&amp; (
+                {clones[2] && !clones[3] && (
                   <button
                     onClick={() => createClone(2)}
                     className="bg-orange-600 hover:bg-orange-700 text-white font-semibold py-2 px-4 rounded transition-colors flex items-center gap-2"
@@ -531,7 +531,7 @@ export default function MultiplicityModule() {
                     Create Doug #4
                   </button>
                 )}
-                {clones[3] &amp;&amp; clones[3].memories.opinions.fence !== "peppy" &amp;&amp; (
+                {clones[3] && clones[3].memories.opinions.fence !== "peppy" && (
                   <button
                     onClick={corruptClone}
                     className="bg-red-600 hover:bg-red-700 text-white font-semibold py-2 px-4 rounded transition-colors flex items-center gap-2"
@@ -548,7 +548,7 @@ export default function MultiplicityModule() {
                 </button>
               </div>
 
-              {clones[3] &amp;&amp; clones[3].memories.opinions.fence === "peppy" &amp;&amp; (
+              {clones[3] && clones[3].memories.opinions.fence === "peppy" && (
                 <div className="mt-6 p-4 bg-red-500/10 border border-red-500/30 rounded">
                   <div className="flex items-start gap-2">
                     <AlertTriangle className="w-5 h-5 text-red-500 flex-shrink-0 mt-0.5" />
@@ -568,7 +568,7 @@ export default function MultiplicityModule() {
         )}
 
         {/* Chapter 3: Deep Copy Solution */}
-        {chapter === 3 &amp;&amp; (
+        {chapter === 3 && (
           <div className="space-y-8">
             <div className="prose prose-invert max-w-none">
               <p className="text-lg leading-relaxed">
@@ -613,7 +613,7 @@ export default function MultiplicityModule() {
                       quality={100}
                       isCorrupted={shallowDemo.memories.family.wife === "Lorna"}
                     />
-                    {shallowDemoClone &amp;&amp; (
+                    {shallowDemoClone && (
                       <CloneCard
                         doug={shallowDemoClone}
                         label="Shallow Clone"
@@ -663,7 +663,7 @@ export default function MultiplicityModule() {
                       quality={100}
                       isCorrupted={false}
                     />
-                    {deepDemoClone &amp;&amp; (
+                    {deepDemoClone && (
                       <CloneCard
                         doug={deepDemoClone}
                         label="Deep Clone"
@@ -712,7 +712,7 @@ export default function MultiplicityModule() {
         )}
 
         {/* Chapter 4: Summary */}
-        {chapter === 4 &amp;&amp; (
+        {chapter === 4 && (
           <div className="space-y-8">
             <div className="prose prose-invert max-w-none">
               <p className="text-lg leading-relaxed">

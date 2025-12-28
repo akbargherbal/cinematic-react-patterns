@@ -334,7 +334,7 @@ function MountUnmountDemo() {
           <RotateCcw className="w-4 h-4" />
           Reset Loop (Unmount/Remount)
         </button>
-        {isMounted &amp;&amp; <LoopComponent />}
+        {isMounted && <LoopComponent />}
       </div>
     </div>
   );
@@ -421,7 +421,7 @@ function LoopIterationDemo() {
             ✓ Persists across child remounts
           </div>
         </div>
-        {childMounted &amp;&amp; <ChildLoopComponent />}
+        {childMounted && <ChildLoopComponent />}
         <button
           onClick={resetLoop}
           className="w-full bg-orange-600 hover:bg-orange-500 text-white px-4 py-2 rounded transition-colors flex items-center justify-center gap-2"
@@ -501,7 +501,7 @@ function ImmutablePropsDemo() {
           onRequestChange={handleParentChange}
           onError={setErrorMessage}
         />
-        {errorMessage &amp;&amp; (
+        {errorMessage && (
           <div className="bg-red-900/30 border border-red-500/50 rounded p-3 text-red-300 text-sm">
             {errorMessage}
           </div>
@@ -575,7 +575,7 @@ function PersistenceMechanismsDemo() {
     <div className="bg-slate-900/50 border border-blue-500/30 rounded-lg p-6">
       <h3 className="text-xl font-semibold text-blue-400 mb-4">Persistence Mechanisms</h3>
       <div className="space-y-4">
-        {componentMounted &amp;&amp; <PersistenceComponent />}
+        {componentMounted && <PersistenceComponent />}
         <button
           onClick={remount}
           className="w-full bg-orange-600 hover:bg-orange-500 text-white px-4 py-2 rounded transition-colors flex items-center justify-center gap-2"
@@ -740,7 +740,7 @@ function LifecycleSimulator() {
           </div>
         </div>
 
-        {phase === "mounted" &amp;&amp; (
+        {phase === "mounted" && (
           <div className="bg-green-900/30 border border-green-500/50 rounded p-3 text-green-300 text-sm">
             ✓ Component is mounted
             <br />✓ State initialized
@@ -749,7 +749,7 @@ function LifecycleSimulator() {
           </div>
         )}
 
-        {phase === "unmounting" &amp;&amp; (
+        {phase === "unmounting" && (
           <div className="bg-orange-900/30 border border-orange-500/50 rounded p-3 text-orange-300 text-sm">
             ⚠ Component unmounting...
             <br />⚠ Running cleanup functions
@@ -758,7 +758,7 @@ function LifecycleSimulator() {
           </div>
         )}
 
-        {leaks.length > 0 &amp;&amp; (
+        {leaks.length > 0 && (
           <div className="bg-red-900/30 border border-red-500/50 rounded p-3">
             <div className="text-red-300 font-semibold mb-2">Memory Leaks Detected:</div>
             {leaks.map((leak, i) => (
@@ -769,7 +769,7 @@ function LifecycleSimulator() {
           </div>
         )}
 
-        {phase === "unmounted" &amp;&amp; leaks.length === 0 &amp;&amp; (
+        {phase === "unmounted" && leaks.length === 0 && (
           <div className="bg-slate-800/50 border border-slate-700 rounded p-3 text-slate-400 text-sm text-center">
             Component unmounted cleanly. Ready to mount again.
           </div>
@@ -812,7 +812,7 @@ export default function SourceCodeRemountingLoop() {
           Colter Stevens, The Train, 2011
         </p>
         <p className="text-sm text-orange-500 mt-2">
-          Component Remounting &amp; Cleanup
+          Component Remounting & Cleanup
         </p>
       </header>
 

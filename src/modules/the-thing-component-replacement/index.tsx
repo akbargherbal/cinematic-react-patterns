@@ -49,7 +49,7 @@ But what if the interface is a lie?`,
               >
                 {revealedComponent === "A" ? "Hide" : "Reveal"} Implementation
               </button>
-              {revealedComponent === "A" &amp;&amp; (
+              {revealedComponent === "A" && (
                 <div className="mt-4 p-4 bg-blue-950/30 border border-blue-500/30 text-sm text-blue-300">
                   <code>
 {`// Normal dog behavior
@@ -79,7 +79,7 @@ function bark() {
               >
                 {revealedComponent === "B" ? "Hide" : "Reveal"} Implementation
               </button>
-              {revealedComponent === "B" &amp;&amp; (
+              {revealedComponent === "B" && (
                 <div className="mt-4 p-4 bg-red-950/30 border border-red-500/30 text-sm text-red-300">
                   <code>
 {`// Thing behavior
@@ -143,7 +143,7 @@ crew.push(bennings);
 crew.push(thingAsBennings); // ✓ Allowed`}
             </pre>
 
-            {typeCheckingEnabled &amp;&amp; (
+            {typeCheckingEnabled && (
               <div className="p-4 bg-blue-950/30 border border-blue-500/30 rounded">
                 <pre className="text-sm text-blue-300">
 {`// TypeScript catches the mismatch
@@ -270,7 +270,7 @@ The component tree is deeply corrupted. And they have no idea how many.`,
 
           <p className="text-sm text-slate-400 text-center">
             Click the root component to see how corruption spreads through the tree.
-            {infectedNodes.size > 0 &amp;&amp; " One infected component can compromise the entire system."}
+            {infectedNodes.size > 0 && " One infected component can compromise the entire system."}
           </p>
         </div>
       ),
@@ -310,7 +310,7 @@ This is the moment of type checking revelation: the component claimed to be huma
               >
                 <div className="flex items-center justify-between mb-3">
                   <span className="font-mono text-slate-300">{crew.name}</span>
-                  {testedSamples.has(crew.name) &amp;&amp; (
+                  {testedSamples.has(crew.name) && (
                     crew.isHuman ? (
                       <Shield className="w-5 h-5 text-blue-400" />
                     ) : (
@@ -335,7 +335,7 @@ This is the moment of type checking revelation: the component claimed to be huma
                   {testedSamples.has(crew.name) ? "Tested" : "Test Blood Sample"}
                 </button>
                 
-                {testedSamples.has(crew.name) &amp;&amp; (
+                {testedSamples.has(crew.name) && (
                   <div className={`mt-3 p-3 rounded text-sm ${
                     crew.isHuman
                       ? "bg-blue-950/30 border border-blue-500/30 text-blue-300"
@@ -477,7 +477,7 @@ const validated = CrewSchema.parse(data);`}
             U.S. Outpost 31, Antarctica, 1982
           </p>
           <p className="text-red-400 text-xs md:text-sm mt-1">
-            Component Swapping &amp; Type Checking
+            Component Swapping & Type Checking
           </p>
         </div>
       </header>
@@ -497,7 +497,7 @@ const validated = CrewSchema.parse(data);`}
           </div>
         </article>
 
-        {currentChapter.demo &amp;&amp; (
+        {currentChapter.demo && (
           <section className="bg-slate-900/30 border border-slate-700 rounded-lg p-6 md:p-8">
             {currentChapter.demo}
           </section>

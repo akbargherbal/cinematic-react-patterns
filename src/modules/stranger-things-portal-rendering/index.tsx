@@ -89,24 +89,24 @@ export default function StrangerThingsPortalRendering() {
         </div>
 
         {/* Chapter Content */}
-        {chapter === 0 &amp;&amp; <ChapterIntro />}
-        {chapter === 1 &amp;&amp; (
+        {chapter === 0 && <ChapterIntro />}
+        {chapter === 1 && (
           <ChapterBuild
             showPortalVersion={showPortalVersion}
             setShowPortalVersion={setShowPortalVersion}
           />
         )}
-        {chapter === 2 &amp;&amp; (
+        {chapter === 2 && (
           <ChapterClimax
             isGateOpen={isGateOpen}
             setIsGateOpen={setIsGateOpen}
           />
         )}
-        {chapter === 3 &amp;&amp; <ChapterResolution />}
-        {chapter === 4 &amp;&amp; <ChapterSummary />}
+        {chapter === 3 && <ChapterResolution />}
+        {chapter === 4 && <ChapterSummary />}
 
         {/* Christmas Lights Demo (Chapters 0-2) */}
-        {chapter <= 2 &amp;&amp; (
+        {chapter <= 2 && (
           <div className="mt-12">
             <ChristmasLights
               message={message}
@@ -375,7 +375,7 @@ function SettingsButton() {
         Settings
       </button>
       
-      {isOpen &amp;&amp; createPortal(
+      {isOpen && createPortal(
         <SettingsModal onClose={() => setIsOpen(false)} />,
         document.body  // ← The gate location
       )}
@@ -410,7 +410,7 @@ function SettingsButton() {
           {isGateOpen ? "Close the Gate" : "Open the Gate"}
         </button>
 
-        {isGateOpen &amp;&amp;
+        {isGateOpen &&
           createPortal(
             <div className="fixed inset-0 bg-red-950/80 backdrop-blur-sm flex items-center justify-center z-50 animate-fade-in">
               <div className="bg-slate-900 border-2 border-red-500 rounded-lg p-8 max-w-md shadow-2xl shadow-red-500/20">
@@ -850,11 +850,11 @@ function OverflowDemo({ showPortalVersion }: { showPortalVersion: boolean }) {
           Open Modal
         </button>
 
-        {showModal &amp;&amp; !showPortalVersion &amp;&amp; modalContent}
+        {showModal && !showPortalVersion && modalContent}
       </div>
 
-      {showModal &amp;&amp;
-        showPortalVersion &amp;&amp;
+      {showModal &&
+        showPortalVersion &&
         createPortal(
           <div className="fixed inset-0 bg-red-950/60 backdrop-blur-sm flex items-center justify-center z-50">
             {modalContent}

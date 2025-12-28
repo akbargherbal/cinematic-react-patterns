@@ -74,7 +74,7 @@ export default function ClockworkOrange() {
             Alex DeLarge, Dystopian Future, 1971
           </p>
           <p className="text-sm text-red-400 mt-1">
-            Concept: forceUpdate() &amp; Uncontrolled Re-renders
+            Concept: forceUpdate() & Uncontrolled Re-renders
           </p>
         </div>
       </header>
@@ -97,11 +97,11 @@ export default function ClockworkOrange() {
           </div>
 
           <div className="space-y-6">
-            {chapter === 0 &amp;&amp; <NaturalComponentDemo />}
-            {chapter === 1 &amp;&amp; <LudovicoIntroDemo />}
-            {chapter === 2 &amp;&amp; <TreatmentSimulator />}
-            {chapter === 3 &amp;&amp; <StateRenderVisualizer />}
-            {chapter === 4 &amp;&amp; <CodeComparison />}
+            {chapter === 0 && <NaturalComponentDemo />}
+            {chapter === 1 && <LudovicoIntroDemo />}
+            {chapter === 2 && <TreatmentSimulator />}
+            {chapter === 3 && <StateRenderVisualizer />}
+            {chapter === 4 && <CodeComparison />}
           </div>
         </div>
       </main>
@@ -303,7 +303,7 @@ function TreatmentSimulator() {
               <span className="text-slate-400">Peaceful (forced)</span>
             )}
           </div>
-          {!ludovicoState.stable &amp;&amp; (
+          {!ludovicoState.stable && (
             <div className="text-xs text-red-400 flex items-center gap-1">
               <AlertTriangle className="w-3 h-3" />
               State-render mismatch! Errors: {ludovicoState.errorCount}
@@ -401,7 +401,7 @@ function StateRenderVisualizer() {
             </div>
           </div>
 
-          {mismatch &amp;&amp; (
+          {mismatch && (
             <div className="bg-red-950/30 border border-red-500/50 rounded p-3 text-sm text-red-400 flex items-start gap-2">
               <AlertTriangle className="w-4 h-4 mt-0.5 flex-shrink-0" />
               <div>

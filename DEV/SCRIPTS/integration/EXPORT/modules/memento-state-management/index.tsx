@@ -164,7 +164,7 @@ If the data is supplementary, if it needs to persist but shouldn't trigger re-re
         </article>
 
         {/* Interactive Demonstrations */}
-        {chapter === 0 &amp;&amp; (
+        {chapter === 0 && (
           <div className="bg-slate-900/50 border border-amber-500/30 rounded-lg p-6 mb-8">
             <h3 className="text-xl font-bold text-amber-500 mb-4 flex items-center gap-2">
               <Camera className="w-5 h-5" />
@@ -203,7 +203,7 @@ If the data is supplementary, if it needs to persist but shouldn't trigger re-re
                 </p>
               </button>
             </div>
-            {memoryChoice &amp;&amp; (
+            {memoryChoice && (
               <div className="mt-6 p-4 bg-slate-950/50 border border-amber-500/20 rounded">
                 <p className="text-sm text-slate-300">
                   {memoryChoice === "photo" ? (
@@ -223,7 +223,7 @@ If the data is supplementary, if it needs to persist but shouldn't trigger re-re
           </div>
         )}
 
-        {chapter === 1 &amp;&amp; (
+        {chapter === 1 && (
           <div className="bg-slate-900/50 border border-red-500/30 rounded-lg p-6 mb-8">
             <h3 className="text-xl font-bold text-red-500 mb-4 flex items-center gap-2">
               <AlertTriangle className="w-5 h-5" />
@@ -254,7 +254,7 @@ target.current = 'Teddy';
           </div>
         )}
 
-        {chapter === 2 &amp;&amp; (
+        {chapter === 2 && (
           <div className="bg-slate-900/50 border border-red-500/30 rounded-lg p-6 mb-8">
             <h3 className="text-xl font-bold text-red-500 mb-4 flex items-center gap-2">
               <AlertTriangle className="w-5 h-5" />
@@ -312,7 +312,7 @@ target.current = 'Teddy';
                 Reset
               </button>
             </div>
-            {manipulationDemo.hasManipulated &amp;&amp; (
+            {manipulationDemo.hasManipulated && (
               <div className="mt-6 p-4 bg-red-950/20 border border-red-500/30 rounded">
                 <p className="text-sm text-red-400">
                   <AlertTriangle className="inline w-4 h-4 mr-2" />
@@ -323,7 +323,7 @@ target.current = 'Teddy';
           </div>
         )}
 
-        {chapter === 3 &amp;&amp; (
+        {chapter === 3 && (
           <div className="bg-slate-900/50 border border-green-500/30 rounded-lg p-6 mb-8">
             <h3 className="text-xl font-bold text-green-500 mb-4 flex items-center gap-2">
               <CheckCircle className="w-5 h-5" />
@@ -379,7 +379,7 @@ target.current = 'Teddy';
           </div>
         )}
 
-        {chapter === 4 &amp;&amp; (
+        {chapter === 4 && (
           <div className="bg-slate-900/50 border border-amber-500/30 rounded-lg p-6 mb-8">
             <h3 className="text-xl font-bold text-amber-500 mb-4">
               The Critical Distinction

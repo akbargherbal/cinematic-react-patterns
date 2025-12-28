@@ -143,14 +143,14 @@ And now, you know kung fu.`,
 
   // Chapter 1 effect: Demonstrate dependency array
   useEffect(() => {
-    if (chapter === 0 &amp;&amp; (watchedDeps.spoon || watchedDeps.apple || watchedDeps.rabbit)) {
+    if (chapter === 0 && (watchedDeps.spoon || watchedDeps.apple || watchedDeps.rabbit)) {
       setDepEffectCount((c) => c + 1);
     }
   }, [watchedDeps.spoon, watchedDeps.apple, watchedDeps.rabbit, chapter]);
 
   // Chapter 2 effect: Demonstrate no dependency array (controlled)
   useEffect(() => {
-    if (chapter === 1 &amp;&amp; watchEverything) {
+    if (chapter === 1 && watchEverything) {
       setRenderCount((c) => c + 1);
       const timer = setTimeout(() => {
         setAgentCount((a) => Math.min(a + 1, 20));
@@ -179,20 +179,20 @@ And now, you know kung fu.`,
 
   // Chapter 4 effect: Demonstrate empty dependency array
   useEffect(() => {
-    if (chapter === 3 &amp;&amp; uploadProgress > 0 &amp;&amp; uploadProgress < 100) {
+    if (chapter === 3 && uploadProgress > 0 && uploadProgress < 100) {
       const timer = setTimeout(() => {
         setUploadProgress((p) => Math.min(p + 10, 100));
       }, 200);
       return () => clearTimeout(timer);
     }
-    if (uploadProgress === 100 &amp;&amp; !uploadComplete) {
+    if (uploadProgress === 100 && !uploadComplete) {
       setUploadComplete(true);
     }
   }, [uploadProgress, uploadComplete, chapter]);
 
   // Chapter 5 effect: Demonstrate belief-based dependency
   useEffect(() => {
-    if (chapter === 4 &amp;&amp; belief >= 80 &amp;&amp; !jumpAttempted) {
+    if (chapter === 4 && belief >= 80 && !jumpAttempted) {
       setJumpAttempted(true);
     }
   }, [belief, chapter, jumpAttempted]);
@@ -243,7 +243,7 @@ And now, you know kung fu.`,
       </div>
 
       {/* Glitch overlay */}
-      {glitchActive &amp;&amp; (
+      {glitchActive && (
         <div className="fixed inset-0 bg-green-500 opacity-20 pointer-events-none animate-pulse z-50" />
       )}
 
@@ -293,7 +293,7 @@ And now, you know kung fu.`,
 
           {/* Interactive Demo */}
           <div className="space-y-4">
-            {chapter === 0 &amp;&amp; (
+            {chapter === 0 && (
               <div className="bg-gray-950 border border-green-500/30 rounded-lg p-6">
                 <h3 className="text-xl font-bold text-green-400 mb-4 flex items-center gap-2">
                   <Code className="w-5 h-5" />
@@ -321,7 +321,7 @@ And now, you know kung fu.`,
                         >
                           {item}
                         </span>
-                        {watchedDeps[item] &amp;&amp; (
+                        {watchedDeps[item] && (
                           <span className="text-xs text-green-500 animate-pulse">
                             [watching]
                           </span>
@@ -339,20 +339,20 @@ And now, you know kung fu.`,
                     <code className="text-green-400">
                       useEffect(() =&gt; &#123;{"\n"}
                       {"  "}// Neo's awareness executes{"\n"}
-                      &#125;, [{watchedDeps.spoon &amp;&amp; "spoon"}
-                      {watchedDeps.spoon &amp;&amp; watchedDeps.apple &amp;&amp; ", "}
-                      {watchedDeps.apple &amp;&amp; "apple"}
-                      {(watchedDeps.spoon || watchedDeps.apple) &amp;&amp;
-                        watchedDeps.rabbit &amp;&amp;
+                      &#125;, [{watchedDeps.spoon && "spoon"}
+                      {watchedDeps.spoon && watchedDeps.apple && ", "}
+                      {watchedDeps.apple && "apple"}
+                      {(watchedDeps.spoon || watchedDeps.apple) &&
+                        watchedDeps.rabbit &&
                         ", "}
-                      {watchedDeps.rabbit &amp;&amp; "rabbit"}]);
+                      {watchedDeps.rabbit && "rabbit"}]);
                     </code>
                   </div>
                 </div>
               </div>
             )}
 
-            {chapter === 1 &amp;&amp; (
+            {chapter === 1 && (
               <div className="bg-gray-950 border border-green-500/30 rounded-lg p-6">
                 <h3 className="text-xl font-bold text-green-400 mb-4 flex items-center gap-2">
                   <AlertTriangle className="w-5 h-5 text-red-500" />
@@ -371,7 +371,7 @@ And now, you know kung fu.`,
                     </span>
                   </label>
 
-                  {watchEverything &amp;&amp; (
+                  {watchEverything && (
                     <div className="p-4 bg-red-950/30 border border-red-500/50 rounded">
                       <div className="text-sm text-red-400 mb-2 flex items-center gap-2">
                         <AlertTriangle className="w-4 h-4" />
@@ -397,7 +397,7 @@ And now, you know kung fu.`,
                     ))}
                   </div>
 
-                  {watchEverything &amp;&amp; (
+                  {watchEverything && (
                     <button
                       onClick={resetChapter2}
                       className="w-full px-4 py-2 bg-green-600 hover:bg-green-700 text-black font-bold rounded transition-colors"
@@ -418,7 +418,7 @@ And now, you know kung fu.`,
               </div>
             )}
 
-            {chapter === 2 &amp;&amp; (
+            {chapter === 2 && (
               <div className="bg-gray-950 border border-green-500/30 rounded-lg p-6">
                 <h3 className="text-xl font-bold text-green-400 mb-4 flex items-center gap-2">
                   <Zap className="w-5 h-5" />
@@ -441,7 +441,7 @@ And now, you know kung fu.`,
                     </div>
                   </div>
 
-                  {catVisible &amp;&amp; (
+                  {catVisible && (
                     <div className="relative h-24 bg-gray-900 border border-green-500/50 rounded overflow-hidden">
                       <div className="absolute inset-0 flex items-center justify-center animate-pulse">
                         <span className="text-6xl">🐈</span>
@@ -472,7 +472,7 @@ And now, you know kung fu.`,
               </div>
             )}
 
-            {chapter === 3 &amp;&amp; (
+            {chapter === 3 && (
               <div className="bg-gray-950 border border-green-500/30 rounded-lg p-6">
                 <h3 className="text-xl font-bold text-green-400 mb-4 flex items-center gap-2">
                   <CheckCircle className="w-5 h-5" />
@@ -491,7 +491,7 @@ And now, you know kung fu.`,
                       : "Uploading..."}
                   </button>
 
-                  {uploadProgress > 0 &amp;&amp; (
+                  {uploadProgress > 0 && (
                     <div className="space-y-2">
                       <div className="w-full bg-gray-800 rounded-full h-4 overflow-hidden">
                         <div
@@ -505,7 +505,7 @@ And now, you know kung fu.`,
                     </div>
                   )}
 
-                  {uploadComplete &amp;&amp; (
+                  {uploadComplete && (
                     <div className="p-4 bg-green-950/30 border border-green-500/50 rounded text-center">
                       <div className="text-2xl font-bold text-green-400 mb-2">
                         I know kung fu.
@@ -551,7 +551,7 @@ And now, you know kung fu.`,
               </div>
             )}
 
-            {chapter === 4 &amp;&amp; (
+            {chapter === 4 && (
               <div className="bg-gray-950 border border-green-500/30 rounded-lg p-6">
                 <h3 className="text-xl font-bold text-green-400 mb-4 flex items-center gap-2">
                   <Zap className="w-5 h-5" />
@@ -612,7 +612,7 @@ And now, you know kung fu.`,
                     </div>
                   </div>
 
-                  {jumpAttempted &amp;&amp; (
+                  {jumpAttempted && (
                     <div className="p-4 bg-green-950/30 border border-green-500/50 rounded text-center animate-pulse">
                       <div className="text-xl font-bold text-green-400">
                         Neo makes the jump!

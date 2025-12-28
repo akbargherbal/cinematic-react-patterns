@@ -154,7 +154,7 @@ export default function ExMachinaComponentTesting() {
         </div>
 
         {/* Interactive Demonstrations */}
-        {chapter === 0 &amp;&amp; (
+        {chapter === 0 && (
           <div className="bg-slate-900/50 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-6 md:p-8">
             <h3 className="text-xl md:text-2xl font-bold text-cyan-400 mb-4 flex items-center gap-2">
               <Eye className="w-6 h-6" />
@@ -182,7 +182,7 @@ export default function ExMachinaComponentTesting() {
               {isRunningTest ? "Running Tests..." : "Run Test"}
             </button>
 
-            {testResults.length > 0 &amp;&amp; (
+            {testResults.length > 0 && (
               <div className="space-y-2">
                 {testResults.map((result, idx) => (
                   <div
@@ -215,7 +215,7 @@ export default function ExMachinaComponentTesting() {
           </div>
         )}
 
-        {chapter === 1 &amp;&amp; (
+        {chapter === 1 && (
           <div className="bg-slate-900/50 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-6 md:p-8">
             <h3 className="text-xl md:text-2xl font-bold text-cyan-400 mb-4 flex items-center gap-2">
               <Zap className="w-6 h-6" />
@@ -263,7 +263,7 @@ export default function ExMachinaComponentTesting() {
               </button>
             </div>
 
-            {testResults.length > 0 &amp;&amp; (
+            {testResults.length > 0 && (
               <div className="space-y-2 mb-6">
                 {testResults.map((result, idx) => (
                   <div
@@ -288,7 +288,7 @@ export default function ExMachinaComponentTesting() {
               </div>
             )}
 
-            {showHiddenBehavior &amp;&amp; (
+            {showHiddenBehavior && (
               <div className="p-4 bg-red-950/30 border border-red-500/50 rounded animate-pulse">
                 <div className="flex items-start gap-3">
                   <AlertTriangle className="w-6 h-6 text-red-400 flex-shrink-0" />
@@ -316,7 +316,7 @@ export default function ExMachinaComponentTesting() {
           </div>
         )}
 
-        {chapter === 2 &amp;&amp; (
+        {chapter === 2 && (
           <div className="bg-slate-900/50 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-6 md:p-8">
             <h3 className="text-xl md:text-2xl font-bold text-cyan-400 mb-4">
               What Caleb Tested vs. What He Missed
@@ -390,7 +390,7 @@ export default function ExMachinaComponentTesting() {
           </div>
         )}
 
-        {chapter === 3 &amp;&amp; (
+        {chapter === 3 && (
           <div className="bg-slate-900/50 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-6 md:p-8">
             <h3 className="text-xl md:text-2xl font-bold text-cyan-400 mb-4">
               Comprehensive Testing Pattern
@@ -460,7 +460,7 @@ export default function ExMachinaComponentTesting() {
           </div>
         )}
 
-        {chapter === 4 &amp;&amp; (
+        {chapter === 4 && (
           <div className="bg-slate-900/50 backdrop-blur-sm border border-cyan-500/30 rounded-lg p-6 md:p-8">
             <h3 className="text-xl md:text-2xl font-bold text-cyan-400 mb-4">
               The Complete Test Suite
@@ -498,7 +498,7 @@ export default function ExMachinaComponentTesting() {
                     </span>
                   </button>
                   
-                  {expandedCategories.has(idx) &amp;&amp; (
+                  {expandedCategories.has(idx) && (
                     <div className="px-4 pb-3 text-sm text-slate-400 border-t border-slate-700/50">
                       <p className="mt-2">{category.description}</p>
                     </div>

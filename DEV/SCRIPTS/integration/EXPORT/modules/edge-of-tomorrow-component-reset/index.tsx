@@ -156,7 +156,7 @@ State resets. Knowledge compounds. And a developer who understands that differen
             </h1>
           </div>
           <p className="text-lg text-slate-400">
-            Component Lifecycle &amp; State Reset
+            Component Lifecycle & State Reset
           </p>
         </div>
       </header>
@@ -175,7 +175,7 @@ State resets. Knowledge compounds. And a developer who understands that differen
           </div>
         </article>
 
-        {currentChapter.demo &amp;&amp; (
+        {currentChapter.demo && (
           <section className="bg-orange-950/20 border border-orange-500/30 rounded-lg p-6 md:p-8">
             <currentChapter.demo />
           </section>
@@ -631,7 +631,7 @@ function LearningTimelineDemo() {
           disabled={iterations >= learnablePatterns.length}
           className="flex-1 px-6 py-3 bg-orange-600 text-white rounded-lg font-medium hover:bg-orange-500 transition-colors disabled:opacity-30 disabled:cursor-not-allowed"
         >
-          Die &amp; Learn ({iterations + 1})
+          Die & Learn ({iterations + 1})
         </button>
         <button
           onClick={reset}

@@ -129,7 +129,7 @@ But in React, you have the power to break the cycle.`,
                 James Cole, 1995
               </p>
               <p className="text-sm md:text-base text-amber-500 mt-2 font-semibold">
-                Circular Dependencies &amp; Infinite Loops
+                Circular Dependencies & Infinite Loops
               </p>
             </div>
           </div>
@@ -166,9 +166,9 @@ But in React, you have the power to break the cycle.`,
 
           {/* Interactive Demo Section */}
           <div className="space-y-6">
-            {chapter === 0 &amp;&amp; <SimpleImportDemo />}
-            {chapter === 1 &amp;&amp; <CircularDependencyDemo />}
-            {chapter === 2 &amp;&amp; (
+            {chapter === 0 && <SimpleImportDemo />}
+            {chapter === 1 && <CircularDependencyDemo />}
+            {chapter === 2 && (
               <InfiniteLoopDemo
                 loopActive={loopActive}
                 errorCount={errorCount}
@@ -176,13 +176,13 @@ But in React, you have the power to break the cycle.`,
                 onReset={handleReset}
               />
             )}
-            {chapter === 3 &amp;&amp; (
+            {chapter === 3 && (
               <SolutionComparator
                 selectedSolution={selectedSolution}
                 onSelectSolution={setSelectedSolution}
               />
             )}
-            {chapter === 4 &amp;&amp; <DAGVisualizer />}
+            {chapter === 4 && <DAGVisualizer />}
           </div>
         </div>
       </main>
@@ -314,7 +314,7 @@ function CircularDependencyDemo() {
           {showCode ? "Hide" : "Show"} Problematic Code
         </button>
 
-        {showCode &amp;&amp; (
+        {showCode && (
           <div className="bg-slate-950 rounded p-4 overflow-x-auto space-y-3">
             <pre className="text-sm text-blue-400">
               <code>{`// FutureComponent.jsx
@@ -357,12 +357,12 @@ function InfiniteLoopDemo({ loopActive, errorCount, onAttemptRender, onReset }: 
       
       <div className="space-y-4">
         <div className="bg-slate-950 rounded p-4 min-h-[200px] overflow-y-auto">
-          {!loopActive &amp;&amp; errorCount === 0 &amp;&amp; (
+          {!loopActive && errorCount === 0 && (
             <div className="text-slate-500 text-sm text-center py-8">
               Click "Attempt Render" to see what happens...
             </div>
           )}
-          {loopActive &amp;&amp; (
+          {loopActive && (
             <div className="space-y-2 font-mono text-xs">
               {Array.from({ length: errorCount }).map((_, idx) => (
                 <div key={idx} className="text-red-400 animate-pulse">
@@ -373,7 +373,7 @@ function InfiniteLoopDemo({ loopActive, errorCount, onAttemptRender, onReset }: 
                   </span>
                 </div>
               ))}
-              {errorCount >= 10 &amp;&amp; (
+              {errorCount >= 10 && (
                 <div className="text-red-500 font-bold mt-4 p-2 bg-red-950/30 rounded">
                   ⚠ Stack Overflow - Application Crashed
                 </div>
@@ -385,7 +385,7 @@ function InfiniteLoopDemo({ loopActive, errorCount, onAttemptRender, onReset }: 
         <div className="flex gap-2">
           <button
             onClick={onAttemptRender}
-            disabled={loopActive &amp;&amp; errorCount < 10}
+            disabled={loopActive && errorCount < 10}
             className="flex-1 px-4 py-2 bg-red-600 text-white rounded hover:bg-red-500 disabled:opacity-50 disabled:cursor-not-allowed transition-colors font-semibold"
           >
             Attempt Render
@@ -399,7 +399,7 @@ function InfiniteLoopDemo({ loopActive, errorCount, onAttemptRender, onReset }: 
           </button>
         </div>
 
-        {errorCount >= 10 &amp;&amp; (
+        {errorCount >= 10 && (
           <div className="text-xs text-slate-400 text-center">
             Neither component can render without the other already being rendered.
           </div>

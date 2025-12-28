@@ -158,8 +158,8 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
             <Clock className="w-8 h-8 text-blue-400" />
             <h1 className="text-3xl md:text-4xl font-bold text-slate-100">Primer: State Time-Travel</h1>
           </div>
-          <p className="text-lg text-slate-400">Aaron &amp; Abe, 2004</p>
-          <p className="text-sm text-blue-400 mt-1">Time-Travel Debugging &amp; State History</p>
+          <p className="text-lg text-slate-400">Aaron & Abe, 2004</p>
+          <p className="text-sm text-blue-400 mt-1">Time-Travel Debugging & State History</p>
         </div>
       </header>
 
@@ -181,7 +181,7 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
         {/* Interactive Demonstrations */}
         <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6 md:p-8">
           {/* Chapter 0: The Discovery */}
-          {chapter === 0 &amp;&amp; (
+          {chapter === 0 && (
             <div>
               <h3 className="text-xl font-bold text-blue-400 mb-4 flex items-center gap-2">
                 <Zap className="w-5 h-5" />
@@ -207,7 +207,7 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
                         <div className="text-xs text-slate-400">{snapshot.timestamp}</div>
                         <div className="text-lg font-bold text-slate-200">{index}</div>
                       </button>
-                      {index < cleanTimeline.length - 1 &amp;&amp; (
+                      {index < cleanTimeline.length - 1 && (
                         <div className="w-8 h-0.5 bg-slate-700"></div>
                       )}
                     </div>
@@ -230,7 +230,7 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
           )}
 
           {/* Chapter 1: The Multiplication */}
-          {chapter === 1 &amp;&amp; (
+          {chapter === 1 && (
             <div>
               <h3 className="text-xl font-bold text-amber-400 mb-4 flex items-center gap-2">
                 <GitBranch className="w-5 h-5" />
@@ -252,7 +252,7 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
                         }`}>
                           {index}
                         </div>
-                        {index < 1 &amp;&amp; <div className="w-8 h-0.5 bg-slate-700"></div>}
+                        {index < 1 && <div className="w-8 h-0.5 bg-slate-700"></div>}
                       </div>
                     ))}
                     <div className="w-8 h-0.5 bg-slate-700"></div>
@@ -295,7 +295,7 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
           )}
 
           {/* Chapter 2: The Paradox */}
-          {chapter === 2 &amp;&amp; (
+          {chapter === 2 && (
             <div>
               <h3 className="text-xl font-bold text-red-400 mb-4 flex items-center gap-2">
                 <AlertTriangle className="w-5 h-5" />
@@ -354,7 +354,7 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
           )}
 
           {/* Chapter 3: The Protocol */}
-          {chapter === 3 &amp;&amp; (
+          {chapter === 3 && (
             <div>
               <h3 className="text-xl font-bold text-emerald-400 mb-4 flex items-center gap-2">
                 <CheckCircle className="w-5 h-5" />
@@ -385,7 +385,7 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
                       <div className="w-12 h-12 rounded border-2 border-emerald-500 bg-emerald-500/10 flex items-center justify-center text-xs">
                         {index}
                       </div>
-                      {index < cleanTimeline.length - 1 &amp;&amp; (
+                      {index < cleanTimeline.length - 1 && (
                         <div className="w-8 h-0.5 bg-emerald-500"></div>
                       )}
                     </div>
@@ -396,7 +396,7 @@ They're rebuilding. Starting from the clean failsafe state, carefully replaying 
           )}
 
           {/* Chapter 4: The Lesson */}
-          {chapter === 4 &amp;&amp; (
+          {chapter === 4 && (
             <div>
               <h3 className="text-xl font-bold text-blue-400 mb-4">Comparison: Wrong vs Right</h3>
               <p className="text-sm text-slate-400 mb-6">

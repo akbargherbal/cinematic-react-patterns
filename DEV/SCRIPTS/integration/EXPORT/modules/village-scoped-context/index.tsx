@@ -132,7 +132,7 @@ The architecture should serve your application's needs, just as the village's ar
             Ivy Walker, Covington, 1897 (2004)
           </p>
           <p className="text-sm text-amber-600/80 mt-1">
-            Context Scope &amp; Provider Boundaries
+            Context Scope & Provider Boundaries
           </p>
         </div>
       </header>
@@ -156,7 +156,7 @@ The architecture should serve your application's needs, just as the village's ar
 
         {/* Interactive Demonstrations */}
         <div className="bg-slate-900/50 border border-amber-900/30 rounded-lg p-8">
-          {chapter === 0 &amp;&amp; (
+          {chapter === 0 && (
             <div>
               <h3 className="text-xl font-bold text-amber-400 mb-6 flex items-center gap-2">
                 <Shield className="w-5 h-5" />
@@ -216,7 +216,7 @@ The architecture should serve your application's needs, just as the village's ar
             </div>
           )}
 
-          {chapter === 1 &amp;&amp; (
+          {chapter === 1 && (
             <div>
               <h3 className="text-xl font-bold text-amber-400 mb-6 flex items-center gap-2">
                 <GitBranch className="w-5 h-5" />
@@ -257,7 +257,7 @@ The architecture should serve your application's needs, just as the village's ar
                         <div className="text-xs text-slate-400 mt-1">
                           const context = useContext(VillageContext)
                         </div>
-                        {selectedComponent === name &amp;&amp; (
+                        {selectedComponent === name && (
                           <div className="mt-2 p-2 bg-slate-900/50 rounded text-xs text-emerald-400 font-mono">
                             context.creatures === true
                             <br />
@@ -278,7 +278,7 @@ The architecture should serve your application's needs, just as the village's ar
             </div>
           )}
 
-          {chapter === 2 &amp;&amp; (
+          {chapter === 2 && (
             <div>
               <h3 className="text-xl font-bold text-amber-400 mb-6 flex items-center gap-2">
                 <ArrowRight className="w-5 h-5" />
@@ -317,7 +317,7 @@ The architecture should serve your application's needs, just as the village's ar
                       <div className="text-xs text-slate-400 font-mono mt-2">
                         useContext(VillageContext)
                       </div>
-                      {boundaryPosition < 50 &amp;&amp; (
+                      {boundaryPosition < 50 && (
                         <div className="mt-2 p-2 bg-slate-900/50 rounded text-xs text-emerald-400">
                           ✓ Context available
                         </div>
@@ -328,7 +328,7 @@ The architecture should serve your application's needs, just as the village's ar
                     className="absolute inset-y-0 right-0 bg-slate-900/50 transition-all duration-300"
                     style={{ width: `${boundaryPosition}%` }}
                   >
-                    {boundaryPosition > 50 &amp;&amp; (
+                    {boundaryPosition > 50 && (
                       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 text-center">
                         <Users className="w-12 h-12 text-slate-600 mx-auto mb-2" />
                         <div className="text-slate-500 font-semibold">Ivy</div>
@@ -350,7 +350,7 @@ The architecture should serve your application's needs, just as the village's ar
             </div>
           )}
 
-          {chapter === 3 &amp;&amp; (
+          {chapter === 3 && (
             <div>
               <h3 className="text-xl font-bold text-amber-400 mb-6 flex items-center gap-2">
                 <Layers className="w-5 h-5" />
@@ -423,7 +423,7 @@ The architecture should serve your application's needs, just as the village's ar
             </div>
           )}
 
-          {chapter === 4 &amp;&amp; (
+          {chapter === 4 && (
             <div>
               <h3 className="text-xl font-bold text-amber-400 mb-6 flex items-center gap-2">
                 <Layers className="w-5 h-5" />

@@ -150,7 +150,7 @@ function PersistenceDemo() {
         </div>
         <div className="flex items-center gap-2">
           <div className="w-3 h-3 bg-orange-500 rounded"></div>
-          <span className="text-slate-300">Ref &amp; localStorage (persist)</span>
+          <span className="text-slate-300">Ref & localStorage (persist)</span>
         </div>
       </div>
     </div>
@@ -182,7 +182,7 @@ function PersistentComponent() {
         <p className="text-xl font-bold text-blue-400">{stateValue}</p>
       </div>
       <div className="bg-orange-900/30 border border-orange-500/30 rounded p-3">
-        <p className="text-sm text-orange-300 mb-1">Ref &amp; localStorage</p>
+        <p className="text-sm text-orange-300 mb-1">Ref & localStorage</p>
         <p className="text-xl font-bold text-orange-400">{refValue.current}</p>
       </div>
       <button
@@ -332,10 +332,10 @@ export default function EternalSunshine() {
             </h1>
           </div>
           <p className="text-lg md:text-xl text-slate-400">
-            Joel &amp; Clementine, 2004
+            Joel & Clementine, 2004
           </p>
           <p className="text-sm md:text-base text-blue-400 mt-2">
-            Understanding State Reset &amp; the Key Prop
+            Understanding State Reset & the Key Prop
           </p>
         </div>
       </header>

@@ -319,7 +319,7 @@ function Demo3Consequences() {
     const capturedDeleted = isDeleted;
 
     intervalRef.current = setInterval(() => {
-      if (!capturedDeleted &amp;&amp; capturedId !== null) {
+      if (!capturedDeleted && capturedId !== null) {
         setErrors((prev) => [
           ...prev,
           `Attempting to save patient ${capturedId}... ERROR: Patient deleted!`,
@@ -402,7 +402,7 @@ function Demo4Solution() {
 
   useEffect(() => {
     // Proper dependencies: re-captures when values change
-    if (!isDeleted &amp;&amp; patientId !== null) {
+    if (!isDeleted && patientId !== null) {
       intervalRef.current = setInterval(() => {
         setLogs((prev) => [
           ...prev,

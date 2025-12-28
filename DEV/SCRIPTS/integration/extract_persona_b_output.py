@@ -13,22 +13,81 @@ Usage:
     # With pandas
     df['RESULT'].apply(lambda x: main(input_file=x, path=False, output_dir='./EXPORT'))
 """
-
-import argparse
-import xml.etree.ElementTree as ET
-from pathlib import Path
 import sys
+import argparse
+import html
+
+from pathlib import Path
 from typing import Optional, Dict, Any
+import xml.etree.ElementTree as ET
 
 
-def parse_xml(xml_content: str) -> ET.Element:
-    """Parse XML string and return root element."""
+def parse_xml(xml_content):
+    """Parse XML string and return root element with automatic error recovery."""
     try:
+        # First attempt: parse as-is
         root = ET.fromstring(xml_content)
         return root
     except ET.ParseError as e:
-        print(f"❌ XML parsing error: {e}")
-        sys.exit(1)
+        print(f"⚠️  Initial parse failed: {e}")
+        print("🔧 Attempting to fix common XML issues...")
+
+        try:
+            # Strategy 1: Escape unescaped ampersands
+            # Replace & with &amp; EXCEPT when it's already part of an entity
+            import re
+
+            fixed_content = re.sub(
+                r"&(?!(?:amp|lt|gt|quot|apos|#\d+|#x[0-9a-fA-F]+);)",
+                "&amp;",
+                xml_content,
+            )
+
+            root = ET.fromstring(fixed_content)
+            print("✅ Fixed by escaping ampersands")
+            return root
+
+        except ET.ParseError:
+            try:
+                # Strategy 2: Wrap in CDATA if it's a simple content issue
+                # This is more aggressive - use cautiously
+                lines = xml_content.split("\n")
+                # Try to identify problematic content and wrap it
+                # (This is a simplified approach - adjust based on your XML structure)
+
+                # Strategy 2b: Try decoding HTML entities first
+                fixed_content = html.unescape(xml_content)
+                # Then re-escape for XML
+                fixed_content = fixed_content.replace("&", "&amp;")
+                fixed_content = fixed_content.replace("<", "&lt;").replace(">", "&gt;")
+
+                root = ET.fromstring(fixed_content)
+                print("✅ Fixed by decoding HTML entities")
+                return root
+
+            except ET.ParseError:
+                print("❌ Could not automatically fix XML. Manual inspection required.")
+                print(f"📍 Error location: {e}")
+
+                # Print context around error for debugging
+                try:
+                    error_line = int(str(e).split("line ")[1].split(",")[0])
+                    error_col = int(str(e).split("column ")[1].split(":")[0])
+                    lines = xml_content.split("\n")
+
+                    print(f"\n🔍 Context around line {error_line}:")
+                    start = max(0, error_line - 2)
+                    end = min(len(lines), error_line + 1)
+
+                    for i in range(start, end):
+                        marker = ">>> " if i == error_line - 1 else "    "
+                        print(f"{marker}Line {i+1}: {lines[i][:100]}")
+                        if i == error_line - 1:
+                            print(f"    {' ' * (error_col - 1)}^--- Error here")
+                except:
+                    print("Could not extract error context")
+
+                return None
 
 
 def extract_module_info(root: ET.Element) -> dict:

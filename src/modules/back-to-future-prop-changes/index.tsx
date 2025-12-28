@@ -137,7 +137,7 @@ Better props produce better renders. The quality of your props determines the qu
         </div>
 
         {/* Interactive Demonstrations */}
-        {chapter === 0 &amp;&amp; (
+        {chapter === 0 && (
           <div className="bg-blue-950/30 border border-blue-500/30 rounded-lg p-6 md:p-8">
             <h3 className="text-xl font-bold text-blue-400 mb-4 flex items-center gap-2">
               <Camera className="w-6 h-6" />
@@ -178,7 +178,7 @@ Better props produce better renders. The quality of your props determines the qu
           </div>
         )}
 
-        {chapter === 1 &amp;&amp; (
+        {chapter === 1 && (
           <div className="bg-orange-950/30 border border-orange-500/30 rounded-lg p-6 md:p-8">
             <h3 className="text-xl font-bold text-orange-400 mb-4 flex items-center gap-2">
               <Zap className="w-6 h-6" />
@@ -257,7 +257,7 @@ Better props produce better renders. The quality of your props determines the qu
                         }`}
                       ></div>
                       <span className="text-sm text-slate-300">{member.name}</span>
-                      {member.opacity < 0.5 &amp;&amp; (
+                      {member.opacity < 0.5 && (
                         <span className="ml-auto text-xs text-red-400">Fading...</span>
                       )}
                     </div>
@@ -275,7 +275,7 @@ Better props produce better renders. The quality of your props determines the qu
           </div>
         )}
 
-        {chapter === 2 &amp;&amp; (
+        {chapter === 2 && (
           <div className="bg-red-950/30 border border-red-500/30 rounded-lg p-6 md:p-8">
             <h3 className="text-xl font-bold text-red-400 mb-4 flex items-center gap-2">
               <ArrowRight className="w-6 h-6" />
@@ -324,7 +324,7 @@ Better props produce better renders. The quality of your props determines the qu
           </div>
         )}
 
-        {chapter === 3 &amp;&amp; (
+        {chapter === 3 && (
           <div className="bg-green-950/30 border border-green-500/30 rounded-lg p-6 md:p-8">
             <h3 className="text-xl font-bold text-green-400 mb-4 flex items-center gap-2">
               <Zap className="w-6 h-6" />
@@ -395,7 +395,7 @@ Better props produce better renders. The quality of your props determines the qu
           </div>
         )}
 
-        {chapter === 4 &amp;&amp; (
+        {chapter === 4 && (
           <div className="bg-blue-950/30 border border-blue-500/30 rounded-lg p-6 md:p-8">
             <h3 className="text-xl font-bold text-blue-400 mb-6 flex items-center gap-2">
               <Zap className="w-6 h-6" />

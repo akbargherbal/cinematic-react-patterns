@@ -133,8 +133,8 @@ The dream is over. The lesson remains. Welcome back to reality.`,
 
   useEffect(() => {
     const handleKeyDown = (e: KeyboardEvent) => {
-      if (e.key === "ArrowRight" &amp;&amp; canGoNext) handleNext();
-      if (e.key === "ArrowLeft" &amp;&amp; canGoPrevious) handlePrevious();
+      if (e.key === "ArrowRight" && canGoNext) handleNext();
+      if (e.key === "ArrowLeft" && canGoPrevious) handlePrevious();
     };
 
     window.addEventListener("keydown", handleKeyDown);
@@ -153,7 +153,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
             </h1>
           </div>
           <p className="text-lg text-slate-400">
-            Component Composition &amp; Children Props
+            Component Composition & Children Props
           </p>
         </div>
       </header>
@@ -180,7 +180,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
         </div>
 
         {/* Interactive Demonstrations */}
-        {chapter === 0 &amp;&amp; (
+        {chapter === 0 && (
           <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6 md:p-8">
             <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
               <Layers className="w-5 h-5 text-blue-400" />
@@ -207,7 +207,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                   <span className="text-xs text-slate-500">Level 1</span>
                 </div>
 
-                {nestedLayers.van &amp;&amp; (
+                {nestedLayers.van && (
                   <div className="ml-6 space-y-4">
                     {/* Hotel Layer */}
                     <div
@@ -228,7 +228,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                         <span className="text-xs text-slate-500">Level 2</span>
                       </div>
 
-                      {nestedLayers.hotel &amp;&amp; (
+                      {nestedLayers.hotel && (
                         <div className="ml-6">
                           {/* Fortress Layer */}
                           <div
@@ -279,7 +279,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
           </div>
         )}
 
-        {chapter === 1 &amp;&amp; (
+        {chapter === 1 && (
           <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6 md:p-8">
             <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
               <Zap className="w-5 h-5 text-blue-400" />
@@ -346,7 +346,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                     )}
                   </div>
 
-                  {propsPassed.vanToHotel &amp;&amp; (
+                  {propsPassed.vanToHotel && (
                     <div className="flex items-center gap-3 mb-4">
                       <button
                         onClick={() => toggleProp("hotelToFortress")}
@@ -366,7 +366,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                   {/* Fortress Level */}
                   <div
                     className={`ml-6 border-2 rounded-lg p-6 transition-all ${
-                      propsPassed.vanToHotel &amp;&amp; propsPassed.hotelToFortress
+                      propsPassed.vanToHotel && propsPassed.hotelToFortress
                         ? "border-blue-300/50 bg-blue-300/5"
                         : "border-red-500/50 bg-red-500/5"
                     }`}
@@ -377,13 +377,13 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                           Fortress Component
                         </span>
                         <span className="text-xs text-slate-500">
-                          {propsPassed.vanToHotel &amp;&amp;
+                          {propsPassed.vanToHotel &&
                           propsPassed.hotelToFortress
                             ? "Receives: onKick callback"
                             : "Missing: onKick callback"}
                         </span>
                       </div>
-                      {propsPassed.vanToHotel &amp;&amp;
+                      {propsPassed.vanToHotel &&
                       propsPassed.hotelToFortress ? (
                         <Check className="w-5 h-5 text-emerald-400" />
                       ) : (
@@ -406,7 +406,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
           </div>
         )}
 
-        {chapter === 2 &amp;&amp; (
+        {chapter === 2 && (
           <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6 md:p-8">
             <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
               <X className="w-5 h-5 text-red-400" />
@@ -473,7 +473,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                       Hotel Component
                     </div>
                     <div className="text-xs text-emerald-400">
-                      ✓ Receives &amp; passes onKick
+                      ✓ Receives & passes onKick
                     </div>
                   </div>
                   <div className="ml-8 bg-emerald-900/20 border border-emerald-500/30 rounded p-3">
@@ -502,7 +502,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
           </div>
         )}
 
-        {chapter === 3 &amp;&amp; (
+        {chapter === 3 && (
           <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6 md:p-8">
             <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
               <Zap className="w-5 h-5 text-emerald-400" />
@@ -542,7 +542,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                       Level 1 - Hits water
                     </span>
                   </div>
-                  {kickTimeline.includes(0) &amp;&amp; (
+                  {kickTimeline.includes(0) && (
                     <Zap className="w-5 h-5 text-emerald-400 animate-pulse" />
                   )}
                 </div>
@@ -565,7 +565,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                       Level 2 - Elevator explodes
                     </span>
                   </div>
-                  {kickTimeline.includes(1) &amp;&amp; (
+                  {kickTimeline.includes(1) && (
                     <Zap className="w-5 h-5 text-emerald-400 animate-pulse" />
                   )}
                 </div>
@@ -588,7 +588,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                       Level 3 - Detonates
                     </span>
                   </div>
-                  {kickTimeline.includes(2) &amp;&amp; (
+                  {kickTimeline.includes(2) && (
                     <Zap className="w-5 h-5 text-emerald-400 animate-pulse" />
                   )}
                 </div>
@@ -611,7 +611,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
                       Wake up on the plane
                     </span>
                   </div>
-                  {kickTimeline.includes(3) &amp;&amp; (
+                  {kickTimeline.includes(3) && (
                     <Check className="w-5 h-5 text-emerald-400" />
                   )}
                 </div>
@@ -629,7 +629,7 @@ The dream is over. The lesson remains. Welcome back to reality.`,
           </div>
         )}
 
-        {chapter === 4 &amp;&amp; (
+        {chapter === 4 && (
           <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-6 md:p-8">
             <h3 className="text-xl font-bold text-slate-100 mb-4">
               Key Takeaways

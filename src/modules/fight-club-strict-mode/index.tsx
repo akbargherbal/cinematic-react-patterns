@@ -309,7 +309,7 @@ export default function FightClubStrictMode() {
             <h1 className="text-4xl font-bold tracking-tight text-red-500">Fight Club</h1>
           </div>
           <p className="text-lg text-slate-400">Tyler Durden, 1999</p>
-          <p className="text-sm text-red-400 font-semibold mt-1">React.StrictMode &amp; Effect Cleanup</p>
+          <p className="text-sm text-red-400 font-semibold mt-1">React.StrictMode & Effect Cleanup</p>
         </div>
       </header>
 
@@ -331,7 +331,7 @@ export default function FightClubStrictMode() {
         </div>
 
         {/* Interactive Demonstrations */}
-        {chapter === 0 &amp;&amp; (
+        {chapter === 0 && (
           <div className="bg-slate-900/50 border border-red-500/30 rounded-lg p-6 mb-8">
             <div className="flex items-center gap-2 mb-4">
               <Code className="w-5 h-5 text-red-500" />
@@ -348,7 +348,7 @@ export default function FightClubStrictMode() {
           </div>
         )}
 
-        {chapter === 1 &amp;&amp; (
+        {chapter === 1 && (
           <div className="bg-slate-900/50 border border-red-500/30 rounded-lg p-6 mb-8">
             <div className="flex items-center justify-between mb-4">
               <div className="flex items-center gap-2">
@@ -420,7 +420,7 @@ export default function FightClubStrictMode() {
           </div>
         )}
 
-        {chapter === 2 &amp;&amp; (
+        {chapter === 2 && (
           <div className="bg-slate-900/50 border border-red-500/30 rounded-lg p-6 mb-8">
             <div className="flex items-center gap-2 mb-4">
               <AlertTriangle className="w-5 h-5 text-red-500" />
@@ -455,7 +455,7 @@ export default function FightClubStrictMode() {
           </div>
         )}
 
-        {chapter === 3 &amp;&amp; (
+        {chapter === 3 && (
           <div className="bg-slate-900/50 border border-emerald-500/30 rounded-lg p-6 mb-8">
             <div className="flex items-center gap-2 mb-4">
               <CheckCircle className="w-5 h-5 text-emerald-500" />
@@ -495,7 +495,7 @@ export default function FightClubStrictMode() {
           </div>
         )}
 
-        {chapter === 4 &amp;&amp; (
+        {chapter === 4 && (
           <div className="bg-slate-900/50 border border-red-500/30 rounded-lg p-6 mb-8">
             <div className="flex items-center gap-2 mb-4">
               <Code className="w-5 h-5 text-red-500" />

@@ -376,7 +376,7 @@ Keyser Söze—the villain, the mastermind, the boogeyman—was a conditionally 
   return (
     <div>
       {/* Other story elements */}
-      {needsVillain &amp;&amp; <Villain name="Keyser Söze" />}
+      {needsVillain && <Villain name="Keyser Söze" />}
     </div>
   );
 }

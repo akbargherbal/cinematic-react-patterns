@@ -223,7 +223,7 @@ Let's synthesize what The Social Network teaches us about state management in Re
             <h1 className="text-3xl md:text-4xl font-bold">The Social Network</h1>
           </div>
           <p className="text-lg text-slate-400">State Synchronization Across Instances</p>
-          <p className="text-sm text-slate-500 mt-1">Mark Zuckerberg &amp; Eduardo Saverin, 2003-2005</p>
+          <p className="text-sm text-slate-500 mt-1">Mark Zuckerberg & Eduardo Saverin, 2003-2005</p>
         </div>
       </header>
 
@@ -250,7 +250,7 @@ Let's synthesize what The Social Network teaches us about state management in Re
             </div>
 
             {/* Chapter 0: FaceMash Demo */}
-            {chapter === 0 &amp;&amp; (
+            {chapter === 0 && (
               <div className="space-y-6">
                 <div className="bg-slate-800 rounded-lg p-6 border border-blue-500/30">
                   <div className="flex items-center justify-between mb-4">
@@ -290,7 +290,7 @@ Let's synthesize what The Social Network teaches us about state management in Re
             )}
 
             {/* Chapter 1: Multiple Instances Demo */}
-            {chapter === 1 &amp;&amp; (
+            {chapter === 1 && (
               <div className="space-y-4">
                 {Object.entries(instances).map(([college, state]) => (
                   <div key={college} className="bg-slate-800 rounded-lg p-4 border border-blue-500/30">
@@ -340,7 +340,7 @@ Let's synthesize what The Social Network teaches us about state management in Re
             )}
 
             {/* Chapter 2: Drift Demo */}
-            {chapter === 2 &amp;&amp; (
+            {chapter === 2 && (
               <div className="space-y-4">
                 <div className="grid grid-cols-2 gap-4">
                   <div className="bg-slate-800 rounded-lg p-4 border border-blue-500/30">
@@ -391,7 +391,7 @@ Let's synthesize what The Social Network teaches us about state management in Re
                     ))}
                   </div>
                 </div>
-                {Math.abs(eduardoOwnership - markOwnership) > 5 &amp;&amp; (
+                {Math.abs(eduardoOwnership - markOwnership) > 5 && (
                   <div className="bg-yellow-950/30 border border-yellow-500/30 rounded-lg p-4">
                     <div className="flex items-start gap-2">
                       <AlertTriangle className="w-5 h-5 text-yellow-400 flex-shrink-0 mt-0.5" />
@@ -409,7 +409,7 @@ Let's synthesize what The Social Network teaches us about state management in Re
             )}
 
             {/* Chapter 3: Reconciliation Demo */}
-            {chapter === 3 &amp;&amp; (
+            {chapter === 3 && (
               <div className="space-y-6">
                 <div className="bg-slate-800 rounded-lg p-6 border border-slate-700">
                   <h4 className="text-lg font-semibold text-slate-300 mb-4 text-center">The Reconciliation Moment</h4>
@@ -424,7 +424,7 @@ Let's synthesize what The Social Network teaches us about state management in Re
                       </div>
                       <div className="text-sm text-slate-400">Eduardo's Local State</div>
                     </div>
-                    {showReconciliation &amp;&amp; (
+                    {showReconciliation && (
                       <ArrowRight className="w-8 h-8 text-red-400 animate-pulse" />
                     )}
                     <div className="text-center">
@@ -475,7 +475,7 @@ const ownership = useContext(OwnershipContext);
             )}
 
             {/* Chapter 4: Summary */}
-            {chapter === 4 &amp;&amp; (
+            {chapter === 4 && (
               <div className="space-y-4">
                 <div className="bg-slate-800 rounded-lg p-4 border border-blue-500/30">
                   <h4 className="text-sm font-semibold text-blue-300 mb-3">When to Use Each Pattern</h4>

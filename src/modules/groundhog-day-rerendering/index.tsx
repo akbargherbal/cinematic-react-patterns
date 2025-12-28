@@ -126,7 +126,7 @@ export default function GroundhogDayRerendering() {
         {/* Interactive Demonstrations */}
         <div className="space-y-8">
           {/* Chapter 1: Render Counter Demo */}
-          {chapter === 0 &amp;&amp; (
+          {chapter === 0 && (
             <div className="bg-slate-900/50 border border-slate-700/30 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                 <Zap className="w-5 h-5 text-sky-500" />
@@ -149,7 +149,7 @@ export default function GroundhogDayRerendering() {
           )}
 
           {/* Chapter 2: Side Effects Demo */}
-          {chapter === 1 &amp;&amp; (
+          {chapter === 1 && (
             <div className="bg-slate-900/50 border border-slate-700/30 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                 <AlertCircle className="w-5 h-5 text-amber-500" />
@@ -171,7 +171,7 @@ export default function GroundhogDayRerendering() {
                 </button>
               </div>
 
-              {sideEffects.length > 0 &amp;&amp; (
+              {sideEffects.length > 0 && (
                 <div className="bg-red-950/30 border border-red-500/30 rounded p-4 mb-4">
                   <h4 className="text-red-400 font-semibold mb-2">Accumulated Side Effects:</h4>
                   <ul className="space-y-1 text-sm text-red-300">
@@ -198,7 +198,7 @@ export default function GroundhogDayRerendering() {
           )}
 
           {/* Chapter 3: Infinite Loop Demo */}
-          {chapter === 2 &amp;&amp; (
+          {chapter === 2 && (
             <div className="bg-slate-900/50 border border-slate-700/30 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                 <AlertCircle className="w-5 h-5 text-red-500" />
@@ -208,7 +208,7 @@ export default function GroundhogDayRerendering() {
               <div className="flex items-center justify-center py-8 mb-4">
                 <div className={`relative ${isLooping ? 'animate-spin' : ''}`}>
                   <Clock className="w-24 h-24 text-red-500" />
-                  {isLooping &amp;&amp; (
+                  {isLooping && (
                     <div className="absolute inset-0 flex items-center justify-center">
                       <div className="w-32 h-32 border-4 border-red-500/30 border-t-red-500 rounded-full animate-spin"></div>
                     </div>
@@ -236,7 +236,7 @@ export default function GroundhogDayRerendering() {
           )}
 
           {/* Chapter 4: Pure vs Impure Comparison */}
-          {chapter === 3 &amp;&amp; (
+          {chapter === 3 && (
             <div className="bg-slate-900/50 border border-slate-700/30 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-white mb-4 flex items-center gap-2">
                 <CheckCircle className="w-5 h-5 text-emerald-500" />
@@ -315,7 +315,7 @@ export default function GroundhogDayRerendering() {
                 </button>
               </div>
 
-              {skills.length > 0 &amp;&amp; (
+              {skills.length > 0 && (
                 <div className="mt-4 bg-emerald-950/30 border border-emerald-500/30 rounded p-4">
                   <h4 className="text-emerald-400 font-semibold mb-2">Skills Learned (Proper State):</h4>
                   <div className="space-y-2">
@@ -332,7 +332,7 @@ export default function GroundhogDayRerendering() {
           )}
 
           {/* Chapter 5: Pattern Summary */}
-          {chapter === 4 &amp;&amp; (
+          {chapter === 4 && (
             <div className="bg-slate-900/50 border border-slate-700/30 rounded-lg p-6">
               <h3 className="text-xl font-semibold text-white mb-6">The Pattern: Phil's Journey → React Best Practices</h3>
               

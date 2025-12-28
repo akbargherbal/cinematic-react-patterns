@@ -263,7 +263,7 @@ That's what makes custom hooks powerful. That's what makes relationships real. T
                       <div className="text-slate-400 text-xs mt-1">{user.response}</div>
                     </div>
                   ))}
-                  {sharedUsers.length === 0 &amp;&amp; (
+                  {sharedUsers.length === 0 && (
                     <div className="text-slate-500 text-sm italic">No users yet</div>
                   )}
                 </div>
@@ -285,7 +285,7 @@ That's what makes custom hooks powerful. That's what makes relationships real. T
                       <div className="text-slate-400 text-xs mt-1">{user.response}</div>
                     </div>
                   ))}
-                  {isolatedUsers.length === 0 &amp;&amp; (
+                  {isolatedUsers.length === 0 && (
                     <div className="text-slate-500 text-sm italic">No users yet</div>
                   )}
                 </div>

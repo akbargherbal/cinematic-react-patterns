@@ -242,7 +242,7 @@ export default function LOTRPropDrilling() {
           {/* Interactive Demonstration */}
           <div className="lg:col-span-3">
             <div className="bg-slate-900/50 border border-slate-700/50 rounded-lg p-6">
-              {chapter === 0 &amp;&amp; (
+              {chapter === 0 && (
                 <div>
                   <h3 className="text-xl font-bold text-amber-500 mb-4 flex items-center gap-2">
                     <Users className="w-5 h-5" />
@@ -281,7 +281,7 @@ export default function LOTRPropDrilling() {
                                 Passes Only
                               </span>
                             )}
-                            {index === ringPosition &amp;&amp; (
+                            {index === ringPosition && (
                               <div className="w-6 h-6 bg-amber-500 rounded-full animate-pulse shadow-lg shadow-amber-500/50" />
                             )}
                           </div>
@@ -301,7 +301,7 @@ export default function LOTRPropDrilling() {
                 </div>
               )}
 
-              {chapter === 1 &amp;&amp; (
+              {chapter === 1 && (
                 <div>
                   <h3 className="text-xl font-bold text-amber-500 mb-4 flex items-center gap-2">
                     <AlertTriangle className="w-5 h-5" />
@@ -330,7 +330,7 @@ export default function LOTRPropDrilling() {
                       </button>
                     ))}
                   </div>
-                  {selectedMember &amp;&amp; (
+                  {selectedMember && (
                     <div className="p-4 bg-slate-800 border border-slate-700 rounded font-mono text-xs">
                       <div className="text-amber-500 mb-2">
                         interface {selectedMember}Props {"{"}
@@ -367,10 +367,10 @@ export default function LOTRPropDrilling() {
                 </div>
               )}
 
-              {chapter === 2 &amp;&amp; (
+              {chapter === 2 && (
                 <div>
                   <h3 className="text-xl font-bold text-amber-500 mb-4">
-                    Fragility &amp; Corruption
+                    Fragility & Corruption
                   </h3>
                   <p className="text-sm text-slate-400 mb-6">
                     The longer the chain, the more vulnerable it becomes. Watch what happens when components try to mutate or steal the state.
@@ -422,7 +422,7 @@ export default function LOTRPropDrilling() {
                 </div>
               )}
 
-              {chapter === 3 &amp;&amp; (
+              {chapter === 3 && (
                 <div>
                   <h3 className="text-xl font-bold text-amber-500 mb-4 flex items-center gap-2">
                     <Zap className="w-5 h-5" />
@@ -467,7 +467,7 @@ export default function LOTRPropDrilling() {
                     </button>
                   </div>
 
-                  {!useEagles &amp;&amp; (
+                  {!useEagles && (
                     <div className="space-y-3">
                       <div className="p-4 bg-emerald-950/20 border border-emerald-500/30 rounded">
                         <div className="flex items-center gap-2 mb-2">
@@ -505,9 +505,9 @@ export default function LOTRPropDrilling() {
                     </div>
                   )}
 
-                  {useEagles &amp;&amp; (
+                  {useEagles && (
                     <div className="space-y-3">
-                      {nazgulDetected &amp;&amp; (
+                      {nazgulDetected && (
                         <div className="p-4 bg-red-950/20 border border-red-500 rounded animate-pulse">
                           <div className="flex items-center gap-2 mb-2">
                             <AlertTriangle className="w-5 h-5 text-red-500" />
@@ -558,7 +558,7 @@ export default function LOTRPropDrilling() {
                 </div>
               )}
 
-              {chapter === 4 &amp;&amp; (
+              {chapter === 4 && (
                 <div>
                   <h3 className="text-xl font-bold text-amber-500 mb-4">
                     The Trade-Offs Matrix

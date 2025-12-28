@@ -240,7 +240,7 @@ The gift of memory, whether across time or across renders, is the gift of sustai
         </div>
 
         {/* Interactive Demonstrations */}
-        {chapter === 0 &amp;&amp; (
+        {chapter === 0 && (
           <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 sm:p-8">
             <h3 className="text-xl font-bold text-slate-100 mb-4 flex items-center gap-2">
               <Brain className="w-5 h-5 text-teal-400" />
@@ -265,7 +265,7 @@ The gift of memory, whether across time or across renders, is the gift of sustai
           </div>
         )}
 
-        {chapter >= 1 &amp;&amp; chapter <= 2 &amp;&amp; (
+        {chapter >= 1 && chapter <= 2 && (
           <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 sm:p-8">
             <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
               <h3 className="text-xl font-bold text-slate-100 flex items-center gap-2">
@@ -308,7 +308,7 @@ The gift of memory, whether across time or across renders, is the gift of sustai
                 <span className="text-sm text-slate-400">
                   Analysis Progress
                 </span>
-                {isCalculating &amp;&amp; (
+                {isCalculating && (
                   <span className="text-xs text-amber-400 animate-pulse">
                     Computing...
                   </span>
@@ -343,7 +343,7 @@ The gift of memory, whether across time or across renders, is the gift of sustai
           </div>
         )}
 
-        {chapter === 3 &amp;&amp; (
+        {chapter === 3 && (
           <div className="space-y-6">
             <div className="bg-slate-900/50 border border-teal-500/30 rounded-lg p-6 sm:p-8">
               <div className="flex items-center justify-between mb-6 flex-wrap gap-4">
@@ -455,7 +455,7 @@ The gift of memory, whether across time or across renders, is the gift of sustai
           </div>
         )}
 
-        {chapter === 4 &amp;&amp; (
+        {chapter === 4 && (
           <div className="space-y-6">
             <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-6 sm:p-8">
               <h3 className="text-xl font-bold text-slate-100 mb-6">

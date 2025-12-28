@@ -147,11 +147,11 @@ Frank drives by in his red Trans Am, touches his eye. It hurts, but there's no w
         </div>
 
         {/* Interactive Demonstrations */}
-        {chapter === 0 &amp;&amp; <IntroDemo />}
-        {chapter === 1 &amp;&amp; <WrongDependenciesDemo demoState={demoState} setDemoState={setDemoState} />}
-        {chapter === 2 &amp;&amp; <StaleClosureDemo demoState={demoState} setDemoState={setDemoState} />}
-        {chapter === 3 &amp;&amp; <CleanupDemo demoState={demoState} setDemoState={setDemoState} />}
-        {chapter === 4 &amp;&amp; <UniverseComparisonDemo />}
+        {chapter === 0 && <IntroDemo />}
+        {chapter === 1 && <WrongDependenciesDemo demoState={demoState} setDemoState={setDemoState} />}
+        {chapter === 2 && <StaleClosureDemo demoState={demoState} setDemoState={setDemoState} />}
+        {chapter === 3 && <CleanupDemo demoState={demoState} setDemoState={setDemoState} />}
+        {chapter === 4 && <UniverseComparisonDemo />}
       </main>
 
       {/* Chapter Navigation Footer */}
@@ -608,7 +608,7 @@ function CleanupDemo({
     setTimeout(() => {
       setWithoutCleanup((prev) => ({
         fetches: prev.fetches.map((f) =>
-          f.id === userId &amp;&amp; f.status === "fetching"
+          f.id === userId && f.status === "fetching"
             ? { ...f, status: "complete" }
             : f
         ),
@@ -630,7 +630,7 @@ function CleanupDemo({
       if (!cancelled) {
         setWithCleanup((prev) => ({
           fetches: prev.fetches.map((f) =>
-            f.id === userId &amp;&amp; f.status === "fetching"
+            f.id === userId && f.status === "fetching"
               ? { ...f, status: "complete" }
               : f
           ),
@@ -640,7 +640,7 @@ function CleanupDemo({
         setWithCleanup((prev) => ({
           ...prev,
           fetches: prev.fetches.map((f) =>
-            f.id === userId &amp;&amp; f.status === "fetching"
+            f.id === userId && f.status === "fetching"
               ? { ...f, status: "cancelled" }
               : f
           ),

@@ -114,7 +114,7 @@ Good afternoon, good evening, and good night.`
           <p className="text-xl text-slate-400 mb-4">Seahaven Island, 1998</p>
           <div className="flex items-center gap-2 text-cyan-400">
             <Activity className="w-5 h-5" />
-            <span className="font-semibold">useEffect &amp; Component Lifecycle</span>
+            <span className="font-semibold">useEffect & Component Lifecycle</span>
           </div>
         </div>
       </header>
@@ -137,11 +137,11 @@ Good afternoon, good evening, and good night.`
         </div>
 
         {/* Interactive Demonstrations */}
-        {chapter === 0 &amp;&amp; <ControlRoomDemo />}
-        {chapter === 1 &amp;&amp; <DependencyTrackerDemo />}
-        {chapter === 2 &amp;&amp; <CleanupComparisonDemo />}
-        {chapter === 3 &amp;&amp; <UnmountSequenceDemo />}
-        {chapter === 4 &amp;&amp; <LifecycleTimelineDemo />}
+        {chapter === 0 && <ControlRoomDemo />}
+        {chapter === 1 && <DependencyTrackerDemo />}
+        {chapter === 2 && <CleanupComparisonDemo />}
+        {chapter === 3 && <UnmountSequenceDemo />}
+        {chapter === 4 && <LifecycleTimelineDemo />}
       </main>
 
       {/* Chapter Navigation */}
@@ -427,7 +427,7 @@ function CleanupComparisonDemo() {
 
       <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
         <div className={`p-6 rounded-lg border ${
-          mounted &amp;&amp; withCleanup
+          mounted && withCleanup
             ? 'bg-sky-500/10 border-sky-500'
             : 'bg-slate-800/50 border-slate-700'
         }`}>
@@ -435,13 +435,13 @@ function CleanupComparisonDemo() {
           <p className="text-sm text-slate-400 mb-4">
             Effect runs, then cleanup executes on unmount. Resources freed cleanly.
           </p>
-          {mounted &amp;&amp; withCleanup &amp;&amp; (
+          {mounted && withCleanup && (
             <div className="text-sky-400 text-sm animate-pulse">✓ Running smoothly</div>
           )}
         </div>
 
         <div className={`p-6 rounded-lg border ${
-          mounted &amp;&amp; !withCleanup
+          mounted && !withCleanup
             ? 'bg-red-500/10 border-red-500 animate-pulse'
             : 'bg-slate-800/50 border-slate-700'
         }`}>
@@ -449,7 +449,7 @@ function CleanupComparisonDemo() {
           <p className="text-sm text-slate-400 mb-4">
             Effect runs, but timers keep running after unmount. Memory leak!
           </p>
-          {!withCleanup &amp;&amp; leakedTimers > 0 &amp;&amp; (
+          {!withCleanup && leakedTimers > 0 && (
             <div className="text-red-400 text-sm">⚠ {leakedTimers} leaked timer(s)</div>
           )}
         </div>
@@ -560,7 +560,7 @@ function UnmountSequenceDemo() {
         </button>
       </div>
 
-      {step === steps.length - 1 &amp;&amp; (
+      {step === steps.length - 1 && (
         <div className="mt-6 p-4 bg-sky-500/10 border border-sky-500 rounded-lg">
           <div className="text-sky-300 font-semibold mb-2">✓ Clean Unmount Complete</div>
           <p className="text-slate-300 text-sm">
@@ -644,7 +644,7 @@ function LifecycleTimelineDemo() {
         }`}>
           <div className="font-bold text-sky-300 mb-2">Setup Function</div>
           <div className="text-sm text-slate-400">Runs on mount and when dependencies change</div>
-          {(phase === 'mounting' || phase === 'updating') &amp;&amp; (
+          {(phase === 'mounting' || phase === 'updating') && (
             <div className="mt-2 text-sky-400 text-xs animate-pulse">→ Executing...</div>
           )}
         </div>
@@ -656,7 +656,7 @@ function LifecycleTimelineDemo() {
         }`}>
           <div className="font-bold text-cyan-300 mb-2">Component Active</div>
           <div className="text-sm text-slate-400">Rendering and responding to state changes</div>
-          {phase === 'mounted' &amp;&amp; (
+          {phase === 'mounted' && (
             <div className="mt-2 text-cyan-400 text-xs">Updates: {updateCount}</div>
           )}
         </div>
@@ -668,7 +668,7 @@ function LifecycleTimelineDemo() {
         }`}>
           <div className="font-bold text-red-300 mb-2">Cleanup Function</div>
           <div className="text-sm text-slate-400">Runs before re-running effect or unmounting</div>
-          {phase === 'unmounting' &amp;&amp; (
+          {phase === 'unmounting' && (
             <div className="mt-2 text-red-400 text-xs animate-pulse">→ Cleaning up...</div>
           )}
         </div>

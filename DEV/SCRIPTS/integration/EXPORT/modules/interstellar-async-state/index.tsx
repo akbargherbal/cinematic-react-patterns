@@ -54,7 +54,7 @@ export default function InterstellarAsyncState() {
             Interstellar: Async State
           </h1>
           <p className="text-slate-400 text-sm md:text-base">
-            Cooper, Gargantua, 2014 • Asynchronous State &amp; Race Conditions
+            Cooper, Gargantua, 2014 • Asynchronous State & Race Conditions
           </p>
         </div>
       </header>
@@ -70,11 +70,11 @@ export default function InterstellarAsyncState() {
         </div>
 
         {/* Chapter Content */}
-        {chapter === 0 &amp;&amp; <ChapterOne />}
-        {chapter === 1 &amp;&amp; <ChapterTwo />}
-        {chapter === 2 &amp;&amp; <ChapterThree />}
-        {chapter === 3 &amp;&amp; <ChapterFour />}
-        {chapter === 4 &amp;&amp; <ChapterFive />}
+        {chapter === 0 && <ChapterOne />}
+        {chapter === 1 && <ChapterTwo />}
+        {chapter === 2 && <ChapterThree />}
+        {chapter === 3 && <ChapterFour />}
+        {chapter === 4 && <ChapterFive />}
       </main>
 
       {/* Chapter Navigation */}
@@ -334,7 +334,7 @@ function ChapterTwo() {
                 <div className="text-sm text-slate-400">
                   Captured age: <span className="text-amber-400 font-mono">{msg.capturedAge}</span>
                 </div>
-                {msg.receivedAt &amp;&amp; (
+                {msg.receivedAt && (
                   <div className="mt-2 pt-2 border-t border-red-500/20">
                     <div className="text-sm text-red-400 flex items-center gap-2">
                       <AlertTriangle className="w-4 h-4" />
@@ -481,7 +481,7 @@ function ChapterThree() {
               <div className="text-xs text-slate-400">
                 Duration: {op.duration}ms • Result: {op.result}
               </div>
-              {op.endTime &amp;&amp; (
+              {op.endTime && (
                 <div className="mt-2 text-xs text-green-400 flex items-center gap-2">
                   <CheckCircle className="w-3 h-3" />
                   Completed at {new Date(op.endTime).toLocaleTimeString()}
@@ -763,7 +763,7 @@ function ChapterFive() {
           {showComparison ? "Hide" : "Show"} Incorrect vs Correct Comparison
         </button>
 
-        {showComparison &amp;&amp; (
+        {showComparison && (
           <div className="grid md:grid-cols-2 gap-4 mb-6">
             <div className="bg-red-950/30 border border-red-500/30 rounded-lg p-4">
               <h4 className="text-lg font-bold text-red-400 mb-3 flex items-center gap-2">

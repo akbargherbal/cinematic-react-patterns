@@ -31,7 +31,7 @@ const Arrow: React.FC<ArrowProps> = ({ direction, color, animated = false, label
         className={`w-8 h-8 ${colorClass} ${animated ? 'animate-pulse' : ''}`}
         strokeWidth={3}
       />
-      {label &amp;&amp; (
+      {label && (
         <span className={`text-xs ${colorClass} font-mono`}>
           {label}
         </span>

@@ -239,7 +239,7 @@ Or prepare for the T-Rex.`,
             Isla Nublar, 1993
           </p>
           <p className="text-sm text-amber-400/70 ml-11 mt-1">
-            Side Effects &amp; useEffect Cleanup
+            Side Effects & useEffect Cleanup
           </p>
         </div>
       </header>
@@ -262,11 +262,11 @@ Or prepare for the T-Rex.`,
         </article>
 
         {/* Interactive Demonstrations */}
-        {chapter === 0 &amp;&amp; <ParkStatusDemo />}
-        {chapter === 1 &amp;&amp; <BreedingCounterDemo />}
-        {chapter === 2 &amp;&amp; <PowerFailureDemo />}
-        {chapter === 3 &amp;&amp; <CodeComparisonDemo />}
-        {chapter === 4 &amp;&amp; <SideBySideDemo />}
+        {chapter === 0 && <ParkStatusDemo />}
+        {chapter === 1 && <BreedingCounterDemo />}
+        {chapter === 2 && <PowerFailureDemo />}
+        {chapter === 3 && <CodeComparisonDemo />}
+        {chapter === 4 && <SideBySideDemo />}
       </main>
 
       {/* Chapter Navigation */}
@@ -397,7 +397,7 @@ function BreedingCounterDemo() {
           <div className="text-xs text-slate-500">
             Expected: 238 | Current: {population}
           </div>
-          {population > 238 &amp;&amp; (
+          {population > 238 && (
             <div className="mt-4 text-sm text-red-400 flex items-center justify-center gap-2">
               <AlertTriangle className="w-4 h-4" />
               Unauthorized breeding detected!
@@ -440,7 +440,7 @@ function PowerFailureDemo() {
   const intervalRef = useRef<number | null>(null);
 
   useEffect(() => {
-    if (!hasPower &amp;&amp; !hasCleanup) {
+    if (!hasPower && !hasCleanup) {
       // Simulate memory leak - effect continues without cleanup
       intervalRef.current = window.setInterval(() => {
         setEscapedDinosaurs((d) => d + 1);
@@ -450,7 +450,7 @@ function PowerFailureDemo() {
 
     // Cleanup function - only runs if hasCleanup is true
     return () => {
-      if (hasCleanup &amp;&amp; intervalRef.current) {
+      if (hasCleanup && intervalRef.current) {
         clearInterval(intervalRef.current);
         setEscapedDinosaurs(0);
         setResourceUsage(0);

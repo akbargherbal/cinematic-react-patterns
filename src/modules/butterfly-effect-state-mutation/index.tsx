@@ -138,7 +138,7 @@ The butterfly effect is real. One mutation can cascade through your entire state
             <h1 className="text-4xl font-bold text-amber-500">The Butterfly Effect</h1>
           </div>
           <p className="text-lg text-slate-400">Evan Treborn, 2004</p>
-          <p className="text-sm text-amber-500/70 mt-1">Side Effects &amp; State Purity</p>
+          <p className="text-sm text-amber-500/70 mt-1">Side Effects & State Purity</p>
         </div>
       </header>
 
@@ -154,7 +154,7 @@ The butterfly effect is real. One mutation can cascade through your entire state
           </div>
         </article>
 
-        {currentChapter.demo &amp;&amp; (
+        {currentChapter.demo && (
           <div className="mt-12">
             <currentChapter.demo />
           </div>
@@ -313,7 +313,7 @@ function MutationExample() {
         {mutated ? 'Reset Timeline' : 'Mutate State'}
       </button>
 
-      {mutated &amp;&amp; (
+      {mutated && (
         <div className="mt-6 p-4 bg-red-950/30 border border-red-500/30 rounded-lg">
           <p className="text-sm text-red-400">
             ⚠️ Mutation executed. But what else changed? Evan's entire life is now different...
@@ -397,7 +397,7 @@ function CascadingEffectDemo() {
         })}
       </div>
 
-      {mutatedNode &amp;&amp; (
+      {mutatedNode && (
         <div className="space-y-4">
           <div className="p-4 bg-red-950/30 border border-red-500/30 rounded-lg">
             <p className="text-sm text-red-400 mb-2">

@@ -205,7 +205,7 @@ With a stable, unique key, I persist. My state survives. My identity is maintain
             </h1>
           </div>
           <p className="text-lg text-slate-400">
-            Component Keys &amp; Identity
+            Component Keys & Identity
           </p>
         </div>
       </header>
@@ -325,7 +325,7 @@ function VoightKampffDemo() {
         {scanning ? 'Scanning...' : 'Run Identity Test'}
       </button>
 
-      {scanning &amp;&amp; (
+      {scanning && (
         <div className="bg-slate-800 border border-cyan-500/30 rounded p-4 animate-pulse">
           <div className="text-cyan-400 text-sm mb-2">Analyzing...</div>
           <div className="h-2 bg-slate-700 rounded overflow-hidden">
@@ -334,7 +334,7 @@ function VoightKampffDemo() {
         </div>
       )}
 
-      {!scanning &amp;&amp; (
+      {!scanning && (
         <div className={`border rounded p-4 ${useKeys ? 'bg-emerald-950/20 border-emerald-500/30' : 'bg-red-950/20 border-red-500/30'}`}>
           <div className="flex items-start gap-3">
             {useKeys ? (
@@ -542,7 +542,7 @@ function TearsInRainDemo() {
       </div>
 
       <div className="mb-6">
-        {mounted &amp;&amp; (
+        {mounted && (
           <RoyBattyComponent useProperKey={useProperKey} />
         )}
       </div>
