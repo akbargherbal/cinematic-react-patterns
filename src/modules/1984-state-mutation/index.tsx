@@ -308,7 +308,7 @@ oldState === newState  // false
                 <div className="mb-2 text-sm text-slate-400">History Log:</div>
                 <div className="max-h-48 overflow-y-auto rounded border border-slate-700 bg-slate-950 p-4">
                   {historyLog.length === 0 ? (
-                    <div className="text-sm italic text-slate-500">
+                    <div className="text-sm text-slate-500 italic">
                       No history recorded...
                     </div>
                   ) : (
@@ -480,17 +480,20 @@ setState(state.map(item =>
     <div className="min-h-screen bg-slate-950 font-mono text-slate-300">
       {/* Header */}
       <header className="sticky top-0 z-10 border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm">
-        <div className="mx-auto max-w-7xl px-4 py-6">
-          <div className="mb-2 flex items-center gap-4">
-            <FileText className="h-8 w-8 text-blue-400" />
-            <div>
-              <h1 className="text-3xl font-bold text-slate-100 md:text-4xl">
-                1984
-              </h1>
+        <div className="mx-auto max-w-7xl p-4">
+          <div className="flex items-center justify-between px-8">
+            <div className="mb-2 flex items-center gap-4">
+              <FileText className="h-8 w-8 text-blue-400" />
+              <div>
+                <h1 className="text-3xl font-bold text-slate-100 md:text-4xl">
+                  1984
+                </h1>
+                </div>
+              </div>
               <p className="text-sm text-slate-400 md:text-base">
                 Winston Smith, Ministry of Truth, 1949
               </p>
-            </div>
+            
           </div>
           <div className="inline-block rounded border border-blue-700/50 bg-blue-950/50 px-3 py-1 text-sm text-blue-300">
             React Concept: Immutable State Updates
@@ -506,7 +509,7 @@ setState(state.map(item =>
             <h2 className="mb-4 border-b border-slate-800 pb-2 text-2xl font-bold text-slate-100">
               {currentChapter.title}
             </h2>
-            <div className="whitespace-pre-line text-sm leading-relaxed text-slate-300 md:text-base">
+            <div className="text-sm leading-relaxed whitespace-pre-line text-slate-300 md:text-base">
               {currentChapter.content}
             </div>
           </article>
@@ -527,7 +530,7 @@ setState(state.map(item =>
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 z-20 border-t border-slate-800 bg-slate-900/95 backdrop-blur-sm">
+      <footer className="fixed right-0 bottom-0 left-0 z-20 border-t border-slate-800 bg-slate-900/95 backdrop-blur-sm">
         <div className="mx-auto max-w-7xl px-4 py-4">
           <div className="flex items-center justify-between">
             <button

@@ -110,16 +110,20 @@ Better props produce better renders. The quality of your props determines the qu
       {/* Header */}
       <header className="border-b border-blue-500/30 bg-slate-950/50 backdrop-blur-sm">
         <div className="mx-auto max-w-6xl px-4 py-6">
-          <div className="mb-2 flex items-center gap-3">
-            <Clock className="h-8 w-8 text-blue-400" />
-            <h1 className="bg-gradient-to-r from-blue-400 to-orange-400 bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
-              Back to the Future
-            </h1>
+          <div className="flex items-center justify-between px-6 py-4">
+            <div className="mb-2 flex items-center gap-3">
+              <Clock className="h-8 w-8 text-blue-400" />
+              <h1 className="bg-gradient-to-r from-blue-400 to-orange-400 bg-clip-text text-3xl font-bold text-transparent md:text-4xl">
+                Back to the Future
+              </h1>
+            </div>
+
+            <p className="ml-11 text-lg text-slate-400">
+              Marty McFly, Hill Valley, 1985
+            </p>
           </div>
-          <p className="ml-11 text-lg text-slate-400">
-            Marty McFly, Hill Valley, 1985
-          </p>
-          <div className="ml-11 mt-3 flex items-center gap-2">
+
+          <div className="ml-6 flex items-center gap-2">
             <Zap className="h-5 w-5 text-orange-400" />
             <p className="text-sm font-semibold text-orange-400">
               Props Changes &amp; Component Updates
@@ -129,7 +133,7 @@ Better props produce better renders. The quality of your props determines the qu
       </header>
 
       {/* Main Content */}
-      <main className="mx-auto max-w-6xl px-4 py-8 pb-32">
+      <main className="mx-auto max-w-6xl p-8 pb-32">
         {/* Chapter Title */}
         <div className="mb-8">
           <h2 className="mb-2 text-2xl font-bold text-white md:text-3xl">
@@ -140,7 +144,7 @@ Better props produce better renders. The quality of your props determines the qu
 
         {/* Narrative Content */}
         <div className="prose prose-invert prose-slate mb-12 max-w-none">
-          <div className="whitespace-pre-line leading-relaxed text-slate-300">
+          <div className="leading-relaxed whitespace-pre-line text-slate-300">
             {currentChapter.content}
           </div>
         </div>
@@ -547,7 +551,7 @@ Better props produce better renders. The quality of your props determines the qu
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 border-t border-blue-500/30 bg-slate-950/90 backdrop-blur-sm">
+      <footer className="fixed right-0 bottom-0 left-0 border-t border-blue-500/30 bg-slate-950/90 backdrop-blur-sm">
         <div className="mx-auto max-w-6xl px-4 py-4">
           <div className="flex items-center justify-between">
             <button

@@ -166,14 +166,18 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
     <div className="min-h-screen bg-slate-950 font-sans text-slate-300">
       {/* Header */}
       <header className="sticky top-0 z-10 border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm">
-        <div className="mx-auto max-w-6xl px-4 py-6">
-          <div className="mb-2 flex items-center gap-3">
-            <Users className="h-8 w-8 text-red-500" />
-            <h1 className="text-4xl font-bold text-slate-100">Coherence</h1>
+        <div className="mx-auto max-w-6xl px-12 py-6">
+          <div className="flex items-center justify-between">
+            <div>
+              <div className="mb-2 flex items-center gap-3">
+                <Users className="h-8 w-8 text-red-500" />
+                <h1 className="text-4xl font-bold text-slate-100">Coherence</h1>
+              </div>
+            </div>
+            <p className="text-lg text-slate-400">
+              State Synchronization Across Component Instances
+            </p>
           </div>
-          <p className="text-lg text-slate-400">
-            State Synchronization Across Component Instances
-          </p>
           <p className="mt-1 text-sm text-slate-500">
             Em, The Dinner Party, 2013
           </p>
@@ -192,7 +196,7 @@ Em realizes the truth: she's not in her original reality. She's in a close appro
 
         {/* Chapter Content */}
         <div className="prose prose-invert prose-slate mb-12 max-w-none">
-          <div className="whitespace-pre-line leading-relaxed text-slate-300">
+          <div className="leading-relaxed whitespace-pre-line text-slate-300">
             {currentChapter.content}
           </div>
         </div>
@@ -632,8 +636,8 @@ function ChildInstance({ state }) {
       </main>
 
       {/* Chapter Navigation */}
-      <footer className="fixed bottom-0 left-0 right-0 border-t border-slate-800 bg-slate-950/90 backdrop-blur-sm">
-        <div className="mx-auto max-w-6xl px-4 py-4">
+      <footer className="fixed right-0 bottom-0 left-0 border-t border-slate-800 bg-slate-950/90 backdrop-blur-sm">
+        <div className="mx-auto max-w-6xl px-4 py-2">
           <div className="flex items-center justify-between">
             <button
               onClick={handlePrevious}

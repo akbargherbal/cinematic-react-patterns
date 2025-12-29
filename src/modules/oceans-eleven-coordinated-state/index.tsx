@@ -588,14 +588,18 @@ The heist worked because we understood: complexity requires coordination. When y
     <div className="min-h-screen bg-slate-950 font-sans text-slate-300">
       {/* Header */}
       <header className="sticky top-0 z-10 border-b border-amber-500/30 bg-slate-950/80 backdrop-blur-sm">
-        <div className="mx-auto max-w-7xl px-4 py-6">
+        <div className="mx-auto max-w-7xl p-6">
+<div className="flex justify-between items-center">
           <div className="mb-2 flex items-center gap-3">
             <Users className="h-8 w-8 text-amber-500" />
             <h1 className="text-3xl font-bold text-amber-500 md:text-4xl">
               Ocean's Eleven
             </h1>
           </div>
+
           <p className="text-lg text-slate-400">Coordinated State Management</p>
+</div>
+
           <div className="mt-3 flex items-center gap-2 text-sm text-amber-400">
             <span className="rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1">
               useReducer
