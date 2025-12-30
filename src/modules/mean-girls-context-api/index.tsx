@@ -12,7 +12,6 @@ import {
   Zap,
   AlertTriangle,
   CheckCircle2,
-  Code2,
   Play,
   RefreshCcw,
   Sparkles,
@@ -22,13 +21,13 @@ import {
   Search,
   Pause,
   Eye,
-  EyeOff,
 } from "lucide-react";
+import { CodeBlock } from "@/components/common/CodeBlock";
 
 /**
  * THE BURN BOOK: Interactive Context API Tutorial
  * Teaching React Context through Mean Girls metaphors
- * 
+ *
  * Following Best Practices for Designing Effective React Learning Modules
  */
 
@@ -110,11 +109,11 @@ const Intro = ({ onNext }: { onNext: () => void }) => (
       <div className="absolute -top-6 -right-6 bg-yellow-400 p-4 rounded-full shadow-lg rotate-12 border-4 border-white">
         <Sparkles className="text-white" />
       </div>
-      
+
       <h2 className="text-3xl font-black text-pink-600 mb-4">
         "Get in, loser. We're learning Context."
       </h2>
-      
+
       <p className="text-gray-700 text-lg leading-relaxed mb-6">
         Passing data through nested components can be a total disaster—like
         trying to keep a secret in North Shore High. In this tutorial, we'll see
@@ -200,12 +199,31 @@ const Intro = ({ onNext }: { onNext: () => void }) => (
 const PropDrillingDemo = ({ onNext }: { onNext: () => void }) => {
   const [secret, setSecret] = useState("Cady is a grool friend.");
   const [renderCount, setRenderCount] = useState(0);
-  const [showCode, setShowCode] = useState(false);
 
   const handleUpdate = (e: React.ChangeEvent<HTMLInputElement>) => {
     setSecret(e.target.value);
     setRenderCount((c) => c + 1);
   };
+
+  const codeExample = `// ❌ Prop Drilling Pattern
+
+// Step 1: Parent creates state
+function Regina() {
+  const [secret, setSecret] = useState("...");
+  return <Gretchen secret={secret} />; // Step 2: Pass to child
+}
+
+// Step 3: Middle component (doesn't use it!)
+function Gretchen({ secret }) {
+  // ❌ Why am I here? Just passing through...
+  // ❌ But I re-render EVERY time 'secret' changes!
+  return <Karen secret={secret} />; // Step 4: Pass again
+}
+
+// Step 5: Finally used here
+function Karen({ secret }) {
+  return <div>{secret}</div>;
+}`;
 
   return (
     <div className="animate-in fade-in duration-500 space-y-6">
@@ -220,7 +238,7 @@ const PropDrillingDemo = ({ onNext }: { onNext: () => void }) => {
           <Info className="text-red-500" size={24} />
           The Gretchen Weiners Problem
         </h3>
-        
+
         <p className="text-gray-600 mb-6">
           Regina has a secret. She needs to tell Karen, but Karen only listens
           to Gretchen. Gretchen doesn't care about the secret, but she{" "}
@@ -300,51 +318,17 @@ const PropDrillingDemo = ({ onNext }: { onNext: () => void }) => {
         </div>
       </div>
 
-      {/* Code Example - Collapsible */}
-      <div className="bg-gray-900 text-pink-100 p-6 rounded-2xl font-mono text-sm shadow-xl">
-        <div className="flex items-center justify-between mb-4">
-          <h4 className="text-red-400 font-bold flex items-center gap-2">
-            <Code2 size={20} />
-            // ❌ Prop Drilling Boilerplate
-          </h4>
-          <button
-            onClick={() => setShowCode(!showCode)}
-            className="text-pink-300 hover:text-pink-100 flex items-center gap-2 text-xs"
-          >
-            {showCode ? <EyeOff size={16} /> : <Eye size={16} />}
-            {showCode ? "Hide Code" : "Show Code"}
-          </button>
-        </div>
-
-        {showCode && (
-          <pre className="overflow-x-auto text-xs leading-relaxed">
-            {`// ❌ Prop Drilling Pattern
-
-// Step 1: Parent creates state
-function Regina() {
-  const [secret, setSecret] = useState("...");
-  return <Gretchen secret={secret} />; // Step 2: Pass to child
-}
-
-// Step 3: Middle component (doesn't use it!)
-function Gretchen({ secret }) {
-  // ❌ Why am I here? Just passing through...
-  // ❌ But I re-render EVERY time 'secret' changes!
-  return <Karen secret={secret} />; // Step 4: Pass again
-}
-
-// Step 5: Finally used here
-function Karen({ secret }) {
-  return <div>{secret}</div>;
-}`}
-          </pre>
-        )}
-      </div>
+      {/* Code Example with CodeBlock */}
+      <CodeBlock
+        code={codeExample}
+        variant="error"
+        title="// ❌ Prop Drilling Boilerplate"
+      />
 
       {/* Learning Checkpoint */}
       <div className="bg-yellow-50 border-2 border-yellow-400 p-4 rounded-xl">
         <p className="text-yellow-800">
-          <strong>⚠️ You now recognize:</strong> Prop drilling creates unnecessary 
+          <strong>⚠️ You now recognize:</strong> Prop drilling creates unnecessary
           re-renders and tight coupling between components. Gretchen suffers for no reason!
         </p>
       </div>
@@ -362,7 +346,35 @@ function Karen({ secret }) {
 // --- Chapter 2: Context Solution ---
 const ContextDemo = ({ onNext }: { onNext: () => void }) => {
   const [secret, setSecret] = useState("She's fabulous, but she's evil.");
-  const [showCode, setShowCode] = useState(false);
+
+  const codeExample = `// ✅ Context API Pattern
+
+// Step 1: Create the Context (The Burn Book)
+const BurnBookContext = createContext();
+
+// Step 2: Wrap tree with Provider
+function App() {
+  const [secret, setSecret] = useState("...");
+
+  return (
+    <BurnBookContext.Provider value={secret}>
+      <School /> {/* ✅ Any descendant can access */}
+    </BurnBookContext.Provider>
+  );
+}
+
+// Step 3: Consume directly (no props!)
+function Karen() {
+  const secret = useContext(BurnBookContext);
+  // ✅ Gets 'secret' directly from Context
+  return <div>{secret}</div>;
+}
+
+// ✅ Gretchen doesn't need to know about 'secret'
+function Gretchen() {
+  // ✅ No props! No re-renders when 'secret' changes!
+  return <div>I'm just doing my thing!</div>;
+}`;
 
   return (
     <div className="animate-in fade-in duration-500 space-y-6">
@@ -377,7 +389,7 @@ const ContextDemo = ({ onNext }: { onNext: () => void }) => {
           <Book className="text-green-500" size={24} />
           The Burn Book Strategy
         </h3>
-        
+
         <p className="text-gray-600 mb-6">
           Instead of passing secrets hand-to-hand, we put them in the{" "}
           <strong>Burn Book (Context)</strong>. Now, anyone who wants to know
@@ -458,55 +470,12 @@ const ContextDemo = ({ onNext }: { onNext: () => void }) => {
         </div>
       </div>
 
-      {/* Code Example */}
-      <div className="bg-gray-900 text-green-100 p-6 rounded-2xl font-mono text-sm shadow-xl">
-        <div className="flex items-center justify-between mb-4">
-          <h4 className="text-green-400 font-bold flex items-center gap-2">
-            <Code2 size={20} />
-            // ✅ The Context API Pattern
-          </h4>
-          <button
-            onClick={() => setShowCode(!showCode)}
-            className="text-green-300 hover:text-green-100 flex items-center gap-2 text-xs"
-          >
-            {showCode ? <EyeOff size={16} /> : <Eye size={16} />}
-            {showCode ? "Hide Code" : "Show Code"}
-          </button>
-        </div>
-
-        {showCode && (
-          <pre className="overflow-x-auto text-xs leading-relaxed">
-            {`// ✅ Context API Pattern
-
-// Step 1: Create the Context (The Burn Book)
-const BurnBookContext = createContext();
-
-// Step 2: Wrap tree with Provider
-function App() {
-  const [secret, setSecret] = useState("...");
-  
-  return (
-    <BurnBookContext.Provider value={secret}>
-      <School /> {/* ✅ Any descendant can access */}
-    </BurnBookContext.Provider>
-  );
-}
-
-// Step 3: Consume directly (no props!)
-function Karen() {
-  const secret = useContext(BurnBookContext);
-  // ✅ Gets 'secret' directly from Context
-  return <div>{secret}</div>;
-}
-
-// ✅ Gretchen doesn't need to know about 'secret'
-function Gretchen() {
-  // ✅ No props! No re-renders when 'secret' changes!
-  return <div>I'm just doing my thing!</div>;
-}`}
-          </pre>
-        )}
-      </div>
+      {/* Code Example with CodeBlock */}
+      <CodeBlock
+        code={codeExample}
+        variant="success"
+        title="// ✅ The Context API Pattern"
+      />
 
       {/* Zen Integration */}
       <div className="bg-purple-50 border-2 border-purple-400 p-6 rounded-xl">
@@ -518,7 +487,7 @@ function Gretchen() {
           <em>"Lift state up when sharing; keep it local when not."</em>
         </p>
         <p className="text-purple-600 text-xs">
-          Context lifts state to the <strong>Provider</strong> level, making it available 
+          Context lifts state to the <strong>Provider</strong> level, making it available
           to all descendants without prop drilling. This is "lifting up" taken to the max!
         </p>
       </div>
@@ -526,7 +495,7 @@ function Gretchen() {
       {/* Learning Checkpoint */}
       <div className="bg-green-50 border-2 border-green-400 p-4 rounded-xl">
         <p className="text-green-800">
-          <strong>✓ You now understand:</strong> Context API decouples components and 
+          <strong>✓ You now understand:</strong> Context API decouples components and
           prevents unnecessary re-renders in middle layers. Gretchen is free!
         </p>
       </div>
@@ -600,8 +569,8 @@ const ComparisonView = ({ onNext }: { onNext: () => void }) => {
           Side-by-Side Comparison
         </h3>
         <p className="text-gray-600 mb-6">
-          Let's see both approaches in action. Type in the input below and watch 
-          how each pattern handles re-renders. Notice Gretchen's suffering in prop 
+          Let's see both approaches in action. Type in the input below and watch
+          how each pattern handles re-renders. Notice Gretchen's suffering in prop
           drilling vs. her peace with Context!
         </p>
 
@@ -785,7 +754,7 @@ const ComparisonView = ({ onNext }: { onNext: () => void }) => {
       {/* Learning Checkpoint */}
       <div className="bg-blue-50 border-2 border-blue-400 p-4 rounded-xl">
         <p className="text-blue-800">
-          <strong>✓ You can now:</strong> Compare prop drilling vs Context side-by-side 
+          <strong>✓ You can now:</strong> Compare prop drilling vs Context side-by-side
           and see the performance difference in real-time. The numbers don't lie!
         </p>
       </div>
@@ -804,7 +773,6 @@ const ComparisonView = ({ onNext }: { onNext: () => void }) => {
 const PerformancePitfall = ({ onNext }: { onNext: () => void }) => {
   const [isRunning, setIsRunning] = useState(false);
   const [tick, setTick] = useState(0);
-  const [showCode, setShowCode] = useState(false);
   const timerRef = useRef<number | null>(null);
 
   useEffect(() => {
@@ -829,6 +797,44 @@ const PerformancePitfall = ({ onNext }: { onNext: () => void }) => {
     setTick(0);
   };
 
+  const codeExample = `// ❌ God Context Anti-Pattern
+
+const AppContext = createContext();
+
+function App() {
+  const [user, setUser] = useState({});
+  const [theme, setTheme] = useState("light");
+  const [notifications, setNotifications] = useState([]);
+  const [settings, setSettings] = useState({});
+  const [cart, setCart] = useState([]);
+  // ... 20 more pieces of state
+
+  return (
+    <AppContext.Provider value={{
+      user, setUser,
+      theme, setTheme,
+      notifications, setNotifications,
+      settings, setSettings,
+      cart, setCart,
+      // ... everything!
+    }}>
+      <App />
+    </AppContext.Provider>
+  );
+}
+
+// ❌ Component only needs 'theme' but gets ALL updates
+function Navbar() {
+  const { theme } = useContext(AppContext);
+
+  // 💥 Re-renders when notifications change!
+  // 💥 Re-renders when user data changes!
+  // 💥 Re-renders when cart changes!
+  // 💥 Re-renders when settings change!
+
+  return <nav className={theme}>...</nav>;
+}`;
+
   return (
     <div className="animate-in fade-in duration-500 space-y-6">
       {/* Problem Statement with Red Border */}
@@ -846,7 +852,7 @@ const PerformancePitfall = ({ onNext }: { onNext: () => void }) => {
           <AlertTriangle className="text-red-500" size={24} />
           The Riot: God Context Problem
         </h3>
-        
+
         <p className="text-gray-600 mb-6">
           Putting <strong>everything</strong> in one giant Context is like
           Regina releasing all the pages of the Burn Book at once. When{" "}
@@ -926,70 +932,18 @@ const PerformancePitfall = ({ onNext }: { onNext: () => void }) => {
         </div>
       </div>
 
-      {/* Code Example */}
-      <div className="bg-gray-900 text-red-100 p-6 rounded-2xl font-mono text-sm shadow-xl">
-        <div className="flex items-center justify-between mb-4">
-          <h4 className="text-red-400 font-bold flex items-center gap-2">
-            <Code2 size={20} />
-            // ❌ Monolithic Context (Everything in One)
-          </h4>
-          <button
-            onClick={() => setShowCode(!showCode)}
-            className="text-red-300 hover:text-red-100 flex items-center gap-2 text-xs"
-          >
-            {showCode ? <EyeOff size={16} /> : <Eye size={16} />}
-            {showCode ? "Hide Code" : "Show Code"}
-          </button>
-        </div>
-
-        {showCode && (
-          <pre className="overflow-x-auto text-xs leading-relaxed">
-            {`// ❌ God Context Anti-Pattern
-
-const AppContext = createContext();
-
-function App() {
-  const [user, setUser] = useState({});
-  const [theme, setTheme] = useState("light");
-  const [notifications, setNotifications] = useState([]);
-  const [settings, setSettings] = useState({});
-  const [cart, setCart] = useState([]);
-  // ... 20 more pieces of state
-
-  return (
-    <AppContext.Provider value={{
-      user, setUser,
-      theme, setTheme,
-      notifications, setNotifications,
-      settings, setSettings,
-      cart, setCart,
-      // ... everything!
-    }}>
-      <App />
-    </AppContext.Provider>
-  );
-}
-
-// ❌ Component only needs 'theme' but gets ALL updates
-function Navbar() {
-  const { theme } = useContext(AppContext);
-  
-  // 💥 Re-renders when notifications change!
-  // 💥 Re-renders when user data changes!
-  // 💥 Re-renders when cart changes!
-  // 💥 Re-renders when settings change!
-  
-  return <nav className={theme}>...</nav>;
-}`}
-          </pre>
-        )}
-      </div>
+      {/* Code Example with CodeBlock */}
+      <CodeBlock
+        code={codeExample}
+        variant="error"
+        title="// ❌ Monolithic Context (Everything in One)"
+      />
 
       {/* Learning Checkpoint */}
       <div className="bg-yellow-50 border-2 border-yellow-400 p-4 rounded-xl">
         <p className="text-yellow-800">
-          <strong>⚠️ You now recognize:</strong> Monolithic contexts cause unnecessary 
-          re-renders across unrelated components. When everything is in one Context, 
+          <strong>⚠️ You now recognize:</strong> Monolithic contexts cause unnecessary
+          re-renders across unrelated components. When everything is in one Context,
           changing anything affects everyone!
         </p>
       </div>
@@ -1015,12 +969,55 @@ function Navbar() {
 // --- Chapter 5: Split Contexts Solution ---
 const SplitContexts = ({ onNext }: { onNext: () => void }) => {
   const [activeUpdate, setActiveUpdate] = useState<"theme" | "user" | "notifications" | null>(null);
-  const [showCode, setShowCode] = useState(false);
 
   const triggerUpdate = (type: "theme" | "user" | "notifications") => {
     setActiveUpdate(type);
     setTimeout(() => setActiveUpdate(null), 1000);
   };
+
+  const codeExample = `// ✅ Split into Logical Contexts
+
+// Step 1: Create separate contexts for different concerns
+const ThemeContext = createContext();      // UI-related
+const UserContext = createContext();       // Auth-related
+const NotificationsContext = createContext(); // Messages-related
+
+// Step 2: Each provider manages its own domain
+function App() {
+  const [theme, setTheme] = useState("light");
+  const [user, setUser] = useState(null);
+  const [notifications, setNotifications] = useState([]);
+
+  return (
+    <ThemeContext.Provider value={{ theme, setTheme }}>
+      <UserContext.Provider value={{ user, setUser }}>
+        <NotificationsContext.Provider value={{ notifications, setNotifications }}>
+          <AppContent />
+        </NotificationsContext.Provider>
+      </UserContext.Provider>
+    </ThemeContext.Provider>
+  );
+}
+
+// Step 3: Components only subscribe to what they need
+function Navbar() {
+  const { theme } = useContext(ThemeContext);
+  // ✅ ONLY re-renders when theme changes
+  // ✅ Ignores user/notification updates
+  return <nav className={theme}>...</nav>;
+}
+
+function UserProfile() {
+  const { user } = useContext(UserContext);
+  // ✅ ONLY re-renders when user changes
+  return <div>{user.name}</div>;
+}
+
+function NotificationBell() {
+  const { notifications } = useContext(NotificationsContext);
+  // ✅ ONLY re-renders when notifications change
+  return <span>{notifications.length}</span>;
+}`;
 
   const ComponentGroup = ({
     name,
@@ -1070,7 +1067,7 @@ const SplitContexts = ({ onNext }: { onNext: () => void }) => {
           <Zap className="text-green-500" size={24} />
           The Solution: Divide and Conquer
         </h3>
-        
+
         <p className="text-gray-600 mb-6">
           Instead of one giant Burn Book, create <strong>multiple themed notebooks</strong>:
           one for theme/UI, one for user/auth, one for notifications. Now when theme
@@ -1082,7 +1079,7 @@ const SplitContexts = ({ onNext }: { onNext: () => void }) => {
           <h4 className="font-bold text-gray-800 mb-4 text-center">
             Interactive Demo: Trigger Updates
           </h4>
-          
+
           <div className="flex flex-wrap justify-center gap-3 mb-6">
             <button
               onClick={() => triggerUpdate("theme")}
@@ -1153,70 +1150,12 @@ const SplitContexts = ({ onNext }: { onNext: () => void }) => {
         </div>
       </div>
 
-      {/* Code Example */}
-      <div className="bg-gray-900 text-green-100 p-6 rounded-2xl font-mono text-sm shadow-xl">
-        <div className="flex items-center justify-between mb-4">
-          <h4 className="text-green-400 font-bold flex items-center gap-2">
-            <Code2 size={20} />
-            // ✅ Split into Logical Contexts
-          </h4>
-          <button
-            onClick={() => setShowCode(!showCode)}
-            className="text-green-300 hover:text-green-100 flex items-center gap-2 text-xs"
-          >
-            {showCode ? <EyeOff size={16} /> : <Eye size={16} />}
-            {showCode ? "Hide Code" : "Show Code"}
-          </button>
-        </div>
-
-        {showCode && (
-          <pre className="overflow-x-auto text-xs leading-relaxed">
-            {`// ✅ Split into Logical Contexts
-
-// Step 1: Create separate contexts for different concerns
-const ThemeContext = createContext();      // UI-related
-const UserContext = createContext();       // Auth-related
-const NotificationsContext = createContext(); // Messages-related
-
-// Step 2: Each provider manages its own domain
-function App() {
-  const [theme, setTheme] = useState("light");
-  const [user, setUser] = useState(null);
-  const [notifications, setNotifications] = useState([]);
-
-  return (
-    <ThemeContext.Provider value={{ theme, setTheme }}>
-      <UserContext.Provider value={{ user, setUser }}>
-        <NotificationsContext.Provider value={{ notifications, setNotifications }}>
-          <AppContent />
-        </NotificationsContext.Provider>
-      </UserContext.Provider>
-    </ThemeContext.Provider>
-  );
-}
-
-// Step 3: Components only subscribe to what they need
-function Navbar() {
-  const { theme } = useContext(ThemeContext);
-  // ✅ ONLY re-renders when theme changes
-  // ✅ Ignores user/notification updates
-  return <nav className={theme}>...</nav>;
-}
-
-function UserProfile() {
-  const { user } = useContext(UserContext);
-  // ✅ ONLY re-renders when user changes
-  return <div>{user.name}</div>;
-}
-
-function NotificationBell() {
-  const { notifications } = useContext(NotificationsContext);
-  // ✅ ONLY re-renders when notifications change
-  return <span>{notifications.length}</span>;
-}`}
-          </pre>
-        )}
-      </div>
+      {/* Code Example with CodeBlock */}
+      <CodeBlock
+        code={codeExample}
+        variant="success"
+        title="// ✅ Split into Logical Contexts"
+      />
 
       {/* Zen Integration */}
       <div className="bg-purple-50 border-2 border-purple-400 p-6 rounded-xl">
@@ -1364,7 +1303,7 @@ const Summary = ({ onRestart }: { onRestart: () => void }) => (
             <div className="font-semibold text-purple-900">
               Console Log Context Value
             </div>
-            <div className="text-sm text-purple-700 font-mono bg-purple-100 p-2 rounded mt-1">
+            <div className="bg-purple-100 p-3 rounded mt-1 font-mono text-xs text-purple-900">
               const value = useContext(MyContext);
               <br />
               console.log('Context updated:', value);

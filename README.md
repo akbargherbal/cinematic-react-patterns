@@ -657,8 +657,8 @@ Configured in `tsconfig.json` and `vite.config.ts`:
 
 Import modules: `import YourModule from "@modules/your-module";`
 
-## 🤝 Contributing
 
+## 🤝 Contributing
 We welcome contributions to enhance existing modules or add new variations!
 
 ### Ways to Contribute
@@ -667,7 +667,6 @@ We welcome contributions to enhance existing modules or add new variations!
 2. **Fix Bugs:** Report or fix issues in any of the 48 modules
 3. **Add New Features:** Suggest and implement new teaching approaches
 4. **Improve Documentation:** Help make the learning experience clearer
-5. **Create Variations:** Same concept, different fiction source
 
 ### Development Workflow
 
@@ -702,7 +701,360 @@ git push origin feature/your-enhancement
 - **Formatting:** Follow existing code style
 - **Components:** Functional components with hooks
 - **Comments:** Explain complex logic and metaphor connections
-- **Registry:** Maintain accurate metadata
+
+### Module Structure Guidelines
+
+#### **Preferred: Single-File Modules**
+
+Most modules should remain as a single `index.tsx` file for simplicity:
+
+```
+src/modules/your-module/
+└── index.tsx              # Complete module in one file
+```
+
+**When to use single-file:**
+- Logic is straightforward
+- Few internal components
+- **This is the default pattern—use it unless you have a clear reason not to**
+
+#### **Allowed: Multi-File Modules (When Justified)**
+
+For complex modules with multiple demos, charts, or intricate logic, you may organize into subdirectories:
+
+```
+src/modules/your-module/
+├── index.tsx              # Entry point (must export default component)
+├── components/
+│   ├── Demo.tsx          # Module-specific components
+│   └── Chart.tsx
+└── utils/
+    └── calculations.ts   # Module-specific utilities
+```
+
+**When to use multi-file:**
+- Multiple interactive demos/visualizations
+- Complex calculations or data transformations
+- Improved readability and maintainability
+
+### Critical Import Rules
+
+#### **✅ DO: Use Relative Imports Within Your Module**
+
+```typescript
+// Inside src/modules/your-module/index.tsx
+import { Demo } from "./components/Demo";
+import { calculate } from "./utils/calculations";
+```
+
+#### **✅ DO: Import from Common Components (Read-Only)**
+
+```typescript
+// Common components are available for use but NOT for modification
+import { CodeBlock } from "@/components/common/CodeBlock";
+```
+
+**Note:** The `/src/components/common/` directory is **read-only** for contributors. You can import and use existing common components, but you cannot add new ones or modify existing ones. If you need a shared component, discuss it with maintainers first.
+
+#### **❌ DON'T: Import from Other Modules**
+
+```typescript
+// ❌ NEVER do this - breaks module isolation
+import { Something } from "@modules/other-module/components/Thing";
+import { Helper } from "../other-module/utils/helper";
+```
+
+**Why this matters:**
+- Modules must remain completely isolated
+- Cross-module imports create tight coupling
+- If you need similar code, duplicate it in your module
+- **Duplication is better than coupling** in this architecture
+
+#### **Import Path Reference**
+
+| Import Type | Syntax | Use Case |
+|------------|--------|----------|
+| **Within same module** | `"./components/Demo"` | Internal module files |
+| **Common components** | `"@/components/common/CodeBlock"` | Shared utilities (read-only) |
+| **Other paths** | `"@/config/moduleRegistry"` | Project infrastructure |
+| **Other modules** | ❌ **FORBIDDEN** | Breaks isolation |
+
+### Adding Code Examples
+
+Use the shared `CodeBlock` component for all code examples:
+
+```tsx
+import { CodeBlock } from "@/components/common/CodeBlock";
+
+// Broken code (red theme)
+<CodeBlock 
+  code={yourCodeString}
+  variant="error"
+  title="// ❌ Common Mistake"
+/>
+
+// Fixed code (green theme)
+<CodeBlock 
+  code={yourCodeString}
+  variant="success"
+  title="// ✅ Correct Approach"
+/>
+
+// Neutral code (default theme)
+<CodeBlock 
+  code={yourCodeString}
+  title="// Example"
+/>
+```
+
+**Props:**
+- `code` (required): String of code to display
+- `variant`: `'default' | 'error' | 'success'` - Sets color theme
+- `title`: Appears in header with code icon
+- `language`: Syntax highlighting language (default: `'jsx'`)
+- `collapsible`: Show/hide toggle (default: `true`)
+- `defaultExpanded`: Start expanded (default: `false`)
+
+### Module Template
+
+Use `src/modules/_template/index.tsx` as a starting point for new modules (if adding variations).
+
+### Architecture Preservation
+
+**These rules are non-negotiable:**
+
+1. ✅ **Module Isolation:** Never import from other modules
+2. ✅ **Registry-First:** All module metadata lives in `moduleRegistry.ts`
+3. ✅ **Default Export:** Your `index.tsx` must export a default component
+4. ✅ **Self-Contained:** Bundle all module dependencies internally
+5. ✅ **Common Components:** Read-only—import but don't modify
+6. ❌ **No Shared Utilities:** Don't create cross-module helper folders
+
+If you need functionality that doesn't fit these constraints, open a discussion issue first.
+
+
+## 📦 Dependency Policy
+
+### Adding New Dependencies
+
+**Before proposing a new dependency, ask:**
+1. Does this enhance the educational value of a module?
+2. Could the concept be taught without this library?
+3. What's the bundle size impact?
+4. Is it actively maintained?
+
+**Approval Process:**
+- Open a GitHub Discussion explaining the need
+- Maintainers review based on pedagogical value
+- Bundle size analysis required for >50KB dependencies
+
+**Examples of Good Additions:**
+- Animation libraries for lifecycle/effect demos
+- State management libraries when teaching state patterns
+- Visualization tools for component tree exploration
+
+**Examples to Avoid:**
+- Alternative build tools (Vite is locked)
+- CSS frameworks beyond Tailwind
+- Libraries that hide React's internals
+
+
+
+## ✨ Auto Animate Integration
+
+### Overview
+
+[Auto Animate](https://auto-animate.formkit.com/) is a **zero-config animation library** (2KB) that automatically animates layout changes in your React components. It enhances the platform's educational value by making React's reconciliation process **visually observable**.
+
+**Educational Value:**
+- Makes component lifecycle events visible (mount/unmount animations)
+- Shows React's DOM diffing in action (list reordering, additions, deletions)
+- Teaches that "declarative UI = automatic transitions"
+- Zero learning curve for students (they see animations without writing animation code)
+
+**Bundle Impact:** +2KB (negligible)
+
+---
+
+### Installation
+
+```bash
+pnpm add @formkit/auto-animate
+```
+
+---
+
+### Basic Usage Pattern
+
+```tsx
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+
+export default function YourModule() {
+  const [parent] = useAutoAnimate();
+  
+  return (
+    <div ref={parent}>
+      {items.map(item => (
+        <div key={item.id}>{item.content}</div>
+      ))}
+    </div>
+  );
+}
+```
+
+**That's it.** Any additions, removals, or reorderings will animate automatically.
+
+---
+
+### Integration Strategy
+
+#### **Approach 1: Enhance Existing Modules (Recommended)**
+
+Add Auto Animate to modules where list operations or conditional rendering are demonstrated:
+
+**High-Impact Targets:**
+- ✅ **Blade Runner: Keys** - Animate replicant list additions/removals to show why keys matter
+- ✅ **Groundhog Day: Re-renders** - Animate component mounting/unmounting in the loop
+- ✅ **Sixth Sense: Conditional Rendering** - Animate components appearing/disappearing
+- ✅ **Usual Suspects: Dynamic Rendering** - Animate suspect lineup changes
+- ✅ **Ocean's 11: useReducer** - Animate heist team member additions (dispatch actions)
+- ✅ **Westworld: Component Instances** - Animate host activations/deactivations
+
+**Example: Enhancing Blade Runner Module**
+
+```tsx
+// Before (static)
+<div className="replicants-grid">
+  {replicants.map(rep => (
+    <ReplicantCard key={rep.id} {...rep} />
+  ))}
+</div>
+
+// After (auto-animated)
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+
+const [replicantsRef] = useAutoAnimate();
+
+<div ref={replicantsRef} className="replicants-grid">
+  {replicants.map(rep => (
+    <ReplicantCard key={rep.id} {...rep} />
+  ))}
+</div>
+```
+
+Now when replicants are added/removed, students **see** why stable keys matter—the animations break if keys change.
+
+---
+
+#### **Approach 2: Module-Wide Enhancement (Optional)**
+
+Add to the `ModuleWrapper` component for platform-wide subtle transitions:
+
+```tsx
+// src/components/ModuleWrapper.tsx
+import { useAutoAnimate } from '@formkit/auto-animate/react';
+
+export function ModuleWrapper({ children, ...props }) {
+  const [contentRef] = useAutoAnimate({ duration: 200 });
+  
+  return (
+    <div {...props}>
+      <ExitButton />
+      <div ref={contentRef}>
+        {children}
+      </div>
+    </div>
+  );
+}
+```
+
+**Caveat:** Test thoroughly—not all modules may benefit from auto-animation at the wrapper level.
+
+---
+
+### Configuration Options
+
+Auto Animate supports customization when needed:
+
+```tsx
+const [parent] = useAutoAnimate({
+  duration: 250,        // Animation duration (ms)
+  easing: 'ease-in-out' // CSS easing function
+});
+```
+
+**Default Recommendation:** Use defaults (they're excellent). Only customize if the module's fiction theme demands it (e.g., Matrix might want faster, more digital transitions).
+
+---
+
+### Best Practices
+
+1. **Apply Sparingly:** Only animate elements that change (don't animate static headers/footers)
+2. **Respect Keys:** Auto Animate reinforces the importance of stable keys—animations break without them
+3. **Test Performance:** With 100+ items, consider disabling animations or using virtualization
+4. **Thematic Consistency:** Ensure animations match the module's fiction aesthetic (speed, style)
+
+---
+
+### Educational Moments to Create
+
+#### **1. The "Keys Matter" Moment (Blade Runner)**
+```tsx
+// Demo: Show broken animation with index keys vs stable keys
+<button onClick={() => setUseIndexKeys(!useIndexKeys)}>
+  Toggle Key Strategy
+</button>
+
+{replicants.map((rep, idx) => (
+  <div key={useIndexKeys ? idx : rep.id}>
+    {rep.name}
+  </div>
+))}
+```
+
+**Learning:** Students see animations glitch with index keys, proving why unique IDs are critical.
+
+#### **2. The "Reconciliation Visualization" (Groundhog Day)**
+```tsx
+// Each loop iteration mounts/unmounts components
+<div ref={autoAnimateRef}>
+  {isLooping && <DayComponent />}
+</div>
+```
+
+**Learning:** Mount/unmount becomes visible, reinforcing lifecycle concepts.
+
+#### **3. The "Conditional Rendering Clarity" (Sixth Sense)**
+```tsx
+<div ref={autoAnimateRef}>
+  {seesDead && <GhostComponent />}
+  <RegularComponent />
+</div>
+```
+
+**Learning:** Components fading in/out makes the "presence in the DOM" concept tangible.
+
+---
+
+### Rollout Checklist
+
+- [ ] Install: `pnpm add @formkit/auto-animate`
+- [ ] Update `package.json` (done automatically)
+- [ ] Add to 3-5 high-impact modules first (pilot phase)
+- [ ] Test animations on mobile (ensure 60fps)
+- [ ] Document in module READMEs where applied
+- [ ] Consider adding "Animation powered by Auto Animate" attribution in footer (optional)
+
+---
+
+### When NOT to Use Auto Animate
+
+- ❌ Modules teaching CSS animations explicitly (e.g., a hypothetical "Transition" concept module)
+- ❌ Heavy data tables (use virtualization instead)
+- ❌ Where animations distract from the core concept being taught
+- ❌ Modules with complex custom animations already implemented
+
+---
 
 ## 📌 Module Management
 

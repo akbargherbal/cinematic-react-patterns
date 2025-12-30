@@ -1,4 +1,4 @@
-# Implementation Translator - Prompt Template (Optimized)
+# Implementation Translator
 
 ## Quick Reference
 
@@ -10,6 +10,7 @@
 - Integration: One registry entry in `moduleRegistry.ts`
 - Chapter-based navigation: 5 chapters from narrative
 - No external dependencies beyond lucide-react
+- **Code display: Use `CodeBlock` component only** (no `<pre>` tags)
 
 **Key Patterns**:
 - ✅ Mandatory cleanup for timers/subscriptions
@@ -19,8 +20,8 @@
 - ✅ Accessibility (ARIA, keyboard nav)
 
 **Pitfall Teaching** (when showing mistakes):
-- ❌ Red badge + border for wrong code
-- ✅ Green badge + border for correct code
+- ❌ Red badge + border for wrong code (via `CodeBlock` variant="error")
+- ✅ Green badge + border for correct code (via `CodeBlock` variant="success")
 - 💡 Yellow badge for explanations
 - Always include: trigger button, metrics, reset, comparison toggle
 - Circuit breakers: max 50 timers, auto-reset
@@ -73,11 +74,12 @@ NARRATIVE_XML_PLACEHOLDER
 - [ ] Async state updates use functional form: `setState(prev => ...)`
 - [ ] No `any` types - proper TypeScript interfaces
 - [ ] Semantic HTML with ARIA labels
+- [ ] **CodeBlock import included: `import { CodeBlock } from "@/components/common/CodeBlock";`**
+- [ ] **All code display uses CodeBlock (never `<pre>` tags)**
 
 **Pitfall Demos** (if applicable):
-- [ ] ❌ badges on all broken code
-- [ ] ✅ badges on all fixed code  
-- [ ] Red/green borders (border-4 border-red-500 / border-green-500)
+- [ ] CodeBlock variant="error" for broken code
+- [ ] CodeBlock variant="success" for fixed code
 - [ ] Trigger button, metrics display, reset button, comparison toggle
 - [ ] Circuit breaker at 50 leaked resources
 - [ ] No security/accessibility violations in "wrong" examples
@@ -158,6 +160,7 @@ Chapter 5: [specific demo]
       <content><![CDATA[
 import { useState, useEffect } from "react";
 import { ActualIconName } from "lucide-react";
+import { CodeBlock } from "@/components/common/CodeBlock";
 
 interface Chapter {
   title: string;
@@ -174,6 +177,17 @@ export default function ModuleName(): JSX.Element {
     { title: "Chapter 4", content: "..." },
     { title: "Chapter 5", content: "..." },
   ];
+
+  // Code examples as template literals
+  const brokenExample = `// ❌ Common Mistake
+function BrokenComponent() {
+  // Broken code here
+}`;
+
+  const fixedExample = `// ✅ Correct Approach
+function FixedComponent() {
+  // Fixed code here
+}`;
 
   const currentChapter = chapters[chapter];
 
@@ -194,6 +208,19 @@ export default function ModuleName(): JSX.Element {
         {/* Interactive Demo Section */}
         <section className="bg-emerald-950/20 border border-emerald-500/30 rounded-lg p-8 mb-12">
           {/* Chapter-specific interactive React demonstrations */}
+          
+          {/* Example code display - ALWAYS use CodeBlock */}
+          <CodeBlock
+            code={brokenExample}
+            variant="error"
+            title="// ❌ Common Mistake"
+          />
+          
+          <CodeBlock
+            code={fixedExample}
+            variant="success"
+            title="// ✅ Correct Approach"
+          />
         </section>
 
         {/* Navigation */}
@@ -271,9 +298,11 @@ export default function ModuleName(): JSX.Element {
 - All effects have cleanup
 - All dependencies listed
 - Functional updates for async state
+- **CodeBlock component for ALL code display**
 
 **Pitfall Demos**:
-- Use badge components for all broken/correct/explanation sections
+- Use CodeBlock with variant="error" for broken code
+- Use CodeBlock with variant="success" for fixed code
 - Include all 5 required elements: trigger, indicator, metrics, reset, toggle
 - Implement circuit breakers (max 50 resources)
 - Never demonstrate: XSS, security holes, accessibility violations, browser crashes
