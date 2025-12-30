@@ -5,12 +5,16 @@
 **Your Role**: Transform narrative XML into production-ready React learning module
 
 **Core Constraints**:
-- Single file: `src/modules/[slug]/index.tsx`
-- Tech stack: React 19, TypeScript, Tailwind only
+- Default single-file: `src/modules/[slug]/index.tsx` (multi-file allowed if needed)
+- Tech stack: React 19, TypeScript, Tailwind
 - Integration: One registry entry in `moduleRegistry.ts`
 - Chapter-based navigation: 5 chapters from narrative
-- No external dependencies beyond lucide-react
 - **Code display: Use `CodeBlock` component only** (no `<pre>` tags)
+
+**Dependencies**:
+- Pre-installed: `lucide-react`, `@/components/common/CodeBlock`, `@formkit/auto-animate`
+- Module-specific: Use libraries specified in your brief (React Query, Zustand, Redux, etc.)
+- Don't add convenience libraries - write the code yourself
 
 **Key Patterns**:
 - ✅ Mandatory cleanup for timers/subscriptions

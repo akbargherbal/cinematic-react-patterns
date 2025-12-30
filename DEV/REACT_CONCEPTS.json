@@ -1,0 +1,468 @@
+{
+  "reactConcepts": {
+    "foundational": [
+      {
+        "id": 1,
+        "name": "Components",
+        "definition": "Reusable, self-contained pieces of UI that accept inputs (props) and return React elements describing what should appear on screen",
+        "importance": "The fundamental building block of React applications. Understanding components is essential for building any React app",
+        "fiction": {
+          "title": "Inception's Dream Layers are Components",
+          "work": "Inception (2010)",
+          "description": "Each dream level in Inception is a self-contained component with its own rules and environment. The deeper dreams are child components nested within parent dreams. Each level receives 'props' from the level above (the kick, the mission parameters) and can return results upward.",
+          "resolution": "Just like components, each dream layer is independent yet connected. A change in one layer affects its children but is isolated from siblings. The totems are like component state - private data that belongs to each dreamer/component."
+        }
+      },
+      {
+        "id": 2,
+        "name": "JSX (JavaScript XML)",
+        "definition": "A syntax extension that allows you to write HTML-like code in JavaScript files",
+        "importance": "Makes React code more readable and intuitive. Compiles to React.createElement() calls under the hood",
+        "fiction": {
+          "title": "The Matrix is JSX - Reality Syntax Over Machine Code",
+          "work": "The Matrix (1999)",
+          "description": "JSX is like what humans see in the Matrix versus the falling green code that machines see. Developers write intuitive HTML-like syntax (the red dress, the woman in the red dress), but it compiles down to React.createElement() calls (the actual Matrix code). Both representations describe the same thing.",
+          "resolution": "Neo learns to see the code beneath the reality, just as developers learn that JSX is syntactic sugar. You can build the Matrix with raw code (createElement), but JSX makes it readable for humans. Under the hood, it's all the same."
+        }
+      },
+      {
+        "id": 3,
+        "name": "Props (Properties)",
+        "definition": "Read-only data passed from parent components to child components",
+        "importance": "Enables component composition and data flow, making components reusable and configurable",
+        "fiction": {
+          "title": "Harry Potter's Wand Chooses the Wizard - Props Configure Components",
+          "work": "Harry Potter series",
+          "description": "Each wizard receives a wand with specific properties (wood type, core, length) from Ollivander. The wand doesn't change these properties - they're read-only. Different props make each wizard unique, just like passing different props makes component instances behave differently. Harry's wand has phoenix feather; Hermione's has dragon heartstring.",
+          "resolution": "The wand (component) remains the same, but its properties determine its behavior. You can't modify your wand's core once chosen, just as child components can't modify props. To change behavior, you need a different wand (different props) from the parent (Ollivander)."
+        }
+      },
+      {
+        "id": 4,
+        "name": "State",
+        "definition": "Mutable data managed within a component that can change over time and trigger re-renders",
+        "importance": "Allows components to be interactive and dynamic, responding to user input and other events",
+        "fiction": {
+          "title": "Groundhog Day is a Component with State",
+          "work": "Groundhog Day (1993)",
+          "description": "Phil Connors relives the same day (component re-renders), but his internal memories and skills (state) persist and change. Each loop through the day is a re-render, but his piano skills, ice sculpting knowledge, and character development are stateful data that accumulate and trigger different outcomes in each render.",
+          "resolution": "External circumstances (props - the town, the people) stay the same, but Phil's internal state evolves. When his state changes enough (becoming a better person), it triggers the final render where he escapes the loop. State changes drive the narrative, just like in React."
+        }
+      },
+      {
+        "id": 5,
+        "name": "useState Hook",
+        "definition": "A Hook that lets you add state to functional components",
+        "importance": "The most fundamental Hook for managing component state in modern React",
+        "fiction": {
+          "title": "Dr. Jekyll and Mr. Hyde is useState Toggle",
+          "work": "Strange Case of Dr Jekyll and Mr Hyde (1886)",
+          "description": "Dr. Jekyll uses a potion (useState setter function) to toggle between two states: Jekyll and Hyde. The transformation is controlled, predictable, and triggers a complete re-render of his personality. useState works the same way - you call the setter with a new value, and the component re-renders with the new state.",
+          "resolution": "Jekyll can't be both states simultaneously (state updates aren't immediate). The transformation takes time (asynchronous state updates). And each state change completely transforms the person/component. He needed better state management - maybe useReducer for complex transformations."
+        }
+      },
+      {
+        "id": 6,
+        "name": "Event Handling",
+        "definition": "Responding to user interactions like clicks, form submissions, and keyboard input",
+        "importance": "Makes applications interactive and responsive to user actions",
+        "fiction": {
+          "title": "Rube Goldberg Machines are Event Handlers",
+          "work": "The Goonies (1985) - Rube Goldberg contraptions",
+          "description": "In The Goonies, Mikey's father has elaborate Rube Goldberg machines where one event (pulling a string) triggers a chain reaction. Event handlers work similarly - a user click (initial trigger) sets off a sequence of function calls, state updates, and UI changes. Each event bubbles through the system predictably.",
+          "resolution": "Just like Data's inventions, event handlers must be carefully designed. One wrong connection and the whole thing breaks. Events propagate (bubble up) through the DOM hierarchy, just like the chain reaction through the contraption's parts. You can stop propagation to contain the reaction."
+        }
+      }
+    ],
+    "intermediate": [
+      {
+        "id": 7,
+        "name": "useEffect Hook",
+        "definition": "A Hook for performing side effects in functional components (data fetching, subscriptions, DOM manipulation)",
+        "importance": "Essential for synchronizing components with external systems and managing component lifecycle",
+        "fiction": {
+          "title": "Back to the Future is useEffect - Side Effects Across Time",
+          "work": "Back to the Future (1985)",
+          "description": "Marty's actions in the past (side effects) must synchronize with the present timeline (component render). Every time he changes something (dependency changes), it triggers a new effect (timeline alteration). The photograph is like the component UI - it re-renders when dependencies (his parents' relationship) change. His cleanup function is trying to restore the timeline before unmounting (leaving 1955).",
+          "resolution": "Doc's warnings about creating paradoxes mirror dependency array warnings. Missing dependencies cause bugs (Marty's siblings disappearing). Too many effects cause infinite loops (endless time travel). The effect must clean up (restore the timeline) to prevent memory leaks (paradoxes)."
+        }
+      },
+      {
+        "id": 8,
+        "name": "Conditional Rendering",
+        "definition": "Displaying different UI elements based on certain conditions",
+        "importance": "Creates dynamic interfaces that adapt to different states and user scenarios",
+        "fiction": {
+          "title": "Alice in Wonderland's Drink Me Bottle - Conditional State Changes",
+          "work": "Alice's Adventures in Wonderland (1865)",
+          "description": "Alice encounters situations where she must choose: drink the potion to shrink, eat the cake to grow. Each choice (condition) renders a different version of Alice (component state). If size < doorHeight, render SmallAlice, else render NormalAlice. The Cheshire Cat's appearance and disappearance is the ultimate conditional render - sometimes visible, sometimes not, based on mysterious conditions.",
+          "resolution": "Alice can't be both tall and short simultaneously - just like a component can't render two mutually exclusive states at once. The ternary operator is Alice's choice at each juncture: this path or that path? The Queen's court uses complex nested conditions - 'If she's guilty AND she stole tarts THEN off with her head ELSE acquit.'"
+        }
+      },
+      {
+        "id": 9,
+        "name": "Lists and Keys",
+        "definition": "Rendering arrays of data with unique key props to help React identify which items have changed",
+        "importance": "Optimizes rendering performance and prevents bugs when working with dynamic lists",
+        "fiction": {
+          "title": "Hogwarts' Marauder's Map Needs Unique Keys",
+          "work": "Harry Potter and the Prisoner of Azkaban",
+          "description": "The Marauder's Map tracks every person in Hogwarts by name (unique key). If two people had the same name without unique identifiers, the map couldn't tell them apart - chaos ensues. React's reconciliation algorithm is like the map's magic - it needs unique keys to track which list items moved, changed, or were added/removed.",
+          "resolution": "Using array indices as keys is like identifying people by their position ('second person from the left'). When people move around, you're tracking the wrong one. Use stable unique identifiers (names, IDs) so React knows Peter Pettigrew is Peter Pettigrew, no matter where he is in the list."
+        }
+      },
+      {
+        "id": 10,
+        "name": "Forms and Controlled Components",
+        "definition": "Components where form input values are controlled by React state",
+        "importance": "Provides a single source of truth for form data and enables validation and manipulation",
+        "fiction": {
+          "title": "1984's Thought Police Control Your Inputs",
+          "work": "1984 by George Orwell",
+          "description": "In Oceania, every word Winston writes in his diary must pass through Party control. Controlled components work similarly - every keystroke must go through React state (the Party) before appearing on screen. The value prop is Big Brother watching, the onChange is the Thought Police intercepting, and state is the official Ministry of Truth record.",
+          "resolution": "Uncontrolled components are like Winston's forbidden diary - they maintain their own state without oversight. Controlled components ensure React (the Party) is the single source of truth. This 'oppression' actually prevents bugs - validation, formatting, and synchronization happen at the Ministry (state) level."
+        }
+      },
+      {
+        "id": 11,
+        "name": "Component Lifecycle",
+        "definition": "The series of phases a component goes through from creation to removal (mounting, updating, unmounting)",
+        "importance": "Understanding when code executes helps manage side effects and optimize performance",
+        "fiction": {
+          "title": "The Lion King's Circle of Life is the Component Lifecycle",
+          "work": "The Lion King (1994)",
+          "description": "Simba's journey mirrors component lifecycle: birth (mounting), growing up with changes (updating), and death (unmounting). Constructor is birth, componentDidMount is the presentation ceremony, updates are growing from cub to adult, and componentWillUnmount is Mufasa's death. Each phase has specific responsibilities - you don't hunt as a newborn cub.",
+          "resolution": "Hakuna Matata is ignoring lifecycle methods and getting bugs. Simba must return (proper cleanup) to prevent memory leaks in Pride Rock. UseEffect with cleanup is like Simba's responsibility to maintain the Circle of Life - subscribe on mount (take the throne), unsubscribe on unmount (pass it on)."
+        }
+      },
+      {
+        "id": 12,
+        "name": "Lifting State Up",
+        "definition": "Moving state to the closest common ancestor when multiple components need to share data",
+        "importance": "Fundamental pattern for managing shared state and component communication",
+        "fiction": {
+          "title": "Lord of the Rings - One State to Rule Them All",
+          "work": "The Lord of the Rings",
+          "description": "The One Ring is state that needs to be lifted up. Initially, each character might want to hold it (local state in multiple components), but this causes conflicts. The state must be lifted to the highest common ancestor - the Council of Elrond - where they decide Frodo will carry it. All other components (Fellowship members) receive this decision as props.",
+          "resolution": "Multiple components (Boromir, Aragorn, Gandalf) need to know about the Ring, so it can't be in local state. Lifting it to the Fellowship (parent component) ensures everyone shares the same truth. When Gollum and Frodo both try to own the state simultaneously, the entire application crashes (Mount Doom)."
+        }
+      },
+      {
+        "id": 13,
+        "name": "Composition vs Inheritance",
+        "definition": "Building complex UIs by combining simpler components rather than using class inheritance",
+        "importance": "React's recommended approach for code reuse and component architecture",
+        "fiction": {
+          "title": "Frankenstein: Composition Over Inheritance Gone Wrong",
+          "work": "Frankenstein by Mary Shelley",
+          "description": "Dr. Frankenstein tries to create life through composition - assembling parts (components) from different sources. This is React's recommended approach. The creature isn't inherited from one parent class; he's composed of multiple reusable parts. Each part maintains its function while contributing to the whole.",
+          "resolution": "The tragedy isn't the composition approach - it's poor integration. The parts don't work well together because Frankenstein didn't properly manage the interfaces (props). React recommends composition because inheritance is too rigid (can't swap out body parts easily). Composition allows flexibility - wrap, contain, and combine components like assembling a better creature."
+        }
+      }
+    ],
+    "advanced": [
+      {
+        "id": 14,
+        "name": "useContext Hook and Context API",
+        "definition": "A way to share data across the component tree without passing props manually at every level",
+        "importance": "Solves prop drilling and enables global state management for themes, authentication, etc.",
+        "fiction": {
+          "title": "The Force is the Context API",
+          "work": "Star Wars",
+          "description": "The Force surrounds and penetrates the galaxy (component tree), accessible to any Jedi (component) without needing to pass it through chains of masters and apprentices (prop drilling). Luke doesn't receive the Force from Obi-Wan who got it from Yoda - he accesses it directly from the universal context. All Force-sensitive components can useContext(TheForce).",
+          "resolution": "Overusing the Force (Context) for everything makes components dependent on it and less reusable. The Dark Side is putting everything in global context - it couples your entire app. Use it wisely for truly global state (theme, auth, language) like the Jedi use the Force for important matters, not trivial tasks."
+        }
+      },
+      {
+        "id": 15,
+        "name": "useReducer Hook",
+        "definition": "An alternative to useState for managing complex state logic with a reducer function",
+        "importance": "Better for complex state transitions and when next state depends on previous state",
+        "fiction": {
+          "title": "Minority Report's PreCogs are a Reducer Function",
+          "work": "Minority Report (2002)",
+          "description": "The PreCogs receive actions (crimes about to happen) and current state (present timeline), then compute the next state (future with or without crime). The reducer function is like their collective processing: reducer(currentState, action) => nextState. Each precognitive vision is a dispatch call - you send an action, the reducer processes it with current state, returns new state.",
+          "resolution": "The system breaks when actions conflict (different PreCogs see different futures), like dispatching incompatible actions. Anderton discovers he can change the outcome by understanding the reduction logic. UseReducer is for complex state where the next state depends on elaborate business logic (like preventing crimes), not simple toggles."
+        }
+      },
+      {
+        "id": 16,
+        "name": "Custom Hooks",
+        "definition": "User-defined functions that use built-in Hooks to extract and reuse stateful logic",
+        "importance": "Promotes code reuse and separation of concerns without changing component hierarchy",
+        "fiction": {
+          "title": "Batman's Utility Belt - Reusable Tools for Every Component",
+          "work": "Batman (various)",
+          "description": "Batman's utility belt contains specialized gadgets (custom hooks) he reuses across missions (components). useBatarang, useGrappleGun, useSmokeBomb - each encapsulates complex logic (state + effects) in a reusable tool. He doesn't rebuild the grapple gun for each building; he reuses the same hook. Any hero (component) can use these tools without rebuilding them.",
+          "resolution": "Batman doesn't put all his logic inline in each fight scene. He abstracts reusable patterns into tools. Similarly, when you use the same stateful logic in multiple components (useMousePosition, useLocalStorage, useFetch), extract a custom hook. It's DRY for stateful behavior, making every component a superhero."
+        }
+      },
+      {
+        "id": 17,
+        "name": "useRef Hook",
+        "definition": "A Hook that returns a mutable ref object that persists across re-renders",
+        "importance": "Access DOM elements directly and store mutable values that don't trigger re-renders",
+        "fiction": {
+          "title": "Dorian Gray's Portrait - Mutable Reference Outside the Render",
+          "work": "The Picture of Dorian Gray by Oscar Wilde",
+          "description": "Dorian Gray (the component) stays young and beautiful (rendered UI unchanged) while his portrait (useRef) ages and changes (mutable value). The portrait mutates without triggering re-renders of Dorian's appearance. It's a reference to a value that persists across renders but doesn't cause re-renders when changed. His beauty is props/state; the portrait is useRef.",
+          "resolution": "Dorian's mistake was putting critical state in a ref instead of useState. His moral decay should have triggered visible re-renders (consequences). Use refs for values you want to mutate without re-rendering (DOM references, timers, previous values). Use state for values that should update the UI."
+        }
+      },
+      {
+        "id": 18,
+        "name": "useMemo Hook",
+        "definition": "A Hook that memoizes expensive computations and only recalculates when dependencies change",
+        "importance": "Performance optimization for computationally expensive operations",
+        "fiction": {
+          "title": "Sherlock's Mind Palace - Cached Deductions",
+          "work": "Sherlock (BBC series)",
+          "description": "Sherlock's Mind Palace stores expensive computations (deductions) so he doesn't need to re-derive them every time. UseMemo works the same way - expensive calculation results are cached and only recalculated when dependencies (new evidence) change. He doesn't re-deduce that Watson is military-trained every time they meet; it's memoized from initial observation.",
+          "resolution": "The Mind Palace (useMemo) is only for expensive computations. Sherlock doesn't memorize trivial facts like what he had for breakfast - similarly, don't memoize cheap calculations. Dependencies are new evidence: when they change, he must recalculate. Cache invalidation is like when new evidence contradicts old deductions."
+        }
+      },
+      {
+        "id": 19,
+        "name": "useCallback Hook",
+        "definition": "A Hook that memoizes callback functions to prevent unnecessary re-creation",
+        "importance": "Optimizes performance when passing callbacks to child components, preventing unnecessary re-renders",
+        "fiction": {
+          "title": "Westworld Hosts - Same Function Instance Across Loops",
+          "work": "Westworld (2016)",
+          "description": "Westworld hosts repeat the same loops (re-renders) daily. UseCallback ensures they use the same function instance across loops unless dependencies change. Without useCallback, Dolores creates a new 'drop the can' function every render, causing child components (other hosts) to re-render unnecessarily thinking the callback changed.",
+          "resolution": "Dolores breaking her loop is like dependencies changing - the callback must be recreated. Ford (React) optimizes by reusing function instances when possible. Overusing useCallback everywhere is like making all hosts completely deterministic - it's premature optimization. Only memoize callbacks passed to optimized children."
+        }
+      },
+      {
+        "id": 20,
+        "name": "React.memo",
+        "definition": "A higher-order component that memoizes component rendering based on prop changes",
+        "importance": "Performance optimization to prevent re-renders when props haven't changed",
+        "fiction": {
+          "title": "Edge of Tomorrow's Time Loop - Skip Renders with Unchanged Props",
+          "work": "Edge of Tomorrow (2014)",
+          "description": "Tom Cruise's character relives the same day (parent re-renders), but React.memo is like him recognizing scenes that haven't changed. When props (tactical situation) are identical to last loop, skip the re-render (skip the fight). Only when props change (new strategy, different approach) does the component fully render (live through the scene).",
+          "resolution": "Eventually, Cruise optimizes the entire day by skipping unchanged sequences - that's React.memo preventing wasteful re-renders. The shallow comparison is like quick recognition of familiar situations. Deep comparison would be living through each moment to verify it's the same. Memo is premature optimization if props always change."
+        }
+      },
+      {
+        "id": 21,
+        "name": "Error Boundaries",
+        "definition": "Components that catch JavaScript errors in their child component tree and display fallback UI",
+        "importance": "Prevents entire app crashes and provides graceful error handling",
+        "fiction": {
+          "title": "Titanic's Bulkheads - Containing the Damage",
+          "work": "Titanic (1997)",
+          "description": "The Titanic's watertight bulkheads are error boundaries - when one compartment (child component) floods (throws error), the bulkheads contain it, preventing the entire ship (app) from sinking immediately. Error boundaries catch errors in their children, display fallback UI (lifeboats), and prevent the whole app from crashing.",
+          "resolution": "The Titanic sank because flooding cascaded beyond the bulkheads' design limits. Similarly, errors in event handlers and async code aren't caught by error boundaries. You need multiple error boundaries at different levels (more bulkheads) for true resilience. And always have a recovery plan (lifeboats/error logging)."
+        }
+      },
+      {
+        "id": 22,
+        "name": "Portals",
+        "definition": "A way to render children into a DOM node outside the parent component's hierarchy",
+        "importance": "Essential for modals, tooltips, and dropdowns that need to break out of CSS overflow constraints",
+        "fiction": {
+          "title": "Narnia's Wardrobe - Rendering Outside the Hierarchy",
+          "work": "The Chronicles of Narnia",
+          "description": "The wardrobe in the spare room (deeply nested component) opens a portal to Narnia (completely different DOM node). The children are still conceptually 'children' of the wardrobe component, but they physically render in a different world (outside the parent DOM). Portals let you render modals to document.body while keeping them logically as children.",
+          "resolution": "Events in Narnia still bubble back to the wardrobe (event bubbling works through portals). The children's context (props, context) comes from their logical parent, not where they're rendered. Use portals when CSS overflow, z-index, or positioning constraints of the parent DOM hierarchy would break your modal/tooltip/dropdown."
+        }
+      },
+      {
+        "id": 23,
+        "name": "Fragments",
+        "definition": "A way to group multiple elements without adding extra DOM nodes",
+        "importance": "Keeps DOM clean and avoids unnecessary wrapper elements",
+        "fiction": {
+          "title": "Fight Club Reveal - Multiple Elements, One Identity",
+          "work": "Fight Club (1999)",
+          "description": "Tyler Durden and the Narrator appear as separate entities (multiple JSX elements) but are revealed to be the same person (one component). Fragments are like this - multiple children that need to be returned together without creating an extra person (DOM node wrapper). <> and </> let you group elements invisibly, like two personalities in one body.",
+          "resolution": "Adding a wrapper div would be like creating a third personality - unnecessary and pollutes the DOM hierarchy. Use fragments when a component must return multiple elements but adding a parent div would break CSS (flexbox, grid) or semantic HTML. It's syntactic sugar for React.Fragment, keeping your DOM clean."
+        }
+      }
+    ],
+    "expert": [
+      {
+        "id": 24,
+        "name": "Code Splitting and Lazy Loading",
+        "definition": "Splitting your bundle into smaller chunks and loading components on demand using React.lazy() and Suspense",
+        "importance": "Dramatically improves initial load time and overall performance",
+        "fiction": {
+          "title": "Voldemort's Horcruxes - Split the Bundle",
+          "work": "Harry Potter series",
+          "description": "Voldemort split his soul (JavaScript bundle) into seven horcruxes (code chunks) hidden in different locations (lazy-loaded). Instead of loading his entire soul upfront (massive bundle), each piece loads on demand when needed. The locket doesn't load until Harry visits the cave. React.lazy() splits your app into horcruxes - only load what you need, when you need it.",
+          "resolution": "The trade-off: splitting makes you harder to destroy (faster initial load) but requires finding pieces when needed (slight delay on lazy load). Too many splits (horcruxes) adds complexity. Too few and the initial bundle (soul) is too large. Suspense is like the hunt - showing fallback UI while fetching the code chunk."
+        }
+      },
+      {
+        "id": 25,
+        "name": "Suspense",
+        "definition": "A component that lets you display fallback content while waiting for async operations",
+        "importance": "Provides declarative loading states and will be central to React's future async rendering features",
+        "fiction": {
+          "title": "Waiting for Godot - Declarative Waiting States",
+          "work": "Waiting for Godot by Samuel Beckett",
+          "description": "Vladimir and Estragon wait for Godot (async data) and perform activities while waiting (fallback UI). Suspense declares what to show during the wait: <Suspense fallback={<VladimirAndEstragon />}><Godot /></Suspense>. The waiting is built into the structure of the play (component), not imperative checks of 'is he here yet?'",
+          "resolution": "Godot never arrives (request fails), but Suspense handles this gracefully with error boundaries. The genius is declarative waiting - you describe what happens while suspended, not manually manage loading states. Suspense for data fetching turns Vladimir's existential waiting into clean, declarative code."
+        }
+      },
+      {
+        "id": 26,
+        "name": "Concurrent Rendering",
+        "definition": "React's ability to prepare multiple versions of the UI at the same time",
+        "importance": "Enables features like transitions and keeps apps responsive during heavy updates",
+        "fiction": {
+          "title": "Pulp Fiction's Timeline - Concurrent Narratives",
+          "work": "Pulp Fiction (1994)",
+          "description": "Pulp Fiction tells multiple storylines concurrently, jumping between timelines, preparing scenes while others play out. Concurrent rendering works similarly - React prepares multiple UI states simultaneously, can pause and resume work, and can interrupt less urgent updates. Vincent's story doesn't block Butch's story; they render concurrently.",
+          "resolution": "Tarantino can switch between stories seamlessly, just as concurrent React can interrupt rendering to handle urgent updates (user input) while keeping less urgent work (expensive render) in progress. The final movie (UI) feels smooth despite complex, interleaved work. Legacy rendering is linear - like watching scenes in chronological order."
+        }
+      },
+      {
+        "id": 27,
+        "name": "useTransition Hook",
+        "definition": "A Hook that marks state updates as non-urgent, keeping the UI responsive",
+        "importance": "Improves perceived performance for expensive updates",
+        "fiction": {
+          "title": "Inception's Time Dilation - Urgent vs Non-Urgent Updates",
+          "work": "Inception (2010)",
+          "description": "In Inception, time moves slower in deeper dream levels. UseTransition works similarly - mark expensive state updates as non-urgent (deep dream level) while keeping urgent updates responsive (real world). A search filter typed by the user is urgent (real-time); the filtered results list can be non-urgent (startTransition). User input stays snappy even with expensive renders.",
+          "resolution": "The kick (urgent update) must happen immediately; planning the heist (non-urgent) can take dream-time. UseTransition says 'this update can be interrupted if something more urgent comes.' isPending tells you when you're in the slow-time dream state, so you can show hints (blur the old results during transition)."
+        }
+      },
+      {
+        "id": 28,
+        "name": "useDeferredValue Hook",
+        "definition": "A Hook that defers updating a value until more urgent updates have finished",
+        "importance": "Keeps UI responsive while showing slightly stale data during transitions",
+        "fiction": {
+          "title": "Tenet's Inverted Time - Deferred Updates",
+          "work": "Tenet (2020)",
+          "description": "In Tenet, some objects move forward in time while others move backward (inverted). UseDeferredValue is like running a value through temporal inversion - it lags behind, showing a delayed version. The search input moves forward in real-time (normal); the deferred search results update after a delay (inverted), keeping UI responsive.",
+          "resolution": "The Protagonist can interact with normal-time objects (UI stays responsive) while inverted objects catch up (expensive derived state updates later). Deferred values prevent expensive computations from blocking urgent updates. Unlike useTransition which wraps the setState call, useDeferredValue wraps the value itself."
+        }
+      },
+      {
+        "id": 29,
+        "name": "Server Components (RSC)",
+        "definition": "Components that run only on the server and don't ship JavaScript to the client",
+        "importance": "Reduces bundle size and enables better performance through server-side data fetching",
+        "fiction": {
+          "title": "The Truman Show - Server-Rendered World",
+          "work": "The Truman Show (1998)",
+          "description": "Truman's world is pre-rendered on the server (Christof's control room). The island, buildings, and actors (Server Components) exist on the server and send down pure HTML to Truman's reality (client). Only interactive elements Truman can affect (buttons, doors he opens) need client-side JavaScript. Most of the world is static Server Components.",
+          "resolution": "Christof's control room is the server - it has access to all data, databases, and can render complex scenes without sending JavaScript to Truman's world (client). Client components are interactive elements Truman touches. The brilliance: Truman gets a full world (UI) without the weight of all the backstage machinery (JavaScript bundle)."
+        }
+      },
+      {
+        "id": 30,
+        "name": "Forward Refs",
+        "definition": "A technique to pass refs through components to their children",
+        "importance": "Necessary for library authors and when you need imperative control over child components",
+        "fiction": {
+          "title": "Charlie and the Chocolate Factory's Golden Tickets - Passing Access Through Layers",
+          "work": "Charlie and the Chocolate Factory (1964)",
+          "description": "Charlie finds a golden ticket (ref) that must pass through multiple barriers - his family, the chocolate factory gates, the tour guides - to reach the actual chocolate room (target DOM element). ForwardRef is like the ticket system that ensures access passes through all intermediaries to reach the final destination. Without it, the ref stops at each wrapper component.",
+          "resolution": "Willy Wonka's factory has many layers of abstraction (wrapper components), but the golden ticket (ref) provides direct access to specific rooms (DOM nodes). Regular components would confiscate the ticket; forwardRef components pass it along transparently. Essential for reusable UI libraries where users need to access underlying DOM elements."
+        }
+      },
+      {
+        "id": 31,
+        "name": "Higher-Order Components (HOCs)",
+        "definition": "Functions that take a component and return a new component with additional props or behavior",
+        "importance": "Pattern for reusing component logic, though largely replaced by Hooks",
+        "fiction": {
+          "title": "Pimp My Ride - Enhancing Components with Features",
+          "work": "Pimp My Ride (TV show)",
+          "description": "Xzibit takes a basic car (component) and returns it with added features (props and behavior) - screens, hydraulics, aquariums. HOCs work the same: withAuth(Component), withLogging(Component), withTheme(Component). The original car/component goes in, an enhanced version comes out. You don't modify the original; you wrap it with extras.",
+          "resolution": "Too many HOCs and you get a ridiculous car with 20 TVs - HOC hell, wrapping components in many layers. Modern React prefers custom hooks (modular upgrades you install yourself) over HOCs (taking the car to be modified). But understanding HOCs helps reading older codebases and libraries like React Redux's connect()."
+        }
+      },
+      {
+        "id": 32,
+        "name": "Render Props",
+        "definition": "A technique for sharing code using a prop whose value is a function",
+        "importance": "Another pattern for code reuse, understanding helps with reading older codebases",
+        "fiction": {
+          "title": "Ocean's Eleven Heist Plans - Flexible Execution Strategies",
+          "work": "Ocean's Eleven (2001)",
+          "description": "Danny Ocean provides the heist infrastructure (data fetching, state management) but lets each team member (render prop function) decide how to use it. The vault access (shared logic) is provided to a function that determines how to proceed. <HeistPlan>{({ vaultAccess, guards, cameras }) => <YourCustomPlan />}</HeistPlan>.",
+          "resolution": "Render props invert control - the component manages complexity (security systems, timing) and calls your function with the goods (data, helpers). You decide what to render with those props. Hooks largely replaced this pattern - useHeistPlan() gives you the same data without render prop callback nesting."
+        }
+      },
+      {
+        "id": 33,
+        "name": "Reconciliation and Virtual DOM",
+        "definition": "React's algorithm for efficiently updating the DOM by comparing virtual DOM trees",
+        "importance": "Understanding this helps you write more performant components",
+        "fiction": {
+          "title": "Arrival's Heptapod Language - Comparing Timelines",
+          "work": "Arrival (2016)",
+          "description": "Louise learns to see time non-linearly, comparing past and future states simultaneously. React's reconciliation is similar - it compares the previous virtual DOM (past) with the new virtual DOM (future) and determines the minimal changes needed. The diffing algorithm is like understanding which timeline deviations matter and which are identical.",
+          "resolution": "Louise doesn't relive every moment to find differences; she compares entire timelines efficiently. React doesn't destroy and recreate the whole DOM; it diffs and patches. Keys are like identifying specific events in the timeline. Understanding reconciliation explains why mutating state directly breaks React - it can't detect changes without comparing new object references."
+        }
+      },
+      {
+        "id": 34,
+        "name": "Batching and Automatic Batching",
+        "definition": "React's ability to group multiple state updates into a single re-render",
+        "importance": "Improves performance; understanding when batching happens helps avoid bugs",
+        "fiction": {
+          "title": "The Godfather's Single Conversation - Batching Requests",
+          "work": "The Godfather (1972)",
+          "description": "Don Corleone doesn't make separate trips for separate favors. On his daughter's wedding day, he batches all requests into a single audience (render). Multiple supplicants present their setState calls, but there's only one render at the end. React 18 brought automatic batching everywhere - like the Don handling all matters in one sitting, even those outside the wedding (async).",
+          "resolution": "Before automatic batching (React 17), async updates caused separate renders - like making multiple trips to the Godfather. React 18 batches everywhere - inside promises, setTimeout, native event handlers. If you need immediate render (emergency), use flushSync() - like bypassing protocol for an urgent meeting. Generally, let React batch for performance."
+        }
+      },
+      {
+        "id": 35,
+        "name": "useImperativeHandle Hook",
+        "definition": "A Hook that customizes the instance value exposed when using refs",
+        "importance": "Provides fine-grained control over imperative APIs in custom components",
+        "fiction": {
+          "title": "The Wizard of Oz - Controlling What's Exposed",
+          "work": "The Wizard of Oz (1939)",
+          "description": "The Wizard controls his public API - projecting a fearsome face (customized ref) while hiding the man behind the curtain (internal implementation). UseImperativeHandle works the same - a component can expose specific methods via ref while keeping internal state and methods private. You choose what the parent sees when they pull back the curtain (access the ref).",
+          "resolution": "Instead of exposing the entire component instance (the man, the machinery), you expose a curated API (the projection). const ref = useRef(); ref.current.focus() might work, but useImperativeHandle lets you expose only focus(), validate(), reset() - not every internal detail. Toto pulling the curtain is accessing internal state you didn't want exposed."
+        }
+      },
+      {
+        "id": 36,
+        "name": "useLayoutEffect Hook",
+        "definition": "Similar to useEffect but fires synchronously after DOM mutations",
+        "importance": "Critical for measurements and DOM manipulations before browser paint",
+        "fiction": {
+          "title": "The Prestige - Timing Is Everything",
+          "work": "The Prestige (2006)",
+          "description": "In The Prestige, the trick's success depends on precise timing - the pledge, the turn, the prestige must happen in exact sequence. UseLayoutEffect is like actions that must happen after the turn (DOM mutation) but before the prestige (browser paint). UseEffect happens after the audience sees (after paint); useLayoutEffect happens backstage before reveal.",
+          "resolution": "Measuring an element's size needs useLayoutEffect - you must know dimensions before the browser paints, or users see a flash. UseEffect would measure after paint (too late). Like a magician setting up the trick precisely before the reveal. Overusing useLayoutEffect blocks painting - the show stops while you fumble backstage."
+        }
+      },
+      {
+        "id": 37,
+        "name": "Strict Mode",
+        "definition": "A development mode wrapper that helps identify potential problems",
+        "importance": "Catches common bugs and prepares your app for future React features",
+        "fiction": {
+          "title": "Minority Report's PreCrime - Catching Bugs Before They Happen",
+          "work": "Minority Report (2002)",
+          "description": "PreCrime catches criminals before they commit crimes. Strict Mode does the same for bugs - it deliberately double-invokes functions, runs effects twice, and flags potential issues in development. It's aggressive prevention, showing you problems (deprecated APIs, unsafe lifecycles, missing cleanup) before they cause production disasters.",
+          "resolution": "Anderton thought the system was infallible but found edge cases. Similarly, Strict Mode isn't perfect, but it catches most common mistakes. The double-rendering seems wasteful (arresting people who might not commit crimes?) but prevents real issues. Only runs in development - PreCrime doesn't operate on people who've already committed crimes (production bugs)."
+        }
+      },
+      {
+        "id": 38,
+        "name": "Performance Profiling",
+        "definition": "Using React DevTools Profiler to measure and optimize component render performance",
+        "importance": "Essential for identifying and fixing performance bottlenecks in production apps",
+        "fiction": {
+          "title": "Moneyball - Analyzing Performance Metrics",
+          "work": "Moneyball (2011)",
+          "description": "Billy Beane uses statistics and data analysis to find undervalued players and optimize team performance. React DevTools Profiler works the same - measure component render times, identify bottlenecks (overpaid players), and optimize where it matters. Don't optimize based on intuition (scouts' feelings); profile and use data to make decisions.",
+          "resolution": "The A's couldn't afford every star, so they optimized based on metrics. You can't optimize every component, so profile to find the actual bottlenecks - the one component re-rendering 1000 times. Flamegraphs show which components are expensive (costly players). Ranked chart shows components by render time. Data-driven optimization, not gut feelings."
+        }
+      }
+    ]
+  }
+}
