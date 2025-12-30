@@ -1,884 +1,660 @@
-import { useState, useReducer } from "react";
-import { Eye, AlertTriangle, CheckCircle, Zap, Activity } from "lucide-react";
+import { useState, useReducer, useEffect, useCallback } from "react";
+import { Brain, Zap, AlertTriangle, CheckCircle, ChevronLeft, ChevronRight, RefreshCw, Eye, Code, Activity } from "lucide-react";
 import { CodeBlock } from "@/components/common/CodeBlock";
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
-interface Chapter {
+// ==================== TYPES ====================
+interface CrimeVision {
   id: string;
-  title: string;
-  content: string;
-  atmosphere: string;
+  type: 'SIMPLE_CRIME' | 'CONDITIONAL_SEQUENCE' | 'MULTI_DEPENDENCY';
+  victim: string;
+  perpetrator: string;
+  time: string;
+  condition?: string;
 }
 
 interface PreCrimeState {
-  timeline: string;
-  team: string;
-  alertLevel: string;
-  vehicleTracking: string;
-  medicalDispatch: string;
+  timeline: string[];
+  assignedTeam: string | null;
+  alertLevel: 'GREEN' | 'YELLOW' | 'RED';
+  pendingCrimes: CrimeVision[];
+  preventedCrimes: number;
+  chaosLevel: number;
 }
 
-type PreCrimeAction =
-  | { type: "SIMPLE_CRIME"; payload: { timeline: string; team: string; alert: string } }
-  | { type: "CONDITIONAL_SEQUENCE"; payload: { events: string[] } }
-  | { type: "MULTI_DEPENDENCY"; payload: { primary: string; dependencies: string[] } }
-  | { type: "RESET" };
+type Action = 
+  | { type: 'RECEIVE_VISION'; vision: CrimeVision }
+  | { type: 'ASSIGN_TEAM'; team: string }
+  | { type: 'UPDATE_ALERT'; level: PreCrimeState['alertLevel'] }
+  | { type: 'PREVENT_CRIME'; crimeId: string }
+  | { type: 'RESET_SYSTEM' };
 
-const initialState: PreCrimeState = {
-  timeline: "No active predictions",
-  team: "Standby",
-  alertLevel: "Green",
-  vehicleTracking: "Inactive",
-  medicalDispatch: "Inactive",
-};
-
-function precogReducer(state: PreCrimeState, action: PreCrimeAction): PreCrimeState {
+// ==================== REDUCER ====================
+const precogReducer = (state: PreCrimeState, action: Action): PreCrimeState => {
   switch (action.type) {
-    case "SIMPLE_CRIME":
+    case 'RECEIVE_VISION':
+      // Centralized logic: Handle all vision types in one place
+      const newTimeline = [...state.timeline, 
+        `${action.vision.time}: ${action.vision.type} - ${action.vision.perpetrator} → ${action.vision.victim}`
+      ];
+      
+      let newAlertLevel = state.alertLevel;
+      if (action.vision.type === 'MULTI_DEPENDENCY') newAlertLevel = 'RED';
+      else if (action.vision.type === 'CONDITIONAL_SEQUENCE') newAlertLevel = 'YELLOW';
+      
       return {
         ...state,
-        timeline: action.payload.timeline,
-        team: action.payload.team,
-        alertLevel: action.payload.alert,
+        timeline: newTimeline.slice(-3), // Keep only last 3
+        pendingCrimes: [...state.pendingCrimes, action.vision],
+        alertLevel: newAlertLevel,
+        chaosLevel: state.chaosLevel + (action.vision.type === 'CONDITIONAL_SEQUENCE' ? 10 : 0)
       };
-    case "CONDITIONAL_SEQUENCE":
+      
+    case 'ASSIGN_TEAM':
+      return { ...state, assignedTeam: action.team };
+      
+    case 'UPDATE_ALERT':
+      return { ...state, alertLevel: action.level };
+      
+    case 'PREVENT_CRIME':
       return {
         ...state,
-        timeline: action.payload.events.join(" → "),
-        team: "Alpha + Bravo (Coordinated)",
-        alertLevel: "Red",
-        vehicleTracking: "Active",
-        medicalDispatch: "Standby",
+        pendingCrimes: state.pendingCrimes.filter(c => c.id !== action.crimeId),
+        preventedCrimes: state.preventedCrimes + 1,
+        chaosLevel: Math.max(0, state.chaosLevel - 15)
       };
-    case "MULTI_DEPENDENCY":
-      return {
-        ...state,
-        timeline: `${action.payload.primary} (Dependencies: ${action.payload.dependencies.join(", ")})`,
-        team: "Tactical Response",
-        alertLevel: "Elevated",
-        vehicleTracking: "Active",
-        medicalDispatch: "Active",
-      };
-    case "RESET":
+      
+    case 'RESET_SYSTEM':
       return initialState;
+      
     default:
       return state;
   }
-}
+};
 
-export default function MinorityReportModule(): JSX.Element {
+const initialState: PreCrimeState = {
+  timeline: [],
+  assignedTeam: null,
+  alertLevel: 'GREEN',
+  pendingCrimes: [],
+  preventedCrimes: 0,
+  chaosLevel: 0
+};
+
+// ==================== COMPONENT ====================
+export default function UseReducerMinorityReport(): JSX.Element {
   const [chapter, setChapter] = useState<number>(0);
-
-  const chapters: Chapter[] = [
+  const [demoMode, setDemoMode] = useState<'broken' | 'fixed'>('fixed');
+  const [state, dispatch] = useReducer(precogReducer, initialState);
+  const [timelineView, setTimelineView] = useState<boolean>(true);
+  const [autoAnimateRef] = useAutoAnimate();
+  
+  // Circuit breaker for chaos
+  useEffect(() => {
+    if (state.chaosLevel > 50) {
+      setTimeout(() => {
+        dispatch({ type: 'RESET_SYSTEM' });
+      }, 1000);
+    }
+  }, [state.chaosLevel]);
+  
+  // ==================== CHAPTERS ====================
+  const chapters = [
     {
-      id: "intro",
       title: "The Temple of State",
-      content:
-        "The air in the Temple is cool and still, thick with the scent of ozone and sterile fluids. Chief John Anderton stands on the gantry, looking down at the three PreCogs suspended in milky fluid. They are a single, unified processing unit. A source of pure, undeniable truth. \"The future,\" he murmurs, \"is just a state we haven't rendered yet.\" A red ball alert arrives: PREMEDITATED_MURDER. The system, fed by the PreCogs' vision, returns the next state. The arrest is flawless. The timeline is preserved. The system is perfect.",
-      atmosphere: "sterile, futuristic, efficient",
+      content: "The air in the Temple is cool and still, thick with the scent of ozone and sterile fluids. It hums with a low, resonant frequency that you feel in your teeth. This is the heart of PreCrime, where the future is born. The PreCogs are a single, unified processing unit—a source of pure, undeniable truth. The future is just a state we haven't rendered yet."
     },
     {
-      id: "build",
       title: "The Chaos of Intersecting Futures",
-      content:
-        "The first vision is simple: armed robbery at 14:00. Anderton manually updates three separate state variables. Then a second vision arrives—the same perpetrator kidnapping a child at 11:00, but only if a train runs on time. Anderton freezes. Which state updates first? A third vision: the father will chase and cause a pile-up. The screen fractures into overlapping windows. His team shouts questions. He's trying to hold all dependencies in his mind. In the confusion, he dispatches the wrong team to a stale location. \"Every vision is another piece of state I have to manage myself!\" The system has failed.",
-      atmosphere: "frustrating, chaotic, overwhelming",
+      content: "The first vision arrives: a simple robbery. Then a second: a conditional kidnapping that only happens if the maglev train is on time. Then a third: a car chase from the kidnapping's father. Anderton manually updates timeline, team assignments, and alert levels with separate useState calls. The screen becomes a mess of overlapping windows. 'Every vision is another piece of state I have to manage myself!' The system, fractured by scattered logic, fails."
     },
     {
-      id: "climax",
       title: "The Reducer Protocol",
-      content:
-        "In Dr. Hineman's greenhouse, Anderton recounts his failure. She smiles: \"You think the PreCogs send raw data you must assemble. Wrong. They are a collective consciousness. Their final vision IS the reconciliation. Stop trying to be the reducer, John. Just dispatch the vision.\" Back in the Ops Room, Anderton creates a protocol—defining the logic, not executing it. He packages three chaotic visions into a single action and dispatches it to the Temple. A single wooden ball returns with a clear, coherent future. Perfect. Elegant. He didn't build the future; he described the events and let the reducer do the rest.",
-      atmosphere: "revelatory, elegant, satisfying",
+      content: "Dr. Hineman explains: 'Stop trying to be the reducer, John. Just dispatch the vision.' The PreCogs see contradictions and dependencies—their unified vision is the reconciliation. Anderton defines a protocol: a single reducer function that handles all state transitions. He packages three conflicting visions into one descriptive action and dispatches it. A single wooden ball returns with a perfectly reconciled future."
     },
     {
-      id: "resolution",
       title: "The Two Timelines",
-      content:
-        "A complex case arrives: bank heist dependent on power grid failure, dependent on solar flare. Fletcher uses the old method—screen fractures, confusion reigns, wrong team dispatched. Anderton steps in. He takes the same fragmented visions and composes one action: MULTI_DEPENDENCY_EVENT. The system processes everything. One directive returns: the flare is a bust, the real crime is the diversion. Clean arrest. \"You were trying to put the logic out here,\" Anderton explains. \"But the logic doesn't belong on the floor; it belongs in the Temple. We describe what happened. It gives us back the future.\"",
-      atmosphere: "reflective, comparative, analytical",
+      content: "A new complex case: bank heist, power grid failure, solar flare. Fletcher tries the old way—multiple useState hooks, manual dependency tracking. The room becomes a cacophony of alarms. Anderton steps in, composes one action with all dependencies, and dispatches it. The reducer processes everything, returning a single coherent directive. 'The logic doesn't belong on the floor; it belongs in the Temple.'"
     },
     {
-      id: "summary",
       title: "The Elegance of Dispatch",
-      content:
-        "Anderton addresses his team, holding a blank wooden ball: \"This is our initial state.\" He holds up a data puck: \"This is an action—a description of an event.\" He gestures to the Temple: \"The reducer lives there. All the complex logic, handled in one place. Our job is no longer to manage state. We describe what happened. We dispatch. The reducer does the rest.\" A complex hostage alert arrives. The team doesn't panic. They compose an action, dispatch it. The system returns new state. The team moves. Resolution is swift and perfect. The system is in harmony.",
-      atmosphere: "celebratory, confident, complete",
-    },
+      content: "'This is our initial state,' Anderton says, holding a blank wooden ball. 'This is an action,' holding a data puck. 'The reducer lives in the Temple. Our job is no longer to manage the state. We describe what happened. We dispatch the action. The reducer does the rest.' The system handles complex alerts with effortless grace: Dispatch → Reduce → Render. Harmony."
+    }
   ];
+  
+  // ==================== DEMO UTILITIES ====================
+  const generateVision = (type: CrimeVision['type']): CrimeVision => ({
+    id: Date.now().toString(),
+    type,
+    victim: ['Leo Crow', 'Sarah Marks', 'Alex Rivera'][Math.floor(Math.random() * 3)],
+    perpetrator: ['Donald Dubin', 'Howard Marks', 'Elias Vaughn'][Math.floor(Math.random() * 3)],
+    time: `${Math.floor(Math.random() * 23)}:${Math.random() > 0.5 ? '15' : '45'}`,
+    condition: type === 'CONDITIONAL_SEQUENCE' ? 'If maglev train is on time' : undefined
+  });
+  
+  const handleReceiveVision = useCallback(() => {
+    const types: CrimeVision['type'][] = ['SIMPLE_CRIME', 'CONDITIONAL_SEQUENCE', 'MULTI_DEPENDENCY'];
+    const vision = generateVision(types[Math.floor(Math.random() * types.length)]);
+    dispatch({ type: 'RECEIVE_VISION', vision });
+  }, []);
+  
+  const handlePreventCrime = useCallback(() => {
+    if (state.pendingCrimes.length > 0) {
+      const crime = state.pendingCrimes[0];
+      dispatch({ type: 'PREVENT_CRIME', crimeId: crime.id });
+    }
+  }, [state.pendingCrimes]);
+  
+  const resetSystem = useCallback(() => {
+    dispatch({ type: 'RESET_SYSTEM' });
+  }, []);
+  
+  // ==================== CODE EXAMPLES ====================
+  const brokenCode = `// ❌ ANTI-PATTERN: Multiple useState hooks
+const [timeline, setTimeline] = useState([]);
+const [assignedTeam, setAssignedTeam] = useState(null);
+const [alertLevel, setAlertLevel] = useState('GREEN');
+const [pendingCrimes, setPendingCrimes] = useState([]);
 
+// Receiving a vision requires manual coordination
+const handleVision = (vision) => {
+  setTimeline([...timeline, \`\${vision.time}: \${vision.type}\`]);
+  setPendingCrimes([...pendingCrimes, vision]);
+  
+  // Need to remember all dependencies
+  if (vision.type === 'CONDITIONAL_SEQUENCE') {
+    setAlertLevel('YELLOW');
+    // Did we update everything? What about team assignment?
+  }
+};`;
+
+  const fixedCode = `// ✅ SOLUTION: Centralized reducer
+const precogReducer = (state, action) => {
+  switch (action.type) {
+    case 'RECEIVE_VISION':
+      return {
+        ...state,
+        timeline: [...state.timeline, action.vision.details],
+        pendingCrimes: [...state.pendingCrimes, action.vision],
+        alertLevel: action.vision.conditional ? 'YELLOW' : state.alertLevel
+        // All logic in one place!
+      };
+    // Other actions: ASSIGN_TEAM, PREVENT_CRIME, etc.
+  }
+};
+
+const [state, dispatch] = useReducer(precogReducer, initialState);
+
+// Dispatch is the only way to update state
+const handleVision = (vision) => {
+  dispatch({ type: 'RECEIVE_VISION', vision });
+};`;
+
+  const dispatchExample = `// 🎯 ELEGANT DISPATCH PATTERN
+// 1. Describe what happened (action)
+const action = {
+  type: 'COMPLEX_CRIME_SEQUENCE',
+  payload: {
+    events: [vision1, vision2, vision3],
+    dependencies: ['train_schedule', 'grid_status']
+  }
+};
+
+// 2. Dispatch to reducer
+dispatch(action);
+
+// 3. Reducer handles ALL logic
+// 4. New state is returned automatically
+// Clean, predictable, maintainable`;
+
+  // ==================== RENDER ====================
   const currentChapter = chapters[chapter];
-
+  
   return (
     <div className="min-h-screen bg-slate-950 text-slate-300 font-sans">
-      {/* Header */}
-      <header className="border-b border-cyan-500/20 bg-slate-900/50 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-6 py-8">
-          <div className="flex items-center gap-4 mb-2">
-            <Eye className="w-10 h-10 text-cyan-400" />
-            <h1 className="text-4xl md:text-5xl font-bold text-cyan-100">Minority Report</h1>
+      {/* HEADER */}
+      <header className="border-b border-cyan-800/50 bg-slate-950/90 backdrop-blur-sm sticky top-0 z-10">
+        <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-6">
+          {/* First line: Title + Metadata */}
+          <div className="flex items-center justify-between gap-4 flex-wrap">
+            <div className="flex items-center gap-3">
+              <Brain className="text-cyan-400 w-8 h-8" />
+              <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Minority Report</h1>
+            </div>
+            <p className="text-sm md:text-base text-slate-400 font-medium">
+              PreCrime • John Anderton • 2002
+            </p>
           </div>
-          <p className="text-lg md:text-xl text-cyan-400/70 ml-14">PreCrime Unit, 2054</p>
-          <p className="text-sm text-slate-400 ml-14 mt-1">
-            Teaching: <span className="text-cyan-400 font-mono">useReducer Hook</span>
+          
+          {/* Second line: Concept */}
+          <p className="text-base md:text-lg text-cyan-400 font-medium mt-2">
+            useReducer for Complex State Management
           </p>
         </div>
       </header>
-
-      <main className="max-w-7xl mx-auto px-6 py-12">
-        {/* Chapter Navigation Bar */}
-        <div className="mb-8 flex items-center justify-between bg-slate-900/30 border border-slate-700/50 rounded-lg p-4">
-          <div className="flex items-center gap-3">
-            <Activity className="w-5 h-5 text-cyan-400" />
-            <span className="text-sm font-mono text-slate-400">
-              Chapter {chapter + 1} / {chapters.length}
-            </span>
-          </div>
-          <div className="flex gap-1">
-            {chapters.map((_, idx) => (
-              <button
-                key={idx}
-                onClick={() => setChapter(idx)}
-                className={`w-2 h-2 rounded-full transition-all ${
-                  idx === chapter
-                    ? "bg-cyan-400 w-8"
-                    : idx < chapter
-                    ? "bg-cyan-600"
-                    : "bg-slate-700"
-                }`}
-                aria-label={`Go to chapter ${idx + 1}`}
-              />
-            ))}
-          </div>
-        </div>
-
-        {/* Chapter Content */}
-        <div className="mb-12">
-          <div className="flex items-baseline gap-4 mb-6">
-            <h2 className="text-3xl md:text-4xl font-bold text-cyan-100">{currentChapter.title}</h2>
-            <span className="text-sm text-slate-500 italic">{currentChapter.atmosphere}</span>
-          </div>
-          <p className="text-lg leading-relaxed text-slate-300 max-w-4xl">{currentChapter.content}</p>
-        </div>
-
-        {/* Interactive Demo Section */}
-        <section className="bg-slate-900/40 border border-cyan-500/20 rounded-xl p-8 shadow-xl shadow-cyan-900/10">
-          {chapter === 0 && <Chapter1Demo />}
-          {chapter === 1 && <Chapter2Demo />}
-          {chapter === 2 && <Chapter3Demo />}
-          {chapter === 3 && <Chapter4Demo />}
-          {chapter === 4 && <Chapter5Demo />}
-        </section>
-
-        {/* Navigation Controls */}
-        <nav className="flex justify-between items-center mt-12">
-          <button
-            onClick={() => setChapter(Math.max(0, chapter - 1))}
-            disabled={chapter === 0}
-            className="px-6 py-3 bg-cyan-600 text-white rounded-lg font-medium hover:bg-cyan-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-          >
-            ← Previous
-          </button>
-          <span className="text-sm text-slate-500 font-mono">
-            {currentChapter.id.toUpperCase()}
-          </span>
-          <button
-            onClick={() => setChapter(Math.min(chapters.length - 1, chapter + 1))}
-            disabled={chapter === chapters.length - 1}
-            className="px-6 py-3 bg-cyan-600 text-white rounded-lg font-medium hover:bg-cyan-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all"
-          >
-            Next →
-          </button>
-        </nav>
-      </main>
-    </div>
-  );
-}
-
-// Chapter 1: Static visualization of reducer flow
-function Chapter1Demo(): JSX.Element {
-  const reducerFlowCode = `// The PreCog reducer: pure function, centralized logic
-function precogReducer(currentState, action) {
-  switch (action.type) {
-    case 'PREMEDITATED_MURDER':
-      return {
-        ...currentState,
-        timeline: action.payload.timestamp,
-        suspect: action.payload.perpetrator,
-        victim: action.payload.victim,
-        team: 'Alpha Unit',
-        status: 'INTERCEPTED'
-      };
-    default:
-      return currentState;
-  }
-}
-
-// Usage: dispatch the vision, get the future
-const action = { 
-  type: 'PREMEDITATED_MURDER', 
-  payload: { perpetrator: 'Donald Dubin', victim: 'Leo Crow', timestamp: '14:09' } 
-};
-
-const newState = precogReducer(currentState, action);
-// The future is rendered. Perfect. Precise.`;
-
-  return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-3 mb-4">
-        <Zap className="w-6 h-6 text-cyan-400" />
-        <h3 className="text-2xl font-bold text-cyan-100">The Perfect System</h3>
-      </div>
-      <p className="text-slate-300 leading-relaxed">
-        The PreCogs operate as a single, pure function. They receive the current state of the world
-        and a vision (action). They return a new, predicted state. No side effects. No chaos. Just
-        input, logic, output.
-      </p>
-
-      <CodeBlock
-        code={reducerFlowCode}
-        variant="success"
-        title="✅ The Temple's Pure Logic"
-        defaultExpanded={true}
-      />
-
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-        <div className="bg-slate-800/50 border border-cyan-500/30 rounded-lg p-6">
-          <div className="text-cyan-400 font-mono text-sm mb-2">INPUT</div>
-          <div className="text-slate-300">Current State + Action</div>
-        </div>
-        <div className="bg-slate-800/50 border border-cyan-500/30 rounded-lg p-6 flex items-center justify-center">
-          <Eye className="w-8 h-8 text-cyan-400 animate-pulse" />
-        </div>
-        <div className="bg-slate-800/50 border border-cyan-500/30 rounded-lg p-6">
-          <div className="text-cyan-400 font-mono text-sm mb-2">OUTPUT</div>
-          <div className="text-slate-300">Next State (Predicted Future)</div>
-        </div>
-      </div>
-
-      <div className="bg-cyan-950/20 border border-cyan-500/30 rounded-lg p-6 mt-6">
-        <p className="text-cyan-300 italic">
-          "The future is just a state we haven't rendered yet."
-        </p>
-      </div>
-    </div>
-  );
-}
-
-// Chapter 2: Anti-pattern - multiple useState chaos
-function Chapter2Demo(): JSX.Element {
-  const [timeline, setTimeline] = useState<string>("Idle");
-  const [team, setTeam] = useState<string>("Standby");
-  const [alertLevel, setAlertLevel] = useState<string>("Green");
-  const [vehicle, setVehicle] = useState<string>("Inactive");
-  const [medical, setMedical] = useState<string>("Inactive");
-  const [updateCount, setUpdateCount] = useState<number>(0);
-
-  const handleVision1 = () => {
-    setTimeline("Robbery at 14:00");
-    setTeam("Bravo");
-    setAlertLevel("Yellow");
-    setUpdateCount((c) => c + 3);
-  };
-
-  const handleVision2 = () => {
-    setTimeline("Kidnapping at 11:00 (if train on time)");
-    setTeam("Bravo (redirected)");
-    setAlertLevel("Orange");
-    setVehicle("Tracking");
-    setUpdateCount((c) => c + 4);
-  };
-
-  const handleVision3 = () => {
-    setTimeline("Multi-vehicle pile-up at 11:45");
-    setMedical("Dispatched");
-    setAlertLevel("Red");
-    // Oops, forgot to check if previous states are still valid!
-    setUpdateCount((c) => c + 3);
-  };
-
-  const reset = () => {
-    setTimeline("Idle");
-    setTeam("Standby");
-    setAlertLevel("Green");
-    setVehicle("Inactive");
-    setMedical("Inactive");
-    setUpdateCount(0);
-  };
-
-  const brokenCode = `// ❌ Scattered State: Multiple useState hooks
-const [timeline, setTimeline] = useState("Idle");
-const [team, setTeam] = useState("Standby");
-const [alertLevel, setAlertLevel] = useState("Green");
-const [vehicle, setVehicle] = useState("Inactive");
-const [medical, setMedical] = useState("Inactive");
-
-// Vision 1: Simple robbery
-function handleVision1() {
-  setTimeline("Robbery at 14:00");  // Update 1
-  setTeam("Bravo");                 // Update 2
-  setAlertLevel("Yellow");          // Update 3
-}
-
-// Vision 2: Conditional kidnapping
-function handleVision2() {
-  setTimeline("Kidnapping at 11:00");  // Overwrites previous!
-  setTeam("Bravo (redirected)");       // More manual logic
-  setAlertLevel("Orange");             // Another update
-  setVehicle("Tracking");              // Don't forget this!
-}
-
-// Vision 3: Pile-up
-function handleVision3() {
-  setTimeline("Pile-up at 11:45");  // Wait, what about previous timelines?
-  setMedical("Dispatched");         // Dependencies unclear
-  setAlertLevel("Red");             // Is robbery still happening?
-  // Easy to forget updates. Logic is scattered everywhere.
-}`;
-
-  return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-3 mb-4">
-        <AlertTriangle className="w-6 h-6 text-red-400" />
-        <h3 className="text-2xl font-bold text-red-100">The Manual State Nightmare</h3>
-      </div>
-      <p className="text-slate-300 leading-relaxed">
-        Anderton tries to manage each piece of state manually. Every new vision requires multiple
-        updates. The logic is scattered. Dependencies are unclear. One mistake and the entire
-        system collapses.
-      </p>
-
-      <CodeBlock code={brokenCode} variant="error" title="❌ Scattered State Logic" defaultExpanded={true} />
-
-      <div className="bg-slate-800/50 border border-red-500/30 rounded-lg p-6">
-        <h4 className="text-lg font-bold text-red-300 mb-4">🐛 Try It: Trigger the Chaos</h4>
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
-          <button
-            onClick={handleVision1}
-            className="px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-500 transition-all"
-          >
-            Vision 1: Robbery
-          </button>
-          <button
-            onClick={handleVision2}
-            className="px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-500 transition-all"
-          >
-            Vision 2: Kidnapping
-          </button>
-          <button
-            onClick={handleVision3}
-            className="px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-500 transition-all"
-          >
-            Vision 3: Pile-up
-          </button>
-        </div>
-
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-4">
-          <div className="bg-slate-900/50 p-3 rounded">
-            <div className="text-xs text-slate-500 mb-1">Timeline</div>
-            <div className="text-sm font-mono text-slate-200">{timeline}</div>
-          </div>
-          <div className="bg-slate-900/50 p-3 rounded">
-            <div className="text-xs text-slate-500 mb-1">Team</div>
-            <div className="text-sm font-mono text-slate-200">{team}</div>
-          </div>
-          <div className="bg-slate-900/50 p-3 rounded">
-            <div className="text-xs text-slate-500 mb-1">Alert</div>
-            <div className="text-sm font-mono text-slate-200">{alertLevel}</div>
-          </div>
-          <div className="bg-slate-900/50 p-3 rounded">
-            <div className="text-xs text-slate-500 mb-1">Vehicle</div>
-            <div className="text-sm font-mono text-slate-200">{vehicle}</div>
-          </div>
-          <div className="bg-slate-900/50 p-3 rounded">
-            <div className="text-xs text-slate-500 mb-1">Medical</div>
-            <div className="text-sm font-mono text-slate-200">{medical}</div>
-          </div>
-          <div className="bg-slate-900/50 p-3 rounded border border-red-500/30">
-            <div className="text-xs text-slate-500 mb-1">State Updates</div>
-            <div className="text-lg font-mono text-red-400">{updateCount}</div>
-          </div>
-        </div>
-
-        <button
-          onClick={reset}
-          className="w-full px-4 py-2 bg-slate-700 text-slate-300 rounded hover:bg-slate-600 transition-all"
-        >
-          🔄 Reset Demo
-        </button>
-      </div>
-
-      <div className="bg-red-950/20 border border-red-500/30 rounded-lg p-6">
-        <p className="text-red-300 italic">
-          "Every vision is another piece of state I have to manage myself!"
-        </p>
-        <p className="text-slate-400 text-sm mt-2">
-          ⚠️ Notice: Logic is scattered, updates are manual, and it's easy to create inconsistent
-          state. This approach doesn't scale.
-        </p>
-      </div>
-    </div>
-  );
-}
-
-// Chapter 3: Solution - useReducer with centralized logic
-function Chapter3Demo(): JSX.Element {
-  const [state, dispatch] = useReducer(precogReducer, initialState);
-
-  const reducerCode = `// ✅ Centralized Logic: Single reducer function
-interface PreCrimeState {
-  timeline: string;
-  team: string;
-  alertLevel: string;
-  vehicleTracking: string;
-  medicalDispatch: string;
-}
-
-type PreCrimeAction =
-  | { type: "SIMPLE_CRIME"; payload: { timeline: string; team: string; alert: string } }
-  | { type: "CONDITIONAL_SEQUENCE"; payload: { events: string[] } }
-  | { type: "RESET" };
-
-function precogReducer(state: PreCrimeState, action: PreCrimeAction): PreCrimeState {
-  switch (action.type) {
-    case "SIMPLE_CRIME":
-      return {
-        ...state,
-        timeline: action.payload.timeline,
-        team: action.payload.team,
-        alertLevel: action.payload.alert,
-      };
-    case "CONDITIONAL_SEQUENCE":
-      // All the complex logic in ONE place
-      return {
-        ...state,
-        timeline: action.payload.events.join(" → "),
-        team: "Alpha + Bravo (Coordinated)",
-        alertLevel: "Red",
-        vehicleTracking: "Active",
-        medicalDispatch: "Standby",
-      };
-    case "RESET":
-      return initialState;
-    default:
-      return state;
-  }
-}
-
-// Usage: Just describe what happened, dispatch the action
-const [state, dispatch] = useReducer(precogReducer, initialState);
-
-dispatch({ 
-  type: "CONDITIONAL_SEQUENCE", 
-  payload: { events: ["Kidnapping", "Chase", "Pile-up"] } 
-});
-// The reducer handles ALL the logic. State is consistent. Perfect.`;
-
-  return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-3 mb-4">
-        <CheckCircle className="w-6 h-6 text-emerald-400" />
-        <h3 className="text-2xl font-bold text-emerald-100">The Reducer Protocol</h3>
-      </div>
-      <p className="text-slate-300 leading-relaxed">
-        All state transition logic lives in one place: the reducer. Anderton doesn't manage state
-        manually. He dispatches actions—descriptions of events. The reducer returns a complete,
-        consistent new state every time.
-      </p>
-
-      <CodeBlock
-        code={reducerCode}
-        variant="success"
-        title="✅ Centralized State Logic"
-        defaultExpanded={true}
-      />
-
-      <div className="bg-slate-800/50 border border-emerald-500/30 rounded-lg p-6">
-        <h4 className="text-lg font-bold text-emerald-300 mb-4">✨ Dispatch Actions</h4>
-        <div className="grid grid-cols-1 md:grid-cols-2 gap-3 mb-6">
-          <button
-            onClick={() =>
-              dispatch({
-                type: "SIMPLE_CRIME",
-                payload: { timeline: "Robbery at 14:00", team: "Bravo", alert: "Yellow" },
-              })
-            }
-            className="px-4 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-500 transition-all"
-          >
-            Dispatch: Simple Crime
-          </button>
-          <button
-            onClick={() =>
-              dispatch({
-                type: "CONDITIONAL_SEQUENCE",
-                payload: { events: ["Kidnapping", "Father Chase", "Pile-up"] },
-              })
-            }
-            className="px-4 py-3 bg-emerald-600 text-white rounded-lg hover:bg-emerald-500 transition-all"
-          >
-            Dispatch: Complex Sequence
-          </button>
-        </div>
-
-        <div className="bg-slate-900/50 border border-emerald-500/20 rounded-lg p-4 mb-4">
-          <div className="text-xs text-emerald-400 font-mono mb-3">CURRENT STATE</div>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm font-mono">
-            <div>
-              <span className="text-slate-500">Timeline:</span>{" "}
-              <span className="text-slate-200">{state.timeline}</span>
+      
+      {/* MAIN CONTENT - Two Column Layout */}
+      <main className="max-w-7xl mx-auto px-4 md:px-8 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+        {/* LEFT COLUMN - Content & Demos */}
+        <div className="lg:col-span-7 space-y-8">
+          {/* Chapter Content */}
+          <section className="bg-slate-900/50 border border-slate-800 rounded-xl p-6 md:p-8">
+            <div className="flex items-center justify-between mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold text-white">{currentChapter.title}</h2>
+              <span className="text-sm text-slate-400 bg-slate-800/50 px-3 py-1 rounded-full">
+                Chapter {chapter + 1} of 5
+              </span>
             </div>
-            <div>
-              <span className="text-slate-500">Team:</span>{" "}
-              <span className="text-slate-200">{state.team}</span>
+            
+            <div className="prose prose-invert prose-lg max-w-none">
+              <p className="leading-relaxed text-slate-300 text-base md:text-lg">
+                {currentChapter.content}
+              </p>
             </div>
-            <div>
-              <span className="text-slate-500">Alert Level:</span>{" "}
-              <span className="text-slate-200">{state.alertLevel}</span>
-            </div>
-            <div>
-              <span className="text-slate-500">Vehicle:</span>{" "}
-              <span className="text-slate-200">{state.vehicleTracking}</span>
-            </div>
-            <div>
-              <span className="text-slate-500">Medical:</span>{" "}
-              <span className="text-slate-200">{state.medicalDispatch}</span>
-            </div>
-          </div>
-        </div>
-
-        <button
-          onClick={() => dispatch({ type: "RESET" })}
-          className="w-full px-4 py-2 bg-slate-700 text-slate-300 rounded hover:bg-slate-600 transition-all"
-        >
-          🔄 Reset State
-        </button>
-      </div>
-
-      <div className="bg-emerald-950/20 border border-emerald-500/30 rounded-lg p-6">
-        <p className="text-emerald-300 italic">
-          "Stop trying to be the reducer, John. Just dispatch the vision."
-        </p>
-        <p className="text-slate-400 text-sm mt-2">
-          ✓ All logic centralized. State always consistent. No scattered updates. Beautiful.
-        </p>
-      </div>
-    </div>
-  );
-}
-
-// Chapter 4: Side-by-side comparison
-function Chapter4Demo(): JSX.Element {
-  const [mode, setMode] = useState<"broken" | "fixed">("broken");
-
-  const brokenCode = `// ❌ Manual State: Fletcher's approach
-function handleComplexCase() {
-  const [heist, setHeist] = useState(false);
-  const [grid, setGrid] = useState("stable");
-  const [flare, setFlare] = useState("pending");
-  
-  // Vision 1: Bank heist
-  setHeist(true);
-  
-  // Vision 2: Check solar flare
-  if (checkFlareData()) {
-    setFlare("confirmed");
-    setGrid("failure");
-  } else {
-    setFlare("fizzled");
-    // Oops! Forgot to update heist state
-    // based on grid status
-  }
-  
-  // Which team do I dispatch?
-  // The logic is scattered everywhere!
-}`;
-
-  const fixedCode = `// ✅ Reducer: Anderton's protocol
-function handleComplexCase() {
-  const [state, dispatch] = useReducer(precogReducer, initialState);
-  
-  // Just describe what's happening
-  dispatch({
-    type: "MULTI_DEPENDENCY_EVENT",
-    payload: {
-      primary: "BANK_HEIST",
-      dependencies: ["POWER_GRID_FAILURE", "SOLAR_FLARE_CONFIRMED"]
-    }
-  });
-  
-  // The reducer contains ALL the logic
-  // for reconciling these dependencies.
-  // One dispatch. One consistent state.
-  // Clean. Reliable. Elegant.
-}`;
-
-  return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-3 mb-4">
-        <Zap className="w-6 h-6 text-cyan-400" />
-        <h3 className="text-2xl font-bold text-cyan-100">The Two Approaches</h3>
-      </div>
-
-      <div className="flex items-center justify-between mb-6">
-        <p className="text-slate-300">Compare the scattered state vs. centralized reducer</p>
-        <button
-          onClick={() => setMode(mode === "broken" ? "fixed" : "broken")}
-          className="px-6 py-2 bg-cyan-600 text-white rounded-lg hover:bg-cyan-500 transition-all font-medium"
-        >
-          {mode === "broken" ? "✅ Show Fix" : "❌ Show Bug"}
-        </button>
-      </div>
-
-      <CodeBlock
-        code={mode === "broken" ? brokenCode : fixedCode}
-        variant={mode === "broken" ? "error" : "success"}
-        title={mode === "broken" ? "❌ Scattered State Logic" : "✅ Centralized Reducer"}
-        defaultExpanded={true}
-      />
-
-      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
-        <div className="bg-red-950/20 border border-red-500/30 rounded-lg p-6">
-          <h4 className="text-lg font-bold text-red-300 mb-3">Fletcher's Way (Manual)</h4>
-          <ul className="space-y-2 text-sm text-slate-300">
-            <li className="flex items-start gap-2">
-              <span className="text-red-400 mt-1">×</span>
-              <span>Multiple useState calls</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-red-400 mt-1">×</span>
-              <span>Logic scattered across handlers</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-red-400 mt-1">×</span>
-              <span>Easy to miss state updates</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-red-400 mt-1">×</span>
-              <span>Inconsistent state likely</span>
-            </li>
-          </ul>
-        </div>
-
-        <div className="bg-emerald-950/20 border border-emerald-500/30 rounded-lg p-6">
-          <h4 className="text-lg font-bold text-emerald-300 mb-3">Anderton's Way (Reducer)</h4>
-          <ul className="space-y-2 text-sm text-slate-300">
-            <li className="flex items-start gap-2">
-              <span className="text-emerald-400 mt-1">✓</span>
-              <span>Single useReducer call</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-emerald-400 mt-1">✓</span>
-              <span>All logic in one pure function</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-emerald-400 mt-1">✓</span>
-              <span>Impossible to miss updates</span>
-            </li>
-            <li className="flex items-start gap-2">
-              <span className="text-emerald-400 mt-1">✓</span>
-              <span>State always consistent</span>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-      <div className="bg-cyan-950/20 border border-cyan-500/30 rounded-lg p-6">
-        <p className="text-cyan-300 italic">
-          "The logic doesn't belong on the floor; it belongs in the Temple."
-        </p>
-      </div>
-    </div>
-  );
-}
-
-// Chapter 5: Complete working example with multiple action types
-function Chapter5Demo(): JSX.Element {
-  const [state, dispatch] = useReducer(precogReducer, initialState);
-  const [actionLog, setActionLog] = useState<string[]>([]);
-
-  const handleDispatch = (action: PreCrimeAction, description: string) => {
-    dispatch(action);
-    setActionLog((log) => [...log, description]);
-  };
-
-  const reset = () => {
-    dispatch({ type: "RESET" });
-    setActionLog([]);
-  };
-
-  const completeCode = `// ✅ Production-Ready useReducer Pattern
-
-// 1. Define your state shape
-interface PreCrimeState {
-  timeline: string;
-  team: string;
-  alertLevel: string;
-  vehicleTracking: string;
-  medicalDispatch: string;
-}
-
-// 2. Define your action types
-type PreCrimeAction =
-  | { type: "SIMPLE_CRIME"; payload: {...} }
-  | { type: "CONDITIONAL_SEQUENCE"; payload: {...} }
-  | { type: "MULTI_DEPENDENCY"; payload: {...} }
-  | { type: "RESET" };
-
-// 3. Write your reducer (centralized logic)
-function precogReducer(state: PreCrimeState, action: PreCrimeAction): PreCrimeState {
-  switch (action.type) {
-    case "SIMPLE_CRIME":
-      return { ...state, /* updates */ };
-    case "CONDITIONAL_SEQUENCE":
-      return { ...state, /* complex logic */ };
-    case "MULTI_DEPENDENCY":
-      return { ...state, /* reconciliation */ };
-    case "RESET":
-      return initialState;
-    default:
-      return state;
-  }
-}
-
-// 4. Use it in your component
-function PreCrimeSystem() {
-  const [state, dispatch] = useReducer(precogReducer, initialState);
-  
-  return (
-    <div>
-      <button onClick={() => dispatch({ type: "SIMPLE_CRIME", payload: {...} })}>
-        Dispatch Vision
-      </button>
-      <StateDisplay state={state} />
-    </div>
-  );
-}
-
-// That's it. Clean. Scalable. Maintainable.`;
-
-  return (
-    <div className="space-y-6">
-      <div className="flex items-center gap-3 mb-4">
-        <Eye className="w-6 h-6 text-cyan-400" />
-        <h3 className="text-2xl font-bold text-cyan-100">System in Harmony</h3>
-      </div>
-      <p className="text-slate-300 leading-relaxed">
-        The PreCrime unit operates with effortless grace. Every action is dispatched. Every state
-        transition is handled by the reducer. The system is predictable, reliable, and elegant.
-      </p>
-
-      <CodeBlock
-        code={completeCode}
-        variant="success"
-        title="✅ Complete useReducer Pattern"
-        defaultExpanded={true}
-      />
-
-      <div className="bg-slate-800/50 border border-cyan-500/30 rounded-lg p-6">
-        <h4 className="text-lg font-bold text-cyan-300 mb-4">🎯 Live System</h4>
-
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 mb-6">
-          <button
-            onClick={() =>
-              handleDispatch(
-                {
-                  type: "SIMPLE_CRIME",
-                  payload: { timeline: "Assault at 09:30", team: "Charlie", alert: "Yellow" },
-                },
-                "SIMPLE_CRIME dispatched"
-              )
-            }
-            className="px-4 py-3 bg-cyan-600 text-white rounded-lg hover:bg-cyan-500 transition-all text-sm"
-          >
-            Simple Crime
-          </button>
-          <button
-            onClick={() =>
-              handleDispatch(
-                {
-                  type: "CONDITIONAL_SEQUENCE",
-                  payload: { events: ["Burglary", "Car Chase", "Standoff"] },
-                },
-                "CONDITIONAL_SEQUENCE dispatched"
-              )
-            }
-            className="px-4 py-3 bg-cyan-600 text-white rounded-lg hover:bg-cyan-500 transition-all text-sm"
-          >
-            Complex Sequence
-          </button>
-          <button
-            onClick={() =>
-              handleDispatch(
-                {
-                  type: "MULTI_DEPENDENCY",
-                  payload: { primary: "Hostage Situation", dependencies: ["Traffic Jam", "Weather Alert"] },
-                },
-                "MULTI_DEPENDENCY dispatched"
-              )
-            }
-            className="px-4 py-3 bg-cyan-600 text-white rounded-lg hover:bg-cyan-500 transition-all text-sm"
-          >
-            Multi-Dependency
-          </button>
-        </div>
-
-        <div className="bg-slate-900/70 border border-cyan-500/20 rounded-lg p-6 mb-4">
-          <div className="text-xs text-cyan-400 font-mono mb-3">SYSTEM STATE</div>
-          <div className="space-y-2 text-sm font-mono">
-            <div className="flex justify-between">
-              <span className="text-slate-500">Timeline:</span>
-              <span className="text-slate-200">{state.timeline}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-slate-500">Team:</span>
-              <span className="text-slate-200">{state.team}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-slate-500">Alert Level:</span>
-              <span className="text-slate-200">{state.alertLevel}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-slate-500">Vehicle Tracking:</span>
-              <span className="text-slate-200">{state.vehicleTracking}</span>
-            </div>
-            <div className="flex justify-between">
-              <span className="text-slate-500">Medical Dispatch:</span>
-              <span className="text-slate-200">{state.medicalDispatch}</span>
-            </div>
-          </div>
-        </div>
-
-        {actionLog.length > 0 && (
-          <div className="bg-slate-900/50 border border-cyan-500/20 rounded-lg p-4 mb-4">
-            <div className="text-xs text-cyan-400 font-mono mb-2">ACTION LOG</div>
-            <div className="space-y-1 text-xs font-mono text-slate-400 max-h-24 overflow-y-auto">
-              {actionLog.map((log, idx) => (
-                <div key={idx}>
-                  {idx + 1}. {log}
+          </section>
+          
+          {/* Interactive Demo */}
+          <section className="bg-slate-900/50 border border-slate-800 rounded-xl p-6 md:p-8">
+            <div className="flex items-center justify-between mb-6">
+              <h3 className="text-xl font-bold text-white flex items-center gap-2">
+                <Zap className="w-5 h-5 text-cyan-400" />
+                PreCrime System Simulation
+              </h3>
+              
+              {chapter === 3 && (
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setDemoMode('broken')}
+                    className={`px-3 py-1.5 text-sm rounded transition-all ${demoMode === 'broken' ? 'bg-red-500/20 border border-red-500/50 text-red-400' : 'bg-slate-800 text-slate-400'}`}
+                  >
+                    ❌ Manual State
+                  </button>
+                  <button
+                    onClick={() => setDemoMode('fixed')}
+                    className={`px-3 py-1.5 text-sm rounded transition-all ${demoMode === 'fixed' ? 'bg-cyan-500/20 border border-cyan-500/50 text-cyan-400' : 'bg-slate-800 text-slate-400'}`}
+                  >
+                    ✅ Reducer Protocol
+                  </button>
                 </div>
-              ))}
+              )}
+            </div>
+            
+            {/* Demo Content per Chapter */}
+            <div ref={autoAnimateRef} className="space-y-6">
+              {/* Chapter 1: Simple Reducer */}
+              {chapter === 0 && (
+                <div className="space-y-4">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <button
+                      onClick={handleReceiveVision}
+                      className="bg-cyan-600 hover:bg-cyan-700 text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+                    >
+                      <Eye className="w-5 h-5" />
+                      Receive Vision
+                    </button>
+                    <button
+                      onClick={handlePreventCrime}
+                      disabled={state.pendingCrimes.length === 0}
+                      className="bg-emerald-600 hover:bg-emerald-700 disabled:opacity-30 disabled:cursor-not-allowed text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+                    >
+                      <CheckCircle className="w-5 h-5" />
+                      Prevent Crime
+                    </button>
+                  </div>
+                  
+                  <div className="bg-slate-900/50 rounded-lg p-4">
+                    <div className="flex items-center justify-between mb-2">
+                      <h4 className="font-medium text-slate-300">System Status</h4>
+                      <span className={`px-2 py-1 rounded text-xs font-medium ${state.alertLevel === 'GREEN' ? 'bg-emerald-500/20 text-emerald-400' : state.alertLevel === 'YELLOW' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-red-500/20 text-red-400'}`}>
+                        {state.alertLevel} ALERT
+                      </span>
+                    </div>
+                    <div className="grid grid-cols-2 gap-4 text-sm">
+                      <div>
+                        <p className="text-slate-400">Prevented Crimes</p>
+                        <p className="text-2xl font-mono text-emerald-400">{state.preventedCrimes}</p>
+                      </div>
+                      <div>
+                        <p className="text-slate-400">Pending Visions</p>
+                        <p className="text-2xl font-mono text-yellow-400">{state.pendingCrimes.length}</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              {/* Chapter 2: Anti-pattern chaos */}
+              {chapter === 1 && (
+                <div className="space-y-6">
+                  <CodeBlock
+                    code={brokenCode}
+                    variant="error"
+                    title="// ❌ Manual State Management (Chaos)"
+                    defaultExpanded={true}
+                  />
+                  
+                  <div className="bg-red-950/20 border border-red-500/30 rounded-lg p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <AlertTriangle className="w-5 h-5 text-red-400" />
+                      <h4 className="font-medium text-red-400">Chaos Meter</h4>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="h-2 bg-red-900/50 rounded-full overflow-hidden">
+                        <div 
+                          className="h-full bg-gradient-to-r from-red-500 to-red-400 rounded-full transition-all duration-300"
+                          style={{ width: `${Math.min(100, state.chaosLevel)}%` }}
+                        />
+                      </div>
+                      <p className="text-sm text-slate-400">
+                        Managing state with multiple useState hooks increases system chaos.
+                        {state.chaosLevel > 30 && " Critical levels detected!"}
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              {/* Chapter 3: Reducer solution */}
+              {chapter === 2 && (
+                <div className="space-y-6">
+                  <CodeBlock
+                    code={fixedCode}
+                    variant="success"
+                    title="// ✅ Centralized Reducer Logic"
+                    defaultExpanded={true}
+                  />
+                  
+                  <div className="bg-cyan-950/20 border border-cyan-500/30 rounded-lg p-4">
+                    <div className="flex items-center gap-2 mb-3">
+                      <CheckCircle className="w-5 h-5 text-cyan-400" />
+                      <h4 className="font-medium text-cyan-400">Reducer in Action</h4>
+                    </div>
+                    <div className="space-y-3">
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-slate-400">Last Action:</span>
+                        <span className="text-cyan-300 font-mono">RECEIVE_VISION</span>
+                      </div>
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-slate-400">State Updates:</span>
+                        <span className="text-emerald-300 font-mono">Single atomic update</span>
+                      </div>
+                      <div className="flex items-center justify-between text-sm">
+                        <span className="text-slate-400">Logic Location:</span>
+                        <span className="text-cyan-300 font-mono">Centralized reducer</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              {/* Chapter 4: Comparison */}
+              {chapter === 3 && (
+                <div className="space-y-6">
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div className={`border rounded-lg p-4 transition-all ${demoMode === 'broken' ? 'border-red-500/50 bg-red-950/10' : 'border-slate-700/50 bg-slate-900/30'}`}>
+                      <div className="flex items-center gap-2 mb-3">
+                        <AlertTriangle className="w-5 h-5 text-red-400" />
+                        <h4 className="font-medium text-slate-300">Manual Approach</h4>
+                      </div>
+                      <p className="text-sm text-slate-400 mb-3">
+                        Multiple useState hooks, scattered logic, manual dependency tracking.
+                      </p>
+                      <div className="space-y-2">
+                        <div className="flex items-center text-sm">
+                          <div className="w-2 h-2 rounded-full bg-red-500 mr-2" />
+                          <span>Race conditions</span>
+                        </div>
+                        <div className="flex items-center text-sm">
+                          <div className="w-2 h-2 rounded-full bg-red-500 mr-2" />
+                          <span>Stale closures</span>
+                        </div>
+                        <div className="flex items-center text-sm">
+                          <div className="w-2 h-2 rounded-full bg-red-500 mr-2" />
+                          <span>Complex bug fixes</span>
+                        </div>
+                      </div>
+                    </div>
+                    
+                    <div className={`border rounded-lg p-4 transition-all ${demoMode === 'fixed' ? 'border-cyan-500/50 bg-cyan-950/10' : 'border-slate-700/50 bg-slate-900/30'}`}>
+                      <div className="flex items-center gap-2 mb-3">
+                        <CheckCircle className="w-5 h-5 text-cyan-400" />
+                        <h4 className="font-medium text-slate-300">Reducer Protocol</h4>
+                      </div>
+                      <p className="text-sm text-slate-400 mb-3">
+                        Single dispatch, centralized logic, predictable state transitions.
+                      </p>
+                      <div className="space-y-2">
+                        <div className="flex items-center text-sm">
+                          <div className="w-2 h-2 rounded-full bg-cyan-500 mr-2" />
+                          <span>Atomic updates</span>
+                        </div>
+                        <div className="flex items-center text-sm">
+                          <div className="w-2 h-2 rounded-full bg-cyan-500 mr-2" />
+                          <span>Easy debugging</span>
+                        </div>
+                        <div className="flex items-center text-sm">
+                          <div className="w-2 h-2 rounded-full bg-cyan-500 mr-2" />
+                          <span>Testable logic</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
+              
+              {/* Chapter 5: Elegant dispatch */}
+              {chapter === 4 && (
+                <div className="space-y-6">
+                  <CodeBlock
+                    code={dispatchExample}
+                    variant="success"
+                    title="// 🎯 Elegant Dispatch Pattern"
+                    defaultExpanded={true}
+                  />
+                  
+                  <div className="bg-gradient-to-r from-cyan-950/20 to-emerald-950/20 border border-cyan-500/30 rounded-lg p-6">
+                    <div className="flex items-center gap-2 mb-4">
+                      <Activity className="w-5 h-5 text-cyan-400" />
+                      <h4 className="font-medium text-white">System Harmony</h4>
+                    </div>
+                    <div className="space-y-4">
+                      <div className="grid grid-cols-3 gap-4">
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-cyan-400 mb-1">1</div>
+                          <p className="text-xs text-slate-400">Describe Action</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-cyan-400 mb-1">2</div>
+                          <p className="text-xs text-slate-400">Dispatch</p>
+                        </div>
+                        <div className="text-center">
+                          <div className="text-2xl font-bold text-cyan-400 mb-1">3</div>
+                          <p className="text-xs text-slate-400">Render State</p>
+                        </div>
+                      </div>
+                      <p className="text-sm text-slate-300 text-center">
+                        Clean flow of information → Predictable state → Maintainable code
+                      </p>
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+            
+            {/* Reset Button */}
+            {(chapter === 1 || chapter === 3) && (
+              <div className="mt-6 pt-6 border-t border-slate-800">
+                <button
+                  onClick={resetSystem}
+                  className="flex items-center justify-center gap-2 w-full py-2 px-4 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                >
+                  <RefreshCw className="w-4 h-4" />
+                  Reset System Simulation
+                </button>
+              </div>
+            )}
+          </section>
+          
+          {/* Navigation */}
+          <nav className="flex items-center justify-between pt-6 border-t border-slate-800">
+            <button
+              onClick={() => setChapter(Math.max(0, chapter - 1))}
+              disabled={chapter === 0}
+              className="flex items-center gap-2 px-5 py-3 bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
+            >
+              <ChevronLeft className="w-5 h-5" />
+              Previous
+            </button>
+            
+            <div className="flex items-center gap-4">
+              <div className="hidden md:flex items-center gap-2">
+                {chapters.map((_, idx) => (
+                  <button
+                    key={idx}
+                    onClick={() => setChapter(idx)}
+                    className={`w-3 h-3 rounded-full transition-all ${chapter === idx ? 'bg-cyan-500' : 'bg-slate-700 hover:bg-slate-600'}`}
+                    aria-label={`Go to chapter ${idx + 1}`}
+                  />
+                ))}
+              </div>
+              <span className="text-sm text-slate-400 font-mono">
+                Chapter {chapter + 1} of {chapters.length}
+              </span>
+            </div>
+            
+            <button
+              onClick={() => setChapter(Math.min(chapters.length - 1, chapter + 1))}
+              disabled={chapter === chapters.length - 1}
+              className="flex items-center gap-2 px-5 py-3 bg-cyan-600 hover:bg-cyan-700 disabled:opacity-30 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
+            >
+              Next
+              <ChevronRight className="w-5 h-5" />
+            </button>
+          </nav>
+        </div>
+        
+        {/* RIGHT COLUMN - Sticky Sidebar */}
+        <div className="lg:col-span-5">
+          <div className="sticky top-24 space-y-6">
+            {/* System Status Card */}
+            <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                <Brain className="w-5 h-5 text-cyan-400" />
+                Temple Status
+              </h3>
+              
+              <div className="space-y-4">
+                <div>
+                  <div className="flex justify-between text-sm mb-1">
+                    <span className="text-slate-400">Timeline Integrity</span>
+                    <span className="text-emerald-400 font-mono">{100 - state.chaosLevel}%</span>
+                  </div>
+                  <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
+                    <div 
+                      className="h-full bg-gradient-to-r from-cyan-500 to-emerald-500 rounded-full transition-all duration-500"
+                      style={{ width: `${100 - Math.min(100, state.chaosLevel)}%` }}
+                    />
+                  </div>
+                </div>
+                
+                <div className="grid grid-cols-2 gap-4">
+                  <div className="bg-slate-800/50 rounded-lg p-3">
+                    <p className="text-sm text-slate-400 mb-1">Pending</p>
+                    <p className="text-2xl font-bold text-yellow-400 font-mono">{state.pendingCrimes.length}</p>
+                  </div>
+                  <div className="bg-slate-800/50 rounded-lg p-3">
+                    <p className="text-sm text-slate-400 mb-1">Prevented</p>
+                    <p className="text-2xl font-bold text-emerald-400 font-mono">{state.preventedCrimes}</p>
+                  </div>
+                </div>
+                
+                <div className="bg-slate-800/30 rounded-lg p-3">
+                  <p className="text-sm text-slate-400 mb-2">Active Team</p>
+                  <p className="text-cyan-300 font-medium">
+                    {state.assignedTeam || 'Awaiting assignment...'}
+                  </p>
+                </div>
+              </div>
+            </div>
+            
+            {/* Vision Log */}
+            <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-6">
+              <div className="flex items-center justify-between mb-4">
+                <h3 className="text-lg font-bold text-white flex items-center gap-2">
+                  <Eye className="w-5 h-5 text-cyan-400" />
+                  Recent Visions
+                </h3>
+                <button
+                  onClick={() => setTimelineView(!timelineView)}
+                  className="text-sm text-slate-400 hover:text-slate-300"
+                >
+                  {timelineView ? 'Show Details' : 'Show Timeline'}
+                </button>
+              </div>
+              
+              <div className="space-y-3 max-h-64 overflow-y-auto pr-2">
+                {timelineView ? (
+                  state.timeline.length > 0 ? (
+                    state.timeline.map((event, idx) => (
+                      <div key={idx} className="bg-slate-800/30 rounded p-3">
+                        <div className="flex items-center gap-2 mb-1">
+                          <div className="w-2 h-2 rounded-full bg-cyan-500" />
+                          <span className="text-sm text-slate-300 font-medium">{event}</span>
+                        </div>
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-slate-500 text-center py-4">No timeline events yet</p>
+                  )
+                ) : (
+                  state.pendingCrimes.length > 0 ? (
+                    state.pendingCrimes.map((crime) => (
+                      <div key={crime.id} className="bg-slate-800/30 rounded p-3">
+                        <div className="flex justify-between items-start mb-1">
+                          <span className={`text-xs font-medium px-2 py-0.5 rounded ${crime.type === 'SIMPLE_CRIME' ? 'bg-blue-500/20 text-blue-400' : crime.type === 'CONDITIONAL_SEQUENCE' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-red-500/20 text-red-400'}`}>
+                            {crime.type.replace('_', ' ')}
+                          </span>
+                          <span className="text-xs text-slate-400">{crime.time}</span>
+                        </div>
+                        <p className="text-sm text-slate-300">
+                          {crime.perpetrator} → {crime.victim}
+                        </p>
+                        {crime.condition && (
+                          <p className="text-xs text-slate-500 mt-1">Condition: {crime.condition}</p>
+                        )}
+                      </div>
+                    ))
+                  ) : (
+                    <p className="text-slate-500 text-center py-4">No pending crimes</p>
+                  )
+                )}
+              </div>
+            </div>
+            
+            {/* Key Insight */}
+            <div className="bg-gradient-to-br from-cyan-950/30 to-slate-900/50 border border-cyan-500/20 rounded-xl p-6">
+              <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
+                <Code className="w-5 h-5 text-cyan-400" />
+                Key Insight
+              </h3>
+              <p className="text-slate-300 text-sm leading-relaxed">
+                {chapter === 0 && "useReducer centralizes state logic in one place—like the Temple housing the PreCogs."}
+                {chapter === 1 && "Multiple useState hooks scatter logic, creating race conditions and stale state bugs."}
+                {chapter === 2 && "The reducer is a pure function: given (state, action), it returns the next state."}
+                {chapter === 3 && "Dispatch is the only way to update state—predictable, debuggable, maintainable."}
+                {chapter === 4 && "We don't manage state; we describe what happened. The reducer handles the rest."}
+              </p>
             </div>
           </div>
-        )}
-
-        <button
-          onClick={reset}
-          className="w-full px-4 py-2 bg-slate-700 text-slate-300 rounded hover:bg-slate-600 transition-all"
-        >
-          🔄 Reset System
-        </button>
-      </div>
-
-      <div className="bg-cyan-950/20 border border-cyan-500/30 rounded-lg p-6">
-        <p className="text-cyan-300 italic mb-3">
-          "We don't manage the state. We describe what happened."
-        </p>
-        <div className="text-sm text-slate-400 space-y-2">
-          <p>✓ State transitions are predictable</p>
-          <p>✓ Logic is centralized and testable</p>
-          <p>✓ Complex dependencies are handled elegantly</p>
-          <p>✓ The system scales with grace</p>
         </div>
-      </div>
+      </main>
+      
+      {/* SAFETY CIRCUIT BREAKER (Hidden but always present) */}
+      {state.chaosLevel > 40 && (
+        <div className="fixed bottom-4 right-4 bg-red-900/90 border border-red-500/50 text-red-100 text-sm px-4 py-2 rounded-lg animate-pulse">
+          ⚡ Chaos level critical ({state.chaosLevel}/50). System will auto-reset.
+        </div>
+      )}
     </div>
   );
 }
