@@ -1,7 +1,11 @@
 import React from "react";
+import * as modulesJSONData from './moduleRegistry.json';
+
 import {
   FlaskConical,
+  Code,
   Zap,
+  Crown,
   Book,
   Film,
   Clock,
@@ -41,30 +45,30 @@ export interface ModuleConfig {
   icon: React.ComponentType<any>; // Lucide icon component
   colorClass: string; // Tailwind color class for icon
   bgClass: string; // Tailwind background classes for card
-  
+
   // Component import (lazy-loaded)
   component: () => Promise<{ default: React.ComponentType }>;
-  
+
   // ModuleWrapper styling props
   wrapperProps: {
     bgClass: string;
     textClass?: string;
     fontClass?: string;
   };
-  
+
   // 🔌 SWITCHBOARD TOGGLE - Enable/disable module across entire app
   enabled: boolean;
 }
 
 /**
  * 🎬 CINEMATIC REACT PATTERNS - MODULE REGISTRY
- * 
+ *
  * This is the SINGLE SOURCE OF TRUTH for all modules.
- * 
+ *
  * SWITCHBOARD INSTRUCTIONS:
  * - Set `enabled: true` to activate a module (appears in home + routing works)
  * - Set `enabled: false` to disable a module (hidden from home + route disabled)
- * 
+ *
  * TROUBLESHOOTING WORKFLOW:
  * 1. If system crashes, set suspicious module to `enabled: false`
  * 2. Restart dev server
@@ -935,6 +939,166 @@ export const moduleRegistry: ModuleConfig[] = [
     },
     enabled: true, // 🚧 PLACEHOLDER
   },
+
+  {
+    id: "use-transition-hook",
+    path: "/use-transition-hook",
+    title: "Inception",
+    subtitle: "Ariadne, The Architect, 2010",
+    concept: "useTransition Hook",
+    icon: Zap,
+    colorClass: "text-blue-500",
+    bgClass: "bg-blue-950/20 border-blue-500/30 hover:border-blue-500",
+    component: () => import("@modules/use-transition-hook"),
+    wrapperProps: {
+      bgClass: "bg-slate-950",
+      textClass: "text-slate-300",
+    },
+    enabled: true,
+  },
+
+  {
+    id: "use-transition-hook",
+    path: "/use-transition-hook_gemini",
+    title: "Inception",
+    subtitle: "The Dream Levels, 2010",
+    concept: "useTransition Hook",
+    icon: Layers,
+    colorClass: "text-indigo-400",
+    bgClass: "bg-slate-900 border-indigo-500/30 hover:border-indigo-500",
+    component: () => import("@modules/use-transition-hook_gemini"),
+    wrapperProps: {
+      bgClass: "bg-slate-950",
+      textClass: "text-slate-300",
+      fontClass: "font-sans",
+    },
+    enabled: true,
+  },
+
+  {
+    id: "use-reducer-minority-report",
+    path: "/use-reducer-minority-report",
+    title: "Minority Report",
+    subtitle: "PreCrime Unit, 2054",
+    concept: "useReducer Hook",
+    icon: Eye,
+    colorClass: "text-cyan-400",
+    bgClass: "bg-cyan-950/20 border-cyan-500/30 hover:border-cyan-500",
+    component: () => import("@modules/use-reducer-minority-report"),
+    wrapperProps: {
+      bgClass: "bg-slate-950",
+      textClass: "text-slate-300",
+      fontClass: "font-sans",
+    },
+    enabled: true,
+  },
+  {
+    id: "lifting-state-up-in-middle-earth",
+    path: "/lifting-state-up-in-middle-earth",
+    title: "The Lord of the Rings",
+    subtitle: "The Council of Elrond, 1954",
+    concept: "Lifting State Up",
+    icon: Crown,
+    colorClass: "text-amber-500",
+    bgClass: "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
+    component: () => import("@modules/lifting-state-up-in-middle-earth"),
+    wrapperProps: {
+      bgClass: "bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950",
+      textClass: "text-slate-300",
+      fontClass: "font-serif",
+    },
+    enabled: true,
+  },
+  {
+    id: "the-force-is-the-context",
+    path: "/the-force-is-the-context",
+    title: "Star Wars",
+    subtitle: "Padawan Anya, Jedi Temple, 1977",
+    concept: "useContext Hook and Context API",
+    icon: Zap,
+    colorClass: "text-blue-500",
+    bgClass: "bg-blue-950/20 border-blue-500/30 hover:border-blue-500",
+    component: () => import("@modules/the-force-is-the-context"),
+    wrapperProps: {
+      bgClass: "bg-slate-950",
+      textClass: "text-slate-300",
+      fontClass: "font-sans",
+    },
+    enabled: true,
+  },
+
+  {
+  id: "strict-mode-precognition",
+  path: "/strict-mode-precognition",
+  title: "Minority Report",
+  subtitle: "Chief John Anderton, PreCrime Division, 2002",
+  concept: "React Strict Mode",
+  icon: Eye,
+  colorClass: "text-blue-500",
+  bgClass: "bg-blue-950/20 border-blue-500/30 hover:border-blue-500",
+  component: () => import("@modules/strict-mode-precognition"),
+  wrapperProps: {
+    bgClass: "bg-slate-950",
+    textClass: "text-slate-300",
+    fontClass: "font-sans"
+  },
+  enabled: true
+},
+{
+  id: "code-splitting-with-horcruxes",
+  path: "/code-splitting-with-horcruxes",
+  title: "Harry Potter",
+  subtitle: "Voldemort, 1997-2007",
+  concept: "Code Splitting & Lazy Loading",
+  icon: Ghost,
+  colorClass: "text-emerald-500",
+  bgClass: "bg-emerald-950/20 border-emerald-500/30 hover:border-emerald-500",
+  component: () => import("@modules/code-splitting-with-horcruxes"),
+  wrapperProps: {
+    bgClass: "bg-slate-950",
+    textClass: "text-slate-300",
+    fontClass: "font-serif"
+  },
+  enabled: true
+},
+
+{
+  id: "inception-dream-layers-as-components",
+  path: "/inception-dream-layers-as-components",
+  title: "Inception",
+  subtitle: "Ariadne, The Architect, 2010",
+  concept: "React Components",
+  icon: Brain,
+  colorClass: "text-cyan-500",
+  bgClass: "bg-cyan-950/20 border-cyan-500/30 hover:border-cyan-500",
+  component: () => import("@modules/inception-dream-layers-as-components"),
+  wrapperProps: {
+    bgClass: "bg-slate-950",
+    textClass: "text-slate-300",
+    fontClass: "font-sans"
+  },
+  enabled: true
+},
+
+
+{
+  id: "the-matrix-is-jsx",
+  path: "/the-matrix-is-jsx",
+  title: "The Matrix",
+  subtitle: "Neo, The One, 1999",
+  concept: "JSX (JavaScript XML)",
+  icon: Code,
+  colorClass: "text-emerald-500",
+  bgClass: "bg-emerald-950/20 border-emerald-500/30 hover:border-emerald-500",
+  component: () => import("@modules/the-matrix-is-jsx"),
+  wrapperProps: {
+    bgClass: "bg-slate-950",
+    textClass: "text-slate-300",
+    fontClass: "font-mono"
+  },
+  enabled: true
+}
+
 ];
 
 /**
@@ -961,6 +1125,6 @@ export const getModuleStats = () => {
   const total = moduleRegistry.length;
   const enabled = moduleRegistry.filter((m) => m.enabled).length;
   const disabled = total - enabled;
-  
+
   return { total, enabled, disabled };
 };

@@ -24,29 +24,29 @@ export const CodeBlock = ({
 
   const variantStyles = {
     default: {
-      headerBg: 'bg-gray-900',
+      headerBg: 'bg-gray-900/80',
       headerText: 'text-gray-100',
       border: 'border-gray-700',
-      codeBg: 'rgb(30, 30, 30)',
+      codeBg: 'rgba(30, 30, 30, 0.7)',
     },
     error: {
       headerBg: 'bg-red-950/50',
       headerText: 'text-red-400',
       border: 'border-red-900/50',
-      codeBg: 'rgb(127, 29, 29)',
+      codeBg: 'rgba(165, 12, 53, 0.3)',
     },
     success: {
       headerBg: 'bg-green-950/50',
       headerText: 'text-green-400',
       border: 'border-green-900/50',
-      codeBg: 'rgb(20, 83, 45)',
+      codeBg: 'rgba(128, 203, 196, 0.3)',
     },
   };
 
   const styles = variantStyles[variant];
 
   return (
-    <div className="bg-gray-900 rounded-2xl shadow-xl overflow-hidden">
+    <div className="bg-gray-900/70 rounded-2xl shadow-xl overflow-hidden">
       <div className={`flex items-center justify-between p-4 ${styles.headerBg}`}>
         <h4 className={`${styles.headerText} font-bold flex items-center gap-2`}>
           <Code2 size={20} />
