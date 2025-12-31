@@ -1,0 +1,125 @@
+{
+  "moduleId": "memo-edge-of-tomorrow",
+  "fiction": {
+    "title": "Edge of Tomorrow",
+    "author": "Doug Liman",
+    "year": 2014,
+    "type": "film",
+    "genre": ["science fiction", "action"],
+    "keyElements": [
+      "Major William Cage",
+      "Rita Vrataski",
+      "Time Loop",
+      "Relentless Render",
+      "Mimics (alien enemies)",
+      "Beach Landing",
+      "Tactical Inputs",
+      "Shallow Comparison"
+    ]
+  },
+  "metaphor": {
+    "core": "The time loop experienced by Major William Cage in 'Edge of Tomorrow', where he relives the same battle repeatedly, serves as a metaphor for React's re-rendering process. The module demonstrates how `React.memo` (and `useMemo`/`useCallback`) allows components to 'skip' unnecessary re-renders when their props haven't changed, conserving computational 'energy' and 'execution time' by recognizing already-solved 'battlefields' and focusing resources only on new 'threats' (changed props).",
+    "mapping": [
+      {
+        "fictionElement": "Major William Cage reliving the day/battle",
+        "reactConcept": "A React component undergoing repeated re-renders."
+      },
+      {
+        "fictionElement": "The Relentless Render (start of each loop)",
+        "reactConcept": "React's default behavior: when a parent component re-renders, all its children re-render by default, even if their props haven't changed."
+      },
+      {
+        "fictionElement": "Brute-Force Approach (Cage repeatedly fighting the same way)",
+        "reactConcept": "Components that re-execute expensive computations or logic on every render, even when their props are identical to the previous render, leading to wasted resources."
+      },
+      {
+        "fictionElement": "Rita explaining to 'skip battles already won' / The Recognition Principle",
+        "reactConcept": "`React.memo`: a Higher-Order Component that memoizes a functional component, preventing it from re-rendering if its props are shallowly equal to the previous props."
+      },
+      {
+        "fictionElement": "Tactical Inputs (props)",
+        "reactConcept": "The props received by a component, which `React.memo` performs a shallow comparison against."
+      },
+      {
+        "fictionElement": "Conserving resources / Energy depletion",
+        "reactConcept": "The performance benefits of `React.memo` in reducing unnecessary computations, CPU cycles, and improving application responsiveness."
+      },
+      {
+        "fictionElement": "The Symphony of Optimization (Cage strategically skipping sectors)",
+        "reactConcept": "Applying `React.memo` strategically to optimize performance by preventing re-renders of components whose props (and internal state derived from props) have not changed."
+      }
+    ],
+    "narrativeArc": "The module follows Cage's journey through the time loop. It starts with the 'relentless render' (default React re-rendering), exposes the inefficiency of the 'brute-force approach' (unoptimized components), introduces the 'recognition principle' (`React.memo`) as a solution, compares 'effort vs. memory' (cost of re-rendering vs. benefits of memoization), and culminates in a 'symphony of optimization' where `React.memo` is applied strategically across a component tree."
+  },
+  "concepts": {
+    "primary": "React.memo",
+    "secondary": [
+      "Performance Optimization",
+      "Unnecessary Re-renders",
+      "Shallow Comparison",
+      "Memoization",
+      "Pure Components (functional equivalent)",
+      "Props Equality",
+      "Component Reconciliation"
+    ],
+    "problems": [
+      "Components re-rendering unnecessarily, leading to wasted CPU cycles and slower UI updates",
+      "Complex or expensive computations re-executing on every render",
+      "Degraded application performance and responsiveness."
+    ],
+    "reactAPIs": ["React.memo", "useState", "useEffect", "useMemo", "useCallback"]
+  },
+  "structure": {
+    "format": "chapter-based",
+    "chapters": [
+      {
+        "title": "The Relentless Render",
+        "focus": "Introduces the default behavior of React re-renders: all children re-render when a parent does."
+      },
+      {
+        "title": "The Brute-Force Approach",
+        "focus": "Demonstrates the performance cost of unnecessary re-renders in components performing expensive work."
+      },
+      {
+        "title": "The Recognition Principle",
+        "focus": "Explains `React.memo` as a way to prevent unnecessary re-renders by performing a shallow comparison of props."
+      },
+      {
+        "title": "Effort vs. Memory",
+        "focus": "Compares the performance impact (execution time, resource usage) of brute-force re-rendering versus memoized optimization."
+      },
+      {
+        "title": "The Symphony of Optimization",
+        "focus": "Illustrates how to strategically apply `React.memo` to optimize an application's component tree for maximum efficiency."
+      }
+    ],
+    "pedagogicalApproach": "narrative|problem-solution|contrast-driven|progressive",
+    "interactiveElements": [
+      "Simulating parent component re-renders and observing child component re-render counts (both memoized and non-memoized)",
+      "Visualizing 'energy' depletion due to brute-force re-renders",
+      "Interactive toggle between memoized and non-memoized component rendering",
+      "Comparing execution times and render counts between optimized and unoptimized scenarios",
+      "Interactive battlefield simulation where individual 'sectors' (components) can have their props changed to trigger selective re-renders in a memoized setup."
+    ]
+  },
+  "search": {
+    "keywords": [
+      "React memo",
+      "React.memo",
+      "Performance Optimization React",
+      "Prevent Re-renders React",
+      "Shallow Comparison React",
+      "React Pure Components",
+      "Functional Component Memoization",
+      "useMemo React",
+      "useCallback React",
+      "Edge of Tomorrow React",
+      "Doug Liman",
+      "Major William Cage"
+    ],
+    "themes": ["performance", "optimization", "rendering", "hooks"],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "relatedModules": []
+  }
+}

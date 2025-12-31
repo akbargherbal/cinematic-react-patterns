@@ -1,0 +1,115 @@
+{
+  "moduleId": "composition-vs-inheritance-frankenstein",
+  "fiction": {
+    "title": "Frankenstein",
+    "author": "Mary Shelley",
+    "year": 1818,
+    "type": "novel",
+    "genre": ["gothic", "science fiction", "horror"],
+    "keyElements": [
+      "Victor Frankenstein",
+      "The Creature",
+      "Patchwork",
+      "Parts (limbs, eyes, etc.)",
+      "Dr. Waldman",
+      "Automaton",
+      "Clockwork Bird"
+    ]
+  },
+  "metaphor": {
+    "core": "The creation of Frankenstein's Creature and other automatons serves as a metaphor to explore the concepts of component composition versus class inheritance in React. It illustrates how combining independent, specialized parts (composition) leads to more flexible and robust systems compared to rigid hierarchical structures (inheritance).",
+    "mapping": [
+      {
+        "fictionElement": "Victor Frankenstein collecting perfect parts",
+        "reactConcept": "Composing independent, specialized React components"
+      },
+      {
+        "fictionElement": "Dr. Waldman's automaton built from a single blueprint",
+        "reactConcept": "Class inheritance creating rigid, tightly-coupled component hierarchies"
+      },
+      {
+        "fictionElement": "Frankenstein's Creature with chaotic signals/poorly defined props",
+        "reactConcept": "Composition with bad or unclear props leading to uncoordinated component behavior"
+      },
+      {
+        "fictionElement": "The Clockwork Nightingale with a central harness and clear sockets",
+        "reactConcept": "Composition with well-defined props and interfaces for seamless component collaboration"
+      },
+      {
+        "fictionElement": "Society of perfect parts united by purpose",
+        "reactConcept": "Building UIs by composing focused components connected via deliberate, well-named props"
+      }
+    ],
+    "narrativeArc": "The module follows Frankenstein's journey from attempting to assemble a creature with poorly integrated parts (bad composition) to successfully building a 'clockwork nightingale' with well-defined interfaces (good composition), contrasting this with the rigidity of inheritance. This narrative arc highlights the evolution of understanding from rigid structures to flexible, composable systems in React."
+  },
+  "concepts": {
+    "primary": "Composition vs. Inheritance",
+    "secondary": [
+      "Component Composition",
+      "Class Inheritance",
+      "Props",
+      "Component Reusability",
+      "Tight Coupling",
+      "Flexible Architectures",
+      "UI Architecture"
+    ],
+    "problems": [
+      "Rigid component hierarchies (inheritance)",
+      "Unintended side effects of changes in inherited classes",
+      "Uncoordinated component behavior due to poorly defined props",
+      "Lack of reusability in tightly coupled systems"
+    ],
+    "reactAPIs": []
+  },
+  "structure": {
+    "format": "chapter-based",
+    "chapters": [
+      {
+        "title": "The Promise of Patchwork",
+        "focus": "Introduces component composition as combining discrete, reusable parts."
+      },
+      {
+        "title": "The Prison of Purity",
+        "focus": "Illustrates the rigidity and problems of class inheritance."
+      },
+      {
+        "title": "A Monstrous Union",
+        "focus": "Shows how composition with poorly defined props can lead to chaotic component behavior."
+      },
+      {
+        "title": "The Clockwork Nightingale",
+        "focus": "Demonstrates good composition with clear, specific props and interfaces."
+      },
+      {
+        "title": "The Architect's Journal",
+        "focus": "Summarizes the philosophy of building UIs through well-composed React components."
+      }
+    ],
+    "pedagogicalApproach": "narrative|problem-solution|contrast-driven|progressive",
+    "interactiveElements": [
+      "Composing a 'Creature' from individual parts",
+      "Visualizing inheritance hierarchy limitations",
+      "Triggering chaotic behavior with bad props",
+      "Observing a well-composed 'Clockwork Nightingale' with clear props",
+      "Displaying a final composed Profile Card"
+    ]
+  },
+  "search": {
+    "keywords": [
+      "React Composition",
+      "React Inheritance",
+      "Props in React",
+      "Component Design Patterns",
+      "React Component Reusability",
+      "React Architecture",
+      "Functional Components vs Classes",
+      "React Best Practices",
+      "Tight Coupling React",
+      "Frankenstein"
+    ],
+    "themes": ["component design", "architecture", "props", "reusability"],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "relatedModules": []
+  }
+}

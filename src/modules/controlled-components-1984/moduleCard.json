@@ -1,0 +1,125 @@
+{
+  "moduleId": "controlled-components-1984",
+  "fiction": {
+    "title": "Nineteen Eighty-Four",
+    "author": "George Orwell",
+    "year": 1949,
+    "type": "novel",
+    "genre": ["dystopian", "social science fiction", "political fiction"],
+    "keyElements": [
+      "Winston Smith",
+      "Big Brother",
+      "Telescreen",
+      "Diary",
+      "Thought Police",
+      "Ministry of Truth",
+      "Official Records",
+      "Unpersons",
+      "Doublethink",
+      "Truth"
+    ]
+  },
+  "metaphor": {
+    "core": "George Orwell's '1984' provides a powerful metaphor for controlled components in React. The Party's totalitarian control over information and reality, enforced by telescreens and the Ministry of Truth, mirrors how controlled components keep input elements synchronized with a single source of truth (React state), ensuring data consistency and preventing discrepancies.",
+    "mapping": [
+      {
+        "fictionElement": "Winston's secret diary (private thoughts)",
+        "reactConcept": "Uncontrolled component with its own internal DOM state, leading to potential desynchronization with application state"
+      },
+      {
+        "fictionElement": "Telescreen (official, omnipresent display)",
+        "reactConcept": "The `value` prop of a controlled component, always reflecting the React state"
+      },
+      {
+        "fictionElement": "Ministry of Truth's official records",
+        "reactConcept": "The single source of truth in React state for input elements"
+      },
+      {
+        "fictionElement": "Thought Police/Party's filtering of information",
+        "reactConcept": "The `onChange` handler of a controlled component, intercepting user input to validate, transform, or reject changes before updating state"
+      },
+      {
+        "fictionElement": "The 'Lag of Truth' (distraction, unsynced inputs)",
+        "reactConcept": "Data desynchronization bugs and loss of user input when uncontrolled components are not properly managed"
+      },
+      {
+        "fictionElement": "Loving Big Brother's State (seamless conformity)",
+        "reactConcept": "The benefit of controlled components: always-in-sync UI and state, enabling real-time validation, formatting, and complex form logic"
+      }
+    ],
+    "narrativeArc": "The module follows Winston's struggle with the 'lag of truth' where his private diary (uncontrolled input) conflicts with the Party's official record (application state), leading to errors. He then encounters the Party's 'clear' terminal (controlled input) where every keystroke is intercepted and validated, forcing conformity to a single truth. This narrative arc demonstrates the problems of uncontrolled components and the benefits of controlled components for data consistency, validation, and a seamless user experience."
+  },
+  "concepts": {
+    "primary": "Controlled Components",
+    "secondary": [
+      "Uncontrolled Components",
+      "Form Handling",
+      "State Management in Forms",
+      "Input Synchronization",
+      "Real-time Validation",
+      "Data Consistency",
+      "Single Source of Truth",
+      "onChange Event"
+    ],
+    "problems": [
+      "Data desynchronization between DOM and React state",
+      "Difficulty with real-time validation and formatting",
+      "Manual DOM manipulation for input values",
+      "Unreliable form submissions"
+    ],
+    "reactAPIs": ["useState", "useRef", "ChangeEvent", "FormEvent"]
+  },
+  "structure": {
+    "format": "chapter-based",
+    "chapters": [
+      {
+        "title": "The Forbidden Diary",
+        "focus": "Introduces uncontrolled components, where the DOM manages its own state, leading to discrepancies with application state."
+      },
+      {
+        "title": "The Lag of Truth",
+        "focus": "Demonstrates the problems and anti-patterns of uncontrolled inputs, such as data desynchronization and validation failures."
+      },
+      {
+        "title": "The Party's Clarity",
+        "focus": "Explains and demonstrates controlled components, where React state is the single source of truth, enabling real-time validation and transformation."
+      },
+      {
+        "title": "Two Systems, One Truth",
+        "focus": "Compares uncontrolled vs. controlled components side-by-side, highlighting data flow and event handling differences."
+      },
+      {
+        "title": "Loving Big Brother's State",
+        "focus": "Summarizes the advantages of controlled components for complex form logic, data integrity, and a predictable user experience."
+      }
+    ],
+    "pedagogicalApproach": "narrative|problem-solution|contrast-driven|progressive",
+    "interactiveElements": [
+      "Demonstrating an uncontrolled input (diary) vs. an official, unsynced truth",
+      "Simulating distraction leading to form submission errors with an uncontrolled input",
+      "Interacting with a controlled input that validates and transforms input in real-time",
+      "Side-by-side comparison of uncontrolled and controlled form behavior",
+      "Complex form data rectification with controlled components"
+    ]
+  },
+  "search": {
+    "keywords": [
+      "React Controlled Components",
+      "React Uncontrolled Components",
+      "React Forms",
+      "Form Handling React",
+      "Input Elements React",
+      "useState Forms",
+      "onChange React",
+      "React Data Binding",
+      "Real-time Validation React",
+      "1984 React",
+      "George Orwell Forms",
+      "Nineteen Eighty-Four"
+    ],
+    "themes": ["forms", "state management", "data consistency", "validation", "user input"],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "relatedModules": []
+  }
+}

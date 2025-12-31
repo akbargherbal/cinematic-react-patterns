@@ -1,0 +1,126 @@
+{
+  "moduleId": "use-transition-hook",
+  "fiction": {
+    "title": "Inception",
+    "author": "Christopher Nolan",
+    "year": 2010,
+    "type": "film",
+    "genre": ["science fiction", "action", "thriller"],
+    "keyElements": [
+      "Ariadne (the Architect)",
+      "Cobb",
+      "Saito",
+      "Real-Time",
+      "Dream-Time",
+      "PASIV device",
+      "Two Clocks",
+      "World Freezes",
+      "Transition button",
+      "Shimmer effect"
+    ]
+  },
+  "metaphor": {
+    "core": "The layered dream worlds from 'Inception', with their distinct 'Real-Time' and slower 'Dream-Time' flows, serve as a metaphor for React's `useTransition` hook. The module illustrates how `useTransition` allows developers to prioritize urgent UI updates (Real-Time, like user input) over less urgent, potentially expensive rendering or data-intensive tasks (Dream-Time, like complex filtering). By marking certain state updates as 'transitions', React can keep the UI responsive for critical interactions while performing the heavy work in the background, providing seamless feedback to the user.",
+    "mapping": [
+      {
+        "fictionElement": "Real-Time (instant user input)",
+        "reactConcept": "Urgent updates: state changes that need to be reflected in the UI immediately for a responsive user experience (e.g., input field value, navigation)."
+      },
+      {
+        "fictionElement": "Dream-Time (slower, deferred computations)",
+        "reactConcept": "Non-urgent updates: state changes that trigger potentially expensive rendering or data operations that can be delayed without blocking the main thread (e.g., filtering a large list, rendering complex charts)."
+      },
+      {
+        "fictionElement": "The World Freezes / Stutter",
+        "reactConcept": "The UI becoming unresponsive or 'freezing' when an expensive synchronous state update blocks the main thread, leading to a poor user experience."
+      },
+      {
+        "fictionElement": "Transition button / modified PASIV device",
+        "reactConcept": "The `startTransition` function from `useTransition`, which marks the enclosed state updates as non-urgent transitions."
+      },
+      {
+        "fictionElement": "Shimmer effect / blue aura",
+        "reactConcept": "Visual feedback provided by the `isPending` value from `useTransition`, indicating that a non-urgent transition is currently in progress."
+      },
+      {
+        "fictionElement": "Saito typing instantly while the world shimmers and resolves",
+        "reactConcept": "The outcome of `useTransition`: user input appears instantly, keeping the UI responsive, while the expensive rendering (e.g., search results) updates gracefully in the background with visual cues."
+      },
+      {
+        "fictionElement": "Synchronized Time (Real-Time and Dream-Time coexisting)",
+        "reactConcept": "The ability of React Concurrent Features (enabled by `useTransition`) to schedule and interleave different priority updates, ensuring responsiveness."
+      }
+    ],
+    "narrativeArc": "The module introduces the 'two clocks' (urgent vs. deferred updates). It then demonstrates how 'the world freezes' (blocking renders) when these are unmanaged. 'The dream within a dream' reveals `useTransition` as the solution, allowing both time streams to coexist. A comparison of 'synchronized time' highlights the user experience difference, culminating in 'The Architect of Time' (mastery of `useTransition`) for building responsive UIs."
+  },
+  "concepts": {
+    "primary": "useTransition Hook",
+    "secondary": [
+      "Concurrency",
+      "UI Responsiveness",
+      "Prioritized Updates",
+      "Blocking Renders",
+      "Expensive Computations",
+      "User Experience (UX)",
+      "Search Filtering",
+      "State Updates",
+      "isPending (feedback)"
+    ],
+    "problems": [
+      "UI blocking and unresponsiveness when user input directly triggers expensive rendering or computations",
+      "Poor user experience (jank, stuttering) during heavy search filters or dynamic list updates",
+      "Difficulty in prioritizing urgent UI updates (e.g., input display) over less urgent background work."
+    ],
+    "reactAPIs": ["useTransition", "useState", "useEffect", "useMemo", "useCallback"]
+  },
+  "structure": {
+    "format": "chapter-based",
+    "chapters": [
+      {
+        "title": "The Two Clocks",
+        "focus": "Introduces the concept of different priority updates in a UI: urgent (Real-Time) vs. non-urgent (Dream-Time)."
+      },
+      {
+        "title": "The World Freezes",
+        "focus": "Demonstrates the problem: how expensive synchronous updates block the UI, making it unresponsive and frustrating."
+      },
+      {
+        "title": "The Dream Within a Dream",
+        "focus": "Explains and demonstrates `useTransition` to mark non-urgent state updates, allowing urgent updates to proceed instantly while providing visual feedback for pending work."
+      },
+      {
+        "title": "Synchronized Time",
+        "focus": "Compares side-by-side the user experience of a blocking UI versus one using `useTransition` for fluid, responsive interactions."
+      },
+      {
+        "title": "The Architect of Time",
+        "focus": "Summarizes the mastery of `useTransition` for building complex, highly responsive applications by intelligently scheduling and prioritizing UI updates."
+      }
+    ],
+    "pedagogicalApproach": "narrative|problem-solution|contrast-driven|progressive",
+    "interactiveElements": [
+      "Visualizing two clocks (Real-Time and Dream-Time) running at different speeds",
+      "Live input field that triggers an expensive simulated filter, demonstrating UI blocking without `useTransition`",
+      "Live input field using `useTransition` to show instant input response and deferred search results with shimmer feedback",
+      "Telemetry displaying metrics like freeze count and responsive input count for comparison",
+      "A search filtering example using `useTransition` for a seamless user experience."
+    ]
+  },
+  "search": {
+    "keywords": [
+      "React useTransition",
+      "Concurrency React",
+      "UI Responsiveness React",
+      "React Performance Hooks",
+      "Expensive Render React",
+      "Blocking UI React",
+      "Input Debouncing React",
+      "Inception React useTransition",
+      "Christopher Nolan Transitions"
+    ],
+    "themes": ["performance", "user experience", "concurrency", "hooks", "optimization"],
+    "difficulty": "advanced",
+    "prerequisites": [],
+    "relatedModules": ["use-deferred-value-tenet"]
+  }
+}

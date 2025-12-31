@@ -1,0 +1,124 @@
+{
+  "moduleId": "render-props-heist-plans",
+  "fiction": {
+    "title": "Ocean's Eleven",
+    "author": "Steven Soderbergh",
+    "year": 2001,
+    "type": "film",
+    "genre": ["heist", "comedy", "thriller"],
+    "keyElements": [
+      "Danny Ocean",
+      "Specialists (Linus, Basher, Yen)",
+      "Bellagio Vault",
+      "Live Security Data",
+      "Heist Plan",
+      "Brittle Blueprints",
+      "Blank Card",
+      "Inversion of Control"
+    ]
+  },
+  "metaphor": {
+    "core": "The intricate heist planning in 'Ocean's Eleven', where diverse specialists need access to the same live security data but for different, specific tasks, serves as a metaphor for the Render Props pattern in React. The module illustrates how a central component can manage complex state and logic (like the Bellagio's security system) and 'render' its children by passing this live data as a function prop, allowing specialized child components to consume and display this data in highly flexible and reusable ways without duplicating logic.",
+    "mapping": [
+      {
+        "fictionElement": "Danny Ocean",
+        "reactConcept": "The React developer, orchestrating component interactions."
+      },
+      {
+        "fictionElement": "Specialists (Linus, Basher, Yen)",
+        "reactConcept": "Specialized React child components that need specific pieces of shared data to render or perform actions."
+      },
+      {
+        "fictionElement": "Bellagio Vault Access (managing live security data)",
+        "reactConcept": "A parent React component responsible for managing complex, shared state (e.g., fetching data, subscribing to updates) and encapsulating related logic."
+      },
+      {
+        "fictionElement": "Live Security Data (guard positions, camera status, etc.)",
+        "reactConcept": "The shared state or computed values that multiple child components need to access."
+      },
+      {
+        "fictionElement": "Brittle Blueprints (separate, duplicated plans)",
+        "reactConcept": "An anti-pattern where child components independently fetch or manage the same shared state, leading to code duplication, synchronization issues, and increased maintenance overhead."
+      },
+      {
+        "fictionElement": "The 'Blank Card' (a function given to specialists)",
+        "reactConcept": "The core of the Render Props pattern: passing a function as a prop to a child component, where this function receives the shared state/logic from the parent and returns JSX."
+      },
+      {
+        "fictionElement": "Inversion of Control (parent provides data, child decides rendering)",
+        "reactConcept": "The parent component is responsible for *what* data is provided, while the child component is responsible for *how* that data is rendered."
+      }
+    ],
+    "narrativeArc": "The module presents Danny Ocean's 'dilemma' of sharing live security data among specialists. It then exposes the 'brittle blueprints' anti-pattern (duplicated state logic) that leads to sync errors. The 'blank card' (render prop) is introduced as the solution, embodying inversion of control. A comparison of 'two plans' demonstrates the robustness of render props over brittle approaches, culminating in the 'fountain' where shared, adaptable logic enables a successful heist, showcasing the power of render props for flexible component reuse."
+  },
+  "concepts": {
+    "primary": "Render Props Pattern",
+    "secondary": [
+      "Higher-Order Components (HOCs) (comparison)",
+      "Inversion of Control",
+      "Component Reusability",
+      "Shared State",
+      "Code Duplication",
+      "Data Flow",
+      "Flexibility",
+      "Abstraction"
+    ],
+    "problems": [
+      "Code duplication when multiple components need to share the same stateful logic",
+      "Difficulty in achieving flexible component reuse with tightly coupled components",
+      "Prop drilling for deeply nested shared data",
+      "Synchronization issues when state is managed independently by multiple consumers."
+    ],
+    "reactAPIs": ["children (as a function prop)", "useState", "useEffect"]
+  },
+  "structure": {
+    "format": "chapter-based",
+    "chapters": [
+      {
+        "title": "The Architect's Dilemma",
+        "focus": "Introduces the problem of sharing stateful logic among multiple specialized components without duplication."
+      },
+      {
+        "title": "The Brittle Blueprints",
+        "focus": "Demonstrates the anti-pattern of duplicating stateful logic across multiple components, leading to synchronization issues and maintenance nightmares."
+      },
+      {
+        "title": "The Blank Card",
+        "focus": "Explains the Render Props pattern as a solution, introducing inversion of control where a parent component manages state and passes it as a function prop to children."
+      },
+      {
+        "title": "Two Plans, One Grid",
+        "focus": "Compares the fragility of the brittle blueprint approach versus the adaptability and robustness of the Render Props pattern in a live simulation."
+      },
+      {
+        "title": "The Fountain",
+        "focus": "Summarizes the benefits of Render Props for building flexible, reusable components that can share complex behavior and state efficiently."
+      }
+    ],
+    "pedagogicalApproach": "narrative|problem-solution|contrast-driven|progressive",
+    "interactiveElements": [
+      "Simulating live security data updates to the Bellagio Vault",
+      "Interactive toggle between 'brittle blueprint' mode (showing sync errors and duplicated logic) and 'render prop' mode (showing centralized, coordinated state)",
+      "Visualizing individual specialist components reacting to shared data",
+      "Demonstrating how render props enable flexible UI customization by allowing children to define their own rendering logic."
+    ]
+  },
+  "search": {
+    "keywords": [
+      "React Render Props",
+      "Render Props Pattern",
+      "Inversion of Control React",
+      "Component Reusability React",
+      "Shared State React",
+      "Higher Order Components vs Render Props",
+      "Function as Children React",
+      "Ocean's Eleven React",
+      "Heist Plan React",
+      "Steven Soderbergh"
+    ],
+    "themes": ["component design", "reusability", "state management", "design patterns", "flexibility"],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "relatedModules": []
+  }
+}

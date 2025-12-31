@@ -1,0 +1,129 @@
+{
+  "moduleId": "inception-dream-layers-as-components",
+  "fiction": {
+    "title": "Inception",
+    "author": "Christopher Nolan",
+    "year": 2010,
+    "type": "film",
+    "genre": ["science fiction", "action", "thriller"],
+    "keyElements": [
+      "Cobb",
+      "Ariadne (the Architect)",
+      "Dream Layers",
+      "PASIV device",
+      "Parisian Cafe",
+      "Luxury Hotel",
+      "Mountain Hospital",
+      "Mal's projection",
+      "Kicks (to exit dream layers)",
+      "Shared Idea (props)"
+    ]
+  },
+  "metaphor": {
+    "core": "The layered dream worlds from 'Inception', meticulously designed by an architect and connected through shared ideas and synchronized 'kicks', serve as a powerful metaphor for React component architecture. Each dream layer represents an isolated, reusable component, props are the 'ideas' passed between them, and synchronized 'kicks' illustrate callback functions for inter-component communication.",
+    "mapping": [
+      {
+        "fictionElement": "Dream Layer (Parisian Cafe, Hotel, Hospital)",
+        "reactConcept": "An isolated, reusable React component with its own internal state and logic."
+      },
+      {
+        "fictionElement": "Ariadne (the Architect)",
+        "reactConcept": "The React developer, responsible for designing and composing components."
+      },
+      {
+        "fictionElement": "PASIV device",
+        "reactConcept": "The React renderer, bringing components to life on the screen."
+      },
+      {
+        "fictionElement": "Meticulous detail and self-contained worlds",
+        "reactConcept": "The principle of component isolation: components manage their own concerns and do not directly interfere with others."
+      },
+      {
+        "fictionElement": "Monolithic blueprint where everything bleeds into everything else",
+        "reactConcept": "An anti-pattern: a single, large component (or deeply interconnected components without clear boundaries) where state changes cause unpredictable side effects across the entire application."
+      },
+      {
+        "fictionElement": "A stack of maps, each with its own rules",
+        "reactConcept": "Breaking down a complex UI into a hierarchical structure of smaller, specialized components."
+      },
+      {
+        "fictionElement": "Ideas passed down between dream layers (e.g., Fischer's father's idea)",
+        "reactConcept": "Props: data passed from a parent component to a child component, defining its interface and behavior."
+      },
+      {
+        "fictionElement": "Synchronized 'kicks' (e.g., van falling, elevator exploding)",
+        "reactConcept": "Callback functions: passed as props from parent to child, allowing child components to communicate events or data back up to their parents, enabling coordinated actions."
+      }
+    ],
+    "narrativeArc": "The module takes us through Ariadne's journey from designing a single isolated dream (component isolation), to witnessing the chaos of a monolithic blueprint (anti-pattern of entangled state), to her epiphany of creating a 'stack of maps' (component composition with clear interfaces). It then contrasts the monolithic vs. component-based approach and culminates in the 'synchronized kick' to demonstrate elegant inter-component communication through props and callbacks."
+  },
+  "concepts": {
+    "primary": "Component Composition",
+    "secondary": [
+      "Component Isolation",
+      "Props",
+      "Callback Functions",
+      "State Management (local vs. shared)",
+      "Side Effects",
+      "Reusability",
+      "Modular Architecture"
+    ],
+    "problems": [
+      "Monolithic components leading to unpredictable state changes and debugging difficulties",
+      "State leakage between unrelated parts of the UI",
+      "Difficulty in managing complex UIs without clear boundaries",
+      "Inefficient updates due to entangled state."
+    ],
+    "reactAPIs": ["useState", "useEffect", "useCallback", "props"]
+  },
+  "structure": {
+    "format": "chapter-based",
+    "chapters": [
+      {
+        "title": "The Parisian Cafe",
+        "focus": "Introduces the concept of React components as isolated, reusable units with defined boundaries and internal state."
+      },
+      {
+        "title": "The Monolithic Blueprint",
+        "focus": "Demonstrates the anti-pattern of a single, massive component with entangled state, leading to unpredictable side effects and debugging challenges."
+      },
+      {
+        "title": "A Stack of Maps",
+        "focus": "Explains the solution: breaking down complex UIs into isolated, composable components with clear `props` interfaces."
+      },
+      {
+        "title": "The Monolith vs. The Stack",
+        "focus": "Compares the behavior and maintainability of monolithic components versus a well-composed component stack, highlighting predictability through isolation."
+      },
+      {
+        "title": "The Synchronized Kick",
+        "focus": "Illustrates how callback functions (passed as props) enable elegant and coordinated inter-component communication for complex application logic."
+      }
+    ],
+    "pedagogicalApproach": "narrative|problem-solution|contrast-driven|progressive",
+    "interactiveElements": [
+      "Interactive 'Parisian Cafe' component demonstrating internal state management and isolation",
+      "Simulating monolithic state chaos with unintended side effects across virtual 'dream layers'",
+      "Visualizing a 'component stack' with distinct, isolated layers communicating via props",
+      "Side-by-side comparison of monolithic vs. composed architecture behavior",
+      "Triggering a 'synchronized kick' cascade through nested components using callback props"
+    ]
+  },
+  "search": {
+    "keywords": [
+      "React Component Composition",
+      "Component Isolation React",
+      "React Props",
+      "Callback Functions React",
+      "State Management React",
+      "Modular React Architecture",
+      "Reusability React Components",
+      "Inception React",
+      "Christopher Nolan Components"
+    ],
+    "themes": ["component design", "architecture", "state management", "props", "callbacks", "reusability"],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "relatedModules": []
+  }
+}

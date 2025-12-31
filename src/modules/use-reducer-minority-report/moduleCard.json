@@ -1,0 +1,133 @@
+{
+  "moduleId": "use-reducer-minority-report",
+  "fiction": {
+    "title": "Minority Report",
+    "author": "Steven Spielberg",
+    "year": 2002,
+    "type": "film",
+    "genre": ["science fiction", "action", "thriller"],
+    "keyElements": [
+      "PreCrime",
+      "John Anderton",
+      "PreCogs",
+      "Crime Visions",
+      "Timeline",
+      "Alert Level",
+      "Dispatch",
+      "Reducer Protocol",
+      "Chaos of Intersecting Futures",
+      "Two Timelines"
+    ]
+  },
+  "metaphor": {
+    "core": "The PreCrime system from 'Minority Report', where precognitive mutants (PreCogs) foresee future crimes (state changes) and their visions are processed to maintain a stable timeline and prevent chaos, serves as a metaphor for React's `useReducer` hook. The module illustrates how `useReducer` centralizes complex state logic (like the PreCrime system) into a single, predictable function, ensuring that multiple, interdependent state updates (interconnected crime visions) are handled atomically and coherently, leading to a more stable and manageable application state than scattered `useState` calls.",
+    "mapping": [
+      {
+        "fictionElement": "PreCrime Temple (heart of the system)",
+        "reactConcept": "The component containing the `useReducer` hook, which centralizes the state management logic."
+      },
+      {
+        "fictionElement": "PreCogs (unified processing unit)",
+        "reactConcept": "The reducer function: a pure function that takes the current state and an action, and returns the new state."
+      },
+      {
+        "fictionElement": "Crime Visions (events unfolding in the future)",
+        "reactConcept": "Actions: plain JavaScript objects that describe 'what happened' in the application, dispatched to the reducer."
+      },
+      {
+        "fictionElement": "Chaos of Intersecting Futures (scattered vision updates)",
+        "reactConcept": "The anti-pattern of managing complex state with multiple, uncoordinated `useState` hooks, leading to race conditions, stale closures, and difficult-to-debug logic."
+      },
+      {
+        "fictionElement": "Reducer Protocol (Anderton's system)",
+        "reactConcept": "`useReducer`: the hook that provides a dispatch function to send actions and returns the current state, ensuring state updates are atomic and follow a predictable pattern."
+      },
+      {
+        "fictionElement": "Red ball / wooden ball (reconciled future)",
+        "reactConcept": "The new, consistent state returned by the reducer after processing an action, representing a single source of truth."
+      },
+      {
+        "fictionElement": "Dispatching a vision (sending a data puck)",
+        "reactConcept": "Calling the `dispatch` function provided by `useReducer` to send an action to the reducer."
+      },
+      {
+        "fictionElement": "Timeline, assigned team, alert level (system state)",
+        "reactConcept": "The complex, interdependent parts of the application state that are managed by the reducer."
+      }
+    ],
+    "narrativeArc": "The module sets the stage in the 'Temple of State' (useReducer component). It then exposes the 'chaos of intersecting futures' (problems with multiple `useState` hooks for complex state). The 'Reducer Protocol' (useReducer) is introduced as the solution, centralizing state logic. 'Two Timelines' compares the `useState` anti-pattern with the `useReducer` solution, highlighting its benefits. The module culminates in 'The Elegance of Dispatch', demonstrating how `useReducer` provides a predictable, maintainable way to manage complex application state."
+  },
+  "concepts": {
+    "primary": "useReducer Hook",
+    "secondary": [
+      "Complex State Management",
+      "Reducers",
+      "Actions",
+      "Dispatch",
+      "useState (comparison)",
+      "Atomic Updates",
+      "Pure Functions",
+      "Predictable State Transitions",
+      "Scalability",
+      "State History (timeline)"
+    ],
+    "problems": [
+      "Managing complex, interdependent state with multiple `useState` hooks, leading to race conditions and stale state issues",
+      "Scattered state update logic, making debugging and maintenance difficult",
+      "Difficulty in ensuring atomic updates when multiple state values change simultaneously."
+    ],
+    "reactAPIs": ["useReducer", "useState", "useEffect", "useCallback"]
+  },
+  "structure": {
+    "format": "chapter-based",
+    "chapters": [
+      {
+        "title": "The Temple of State",
+        "focus": "Introduces the concept of a centralized state management system and the need for predictable state transitions."
+      },
+      {
+        "title": "The Chaos of Intersecting Futures",
+        "focus": "Demonstrates the problems of managing complex, interdependent state with multiple `useState` hooks, leading to race conditions and inconsistencies."
+      },
+      {
+        "title": "The Reducer Protocol",
+        "focus": "Explains and demonstrates the `useReducer` hook as a solution for centralizing state logic into a single, predictable function (the reducer)."
+      },
+      {
+        "title": "The Two Timelines",
+        "focus": "Compares `useState` (manual, scattered) versus `useReducer` (centralized, atomic) for managing complex state, highlighting the benefits of the latter for predictability and debugging."
+      },
+      {
+        "title": "The Elegance of Dispatch",
+        "focus": "Summarizes the power of `useReducer`: describing 'what happened' via actions and letting the reducer predictably transition the state, leading to maintainable and scalable code."
+      }
+    ],
+    "pedagogicalApproach": "narrative|problem-solution|contrast-driven|progressive",
+    "interactiveElements": [
+      "Simulating receiving 'crime visions' (actions) that update a complex system state",
+      "Demonstrating chaotic state updates with multiple `useState` calls and tracking 'chaos level'",
+      "Using `useReducer` to process actions and update state atomically, reducing 'chaos'",
+      "Side-by-side comparison interface to observe the difference in system stability and state integrity between `useState` and `useReducer` approaches",
+      "Interactive controls to dispatch various types of actions (visions, prevent crimes) and observe state transitions."
+    ]
+  },
+  "search": {
+    "keywords": [
+      "React useReducer",
+      "useState vs useReducer",
+      "Complex State Management React",
+      "Reducers React",
+      "Actions Dispatch React",
+      "Atomic State Updates React",
+      "Predictable State React",
+      "Minority Report useReducer",
+      "PreCrime Reducers",
+      "Steven Spielberg",
+      "Philip K. Dick"
+    ],
+    "themes": ["state management", "hooks", "architecture", "predictability", "debugging"],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "relatedModules": []
+  }
+}

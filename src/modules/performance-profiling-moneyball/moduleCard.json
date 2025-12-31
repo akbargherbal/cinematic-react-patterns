@@ -1,0 +1,127 @@
+{
+  "moduleId": "performance-profiling-moneyball",
+  "fiction": {
+    "title": "Moneyball",
+    "author": "Bennett Miller",
+    "year": 2011,
+    "type": "film",
+    "genre": ["biographical drama", "sports drama"],
+    "keyElements": [
+      "Billy Beane",
+      "Peter Brand",
+      "Oakland A's",
+      "Scouts",
+      "Gut Feel",
+      "Data",
+      "Baseball Player Stats",
+      "Wins",
+      "Bottleneck"
+    ]
+  },
+  "metaphor": {
+    "core": "The data-driven approach of the Oakland A's in 'Moneyball', where undervalued players are identified through statistical analysis instead of 'gut feel' and aesthetics, serves as a metaphor for performance profiling in React. The module illustrates how using React's Profiler tools (like `React.Profiler`) to collect concrete data about component render times and frequencies allows developers to identify actual performance bottlenecks and optimize effectively, rather than wasting effort on components that merely 'look' complex.",
+    "mapping": [
+      {
+        "fictionElement": "Billy Beane (General Manager)",
+        "reactConcept": "The React developer responsible for optimizing application performance."
+      },
+      {
+        "fictionElement": "Scouts relying on 'gut feel' and aesthetics",
+        "reactConcept": "Developers guessing at performance bottlenecks based on perceived complexity or UI appearance, leading to misdirected optimization efforts."
+      },
+      {
+        "fictionElement": "Peter Brand and his spreadsheets of data",
+        "reactConcept": "React's Profiler tools (`React.Profiler`, browser dev tools) providing concrete, measurable data about component rendering behavior."
+      },
+      {
+        "fictionElement": "Undervalued player (e.g., Scott Hatteberg) who 'gets on base' cheaply",
+        "reactConcept": "A seemingly simple React component (e.g., `Avatar`) that, despite its appearance, is a hidden performance bottleneck due to frequent, unnecessary re-renders."
+      },
+      {
+        "fictionElement": "Expensive player with a 'million-dollar swing' but high 'cost'",
+        "reactConcept": "A visually complex React component (e.g., `Chart`) that appears to be a bottleneck but is actually performant (e.g., memoized or renders infrequently)."
+      },
+      {
+        "fictionElement": "Identifying a player who 'gets on base'",
+        "reactConcept": "Pinpointing the actual component that contributes most to render time or re-renders, regardless of its visual complexity."
+      },
+      {
+        "fictionElement": "The 'Winning Streak'",
+        "reactConcept": "A smoothly performing React application with responsive UI, resulting from data-driven performance optimizations."
+      }
+    ],
+    "narrativeArc": "The module follows Billy Beane's journey from losing with 'gut feel' (guessing performance issues), to 'flying blind' (wasting optimization efforts), then discovering 'The System' with Peter Brand (using profiler data to identify real bottlenecks). It contrasts 'two ways of seeing' (scouts' aesthetic-based vs. profiler's data-based optimization) and culminates in a 'winning streak' (achieving smooth application performance through data-driven decisions), emphasizing the importance of profiling over intuition."
+  },
+  "concepts": {
+    "primary": "Performance Profiling",
+    "secondary": [
+      "React.Profiler",
+      "Performance Optimization",
+      "Identifying Bottlenecks",
+      "Measuring Render Times",
+      "Component Re-renders",
+      "Memoization (`React.memo`)",
+      "Developer Tools",
+      "Data-driven Optimization"
+    ],
+    "problems": [
+      "Misdiagnosing performance issues based on intuition rather than data",
+      "Wasting optimization efforts on non-bottleneck components",
+      "Slow and unresponsive UIs due to inefficient rendering",
+      "Difficulty in tracking component render costs."
+    ],
+    "reactAPIs": ["React.Profiler", "useState", "useEffect", "useMemo", "useCallback", "React.memo"]
+  },
+  "structure": {
+    "format": "chapter-based",
+    "chapters": [
+      {
+        "title": "The Problem in the Room",
+        "focus": "Introduces the challenge of performance issues in applications and the inadequacy of 'gut feel' for diagnosis."
+      },
+      {
+        "title": "Flying Blind",
+        "focus": "Demonstrates the pitfalls of optimizing based on assumptions or perceived complexity, leading to wasted effort."
+      },
+      {
+        "title": "The System",
+        "focus": "Introduces performance profiling as a data-driven approach to identify actual bottlenecks, even in seemingly simple components."
+      },
+      {
+        "title": "Two Ways of Seeing",
+        "focus": "Compares optimizing based on intuition ('gut feel') versus concrete data from a profiler, highlighting the accuracy of the latter."
+      },
+      {
+        "title": "The Winning Streak",
+        "focus": "Summarizes the benefits of data-driven performance optimization, leading to a smooth, responsive, and performant application."
+      }
+    ],
+    "pedagogicalApproach": "narrative|problem-solution|contrast-driven|progressive",
+    "interactiveElements": [
+      "Simulating player stats updates to trigger re-renders",
+      "Interactive mode toggling between 'gut feel' (unoptimized) and 'data-driven' (optimized)",
+      "Live profiler metrics dashboard showing render counts and times for various components",
+      "Highlighting 'bottleneck' components based on profiling data",
+      "Demonstrating simulated UI lag due to unoptimized components and its reduction with optimization."
+    ]
+  },
+  "search": {
+    "keywords": [
+      "React Performance Profiling",
+      "React.Profiler",
+      "Performance Optimization React",
+      "Identify Bottlenecks React",
+      "React Dev Tools Performance",
+      "Measuring Renders React",
+      "React.memo for Performance",
+      "Moneyball React",
+      "Billy Beane Performance",
+      "Michael Lewis",
+      "Bennett Miller"
+    ],
+    "themes": ["performance", "optimization", "profiling", "rendering", "tools"],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "relatedModules": []
+  }
+}

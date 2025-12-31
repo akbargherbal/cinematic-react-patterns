@@ -1,0 +1,124 @@
+{
+  "moduleId": "concurrent-rendering-pulp-fiction",
+  "fiction": {
+    "title": "Pulp Fiction",
+    "author": "Quentin Tarantino",
+    "year": 1994,
+    "type": "film",
+    "genre": ["crime", "drama"],
+    "keyElements": [
+      "Quentin (director)",
+      "Vincent Vega",
+      "Jules Winnfield",
+      "Butch Coolidge",
+      "Film Reels",
+      "Tapestry (non-linear storytelling)",
+      "The Scheduler",
+      "Phone Call (urgent interruption)"
+    ]
+  },
+  "metaphor": {
+    "core": "The non-linear, interwoven narratives of Pulp Fiction, managed by a 'director' who prioritizes and switches between stories, serve as a metaphor for React's concurrent rendering capabilities, particularly `useTransition`, where React can work on multiple UI updates simultaneously in the background, pausing low-priority work to handle urgent user interactions.",
+    "mapping": [
+      {
+        "fictionElement": "Multiple film reels/storylines (Vincent, Butch, Jules)",
+        "reactConcept": "Different UI updates or rendering tasks"
+      },
+      {
+        "fictionElement": "Quentin (director) managing the reels",
+        "reactConcept": "React's scheduler prioritizing and managing rendering"
+      },
+      {
+        "fictionElement": "A long, slow scene playing (blocking)",
+        "reactConcept": "A synchronous, heavy rendering task blocking the main thread"
+      },
+      {
+        "fictionElement": "Urgent phone call interrupting the scene",
+        "reactConcept": "Urgent user input (e.g., typing, clicks) during heavy rendering"
+      },
+      {
+        "fictionElement": "Quentin's custom switchboard (The Scheduler) to pause/resume reels",
+        "reactConcept": "useTransition pausing low-priority rendering to allow high-priority updates"
+      },
+      {
+        "fictionElement": "Seamless switching between reels",
+        "reactConcept": "Responsive UI where user input is handled immediately, and background work resumes smoothly"
+      },
+      {
+        "fictionElement": "Traffic Jam vs. Dance",
+        "reactConcept": "Blocking renders cause UI freezes, concurrent renders create fluid, responsive experiences"
+      }
+    ],
+    "narrativeArc": "The module progresses from explaining the concept of a 'tapestry' of UI states (concurrent mode) to the problems of 'linear cuts' (blocking renders), then introduces the 'Scheduler' (useTransition) as a solution, compares the outcomes of 'traffic jams vs. dance' (blocking vs. concurrent), and finally summarizes the benefits in a 'premiere' real-world example."
+  },
+  "concepts": {
+    "primary": "Concurrent Rendering",
+    "secondary": [
+      "useTransition Hook",
+      "Scheduler",
+      "Prioritized Updates",
+      "Responsive UI",
+      "Blocking Renders",
+      "Non-Blocking Updates",
+      "User Experience (UX)"
+    ],
+    "problems": [
+      "UI unresponsiveness during heavy computations/renders",
+      "Jank and dropped frames",
+      "Poor user experience when interacting with slow UIs"
+    ],
+    "reactAPIs": ["useTransition", "useState", "useEffect", "useCallback", "useDeferredValue", "Suspense"]
+  },
+  "structure": {
+    "format": "chapter-based",
+    "chapters": [
+      {
+        "title": "The Tapestry",
+        "focus": "Introduces React's concurrent mode capabilities."
+      },
+      {
+        "title": "The Linear Cut",
+        "focus": "Demonstrates the problem of blocking renders in legacy React."
+      },
+      {
+        "title": "The Scheduler",
+        "focus": "Explains and demonstrates useTransition for managing concurrent updates."
+      },
+      {
+        "title": "Traffic Jam vs. Dance",
+        "focus": "Compares blocking vs. concurrent rendering side-by-side."
+      },
+      {
+        "title": "The Premiere",
+        "focus": "Summarizes the benefits with a real-world example (responsive search)."
+      }
+    ],
+    "pedagogicalApproach": "narrative|problem-solution|contrast-driven|progressive",
+    "interactiveElements": [
+      "Simulating multiple UI states being prepared",
+      "Demonstrating blocking renders and missed user input",
+      "Interacting with a responsive UI during heavy background work using useTransition",
+      "Side-by-side comparison of blocking vs. concurrent performance metrics",
+      "Real-time responsive search demo using useTransition"
+    ]
+  },
+  "search": {
+    "keywords": [
+      "React Concurrent Mode",
+      "useTransition",
+      "React Scheduler",
+      "Responsive UI React",
+      "Non-blocking UI",
+      "React Performance Optimization",
+      "React UX",
+      "Pulp Fiction React",
+      "React Hooks concurrent",
+      "Pulp Fiction",
+      "Quentin Tarantino"
+    ],
+    "themes": ["performance", "user experience", "concurrency", "hooks"],
+    "difficulty": "advanced",
+    "prerequisites": [],
+    "relatedModules": []
+  }
+}

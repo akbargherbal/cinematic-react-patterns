@@ -1,0 +1,119 @@
+{
+  "moduleId": "event-handling-goonies-contraptions",
+  "fiction": {
+    "title": "The Goonies",
+    "author": "Chris Columbus, Steven Spielberg",
+    "year": 1985,
+    "type": "film",
+    "genre": ["adventure", "comedy", "family"],
+    "keyElements": [
+      "Data (Richard Wang)",
+      "Contraptions",
+      "Gate-omatic",
+      "Map Revealer",
+      "Chain Reaction",
+      "Event Bubbling",
+      "Chunk",
+      "Slick Shoes",
+      "Pirate Ship",
+      "Three Locks"
+    ]
+  },
+  "metaphor": {
+    "core": "Data's intricate contraptions from 'The Goonies', with their complex chain reactions and unexpected outcomes, serve as a metaphor for event handling and propagation in React. The module explores how events trigger actions, how they can 'bubble up' through components, and how to control this propagation to ensure predictable and intended user interactions.",
+    "mapping": [
+      {
+        "fictionElement": "Data's Gate-omatic (single intentional action)",
+        "reactConcept": "Basic React event handler: one user interaction leading to one clear, intended outcome."
+      },
+      {
+        "fictionElement": "Unintended Cascade (Map Revealer triggering parent's handler)",
+        "reactConcept": "Event bubbling in React: a child component's event propagating up to its parent and triggering parent event handlers unexpectedly."
+      },
+      {
+        "fictionElement": "The Brake Pad (stopping the marble's journey)",
+        "reactConcept": "`event.stopPropagation()`: preventing an event from bubbling up to parent components, isolating the event to its source."
+      },
+      {
+        "fictionElement": "Teaching the Machine to be Quiet (controlled contraptions)",
+        "reactConcept": "Understanding when to use event bubbling (default) versus `stopPropagation()` for controlled UI interactions."
+      },
+      {
+        "fictionElement": "Symphony of Silence (three locks in sequence, isolated events)",
+        "reactConcept": "Masterful event handling for complex interactions: coordinating sequential events where each component isolates its own events to prevent accidental triggers while maintaining precise control."
+      }
+    ],
+    "narrativeArc": "The module follows Data's contraptions from simple, predictable machines (basic event handlers) to those with unintended 'cascades' (event bubbling). It then introduces the 'brake pad' (`stopPropagation`) to control these reactions, compares the noisy vs. quiet machines (controlled vs. uncontrolled propagation), and culminates in a 'symphony of silence' (complex sequential event handling) to illustrate mastery over event flow in React."
+  },
+  "concepts": {
+    "primary": "Event Handling",
+    "secondary": [
+      "Event Propagation",
+      "Event Bubbling",
+      "`event.stopPropagation()`",
+      "Synthetic Events",
+      "Event Listeners",
+      "Controlled Interactions",
+      "Side Effects",
+      "Lifecycle (cleanup)"
+    ],
+    "problems": [
+      "Unintended side effects from event bubbling",
+      "Difficulty in isolating component interactions",
+      "Performance issues from excessive event listeners (memory leaks if not cleaned up)"
+    ],
+    "reactAPIs": ["onClick", "onChange", "SyntheticEvent", "`event.stopPropagation()`", "useState", "useEffect", "useRef"]
+  },
+  "structure": {
+    "format": "chapter-based",
+    "chapters": [
+      {
+        "title": "The Perfect Machine",
+        "focus": "Introduces basic React event handling: predictable actions from user interactions."
+      },
+      {
+        "title": "The Unintended Cascade",
+        "focus": "Demonstrates the problem of event bubbling and unintended side effects in nested components."
+      },
+      {
+        "title": "The Brake Pad",
+        "focus": "Explains and demonstrates `event.stopPropagation()` to prevent event bubbling and isolate component actions."
+      },
+      {
+        "title": "Teaching the Machine to be Quiet",
+        "focus": "Compares controlled vs. uncontrolled event propagation and when to use `stopPropagation()` effectively."
+      },
+      {
+        "title": "The Symphony of Silence",
+        "focus": "Explores complex sequential event handling, emphasizing isolation and precise coordination for advanced UI interactions."
+      }
+    ],
+    "pedagogicalApproach": "narrative|problem-solution|contrast-driven|progressive",
+    "interactiveElements": [
+      "Simulating a chain reaction with a simple event handler",
+      "Demonstrating event bubbling in nested components (with counters for parent/child triggers)",
+      "Toggling between 'uncontrolled' (bubbling) and 'controlled' (`stopPropagation`) modes",
+      "Side-by-side comparison of event propagation effects",
+      "Interactive sequence of events requiring precise control and isolation"
+    ]
+  },
+  "search": {
+    "keywords": [
+      "React Event Handling",
+      "Event Bubbling React",
+      "Event Propagation React",
+      "stopPropagation React",
+      "onClick React",
+      "SyntheticEvent React",
+      "React Forms Events",
+      "Component Interaction React",
+      "Goonies React Events",
+      "The Goonies",
+      "Data Goonies"
+    ],
+    "themes": ["event handling", "component interaction", "state management", "performance"],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "relatedModules": []
+  }
+}

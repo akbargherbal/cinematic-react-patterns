@@ -1,0 +1,121 @@
+{
+  "moduleId": "use-layout-effect-the-prestige",
+  "fiction": {
+    "title": "The Prestige",
+    "author": "Christopher Nolan",
+    "year": 2006,
+    "type": "film",
+    "genre": ["mystery", "science fiction", "drama", "thriller"],
+    "keyElements": [
+      "Alistair",
+      "The Pledge",
+      "The Turn",
+      "The Prestige",
+      "Invisible moment",
+      "Flashing Dove",
+      "Stagehand",
+      "Secret Assistant",
+      "Gilded Cage",
+      "Dove"
+    ]
+  },
+  "metaphor": {
+    "core": "The three acts of a magic trick—The Pledge, The Turn, and The Prestige—from 'The Prestige' serve as a metaphor for the React rendering lifecycle, specifically differentiating between `useEffect` and `useLayoutEffect`. The 'invisible moment' between a DOM mutation and the browser painting the UI is where the 'secret work' happens. `useEffect` acts like a 'stagehand' who works *after* the browser paints, potentially causing a visible 'flicker', while `useLayoutEffect` is the 'secret assistant' who works *synchronously* after DOM mutations but *before* the browser paints, ensuring a seamless illusion and preventing visual glitches.",
+    "mapping": [
+      {
+        "fictionElement": "The Three Acts of Illusion (Pledge, Turn, Prestige)",
+        "reactConcept": "The React rendering lifecycle: component renders, DOM is updated, browser paints."
+      },
+      {
+        "fictionElement": "The invisible moment between the Turn and the Prestige",
+        "reactConcept": "The synchronous phase after DOM mutations (triggered by React) but before the browser renders the visual updates to the screen."
+      },
+      {
+        "fictionElement": "The Flashing Dove / Stagehand working after the cage appears",
+        "reactConcept": "`useEffect`: runs asynchronously after the browser has painted the screen, potentially leading to a visible 'flicker' if DOM measurements or adjustments are needed after the initial render."
+      },
+      {
+        "fictionElement": "The Secret Assistant / Eliza working synchronously as the cage appears",
+        "reactConcept": "`useLayoutEffect`: runs synchronously immediately after DOM mutations have been applied, but *before* the browser has a chance to visually update the screen. Ideal for DOM measurements or adjustments that must happen before paint to avoid flicker."
+      },
+      {
+        "fictionElement": "The audience seeing the mechanism (flicker)",
+        "reactConcept": "A visible layout shift or flicker in the UI caused by `useEffect` making DOM adjustments after the browser has already painted the initial state."
+      },
+      {
+        "fictionElement": "Seamless illusion / one perfect moment",
+        "reactConcept": "The smooth user experience achieved by `useLayoutEffect` preventing visible flickers by performing DOM-read/write operations before the browser's next paint."
+      }
+    ],
+    "narrativeArc": "The module introduces the 'three acts of illusion' and the 'invisible moment' in magic (React's rendering pipeline). It then demonstrates the 'flashing dove' problem with `useEffect` (flicker due to asynchronous execution after paint). The 'secret assistant' (`useLayoutEffect`) is revealed as the solution for synchronous, pre-paint DOM manipulation. A comparison of 'two performances' highlights the benefits of `useLayoutEffect`, culminating in 'The Master's Notebook', which provides guidelines for strategic hook usage."
+  },
+  "concepts": {
+    "primary": "useLayoutEffect Hook",
+    "secondary": [
+      "useEffect Hook (comparison)",
+      "DOM Manipulation",
+      "Browser Painting",
+      "Layout Shifts",
+      "Flicker (UI)",
+      "Synchronous vs. Asynchronous",
+      "Performance Optimization (visual)",
+      "React Rendering Lifecycle",
+      "DOM Measurements (getBoundingClientRect)"
+    ],
+    "problems": [
+      "Visible layout shifts or UI flickers when DOM elements need to be measured or adjusted immediately after a render but before the browser paints",
+      "Incorrect scroll positions or tooltip placements due to asynchronous DOM updates."
+    ],
+    "reactAPIs": ["useLayoutEffect", "useEffect", "useState", "useRef"]
+  },
+  "structure": {
+    "format": "chapter-based",
+    "chapters": [
+      {
+        "title": "The Three Acts of Illusion",
+        "focus": "Introduces the React rendering lifecycle phases (DOM mutation, browser paint) and the critical 'invisible moment' for layout adjustments."
+      },
+      {
+        "title": "The Flashing Dove",
+        "focus": "Demonstrates the problem of `useEffect` running asynchronously after browser paint, leading to visible flickers or layout shifts."
+      },
+      {
+        "title": "The Secret Assistant",
+        "focus": "Explains and demonstrates `useLayoutEffect`: runs synchronously after DOM mutations but before browser paint, preventing visual flickers."
+      },
+      {
+        "title": "Two Performances, One Night",
+        "focus": "Compares `useEffect` and `useLayoutEffect` side-by-side, highlighting the difference in visual outcome and the ideal use cases for each."
+      },
+      {
+        "title": "The Master's Notebook",
+        "focus": "Summarizes practical guidelines and real-world scenarios where `useLayoutEffect` is essential (e.g., DOM measurements, scroll positioning, tooltip placement)."
+      }
+    ],
+    "pedagogicalApproach": "narrative|problem-solution|contrast-driven|progressive",
+    "interactiveElements": [
+      "Visualizing the three acts of a magic trick (render phases)",
+      "Demonstrating the 'flashing dove' effect (UI flicker) caused by `useEffect` and tracking flicker counts/time",
+      "Showing a seamless trick with `useLayoutEffect` (no flicker)",
+      "Side-by-side comparison interface for `useEffect` vs. `useLayoutEffect` to observe visual differences",
+      "Interactive tooltip positioning example using `useLayoutEffect` to prevent flicker."
+    ]
+  },
+  "search": {
+    "keywords": [
+      "React useLayoutEffect",
+      "useEffect vs useLayoutEffect",
+      "DOM Measurement React",
+      "Prevent Layout Shift React",
+      "React Flicker",
+      "Synchronous DOM Updates React",
+      "React Performance Layout",
+      "The Prestige React",
+      "Christopher Nolan useLayoutEffect"
+    ],
+    "themes": ["DOM manipulation", "layout", "performance", "hooks", "visual stability"],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "relatedModules": []
+  }
+}

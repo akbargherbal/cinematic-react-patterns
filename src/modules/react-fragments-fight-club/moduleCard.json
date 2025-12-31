@@ -1,0 +1,119 @@
+{
+  "moduleId": "react-fragments-fight-club",
+  "fiction": {
+    "title": "Fight Club",
+    "author": "David Fincher",
+    "year": 1999,
+    "type": "film",
+    "genre": ["drama", "thriller", "psychological"],
+    "keyElements": [
+      "The Narrator",
+      "Tyler Durden",
+      "Two Personalities in One Body",
+      "One Root Element",
+      "Third Man",
+      "Space Monkeys",
+      "Project Mayhem",
+      "Rules of Fight Club"
+    ]
+  },
+  "metaphor": {
+    "core": "The core concept of 'Fight Club'—two distinct personalities coexisting within a single body, and the philosophical struggle with identity and control—serves as a metaphor for React Fragments. A React component must return a single root element, yet often needs to render multiple sibling elements. Fragments (`<>...</>`) allow these elements to be grouped without introducing an unnecessary wrapper DOM node, thereby maintaining a clean and semantically correct UI structure, akin to two personalities existing without a 'third man' container.",
+    "mapping": [
+      {
+        "fictionElement": "Two distinct personalities (Narrator and Tyler) in one body",
+        "reactConcept": "Multiple adjacent JSX elements that a React component needs to return, but which must be wrapped in a single root element."
+      },
+      {
+        "fictionElement": "The 'Third Man' (a wrapper div)",
+        "reactConcept": "Using an extra `<div>` element to group multiple JSX elements, which adds an unnecessary DOM node to the component tree."
+      },
+      {
+        "fictionElement": "Breaks every layout it touches (e.g., flexbox)",
+        "reactConcept": "The negative side effects of extra wrapper `<div>`s, particularly in CSS layouts like Flexbox or Grid, where an unexpected DOM node can disrupt styling and semantic structure."
+      },
+      {
+        "fictionElement": "The 'wrapper was a lie' / 'they were never separate'",
+        "reactConcept": "`React.Fragment` (`<>...</>`): a special built-in component that lets you group children without adding extra nodes to the DOM."
+      },
+      {
+        "fictionElement": "Integrated Self / No box",
+        "reactConcept": "The benefit of Fragments: grouping multiple elements cleanly without impacting the DOM structure or CSS layouts."
+      },
+      {
+        "fictionElement": "A seamless sequence / nothing extra",
+        "reactConcept": "The elegance and efficiency of Fragments in maintaining a flat and semantically correct DOM tree."
+      }
+    ],
+    "narrativeArc": "The module starts by posing the core problem: rendering two elements when only one root is allowed, using the 'two personalities, one body' metaphor. It then introduces the problematic 'Third Man' (wrapper `div`), demonstrating how it breaks layouts. The revelation that 'the wrapper was a lie' leads to Fragments as the elegant solution. A clear comparison of 'one box vs. no box' solidifies the understanding, culminating in a 'clean structure' enabled by Fragments."
+  },
+  "concepts": {
+    "primary": "React Fragments",
+    "secondary": [
+      "JSX Syntax",
+      "Returning Multiple Elements",
+      "DOM Structure",
+      "Semantic HTML",
+      "CSS Layouts (Flexbox, Grid)",
+      "Performance (minimal DOM nodes)",
+      "Wrapper Divs"
+    ],
+    "problems": [
+      "JSX syntax error when returning multiple adjacent elements",
+      "Adding unnecessary wrapper `div` elements, leading to increased DOM node count",
+      "Disrupting CSS layouts (e.g., Flexbox, Grid) due to extra wrapper divs",
+      "Creating non-semantic HTML structures."
+    ],
+    "reactAPIs": ["Fragment", "React.Fragment", "useState", "useEffect"]
+  },
+  "structure": {
+    "format": "chapter-based",
+    "chapters": [
+      {
+        "title": "Two Sides of the Same Coin",
+        "focus": "Introduces the JSX rule: a component must return a single root element, posing the challenge of rendering multiple siblings."
+      },
+      {
+        "title": "The Third Man",
+        "focus": "Demonstrates the anti-pattern of using a wrapper `div` for grouping, highlighting how it adds unnecessary DOM nodes and breaks CSS layouts."
+      },
+      {
+        "title": "The Wrapper Was a Lie",
+        "focus": "Explains `React.Fragment` (`<>...</>`) as the solution for grouping multiple elements without adding extra DOM nodes."
+      },
+      {
+        "title": "One Box vs. No Box",
+        "focus": "Compares side-by-side the practical differences and benefits of using Fragments versus a wrapper `div` for clean DOM structure and layout integrity."
+      },
+      {
+        "title": "A Clean Structure",
+        "focus": "Summarizes the advantages of Fragments for creating efficient, semantic, and maintainable React component structures."
+      }
+    ],
+    "pedagogicalApproach": "narrative|problem-solution|contrast-driven|progressive",
+    "interactiveElements": [
+      "Illustrating the JSX syntax error when returning adjacent elements",
+      "Demonstrating how a wrapper `div` breaks a Flexbox layout and adds to the DOM node count",
+      "Interactive comparison toggling between `div` wrapper and `Fragment` to observe DOM structure and layout behavior",
+      "Visual representation of a clean component structure using multiple Fragments."
+    ]
+  },
+  "search": {
+    "keywords": [
+      "React Fragments",
+      "JSX Fragments",
+      "Return Multiple Elements React",
+      "React DOM Structure",
+      "React Layouts",
+      "React Performance DOM",
+      "Wrapper Divs React",
+      "Fight Club React Fragments",
+      "Tyler Durden Fragments",
+      "David Fincher"
+    ],
+    "themes": ["component structure", "DOM optimization", "layout", "JSX"],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "relatedModules": []
+  }
+}

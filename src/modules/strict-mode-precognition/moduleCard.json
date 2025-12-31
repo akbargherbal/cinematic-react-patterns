@@ -1,0 +1,131 @@
+{
+  "moduleId": "strict-mode-precognition",
+  "fiction": {
+    "title": "Minority Report",
+    "author": "Steven Spielberg",
+    "year": 2002,
+    "type": "film",
+    "genre": ["science fiction", "action", "thriller"],
+    "keyElements": [
+      "John Anderton",
+      "PreCrime",
+      "PreCogs",
+      "Visions of Future Crimes",
+      "Deprecated Schema",
+      "Data Leak",
+      "Cleanup Function",
+      "Double Invocation",
+      "Guardrails"
+    ]
+  },
+  "metaphor": {
+    "core": "The PreCrime system and the precognitive visions from 'Minority Report', which identify crimes before they happen, serve as a metaphor for React's Strict Mode. Strict Mode acts like PreCogs, proactively detecting potential problems in a React application during development by intentionally running components and effects twice. This 'double vision' exposes impure side effects, memory leaks, and other subtle bugs that might otherwise go unnoticed, preventing future runtime errors before they can occur in production.",
+    "mapping": [
+      {
+        "fictionElement": "PreCrime system",
+        "reactConcept": "React.StrictMode: a development-only tool for highlighting potential problems in an application."
+      },
+      {
+        "fictionElement": "PreCogs' visions of future crimes",
+        "reactConcept": "Strict Mode's warnings and console messages, which alert developers to potential bugs and anti-patterns."
+      },
+      {
+        "fictionElement": "John Anderton's personal data visualizer component",
+        "reactConcept": "A React component under development that might contain impure side effects or memory leaks."
+      },
+      {
+        "fictionElement": "Old data flashing briefly / data leak",
+        "reactConcept": "Stale state, memory leaks, or unhandled subscriptions caused by missing cleanup functions in `useEffect`."
+      },
+      {
+        "fictionElement": "Double invocation (PreCogs running it twice)",
+        "reactConcept": "Strict Mode intentionally invokes component render functions, effects, and constructors twice in development to expose side effects that lack proper cleanup."
+      },
+      {
+        "fictionElement": "Cleanup function stopping the 'visions'",
+        "reactConcept": "The return function in `useEffect` (or equivalent cleanup logic) that ensures side effects are properly disposed of, preventing memory leaks and stale state."
+      },
+      {
+        "fictionElement": "PreCrime-certified build",
+        "reactConcept": "A React application that has been developed with Strict Mode enabled and all warnings addressed, leading to more robust and predictable behavior."
+      },
+      {
+        "fictionElement": "Guardrails, not accusations",
+        "reactConcept": "Strict Mode's warnings are guidance for writing better, more resilient code, not errors that stop the application."
+      }
+    ],
+    "narrativeArc": "The module introduces Strict Mode as a 'flawless system' (like PreCrime) for bug prevention. It then shows an 'unseen flaw' in Anderton's component (missing effect cleanup causing stale data). The 'double vision' of Strict Mode (double invocation of effects) exposes this flaw. A comparison of 'two systems' (with and without Strict Mode) demonstrates the benefits of cleanup, leading to a 'new protocol' where Strict Mode becomes a standard for building robust React applications."
+  },
+  "concepts": {
+    "primary": "React.StrictMode",
+    "secondary": [
+      "Side Effects",
+      "useEffect Cleanup",
+      "Memory Leaks",
+      "Stale State",
+      "Impure Components",
+      "Development Tools",
+      "Debugging",
+      "Lifecycle Methods (deprecated warnings)"
+    ],
+    "problems": [
+      "Subtle bugs caused by impure components or uncleaned side effects that are hard to reproduce in production",
+      "Memory leaks due to missing cleanup functions in `useEffect`",
+      "Stale closures leading to incorrect data access",
+      "Using deprecated lifecycle methods that may cause issues in future React versions."
+    ],
+    "reactAPIs": ["StrictMode", "useEffect", "useState", "useRef"]
+  },
+  "structure": {
+    "format": "chapter-based",
+    "chapters": [
+      {
+        "title": "The Flawless System",
+        "focus": "Introduces React Strict Mode as a development tool for proactive bug detection."
+      },
+      {
+        "title": "The Unseen Flaw",
+        "focus": "Demonstrates a common bug: missing cleanup functions in `useEffect` leading to stale state and data leaks."
+      },
+      {
+        "title": "The Double Vision",
+        "focus": "Explains how Strict Mode's double invocation of effects helps expose impure side effects and the necessity of proper cleanup."
+      },
+      {
+        "title": "A Tale of Two Systems",
+        "focus": "Compares the behavior of a component with and without Strict Mode enabled, highlighting how cleanup resolves potential issues."
+      },
+      {
+        "title": "The New Protocol",
+        "focus": "Summarizes the benefits of integrating Strict Mode into development workflow for building robust and predictable React applications."
+      }
+    ],
+    "pedagogicalApproach": "narrative|problem-solution|contrast-driven|progressive",
+    "interactiveElements": [
+      "Simulating a data fetch with an intentional stale state/leak bug",
+      "Interactive profile switcher that highlights stale data flashes without cleanup",
+      "Toggle Strict Mode on/off to observe its double invocation behavior and warnings",
+      "Tracking stale flashes and leaked resources",
+      "Code examples showing problematic effects and their corrected versions with cleanup functions."
+    ]
+  },
+  "search": {
+    "keywords": [
+      "React Strict Mode",
+      "useEffect Cleanup",
+      "React Memory Leaks",
+      "Stale State React",
+      "Impure Components React",
+      "React Development Tools",
+      "Debugging React Effects",
+      "Minority Report React",
+      "PreCrime Strict Mode",
+      "Steven Spielberg",
+      "Philip K. Dick"
+    ],
+    "themes": ["debugging", "performance", "side effects", "hooks", "development best practices"],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "relatedModules": []
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "moduleId": "lists-and-keys-marauders-map",
+  "fiction": {
+    "title": "Harry Potter and the Prisoner of Azkaban",
+    "author": "J.K. Rowling",
+    "year": 1999,
+    "type": "novel",
+    "genre": ["fantasy", "young-adult"],
+    "keyElements": [
+      "Marauder's Map",
+      "Fred and George Weasley",
+      "Hogwarts Castle",
+      "Hogwarts Inhabitants",
+      "Dots on a map",
+      "Positional Charm",
+      "Identity Charm",
+      "Mischief Managed"
+    ]
+  },
+  "metaphor": {
+    "core": "The Marauder's Map, with its ability to track individuals within Hogwarts, serves as a metaphor for rendering lists in React and the crucial role of `keys`. The 'Positional Charm' (using array index as a key) leads to glitches and misidentification when the list changes, while the 'Identity Charm' (using a stable, unique ID as a key) ensures that React correctly tracks and updates each item, much like the map accurately identifies each person regardless of their movement.",
+    "mapping": [
+      {
+        "fictionElement": "Marauder's Map",
+        "reactConcept": "A React component rendering a dynamic list of items."
+      },
+      {
+        "fictionElement": "Dots representing people on the map",
+        "reactConcept": "Individual items in a React list, rendered as components."
+      },
+      {
+        "fictionElement": "Positional Charm (tracking by order)",
+        "reactConcept": "Using array `index` as a `key` in list rendering, leading to re-rendering issues when list order changes, items are added, or removed."
+      },
+      {
+        "fictionElement": "Chaos of the Corridors / Flickering names (when using positional charm)",
+        "reactConcept": "UI glitches, incorrect component state, and inefficient re-renders caused by unstable `index` keys when list items change."
+      },
+      {
+        "fictionElement": "Identity Charm (tracking by unique magical signature)",
+        "reactConcept": "Using a stable, unique identifier (e.g., `item.id`) as a `key` in list rendering."
+      },
+      {
+        "fictionElement": "Stable dot remaining 'Albus Dumbledore' no matter who passes",
+        "reactConcept": "React correctly identifying, updating, or moving DOM nodes based on stable `id` keys, preserving internal state and ensuring efficient, predictable UI behavior."
+      },
+      {
+        "fictionElement": "Peter Pettigrew's dot appearing unexpectedly",
+        "reactConcept": "The importance of stable keys for accurate data representation, preventing subtle bugs in dynamic lists."
+      }
+    ],
+    "narrativeArc": "The module starts by introducing the Marauder's Map (list rendering) and its initial 'flawless' display of static inhabitants. It then exposes the 'chaos of the corridors' caused by the 'Positional Charm' (index keys) when the list becomes dynamic. The 'Identity Charm' (stable ID keys) is revealed as the solution, followed by a direct comparison demonstrating the stability it brings. The module concludes with the 'secret of the magic' – the core rules for effective key usage in React lists."
+  },
+  "concepts": {
+    "primary": "Lists and Keys",
+    "secondary": [
+      "List Rendering",
+      "Unique Keys",
+      "Stable Keys",
+      "Array Index as Key",
+      "Component Reconciliation",
+      "DOM Manipulation",
+      "Performance Optimization",
+      "UI Glitches",
+      "State Preservation"
+    ],
+    "problems": [
+      "Incorrect UI updates when list items are reordered, added, or removed without stable keys",
+      "Loss of internal component state (e.g., form input values, animations) when DOM nodes are reused incorrectly",
+      "Inefficient re-renders due to React's inability to correctly identify changed items."
+    ],
+    "reactAPIs": ["key prop", "map method", "useState", "useEffect"]
+  },
+  "structure": {
+    "format": "chapter-based",
+    "chapters": [
+      {
+        "title": "Mischief Managed, One Dot at a Time",
+        "focus": "Introduces basic list rendering in React and the need for `keys`."
+      },
+      {
+        "title": "The Chaos of the Corridors",
+        "focus": "Demonstrates the problems and UI glitches caused by using array `index` as a `key` when list items change dynamically."
+      },
+      {
+        "title": "The Identity Charm",
+        "focus": "Explains and demonstrates the solution: using a stable, unique ID as a `key` to ensure correct reconciliation and UI updates."
+      },
+      {
+        "title": "Position Versus Person",
+        "focus": "Provides a direct, side-by-side comparison of rendering lists with `index` keys versus stable `id` keys, highlighting the practical differences."
+      },
+      {
+        "title": "The Secret of the Magic",
+        "focus": "Summarizes the fundamental rules and best practices for using keys in React lists, including uniqueness and stability."
+      }
+    ],
+    "pedagogicalApproach": "narrative|problem-solution|contrast-driven|progressive",
+    "interactiveElements": [
+      "Demonstrating a static list where both index and ID keys appear to work",
+      "Simulating dynamic list changes (add, remove, shuffle) with `index` keys to trigger UI glitches and track 'glitch count'",
+      "Performing the same dynamic list changes with stable `id` keys to show correct and predictable UI behavior",
+      "Side-by-side comparison interface to switch between 'position' and 'identity' key modes and observe the effects in real-time",
+      "Interactive list manipulation (add/remove/shuffle items)"
+    ]
+  },
+  "search": {
+    "keywords": [
+      "React Lists Keys",
+      "Unique Keys React",
+      "Stable Keys React",
+      "Array Index as Key React",
+      "React Reconciliation",
+      "DOM Diffing React",
+      "List Rendering Performance React",
+      "Harry Potter Marauder's Map React",
+      "React UI Glitches",
+      "J.K. Rowling"
+    ],
+    "themes": ["list rendering", "performance", "reconciliation", "UI stability"],
+    "difficulty": "beginner",
+    "prerequisites": [],
+    "relatedModules": []
+  }
+}

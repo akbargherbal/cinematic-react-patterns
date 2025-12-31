@@ -1,0 +1,123 @@
+{
+  "moduleId": "usememo-sherlocks-mind-palace",
+  "fiction": {
+    "title": "Sherlock",
+    "author": "Steven Moffat, Mark Gatiss",
+    "year": 2010,
+    "type": "tv-series",
+    "genre": ["crime", "drama", "mystery"],
+    "keyElements": [
+      "Sherlock Holmes",
+      "Mind Palace",
+      "Lestrade",
+      "Evidence",
+      "Deduction",
+      "Conclusion",
+      "Re-litigation of the Obvious"
+    ]
+  },
+  "metaphor": {
+    "core": "Sherlock Holmes's 'Mind Palace'—a mental construct where complex deductions are stored and retrieved instantly based on specific evidence—serves as a metaphor for React's `useMemo` hook. The module illustrates how `useMemo` memoizes expensive calculations, caching their results against a dependency array. When the component re-renders, if the 'evidence' (dependencies) hasn't changed, `useMemo` retrieves the cached 'conclusion' (result) immediately, avoiding the need to 're-deduce' (re-calculate) the same answer repeatedly, thereby optimizing performance.",
+    "mapping": [
+      {
+        "fictionElement": "Sherlock Holmes",
+        "reactConcept": "A React functional component performing computations."
+      },
+      {
+        "fictionElement": "Mind Palace (a dedicated mental space)",
+        "reactConcept": "`useMemo`: a React hook that memoizes the result of a function call, caching it to avoid re-computation on subsequent renders."
+      },
+      {
+        "fictionElement": "Complex Deduction / Analysis of clues",
+        "reactConcept": "An expensive calculation or function call within a component that consumes significant CPU resources if run on every render."
+      },
+      {
+        "fictionElement": "Evidence tags (e.g., mud composition, witness timeline)",
+        "reactConcept": "The dependency array passed to `useMemo`: a list of values that, if any change, indicate the cached result might be stale and the function needs to be re-executed."
+      },
+      {
+        "fictionElement": "Lestrade asking for the same conclusion repeatedly",
+        "reactConcept": "A parent component re-rendering, causing child components to re-execute functions even if their inputs haven't changed."
+      },
+      {
+        "fictionElement": "Re-litigation of the Obvious / Draining mental energy",
+        "reactConcept": "The anti-pattern of not using `useMemo` for expensive calculations, leading to unnecessary re-computations on every render, wasting CPU cycles and degrading performance."
+      },
+      {
+        "fictionElement": "Retrieving a pre-computed answer instantly",
+        "reactConcept": "The benefit of `useMemo`: if dependencies are unchanged, the cached result is returned instantly, avoiding the cost of re-computation."
+      }
+    ],
+    "narrativeArc": "The module starts with Sherlock's 'Deductive Engine' and the concept of storing complex conclusions. It then exposes the 'Re-Litigation of the Obvious' (unmemoized expensive calculations) as a performance drain. 'The Architecture of Memory' (`useMemo`) is introduced as the solution. A comparison of 'Calculation vs. Retrieval' highlights the performance benefits, culminating in 'The Rules of the Palace', which provides best practices for using `useMemo`, including dependency management and avoiding memoizing trivial calculations."
+  },
+  "concepts": {
+    "primary": "useMemo Hook",
+    "secondary": [
+      "Memoization",
+      "Performance Optimization",
+      "Expensive Calculations",
+      "Dependency Array",
+      "Referential Equality",
+      "Pure Functions",
+      "Component Re-renders",
+      "Caching"
+    ],
+    "problems": [
+      "Unnecessary re-execution of expensive calculations on every component re-render",
+      "Degraded application performance and responsiveness due to wasted CPU cycles",
+      "Misunderstanding of when to apply memoization and how dependency arrays work."
+    ],
+    "reactAPIs": ["useMemo", "useState", "useEffect", "useCallback"]
+  },
+  "structure": {
+    "format": "chapter-based",
+    "chapters": [
+      {
+        "title": "The Deductive Engine",
+        "focus": "Introduces the concept of expensive computations within components and the need for caching their results."
+      },
+      {
+        "title": "The Re-Litigation of the Obvious",
+        "focus": "Demonstrates the anti-pattern: re-running expensive calculations on every render, leading to performance issues and wasted resources."
+      },
+      {
+        "title": "The Architecture of Memory",
+        "focus": "Explains and demonstrates `useMemo` as a solution to memoize expensive function results, caching them based on a dependency array."
+      },
+      {
+        "title": "Calculation vs. Retrieval",
+        "focus": "Compares side-by-side the performance of re-calculating on every render versus retrieving a cached value via `useMemo`."
+      },
+      {
+        "title": "The Rules of the Palace",
+        "focus": "Summarizes best practices for `useMemo`, including when to use it (expensive operations) and the importance of accurate dependency array management."
+      }
+    ],
+    "pedagogicalApproach": "narrative|problem-solution|contrast-driven|progressive",
+    "interactiveElements": [
+      "Simulating an expensive calculation with adjustable inputs (evidence)",
+      "Interactive toggle between 're-deducing' (unmemoized) and 'Mind Palace' (memoized) modes",
+      "Tracking calculation time, render counts, and 'leaked calculations' (unnecessary re-runs)",
+      "Controls to update 'evidence' (dependencies) and observe when memoized calculations re-execute.",
+      "Visual representation of Sherlock's 'Mind Palace' (cached results)."
+    ]
+  },
+  "search": {
+    "keywords": [
+      "React useMemo",
+      "Memoization Hooks React",
+      "Expensive Calculation React",
+      "React Performance Optimization",
+      "Dependency Array useMemo",
+      "Pure Components React",
+      "Sherlock Mind Palace React",
+      "Caching React",
+      "Steven Moffat",
+      "Mark Gatiss"
+    ],
+    "themes": ["performance", "optimization", "hooks", "memoization"],
+    "difficulty": "intermediate",
+    "prerequisites": [],
+    "relatedModules": []
+  }
+}

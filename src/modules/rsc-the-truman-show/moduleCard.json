@@ -1,0 +1,127 @@
+{
+  "moduleId": "rsc-the-truman-show",
+  "fiction": {
+    "title": "The Truman Show",
+    "author": "Peter Weir",
+    "year": 1998,
+    "type": "film",
+    "genre": ["comedy-drama", "science fiction"],
+    "keyElements": [
+      "Truman Burbank",
+      "Christof",
+      "Seahaven Island",
+      "Lunar Control Room",
+      "Background Actors",
+      "Interactive Props",
+      "Bloated Bundle",
+      "Lagging UI"
+    ]
+  },
+  "metaphor": {
+    "core": "The meticulously crafted, yet ultimately fake, world of Seahaven Island in 'The Truman Show', controlled by Christof from a distant lunar studio, serves as a metaphor for React Server Components (RSC). The module illustrates how RSC allows developers (Christof) to render static or data-intensive parts of the UI (Seahaven's background, weather, news) entirely on the server (Lunar Control Room), sending minimal JavaScript to the client (Truman's world). Interactive elements (like Truman's car) remain Client Components, ensuring a fast, seamless user experience by offloading heavy rendering and data fetching from the client to the server.",
+    "mapping": [
+      {
+        "fictionElement": "Seahaven Island (Truman's world)",
+        "reactConcept": "The user's experience of the React application in the browser."
+      },
+      {
+        "fictionElement": "Lunar Control Room (Christof's studio)",
+        "reactConcept": "The server where React Server Components are rendered."
+      },
+      {
+        "fictionElement": "Christof (the director/creator)",
+        "reactConcept": "The React developer, architecting the application with RSC."
+      },
+      {
+        "fictionElement": "Background Actors, Buildings, Scenery (static parts of Seahaven)",
+        "reactConcept": "React Server Components: rendered on the server, producing zero client-side JavaScript, ideal for static content or data-heavy, non-interactive UI."
+      },
+      {
+        "fictionElement": "Truman's Car (interactive elements)",
+        "reactConcept": "React Client Components: rendered on the client, containing state, interactivity, and event listeners, explicitly marked with 'use client'."
+      },
+      {
+        "fictionElement": "Signal overload / lagging prop department (sending everything client-side)",
+        "reactConcept": "The anti-pattern of rendering all components client-side, leading to large JavaScript bundles, slow initial load times, and poor interactivity (hydrating unnecessary components)."
+      },
+      {
+        "fictionElement": "Seamless, fast, responsive world / Architect's Cut",
+        "reactConcept": "The optimized user experience achieved by strategically using RSC to reduce client-side bundle size, improve initial load performance, and enable faster interactivity."
+      }
+    ],
+    "narrativeArc": "The module starts with the 'perfectly rendered morning' in Seahaven (efficient RSC). It then depicts the 'lagging prop department' (bloated client bundles) as the consequence of sending everything client-side. Christof's 'director's cut' (strategic use of RSC) is introduced as the solution. A comparison of 'two blueprints' highlights the performance difference, culminating in 'The View from the Moon', where a seamless user experience is achieved by moving heavy lifting to the server, underscoring the benefits of RSC."
+  },
+  "concepts": {
+    "primary": "React Server Components (RSC)",
+    "secondary": [
+      "Client Components",
+      "Server-Side Rendering (SSR)",
+      "Client-Side Hydration",
+      "JavaScript Bundle Size",
+      "Performance Optimization",
+      "Initial Load Time",
+      "User Experience (UX)",
+      "Data Fetching",
+      "Static vs. Interactive UI"
+    ],
+    "problems": [
+      "Large JavaScript bundles slowing down initial page load",
+      "Poor interactivity due to slow hydration of client-heavy applications",
+      "Over-fetching data on the client",
+      "Complexity in managing client-side data fetching and caching."
+    ],
+    "reactAPIs": ["use client" directive, "useState", "useEffect", "useRef"]
+  },
+  "structure": {
+    "format": "chapter-based",
+    "chapters": [
+      {
+        "title": "A Perfectly Rendered Morning",
+        "focus": "Introduces the concept of Server Components as a way to render UI on the server, sending minimal JavaScript to the client for faster initial loads."
+      },
+      {
+        "title": "The Lagging Prop Department",
+        "focus": "Demonstrates the problems of client-heavy applications: large JavaScript bundles, slow hydration, and poor interactivity."
+      },
+      {
+        "title": "The Director's Cut",
+        "focus": "Explains how to strategically use Server Components for static/data-intensive parts and Client Components for interactive parts."
+      },
+      {
+        "title": "The Two Blueprints",
+        "focus": "Compares the performance and bundle size implications of a client-heavy approach versus an RSC-optimized architecture."
+      },
+      {
+        "title": "The View from the Moon",
+        "focus": "Summarizes the benefits of RSC for improving application performance, user experience, and architectural clarity by offloading server work."
+      }
+    ],
+    "pedagogicalApproach": "narrative|problem-solution|contrast-driven|progressive",
+    "interactiveElements": [
+      "Simulating the impact of a 'bloated bundle' (client-heavy) versus an 'optimal architecture' (RSC-optimized) on bundle size and interaction time",
+      "Interactive door button demonstrating UI lag in bloated mode and responsiveness in optimal mode",
+      "Telemetry displaying bundle size, interaction time, and leaked resources for comparison",
+      "Visual representation of static (server-rendered) vs. interactive (client-rendered) elements in Seahaven."
+    ]
+  },
+  "search": {
+    "keywords": [
+      "React Server Components",
+      "RSC React",
+      "Client Components React",
+      "Next.js App Router",
+      "React Performance",
+      "JavaScript Bundle Size",
+      "Server-Side Rendering React",
+      "SSR vs RSC",
+      "Hydration React",
+      "The Truman Show React Components",
+      "Peter Weir",
+      "Andrew Niccol"
+    ],
+    "themes": ["server-side rendering", "performance", "architecture", "user experience", "data fetching"],
+    "difficulty": "advanced",
+    "prerequisites": [],
+    "relatedModules": []
+  }
+}
