@@ -61,7 +61,7 @@ export const CodeBlock = ({
       <div className={`flex items-center justify-between p-4 ${styles.headerBg}`}>
         <h4 className={`${styles.headerText} font-bold flex items-center gap-2`}>
           <Code2 size={20} />
-          {title && <span className="font-mono text-sm">{title}</span>}
+          {title && <span className="font-mono text-sm px-2">{title}</span>}
         </h4>
         
         <div className="flex items-center gap-3">

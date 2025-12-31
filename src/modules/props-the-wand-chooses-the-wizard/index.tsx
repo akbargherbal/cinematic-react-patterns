@@ -124,7 +124,7 @@ function WandComponent({ wood, core, length, wizard, isChosen }: WandProps) {
   );
 }
 
-function BrokenWandComponent({ wood, core, length, wizard }: WandProps & {
+function BrokenWandComponent({ wood, core, length, wizard, onBackfire }: WandProps & {
   onBackfire: () => void;
 }) {
   const [mutating, setMutating] = useState(false);

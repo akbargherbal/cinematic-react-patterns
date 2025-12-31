@@ -239,8 +239,8 @@ useEffect(() => {
                 <h2 className="text-2xl md:text-3xl font-bold text-white">
                   {currentChapter.title}
                 </h2>
-                <span className="text-sm font-mono px-3 py-1 bg-slate-700/50 rounded-full">
-                  Chapter {chapter + 1} of 5
+                <span className="text-sm font-mono px-3 py-1 bg-slate-700/50 rounded-full text-center">
+                  {chapter + 1}/5
                 </span>
               </div>
               
@@ -270,9 +270,9 @@ useEffect(() => {
               {/* Chapter-specific demos */}
               {chapter === 0 && (
                 <div className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className="space-y-4">
-                      <h4 className="font-semibold text-amber-300">The Photograph (UI State)</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3 items-end">
+                    <div className="space-y-4 md:col-span-1">
+                      <h4 className="font-semibold text-amber-300 text-center">The Photograph (UI State)</h4>
                       <div className={`h-48 rounded-lg border-2 ${photoState === "clear" ? "border-green-500/50 bg-green-950/20" : photoState === "fading" ? "border-amber-500/50 bg-amber-950/20" : "border-red-500/50 bg-red-950/20"} flex items-center justify-center`}>
                         <div className="text-center">
                           <Camera className={`w-12 h-12 mx-auto mb-2 ${photoState === "clear" ? "text-green-400" : photoState === "fading" ? "text-amber-400" : "text-red-400"}`} />
@@ -285,8 +285,8 @@ useEffect(() => {
                       </div>
                     </div>
                     
-                    <div className="space-y-4">
-                      <h4 className="font-semibold text-amber-300">Initial Side Effect</h4>
+                    <div className="space-y-4 md:col-span-2">
+                      <h4 className="font-semibold text-amber-300 text-center">Initial Side Effect</h4>
                       <CodeBlock
                         code={`useEffect(() => {
   // This runs after initial render
@@ -323,8 +323,8 @@ useEffect(() => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div className="md:col-span-2">
                       <CodeBlock
                         code={noDepsCode}
                         variant="error"
@@ -362,8 +362,8 @@ useEffect(() => {
 
               {chapter === 2 && (
                 <div className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div>
+                  <div className="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div className="md:col-span-2">
                       <CodeBlock
                         code={withDepsCode}
                         variant="success"
@@ -372,7 +372,7 @@ useEffect(() => {
                       />
                     </div>
                     
-                    <div className="space-y-6">
+                    <div className="space-y-6 md:col-span-1">
                       <div>
                         <h4 className="font-semibold text-amber-300 mb-3">Dependency States</h4>
                         <div className="space-y-4">
@@ -441,7 +441,7 @@ useEffect(() => {
                     </button>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-3">
                     <div className={`p-4 rounded-lg ${demoMode === "uncontrolled" ? "bg-red-950/20 border border-red-500/30" : "bg-slate-900/50 border border-slate-700"}`}>
                       <h5 className="font-semibold mb-3 flex items-center gap-2">
                         {demoMode === "uncontrolled" ? "❌ Chaotic" : "Chaotic"} Approach
@@ -505,7 +505,7 @@ useEffect(() => {
                     </div>
                   </div>
 
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div className="space-y-4">
                     <div>
                       <CodeBlock
                         code={cleanupCode}
