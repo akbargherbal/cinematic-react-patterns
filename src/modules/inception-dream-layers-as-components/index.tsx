@@ -345,9 +345,9 @@ function MissionCascade() {
       </header>
 
       <main className="relative mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8">
-        <div className="lg:grid lg:grid-cols-12 lg:gap-8">
+        <div className="lg:grid lg:grid-cols-12 lg:gap-4">
           {/* Main content column */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-8">
             {/* Chapter content */}
             <div className="prose prose-invert prose-lg mb-8 max-w-none sm:mb-12">
               <div className="mb-4 flex items-center gap-3">
@@ -879,7 +879,7 @@ function MissionCascade() {
           </div>
 
           {/* Sidebar column */}
-          <div className="mt-8 lg:col-span-5 lg:mt-0 lg:pl-8">
+          <div className="mt-8 lg:col-span-4 lg:mt-0 lg:pl-8">
             <div className="sticky top-8 space-y-6">
               {/* Metaphor registry */}
               <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-4 sm:p-6">
