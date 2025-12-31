@@ -433,7 +433,7 @@ setState(state.map(item =>
   return (
     <div className="min-h-screen bg-slate-950 text-slate-300 font-mono">
       {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-10">
+      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 py-6">
           <div className="flex items-center gap-4 mb-2">
             <FileText className="w-8 h-8 text-blue-400" />

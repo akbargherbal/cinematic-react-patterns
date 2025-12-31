@@ -4,897 +4,225 @@
 
 An interactive educational platform that transforms complex React concepts into memorable, story-driven learning experiences. Each module uses a beloved work of fiction—films, novels, plays—as a metaphor to teach core React patterns.
 
-**📊 Project Scale:**
-
-- 🎬 **48 fiction sources** mapped to React concepts
-- ✅ **48 modules complete** - Full curriculum implemented
-- 📚 **Every major React concept** covered from hooks to advanced patterns
-- 🌍 **200+ years of stories** (1818-2019) teaching modern React
-
-**Status:** Complete Educational Platform - Ready for Learning!
-
 ## 🎯 Project Vision
 
-**Cinematic React Patterns** is a comprehensive educational platform that teaches React through the power of storytelling. We've mapped **48 iconic works of fiction**—from Mary Shelley's Frankenstein (1818) to Netflix's Russian Doll (2019)—to create the most comprehensive and memorable React learning experience ever built.
+**Cinematic React Patterns** is a comprehensive educational platform that teaches React through the power of storytelling. By mapping iconic works of fiction to React concepts, we create a learning experience that is both comprehensive and unforgettable.
 
-**The Philosophy:** Abstract programming concepts become concrete and unforgettable when taught through stories we already know and love. Why memorize useEffect dependency rules when you can learn them from Neo dodging bullets in The Matrix?
+**The Philosophy:** Abstract programming concepts become concrete and memorable when taught through stories we already know and love. Why memorize useEffect dependency rules when you can learn them from Neo dodging bullets in The Matrix?
 
-### Current Status
+## 🏗️ Architecture
 
-- ✅ **48 modules fully implemented** - Complete React curriculum
-- ✅ **All major React concepts covered** - From basics to advanced patterns
-- ✅ **Centralized module registry** - Single source of truth for all modules
-- ✅ **Production ready** - Deployed and available for learning
-- 🎓 **Comprehensive curriculum** - Every concept with its perfect cinematic metaphor
+### Switchboard Pattern: JSON-Driven Registry
 
-### Achievement Unlocked
-
-We've built the **most comprehensive React learning platform** where every concept—from basic hooks to advanced patterns—has its own fiction-themed module. With 48 completed modules spanning classic literature to modern cinema, this is an educational experience that makes React fundamentals truly unforgettable.
-
-**Coverage:** useState to useReducer, controlled components to portals, prop drilling to Context API, and everything in between—each concept paired with the perfect cinematic metaphor.
-
-## 📚 Complete Module Library (48/48)
-
-### 🎣 Core Hooks & State Management
-
-#### 🧪 Frankenstein's Forms
-- **Fiction:** Mary Shelley's *Frankenstein* (1818)
-- **Concept:** Controlled vs Uncontrolled Components
-- **Path:** `/frankenstein-controlled-components`
-- **Learning:** Dr. Frankenstein's failed uncontrolled component (The Creature) teaches the importance of controlling your inputs
-
-#### ⚡ The Matrix: Dependency Array
-- **Fiction:** *The Matrix* (1999)
-- **Concept:** useEffect Dependencies
-- **Path:** `/matrix-useeffect-dependencies`
-- **Learning:** Like Neo learning to see the Matrix code, master the dependency array to control when your effects run
-
-#### 🧠 Memento: Memory Management
-- **Fiction:** *Memento* (2000)
-- **Concept:** useState vs useRef
-- **Path:** `/memento-usestate-vs-useref`
-- **Learning:** Leonard's polaroids (useRef) persist without triggering new scenes, while his actions (useState) restart the investigation
-
-#### 🔁 Groundhog Day: The Re-render Loop
-- **Fiction:** *Groundhog Day* (1993)
-- **Concept:** Re-rendering & Pure Functions
-- **Path:** `/groundhog-day-rerendering`
-- **Learning:** Phil Connors teaches why pure functions prevent infinite re-render loops
-
-#### 🧮 Arrival: Expensive Calculations
-- **Fiction:** *Arrival* (2016)
-- **Concept:** useMemo for Performance
-- **Path:** `/arrival-usememo`
-- **Learning:** Like learning the Heptapod language, some computations are expensive—cache them with useMemo
-
-#### ⏰ Looper: Callback Timing
-- **Fiction:** *Looper* (2012)
-- **Concept:** useCallback Timing
-- **Path:** `/looper-usecallback`
-- **Learning:** Prevent future you from creating unnecessary function instances
-
-#### 💝 Her: Custom Hooks
-- **Fiction:** *Her* (2013)
-- **Concept:** Custom Hooks
-- **Path:** `/her-custom-hooks`
-- **Learning:** Create your own OS-like interfaces by composing React's built-in hooks
-
-#### ⏳ Donnie Darko: Effect Dependencies
-- **Fiction:** *Donnie Darko* (2001)
-- **Concept:** Effect Dependencies & Timing
-- **Path:** `/donnie-darko-effect-dependencies`
-- **Learning:** Understanding the timeline of effects and their dependencies
-
-### 🗂️ Component Patterns & Architecture
-
-#### 🌀 Inception: Component Composition
-- **Fiction:** *Inception* (2010)
-- **Concept:** Component Composition
-- **Path:** `/inception-component-composition`
-- **Learning:** Build dreams within dreams—master nested component architecture
-
-#### 🤖 Blade Runner: Component Identity
-- **Fiction:** *Blade Runner* (1982)
-- **Concept:** Component Identity & Keys
-- **Path:** `/blade-runner-keys`
-- **Learning:** Replicants need identifiers—learn why React keys are essential for component identity
-
-#### 🎭 Westworld: Component vs Instance
-- **Fiction:** *Westworld* (2016)
-- **Concept:** Component vs Instance
-- **Path:** `/westworld-component-instance`
-- **Learning:** Understand the difference between host design (component) and individual hosts (instances)
-
-#### 👽 The Thing: Component Swapping
-- **Fiction:** *The Thing* (1982)
-- **Concept:** Dynamic Component Rendering
-- **Path:** `/the-thing-component-swapping`
-- **Learning:** Like The Thing taking different forms, dynamically swap components based on state
-
-#### 🎬 Rashomon: Multiple Perspectives
-- **Fiction:** *Rashomon* (1950)
-- **Concept:** Multiple Component Perspectives
-- **Path:** `/rashomon-component-perspectives`
-- **Learning:** Same data, different renderers—master rendering the same state multiple ways
-
-#### 🕵️ The Usual Suspects: Dynamic Rendering
-- **Fiction:** *The Usual Suspects* (1995)
-- **Concept:** Conditional Rendering Patterns
-- **Path:** `/usual-suspects-dynamic-rendering`
-- **Learning:** The greatest trick React ever pulled was making you think conditional rendering was simple
-
-#### 👻 The Sixth Sense: Conditional Rendering
-- **Fiction:** *The Sixth Sense* (1999)
-- **Concept:** Conditional Rendering
-- **Path:** `/sixth-sense-conditional-rendering`
-- **Learning:** Some components see dead code—master conditional rendering to show only what's alive
-
-#### 👨‍👨‍👦‍👦 Multiplicity: Component Cloning
-- **Fiction:** *Multiplicity* (1996)
-- **Concept:** Component Replication Patterns
-- **Path:** `/multiplicity-component-cloning`
-- **Learning:** Clone components effectively while maintaining state integrity
-
-### 📦 State Management & Data Flow
-
-#### 📖 1984: Immutable State
-- **Fiction:** *1984* by George Orwell
-- **Concept:** Immutable State Updates
-- **Path:** `/1984-immutable-state`
-- **Learning:** Big Brother watches state mutations—learn to update immutably
-
-#### 💰 Ocean's Eleven: Complex State
-- **Fiction:** *Ocean's 11* (2001)
-- **Concept:** useReducer for Complex State
-- **Path:** `/oceans-eleven-usereducer`
-- **Learning:** Orchestrate complex state heists with useReducer's action-based pattern
-
-#### 🗻 Lord of the Rings: Prop Drilling
-- **Fiction:** *The Lord of the Rings* (2001-2003)
-- **Concept:** Prop Drilling Problem
-- **Path:** `/lotr-prop-drilling`
-- **Learning:** Like passing the Ring through Middle-earth, prop drilling is painful—learn why Context is the Eagle
-
-#### 🏘️ The Village: Scoped Context
-- **Fiction:** *The Village* (2004)
-- **Concept:** Scoped Context Providers
-- **Path:** `/village-scoped-context`
-- **Learning:** Create isolated context boundaries like the village's borders
-
-#### 💖 Mean Girls: Context API
-- **Fiction:** *Mean Girls* (2004)
-- **Concept:** Context API & Prop Drilling
-- **Path:** `/mean-girls-context-api`
-- **Learning:** Stop passing gossip through every Plastic—use the Burn Book (Context) for global state
-
-#### 💼 The Social Network: State Sync
-- **Fiction:** *The Social Network* (2010)
-- **Concept:** State Synchronization
-- **Path:** `/social-network-state-sync`
-- **Learning:** Like syncing Harvard's social graph, master keeping distributed state in sync
-
-#### 🌌 Coherence: State Sync Crisis
-- **Fiction:** *Coherence* (2013)
-- **Concept:** State Sync Across Instances
-- **Path:** `/coherence-state-sync`
-- **Learning:** When reality splits, state must stay coherent across parallel instances
-
-#### 📺 Black Mirror Bandersnatch: State Branching
-- **Fiction:** *Black Mirror: Bandersnatch* (2018)
-- **Concept:** State Branching & History
-- **Path:** `/bandersnatch-state-branching`
-- **Learning:** Navigate branching state paths like the film's choose-your-own-adventure
-
-#### 🔬 Primer: State Time Travel
-- **Fiction:** *Primer* (2004)
-- **Concept:** State Time Travel & Debugging
-- **Path:** `/primer-state-time-travel`
-- **Learning:** Build your own time machine for state debugging
-
-#### 🦋 The Butterfly Effect: State Purity
-- **Fiction:** *The Butterfly Effect* (2004)
-- **Concept:** State Mutation Side Effects
-- **Path:** `/butterfly-effect-state-purity`
-- **Learning:** Small mutations create chaos—maintain pure state updates
-
-### ⚡ Performance & Optimization
-
-#### 🎩 The Prestige: React.memo
-- **Fiction:** *The Prestige* (2006)
-- **Concept:** React.memo Optimization
-- **Path:** `/prestige-react-memo`
-- **Learning:** Every magic trick has a cost—learn when memoization's prestige is worth the pledge
-
-#### 🎩 The Prestige: Memoization Cost
-- **Fiction:** *The Prestige* (2006)
-- **Concept:** React.memo Cost Analysis
-- **Path:** `/prestige-cost-analysis`
-- **Learning:** The transported man pays a price—understand when React.memo costs more than it saves
-
-#### 🍊 A Clockwork Orange: Forced Re-renders
-- **Fiction:** *A Clockwork Orange* (1971)
-- **Concept:** Force Re-render Patterns
-- **Path:** `/clockwork-orange-forced-rerenders`
-- **Learning:** Sometimes you need to force a re-render—learn the Ludovico Technique for components
-
-#### 🏝️ Shutter Island: Stale Closures
-- **Fiction:** *Shutter Island* (2010)
-- **Concept:** Stale Closures in Effects
-- **Path:** `/shutter-island-stale-closures`
-- **Learning:** Like Teddy's false memories, closures can trap stale values—learn to break free
-
-### 🎯 Advanced Patterns & Architecture
-
-#### 🔮 Stranger Things: Portals
-- **Fiction:** *Stranger Things* (2016)
-- **Concept:** React Portals
-- **Path:** `/stranger-things-portals`
-- **Learning:** Render into the Upside Down—master React Portals for rendering outside the DOM hierarchy
-
-#### 🏠 Parasite: Component Injection
-- **Fiction:** *Parasite* (2019)
-- **Concept:** Component Injection Patterns
-- **Path:** `/parasite-component-injection`
-- **Learning:** Infiltrate the component tree like the Kim family—master dependency injection
-
-#### 😱 Get Out: Higher-Order Components
-- **Fiction:** *Get Out* (2017)
-- **Concept:** Higher-Order Components (HOCs)
-- **Path:** `/get-out-hocs`
-- **Learning:** Like the Sunken Place, HOCs wrap and transform components
-
-#### 🤖 Ex Machina: Component Testing
-- **Fiction:** *Ex Machina* (2014)
-- **Concept:** Component Testing Strategies
-- **Path:** `/ex-machina-testing`
-- **Learning:** Ava's Turing test teaches how to properly test component behavior
-
-#### 🌙 Moon: Singleton Pattern
-- **Fiction:** *Moon* (2009)
-- **Concept:** Singleton Pattern in React
-- **Path:** `/moon-singleton`
-- **Learning:** Like Sam Bell's solitary station, some instances should be truly singular
-
-#### ⏮️ Tenet: Reverse Data Flow
-- **Fiction:** *Tenet* (2020)
-- **Concept:** Inverse Data Flow Patterns
-- **Path:** `/tenet-reverse-data-flow`
-- **Learning:** Master inverted data flow where children communicate back up to parents
-
-### ♻️ Lifecycle & Effects Management
-
-#### 📺 The Truman Show: Component Lifecycle
-- **Fiction:** *The Truman Show* (1998)
-- **Concept:** Component Lifecycle
-- **Path:** `/truman-show-lifecycle`
-- **Learning:** From birth to exit, understand every stage of a component's life on the dome
-
-#### 🦖 Jurassic Park: Side Effects
-- **Fiction:** *Jurassic Park* (1993)
-- **Concept:** Side Effects & Cleanup
-- **Path:** `/jurassic-park-side-effects`
-- **Learning:** Life finds a way—and side effects need cleanup before they escape
-
-#### 💔 Eternal Sunshine: State Reset
-- **Fiction:** *Eternal Sunshine of the Spotless Mind* (2004)
-- **Concept:** State Reset Patterns
-- **Path:** `/eternal-sunshine-state-reset`
-- **Learning:** Erase state cleanly using the key prop for component reset
-
-#### 🔁 Edge of Tomorrow: Component Reset Loop
-- **Fiction:** *Edge of Tomorrow* (2014)
-- **Concept:** Component Reset Patterns
-- **Path:** `/edge-of-tomorrow-reset-loop`
-- **Learning:** Die, reset, repeat—master component remounting strategies
-
-#### 🚇 Source Code: Remounting Loop
-- **Fiction:** *Source Code* (2011)
-- **Concept:** Strategic Component Remounting
-- **Path:** `/source-code-remounting`
-- **Learning:** Each 8-minute loop remounts the simulation—control component lifecycle deliberately
-
-#### 🪆 Russian Doll: Lifecycle Debugging
-- **Fiction:** *Russian Doll* (2019)
-- **Concept:** Lifecycle Debugging Patterns
-- **Path:** `/russian-doll-lifecycle-debugging`
-- **Learning:** Trapped in a birthday loop, Nadia teaches how to debug lifecycle issues
-
-#### 🔄 The Matrix Reloaded: System Exit
-- **Fiction:** *The Matrix Reloaded* (2003)
-- **Concept:** Cleanup & Unmounting
-- **Path:** `/matrix-reloaded-system-exit`
-- **Learning:** Architect teaches the critical importance of proper component cleanup before exit
-
-### 🔄 Time & Async Patterns
-
-#### ⚡ Back to the Future: Props Changes
-- **Fiction:** *Back to the Future* (1985)
-- **Concept:** Props Changes & Re-renders
-- **Path:** `/back-to-future-props-changes`
-- **Learning:** When props change, components re-render—understand the ripple effects through time
-
-#### 🌠 Interstellar: Async State
-- **Fiction:** *Interstellar* (2014)
-- **Concept:** Async State & Race Conditions
-- **Path:** `/interstellar-async-state`
-- **Learning:** Time dilation on Miller's planet teaches race conditions—one hour there is seven years of updates
-
-#### 🐒 12 Monkeys: Circular Dependencies
-- **Fiction:** *12 Monkeys* (1995)
-- **Concept:** Circular Dependencies
-- **Path:** `/12-monkeys-circular-dependencies`
-- **Learning:** Break free from circular dependency paradoxes
-
-#### 👁️ Minority Report: Optimistic Rendering
-- **Fiction:** *Minority Report* (2002)
-- **Concept:** Optimistic UI Updates
-- **Path:** `/minority-report-optimistic-rendering`
-- **Learning:** Predict the future state before the server confirms—optimistic UI patterns
-
-### ⚔️ Rules & Best Practices
-
-#### 💥 Fight Club: Strict Mode
-- **Fiction:** *Fight Club* (1999)
-- **Concept:** React Strict Mode & Cleanup
-- **Path:** `/fight-club-strict-mode`
-- **Learning:** Tyler Durden forces double-mounts to expose your side effects—learn to write proper cleanup
-
----
-
-## 🎓 Complete Learning Outcomes
-
-### Fundamentals Mastery
-- ✅ Controlled vs Uncontrolled Components (Frankenstein)
-- ✅ Component Lifecycle (Truman Show)
-- ✅ Re-rendering & Pure Functions (Groundhog Day)
-- ✅ Conditional Rendering (Sixth Sense)
-- ✅ Props Changes & Updates (Back to the Future)
-
-### Hooks Deep Dive
-- ✅ useState vs useRef (Memento)
-- ✅ useEffect Dependencies (Matrix)
-- ✅ Effect Dependencies & Timing (Donnie Darko)
-- ✅ useMemo for Performance (Arrival)
-- ✅ useCallback Timing (Looper)
-- ✅ Custom Hooks (Her)
-- ✅ useReducer for Complex State (Ocean's 11)
-
-### Component Architecture
-- ✅ Component Composition (Inception)
-- ✅ Component Identity & Keys (Blade Runner)
-- ✅ Component vs Instance (Westworld)
-- ✅ Dynamic Component Rendering (The Thing)
-- ✅ Multiple Perspectives (Rashomon)
-- ✅ Component Cloning (Multiplicity)
-- ✅ Higher-Order Components (Get Out)
-
-### State Management
-- ✅ Immutable State Updates (1984)
-- ✅ State Synchronization (Social Network, Coherence)
-- ✅ State Branching (Bandersnatch)
-- ✅ State Time Travel (Primer)
-- ✅ State Purity (Butterfly Effect)
-- ✅ Prop Drilling vs Context (LOTR, Mean Girls)
-- ✅ Scoped Context (The Village)
-
-### Performance Optimization
-- ✅ React.memo Strategies (Prestige)
-- ✅ Memoization Cost Analysis (Prestige Cost)
-- ✅ Force Re-renders (Clockwork Orange)
-- ✅ Stale Closures (Shutter Island)
-
-### Advanced Patterns
-- ✅ React Portals (Stranger Things)
-- ✅ Component Injection (Parasite)
-- ✅ Component Testing (Ex Machina)
-- ✅ Singleton Pattern (Moon)
-- ✅ Reverse Data Flow (Tenet)
-
-### Lifecycle & Effects
-- ✅ Strict Mode & Cleanup (Fight Club)
-- ✅ Side Effects & Cleanup (Jurassic Park)
-- ✅ State Reset Patterns (Eternal Sunshine)
-- ✅ Component Reset Loops (Edge of Tomorrow, Source Code)
-- ✅ Lifecycle Debugging (Russian Doll)
-- ✅ Cleanup & Unmounting (Matrix Reloaded)
-
-### Async & Time Patterns
-- ✅ Async State & Race Conditions (Interstellar)
-- ✅ Circular Dependencies (12 Monkeys)
-- ✅ Optimistic UI Updates (Minority Report)
-
----
-
-**📊 Coverage Statistics:**
-- 🎬 **48 Fiction Sources** (1818-2019)
-- 🎭 **15+ Genres** represented
-- 🌍 **International Cinema** included
-- ⚛️ **Every React Concept** covered
-
-## 🗂️ Architecture
-
-This project follows a **Modular Monolith** architecture with a **centralized module registry** for easy management.
-
-### Core Principles
-
-1. **Module Isolation:** Each concept is a standalone directory under `/src/modules/`
-2. **Centralized Configuration:** All modules registered in a single source of truth
-3. **Switchboard Control:** Enable/disable modules with a single boolean toggle
-4. **Zero Dependencies Between Modules:** Modules don't import from each other
-5. **Thematic Consistency:** Each module has its own visual theme tied to its fiction source
-6. **Lazy Loading:** Modules load on-demand for optimal performance
-
-### 📌 Module Switchboard System
-
-The project uses a **centralized module registry** that acts like an electrical switchboard:
-
-```typescript
-// src/config/moduleRegistry.ts
-export const moduleRegistry = [
-  {
-    id: "mean-girls-context-api",
-    path: "/mean-girls-context-api",
-    title: "Mean Girls",
-    concept: "Context API & Prop Drilling",
-    enabled: true, // 🔌 Toggle to enable/disable module
-    // ... all module configuration in one place
-  },
-  // ... other modules
-];
-```
-
-**Benefits:**
-- ✅ **One-line toggle** - Enable/disable any module instantly
-- ✅ **Single source of truth** - Zero duplication across files
-- ✅ **Easy troubleshooting** - Quickly isolate problematic modules
-- ✅ **Clean architecture** - Minimal routing boilerplate
-- ✅ **Type-safe** - Full TypeScript support
-
-### Directory Structure
-
-```
-cinematic-react-patterns/
-├── src/
-│   ├── config/
-│   │   └── moduleRegistry.ts  # 🔌 SWITCHBOARD - All 48 modules
-│   ├── modules/
-│   │   ├── home/              # Landing page (module showcase)
-│   │   ├── frankenstein.../   # ✅ Controlled Components
-│   │   ├── matrix.../         # ✅ useEffect Dependencies
-│   │   ├── inception.../      # ✅ Component Composition
-│   │   └── [45 more modules]/ # ✅ All implemented
-│   ├── App.tsx                # Router - auto-generates routes
-│   ├── main.tsx               # Entry point
-│   └── index.css              # Global styles
-├── public/
-├── package.json
-├── vite.config.ts
-└── README.md
-```
-
-### Module Anatomy
-
-Each module is **completely self-contained**:
-
-```
-src/modules/your-module/
-├── index.tsx              # Main module component (default export)
-├── components/            # Module-specific components (optional)
-├── utils/                 # Module-specific utilities (optional)
-└── README.md              # Module documentation (optional)
-```
-
-## 🛠️ Local Development
-
-### Prerequisites
-
-- Node.js 18+
-- pnpm (recommended package manager)
-
-If you don't have pnpm installed:
-
-```bash
-npm install -g pnpm
-```
-
-### Installation
-
-```bash
-# Clone the repository
-git clone https://github.com/akbargherbal/cinematic-react-patterns.git
-cd cinematic-react-patterns
-
-# Install dependencies
-pnpm install
-```
-
-### Running Locally
-
-```bash
-# Start development server
-pnpm dev
-
-# Open browser to http://localhost:5173
-```
-
-### Building for Production
-
-```bash
-# Create production build
-pnpm build
-
-# Preview production build locally
-pnpm preview
-```
-
-## 🚢 Deployment
-
-The project is configured for Firebase Hosting.
-
-```bash
-# Install Firebase CLI globally
-npm install -g firebase-tools
-
-# Login to Firebase
-firebase login
-
-# Deploy to Firebase
-firebase deploy
-```
-
-### Deployment Configuration
-
-The `firebase.json` configuration handles SPA routing:
+The project uses a **JSON-driven module registry** with TypeScript transformation as its architectural foundation:
 
 ```json
-{
-  "hosting": {
-    "public": "dist",
-    "rewrites": [
-      {
-        "source": "**",
-        "destination": "/index.html"
-      }
-    ]
+// src/config/moduleRegistry.json - Pure data configuration
+[
+  {
+    "id": "module-id",
+    "path": "/module-path",
+    "title": "Module Title",
+    "subtitle": "Character, Context, Year",
+    "concept": "React Concept",
+    "icon": "IconName",
+    "colorClass": "text-cyan-500",
+    "bgClass": "bg-cyan-950/20 border-cyan-500/30",
+    "component": "dynamic_import",
+    "wrapperProps": {
+      "bgClass": "bg-slate-950",
+      "textClass": "text-slate-300",
+      "fontClass": "font-sans"
+    },
+    "enabled": true
   }
+]
+```
+
+```typescript
+// src/config/moduleRegistry.ts - Type transformation layer
+import modulesJSONData from "./moduleRegistry.json";
+
+// Transforms JSON strings into React components and functions
+export const moduleRegistry: ModuleConfig[] = modulesJSONData.map(
+  (raw: RawModuleData): ModuleConfig => ({
+    ...raw,
+    icon: iconMap[raw.icon] || Brain, // String → React Component
+    component: () => import(`../modules/${raw.id}/index.tsx`), // Dynamic import
+  }),
+);
+```
+
+**Key Principles:**
+
+- **JSON as data source**: All module configuration in portable JSON format
+- **Type-safe transformation**: TypeScript layer adds types and dynamic imports
+- **Dynamic routing**: Routes auto-generated from registry configuration
+- **Icon mapping**: String names mapped to Lucide React components
+- **Centralized management**: Single JSON file controls entire curriculum
+- **Easy maintenance**: Add/remove modules by editing JSON only
+
+### Module Structure
+
+Each module follows a consistent pattern:
+
+1. **Fiction Source**: A well-known work of fiction (film, novel, play)
+2. **React Concept**: A specific React pattern or hook
+3. **Metaphor Mapping**: How the story teaches the technical concept
+4. **Interactive Demo**: Hands-on code examples and exercises
+
+## 📚 Learning Curriculum
+
+The platform covers React concepts across these categories:
+
+### Core Hooks & State Management
+
+- useState, useEffect, useRef fundamentals
+- Custom hooks and composition
+- Performance hooks (useMemo, useCallback)
+
+### Component Patterns & Architecture
+
+- Component composition and nesting
+- Component identity and keys
+- Dynamic and conditional rendering
+- Component lifecycle patterns
+
+### State Management & Data Flow
+
+- Immutable state updates
+- Complex state with useReducer
+- Prop drilling and Context API
+- State synchronization patterns
+
+### Performance & Optimization
+
+- Memoization strategies
+- Performance profiling
+- Optimization best practices
+
+### Lifecycle & Effects
+
+- Effect dependencies and timing
+- Cleanup patterns
+- Side effect management
+
+### Advanced Patterns
+
+- Portals and refs
+- Error boundaries
+- Higher-order patterns
+- State machines
+
+### Forms & User Input
+
+- Controlled vs uncontrolled components
+- Form validation patterns
+- User input handling
+
+## 🔧 Module Management
+
+### Enabling/Disabling Modules
+
+Control module visibility by editing the JSON registry:
+
+```json
+// src/config/moduleRegistry.json
+
+{
+  "id": "your-module",
+  "enabled": true, // ✅ Module active (visible, routes work)
+  // OR
+  "enabled": false // ❌ Module disabled (hidden everywhere)
 }
 ```
 
-## 🎨 Design Philosophy
+**Best Practices:**
 
-### Visual Themes
+- Keep production modules `"enabled": true`
+- Use `"enabled": false` only for maintenance or testing
+- Add JSON comments (in separate documentation) explaining temporary disabling
+- Validate JSON syntax after edits
 
-Each module has a unique aesthetic that reflects its fiction source:
+### Adding New Modules
 
-- **Frankenstein:** Gothic serif typography (Crimson Pro), dark slate with emerald accents
-- **Fight Club:** Industrial monospace (JetBrains Mono), pure black with red highlights
-- **Mean Girls:** Modern sans-serif (Inter), pink pastels with vibrant accents
-- **Matrix:** Digital green-on-black terminal aesthetic
-- **Inception:** Dream-like layered interfaces
-- **And 43 more unique themes...**
+1. **Create module component** in `src/modules/[module-id]/index.tsx`
+2. **Add entry to JSON** in `moduleRegistry.json`:
+   ```json
+   {
+     "id": "new-module-id",
+     "path": "/new-module-path",
+     "title": "Module Title",
+     "subtitle": "Character, Context, Year",
+     "concept": "React Concept",
+     "icon": "Brain",
+     "colorClass": "text-cyan-500",
+     "bgClass": "bg-cyan-950/20 border-cyan-500/30",
+     "component": "dynamic_import",
+     "wrapperProps": {
+       "bgClass": "bg-slate-950",
+       "textClass": "text-slate-300",
+       "fontClass": "font-sans"
+     },
+     "enabled": true
+   }
+   ```
+3. **Add icon to mapping** (if using new icon) in `moduleRegistry.ts`
+4. **Route automatically generated** from configuration
+5. **Test integration** before enabling
 
-### Custom Animations
+### Available Icons
 
-Defined in `index.css` for smooth module transitions:
-
-- `fade-in`: Opacity transitions
-- `slide-in-from-bottom-4`: Entry animations
-- `slide-in-from-right-2`: Sequential reveals
-- `zoom-in`: Scale-based entrances
-
-### ModuleWrapper Component
-
-Provides environment isolation for each module:
-
-- Sets body background/text/font classes (from registry)
-- Universal EXIT button (top-left, fixed position)
-- Cleanup on unmount
-- Scroll-to-top on route change
-
-## 🔧 Key Implementation Details
-
-### Centralized Module Registry
-
-All module configuration lives in `src/config/moduleRegistry.ts`:
-
-```typescript
-export interface ModuleConfig {
-  id: string;                    // Unique identifier
-  path: string;                  // URL route
-  title: string;                 // Display name
-  subtitle: string;              // Fiction context
-  concept: string;               // React concept taught
-  icon: React.ComponentType;     // Lucide icon
-  colorClass: string;            // Tailwind color
-  bgClass: string;               // Tailwind background
-  component: () => Promise<...>; // Lazy-loaded component
-  wrapperProps: {                // ModuleWrapper styling
-    bgClass: string;
-    textClass?: string;
-    fontClass?: string;
-  };
-  enabled: boolean;              // 🔌 Switchboard toggle
-}
-```
-
-### Dynamic Route Generation
-
-Routes are generated automatically from enabled modules:
-
-```tsx
-// App.tsx
-import { getEnabledModules } from "./config/moduleRegistry";
-
-export default function App() {
-  const enabledModules = getEnabledModules();
-
-  return (
-    <Routes>
-      {enabledModules.map((module) => (
-        <Route
-          key={module.id}
-          path={module.path}
-          element={
-            <ModuleWrapper {...module.wrapperProps}>
-              <LazyComponent />
-            </ModuleWrapper>
-          }
-        />
-      ))}
-    </Routes>
-  );
-}
-```
-
-### Path Aliases
-
-Configured in `tsconfig.json` and `vite.config.ts`:
+Icons are mapped in `moduleRegistry.ts` from Lucide React:
 
 ```typescript
-"@/*": ["./src/*"]
-"@modules/*": ["./src/modules/*"]
+const iconMap: Record<string, React.ComponentType<any>> = {
+  Brain,
+  Code,
+  Wand: Zap,
+  Calendar,
+  Zap,
+  Door: DoorOpen,
+  Crown,
+  Image,
+  Clock,
+  Code2,
+  Ship,
+  RotateCcw,
+  Film,
+  Ticket,
+  Car,
+  // Add new icons here as needed
+};
 ```
 
-Import modules: `import YourModule from "@modules/your-module";`
+To use a new icon:
 
+1. Import from `lucide-react` in `moduleRegistry.ts`
+2. Add to `iconMap` object
+3. Reference by string name in JSON
 
-## 🤝 Contributing
-We welcome contributions to enhance existing modules or add new variations!
+## 🎨 Animation Integration
 
-### Ways to Contribute
+### Auto Animate Library
 
-1. **Enhance Existing Modules:** Add interactive demos, improve explanations, polish UI
-2. **Fix Bugs:** Report or fix issues in any of the 48 modules
-3. **Add New Features:** Suggest and implement new teaching approaches
-4. **Improve Documentation:** Help make the learning experience clearer
-
-### Development Workflow
-
-```bash
-# 1. Fork and clone
-git clone https://github.com/YOUR_USERNAME/cinematic-react-patterns.git
-
-# 2. Create branch
-git checkout -b feature/your-enhancement
-
-# 3. Install dependencies
-pnpm install
-
-# 4. Make your changes
-# Work in the relevant module directory
-
-# 5. Test locally
-pnpm dev
-
-# 6. Commit and push
-git add .
-git commit -m "feat: enhance [Module Name] with [your changes]"
-git push origin feature/your-enhancement
-
-# 7. Open Pull Request
-```
-
-### Code Standards
-
-- **TypeScript:** Strictly typed (no `any` unless absolutely necessary)
-- **Styling:** Tailwind CSS (utility-first approach)
-- **Formatting:** Follow existing code style
-- **Components:** Functional components with hooks
-- **Comments:** Explain complex logic and metaphor connections
-
-### Module Structure Guidelines
-
-#### **Preferred: Single-File Modules**
-
-Most modules should remain as a single `index.tsx` file for simplicity:
-
-```
-src/modules/your-module/
-└── index.tsx              # Complete module in one file
-```
-
-**When to use single-file:**
-- Logic is straightforward
-- Few internal components
-- **This is the default pattern—use it unless you have a clear reason not to**
-
-#### **Allowed: Multi-File Modules (When Justified)**
-
-For complex modules with multiple demos, charts, or intricate logic, you may organize into subdirectories:
-
-```
-src/modules/your-module/
-├── index.tsx              # Entry point (must export default component)
-├── components/
-│   ├── Demo.tsx          # Module-specific components
-│   └── Chart.tsx
-└── utils/
-    └── calculations.ts   # Module-specific utilities
-```
-
-**When to use multi-file:**
-- Multiple interactive demos/visualizations
-- Complex calculations or data transformations
-- Improved readability and maintainability
-
-### Critical Import Rules
-
-#### **✅ DO: Use Relative Imports Within Your Module**
-
-```typescript
-// Inside src/modules/your-module/index.tsx
-import { Demo } from "./components/Demo";
-import { calculate } from "./utils/calculations";
-```
-
-#### **✅ DO: Import from Common Components (Read-Only)**
-
-```typescript
-// Common components are available for use but NOT for modification
-import { CodeBlock } from "@/components/common/CodeBlock";
-```
-
-**Note:** The `/src/components/common/` directory is **read-only** for contributors. You can import and use existing common components, but you cannot add new ones or modify existing ones. If you need a shared component, discuss it with maintainers first.
-
-#### **❌ DON'T: Import from Other Modules**
-
-```typescript
-// ❌ NEVER do this - breaks module isolation
-import { Something } from "@modules/other-module/components/Thing";
-import { Helper } from "../other-module/utils/helper";
-```
-
-**Why this matters:**
-- Modules must remain completely isolated
-- Cross-module imports create tight coupling
-- If you need similar code, duplicate it in your module
-- **Duplication is better than coupling** in this architecture
-
-#### **Import Path Reference**
-
-| Import Type | Syntax | Use Case |
-|------------|--------|----------|
-| **Within same module** | `"./components/Demo"` | Internal module files |
-| **Common components** | `"@/components/common/CodeBlock"` | Shared utilities (read-only) |
-| **Other paths** | `"@/config/moduleRegistry"` | Project infrastructure |
-| **Other modules** | ❌ **FORBIDDEN** | Breaks isolation |
-
-### Adding Code Examples
-
-Use the shared `CodeBlock` component for all code examples:
-
-```tsx
-import { CodeBlock } from "@/components/common/CodeBlock";
-
-// Broken code (red theme)
-<CodeBlock 
-  code={yourCodeString}
-  variant="error"
-  title="// ❌ Common Mistake"
-/>
-
-// Fixed code (green theme)
-<CodeBlock 
-  code={yourCodeString}
-  variant="success"
-  title="// ✅ Correct Approach"
-/>
-
-// Neutral code (default theme)
-<CodeBlock 
-  code={yourCodeString}
-  title="// Example"
-/>
-```
-
-**Props:**
-- `code` (required): String of code to display
-- `variant`: `'default' | 'error' | 'success'` - Sets color theme
-- `title`: Appears in header with code icon
-- `language`: Syntax highlighting language (default: `'jsx'`)
-- `collapsible`: Show/hide toggle (default: `true`)
-- `defaultExpanded`: Start expanded (default: `false`)
-
-### Module Template
-
-Use `src/modules/_template/index.tsx` as a starting point for new modules (if adding variations).
-
-### Architecture Preservation
-
-**These rules are non-negotiable:**
-
-1. ✅ **Module Isolation:** Never import from other modules
-2. ✅ **Registry-First:** All module metadata lives in `moduleRegistry.ts`
-3. ✅ **Default Export:** Your `index.tsx` must export a default component
-4. ✅ **Self-Contained:** Bundle all module dependencies internally
-5. ✅ **Common Components:** Read-only—import but don't modify
-6. ❌ **No Shared Utilities:** Don't create cross-module helper folders
-
-If you need functionality that doesn't fit these constraints, open a discussion issue first.
-
-
-## 📦 Dependency Policy
-
-### Adding New Dependencies
-
-**Before proposing a new dependency, ask:**
-1. Does this enhance the educational value of a module?
-2. Could the concept be taught without this library?
-3. What's the bundle size impact?
-4. Is it actively maintained?
-
-**Approval Process:**
-- Open a GitHub Discussion explaining the need
-- Maintainers review based on pedagogical value
-- Bundle size analysis required for >50KB dependencies
-
-**Examples of Good Additions:**
-- Animation libraries for lifecycle/effect demos
-- State management libraries when teaching state patterns
-- Visualization tools for component tree exploration
-
-**Examples to Avoid:**
-- Alternative build tools (Vite is locked)
-- CSS frameworks beyond Tailwind
-- Libraries that hide React's internals
-
-
-
-## ✨ Auto Animate Integration
-
-### Overview
-
-[Auto Animate](https://auto-animate.formkit.com/) is a **zero-config animation library** (2KB) that automatically animates layout changes in your React components. It enhances the platform's educational value by making React's reconciliation process **visually observable**.
-
-**Educational Value:**
-- Makes component lifecycle events visible (mount/unmount animations)
-- Shows React's DOM diffing in action (list reordering, additions, deletions)
-- Teaches that "declarative UI = automatic transitions"
-- Zero learning curve for students (they see animations without writing animation code)
-
-**Bundle Impact:** +2KB (negligible)
-
----
-
-### Installation
+The platform uses `@formkit/auto-animate` for seamless DOM animations:
 
 ```bash
 pnpm add @formkit/auto-animate
 ```
 
----
-
-### Basic Usage Pattern
+**Basic Usage:**
 
 ```tsx
-import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
-export default function YourModule() {
+function Component() {
   const [parent] = useAutoAnimate();
-  
+
   return (
     <div ref={parent}>
-      {items.map(item => (
+      {items.map((item) => (
         <div key={item.id}>{item.content}</div>
       ))}
     </div>
@@ -902,180 +230,272 @@ export default function YourModule() {
 }
 ```
 
-**That's it.** Any additions, removals, or reorderings will animate automatically.
-
----
-
 ### Integration Strategy
 
-#### **Approach 1: Enhance Existing Modules (Recommended)**
+**Approach 1: Targeted Enhancement (Recommended)**
 
-Add Auto Animate to modules where list operations or conditional rendering are demonstrated:
+Add animations to modules where DOM changes are demonstrated:
 
-**High-Impact Targets:**
-- ✅ **Blade Runner: Keys** - Animate replicant list additions/removals to show why keys matter
-- ✅ **Groundhog Day: Re-renders** - Animate component mounting/unmounting in the loop
-- ✅ **Sixth Sense: Conditional Rendering** - Animate components appearing/disappearing
-- ✅ **Usual Suspects: Dynamic Rendering** - Animate suspect lineup changes
-- ✅ **Ocean's 11: useReducer** - Animate heist team member additions (dispatch actions)
-- ✅ **Westworld: Component Instances** - Animate host activations/deactivations
+- List operations (add/remove/reorder)
+- Conditional rendering (mount/unmount)
+- Component keys and reconciliation
+- State-driven UI updates
 
-**Example: Enhancing Blade Runner Module**
+**Example:**
 
 ```tsx
 // Before (static)
-<div className="replicants-grid">
-  {replicants.map(rep => (
-    <ReplicantCard key={rep.id} {...rep} />
+<div className="items-grid">
+  {items.map((item) => (
+    <ItemCard key={item.id} {...item} />
   ))}
-</div>
+</div>;
 
-// After (auto-animated)
-import { useAutoAnimate } from '@formkit/auto-animate/react';
+// After (animated)
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
-const [replicantsRef] = useAutoAnimate();
+const [itemsRef] = useAutoAnimate();
 
-<div ref={replicantsRef} className="replicants-grid">
-  {replicants.map(rep => (
-    <ReplicantCard key={rep.id} {...rep} />
+<div ref={itemsRef} className="items-grid">
+  {items.map((item) => (
+    <ItemCard key={item.id} {...item} />
   ))}
-</div>
+</div>;
 ```
 
-Now when replicants are added/removed, students **see** why stable keys matter—the animations break if keys change.
+**Approach 2: Module-Wide Enhancement (Optional)**
 
----
-
-#### **Approach 2: Module-Wide Enhancement (Optional)**
-
-Add to the `ModuleWrapper` component for platform-wide subtle transitions:
+Add to wrapper components for platform-wide transitions:
 
 ```tsx
 // src/components/ModuleWrapper.tsx
-import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 export function ModuleWrapper({ children, ...props }) {
   const [contentRef] = useAutoAnimate({ duration: 200 });
-  
+
   return (
     <div {...props}>
       <ExitButton />
-      <div ref={contentRef}>
-        {children}
-      </div>
+      <div ref={contentRef}>{children}</div>
     </div>
   );
 }
 ```
 
-**Caveat:** Test thoroughly—not all modules may benefit from auto-animation at the wrapper level.
-
----
-
 ### Configuration Options
 
-Auto Animate supports customization when needed:
+Customize when needed:
 
 ```tsx
 const [parent] = useAutoAnimate({
-  duration: 250,        // Animation duration (ms)
-  easing: 'ease-in-out' // CSS easing function
+  duration: 250, // Animation duration (ms)
+  easing: "ease-in-out", // CSS easing function
 });
 ```
 
-**Default Recommendation:** Use defaults (they're excellent). Only customize if the module's fiction theme demands it (e.g., Matrix might want faster, more digital transitions).
-
----
+**Default Recommendation:** Use defaults unless the module's theme demands customization.
 
 ### Best Practices
 
-1. **Apply Sparingly:** Only animate elements that change (don't animate static headers/footers)
-2. **Respect Keys:** Auto Animate reinforces the importance of stable keys—animations break without them
-3. **Test Performance:** With 100+ items, consider disabling animations or using virtualization
-4. **Thematic Consistency:** Ensure animations match the module's fiction aesthetic (speed, style)
+1. **Apply Sparingly**: Only animate elements that change
+2. **Respect Keys**: Animations reinforce the importance of stable keys
+3. **Test Performance**: With 100+ items, consider virtualization
+4. **Thematic Consistency**: Match animations to module aesthetics
 
----
+### Educational Opportunities
 
-### Educational Moments to Create
+**Keys Matter Demonstration:**
 
-#### **1. The "Keys Matter" Moment (Blade Runner)**
 ```tsx
-// Demo: Show broken animation with index keys vs stable keys
+// Show broken animation with index keys vs stable keys
 <button onClick={() => setUseIndexKeys(!useIndexKeys)}>
   Toggle Key Strategy
-</button>
+</button>;
 
-{replicants.map((rep, idx) => (
-  <div key={useIndexKeys ? idx : rep.id}>
-    {rep.name}
-  </div>
-))}
+{
+  items.map((item, idx) => (
+    <div key={useIndexKeys ? idx : item.id}>{item.name}</div>
+  ));
+}
 ```
 
 **Learning:** Students see animations glitch with index keys, proving why unique IDs are critical.
 
-#### **2. The "Reconciliation Visualization" (Groundhog Day)**
+**Reconciliation Visualization:**
+
 ```tsx
-// Each loop iteration mounts/unmounts components
-<div ref={autoAnimateRef}>
-  {isLooping && <DayComponent />}
-</div>
+// Each lifecycle mounts/unmounts components
+<div ref={autoAnimateRef}>{isActive && <Component />}</div>
 ```
 
 **Learning:** Mount/unmount becomes visible, reinforcing lifecycle concepts.
 
-#### **3. The "Conditional Rendering Clarity" (Sixth Sense)**
-```tsx
-<div ref={autoAnimateRef}>
-  {seesDead && <GhostComponent />}
-  <RegularComponent />
-</div>
-```
-
-**Learning:** Components fading in/out makes the "presence in the DOM" concept tangible.
-
----
-
-### Rollout Checklist
-
-- [ ] Install: `pnpm add @formkit/auto-animate`
-- [ ] Update `package.json` (done automatically)
-- [ ] Add to 3-5 high-impact modules first (pilot phase)
-- [ ] Test animations on mobile (ensure 60fps)
-- [ ] Document in module READMEs where applied
-- [ ] Consider adding "Animation powered by Auto Animate" attribution in footer (optional)
-
----
-
 ### When NOT to Use Auto Animate
 
-- ❌ Modules teaching CSS animations explicitly (e.g., a hypothetical "Transition" concept module)
-- ❌ Heavy data tables (use virtualization instead)
-- ❌ Where animations distract from the core concept being taught
-- ❌ Modules with complex custom animations already implemented
+- ❌ Modules teaching CSS animations explicitly
+- ❌ Heavy data tables (use virtualization)
+- ❌ Where animations distract from core concepts
+- ❌ Modules with complex custom animations
 
----
+## 🚀 Development Setup
 
-## 📌 Module Management
+### Prerequisites
 
-### Enabling/Disabling Modules
+- Node.js 18+ and pnpm
+- Modern browser with ES6+ support
+- Git for version control
 
-```typescript
-// src/config/moduleRegistry.ts
+### Installation
 
+```bash
+# Clone repository
+git clone https://github.com/akbargherbal/cinematic-react-patterns.git
+
+# Install dependencies
+pnpm install
+
+# Start development server
+pnpm dev
+```
+
+### Project Structure
+
+```
+src/
+├── config/
+│   └── moduleRegistry.ts    # Centralized module configuration
+├── modules/
+│   └── [module-name]/       # Individual module components
+├── components/
+│   └── ModuleWrapper.tsx    # Shared wrapper component
+├── routes/                  # Route configuration
+└── App.tsx                  # Root application
+```
+
+## 📖 Module Development Guide
+
+### Creating a New Module
+
+1. **Choose your fiction source**: Select a story that naturally maps to the React concept
+2. **Identify the metaphor**: How does the story teach the technical pattern?
+3. **Create component directory**: `src/modules/[module-id]/index.tsx`
+4. **Build the component**: Create interactive demo with code examples
+5. **Add JSON entry**: Register in `moduleRegistry.json`
+6. **Map icon** (if new): Add to `iconMap` in `moduleRegistry.ts`
+7. **Test and refine**: Ensure the metaphor is clear and memorable
+
+### Module JSON Schema
+
+```json
 {
-  id: "your-module",
-  enabled: true,  // ✅ Module active (shows on home, routes work)
-  // OR
-  enabled: false, // ❌ Module disabled (hidden everywhere)
+  "id": "unique-module-identifier", // Kebab-case, matches folder name
+  "path": "/url-path", // Route path (usually same as id)
+  "title": "Fiction Work Title", // Display title
+  "subtitle": "Character, Context, Year", // Metadata line
+  "concept": "React Concept Name", // What React pattern this teaches
+  "icon": "IconName", // Must exist in iconMap
+  "colorClass": "text-color-shade", // Tailwind text color
+  "bgClass": "bg-color-shade border-color", // Tailwind background/border
+  "component": "dynamic_import", // Always "dynamic_import"
+  "wrapperProps": {
+    "bgClass": "bg-slate-950", // Module background
+    "textClass": "text-slate-300", // Module text color
+    "fontClass": "font-sans" // Typography
+  },
+  "enabled": true // Visibility toggle
 }
 ```
 
-### Best Practices
+### Module Component Structure
 
-- ✅ Keep all production modules `enabled: true`
-- ✅ Set `enabled: false` only for maintenance or testing
-- ✅ Use comments to explain temporary disabling
+```tsx
+// src/modules/your-module-id/index.tsx
+import { useState } from "react";
+import CodeBlock from "@/components/common/CodeBlock";
+
+export default function YourModule() {
+  return (
+    <div className="space-y-6">
+      {/* Hero Section */}
+      <div className="text-center">
+        <h1 className="text-4xl font-bold">Module Title</h1>
+        <p className="text-lg opacity-80">The Metaphor Explanation</p>
+      </div>
+
+      {/* Concept Explanation */}
+      <section>
+        <h2>The React Concept</h2>
+        <p>Technical explanation...</p>
+      </section>
+
+      {/* Interactive Demo */}
+      <section>
+        <h2>Interactive Example</h2>
+        {/* Live demo component */}
+      </section>
+
+      {/* Code Example */}
+      <CodeBlock code={exampleCode} language="tsx" />
+
+      {/* Learning Points */}
+      <section>
+        <h2>Key Takeaways</h2>
+        <ul>{/* Bullet points */}</ul>
+      </section>
+    </div>
+  );
+}
+```
+
+### Module Query Utilities
+
+The registry provides helper functions for module access:
+
+```typescript
+// Get all enabled modules
+const modules = getEnabledModules();
+
+// Get specific module by ID
+const module = getModuleById("inception-dream-layers-as-components");
+
+// Get module by URL path
+const module = getModuleByPath("/inception-dream-layers-as-components");
+
+// Get module statistics
+const { total, enabled, disabled } = getModuleStats();
+// Returns: { total: 34, enabled: 34, disabled: 0 }
+```
+
+These utilities are automatically updated when JSON changes—no manual counting needed.
+
+### Quality Standards
+
+- **Clear metaphor**: Story naturally teaches the concept
+- **Interactive demo**: Hands-on examples users can modify
+- **Progressive difficulty**: Start simple, build complexity
+- **Visual feedback**: Show state changes and re-renders
+- **Code examples**: Real-world applicable patterns
+
+## 🎓 Educational Philosophy
+
+### Story-Driven Learning
+
+**Why fiction works:**
+
+- **Memorable**: Stories stick in memory better than abstract rules
+- **Contextual**: Concepts make sense within familiar narratives
+- **Engaging**: Learning feels like entertainment
+- **Universal**: Great stories transcend technical backgrounds
+
+### Concept Mapping
+
+Each module demonstrates:
+
+1. **The Problem**: What challenge does this pattern solve?
+2. **The Metaphor**: How does the story illustrate this?
+3. **The Pattern**: Technical implementation in React
+4. **The Practice**: Interactive exercises and examples
 
 ## 📄 License
 
@@ -1098,10 +518,4 @@ For questions, bug reports, or suggestions, please use GitHub Issues or Discussi
 
 ---
 
-**The Achievement:** 48 React concepts. 48 unforgettable stories. One complete curriculum. From Frankenstein's uncontrolled components to Neo's dependency arrays—every concept has its perfect cinematic metaphor.
-
-**Your Turn:** Explore all 48 modules and master React through the stories you love. 🎬✨
-
----
-
-*"The first rule of React development is you do talk about React development."* - Tyler Durden, probably
+**Learn React through the stories you love.** 🎬✨

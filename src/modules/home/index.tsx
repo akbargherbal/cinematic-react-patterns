@@ -66,26 +66,34 @@ export default function Home() {
                 <module.icon size={120} />
               </div>
 
-              {/* Content */}
               <div className="relative z-10">
-                <module.icon
-                  className={`${module.colorClass} mb-4 transition-transform group-hover:scale-110`}
-                  size={48}
-                />
+                {/* SECTION 1: Icon (left) + Concept (right) */}
+                <div className="mb-4 flex items-center gap-4">
+                  {/* Icon (Left) */}
+                  <module.icon
+                    className={`${module.colorClass} transition-transform group-hover:scale-110 flex-shrink-0`}
+                    size={32}
+                  />
+                  {/* Concept (Right) - The core learning topic */}
+                  <p className="text-sm font-semibold uppercase tracking-wider text-zinc-400">
+                    {module.concept}
+                  </p>
+                </div>
 
-                <h3 className="mb-2 text-2xl font-bold transition-colors group-hover:text-white">
-                  {module.title}
-                </h3>
+                {/* Separator */}
+                <div className="border-t border-zinc-800 pt-4" />
 
-                <p className="mb-4 text-sm italic text-zinc-500">
-                  {module.subtitle}
-                </p>
+                {/* SECTION 2: Fiction Work Details (Title + Subtitle) */}
+                <div className="mt-4">
+                  {/* Title (Largest text) */}
+                  <h3 className="mb-1 text-3xl font-bold leading-snug transition-colors group-hover:text-white">
+                    {module.title}
+                  </h3>
 
-                <div className="border-t border-zinc-800 pt-4">
-                  <span className="font-mono text-xs uppercase tracking-widest text-zinc-600">
-                    Learn
-                  </span>
-                  <p className="mt-1 text-sm text-zinc-400">{module.concept}</p>
+                  {/* Subtitle/Metadata */}
+                  <p className="text-sm italic text-zinc-500">
+                    {module.subtitle}
+                  </p>
                 </div>
               </div>
 

@@ -170,7 +170,7 @@ React.createElement(
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-300 p-4 md:p-8 font-mono">
-      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-10">
+      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6">
           <div className="flex items-center justify-between gap-4 md:gap-6 mb-2 flex-wrap">
             <div className="flex items-center gap-3">

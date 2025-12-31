@@ -192,7 +192,7 @@ createRoot(document.getElementById('root')).render(
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-950 via-blue-950/40 to-slate-950 text-slate-300 font-sans">
       {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-10">
+      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm top-0 z-10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4">
           <div className="flex items-center justify-between gap-4 flex-wrap mb-2">
             <div className="flex items-center gap-3">
