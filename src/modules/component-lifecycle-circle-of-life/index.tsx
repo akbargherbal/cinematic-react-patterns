@@ -1,5 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import { Crown, Sun, Moon, CloudRain, AlertCircle, CheckCircle, RefreshCw } from "lucide-react";
+import {
+  Crown,
+  Sun,
+  Moon,
+  CloudRain,
+  AlertCircle,
+  CheckCircle,
+  RefreshCw,
+} from "lucide-react";
 import { CodeBlock } from "@/components/common/CodeBlock";
 
 interface Chapter {
@@ -14,7 +22,9 @@ export default function ComponentLifecycleCircleOfLife(): JSX.Element {
   const [leakyIntervals, setLeakyIntervals] = useState<number>(0);
   const [activeCleanup, setActiveCleanup] = useState<boolean>(false);
   const [componentCount, setComponentCount] = useState<number>(0);
-  const [kingdomState, setKingdomState] = useState<"healthy" | "decaying">("healthy");
+  const [kingdomState, setKingdomState] = useState<"healthy" | "decaying">(
+    "healthy",
+  );
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
   const leakyIntervalsRef = useRef<Set<NodeJS.Timeout>>(new Set());
 
@@ -31,7 +41,7 @@ export default function ComponentLifecycleCircleOfLife(): JSX.Element {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
       }
-      leakyIntervalsRef.current.forEach(interval => clearInterval(interval));
+      leakyIntervalsRef.current.forEach((interval) => clearInterval(interval));
       leakyIntervalsRef.current.clear();
     };
   }, []);
@@ -39,29 +49,34 @@ export default function ComponentLifecycleCircleOfLife(): JSX.Element {
   const chapters: Chapter[] = [
     {
       title: "The Circle of Life",
-      content: "The sun breaks over the savanna, casting everything in warm gold. At Pride Rock, Rafiki presents newborn Simba to the kingdom—this is component mounting. The component is now live and visible in the DOM. Mufasa explains the Circle of Life: 'A king's time as ruler rises and falls like the sun.' This is the fundamental pattern: mount, update, unmount. The Circle of Life isn't a suggestion; it's the law of the render cycle.",
-      atmosphere: "majestic, foundational, orderly"
+      content:
+        "The sun breaks over the savanna, casting everything in warm gold. At Pride Rock, Rafiki presents newborn Simba to the kingdom—this is component mounting. The component is now live and visible in the DOM. Mufasa explains the Circle of Life: 'A king's time as ruler rises and falls like the sun.' This is the fundamental pattern: mount, update, unmount. The Circle of Life isn't a suggestion; it's the law of the render cycle.",
+      atmosphere: "majestic, foundational, orderly",
     },
     {
       title: "The Hakuna Matata Problem",
-      content: "Simba lives carefree in the jungle with Timon and Pumbaa—'Hakuna Matata.' This is a component that has mounted but ignores all props and state updates. Nala arrives with urgent news: the Pride Lands are devastated under Scar's rule. This is a critical prop change demanding re-render. Simba refuses: 'I can't go back.' The component actively rejects updates, leaving the application broken. 'Hakuna Matata' just means 'no cleanup functions'—and the consequences are piling up.",
-      atmosphere: "irresponsible, decaying, tense"
+      content:
+        "Simba lives carefree in the jungle with Timon and Pumbaa—'Hakuna Matata.' This is a component that has mounted but ignores all props and state updates. Nala arrives with urgent news: the Pride Lands are devastated under Scar's rule. This is a critical prop change demanding re-render. Simba refuses: 'I can't go back.' The component actively rejects updates, leaving the application broken. 'Hakuna Matata' just means 'no cleanup functions'—and the consequences are piling up.",
+      atmosphere: "irresponsible, decaying, tense",
     },
     {
       title: "Remember Who You Are",
-      content: "Simba stares at his reflection, lost. Rafiki guides him: 'Look harder.' This is debugging, inspecting the component's true identity. Mufasa's ghost appears in storm clouds: 'Remember who you are. You must take your place in the Circle of Life.' This is the useEffect hook—a directive to act based on your dependencies. The component finally understands its purpose. Remember who you are: a component with an effect.",
-      atmosphere: "mysterious, epic, revelatory"
+      content:
+        "Simba stares at his reflection, lost. Rafiki guides him: 'Look harder.' This is debugging, inspecting the component's true identity. Mufasa's ghost appears in storm clouds: 'Remember who you are. You must take your place in the Circle of Life.' This is the useEffect hook—a directive to act based on your dependencies. The component finally understands its purpose. Remember who you are: a component with an effect.",
+      atmosphere: "mysterious, epic, revelatory",
     },
     {
       title: "The Two Kingdoms",
-      content: "APPROACH A: The Kingdom of Ignored Updates. The Pride Lands are grey and barren. Hyenas (memory leaks) laugh as they fight over scraps. The application is broken, slow, and dying. This is the UI of 'Hakuna Matata'—no cleanup, no updates. APPROACH B: The Kingdom of the Lifecycle. After the fight, cleansing rain falls—the useEffect cleanup function. The land transforms to vibrant green. The component accepted props, updated state, and ran cleanup. The UI is restored, healthy, and performant. One king's rule rises and falls like the sun. One component mounts, updates, and unmounts.",
-      atmosphere: "reflective, comparative, analytical"
+      content:
+        "APPROACH A: The Kingdom of Ignored Updates. The Pride Lands are grey and barren. Hyenas (memory leaks) laugh as they fight over scraps. The application is broken, slow, and dying. This is the UI of 'Hakuna Matata'—no cleanup, no updates. APPROACH B: The Kingdom of the Lifecycle. After the fight, cleansing rain falls—the useEffect cleanup function. The land transforms to vibrant green. The component accepted props, updated state, and ran cleanup. The UI is restored, healthy, and performant. One king's rule rises and falls like the sun. One component mounts, updates, and unmounts.",
+      atmosphere: "reflective, comparative, analytical",
     },
     {
       title: "The Cycle is Complete",
-      content: "The sun rises again. Rafiki presents Simba's cub on Pride Rock—a new component mounting. The scene mirrors the opening, demonstrating the reusable lifecycle pattern. The Pride Lands thrive in perfect balance. The chaos of Scar's reign is a lesson learned. By understanding and respecting the three phases—mounting, updating, and unmounting—the application doesn't just run; it thrives. The cycle is complete. The state is in balance.",
-      atmosphere: "celebratory, confident, complete"
-    }
+      content:
+        "The sun rises again. Rafiki presents Simba's cub on Pride Rock—a new component mounting. The scene mirrors the opening, demonstrating the reusable lifecycle pattern. The Pride Lands thrive in perfect balance. The chaos of Scar's reign is a lesson learned. By understanding and respecting the three phases—mounting, updating, and unmounting—the application doesn't just run; it thrives. The cycle is complete. The state is in balance.",
+      atmosphere: "celebratory, confident, complete",
+    },
   ];
 
   // Code examples
@@ -198,7 +213,7 @@ function CircleOfLifeComponent() {
   // Demo functions
   const triggerMemoryLeak = () => {
     const interval = setInterval(() => {
-      setLeakyIntervals(prev => {
+      setLeakyIntervals((prev) => {
         const newCount = prev + 1;
         if (newCount % 10 === 0) {
           setKingdomState("decaying");
@@ -210,7 +225,7 @@ function CircleOfLifeComponent() {
   };
 
   const resetLeaks = () => {
-    leakyIntervalsRef.current.forEach(interval => clearInterval(interval));
+    leakyIntervalsRef.current.forEach((interval) => clearInterval(interval));
     leakyIntervalsRef.current.clear();
     setLeakyIntervals(0);
     setKingdomState("healthy");
@@ -220,7 +235,7 @@ function CircleOfLifeComponent() {
     setMounted(!mounted);
     if (!mounted) {
       intervalRef.current = setInterval(() => {
-        setComponentCount(c => c + 1);
+        setComponentCount((c) => c + 1);
       }, 1000);
     } else if (intervalRef.current) {
       clearInterval(intervalRef.current);
@@ -232,131 +247,104 @@ function CircleOfLifeComponent() {
   const progress = ((chapter + 1) / chapters.length) * 100;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-950 via-stone-900 to-amber-950 text-amber-100 font-serif p-4 md:p-8">
+    <div className="min-h-screen bg-gradient-to-br from-amber-950 via-stone-900 to-amber-950 p-4 font-serif text-amber-100 md:p-8">
       {/* Header */}
-      <header className="border-b border-amber-800/50 bg-amber-950/40 backdrop-blur-sm mb-8 md:mb-12">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6">
-          <div className="flex items-center justify-between gap-4 md:gap-6 mb-2 flex-wrap">
+      <header className="mb-8 border-b border-amber-800/50 bg-amber-950/40 backdrop-blur-sm md:mb-12">
+        <div className="mx-auto max-w-7xl px-4 py-4 md:px-6 md:py-6">
+          <div className="mb-2 flex flex-wrap items-center justify-between gap-4 md:gap-6">
             <div className="flex items-center gap-3">
-              <Crown className="text-amber-400 w-6 h-6 md:w-8 md:h-8" />
-              <h1 className="text-xl md:text-3xl font-bold tracking-tight">The Lion King</h1>
+              <Crown className="h-6 w-6 text-amber-400 md:h-8 md:w-8" />
+              <h1 className="text-xl font-bold tracking-tight md:text-3xl">
+                The Lion King
+              </h1>
             </div>
-            <p className="text-xs md:text-base text-amber-300/70">
+            <p className="text-xs text-amber-300/70 md:text-base">
               Simba • Pride Lands • 1994
             </p>
           </div>
-          <p className="text-base md:text-lg text-amber-400 font-medium">
+          <p className="text-base font-medium text-amber-400 md:text-lg">
             Component Lifecycle: Mount, Update, Unmount
           </p>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
+      <main className="mx-auto max-w-7xl space-y-4">
+        <div className="grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-12">
           {/* Left Column: Narrative */}
-          <div className="lg:col-span-7 space-y-6">
-            <div className="bg-amber-950/30 border border-amber-800/30 rounded-xl p-6 md:p-8 backdrop-blur-sm">
-              <div className="flex items-center gap-3 mb-4">
-                <Sun className="text-amber-400 w-5 h-5" />
-                <h2 className="text-2xl md:text-3xl font-bold text-amber-200">{currentChapter.title}</h2>
+          <div className="space-y-6 lg:col-span-4">
+            <div className="rounded-xl border border-amber-800/30 bg-amber-950/30 p-6 backdrop-blur-sm md:p-8">
+              <div className="mb-4 flex items-center gap-3">
+                <Sun className="h-5 w-5 text-amber-400" />
+                <h2 className="text-2xl font-bold text-amber-200 md:text-3xl">
+                  {currentChapter.title}
+                </h2>
               </div>
-              
+
               <div className="prose prose-invert prose-lg max-w-none">
-                <p className="leading-relaxed text-amber-100/90 mb-6">{currentChapter.content}</p>
-                
+                <p className="mb-6 leading-relaxed text-amber-100/90">
+                  {currentChapter.content}
+                </p>
+
                 <div className="flex items-center gap-2 text-sm text-amber-400/70">
-                  <CloudRain className="w-4 h-4" />
+                  <CloudRain className="h-4 w-4" />
                   <span>Atmosphere: {currentChapter.atmosphere}</span>
                 </div>
               </div>
 
               {/* Progress Bar */}
               <div className="mt-8">
-                <div className="flex justify-between text-sm text-amber-300/70 mb-2">
-                  <span>Chapter {chapter + 1} of {chapters.length}</span>
+                <div className="mb-2 flex justify-between text-sm text-amber-300/70">
+                  <span>
+                    Chapter {chapter + 1} of {chapters.length}
+                  </span>
                   <span>{Math.round(progress)}%</span>
                 </div>
-                <div className="h-2 bg-amber-900/50 rounded-full overflow-hidden">
-                  <div 
+                <div className="h-2 overflow-hidden rounded-full bg-amber-900/50">
+                  <div
                     className="h-full bg-gradient-to-r from-amber-600 to-amber-400 transition-all duration-500"
                     style={{ width: `${progress}%` }}
                   />
                 </div>
               </div>
             </div>
-
-            {/* Navigation */}
-            <nav className="flex justify-between items-center">
-              <button
-                onClick={() => setChapter(Math.max(0, chapter - 1))}
-                disabled={chapter === 0}
-                className="px-4 md:px-6 py-3 bg-amber-800 text-amber-100 rounded-lg hover:bg-amber-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
-              >
-                <span className="rotate-180">→</span>
-                Previous
-              </button>
-              
-              <div className="flex items-center gap-4">
-                <span className="text-sm text-amber-400/60 font-mono tabular-nums">
-                  {chapter + 1}/{chapters.length}
-                </span>
-                <div className="flex gap-2">
-                  {chapters.map((_, idx) => (
-                    <button
-                      key={idx}
-                      onClick={() => setChapter(idx)}
-                      className={`w-2 h-2 rounded-full transition-all ${idx === chapter ? 'bg-amber-400 scale-125' : 'bg-amber-800/50 hover:bg-amber-700'}`}
-                      aria-label={`Go to chapter ${idx + 1}`}
-                    />
-                  ))}
-                </div>
-              </div>
-
-              <button
-                onClick={() => setChapter(Math.min(chapters.length - 1, chapter + 1))}
-                disabled={chapter === chapters.length - 1}
-                className="px-4 md:px-6 py-3 bg-amber-800 text-amber-100 rounded-lg hover:bg-amber-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
-              >
-                Next
-                <span>→</span>
-              </button>
-            </nav>
           </div>
 
           {/* Right Column: Interactive Demos */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="space-y-6 lg:col-span-8">
             {/* Chapter 1: Mounting Demo */}
             {chapter === 0 && (
-              <div className="bg-stone-900/50 border border-amber-700/30 rounded-xl p-6">
-                <h3 className="text-lg font-semibold text-amber-300 mb-4 flex items-center gap-2">
-                  <Sun className="w-5 h-5" />
+              <div className="rounded-xl border border-amber-700/30 bg-stone-900/50 p-6">
+                <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-amber-300">
+                  <Sun className="h-5 w-5" />
                   Mounting Ceremony
                 </h3>
-                
-                <div className="space-y-4 mb-6">
+
+                <div className="mb-6 space-y-4">
                   <div className="flex items-center justify-center gap-4">
                     <button
                       onClick={() => setMounted(true)}
                       disabled={mounted}
-                      className="px-4 py-2 bg-amber-700 text-white rounded hover:bg-amber-600 disabled:opacity-50"
+                      className="rounded bg-amber-700 px-4 py-2 text-white hover:bg-amber-600 disabled:opacity-50"
                     >
                       Present Simba (Mount)
                     </button>
                     <button
                       onClick={() => setMounted(false)}
                       disabled={!mounted}
-                      className="px-4 py-2 bg-stone-700 text-white rounded hover:bg-stone-600 disabled:opacity-50"
+                      className="rounded bg-stone-700 px-4 py-2 text-white hover:bg-stone-600 disabled:opacity-50"
                     >
                       Hide (Unmount)
                     </button>
                   </div>
-                  
-                  <div className="text-center p-4 border border-amber-800/50 rounded-lg">
+
+                  <div className="rounded-lg border border-amber-800/50 p-4 text-center">
                     {mounted ? (
                       <div className="flex items-center justify-center gap-3 text-amber-300">
-                        <Crown className="w-6 h-6" />
-                        <span className="text-xl">👑 Simba is King of the Pride Lands 👑</span>
-                        <Crown className="w-6 h-6" />
+                        <Crown className="h-6 w-6" />
+                        <span className="text-xl">
+                          👑 Simba is King of the Pride Lands 👑
+                        </span>
+                        <Crown className="h-6 w-6" />
                       </div>
                     ) : (
                       <div className="text-stone-500 italic">
@@ -377,43 +365,55 @@ function CircleOfLifeComponent() {
 
             {/* Chapter 2: Memory Leak Demo */}
             {chapter === 1 && (
-              <div className="bg-stone-900/50 border border-red-700/40 rounded-xl p-6">
-                <h3 className="text-lg font-semibold text-red-300 mb-4 flex items-center gap-2">
-                  <AlertCircle className="w-5 h-5" />
+              <div className="rounded-xl border border-red-700/40 bg-stone-900/50 p-6">
+                <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-red-300">
+                  <AlertCircle className="h-5 w-5" />
                   Hakuna Matata Memory Leak
                 </h3>
-                
-                <div className="space-y-4 mb-6">
+
+                <div className="mb-6 space-y-4">
                   <div className="grid grid-cols-2 gap-4">
                     <button
                       onClick={triggerMemoryLeak}
-                      className="px-4 py-3 bg-red-700 text-white rounded hover:bg-red-600"
+                      className="rounded bg-red-700 px-4 py-3 text-white hover:bg-red-600"
                     >
                       🐛 Create Leaky Interval
                     </button>
                     <button
                       onClick={resetLeaks}
-                      className="px-4 py-3 bg-amber-700 text-white rounded hover:bg-amber-600"
+                      className="rounded bg-amber-700 px-4 py-3 text-white hover:bg-amber-600"
                     >
                       🔄 Reset & Cleanup
                     </button>
                   </div>
-                  
+
                   <div className="space-y-3">
-                    <div className="flex justify-between items-center p-3 bg-red-950/30 border border-red-800/30 rounded">
+                    <div className="flex items-center justify-between rounded border border-red-800/30 bg-red-950/30 p-3">
                       <span className="text-red-300">Leaky Intervals:</span>
-                      <span className="text-2xl font-mono tabular-nums text-red-400">{leakyIntervals}</span>
+                      <span className="font-mono text-2xl text-red-400 tabular-nums">
+                        {leakyIntervals}
+                      </span>
                     </div>
-                    
-                    <div className={`p-3 border rounded transition-all ${kingdomState === 'decaying' ? 'border-red-500 bg-red-950/20' : 'border-amber-800/30 bg-amber-950/10'}`}>
+
+                    <div
+                      className={`rounded border p-3 transition-all ${kingdomState === "decaying" ? "border-red-500 bg-red-950/20" : "border-amber-800/30 bg-amber-950/10"}`}
+                    >
                       <div className="flex items-center gap-2">
-                        {kingdomState === 'decaying' ? (
-                          <AlertCircle className="w-5 h-5 text-red-400" />
+                        {kingdomState === "decaying" ? (
+                          <AlertCircle className="h-5 w-5 text-red-400" />
                         ) : (
-                          <CheckCircle className="w-5 h-5 text-amber-400" />
+                          <CheckCircle className="h-5 w-5 text-amber-400" />
                         )}
-                        <span className={kingdomState === 'decaying' ? 'text-red-300' : 'text-amber-300'}>
-                          {kingdomState === 'decaying' ? '⚠️ Pride Lands decaying!' : '✓ Kingdom healthy'}
+                        <span
+                          className={
+                            kingdomState === "decaying"
+                              ? "text-red-300"
+                              : "text-amber-300"
+                          }
+                        >
+                          {kingdomState === "decaying"
+                            ? "⚠️ Pride Lands decaying!"
+                            : "✓ Kingdom healthy"}
                         </span>
                       </div>
                     </div>
@@ -427,11 +427,13 @@ function CircleOfLifeComponent() {
                     title="// ❌ Missing Cleanup = Memory Leak"
                     defaultExpanded={true}
                   />
-                  
-                  <div className="text-sm text-red-300/70 p-3 bg-red-950/20 border border-red-800/30 rounded">
+
+                  <div className="rounded border border-red-800/30 bg-red-950/20 p-3 text-sm text-red-300/70">
                     <p className="flex items-start gap-2">
-                      <AlertCircle className="w-4 h-4 mt-0.5 flex-shrink-0" />
-                      Each interval continues running even after component unmounts. At {leakyIntervals} intervals, performance degrades.
+                      <AlertCircle className="mt-0.5 h-4 w-4 flex-shrink-0" />
+                      Each interval continues running even after component
+                      unmounts. At {leakyIntervals} intervals, performance
+                      degrades.
                     </p>
                   </div>
                 </div>
@@ -440,43 +442,55 @@ function CircleOfLifeComponent() {
 
             {/* Chapter 3: Cleanup Demo */}
             {chapter === 2 && (
-              <div className="bg-stone-900/50 border border-emerald-700/40 rounded-xl p-6">
-                <h3 className="text-lg font-semibold text-emerald-300 mb-4 flex items-center gap-2">
-                  <CheckCircle className="w-5 h-5" />
+              <div className="rounded-xl border border-emerald-700/40 bg-stone-900/50 p-6">
+                <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-emerald-300">
+                  <CheckCircle className="h-5 w-5" />
                   Remember useEffect with Cleanup
                 </h3>
-                
-                <div className="space-y-4 mb-6">
-                  <div className="flex flex-col sm:flex-row gap-4 items-center justify-center">
+
+                <div className="mb-6 space-y-4">
+                  <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
                     <button
                       onClick={toggleMount}
-                      className={`px-6 py-3 rounded-lg transition-all ${mounted ? 'bg-emerald-700 hover:bg-emerald-600' : 'bg-amber-700 hover:bg-amber-600'}`}
+                      className={`rounded-lg px-6 py-3 transition-all ${mounted ? "bg-emerald-700 hover:bg-emerald-600" : "bg-amber-700 hover:bg-amber-600"}`}
                     >
-                      {mounted ? '👑 Abdicate Throne (Unmount)' : '👑 Accept Responsibility (Mount)'}
+                      {mounted
+                        ? "👑 Abdicate Throne (Unmount)"
+                        : "👑 Accept Responsibility (Mount)"}
                     </button>
-                    
+
                     <button
                       onClick={() => setActiveCleanup(!activeCleanup)}
-                      className="px-4 py-2 bg-stone-700 text-white rounded hover:bg-stone-600"
+                      className="rounded bg-stone-700 px-4 py-2 text-white hover:bg-stone-600"
                     >
-                      {activeCleanup ? 'Show Without Cleanup' : 'Show With Cleanup'}
+                      {activeCleanup
+                        ? "Show Without Cleanup"
+                        : "Show With Cleanup"}
                     </button>
                   </div>
-                  
+
                   <div className="space-y-3">
-                    <div className="flex justify-between items-center p-3 bg-stone-800/30 border border-stone-700/30 rounded">
+                    <div className="flex items-center justify-between rounded border border-stone-700/30 bg-stone-800/30 p-3">
                       <span>Years Ruled:</span>
-                      <span className="text-2xl font-mono tabular-nums text-amber-300">{componentCount}</span>
+                      <span className="font-mono text-2xl text-amber-300 tabular-nums">
+                        {componentCount}
+                      </span>
                     </div>
-                    
-                    <div className="flex items-center gap-3 p-3 bg-emerald-950/20 border border-emerald-800/30 rounded">
+
+                    <div className="flex items-center gap-3 rounded border border-emerald-800/30 bg-emerald-950/20 p-3">
                       {activeCleanup ? (
-                        <CheckCircle className="w-5 h-5 text-emerald-400" />
+                        <CheckCircle className="h-5 w-5 text-emerald-400" />
                       ) : (
-                        <AlertCircle className="w-5 h-5 text-red-400" />
+                        <AlertCircle className="h-5 w-5 text-red-400" />
                       )}
-                      <span className={activeCleanup ? 'text-emerald-300' : 'text-red-300'}>
-                        {activeCleanup ? '✅ Cleanup function active' : '❌ No cleanup (resources leak)'}
+                      <span
+                        className={
+                          activeCleanup ? "text-emerald-300" : "text-red-300"
+                        }
+                      >
+                        {activeCleanup
+                          ? "✅ Cleanup function active"
+                          : "❌ No cleanup (resources leak)"}
                       </span>
                     </div>
                   </div>
@@ -493,53 +507,69 @@ function CircleOfLifeComponent() {
 
             {/* Chapter 4: Comparison Demo */}
             {chapter === 3 && (
-              <div className="bg-stone-900/50 border border-amber-700/40 rounded-xl p-6">
-                <h3 className="text-lg font-semibold text-amber-300 mb-4 flex items-center gap-2">
-                  <RefreshCw className="w-5 h-5" />
+              <div className="rounded-xl border border-amber-700/40 bg-stone-900/50 p-6">
+                <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-amber-300">
+                  <RefreshCw className="h-5 w-5" />
                   Kingdom Comparison
                 </h3>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-6">
+
+                <div className="mb-6 grid grid-cols-1 gap-6 md:grid-cols-2">
                   {/* Broken Kingdom */}
-                  <div className="border border-red-700/40 rounded-lg p-4 bg-red-950/10">
-                    <div className="flex items-center gap-2 mb-3">
-                      <AlertCircle className="w-5 h-5 text-red-400" />
-                      <h4 className="font-semibold text-red-300">Hakuna Matata Kingdom</h4>
+                  <div className="rounded-lg border border-red-700/40 bg-red-950/10 p-4">
+                    <div className="mb-3 flex items-center gap-2">
+                      <AlertCircle className="h-5 w-5 text-red-400" />
+                      <h4 className="font-semibold text-red-300">
+                        Hakuna Matata Kingdom
+                      </h4>
                     </div>
-                    
+
                     <div className="space-y-3">
-                      <div className="h-24 bg-gradient-to-br from-red-950/30 to-stone-900/50 rounded border border-red-800/30 p-3">
-                        <div className="text-red-400 text-sm">No cleanup functions</div>
-                        <div className="text-red-300 text-2xl mt-2 font-mono">{leakyIntervals}</div>
-                        <div className="text-red-400/70 text-xs mt-1">leaking hyenas</div>
+                      <div className="h-24 rounded border border-red-800/30 bg-gradient-to-br from-red-950/30 to-stone-900/50 p-3">
+                        <div className="text-sm text-red-400">
+                          No cleanup functions
+                        </div>
+                        <div className="mt-2 font-mono text-2xl text-red-300">
+                          {leakyIntervals}
+                        </div>
+                        <div className="mt-1 text-xs text-red-400/70">
+                          leaking hyenas
+                        </div>
                       </div>
-                      
+
                       <button
                         onClick={triggerMemoryLeak}
-                        className="w-full px-3 py-2 bg-red-700 text-white rounded text-sm hover:bg-red-600"
+                        className="w-full rounded bg-red-700 px-3 py-2 text-sm text-white hover:bg-red-600"
                       >
                         Add More Hyenas
                       </button>
                     </div>
                   </div>
-                  
+
                   {/* Restored Kingdom */}
-                  <div className="border border-emerald-700/40 rounded-lg p-4 bg-emerald-950/10">
-                    <div className="flex items-center gap-2 mb-3">
-                      <CheckCircle className="w-5 h-5 text-emerald-400" />
-                      <h4 className="font-semibold text-emerald-300">Kingdom Restored</h4>
+                  <div className="rounded-lg border border-emerald-700/40 bg-emerald-950/10 p-4">
+                    <div className="mb-3 flex items-center gap-2">
+                      <CheckCircle className="h-5 w-5 text-emerald-400" />
+                      <h4 className="font-semibold text-emerald-300">
+                        Kingdom Restored
+                      </h4>
                     </div>
-                    
+
                     <div className="space-y-3">
-                      <div className="h-24 bg-gradient-to-br from-emerald-950/30 to-stone-900/50 rounded border border-emerald-800/30 p-3">
-                        <div className="text-emerald-400 text-sm">With cleanup</div>
-                        <div className="text-emerald-300 text-2xl mt-2 font-mono">0</div>
-                        <div className="text-emerald-400/70 text-xs mt-1">managed resources</div>
+                      <div className="h-24 rounded border border-emerald-800/30 bg-gradient-to-br from-emerald-950/30 to-stone-900/50 p-3">
+                        <div className="text-sm text-emerald-400">
+                          With cleanup
+                        </div>
+                        <div className="mt-2 font-mono text-2xl text-emerald-300">
+                          0
+                        </div>
+                        <div className="mt-1 text-xs text-emerald-400/70">
+                          managed resources
+                        </div>
                       </div>
-                      
+
                       <button
                         onClick={resetLeaks}
-                        className="w-full px-3 py-2 bg-emerald-700 text-white rounded text-sm hover:bg-emerald-600"
+                        className="w-full rounded bg-emerald-700 px-3 py-2 text-sm text-white hover:bg-emerald-600"
                       >
                         Restore Kingdom
                       </button>
@@ -558,23 +588,23 @@ function CircleOfLifeComponent() {
 
             {/* Chapter 5: Full Cycle Demo */}
             {chapter === 4 && (
-              <div className="bg-stone-900/50 border border-amber-700/30 rounded-xl p-6">
-                <h3 className="text-lg font-semibold text-amber-300 mb-4 flex items-center gap-2">
-                  <Crown className="w-5 h-5" />
+              <div className="rounded-xl border border-amber-700/30 bg-stone-900/50 p-6">
+                <h3 className="mb-4 flex items-center gap-2 text-lg font-semibold text-amber-300">
+                  <Crown className="h-5 w-5" />
                   The Cycle is Complete
                 </h3>
-                
-                <div className="space-y-4 mb-6">
+
+                <div className="mb-6 space-y-4">
                   <div className="grid grid-cols-3 gap-3">
                     <button
                       onClick={() => setMounted(true)}
-                      className={`px-3 py-2 rounded ${mounted ? 'bg-amber-700' : 'bg-stone-700 hover:bg-stone-600'}`}
+                      className={`rounded px-3 py-2 ${mounted ? "bg-amber-700" : "bg-stone-700 hover:bg-stone-600"}`}
                     >
                       🌅 Mount
                     </button>
                     <button
-                      onClick={() => setComponentCount(c => c + 1)}
-                      className="px-3 py-2 bg-amber-700 rounded hover:bg-amber-600"
+                      onClick={() => setComponentCount((c) => c + 1)}
+                      className="rounded bg-amber-700 px-3 py-2 hover:bg-amber-600"
                     >
                       🔄 Update
                     </button>
@@ -583,30 +613,38 @@ function CircleOfLifeComponent() {
                         setMounted(false);
                         setComponentCount(0);
                       }}
-                      className="px-3 py-2 bg-stone-700 rounded hover:bg-stone-600"
+                      className="rounded bg-stone-700 px-3 py-2 hover:bg-stone-600"
                     >
                       🌄 Unmount
                     </button>
                   </div>
-                  
-                  <div className="p-4 border border-amber-800/30 rounded-lg bg-amber-950/10">
+
+                  <div className="rounded-lg border border-amber-800/30 bg-amber-950/10 p-4">
                     <div className="space-y-3">
                       <div className="flex justify-between">
-                        <span className="text-amber-300/70">Component Status:</span>
-                        <span className={`font-medium ${mounted ? 'text-amber-300' : 'text-stone-500'}`}>
-                          {mounted ? 'Mounted at Pride Rock' : 'Unmounted'}
+                        <span className="text-amber-300/70">
+                          Component Status:
+                        </span>
+                        <span
+                          className={`font-medium ${mounted ? "text-amber-300" : "text-stone-500"}`}
+                        >
+                          {mounted ? "Mounted at Pride Rock" : "Unmounted"}
                         </span>
                       </div>
-                      
+
                       <div className="flex justify-between">
                         <span className="text-amber-300/70">Update Count:</span>
-                        <span className="text-amber-300 font-mono tabular-nums">{componentCount}</span>
+                        <span className="font-mono text-amber-300 tabular-nums">
+                          {componentCount}
+                        </span>
                       </div>
-                      
+
                       <div className="flex justify-between">
-                        <span className="text-amber-300/70">Resources Cleaned:</span>
-                        <span className="text-emerald-300 font-medium">
-                          {mounted ? 'Active' : '✓ All cleaned up'}
+                        <span className="text-amber-300/70">
+                          Resources Cleaned:
+                        </span>
+                        <span className="font-medium text-emerald-300">
+                          {mounted ? "Active" : "✓ All cleaned up"}
                         </span>
                       </div>
                     </div>
@@ -619,26 +657,70 @@ function CircleOfLifeComponent() {
                   title="// ✅ Complete Lifecycle Management"
                   defaultExpanded={true}
                 />
-                
-                <div className="mt-4 p-3 bg-emerald-950/20 border border-emerald-800/30 rounded text-sm text-emerald-300/80">
-                  The cycle is complete. The component properly handles mounting, updating with cleanup, and unmounting. The application state remains balanced.
+
+                <div className="mt-4 rounded border border-emerald-800/30 bg-emerald-950/20 p-3 text-sm text-emerald-300/80">
+                  The cycle is complete. The component properly handles
+                  mounting, updating with cleanup, and unmounting. The
+                  application state remains balanced.
                 </div>
               </div>
             )}
           </div>
         </div>
 
+        {/* Navigation */}
+        <nav className="flex items-center justify-between">
+          <button
+            onClick={() => setChapter(Math.max(0, chapter - 1))}
+            disabled={chapter === 0}
+            className="flex items-center gap-2 rounded-lg bg-amber-800 px-4 py-3 text-amber-100 transition-colors hover:bg-amber-700 disabled:cursor-not-allowed disabled:opacity-30 md:px-6"
+          >
+            <span className="rotate-180">→</span>
+            Previous
+          </button>
+
+          <div className="flex items-center gap-4">
+            <span className="font-mono text-sm text-amber-400/60 tabular-nums">
+              {chapter + 1}/{chapters.length}
+            </span>
+            <div className="flex gap-2">
+              {chapters.map((_, idx) => (
+                <button
+                  key={idx}
+                  onClick={() => setChapter(idx)}
+                  className={`h-2 w-2 rounded-full transition-all ${idx === chapter ? "scale-125 bg-amber-400" : "bg-amber-800/50 hover:bg-amber-700"}`}
+                  aria-label={`Go to chapter ${idx + 1}`}
+                />
+              ))}
+            </div>
+          </div>
+
+          <button
+            onClick={() =>
+              setChapter(Math.min(chapters.length - 1, chapter + 1))
+            }
+            disabled={chapter === chapters.length - 1}
+            className="flex items-center gap-2 rounded-lg bg-amber-800 px-4 py-3 text-amber-100 transition-colors hover:bg-amber-700 disabled:cursor-not-allowed disabled:opacity-30 md:px-6"
+          >
+            Next
+            <span>→</span>
+          </button>
+        </nav>
+
         {/* Safety Reset - Always Visible */}
-        <div className="mt-8 p-4 bg-stone-900/30 border border-stone-700/30 rounded-lg">
-          <div className="flex flex-col sm:flex-row items-center justify-between gap-4">
+        <div className="rounded-lg border border-stone-700/30 bg-stone-900/30 p-4">
+          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
             <div className="text-sm text-amber-300/70">
               <span className="flex items-center gap-2">
-                <AlertCircle className="w-4 h-4" />
+                <AlertCircle className="h-4 w-4" />
                 Safety Controls
               </span>
-              <p className="mt-1 text-xs">Circuit breaker active: {leakyIntervals > 50 ? '⚠️ Threshold reached' : '✓ Normal'}</p>
+              <p className="mt-1 text-xs">
+                Circuit breaker active:{" "}
+                {leakyIntervals > 50 ? "⚠️ Threshold reached" : "✓ Normal"}
+              </p>
             </div>
-            
+
             <div className="flex gap-3">
               <button
                 onClick={() => {
@@ -647,14 +729,14 @@ function CircleOfLifeComponent() {
                   setComponentCount(0);
                   setActiveCleanup(false);
                 }}
-                className="px-4 py-2 bg-stone-700 text-white rounded hover:bg-stone-600 text-sm"
+                className="rounded bg-stone-700 px-4 py-2 text-sm text-white hover:bg-stone-600"
               >
                 Reset All Demos
               </button>
-              
+
               <button
                 onClick={() => setChapter(0)}
-                className="px-4 py-2 bg-amber-800 text-amber-100 rounded hover:bg-amber-700 text-sm"
+                className="rounded bg-amber-800 px-4 py-2 text-sm text-amber-100 hover:bg-amber-700"
               >
                 Restart from Chapter 1
               </button>

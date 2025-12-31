@@ -502,7 +502,7 @@ function CourtVerdict() {
               </div>
             </div>
 
-            <div className="grid md:grid-cols-2 gap-6">
+            <div className="space-y-4">
               <CodeBlock
                 code={`// Using ternary operator
 function AliceView() {
@@ -539,7 +539,7 @@ function WonderlandScene() {
       case 3: // Chapter 4: Tea Party Comparison
         return (
           <div className="space-y-8">
-            <div className="grid md:grid-cols-2 gap-8">
+            <div className="space-y-4">
               {/* Mad Hatter's Table */}
               <div className="bg-rose-950/20 border border-rose-500/30 rounded-lg p-6">
                 <div className="flex items-center justify-between mb-6">
@@ -632,7 +632,7 @@ function WonderlandScene() {
               
               <div className="grid md:grid-cols-3 gap-4 mb-6">
                 {teaPartyGuests.map(guest => (
-                  <div key={guest.id} className="flex items-center justify-between p-4 bg-slate-800/50 rounded">
+                  <div key={guest.id} className="p-4 bg-slate-800/50 rounded flex flex-col items-center gap-2">
                     <span className="font-medium">{guest.name}</span>
                     <button
                       onClick={() => {
