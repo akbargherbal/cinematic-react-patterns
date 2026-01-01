@@ -2,6 +2,8 @@ import { useState, useReducer, useEffect, useCallback } from "react";
 import { Brain, Zap, AlertTriangle, CheckCircle, ChevronLeft, ChevronRight, RefreshCw, Eye, Code, Activity } from "lucide-react";
 import { CodeBlock } from "@/components/common/CodeBlock";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
+const themeColor = 'cyan'; // Try changing to 'amber', 'purple', etc.
+import ModuleHeader from '@/components/common/ModuleHeader';
 
 // ==================== TYPES ====================
 interface CrimeVision {
@@ -212,26 +214,14 @@ dispatch(action);
   
   return (
     <div className="min-h-screen bg-slate-950 text-slate-300 font-sans">
-      {/* HEADER */}
-      <header className="border-b border-cyan-800/50 bg-slate-950/90 backdrop-blur-sm top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-6">
-          {/* First line: Title + Metadata */}
-          <div className="flex items-center justify-between gap-4 flex-wrap">
-            <div className="flex items-center gap-3">
-              <Brain className="text-cyan-400 w-8 h-8" />
-              <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Minority Report</h1>
-            </div>
-            <p className="text-sm md:text-base text-slate-400 font-medium">
-              PreCrime • John Anderton • 2002
-            </p>
-          </div>
-          
-          {/* Second line: Concept */}
-          <p className="text-base md:text-lg text-cyan-400 font-medium mt-2">
-            useReducer for Complex State Management
-          </p>
-        </div>
-      </header>
+      <ModuleHeader
+        icon={Brain}
+        title="Minority Report"
+        subtitle="PreCrime • John Anderton • 2002"
+        concept="useReducer for Complex State Management"
+        themeColor="cyan"
+      />
+
       
       {/* MAIN CONTENT - Two Column Layout */}
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">

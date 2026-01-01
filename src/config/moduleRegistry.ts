@@ -1,6 +1,11 @@
 import React from "react";
 import modulesJSONData from './moduleRegistry.json'; // ← Changed this line
 
+export interface ThemeConfig {
+  /** Primary theme color from the safelist: cyan, amber, purple, emerald, red, blue */
+  primaryColor: 'cyan' | 'amber' | 'purple' | 'emerald' | 'red' | 'blue';
+}
+
 import {
   Brain,
   Code,
@@ -56,6 +61,9 @@ interface RawModuleData {
     fontClass?: string;
   };
   enabled: boolean;
+    // NEW: Theme configuration for shared components
+  themeConfig?: ThemeConfig;  // Optional for backward compatibility
+
 }
 
 export interface ModuleConfig {
@@ -74,6 +82,8 @@ export interface ModuleConfig {
     fontClass?: string;
   };
   enabled: boolean;
+    // NEW: Theme configuration for shared components
+  themeConfig?: ThemeConfig;
 }
 
 // Icon mapping - maps JSON string names to actual Lucide components
