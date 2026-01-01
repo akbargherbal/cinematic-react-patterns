@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Minority Report - useReducer</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            safelist: [
+                // Cyan theme colors (Minority Report)
+                'text-cyan-500', 'text-cyan-400', 'text-cyan-300', 'text-cyan-200', 'text-cyan-100',
+                'bg-cyan-500', 'bg-cyan-600', 'bg-cyan-700', 'bg-cyan-900', 'bg-cyan-950',
+                'border-cyan-500', 'border-cyan-700',
+                'hover:bg-cyan-700',
+                // Amber theme colors (Sherlock)
+                'text-amber-500', 'text-amber-400', 'text-amber-300', 'text-amber-200', 'text-amber-100',
+                'bg-amber-500', 'bg-amber-900', 'bg-amber-950',
+                'border-amber-500', 'border-amber-700',
+                'hover:bg-amber-900',
+            ]
+        }
+    </script>
+    <style>
+        /* Mark standardized components with subtle visual indicator (for demo only) */
+        .standardized-component {
+            position: relative;
+        }
+        .standardized-component::before {
+            content: '📦 STANDARDIZED';
+            position: absolute;
+            top: -1.5rem;
+            left: 0;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #10b981;
+            background: #064e3b;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            opacity: 0.7;
+            font-family: monospace;
+            z-index: 50;
+        }
+        
+        .module-specific {
+            position: relative;
+        }
+        .module-specific::before {
+            content: '🎨 MODULE-SPECIFIC';
+            position: absolute;
+            top: -1.5rem;
+            left: 0;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #f59e0b;
+            background: #78350f;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            opacity: 0.7;
+            font-family: monospace;
+            z-index: 50;
+        }
+    </style>
+</head>
+<body class="bg-slate-950 text-slate-300 font-sans">
+    <div class="min-h-screen bg-slate-950 text-slate-300">
+        
+        <!-- ==================== STANDARDIZED: ModuleHeader ==================== -->
+        <header class="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm standardized-component" style="margin-top: 2rem;">
+            <div class="max-w-7xl mx-auto px-4 sm:px-6 py-6">
+                <!-- Line 1: Icon + Title (left) | Metadata (right) -->
+                <div class="flex items-center justify-between gap-4 mb-2 flex-wrap">
+                    <div class="flex items-center gap-3">
+                        <!-- Brain icon for Minority Report -->
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="text-cyan-500 w-7 h-7 sm:w-8 sm:h-8">
+                            <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"></path>
+                            <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"></path>
+                            <path d="M15 13a4.5 4.5 0 0 1-3-4 4.5 4.5 0 0 1-3 4"></path>
+                            <path d="M17.599 6.5a3 3 0 0 0 .399-1.375"></path>
+                            <path d="M6.003 5.125A3 3 0 0 0 6.401 6.5"></path>
+                            <path d="M3.477 10.896a4 4 0 0 1 .585-.396"></path>
+                            <path d="M19.938 10.5a4 4 0 0 1 .585.396"></path>
+                            <path d="M6 18a4 4 0 0 1-1.967-.516"></path>
+                            <path d="M19.967 17.484A4 4 0 0 1 18 18"></path>
+                        </svg>
+                        <h1 class="text-2xl sm:text-3xl font-bold tracking-tight">Minority Report</h1>
+                    </div>
+                    <p class="text-sm sm:text-base text-slate-400 whitespace-nowrap">
+                        Sci-Fi Film • PreCrime • 2002
+                    </p>
+                </div>
+                
+                <!-- Line 2: React concept -->
+                <p class="text-base sm:text-lg text-cyan-400 font-medium">
+                    useReducer Hook: Centralized State Management
+                </p>
+            </div>
+        </header>
+
+        <!-- ==================== STANDARDIZED: ModuleLayout ==================== -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-6 py-8 standardized-component" style="margin-top: 2rem;">
+            <div class="lg:grid lg:grid-cols-12 lg:gap-8">
+                
+                <!-- LEFT COLUMN (8) - Main Content -->
+                <div class="lg:col-span-8">
+                    
+                    <!-- ==================== STANDARDIZED: ChapterContent ==================== -->
+                    <div class="prose prose-invert prose-lg max-w-none mb-8 sm:mb-12 standardized-component" style="margin-top: 2rem;">
+                        <h2 class="text-2xl sm:text-3xl font-bold mb-4 text-cyan-100">
+                            The Temple of State
+                        </h2>
+                        <div class="text-slate-300 leading-relaxed space-y-4">
+                            <p>The air in the Temple is cool and still, thick with the scent of ozone and sterile fluids. It hums with a low, resonant frequency that you feel in your teeth. This is the heart of PreCrime, where the future is born. The PreCogs are a single, unified processing unit—a source of pure, undeniable truth. The future is just a state we haven't rendered yet.</p>
+                        </div>
+                    </div>
+
+                    <!-- ==================== MODULE-SPECIFIC: Interactive Demo ==================== -->
+                    <section class="bg-slate-900/40 border border-cyan-500/20 rounded-xl p-6 sm:p-8 mb-8 backdrop-blur-sm module-specific" style="margin-top: 2rem;">
+                        <div class="flex items-center gap-2 mb-6">
+                            <div class="w-2 h-6 bg-cyan-500 rounded"></div>
+                            <h3 class="text-xl font-bold text-cyan-200">Interactive Demonstration</h3>
+                        </div>
+                        
+                        <!-- UNIQUE MINORITY REPORT DEMO CONTENT -->
+                        <div class="space-y-6">
+                            <!-- PreCrime Alert Level Display -->
+                            <div class="bg-slate-950/50 border border-cyan-500/30 rounded-lg p-6">
+                                <div class="flex items-center justify-between mb-4">
+                                    <h4 class="text-lg font-bold text-cyan-300">PreCrime Alert System</h4>
+                                    <div class="px-3 py-1 bg-green-900/30 border border-green-500/50 text-green-400 rounded text-sm font-medium">
+                                        GREEN
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-4">
+                                    <button class="px-4 py-3 bg-cyan-900/30 border border-cyan-700/50 text-cyan-300 rounded hover:bg-cyan-900/50 transition-colors">
+                                        Receive Vision
+                                    </button>
+                                    <button class="px-4 py-3 bg-slate-800 border border-slate-700 text-slate-300 rounded hover:bg-slate-700 transition-colors">
+                                        Prevent Crime
+                                    </button>
+                                </div>
+                                
+                                <div class="mt-4 p-4 bg-cyan-950/20 border border-cyan-500/20 rounded">
+                                    <p class="text-sm text-cyan-200 font-mono">
+                                        dispatch({ type: 'RECEIVE_VISION', vision })
+                                    </p>
+                                </div>
+                            </div>
+
+                            <!-- Timeline Visualization -->
+                            <div class="space-y-3">
+                                <h4 class="text-sm font-semibold text-slate-400 uppercase tracking-wider">
+                                    Recent PreCog Visions
+                                </h4>
+                                <div class="bg-slate-800/30 rounded p-3">
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <div class="w-2 h-2 rounded-full bg-cyan-500"></div>
+                                        <span class="text-sm text-slate-300 font-medium">14:45: SIMPLE_CRIME - Donald Dubin → Leo Crow</span>
+                                    </div>
+                                </div>
+                                <div class="bg-slate-800/30 rounded p-3">
+                                    <div class="flex items-center gap-2 mb-1">
+                                        <div class="w-2 h-2 rounded-full bg-yellow-500"></div>
+                                        <span class="text-sm text-slate-300 font-medium">15:15: CONDITIONAL_SEQUENCE - Howard Marks → Sarah Marks</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- ==================== STANDARDIZED: ChapterNavigation ==================== -->
+                    <nav class="flex items-center justify-between mt-8 pt-6 border-t border-slate-800 standardized-component" style="margin-top: 2rem;">
+                        <!-- Previous Button -->
+                        <button disabled class="flex items-center gap-2 px-5 py-3 bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="m15 18-6-6 6-6"/></svg>
+                            Previous
+                        </button>
+                        
+                        <!-- Dot Indicators + Counter -->
+                        <div class="flex items-center gap-4">
+                            <div class="hidden md:flex items-center gap-2">
+                                <button class="w-3 h-3 rounded-full transition-all bg-cyan-500" aria-label="Go to chapter 1"></button>
+                                <button class="w-3 h-3 rounded-full transition-all bg-slate-700 hover:bg-slate-600" aria-label="Go to chapter 2"></button>
+                                <button class="w-3 h-3 rounded-full transition-all bg-slate-700 hover:bg-slate-600" aria-label="Go to chapter 3"></button>
+                                <button class="w-3 h-3 rounded-full transition-all bg-slate-700 hover:bg-slate-600" aria-label="Go to chapter 4"></button>
+                                <button class="w-3 h-3 rounded-full transition-all bg-slate-700 hover:bg-slate-600" aria-label="Go to chapter 5"></button>
+                            </div>
+                            <span class="text-sm text-slate-400 font-mono">
+                                Chapter 1 of 5
+                            </span>
+                        </div>
+                        
+                        <!-- Next Button -->
+                        <button class="flex items-center gap-2 px-5 py-3 bg-cyan-600 hover:bg-cyan-700 disabled:opacity-30 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors">
+                            Next
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5"><path d="m9 18 6-6-6-6"/></svg>
+                        </button>
+                    </nav>
+
+                </div>
+
+                <!-- RIGHT COLUMN (4) - Sticky Sidebar -->
+                <div class="lg:col-span-4">
+                    <div class="sticky top-24 space-y-6">
+                        
+                        <!-- ==================== MODULE-SPECIFIC: System Status Card ==================== -->
+                        <div class="bg-slate-900/70 border border-slate-800 rounded-xl p-6 module-specific" style="margin-top: 2rem;">
+                            <h3 class="text-lg font-bold text-white mb-4 flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-cyan-400">
+                                    <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"></path>
+                                    <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"></path>
+                                </svg>
+                                Temple Status
+                            </h3>
+                            
+                            <div class="space-y-4">
+                                <div>
+                                    <div class="flex justify-between text-sm mb-1">
+                                        <span class="text-slate-400">Timeline Integrity</span>
+                                        <span class="text-emerald-400 font-mono">100%</span>
+                                    </div>
+                                    <div class="h-2 bg-slate-800 rounded-full overflow-hidden">
+                                        <div class="h-full bg-gradient-to-r from-cyan-500 to-emerald-500 rounded-full transition-all duration-500" style="width: 100%"></div>
+                                    </div>
+                                </div>
+                                
+                                <div class="grid grid-cols-2 gap-4">
+                                    <div class="bg-slate-800/50 rounded-lg p-3">
+                                        <p class="text-sm text-slate-400 mb-1">Pending</p>
+                                        <p class="text-2xl font-bold text-yellow-400 font-mono">2</p>
+                                    </div>
+                                    <div class="bg-slate-800/50 rounded-lg p-3">
+                                        <p class="text-sm text-slate-400 mb-1">Prevented</p>
+                                        <p class="text-2xl font-bold text-emerald-400 font-mono">0</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- ==================== MODULE-SPECIFIC: Key Insight Card ==================== -->
+                        <div class="bg-gradient-to-br from-cyan-950/30 to-slate-900/50 border border-cyan-500/20 rounded-xl p-6 module-specific" style="margin-top: 2rem;">
+                            <h3 class="text-lg font-bold text-white mb-3 flex items-center gap-2">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="w-5 h-5 text-cyan-400">
+                                    <polyline points="16 18 22 12 16 6"></polyline>
+                                    <polyline points="8 6 2 12 8 18"></polyline>
+                                </svg>
+                                Key Insight
+                            </h3>
+                            <p class="text-slate-300 text-sm leading-relaxed">
+                                useReducer centralizes state logic in one place—like the Temple housing the PreCogs. Instead of scattering state updates across multiple useState hooks, dispatch actions to a single reducer function.
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+
+            </div>
+        </main>
+
+        <!-- Legend (for demonstration purposes only) -->
+        <div class="fixed bottom-4 right-4 bg-slate-900/95 border border-slate-700 rounded-lg p-4 text-xs space-y-2 max-w-xs shadow-2xl">
+            <div class="font-bold text-slate-200 mb-2 border-b border-slate-700 pb-2">Visual Guide</div>
+            <div class="flex items-center gap-2">
+                <div class="w-3 h-3 bg-emerald-900 rounded"></div>
+                <span class="text-slate-300">📦 Standardized Component</span>
+            </div>
+            <div class="flex items-center gap-2">
+                <div class="w-3 h-3 bg-amber-900 rounded"></div>
+                <span class="text-slate-300">🎨 Module-Specific Content</span>
+            </div>
+            <p class="text-slate-500 text-xs pt-2 border-t border-slate-800">
+                Same structure, different theme (cyan vs amber)
+            </p>
+        </div>
+
+    </div>
+</body>
+</html>

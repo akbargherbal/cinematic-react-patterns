@@ -697,7 +697,7 @@ const [isLoading, setIsLoading] = useState(false); // Loading state
   return (
     <div className="min-h-screen bg-slate-950 text-slate-300 font-serif">
       {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm sticky top-0 z-10">
+      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 py-6">
           {/* First line: Title left, metadata right */}
           <div className="flex items-center justify-between gap-4 mb-2 flex-wrap">

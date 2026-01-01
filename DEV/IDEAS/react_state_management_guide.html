@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React State Management - Visual Workflow Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        .phase-box {
+            border: 3px dashed #cbd5e1;
+            position: relative;
+        }
+        .phase-label {
+            position: absolute;
+            top: -12px;
+            left: 16px;
+            background: white;
+            padding: 0 8px;
+            font-weight: 700;
+            font-size: 14px;
+            color: #475569;
+        }
+        .component-tree {
+            position: relative;
+            padding: 20px;
+        }
+        .tree-node {
+            background: white;
+            border: 2px solid #64748b;
+            border-radius: 8px;
+            padding: 12px 16px;
+            display: inline-block;
+            position: relative;
+            margin: 8px;
+        }
+        .tree-node.has-state {
+            border-color: #3b82f6;
+            background: #eff6ff;
+            box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.2);
+        }
+        .tree-connector {
+            position: absolute;
+            border-left: 2px solid #cbd5e1;
+            height: 30px;
+        }
+        .data-flow-down {
+            background: linear-gradient(to bottom, #dbeafe, #bfdbfe);
+            border-left: 4px solid #3b82f6;
+        }
+        .event-flow-up {
+            background: linear-gradient(to bottom, #fee2e2, #fecaca);
+            border-left: 4px solid #ef4444;
+        }
+        .state-local {
+            background: linear-gradient(135deg, #f0fdf4, #dcfce7);
+            border-left: 4px solid #22c55e;
+        }
+        .state-lifted {
+            background: linear-gradient(135deg, #eff6ff, #dbeafe);
+            border-left: 4px solid #3b82f6;
+        }
+        .state-context {
+            background: linear-gradient(135deg, #fef3c7, #fde68a);
+            border-left: 4px solid #f59e0b;
+        }
+        .state-external {
+            background: linear-gradient(135deg, #f3e8ff, #e9d5ff);
+            border-left: 4px solid #a855f7;
+        }
+        .decision-box {
+            border: 2px solid #6366f1;
+            background: #eef2ff;
+            border-radius: 8px;
+            position: relative;
+        }
+        .decision-arrow {
+            width: 0;
+            height: 0;
+            border-left: 10px solid transparent;
+            border-right: 10px solid transparent;
+            border-top: 15px solid #6366f1;
+            margin: 0 auto;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: start;
+            gap: 8px;
+            margin: 8px 0;
+        }
+        .checklist-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        @media print {
+            .phase-box {
+                page-break-inside: avoid;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-8">
+    
+    <!-- Header -->
+    <div class="max-w-6xl mx-auto mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 mb-2">React State Management</h1>
+        <p class="text-xl text-gray-600">Local → Lifted → Context → External Libraries</p>
+        <p class="text-sm text-gray-500 mt-2">Master the decision tree: Where should state live?</p>
+    </div>
+
+    <!-- Checklist Sidebar -->
+    <div class="max-w-6xl mx-auto mb-8 bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-2xl font-bold mb-4 text-gray-900">📋 The Master Checklist</h2>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+            <div>
+                <h3 class="font-bold text-lg mb-3 text-green-700">Phase 1: Identify (10 min)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Which component(s) need this data?</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Draw component tree on paper</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Mark all consumers with dots</span>
+                </div>
+
+                <h3 class="font-bold text-lg mb-3 mt-6 text-blue-700">Phase 2: Locate (5 min)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Find lowest common ancestor</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Count levels of separation</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Check decision flowchart</span>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-lg mb-3 text-yellow-700">Phase 3: Implement (30 min)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Create useState in parent</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Pass state down as props</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Pass updater functions up</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Remove old local state</span>
+                </div>
+
+                <h3 class="font-bold text-lg mb-3 mt-6 text-purple-700">Phase 4: Refactor (15 min)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Too much prop drilling?</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Consider Context or library</span>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-lg mb-3 text-red-700">Phase 5: Verify (10 min)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">All components read correct data?</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Updates trigger re-renders?</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">No duplicate state sources?</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Can explain data flow?</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto space-y-12">
+
+        <!-- PHASE 0: The Problem -->
+        <section class="phase-box bg-white rounded-lg p-8">
+            <div class="phase-label">PHASE 0: THE PROBLEM</div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900">Two Siblings Need Same Data</h2>
+            
+            <div class="bg-gray-100 p-6 rounded-lg mb-6">
+                <div class="text-center mb-4">
+                    <div class="inline-block bg-gray-300 text-gray-800 px-4 py-2 rounded font-mono text-sm">
+                        &lt;App /&gt;
+                    </div>
+                </div>
+                
+                <div class="flex justify-center gap-8">
+                    <div class="bg-red-100 border-2 border-red-500 rounded-lg p-4 max-w-xs">
+                        <div class="font-mono text-sm font-bold mb-2">&lt;Counter /&gt;</div>
+                        <div class="bg-white p-3 rounded text-center">
+                            <div class="text-3xl font-bold text-red-600">5</div>
+                            <button class="mt-2 bg-red-500 text-white px-3 py-1 rounded text-sm">+1</button>
+                        </div>
+                        <p class="text-xs text-red-800 mt-2">Has its own count state</p>
+                    </div>
+                    
+                    <div class="bg-red-100 border-2 border-red-500 rounded-lg p-4 max-w-xs">
+                        <div class="font-mono text-sm font-bold mb-2">&lt;Display /&gt;</div>
+                        <div class="bg-white p-3 rounded text-center">
+                            <div class="text-sm text-gray-600">Current count:</div>
+                            <div class="text-3xl font-bold text-red-600">???</div>
+                        </div>
+                        <p class="text-xs text-red-800 mt-2">Needs same count value</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="p-4 bg-red-50 rounded border-l-4 border-red-500">
+                <p class="font-bold text-red-900 mb-2">❌ The Problem:</p>
+                <p class="text-sm text-red-800">State in <code>&lt;Counter /&gt;</code> is isolated. <code>&lt;Display /&gt;</code> can't access it.</p>
+                <p class="text-sm text-red-800 mt-2"><strong>Solution:</strong> Move state to their common parent and pass it down.</p>
+            </div>
+        </section>
+
+        <!-- PHASE 1: Identify -->
+        <section class="phase-box bg-white rounded-lg p-8">
+            <div class="phase-label">PHASE 1: IDENTIFY (10 min)</div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900">Find All Components That Need This Data</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <h3 class="font-bold text-gray-900 mb-3">Step 1: Draw Your Component Tree</h3>
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <div class="text-center space-y-4">
+                            <div class="inline-block bg-gray-300 px-4 py-2 rounded">&lt;App /&gt;</div>
+                            <div class="flex justify-center gap-8">
+                                <div class="bg-white border-2 border-gray-400 px-4 py-2 rounded">&lt;Counter /&gt;</div>
+                                <div class="bg-white border-2 border-gray-400 px-4 py-2 rounded">&lt;Display /&gt;</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-gray-900 mb-3">Step 2: Mark Consumers with Dots</h3>
+                    <div class="bg-gray-100 p-4 rounded-lg">
+                        <div class="text-center space-y-4">
+                            <div class="inline-block bg-gray-300 px-4 py-2 rounded">&lt;App /&gt;</div>
+                            <div class="flex justify-center gap-8">
+                                <div class="bg-green-100 border-2 border-green-500 px-4 py-2 rounded relative">
+                                    &lt;Counter /&gt;
+                                    <span class="absolute -top-2 -right-2 bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">✓</span>
+                                </div>
+                                <div class="bg-green-100 border-2 border-green-500 px-4 py-2 rounded relative">
+                                    &lt;Display /&gt;
+                                    <span class="absolute -top-2 -right-2 bg-green-500 text-white rounded-full w-6 h-6 flex items-center justify-center text-xs">✓</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <p class="text-xs text-gray-600 mt-2">Both need access to count value</p>
+                </div>
+            </div>
+            
+            <div class="p-4 bg-green-50 rounded border-l-4 border-green-500">
+                <p class="font-bold text-green-900 mb-2">🎯 Key Questions:</p>
+                <ul class="text-sm text-green-800 space-y-1">
+                    <li>• Which components <strong>read</strong> this state?</li>
+                    <li>• Which components <strong>update</strong> this state?</li>
+                    <li>• Are they siblings? Parent-child? Cousins?</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- PHASE 2: Locate Common Parent -->
+        <section class="phase-box bg-white rounded-lg p-8">
+            <div class="phase-label">PHASE 2: LOCATE (5 min)</div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900">Find the Lowest Common Ancestor</h2>
+            
+            <div class="bg-gray-100 p-6 rounded-lg mb-6">
+                <div class="text-center space-y-6">
+                    <div>
+                        <div class="inline-block bg-blue-500 text-white px-6 py-3 rounded-lg shadow-lg font-mono font-bold">
+                            &lt;App /&gt; ← STATE LIVES HERE
+                        </div>
+                        <p class="text-sm text-gray-600 mt-2">Lowest common ancestor of both consumers</p>
+                    </div>
+                    
+                    <div class="relative">
+                        <div class="absolute left-1/2 transform -translate-x-1/2 w-0.5 h-12 bg-blue-400"></div>
+                    </div>
+                    
+                    <div class="flex justify-center gap-12">
+                        <div class="relative">
+                            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0.5 h-12 bg-blue-400"></div>
+                            <div class="bg-white border-2 border-green-500 px-6 py-3 rounded-lg font-mono">
+                                &lt;Counter /&gt;
+                            </div>
+                            <div class="text-xs text-center mt-2 text-blue-600">Receives: count, setCount</div>
+                        </div>
+                        
+                        <div class="relative">
+                            <div class="absolute bottom-full left-1/2 transform -translate-x-1/2 w-0.5 h-12 bg-blue-400"></div>
+                            <div class="bg-white border-2 border-green-500 px-6 py-3 rounded-lg font-mono">
+                                &lt;Display /&gt;
+                            </div>
+                            <div class="text-xs text-center mt-2 text-blue-600">Receives: count</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="grid md:grid-cols-2 gap-4">
+                <div class="p-4 bg-blue-50 rounded border-l-4 border-blue-500">
+                    <p class="font-bold text-blue-900 mb-2">✅ Rule:</p>
+                    <p class="text-sm text-blue-800">State lives in the <strong>lowest parent</strong> that encompasses all consumers.</p>
+                </div>
+                
+                <div class="p-4 bg-yellow-50 rounded border-l-4 border-yellow-500">
+                    <p class="font-bold text-yellow-900 mb-2">💡 Tip:</p>
+                    <p class="text-sm text-yellow-800">If only 1 component needs it, keep state <strong>local</strong> to that component!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 3: Implement State Lifting -->
+        <section class="phase-box bg-white rounded-lg p-8">
+            <div class="phase-label">PHASE 3: IMPLEMENT (30 min)</div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900">Lift State to Common Parent</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <h3 class="font-bold text-red-700 mb-3">❌ Before: State in Child</h3>
+                    <div class="bg-gray-100 p-4 rounded text-xs font-mono overflow-x-auto">
+<pre><code class="language-javascript">// Counter.jsx
+function Counter() {
+  const [count, setCount] = useState(0);
+  
+  return (
+    &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+      Count: {count}
+    &lt;/button&gt;
+  );
+}
+
+// Display.jsx
+function Display() {
+  // ❌ Can't access count!
+  return &lt;div&gt;Count: ???&lt;/div&gt;;
+}</code></pre>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-green-700 mb-3">✅ After: State in Parent</h3>
+                    <div class="bg-gray-100 p-4 rounded text-xs font-mono overflow-x-auto">
+<pre><code class="language-javascript">// App.jsx
+function App() {
+  const [count, setCount] = useState(0);
+  
+  return (
+    &lt;&gt;
+      &lt;Counter count={count} setCount={setCount} /&gt;
+      &lt;Display count={count} /&gt;
+    &lt;/&gt;
+  );
+}
+
+// Counter.jsx
+function Counter({ count, setCount }) {
+  return (
+    &lt;button onClick={() =&gt; setCount(count + 1)}&gt;
+      Count: {count}
+    &lt;/button&gt;
+  );
+}
+
+// Display.jsx
+function Display({ count }) {
+  return &lt;div&gt;Count: {count}&lt;/div&gt;;
+}</code></pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="space-y-4">
+                <div class="data-flow-down p-4 rounded-lg">
+                    <p class="font-bold text-blue-900 mb-2">⬇️ Data Flows DOWN via Props</p>
+                    <div class="text-sm space-y-2 font-mono">
+                        <div>App: <code className="bg-white px-2 py-1 rounded">count = 5</code></div>
+                        <div className="ml-4">→ Counter: <code className="bg-white px-2 py-1 rounded">props.count = 5</code></div>
+                        <div className="ml-4">→ Display: <code className="bg-white px-2 py-1 rounded">props.count = 5</code></div>
+                    </div>
+                </div>
+                
+                <div class="event-flow-up p-4 rounded-lg">
+                    <p class="font-bold text-red-900 mb-2">⬆️ Updates Flow UP via Functions</p>
+                    <div class="text-sm space-y-2 font-mono">
+                        <div>Counter: <code className="bg-white px-2 py-1 rounded">onClick={() => setCount(6)}</code></div>
+                        <div className="ml-4">→ Calls function from App</div>
+                        <div className="ml-4">→ App state updates to 6</div>
+                        <div className="ml-4">→ Both children re-render with new value</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6 p-4 bg-indigo-50 rounded border-l-4 border-indigo-500">
+                <p class="font-bold text-indigo-900 mb-2">🔑 The Pattern:</p>
+                <ol class="text-sm text-indigo-800 space-y-1 list-decimal list-inside">
+                    <li>Move <code>useState</code> to common parent</li>
+                    <li>Pass <strong>state value</strong> down to components that read it</li>
+                    <li>Pass <strong>setter function</strong> down to components that update it</li>
+                    <li>Remove old local state from children</li>
+                </ol>
+            </div>
+        </section>
+
+        <!-- Decision Flowchart -->
+        <section class="bg-gradient-to-br from-indigo-600 to-purple-600 text-white rounded-lg p-8">
+            <h2 class="text-3xl font-bold mb-6">🧭 The State Decision Flowchart</h2>
+            
+            <div class="space-y-4">
+                <!-- Question 1 -->
+                <div class="decision-box p-4">
+                    <p class="font-bold text-indigo-900 text-center">How many components need this state?</p>
+                </div>
+                <div class="decision-arrow"></div>
+                
+                <div class="grid md:grid-cols-3 gap-4">
+                    <div class="state-local p-4 rounded-lg text-gray-900">
+                        <p class="font-bold text-green-700 mb-2">1 Component</p>
+                        <p class="text-sm mb-2">Keep it <strong>local</strong></p>
+                        <div class="bg-white p-2 rounded text-xs font-mono">
+                            useState in that component
+                        </div>
+                    </div>
+                    
+                    <div class="state-lifted p-4 rounded-lg text-gray-900">
+                        <p class="font-bold text-blue-700 mb-2">2-3 Related Components</p>
+                        <p class="text-sm mb-2"><strong>Lift state</strong> to parent</p>
+                        <div class="bg-white p-2 rounded text-xs font-mono">
+                            useState in common ancestor
+                        </div>
+                    </div>
+                    
+                    <div class="state-context p-4 rounded-lg text-gray-900">
+                        <p class="font-bold text-yellow-700 mb-2">4-6 Deeply Nested</p>
+                        <p class="text-sm mb-2">Use <strong>Context</strong></p>
+                        <div class="bg-white p-2 rounded text-xs font-mono">
+                            createContext + Provider
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Question 2 -->
+                <div class="decision-box p-4 mt-6">
+                    <p class="font-bold text-indigo-900 text-center">Is state shared across routes or complex?</p>
+                </div>
+                <div class="decision-arrow"></div>
+                
+                <div class="state-external p-4 rounded-lg text-gray-900 max-w-2xl mx-auto">
+                    <p class="font-bold text-purple-700 mb-2">Many Components + Complex Logic</p>
+                    <p class="text-sm mb-2">Use <strong>external library</strong></p>
+                    <div class="bg-white p-3 rounded space-y-2">
+                        <div class="text-xs font-mono">Zustand (simplest)</div>
+                        <div class="text-xs font-mono">Redux Toolkit (most powerful)</div>
+                        <div class="text-xs font-mono">Jotai/Recoil (atomic)</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6 p-4 bg-white/10 rounded-lg">
+                <p class="font-bold mb-2">📏 The "Levels of Separation" Rule:</p>
+                <p class="text-sm">1-2 levels: Props | 3-5 levels: Context | 6+ levels: External library</p>
+            </div>
+        </section>
+
+        <!-- PHASE 4: Context Pattern -->
+        <section class="phase-box bg-white rounded-lg p-8">
+            <div class="phase-label">PHASE 4: CONTEXT (Optional)</div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900">When Prop Drilling Gets Painful</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6 mb-6">
+                <div>
+                    <h3 class="font-bold text-red-700 mb-3">❌ Prop Drilling Problem</h3>
+                    <div class="bg-gray-100 p-4 rounded">
+                        <div class="space-y-2 text-xs font-mono">
+                            <div class="bg-red-100 border-l-4 border-red-500 p-2">
+                                App: theme="dark"
+                            </div>
+                            <div class="ml-4 bg-red-100 border-l-4 border-red-500 p-2">
+                                Layout: passes theme down →
+                            </div>
+                            <div class="ml-8 bg-red-100 border-l-4 border-red-500 p-2">
+                                Sidebar: passes theme down →
+                            </div>
+                            <div class="ml-12 bg-red-100 border-l-4 border-red-500 p-2">
+                                Menu: passes theme down →
+                            </div>
+                            <div class="ml-16 bg-green-100 border-l-4 border-green-500 p-2">
+                                Button: FINALLY uses theme!
+                            </div>
+                        </div>
+                        <p class="text-xs text-red-800 mt-3">4 components just passing props through!</p>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-green-700 mb-3">✅ Context Solution</h3>
+                    <div class="bg-gray-100 p-4 rounded">
+                        <div class="space-y-2 text-xs font-mono">
+                            <div class="bg-blue-100 border-l-4 border-blue-500 p-2">
+                                &lt;ThemeProvider value="dark"&gt;
+                            </div>
+                            <div class="ml-4 bg-gray-200 p-2">
+                                Layout
+                            </div>
+                            <div class="ml-8 bg-gray-200 p-2">
+                                Sidebar
+                            </div>
+                            <div class="ml-12 bg-gray-200 p-2">
+                                Menu
+                            </div>
+                            <div class="ml-16 bg-green-100 border-l-4 border-green-500 p-2">
+                                Button: useContext(ThemeContext)
+                            </div>
+                            <div class="bg-blue-100 border-l-4 border-blue-500 p-2">
+                                &lt;/ThemeProvider&gt;
+                            </div>
+                        </div>
+                        <p class="text-xs text-green-800 mt-3">Middle components don't need to know!</p>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-100 p-4 rounded-lg mb-4">
+                <h3 class="font-bold text-gray-900 mb-3">Context Setup Pattern</h3>
+                <div class="text-xs font-mono overflow-x-auto">
+<pre><code class="language-javascript">// ThemeContext.jsx
+import { createContext, useContext, useState } from 'react';
+
+const ThemeContext = createContext();
+
+export function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState('light');
+  
+  return (
+    &lt;ThemeContext.Provider value={{ theme, setTheme }}&gt;
+      {children}
+    &lt;/ThemeContext.Provider&gt;
+  );
+}
+
+export function useTheme() {
+  return useContext(ThemeContext);
+}
+
+// App.jsx
+function App() {
+  return (
+    &lt;ThemeProvider&gt;
+      &lt;Layout /&gt;
+    &lt;/ThemeProvider&gt;
+  );
+}
+
+// Any deep component
+function Button() {
+  const { theme, setTheme } = useTheme();
+  return &lt;button className={theme}&gt;Toggle&lt;/button&gt;;
+}</code></pre>
+                </div>
+            </div>
+            
+            <div class="p-4 bg-yellow-50 rounded border-l-4 border-yellow-500">
+                <p class="font-bold text-yellow-900 mb-2">⚠️ When NOT to Use Context:</p>
+                <ul class="text-sm text-yellow-800 space-y-1">
+                    <li>• Only 2-3 components need it (just use props)</li>
+                    <li>• State changes very frequently (causes re-renders of all consumers)</li>
+                    <li>• You're new to React (master props first!)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- PHASE 5: Verification -->
+        <section class="phase-box bg-white rounded-lg p-8">
+            <div class="phase-label">PHASE 5: VERIFY (10 min)</div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900">Self-Test: Did You Lift State Correctly?</h2>
+            
+            <div class="grid md:grid-cols-3 gap-4 mb-6">
+                <div class="bg-green-50 p-4 rounded-lg border-2 border-green-500">
+                    <h3 class="font-bold text-green-900 mb-2">✅ Data Flow</h3>
+                    <div class="text-sm text-green-800 space-y-2">
+                        <label class="flex items-start gap-2">
+                            <input type="checkbox" class="mt-1">
+                            <span>State is in common parent?</span>
+                        </label>
+                        <label class="flex items-start gap-2">
+                            <input type="checkbox" class="mt-1">
+                            <span>All consumers receive it via props?</span>
+                        </label>
+                        <label class="flex items-start gap-2">
+                            <input type="checkbox" class="mt-1">
+                            <span>Updates trigger re-renders?</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 p-4 rounded-lg border-2 border-blue-500">
+                    <h3 class="font-bold text-blue-900 mb-2">✅ No Duplication</h3>
+                    <div class="text-sm text-blue-800 space-y-2">
+                        <label class="flex items-start gap-2">
+                            <input type="checkbox" class="mt-1">
+                            <span>Only ONE source of truth?</span>
+                        </label>
+                        <label class="flex items-start gap-2">
+                            <input type="checkbox" class="mt-1">
+                            <span>No local copies of state?</span>
+                        </label>
+                        <label class="flex items-start gap-2">
+                            <input type="checkbox" class="mt-1">
+                            <span>Can trace data object → UI?</span>
+                        </label>
+                    </div>
+                </div>
+                
+                <div class="bg-purple-50 p-4 rounded-lg border-2 border-purple-500">
+                    <h3 class="font-bold text-purple-900 mb-2">✅ Right Tool</h3>
+                    <div class="text-sm text-purple-800 space-y-2">
+                        <label class="flex items-start gap-2">
+                            <input type="checkbox" class="mt-1">
+                            <span>Used simplest solution?</span>
+                        </label>
+                        <label class="flex items-start gap-2">
+                            <input type="checkbox" class="mt-1">
+                            <span>No prop drilling >3 levels?</span>
+                        </label>
+                        <label class="flex items-start gap-2">
+                            <input type="checkbox" class="mt-1">
+                            <span>Can explain why you chose this approach?</span>
+                        </label>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="bg-gray-800 text-white rounded-lg p-6">
+                <h3 class="font-bold text-xl mb-4">🎯 Common Mistakes to Avoid</h3>
+                <div class="grid md:grid-cols-2 gap-4 text-sm">
+                    <div>
+                        <p class="font-bold text-red-400 mb-2">❌ Anti-Patterns:</p>
+                        <ul class="space-y-1">
+                            <li>• Lifting state TOO high (makes App bloated)</li>
+                            <li>• Duplicating state in multiple places</li>
+                            <li>• Prop drilling when Context makes sense</li>
+                            <li>• Using Context for everything</li>
+                        </ul>
+                    </div>
+                    <div>
+                        <p class="font-bold text-green-400 mb-2">✅ Best Practices:</p>
+                        <ul class="space-y-1">
+                            <li>• Start local, lift only when needed</li>
+                            <li>• Keep state as low as possible</li>
+                            <li>• One source of truth per state</li>
+                            <li>• Name state clearly: count, not data</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Practice Projects -->
+        <section class="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg p-8">
+            <h2 class="text-3xl font-bold mb-4">🎓 Practice Projects (Build 10)</h2>
+            <p class="text-lg mb-6">Master state management through deliberate repetition:</p>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-white/10 rounded-lg p-4">
+                    <h3 class="font-bold text-xl mb-3">Beginner (Local → Lifted)</h3>
+                    <ol class="space-y-2 text-sm list-decimal list-inside">
+                        <li><strong>Shared Counter</strong> - Two components display + modify same count</li>
+                        <li><strong>Filter + List</strong> - Search bar filters product list</li>
+                        <li><strong>Theme Toggle</strong> - Button in header affects entire app</li>
+                        <li><strong>Form Sync</strong> - Input in one component, preview in another</li>
+                        <li><strong>Tab State</strong> - Tabs controlled by parent, content shows in children</li>
+                    </ol>
+                </div>
+                
+                <div class="bg-white/10 rounded-lg p-4">
+                    <h3 class="font-bold text-xl mb-3">Intermediate (Context)</h3>
+                    <ol start="6" class="space-y-2 text-sm list-decimal list-inside">
+                        <li><strong>Shopping Cart</strong> - Add/remove items from anywhere</li>
+                        <li><strong>User Auth</strong> - Login status visible across all routes</li>
+                        <li><strong>Notification System</strong> - Toast messages triggered from deep components</li>
+                        <li><strong>Multi-Language</strong> - Language switcher affects all text</li>
+                        <li><strong>Dark Mode</strong> - Theme persists across page refreshes</li>
+                    </ol>
+                </div>
+            </div>
+            
+            <div class="mt-6 p-4 bg-white/10 rounded-lg">
+                <p class="font-bold text-lg mb-2">⏱️ Time Investment:</p>
+                <ul class="text-sm space-y-1">
+                    <li>• Projects 1-3: ~2 hours each (lifting state basics)</li>
+                    <li>• Projects 4-6: ~3 hours each (decision-making practice)</li>
+                    <li>• Projects 7-10: ~4 hours each (Context + complexity)</li>
+                    <li>• <strong>Total: ~30 hours → State management mastery</strong></li>
+                </ul>
+            </div>
+            
+            <div class="mt-4 p-4 bg-yellow-500 text-gray-900 rounded-lg">
+                <p class="font-bold mb-2">🔑 Success Metric:</p>
+                <p class="text-sm">After project #6, you should be able to look at a component tree and <strong>immediately know where state belongs</strong> without thinking.</p>
+            </div>
+        </section>
+
+        <!-- Quick Reference Card -->
+        <section class="bg-white rounded-lg shadow-lg p-8 border-4 border-indigo-500">
+            <h2 class="text-2xl font-bold mb-6 text-gray-900">📖 Quick Reference Card</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-bold text-lg mb-3 text-indigo-700">The Process (Every Time)</h3>
+                    <ol class="space-y-2 text-sm list-decimal list-inside">
+                        <li>Draw component tree on paper</li>
+                        <li>Mark all components that need the data</li>
+                        <li>Find lowest common ancestor</li>
+                        <li>Count levels of separation (1-2? 3-5? 6+?)</li>
+                        <li>Choose: Props | Context | Library</li>
+                        <li>Implement and verify</li>
+                    </ol>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-lg mb-3 text-indigo-700">Mental Models</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="bg-blue-50 p-3 rounded">
+                            <strong>Data:</strong> Flows DOWN like water (parent → child)
+                        </div>
+                        <div class="bg-red-50 p-3 rounded">
+                            <strong>Events:</strong> Bubble UP like air (child → parent)
+                        </div>
+                        <div class="bg-green-50 p-3 rounded">
+                            <strong>Source of Truth:</strong> Only ONE place holds the real data
+                        </div>
+                        <div class="bg-purple-50 p-3 rounded">
+                            <strong>Components:</strong> Dumb receivers, smart parent decides
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-6 p-4 bg-gradient-to-r from-indigo-50 to-purple-50 rounded-lg border-2 border-indigo-300">
+                <p class="font-bold text-indigo-900 mb-2">🎯 The Golden Rule:</p>
+                <p class="text-sm text-indigo-800">"State should live in the <strong>lowest common ancestor</strong> of all components that need it. No higher, no lower."</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="max-w-6xl mx-auto mt-12 text-center text-gray-600 text-sm">
+        <p class="font-bold text-lg mb-2">Your Path to Mastery</p>
+        <p>Print this guide → Build 10 projects → Internalize the decision tree</p>
+        <p class="mt-2">After ~30 hours of practice, state management becomes intuitive.</p>
+        <p class="mt-4 text-xs text-gray-500">Save as <code>react_state_management_guide.html</code> and reference forever.</p>
+    </div>
+
+    <script>
+        // Initialize syntax highlighting
+        hljs.highlightAll();
+    </script>
+
+</body>
+</html>

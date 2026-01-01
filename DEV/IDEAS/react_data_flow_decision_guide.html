@@ -1,0 +1,1116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Data Flow Decision - Visual Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Highlight.js for syntax highlighting -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/styles/github-dark.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/highlight.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/javascript.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.9.0/languages/jsx.min.js"></script>
+    
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        
+        .phase-box {
+            border: 3px dashed #cbd5e1;
+            position: relative;
+        }
+        
+        .phase-label {
+            position: absolute;
+            top: -12px;
+            left: 16px;
+            background: white;
+            padding: 0 8px;
+            font-weight: 700;
+            font-size: 14px;
+            color: #475569;
+        }
+        
+        .component-node {
+            border: 2px solid #3b82f6;
+            background: white;
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 14px;
+            position: relative;
+        }
+        
+        .component-with-state {
+            border-color: #10b981;
+            background: linear-gradient(to bottom, #d1fae5, white);
+        }
+        
+        .component-needs-data {
+            border-color: #ef4444;
+            background: linear-gradient(to bottom, #fee2e2, white);
+        }
+        
+        .prop-arrow {
+            width: 2px;
+            background: #3b82f6;
+            margin: 0 auto;
+            position: relative;
+        }
+        
+        .prop-arrow::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 6px solid transparent;
+            border-right: 6px solid transparent;
+            border-top: 10px solid #3b82f6;
+        }
+        
+        .prop-label {
+            position: absolute;
+            right: -80px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 11px;
+            color: #3b82f6;
+            background: white;
+            padding: 2px 6px;
+            border: 1px solid #3b82f6;
+            border-radius: 4px;
+            white-space: nowrap;
+        }
+        
+        .context-glow {
+            box-shadow: 0 0 0 3px rgba(147, 51, 234, 0.3);
+            border-color: #9333ea;
+        }
+        
+        .global-state-badge {
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            background: #f59e0b;
+            color: white;
+            padding: 4px 8px;
+            border-radius: 12px;
+            font-size: 10px;
+            font-weight: 700;
+        }
+        
+        .decision-box {
+            border: 3px solid #3b82f6;
+            border-radius: 12px;
+            padding: 16px;
+            background: linear-gradient(to bottom, #dbeafe, white);
+        }
+        
+        .checklist-item {
+            display: flex;
+            align-items: start;
+            gap: 8px;
+            margin: 8px 0;
+        }
+        
+        .checklist-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+        
+        .depth-ruler {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin: 20px 0;
+        }
+        
+        .depth-segment {
+            flex: 1;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 8px;
+            font-weight: 700;
+            font-size: 12px;
+        }
+        
+        /* Highlight.js customizations */
+        pre code.hljs {
+            border-radius: 0.5rem;
+            padding: 1rem;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+        
+        /* Inline code styling */
+        code:not(.hljs) {
+            background: #f3f4f6;
+            padding: 0.125rem 0.375rem;
+            border-radius: 0.25rem;
+            font-size: 0.875em;
+            color: #1f2937;
+            font-family: 'Courier New', monospace;
+        }
+        
+        .tree-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        .tree-row {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-8">
+    
+    <!-- Header -->
+    <div class="max-w-6xl mx-auto mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 mb-2">React Data Flow Decision</h1>
+        <p class="text-xl text-gray-600">From Props → Context → State Libraries</p>
+        <p class="text-sm text-gray-500 mt-2">Total time: ~60 minutes | Skill level: Intermediate React</p>
+    </div>
+
+    <!-- Quick Checklist -->
+    <div class="max-w-6xl mx-auto mb-8 bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-2xl font-bold mb-4 text-gray-900">📋 The Decision Workflow</h2>
+        
+        <div class="grid md:grid-cols-3 gap-6">
+            <div>
+                <h3 class="font-bold text-lg mb-3 text-blue-700">Phase 1: Map (10 min)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Draw component tree on paper</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Mark where state lives</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Mark which components need it</span>
+                </div>
+
+                <h3 class="font-bold text-lg mb-3 mt-6 text-green-700">Phase 2: Measure (5 min)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Count levels from state to consumer</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">How many components pass props?</span>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-lg mb-3 text-yellow-700">Phase 3: Assess (15 min)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">How often does it change?</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">How many components need it?</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Does it persist across routes?</span>
+                </div>
+
+                <h3 class="font-bold text-lg mb-3 mt-6 text-purple-700">Phase 4: Choose (10 min)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Use decision matrix</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Pick the simplest solution</span>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-lg mb-3 text-red-700">Phase 5: Implement (20 min)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Follow pattern for your choice</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Test with different data</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Can migrate later if needed?</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto space-y-12">
+
+        <!-- PHASE 0: The Three Approaches -->
+        <section class="phase-box bg-white rounded-lg p-8">
+            <div class="phase-label">PHASE 0: THE THREE APPROACHES</div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900">Understanding Your Options</h2>
+            
+            <div class="grid md:grid-cols-3 gap-6">
+                <div class="bg-blue-50 p-6 rounded-lg border-2 border-blue-500">
+                    <h3 class="font-bold text-xl text-blue-900 mb-3">1. Props (Default)</h3>
+                    <div class="mb-4">
+                        <div class="component-node component-with-state mb-2">Parent (has state)</div>
+                        <div class="prop-arrow" style="height: 30px;"></div>
+                        <div class="component-node mb-2">Child</div>
+                        <div class="prop-arrow" style="height: 30px;"></div>
+                        <div class="component-node component-needs-data">Grandchild (needs it)</div>
+                    </div>
+                    <p class="text-sm text-blue-800"><strong>Use when:</strong> 1-2 levels deep, clear parent-child relationship</p>
+                </div>
+
+                <div class="bg-purple-50 p-6 rounded-lg border-2 border-purple-500">
+                    <h3 class="font-bold text-xl text-purple-900 mb-3">2. Context (Mid-tier)</h3>
+                    <div class="mb-4">
+                        <div class="component-node component-with-state context-glow mb-2">Provider (has state)</div>
+                        <div style="height: 30px; text-align: center; line-height: 30px; font-size: 12px; color: #9333ea;">⚡ Skip middle layers ⚡</div>
+                        <div class="component-node component-needs-data context-glow">Any descendant</div>
+                    </div>
+                    <p class="text-sm text-purple-800"><strong>Use when:</strong> 3-5 levels deep, many components need it</p>
+                </div>
+
+                <div class="bg-orange-50 p-6 rounded-lg border-2 border-orange-500">
+                    <h3 class="font-bold text-xl text-orange-900 mb-3">3. State Library (Global)</h3>
+                    <div class="mb-4">
+                        <div class="component-node mb-2" style="border-color: #f59e0b;">
+                            <div class="global-state-badge">Zustand/Redux</div>
+                            Any Component
+                        </div>
+                        <div style="height: 30px; text-align: center; line-height: 30px; font-size: 12px; color: #f59e0b;">🌐 Global access 🌐</div>
+                        <div class="component-node" style="border-color: #f59e0b;">Any Component</div>
+                    </div>
+                    <p class="text-sm text-orange-800"><strong>Use when:</strong> 6+ levels, cross-route, complex updates</p>
+                </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-gray-800 text-white rounded-lg">
+                <p class="font-bold mb-2">🎯 Golden Rule:</p>
+                <p class="text-sm">Start with Props. Upgrade to Context only when props become painful. Use State Libraries for truly global needs.</p>
+            </div>
+        </section>
+
+        <!-- PHASE 1: Map Your Component Tree -->
+        <section class="phase-box bg-white rounded-lg p-8">
+            <div class="phase-label">PHASE 1: MAP (10 min)</div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900">Draw Your Component Structure</h2>
+            
+            <div class="space-y-6">
+                <div class="bg-blue-50 p-6 rounded-lg">
+                    <h3 class="font-bold text-blue-900 mb-4">Example: E-commerce App</h3>
+                    
+                    <div class="tree-container">
+                        <div class="tree-row">
+                            <div class="component-node component-with-state" style="min-width: 120px;">
+                                App<br>
+                                <span class="text-xs text-green-700">✓ cart state</span>
+                            </div>
+                        </div>
+                        
+                        <div class="prop-arrow" style="height: 40px; width: 2px;"></div>
+                        
+                        <div class="tree-row">
+                            <div class="component-node" style="min-width: 100px;">Header</div>
+                            <div class="component-node" style="min-width: 100px;">Main</div>
+                        </div>
+                        
+                        <div style="height: 40px; display: flex; justify-content: space-around;">
+                            <div class="prop-arrow" style="height: 40px; width: 2px; margin: 0 150px;"></div>
+                            <div class="prop-arrow" style="height: 40px; width: 2px; margin: 0 150px;"></div>
+                        </div>
+                        
+                        <div class="tree-row">
+                            <div class="component-node component-needs-data" style="min-width: 100px;">
+                                CartIcon<br>
+                                <span class="text-xs text-red-700">✗ needs cart</span>
+                            </div>
+                            <div class="component-node" style="min-width: 100px;">ProductList</div>
+                        </div>
+                        
+                        <div style="height: 40px; display: flex; justify-content: flex-end;">
+                            <div class="prop-arrow" style="height: 40px; width: 2px; margin: 0 120px;"></div>
+                        </div>
+                        
+                        <div class="tree-row" style="justify-content: flex-end;">
+                            <div class="component-node component-needs-data" style="min-width: 100px; margin-right: 60px;">
+                                ProductCard<br>
+                                <span class="text-xs text-red-700">✗ needs addToCart</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="grid md:grid-cols-2 gap-6">
+                    <div class="bg-green-50 p-4 rounded-lg border-2 border-green-500">
+                        <h3 class="font-bold text-green-900 mb-3">✅ What to Mark</h3>
+                        <ul class="text-sm text-green-800 space-y-2 ml-4 list-disc">
+                            <li><strong>Green boxes:</strong> Where state lives</li>
+                            <li><strong>Red boxes:</strong> Components that need the data</li>
+                            <li><strong>Blue boxes:</strong> Components that just pass it through</li>
+                            <li><strong>Count:</strong> How many levels between green and red?</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-yellow-50 p-4 rounded-lg border-2 border-yellow-500">
+                        <h3 class="font-bold text-yellow-900 mb-3">🎯 Key Questions</h3>
+                        <ul class="text-sm text-yellow-800 space-y-2 ml-4 list-disc">
+                            <li>Which component is the common parent?</li>
+                            <li>How many intermediate components?</li>
+                            <li>Do sibling components need same data?</li>
+                            <li>Does data cross route boundaries?</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 2: Measure Depth -->
+        <section class="phase-box bg-white rounded-lg p-8">
+            <div class="phase-label">PHASE 2: MEASURE (5 min)</div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900">The Depth Ruler</h2>
+            
+            <div class="space-y-6">
+                <div class="depth-ruler">
+                    <div class="depth-segment bg-green-500 text-white">
+                        1-2 Levels<br>
+                        <span class="text-xs">PROPS ✓</span>
+                    </div>
+                    <div class="depth-segment bg-purple-500 text-white">
+                        3-5 Levels<br>
+                        <span class="text-xs">CONTEXT ✓</span>
+                    </div>
+                    <div class="depth-segment bg-orange-500 text-white">
+                        6+ Levels<br>
+                        <span class="text-xs">STATE LIB ✓</span>
+                    </div>
+                </div>
+
+                <div class="bg-blue-50 p-6 rounded-lg">
+                    <h3 class="font-bold text-blue-900 mb-4">📏 How to Count</h3>
+                    
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="bg-white p-4 rounded border-2 border-green-500">
+                            <p class="font-bold text-sm text-green-900 mb-2">1 Level Deep = Props</p>
+                            <pre class="text-xs"><code class="language-jsx">&lt;Parent&gt;
+  &lt;Child data={data} /&gt;
+&lt;/Parent&gt;</code></pre>
+                            <p class="text-xs text-green-800 mt-2">Direct parent → child. Always use props!</p>
+                        </div>
+
+                        <div class="bg-white p-4 rounded border-2 border-purple-500">
+                            <p class="font-bold text-sm text-purple-900 mb-2">3 Levels Deep = Context?</p>
+                            <pre class="text-xs"><code class="language-jsx">&lt;Grandparent&gt;
+  &lt;Parent&gt;
+    &lt;Child data={data} /&gt;
+  &lt;/Parent&gt;
+&lt;/Grandparent&gt;</code></pre>
+                            <p class="text-xs text-purple-800 mt-2">Parent doesn't use data? Consider Context.</p>
+                        </div>
+
+                        <div class="bg-white p-4 rounded border-2 border-orange-500">
+                            <p class="font-bold text-sm text-orange-900 mb-2">6+ Levels = State Library</p>
+                            <pre class="text-xs"><code class="language-jsx">&lt;App&gt;
+  &lt;Layout&gt;
+    &lt;Main&gt;
+      &lt;Section&gt;
+        &lt;Container&gt;
+          &lt;Child /&gt; {/* needs data */}</code></pre>
+                            <p class="text-xs text-orange-800 mt-2">Too deep for Context. Use Zustand/Redux.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="p-4 bg-yellow-50 rounded border-l-4 border-yellow-500">
+                    <p class="font-bold text-yellow-900 mb-2">💡 Pro Tip:</p>
+                    <p class="text-sm text-yellow-800">If more than 2 intermediate components just pass props without using them = "prop drilling" = time to upgrade!</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 3: Assess Characteristics -->
+        <section class="phase-box bg-white rounded-lg p-8">
+            <div class="phase-label">PHASE 3: ASSESS (15 min)</div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900">Analyze Data Characteristics</h2>
+            
+            <div class="space-y-6">
+                <div class="bg-gray-100 p-6 rounded-lg">
+                    <h3 class="font-bold text-gray-900 mb-4">🔍 Assessment Criteria</h3>
+                    
+                    <table class="w-full text-sm">
+                        <thead>
+                            <tr class="border-b-2 border-gray-400">
+                                <th class="text-left py-3 px-4">Question</th>
+                                <th class="text-left py-3 px-4 bg-green-100">Props</th>
+                                <th class="text-left py-3 px-4 bg-purple-100">Context</th>
+                                <th class="text-left py-3 px-4 bg-orange-100">State Library</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-gray-300">
+                            <tr>
+                                <td class="py-3 px-4 font-bold">How many levels?</td>
+                                <td class="py-3 px-4 bg-green-50">1-2 levels</td>
+                                <td class="py-3 px-4 bg-purple-50">3-5 levels</td>
+                                <td class="py-3 px-4 bg-orange-50">6+ levels</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-bold">How often updates?</td>
+                                <td class="py-3 px-4 bg-green-50">Frequently</td>
+                                <td class="py-3 px-4 bg-purple-50">Occasionally</td>
+                                <td class="py-3 px-4 bg-orange-50">Any frequency</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-bold">How many consumers?</td>
+                                <td class="py-3 px-4 bg-green-50">1-2 components</td>
+                                <td class="py-3 px-4 bg-purple-50">3-10 components</td>
+                                <td class="py-3 px-4 bg-orange-50">10+ components</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-bold">Crosses routes?</td>
+                                <td class="py-3 px-4 bg-green-50">No</td>
+                                <td class="py-3 px-4 bg-purple-50">Maybe</td>
+                                <td class="py-3 px-4 bg-orange-50">Yes</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-bold">Persist on reload?</td>
+                                <td class="py-3 px-4 bg-green-50">No</td>
+                                <td class="py-3 px-4 bg-purple-50">No</td>
+                                <td class="py-3 px-4 bg-orange-50">Often yes</td>
+                            </tr>
+                            <tr>
+                                <td class="py-3 px-4 font-bold">Complex updates?</td>
+                                <td class="py-3 px-4 bg-green-50">Simple</td>
+                                <td class="py-3 px-4 bg-purple-50">Medium</td>
+                                <td class="py-3 px-4 bg-orange-50">Complex</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-green-50 p-4 rounded-lg border-2 border-green-500">
+                        <h3 class="font-bold text-green-900 mb-3">Props Examples</h3>
+                        <ul class="text-sm text-green-800 space-y-2 ml-4 list-disc">
+                            <li>Parent → Child data</li>
+                            <li>List → ListItem props</li>
+                            <li>Form → Input values</li>
+                            <li>Button onClick handlers</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-purple-50 p-4 rounded-lg border-2 border-purple-500">
+                        <h3 class="font-bold text-purple-900 mb-3">Context Examples</h3>
+                        <ul class="text-sm text-purple-800 space-y-2 ml-4 list-disc">
+                            <li>Theme (light/dark)</li>
+                            <li>Language/i18n</li>
+                            <li>Current user info</li>
+                            <li>Notification system</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-orange-50 p-4 rounded-lg border-2 border-orange-500">
+                        <h3 class="font-bold text-orange-900 mb-3">State Library Examples</h3>
+                        <ul class="text-sm text-orange-800 space-y-2 ml-4 list-disc">
+                            <li>Shopping cart</li>
+                            <li>Complex filters/search</li>
+                            <li>Real-time data feeds</li>
+                            <li>Multi-step wizards</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-indigo-50 rounded border-l-4 border-indigo-500">
+                <p class="font-bold text-indigo-900 mb-2">🎯 Quick Decision:</p>
+                <p class="text-sm text-indigo-800">If you can easily lift state to a common parent without passing through 3+ components, use Props. Otherwise, consider Context or a State Library.</p>
+            </div>
+        </section>
+
+        <!-- PHASE 4: The Decision Matrix -->
+        <section class="phase-box bg-white rounded-lg p-8">
+            <div class="phase-label">PHASE 4: CHOOSE (10 min)</div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900">The Decision Matrix</h2>
+            
+            <div class="space-y-6">
+                <div class="decision-box">
+                    <h3 class="font-bold text-2xl text-blue-900 mb-4 text-center">Start Here ⬇️</h3>
+                    
+                    <div class="space-y-4">
+                        <div class="bg-white p-4 rounded-lg border-2 border-blue-500">
+                            <p class="font-bold text-blue-900 mb-2">Question 1: Is it 1-2 levels from parent to child?</p>
+                            <div class="flex gap-4">
+                                <div class="flex-1 bg-green-100 p-3 rounded border-2 border-green-500 text-center">
+                                    <p class="font-bold text-green-900">YES</p>
+                                    <p class="text-sm text-green-800">→ Use <strong>PROPS</strong></p>
+                                </div>
+                                <div class="flex-1 bg-gray-100 p-3 rounded border-2 border-gray-400 text-center">
+                                    <p class="font-bold text-gray-900">NO</p>
+                                    <p class="text-sm text-gray-800">→ Continue ⬇️</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-lg border-2 border-purple-500">
+                            <p class="font-bold text-purple-900 mb-2">Question 2: Do multiple scattered components need it?</p>
+                            <div class="flex gap-4">
+                                <div class="flex-1 bg-purple-100 p-3 rounded border-2 border-purple-500 text-center">
+                                    <p class="font-bold text-purple-900">YES</p>
+                                    <p class="text-sm text-purple-800">→ Use <strong>CONTEXT</strong></p>
+                                </div>
+                                <div class="flex-1 bg-gray-100 p-3 rounded border-2 border-gray-400 text-center">
+                                    <p class="font-bold text-gray-900">NO</p>
+                                    <p class="text-sm text-gray-800">→ Continue ⬇️</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="bg-white p-4 rounded-lg border-2 border-orange-500">
+                            <p class="font-bold text-orange-900 mb-2">Question 3: Does it need complex updates or persist across routes?</p>
+                            <div class="flex gap-4">
+                                <div class="flex-1 bg-orange-100 p-3 rounded border-2 border-orange-500 text-center">
+                                    <p class="font-bold text-orange-900">YES</p>
+                                    <p class="text-sm text-orange-800">→ Use <strong>ZUSTAND/REDUX</strong></p>
+                                </div>
+                                <div class="flex-1 bg-green-100 p-3 rounded border-2 border-green-500 text-center">
+                                    <p class="font-bold text-green-900">NO</p>
+                                    <p class="text-sm text-green-800">→ Actually, use <strong>PROPS</strong></p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gray-800 text-white p-6 rounded-lg">
+                    <h3 class="font-bold text-xl mb-4">⚠️ Common Mistakes</h3>
+                    <div class="grid md:grid-cols-2 gap-4 text-sm">
+                        <div>
+                            <p class="font-bold text-red-400 mb-2">❌ Don't Do:</p>
+                            <ul class="space-y-1 ml-4 list-disc">
+                                <li>Using Redux for theme toggle (overkill!)</li>
+                                <li>Context for everything (performance issues)</li>
+                                <li>Props through 6+ levels (maintenance nightmare)</li>
+                                <li>Multiple Contexts when one would work</li>
+                            </ul>
+                        </div>
+                        <div>
+                            <p class="font-bold text-green-400 mb-2">✅ Do Instead:</p>
+                            <ul class="space-y-1 ml-4 list-disc">
+                                <li>Start simple, upgrade when needed</li>
+                                <li>Separate Contexts for separate concerns</li>
+                                <li>Measure before optimizing</li>
+                                <li>Document your choice for team</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- PHASE 5: Implementation Patterns -->
+        <section class="phase-box bg-white rounded-lg p-8">
+            <div class="phase-label">PHASE 5: IMPLEMENT (20 min)</div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900">Implementation Guide</h2>
+            
+            <div class="space-y-6">
+                <!-- Props Pattern -->
+                <div class="bg-green-50 p-6 rounded-lg border-2 border-green-500">
+                    <h3 class="font-bold text-2xl text-green-900 mb-4">1. Props Pattern</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="font-bold text-sm mb-2">Step 1: Lift State to Common Parent</p>
+                            <pre><code class="language-jsx">function Dashboard() {
+  const [theme, setTheme] = useState('light');
+  
+  return (
+    <div>
+      <Header theme={theme} />
+      <Settings 
+        theme={theme} 
+        onThemeChange={setTheme} 
+      />
+    </div>
+  );
+}</code></pre>
+                        </div>
+
+                        <div>
+                            <p class="font-bold text-sm mb-2">Step 2: Pass Props Down</p>
+                            <pre><code class="language-jsx">function Header({ theme }) {
+  return (
+    <header className={theme}>
+      {/* Use theme */}
+    </header>
+  );
+}
+
+function Settings({ theme, onThemeChange }) {
+  return (
+    <button onClick={() => onThemeChange('dark')}>
+      Toggle
+    </button>
+  );
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 p-3 bg-white rounded border border-green-600">
+                        <p class="text-sm text-green-900"><strong>✅ Use Props when:</strong> Direct parent-child, data flows one direction, small component trees</p>
+                    </div>
+                </div>
+
+                <!-- Context Pattern -->
+                <div class="bg-purple-50 p-6 rounded-lg border-2 border-purple-500">
+                    <h3 class="font-bold text-2xl text-purple-900 mb-4">2. Context Pattern</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="font-bold text-sm mb-2">Step 1: Create Context + Provider</p>
+                            <pre><code class="language-jsx">const ThemeContext = createContext();
+
+function ThemeProvider({ children }) {
+  const [theme, setTheme] = useState('light');
+  
+  const value = { theme, setTheme };
+  
+  return (
+    <ThemeContext.Provider value={value}>
+      {children}
+    </ThemeContext.Provider>
+  );
+}
+
+// Custom hook for convenience
+function useTheme() {
+  return useContext(ThemeContext);
+}</code></pre>
+                        </div>
+
+                        <div>
+                            <p class="font-bold text-sm mb-2">Step 2: Wrap App + Use Anywhere</p>
+                            <pre><code class="language-jsx">// App.jsx
+function App() {
+  return (
+    <ThemeProvider>
+      <Dashboard />
+    </ThemeProvider>
+  );
+}
+
+// Any deeply nested component
+function DeepComponent() {
+  const { theme, setTheme } = useTheme();
+  
+  return (
+    <button onClick={() => setTheme('dark')}>
+      Current: {theme}
+    </button>
+  );
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 p-3 bg-white rounded border border-purple-600">
+                        <p class="text-sm text-purple-900"><strong>✅ Use Context when:</strong> 3+ levels deep, avoid prop drilling, theme/auth/language type data</p>
+                    </div>
+                </div>
+
+                <!-- State Library Pattern -->
+                <div class="bg-orange-50 p-6 rounded-lg border-2 border-orange-500">
+                    <h3 class="font-bold text-2xl text-orange-900 mb-4">3. Zustand Pattern (Recommended Library)</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="font-bold text-sm mb-2">Step 1: Create Store</p>
+                            <pre><code class="language-jsx">import { create } from 'zustand';
+
+const useCartStore = create((set) => ({
+  items: [],
+  
+  addItem: (item) => set((state) => ({
+    items: [...state.items, item]
+  })),
+  
+  removeItem: (id) => set((state) => ({
+    items: state.items.filter(i => i.id !== id)
+  })),
+  
+  clearCart: () => set({ items: [] })
+}));</code></pre>
+                        </div>
+
+                        <div>
+                            <p class="font-bold text-sm mb-2">Step 2: Use Anywhere (No Provider!)</p>
+                            <pre><code class="language-jsx">function ProductCard({ product }) {
+  const addItem = useCartStore(s => s.addItem);
+  
+  return (
+    <button onClick={() => addItem(product)}>
+      Add to Cart
+    </button>
+  );
+}
+
+function CartIcon() {
+  const items = useCartStore(s => s.items);
+  
+  return (
+    <div>Cart ({items.length})</div>
+  );
+}</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="mt-4 p-3 bg-white rounded border border-orange-600">
+                        <p class="text-sm text-orange-900"><strong>✅ Use Zustand when:</strong> Complex state logic, cross-route state, need DevTools, want simplicity over Redux</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-blue-50 rounded border-l-4 border-blue-500">
+                <p class="font-bold text-blue-900 mb-2">💡 Migration Path:</p>
+                <p class="text-sm text-blue-800">Start with Props → Refactor to Context when painful → Move to Zustand when Context gets complex. Each step is incremental!</p>
+            </div>
+        </section>
+
+        <!-- Comparison Table -->
+        <section class="bg-white rounded-lg shadow-lg p-8">
+            <h2 class="text-3xl font-bold mb-6 text-gray-900">📊 Feature Comparison</h2>
+            
+            <div class="overflow-x-auto">
+                <table class="w-full text-sm">
+                    <thead>
+                        <tr class="border-b-2 border-gray-400">
+                            <th class="text-left py-3 px-4">Feature</th>
+                            <th class="text-left py-3 px-4 bg-green-100">Props</th>
+                            <th class="text-left py-3 px-4 bg-purple-100">Context</th>
+                            <th class="text-left py-3 px-4 bg-orange-100">Zustand</th>
+                            <th class="text-left py-3 px-4 bg-red-100">Redux</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-gray-300">
+                        <tr>
+                            <td class="py-3 px-4 font-bold">Setup Complexity</td>
+                            <td class="py-3 px-4 bg-green-50">⭐ None</td>
+                            <td class="py-3 px-4 bg-purple-50">⭐⭐ Low</td>
+                            <td class="py-3 px-4 bg-orange-50">⭐⭐ Low</td>
+                            <td class="py-3 px-4 bg-red-50">⭐⭐⭐⭐⭐ High</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-bold">Bundle Size</td>
+                            <td class="py-3 px-4 bg-green-50">0 KB</td>
+                            <td class="py-3 px-4 bg-purple-50">0 KB</td>
+                            <td class="py-3 px-4 bg-orange-50">~1 KB</td>
+                            <td class="py-3 px-4 bg-red-50">~3 KB</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-bold">Performance</td>
+                            <td class="py-3 px-4 bg-green-50">✅ Excellent</td>
+                            <td class="py-3 px-4 bg-purple-50">⚠️ Can re-render</td>
+                            <td class="py-3 px-4 bg-orange-50">✅ Excellent</td>
+                            <td class="py-3 px-4 bg-red-50">✅ Excellent</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-bold">DevTools</td>
+                            <td class="py-3 px-4 bg-green-50">React DevTools</td>
+                            <td class="py-3 px-4 bg-purple-50">React DevTools</td>
+                            <td class="py-3 px-4 bg-orange-50">✅ Built-in</td>
+                            <td class="py-3 px-4 bg-red-50">✅ Extensive</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-bold">TypeScript</td>
+                            <td class="py-3 px-4 bg-green-50">✅ Native</td>
+                            <td class="py-3 px-4 bg-purple-50">✅ Native</td>
+                            <td class="py-3 px-4 bg-orange-50">✅ Excellent</td>
+                            <td class="py-3 px-4 bg-red-50">✅ Excellent</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-bold">Middleware</td>
+                            <td class="py-3 px-4 bg-green-50">❌ None</td>
+                            <td class="py-3 px-4 bg-purple-50">❌ None</td>
+                            <td class="py-3 px-4 bg-orange-50">✅ Simple</td>
+                            <td class="py-3 px-4 bg-red-50">✅ Extensive</td>
+                        </tr>
+                        <tr>
+                            <td class="py-3 px-4 font-bold">Learning Curve</td>
+                            <td class="py-3 px-4 bg-green-50">⭐ Easy</td>
+                            <td class="py-3 px-4 bg-purple-50">⭐⭐ Medium</td>
+                            <td class="py-3 px-4 bg-orange-50">⭐⭐ Medium</td>
+                            <td class="py-3 px-4 bg-red-50">⭐⭐⭐⭐⭐ Steep</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="mt-6 p-4 bg-indigo-50 rounded border-l-4 border-indigo-500">
+                <p class="font-bold text-indigo-900 mb-2">🎯 Recommendation:</p>
+                <p class="text-sm text-indigo-800">For most apps: <strong>Props</strong> for local state, <strong>Context</strong> for theme/auth, <strong>Zustand</strong> for complex global state. Skip Redux unless you need its ecosystem.</p>
+            </div>
+        </section>
+
+        <!-- Practice Projects -->
+        <section class="bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-lg p-8">
+            <h2 class="text-3xl font-bold mb-4">🎓 Master Through Practice</h2>
+            <p class="text-lg mb-6">Build these 10 projects, making deliberate data flow decisions:</p>
+            
+            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                <div class="space-y-3">
+                    <div class="bg-white/10 p-4 rounded-lg">
+                        <p class="font-bold text-lg mb-1">1. Todo List</p>
+                        <p class="text-xs opacity-90"><strong>Start:</strong> Props | <strong>Upgrade:</strong> Context for filters</p>
+                        <p class="text-xs mt-1">Practice lifting state to common parent</p>
+                    </div>
+
+                    <div class="bg-white/10 p-4 rounded-lg">
+                        <p class="font-bold text-lg mb-1">2. Theme Switcher</p>
+                        <p class="text-xs opacity-90"><strong>Start:</strong> Props | <strong>Upgrade:</strong> Context</p>
+                        <p class="text-xs mt-1">Classic Context use case - affects entire UI</p>
+                    </div>
+
+                    <div class="bg-white/10 p-4 rounded-lg">
+                        <p class="font-bold text-lg mb-1">3. User Profile Dashboard</p>
+                        <p class="text-xs opacity-90"><strong>Use:</strong> Context for user, Props for components</p>
+                        <p class="text-xs mt-1">Combine patterns appropriately</p>
+                    </div>
+
+                    <div class="bg-white/10 p-4 rounded-lg">
+                        <p class="font-bold text-lg mb-1">4. Shopping Cart</p>
+                        <p class="text-xs opacity-90"><strong>Use:</strong> Zustand for cart state</p>
+                        <p class="text-xs mt-1">Cross-route state, complex updates</p>
+                    </div>
+
+                    <div class="bg-white/10 p-4 rounded-lg">
+                        <p class="font-bold text-lg mb-1">5. Multi-step Form</p>
+                        <p class="text-xs opacity-90"><strong>Start:</strong> Props | <strong>Consider:</strong> Zustand if complex</p>
+                        <p class="text-xs mt-1">Practice component composition</p>
+                    </div>
+                </div>
+
+                <div class="space-y-3">
+                    <div class="bg-white/10 p-4 rounded-lg">
+                        <p class="font-bold text-lg mb-1">6. Notification System</p>
+                        <p class="text-xs opacity-90"><strong>Use:</strong> Context + custom hook</p>
+                        <p class="text-xs mt-1">Global notifications, any component can trigger</p>
+                    </div>
+
+                    <div class="bg-white/10 p-4 rounded-lg">
+                        <p class="font-bold text-lg mb-1">7. Product Catalog with Filters</p>
+                        <p class="text-xs opacity-90"><strong>Start:</strong> Props | <strong>Upgrade:</strong> Zustand</p>
+                        <p class="text-xs mt-1">URL sync, complex filter logic</p>
+                    </div>
+
+                    <div class="bg-white/10 p-4 rounded-lg">
+                        <p class="font-bold text-lg mb-1">8. Chat Application</p>
+                        <p class="text-xs opacity-90"><strong>Use:</strong> Zustand for messages, Context for user</p>
+                        <p class="text-xs mt-1">Real-time updates, multiple concerns</p>
+                    </div>
+
+                    <div class="bg-white/10 p-4 rounded-lg">
+                        <p class="font-bold text-lg mb-1">9. Dashboard with Widgets</p>
+                        <p class="text-xs opacity-90"><strong>Use:</strong> Props for widgets, Context for layout</p>
+                        <p class="text-xs mt-1">Each widget isolated, shared layout settings</p>
+                    </div>
+
+                    <div class="bg-white/10 p-4 rounded-lg">
+                        <p class="font-bold text-lg mb-1">10. Blog with Comments</p>
+                        <p class="text-xs opacity-90"><strong>Use:</strong> Props mostly, Context for auth</p>
+                        <p class="text-xs mt-1">Practice choosing the simplest solution</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-white/10 rounded-lg">
+                <p class="font-bold text-lg mb-2">Time Investment</p>
+                <p class="text-sm">~3 hours per project × 10 = ~30 hours total</p>
+                <p class="text-sm mt-2">After 5-6 projects, data flow decisions become intuitive.</p>
+                <p class="text-sm font-bold mt-3">🎯 Goal: Stop over-engineering, pick the right tool for the job!</p>
+            </div>
+        </section>
+
+        <!-- Migration Guide -->
+        <section class="bg-white rounded-lg shadow-lg p-8">
+            <h2 class="text-3xl font-bold mb-6 text-gray-900">🔄 Migration Paths</h2>
+            
+            <div class="space-y-6">
+                <div class="bg-gradient-to-r from-green-50 to-purple-50 p-6 rounded-lg border-2 border-purple-500">
+                    <h3 class="font-bold text-xl text-purple-900 mb-4">Props → Context</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="font-bold text-sm mb-2 text-green-700">Before (Props)</p>
+                            <pre><code class="language-jsx">function App() {
+  const [theme, setTheme] = useState('light');
+  return (
+    <Layout theme={theme}>
+      <Header theme={theme} />
+      <Main theme={theme}>
+        <Card theme={theme} /> {/* 😫 */}
+      </Main>
+    </Layout>
+  );
+}</code></pre>
+                        </div>
+
+                        <div>
+                            <p class="font-bold text-sm mb-2 text-purple-700">After (Context)</p>
+                            <pre><code class="language-jsx">function App() {
+  return (
+    <ThemeProvider>
+      <Layout>
+        <Header />
+        <Main>
+          <Card /> {/* 😊 Uses useTheme() */}
+        </Main>
+      </Layout>
+    </ThemeProvider>
+  );
+}</code></pre>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-gradient-to-r from-purple-50 to-orange-50 p-6 rounded-lg border-2 border-orange-500">
+                    <h3 class="font-bold text-xl text-orange-900 mb-4">Context → Zustand</h3>
+                    
+                    <div class="grid md:grid-cols-2 gap-6">
+                        <div>
+                            <p class="font-bold text-sm mb-2 text-purple-700">Before (Context)</p>
+                            <pre><code class="language-jsx">// Getting complex...
+const CartContext = createContext();
+
+function CartProvider({ children }) {
+  const [items, setItems] = useState([]);
+  
+  const addItem = (item) => {
+    setItems(prev => [...prev, item]);
+  };
+  
+  const removeItem = (id) => {
+    setItems(prev => 
+      prev.filter(i => i.id !== id)
+    );
+  };
+  
+  // More logic...
+  
+  return <CartContext.Provider ...>
+}</code></pre>
+                        </div>
+
+                        <div>
+                            <p class="font-bold text-sm mb-2 text-orange-700">After (Zustand)</p>
+                            <pre><code class="language-jsx">// Much cleaner!
+import { create } from 'zustand';
+
+const useCart = create((set) => ({
+  items: [],
+  
+  addItem: (item) => set((state) => ({
+    items: [...state.items, item]
+  })),
+  
+  removeItem: (id) => set((state) => ({
+    items: state.items.filter(i => i.id !== id)
+  }))
+}));
+
+// No Provider needed!</code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-blue-50 rounded border-l-4 border-blue-500">
+                <p class="font-bold text-blue-900 mb-2">📝 Migration Checklist:</p>
+                <ul class="text-sm text-blue-800 space-y-1 ml-4 list-disc">
+                    <li>Don't migrate just because - wait until current approach is painful</li>
+                    <li>Migrate one feature at a time, not entire app</li>
+                    <li>Both approaches can coexist during migration</li>
+                    <li>Test thoroughly after migration</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Final Decision Tree -->
+        <section class="bg-gradient-to-br from-indigo-600 to-purple-600 text-white rounded-lg p-8">
+            <h2 class="text-3xl font-bold mb-6 text-center">🌲 The Decision Tree (Print This!)</h2>
+            
+            <div class="bg-white/10 rounded-lg p-6 backdrop-blur">
+                <div class="space-y-4">
+                    <div class="bg-white/20 p-4 rounded-lg text-center">
+                        <p class="font-bold text-xl">START: I need to share data between components</p>
+                    </div>
+
+                    <div class="flex justify-center">
+                        <div class="text-4xl">⬇️</div>
+                    </div>
+
+                    <div class="bg-green-500 p-4 rounded-lg text-center">
+                        <p class="font-bold">Is it parent → direct child?</p>
+                        <p class="text-sm mt-2">YES → <strong>USE PROPS</strong> ✅</p>
+                        <p class="text-sm">NO → Continue ⬇️</p>
+                    </div>
+
+                    <div class="flex justify-center">
+                        <div class="text-4xl">⬇️</div>
+                    </div>
+
+                    <div class="bg-purple-500 p-4 rounded-lg text-center">
+                        <p class="font-bold">Is it 3-5 levels deep + many components need it?</p>
+                        <p class="text-sm mt-2">YES → <strong>USE CONTEXT</strong> ✅</p>
+                        <p class="text-sm">NO → Continue ⬇️</p>
+                    </div>
+
+                    <div class="flex justify-center">
+                        <div class="text-4xl">⬇️</div>
+                    </div>
+
+                    <div class="bg-orange-500 p-4 rounded-lg text-center">
+                        <p class="font-bold">Is it 6+ levels OR crosses routes OR complex logic?</p>
+                        <p class="text-sm mt-2">YES → <strong>USE ZUSTAND</strong> ✅</p>
+                        <p class="text-sm">NO → Actually, go back and <strong>USE PROPS</strong></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-6 p-4 bg-white/10 rounded-lg">
+                <p class="font-bold text-center text-xl">Remember: When in doubt, start with Props!</p>
+                <p class="text-center text-sm mt-2">You can always upgrade later. Premature optimization is the root of all evil.</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="max-w-6xl mx-auto mt-12 text-center text-gray-600 text-sm">
+        <p class="font-bold mb-2">Print the decision tree. Build the 10 projects. Master data flow!</p>
+        <p>Each project takes ~3 hours. After 30 hours of practice, you'll make the right choice instinctively.</p>
+        <p class="mt-4 text-xs">The best React developers use the simplest solution that works.</p>
+    </div>
+
+    <script>
+        // Initialize Highlight.js
+        hljs.highlightAll();
+    </script>
+
+</body>
+</html>

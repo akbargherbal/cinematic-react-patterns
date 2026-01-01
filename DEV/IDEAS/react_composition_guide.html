@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>React Component Composition - Visual Guide</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+        }
+        .phase-box {
+            border: 3px dashed #cbd5e1;
+            position: relative;
+        }
+        .phase-label {
+            position: absolute;
+            top: -12px;
+            left: 16px;
+            background: white;
+            padding: 0 8px;
+            font-weight: 700;
+            font-size: 14px;
+            color: #475569;
+        }
+        .component-box {
+            border: 2px solid #3b82f6;
+            position: relative;
+            background: rgba(59, 130, 246, 0.05);
+        }
+        .component-label {
+            position: absolute;
+            top: -10px;
+            left: 8px;
+            background: #3b82f6;
+            color: white;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-size: 11px;
+            font-weight: 600;
+            font-family: 'Courier New', monospace;
+        }
+        .leaf-component {
+            border-color: #10b981;
+            background: rgba(16, 185, 129, 0.05);
+        }
+        .leaf-component .component-label {
+            background: #10b981;
+        }
+        .data-flow {
+            background: linear-gradient(to right, #fef3c7, #fde68a);
+            border-left: 4px solid #f59e0b;
+        }
+        .event-flow {
+            background: linear-gradient(to right, #fee2e2, #fecaca);
+            border-left: 4px solid #ef4444;
+        }
+        .checklist-item {
+            display: flex;
+            align-items: start;
+            gap: 8px;
+            margin: 8px 0;
+        }
+        .checklist-checkbox {
+            width: 20px;
+            height: 20px;
+            margin-top: 2px;
+            flex-shrink: 0;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 p-8">
+    
+    <!-- Header -->
+    <div class="max-w-6xl mx-auto mb-12">
+        <h1 class="text-4xl font-bold text-gray-900 mb-2">React Component Composition</h1>
+        <p class="text-xl text-gray-600">From Static HTML → Composable Components</p>
+    </div>
+
+    <!-- Checklist Sidebar -->
+    <div class="max-w-6xl mx-auto mb-8 bg-white rounded-lg shadow-md p-6">
+        <h2 class="text-2xl font-bold mb-4 text-gray-900">📋 The Checklist</h2>
+        
+        <div class="grid md:grid-cols-2 gap-6">
+            <div>
+                <h3 class="font-bold text-lg mb-3 text-blue-700">Phase 1: Identify (5 min)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Draw mental boxes around sections</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Name each section in plain English</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Ask: "What would I reuse?"</span>
+                </div>
+
+                <h3 class="font-bold text-lg mb-3 mt-6 text-green-700">Phase 2: Extract (45 min)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Start with smallest pieces first</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Each component = ONE job</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Props = what changes between uses</span>
+                </div>
+            </div>
+
+            <div>
+                <h3 class="font-bold text-lg mb-3 text-yellow-700">Phase 3: Data (15 min)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Create single data object</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Extract all hardcoded values</span>
+                </div>
+
+                <h3 class="font-bold text-lg mb-3 mt-6 text-purple-700">Phase 4: Wire (20 min)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Main component gets full object</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Children get only what they need</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Events pass as functions</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Add key to .map() loops</span>
+                </div>
+
+                <h3 class="font-bold text-lg mb-3 mt-6 text-red-700">Phase 5: Verify (10 min)</h3>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">Works with different data?</span>
+                </div>
+                <div class="checklist-item">
+                    <input type="checkbox" class="checklist-checkbox">
+                    <span class="text-sm">No hardcoded values left?</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="max-w-6xl mx-auto space-y-12">
+
+        <!-- PHASE 0: Starting Point -->
+        <section class="phase-box bg-white rounded-lg p-8">
+            <div class="phase-label">PHASE 0: YOUR STARTING POINT</div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900">Static HTML with Tailwind</h2>
+            
+            <div class="bg-gray-100 p-6 rounded-lg mb-4">
+                <div class="bg-white rounded-lg shadow-md p-6 max-w-sm">
+                    <div class="flex items-center gap-4 mb-6">
+                        <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Ada" alt="Ada Lovelace" class="w-16 h-16 rounded-full">
+                        <div>
+                            <h2 class="text-xl font-bold text-gray-900">Ada Lovelace</h2>
+                            <p class="text-gray-600">Computational Visionary</p>
+                        </div>
+                    </div>
+                    <ul class="flex flex-wrap gap-2 mb-6">
+                        <li class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Mathematics</li>
+                        <li class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Poetry</li>
+                        <li class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Algorithms</li>
+                    </ul>
+                    <div class="flex gap-2">
+                        <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex-1">Follow</button>
+                        <button class="bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300 flex-1">Message</button>
+                    </div>
+                </div>
+            </div>
+            
+            <p class="text-gray-700 text-sm italic">✅ This renders correctly. Time to break it into components!</p>
+        </section>
+
+        <!-- PHASE 1: Identify Boundaries -->
+        <section class="phase-box bg-white rounded-lg p-8">
+            <div class="phase-label">PHASE 1: IDENTIFY (5 min)</div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900">Draw Mental Boxes</h2>
+            
+            <div class="bg-gray-100 p-6 rounded-lg">
+                <div class="component-box rounded-lg p-6 max-w-sm bg-white shadow-md">
+                    <div class="component-label">&lt;Card&gt;</div>
+                    
+                    <div class="component-box rounded-lg p-4 mb-4">
+                        <div class="component-label">&lt;Header&gt;</div>
+                        
+                        <div class="flex items-center gap-4">
+                            <div class="leaf-component component-box rounded-full p-1">
+                                <div class="component-label">&lt;Avatar&gt;</div>
+                                <img src="https://api.dicebear.com/7.x/avataaars/svg?seed=Ada" alt="Ada" class="w-16 h-16 rounded-full">
+                            </div>
+                            
+                            <div class="leaf-component component-box rounded p-2">
+                                <div class="component-label">&lt;Bio&gt;</div>
+                                <div>
+                                    <h2 class="text-xl font-bold text-gray-900">Ada Lovelace</h2>
+                                    <p class="text-gray-600">Computational Visionary</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="leaf-component component-box rounded-lg p-4 mb-4">
+                        <div class="component-label">&lt;SkillList&gt;</div>
+                        <ul class="flex flex-wrap gap-2">
+                            <li class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Mathematics</li>
+                            <li class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Poetry</li>
+                            <li class="bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-sm">Algorithms</li>
+                        </ul>
+                    </div>
+                    
+                    <div class="leaf-component component-box rounded-lg p-2">
+                        <div class="component-label">&lt;ActionBar&gt;</div>
+                        <div class="flex gap-2">
+                            <button class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 flex-1">Follow</button>
+                            <button class="bg-gray-200 text-gray-800 px-4 py-2 rounded hover:bg-gray-300 flex-1">Message</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4 p-4 bg-blue-50 rounded border-l-4 border-blue-500">
+                <p class="font-bold text-blue-900 mb-2">Component Boundaries Identified:</p>
+                <ul class="text-sm text-blue-800 space-y-1">
+                    <li>🟦 <strong>Blue boxes</strong> = Container components (have children)</li>
+                    <li>🟩 <strong>Green boxes</strong> = Leaf components (receive data, no children)</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- PHASE 2: Extract Components -->
+        <section class="phase-box bg-white rounded-lg p-8">
+            <div class="phase-label">PHASE 2: EXTRACT (45 min)</div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900">Build Bottom-Up (Smallest First)</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div class="bg-green-50 p-4 rounded-lg border-2 border-green-500">
+                    <h3 class="font-bold text-green-900 mb-3">1. Leaf Components (Start Here)</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="bg-white p-3 rounded border border-green-300">
+                            <code class="text-xs text-green-800">function Avatar({ src, alt })</code>
+                            <p class="text-xs text-gray-600 mt-1">Just displays image</p>
+                        </div>
+                        <div class="bg-white p-3 rounded border border-green-300">
+                            <code class="text-xs text-green-800">function Bio({ name, title })</code>
+                            <p class="text-xs text-gray-600 mt-1">Just displays text</p>
+                        </div>
+                        <div class="bg-white p-3 rounded border border-green-300">
+                            <code class="text-xs text-green-800">function SkillList({ skills })</code>
+                            <p class="text-xs text-gray-600 mt-1">Maps array to badges</p>
+                        </div>
+                        <div class="bg-white p-3 rounded border border-green-300">
+                            <code class="text-xs text-green-800">function ActionBar({ onFollow, onMessage })</code>
+                            <p class="text-xs text-gray-600 mt-1">Buttons with events</p>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="bg-blue-50 p-4 rounded-lg border-2 border-blue-500">
+                    <h3 class="font-bold text-blue-900 mb-3">2. Container Components (Build After)</h3>
+                    <div class="space-y-3 text-sm">
+                        <div class="bg-white p-3 rounded border border-blue-300">
+                            <code class="text-xs text-blue-800">function Card({ children })</code>
+                            <p class="text-xs text-gray-600 mt-1">Wraps everything</p>
+                        </div>
+                        <div class="bg-white p-3 rounded border border-blue-300">
+                            <code class="text-xs text-blue-800">function Header({ children })</code>
+                            <p class="text-xs text-gray-600 mt-1">Groups Avatar + Bio</p>
+                        </div>
+                        <div class="bg-white p-3 rounded border border-blue-300">
+                            <code class="text-xs text-blue-800">function UserProfile({ user })</code>
+                            <p class="text-xs text-gray-600 mt-1">Orchestrates all pieces</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4 p-4 bg-yellow-50 rounded border-l-4 border-yellow-500">
+                <p class="font-bold text-yellow-900 mb-2">💡 Key Pattern:</p>
+                <p class="text-sm text-yellow-800">Components that <strong>display data</strong> = props like <code>src</code>, <code>name</code>, <code>skills</code></p>
+                <p class="text-sm text-yellow-800">Components that <strong>organize layout</strong> = <code>{`{children}`}</code> prop</p>
+            </div>
+        </section>
+
+        <!-- PHASE 3: Data Object -->
+        <section class="phase-box bg-white rounded-lg p-8">
+            <div class="phase-label">PHASE 3: DATA (15 min)</div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900">Extract Hardcoded Values</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <div>
+                    <h3 class="font-bold text-red-700 mb-3">❌ Before: Hardcoded in HTML</h3>
+                    <div class="bg-gray-100 p-4 rounded text-xs font-mono overflow-x-auto">
+<pre class="text-red-600">&lt;h2&gt;<span class="bg-red-200">Ada Lovelace</span>&lt;/h2&gt;
+&lt;p&gt;<span class="bg-red-200">Computational Visionary</span>&lt;/p&gt;
+&lt;img src="<span class="bg-red-200">/ada.png</span>" /&gt;
+&lt;li&gt;<span class="bg-red-200">Mathematics</span>&lt;/li&gt;
+&lt;li&gt;<span class="bg-red-200">Poetry</span>&lt;/li&gt;</pre>
+                    </div>
+                </div>
+                
+                <div>
+                    <h3 class="font-bold text-green-700 mb-3">✅ After: Single Data Object</h3>
+                    <div class="bg-gray-100 p-4 rounded text-xs font-mono overflow-x-auto">
+<pre class="text-green-600">const user = {
+  name: "Ada Lovelace",
+  title: "Computational Visionary",
+  avatarUrl: "/ada.png",
+  skills: [
+    "Mathematics",
+    "Poetry",
+    "Algorithms"
+  ]
+};</pre>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4 p-4 bg-purple-50 rounded border-l-4 border-purple-500">
+                <p class="font-bold text-purple-900 mb-2">🎯 Test:</p>
+                <p class="text-sm text-purple-800">Can you create a <code>user2</code> object with different values and it would work? If yes, you've extracted correctly!</p>
+            </div>
+        </section>
+
+        <!-- PHASE 4: Data Flow -->
+        <section class="phase-box bg-white rounded-lg p-8">
+            <div class="phase-label">PHASE 4: WIRE (20 min)</div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900">Connect Props Parent → Child</h2>
+            
+            <div class="space-y-4">
+                <div class="data-flow p-4 rounded-lg">
+                    <p class="font-bold text-yellow-900 mb-2">⬇️ Data Flows DOWN</p>
+                    <div class="text-sm space-y-2 font-mono">
+                        <div class="bg-white p-2 rounded border">
+                            <code>&lt;UserProfile user={user} /&gt;</code>
+                            <span class="text-gray-600 text-xs ml-2">← Full object</span>
+                        </div>
+                        <div class="ml-6 bg-white p-2 rounded border">
+                            <code>&lt;Avatar src={user.avatarUrl} /&gt;</code>
+                            <span class="text-gray-600 text-xs ml-2">← Just what it needs</span>
+                        </div>
+                        <div class="ml-6 bg-white p-2 rounded border">
+                            <code>&lt;Bio name={user.name} title={user.title} /&gt;</code>
+                            <span class="text-gray-600 text-xs ml-2">← Only 2 fields</span>
+                        </div>
+                        <div class="ml-6 bg-white p-2 rounded border">
+                            <code>&lt;SkillList skills={user.skills} /&gt;</code>
+                            <span class="text-gray-600 text-xs ml-2">← Array to map over</span>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="event-flow p-4 rounded-lg">
+                    <p class="font-bold text-red-900 mb-2">⬆️ Events Flow UP</p>
+                    <div class="text-sm space-y-2 font-mono">
+                        <div class="bg-white p-2 rounded border">
+                            <code>&lt;ActionBar onFollow={handleFollow} onMessage={handleMessage} /&gt;</code>
+                        </div>
+                        <div class="ml-6 bg-white p-2 rounded border">
+                            <code>&lt;button onClick={onFollow}&gt;Follow&lt;/button&gt;</code>
+                            <span class="text-gray-600 text-xs ml-2">← Triggers parent function</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="mt-4 p-4 bg-indigo-50 rounded border-l-4 border-indigo-500">
+                <p class="font-bold text-indigo-900 mb-2">🔑 Golden Rule:</p>
+                <p class="text-sm text-indigo-800"><strong>Parent decides what data.</strong> Child decides how to display it.</p>
+                <p class="text-sm text-indigo-800 mt-1"><strong>Child triggers event.</strong> Parent decides what happens.</p>
+            </div>
+        </section>
+
+        <!-- PHASE 5: Final Result -->
+        <section class="phase-box bg-white rounded-lg p-8">
+            <div class="phase-label">PHASE 5: VERIFY (10 min)</div>
+            <h2 class="text-2xl font-bold mb-4 text-gray-900">Self-Test Questions</h2>
+            
+            <div class="grid md:grid-cols-3 gap-4">
+                <div class="bg-green-50 p-4 rounded-lg border-2 border-green-500">
+                    <h3 class="font-bold text-green-900 mb-2">1. Reusable?</h3>
+                    <p class="text-sm text-green-800">Can components work with different data?</p>
+                    <p class="text-xs text-green-700 mt-2 font-mono">user2 = {name: "Grace Hopper", ...}</p>
+                </div>
+                
+                <div class="bg-blue-50 p-4 rounded-lg border-2 border-blue-500">
+                    <h3 class="font-bold text-blue-900 mb-2">2. Single Purpose?</h3>
+                    <p class="text-sm text-blue-800">Does each component do ONE thing?</p>
+                    <p class="text-xs text-blue-700 mt-2">Avatar = shows image<br>Bio = shows text</p>
+                </div>
+                
+                <div class="bg-purple-50 p-4 rounded-lg border-2 border-purple-500">
+                    <h3 class="font-bold text-purple-900 mb-2">3. Clear Flow?</h3>
+                    <p class="text-sm text-purple-800">Can you trace data object → screen?</p>
+                    <p class="text-xs text-purple-700 mt-2">user.name → Bio → &lt;h2&gt;</p>
+                </div>
+            </div>
+            
+            <div class="mt-6 p-4 bg-gray-800 text-white rounded-lg">
+                <p class="font-bold mb-2">🎯 Success Criteria:</p>
+                <ul class="text-sm space-y-1">
+                    <li>✅ All 3 questions = YES</li>
+                    <li>✅ No hardcoded values in components</li>
+                    <li>✅ Tailwind classes use <code>className</code></li>
+                    <li>✅ <code>key</code> prop on mapped items</li>
+                    <li>✅ You can explain each component's purpose</li>
+                </ul>
+            </div>
+        </section>
+
+        <!-- Practice Projects -->
+        <section class="bg-gradient-to-r from-purple-600 to-blue-600 text-white rounded-lg p-8">
+            <h2 class="text-3xl font-bold mb-4">🎓 Master Through Repetition</h2>
+            <p class="text-lg mb-4">Build 10 variations following this exact sequence:</p>
+            
+            <div class="grid md:grid-cols-2 gap-4 text-sm">
+                <ul class="space-y-2">
+                    <li>1. ✅ User profile card (you just learned this!)</li>
+                    <li>2. 🛍️ Product card with image gallery</li>
+                    <li>3. 📝 Blog post with comments</li>
+                    <li>4. 💰 Pricing table with features</li>
+                    <li>5. 📊 Dashboard stat cards</li>
+                </ul>
+                <ul class="space-y-2">
+                    <li>6. 👥 Team member directory</li>
+                    <li>7. ✔️ Todo list with filters</li>
+                    <li>8. 🛒 Shopping cart with items</li>
+                    <li>9. 📅 Calendar event card</li>
+                    <li>10. 📋 Multi-step form wizard</li>
+                </ul>
+            </div>
+            
+            <div class="mt-6 p-4 bg-white/10 rounded-lg">
+                <p class="font-bold">After ~6 reps, the pattern becomes automatic.</p>
+                <p class="text-sm mt-2">Total time to mastery: ~20 hours of deliberate practice</p>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <div class="max-w-6xl mx-auto mt-12 text-center text-gray-600 text-sm">
+        <p>Print this guide. Check the boxes. Build 10 projects. Master component composition.</p>
+        <p class="mt-2">Each ~2 hour project moves you from copying → understanding → mastery.</p>
+    </div>
+
+</body>
+</html>

@@ -236,7 +236,7 @@ dispatch(action);
       {/* MAIN CONTENT - Two Column Layout */}
       <main className="max-w-7xl mx-auto px-4 md:px-8 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
         {/* LEFT COLUMN - Content & Demos */}
-        <div className="lg:col-span-7 space-y-8">
+        <div className="lg:col-span-8 space-y-8">
           {/* Chapter Content */}
           <section className="bg-slate-900/50 border border-slate-800 rounded-xl p-6 md:p-8">
             <div className="flex items-center justify-between mb-6">
@@ -534,7 +534,7 @@ dispatch(action);
         </div>
         
         {/* RIGHT COLUMN - Sticky Sidebar */}
-        <div className="lg:col-span-5">
+        <div className="lg:col-span-4">
           <div className="sticky top-24 space-y-6">
             {/* System Status Card */}
             <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-6">

@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Comparison Component - Demo</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Syntax highlighting styles */
+        .code-block pre {
+            color: rgb(212, 212, 212);
+            font-size: 13px;
+            font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace;
+            line-height: 1.5;
+            padding: 1rem;
+            margin: 0;
+            overflow-x: auto;
+            background: rgba(30, 30, 30, 0.85);
+            border-radius: 0.5rem;
+        }
+        .code-block code {
+            color: rgb(156, 220, 254);
+            font-size: 13px;
+            font-family: Menlo, Monaco, Consolas, "Andale Mono", "Ubuntu Mono", "Courier New", monospace;
+        }
+        .token.comment { color: rgb(106, 153, 85); }
+        .token.keyword { color: rgb(86, 156, 214); }
+        .token.function { color: rgb(220, 220, 170); }
+        .token.punctuation { color: rgb(212, 212, 212); }
+        .token.number { color: rgb(181, 206, 168); }
+        .token.operator { color: rgb(212, 212, 212); }
+        .token.parameter { color: rgb(156, 220, 254); }
+        
+        /* Toggle animation */
+        .code-content {
+            transition: opacity 150ms ease-in-out, transform 150ms ease-in-out;
+        }
+        .code-content.hidden {
+            display: none;
+        }
+    </style>
+    <script>
+        function toggleCode(mode) {
+            // Hide all code blocks
+            document.querySelectorAll('.code-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            // Show selected code block
+            document.getElementById('code-' + mode).classList.remove('hidden');
+            
+            // Update button states
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('inactive');
+            });
+            document.getElementById('btn-' + mode).classList.remove('inactive');
+            document.getElementById('btn-' + mode).classList.add('active');
+        }
+        
+        // Set default on load
+        window.addEventListener('DOMContentLoaded', () => {
+            toggleCode('bad');
+        });
+    </script>
+</head>
+<body class="bg-slate-950 text-slate-300 font-serif p-8">
+    <div class="max-w-4xl mx-auto space-y-12">
+        
+        <!-- Header -->
+        <div class="text-center space-y-2">
+            <h1 class="text-3xl font-bold text-amber-100">Code Comparison Component</h1>
+            <p class="text-slate-400">Toggleable pattern for comparing "Bad" vs "Good" code examples</p>
+        </div>
+
+        <!-- ==================== PATTERN 1: Toggle Buttons (Recommended) ==================== -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-xl font-bold text-amber-200">Pattern 1: Toggle Buttons</h2>
+                <span class="text-xs text-slate-500 font-mono">Recommended</span>
+            </div>
+            
+            <!-- The Proposed Component -->
+            <div class="bg-slate-900/40 border border-amber-500/20 rounded-xl p-6 backdrop-blur-sm">
+                
+                <!-- Toggle Controls -->
+                <div class="flex gap-2 mb-4">
+                    <button 
+                        id="btn-bad"
+                        onclick="toggleCode('bad')"
+                        class="toggle-btn flex-1 py-2 px-4 rounded-lg transition-all duration-200 active"
+                    >
+                        <div class="flex items-center justify-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <circle cx="12" cy="12" r="10"></circle>
+                                <line x1="15" y1="9" x2="9" y2="15"></line>
+                                <line x1="9" y1="9" x2="15" y2="15"></line>
+                            </svg>
+                            <span class="font-medium">Silent Reference (Bad)</span>
+                        </div>
+                    </button>
+                    <button 
+                        id="btn-good"
+                        onclick="toggleCode('good')"
+                        class="toggle-btn flex-1 py-2 px-4 rounded-lg transition-all duration-200 inactive"
+                    >
+                        <div class="flex items-center justify-center gap-2">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                                <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                            </svg>
+                            <span class="font-medium">Living State (Good)</span>
+                        </div>
+                    </button>
+                </div>
+
+                <!-- Code Block Container -->
+                <div class="relative">
+                    <!-- Bad Code -->
+                    <div id="code-bad" class="code-content code-block">
+                        <pre><code class="language-jsx"><span class="token comment">// ❌ ANTI-PATTERN: Silent Reference</span>
+<span class="token keyword">const</span> portraitRef <span class="token operator">=</span> <span class="token function">useRef</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function">addSin</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  portraitRef<span class="token punctuation">.</span>current <span class="token operator">+=</span> <span class="token number">1</span><span class="token punctuation">;</span> <span class="token comment">// Silent mutation</span>
+  <span class="token comment">// Component doesn't re-render!</span>
+  <span class="token comment">// UI shows 0, but ref.current is secretly incrementing</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">return</span> <span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>p<span class="token operator">&gt;</span>Corruption<span class="token punctuation">:</span> <span class="token punctuation">{</span>portraitRef<span class="token punctuation">.</span>current<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">&gt;</span> <span class="token punctuation">{</span><span class="token comment">/* Shows stale value */</span><span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span>addSin<span class="token punctuation">}</span><span class="token operator">&gt;</span>Add Sin<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+                    </div>
+
+                    <!-- Good Code -->
+                    <div id="code-good" class="code-content code-block hidden">
+                        <pre><code class="language-jsx"><span class="token comment">// ✅ CORRECT PATTERN: Living State</span>
+<span class="token keyword">const</span> <span class="token punctuation">[</span>soul<span class="token punctuation">,</span> setSoul<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword">const</span> <span class="token function">addVirtue</span> <span class="token operator">=</span> <span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">=&gt;</span> <span class="token punctuation">{</span>
+  <span class="token function">setSoul</span><span class="token punctuation">(</span><span class="token parameter">prev</span> <span class="token operator">=&gt;</span> prev <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// Triggers update</span>
+  <span class="token comment">// Component re-renders automatically</span>
+  <span class="token comment">// UI always reflects current state</span>
+<span class="token punctuation">}</span><span class="token punctuation">;</span>
+
+<span class="token keyword">return</span> <span class="token punctuation">(</span>
+  <span class="token operator">&lt;</span>div<span class="token operator">&gt;</span>
+    <span class="token operator">&lt;</span>p<span class="token operator">&gt;</span>Virtue<span class="token punctuation">:</span> <span class="token punctuation">{</span>soul<span class="token punctuation">}</span><span class="token operator">&lt;</span><span class="token operator">/</span>p<span class="token operator">&gt;</span> <span class="token punctuation">{</span><span class="token comment">/* Always accurate */</span><span class="token punctuation">}</span>
+    <span class="token operator">&lt;</span>button onClick<span class="token operator">=</span><span class="token punctuation">{</span>addVirtue<span class="token punctuation">}</span><span class="token operator">&gt;</span>Add Virtue<span class="token operator">&lt;</span><span class="token operator">/</span>button<span class="token operator">&gt;</span>
+  <span class="token operator">&lt;</span><span class="token operator">/</span>div<span class="token operator">&gt;</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span></code></pre>
+                    </div>
+                </div>
+
+                <!-- Status Indicator (optional enhancement) -->
+                <div class="mt-4 p-3 bg-slate-800/30 border border-slate-700 rounded text-sm text-slate-400">
+                    <div class="flex items-start gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="mt-0.5 flex-shrink-0 text-amber-500">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="12" y1="16" x2="12" y2="12"></line>
+                            <line x1="12" y1="8" x2="12.01" y2="8"></line>
+                        </svg>
+                        <p id="explanation-text">
+                            <span id="bad-explanation">The ref mutation happens in the background. To see the change, you'd need to force a re-render separately—this disconnect causes bugs.</span>
+                            <span id="good-explanation" class="hidden">State updates trigger automatic re-renders. The UI always reflects the current value—predictable and maintainable.</span>
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Benefits List -->
+            <div class="bg-slate-900/20 border border-slate-800 rounded-lg p-4 text-sm">
+                <h3 class="font-semibold text-slate-300 mb-2">✅ Benefits of This Pattern</h3>
+                <ul class="space-y-1 text-slate-400">
+                    <li>• <strong>Mobile-friendly:</strong> No horizontal scrolling, one column layout</li>
+                    <li>• <strong>Clear comparison:</strong> User explicitly chooses which example to study</li>
+                    <li>• <strong>Better focus:</strong> One code block at a time = less cognitive load</li>
+                    <li>• <strong>Vertical efficiency:</strong> Uses screen height instead of width</li>
+                    <li>• <strong>Accessible:</strong> Keyboard navigation, clear labels</li>
+                </ul>
+            </div>
+        </section>
+
+        <hr class="border-slate-800">
+
+        <!-- ==================== PATTERN 2: Tab Interface (Alternative) ==================== -->
+        <section class="space-y-4">
+            <div class="flex items-center justify-between">
+                <h2 class="text-xl font-bold text-amber-200">Pattern 2: Tab Interface</h2>
+                <span class="text-xs text-slate-500 font-mono">Alternative</span>
+            </div>
+            
+            <div class="bg-slate-900/40 border border-amber-500/20 rounded-xl overflow-hidden backdrop-blur-sm">
+                
+                <!-- Tab Headers -->
+                <div class="flex border-b border-slate-700">
+                    <button 
+                        onclick="toggleTab('tab-bad')"
+                        id="tab-btn-bad"
+                        class="tab-btn flex-1 px-4 py-3 text-sm font-medium transition-all border-b-2 border-red-500 bg-slate-800/30 text-red-300"
+                    >
+                        ❌ Anti-Pattern
+                    </button>
+                    <button 
+                        onclick="toggleTab('tab-good')"
+                        id="tab-btn-good"
+                        class="tab-btn flex-1 px-4 py-3 text-sm font-medium transition-all border-b-2 border-transparent bg-slate-900/20 text-slate-400 hover:text-slate-300"
+                    >
+                        ✅ Correct Pattern
+                    </button>
+                </div>
+
+                <!-- Tab Content -->
+                <div class="p-6">
+                    <div id="tab-bad" class="tab-content code-block">
+                        <pre><code class="language-jsx"><span class="token comment">// ❌ Silent mutation without re-render</span>
+<span class="token keyword">const</span> count <span class="token operator">=</span> <span class="token function">useRef</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+count<span class="token punctuation">.</span>current<span class="token operator">++</span><span class="token punctuation">;</span> <span class="token comment">// UI won't update</span></code></pre>
+                    </div>
+
+                    <div id="tab-good" class="tab-content code-block hidden">
+                        <pre><code class="language-jsx"><span class="token comment">// ✅ State update triggers re-render</span>
+<span class="token keyword">const</span> <span class="token punctuation">[</span>count<span class="token punctuation">,</span> setCount<span class="token punctuation">]</span> <span class="token operator">=</span> <span class="token function">useState</span><span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token function">setCount</span><span class="token punctuation">(</span>count <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment">// UI updates automatically</span></code></pre>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <hr class="border-slate-800">
+
+        <!-- Component API Proposal -->
+        <section class="space-y-4">
+            <h2 class="text-xl font-bold text-amber-200">Proposed Component API</h2>
+            
+            <div class="bg-slate-900/40 border border-amber-500/20 rounded-xl p-6 backdrop-blur-sm">
+                <h3 class="text-lg font-semibold text-slate-300 mb-4">&lt;CodeComparison&gt; Component</h3>
+                
+                <div class="code-block">
+                    <pre><code class="language-jsx"><span class="token keyword">import</span> <span class="token punctuation">{</span> CodeComparison <span class="token punctuation">}</span> <span class="token keyword">from</span> <span class="token string">'@/components/module/CodeComparison'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Usage in module</span>
+<span class="token operator">&lt;</span>CodeComparison
+  badLabel<span class="token operator">=</span><span class="token string">"Silent Reference"</span>
+  goodLabel<span class="token operator">=</span><span class="token string">"Living State"</span>
+  badCode<span class="token operator">=</span><span class="token punctuation">{</span>antiPatternCode<span class="token punctuation">}</span>
+  goodCode<span class="token operator">=</span><span class="token punctuation">{</span>correctPatternCode<span class="token punctuation">}</span>
+  badExplanation<span class="token operator">=</span><span class="token string">"Ref mutations don't trigger re-renders..."</span>
+  goodExplanation<span class="token operator">=</span><span class="token string">"State updates automatically re-render..."</span>
+  language<span class="token operator">=</span><span class="token string">"tsx"</span>
+  themeColor<span class="token operator">=</span><span class="token string">"amber"</span> <span class="token comment">// or "cyan", "emerald", etc.</span>
+<span class="token operator">/</span><span class="token operator">&gt;</span></code></pre>
+                </div>
+
+                <div class="mt-6 space-y-3">
+                    <h4 class="font-semibold text-slate-300">Props:</h4>
+                    <div class="space-y-2 text-sm text-slate-400">
+                        <div class="flex gap-2">
+                            <code class="text-amber-400 bg-slate-800 px-2 py-0.5 rounded">badLabel</code>
+                            <span>- Label for anti-pattern button (e.g., "Broken", "Anti-Pattern")</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <code class="text-amber-400 bg-slate-800 px-2 py-0.5 rounded">goodLabel</code>
+                            <span>- Label for correct pattern button (e.g., "Fixed", "Best Practice")</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <code class="text-amber-400 bg-slate-800 px-2 py-0.5 rounded">badCode</code>
+                            <span>- Code string for anti-pattern example</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <code class="text-amber-400 bg-slate-800 px-2 py-0.5 rounded">goodCode</code>
+                            <span>- Code string for correct pattern example</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <code class="text-amber-400 bg-slate-800 px-2 py-0.5 rounded">badExplanation?</code>
+                            <span>- Optional context for why pattern is bad</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <code class="text-amber-400 bg-slate-800 px-2 py-0.5 rounded">goodExplanation?</code>
+                            <span>- Optional context for why pattern is good</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <code class="text-amber-400 bg-slate-800 px-2 py-0.5 rounded">language</code>
+                            <span>- Syntax highlighting language (tsx, jsx, js)</span>
+                        </div>
+                        <div class="flex gap-2">
+                            <code class="text-amber-400 bg-slate-800 px-2 py-0.5 rounded">themeColor</code>
+                            <span>- Module theme color for toggle buttons</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Visual Comparison: Before vs After -->
+        <section class="space-y-4">
+            <h2 class="text-xl font-bold text-amber-200">Impact: Before vs After</h2>
+            
+            <div class="grid md:grid-cols-2 gap-6">
+                <!-- Before: Side-by-side (cramped) -->
+                <div class="space-y-2">
+                    <h3 class="text-sm font-semibold text-red-400 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <line x1="15" y1="9" x2="9" y2="15"></line>
+                            <line x1="9" y1="9" x2="15" y2="15"></line>
+                        </svg>
+                        Before: Side-by-side
+                    </h3>
+                    <div class="bg-slate-900/40 border border-red-500/20 rounded-lg p-3 text-xs">
+                        <div class="grid grid-cols-2 gap-2">
+                            <div class="bg-slate-800 p-2 rounded overflow-hidden">
+                                <div class="text-[8px] opacity-50">Bad code here...</div>
+                                <div class="text-[8px] opacity-50">Horizontally cramped</div>
+                            </div>
+                            <div class="bg-slate-800 p-2 rounded overflow-hidden">
+                                <div class="text-[8px] opacity-50">Good code here...</div>
+                                <div class="text-[8px] opacity-50">Hard to read</div>
+                            </div>
+                        </div>
+                        <div class="mt-2 text-slate-500 text-[10px]">❌ Mobile: Requires scrolling</div>
+                    </div>
+                </div>
+
+                <!-- After: Toggleable (clean) -->
+                <div class="space-y-2">
+                    <h3 class="text-sm font-semibold text-emerald-400 flex items-center gap-2">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
+                            <polyline points="22 4 12 14.01 9 11.01"></polyline>
+                        </svg>
+                        After: Toggleable
+                    </h3>
+                    <div class="bg-slate-900/40 border border-emerald-500/20 rounded-lg p-3 text-xs">
+                        <div class="flex gap-1 mb-2">
+                            <div class="flex-1 bg-red-900/20 border border-red-500/30 rounded px-2 py-1 text-[9px] text-center">Bad</div>
+                            <div class="flex-1 bg-slate-800 rounded px-2 py-1 text-[9px] text-center opacity-50">Good</div>
+                        </div>
+                        <div class="bg-slate-800 p-2 rounded">
+                            <div class="text-[8px] opacity-50">Full-width code block</div>
+                            <div class="text-[8px] opacity-50">Easy to read</div>
+                        </div>
+                        <div class="mt-2 text-slate-500 text-[10px]">✅ Mobile: Full readability</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+    </div>
+
+    <script>
+        // Tab toggle functionality
+        function toggleTab(tabId) {
+            // Hide all tab contents
+            document.querySelectorAll('.tab-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            // Show selected tab content
+            document.getElementById(tabId).classList.remove('hidden');
+            
+            // Update button states
+            document.querySelectorAll('.tab-btn').forEach(btn => {
+                btn.classList.remove('border-red-500', 'border-emerald-500', 'bg-slate-800/30', 'text-red-300', 'text-emerald-300');
+                btn.classList.add('border-transparent', 'bg-slate-900/20', 'text-slate-400');
+            });
+            
+            const activeBtn = document.getElementById(tabId.replace('tab-', 'tab-btn-'));
+            activeBtn.classList.remove('border-transparent', 'bg-slate-900/20', 'text-slate-400');
+            if (tabId === 'tab-bad') {
+                activeBtn.classList.add('border-red-500', 'bg-slate-800/30', 'text-red-300');
+            } else {
+                activeBtn.classList.add('border-emerald-500', 'bg-slate-800/30', 'text-emerald-300');
+            }
+        }
+        
+        // Enhanced toggle with explanations
+        function toggleCode(mode) {
+            // Hide all code blocks
+            document.querySelectorAll('.code-content').forEach(el => {
+                el.classList.add('hidden');
+            });
+            
+            // Show selected code block
+            document.getElementById('code-' + mode).classList.remove('hidden');
+            
+            // Update button states
+            document.querySelectorAll('.toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('inactive');
+            });
+            document.getElementById('btn-' + mode).classList.remove('inactive');
+            document.getElementById('btn-' + mode).classList.add('active');
+            
+            // Update explanation text
+            if (mode === 'bad') {
+                document.getElementById('bad-explanation').classList.remove('hidden');
+                document.getElementById('good-explanation').classList.add('hidden');
+            } else {
+                document.getElementById('bad-explanation').classList.add('hidden');
+                document.getElementById('good-explanation').classList.remove('hidden');
+            }
+        }
+        
+        // Initialize tabs
+        window.addEventListener('DOMContentLoaded', () => {
+            toggleTab('tab-bad');
+        });
+    </script>
+
+    <style>
+        /* Toggle button styles */
+        .toggle-btn.active {
+            background: rgba(239, 68, 68, 0.2);
+            border: 1px solid rgba(239, 68, 68, 0.5);
+            color: rgb(252, 165, 165);
+        }
+        
+        .toggle-btn.inactive {
+            background: rgba(51, 65, 85, 0.5);
+            border: 1px solid rgba(71, 85, 105, 1);
+            color: rgb(148, 163, 184);
+        }
+        
+        .toggle-btn:hover.inactive {
+            background: rgba(51, 65, 85, 0.8);
+        }
+        
+        /* Active state for good code */
+        #btn-good.active {
+            background: rgba(16, 185, 129, 0.2);
+            border: 1px solid rgba(16, 185, 129, 0.5);
+            color: rgb(110, 231, 183);
+        }
+    </style>
+</body>
+</html>
