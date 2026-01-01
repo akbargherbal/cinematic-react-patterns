@@ -334,7 +334,7 @@ function UserProfile({ user }) {
       <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
           {/* Left Column: Narrative & Instructions */}
-          <div className="lg:col-span-7">
+          <div className="lg:col-span-5">
             <div className="prose prose-invert prose-lg max-w-none mb-8">
               <div className="flex items-center gap-3 mb-2">
                 <div className={`w-3 h-3 rounded-full ${chapter === 0 ? 'bg-emerald-500' : 'bg-slate-700'}`}></div>
@@ -390,7 +390,7 @@ function UserProfile({ user }) {
           </div>
 
           {/* Right Column: Live Demos & Code */}
-          <div className="lg:col-span-5">
+          <div className="lg:col-span-7">
             <div className="sticky top-24 space-y-8">
               {/* Chapter 0 Demo: Basic Composition */}
               {chapter === 0 && (
