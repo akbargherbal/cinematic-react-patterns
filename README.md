@@ -380,8 +380,8 @@ src/
 1. **Choose your fiction source**: Select a story that naturally maps to the React concept
 2. **Identify the metaphor**: How does the story teach the technical pattern?
 3. **Create component directory**: `src/modules/[module-id]/index.tsx`
-4. **Build the component**: Create interactive demo with code examples
-5. **Add JSON entry**: Register in `moduleRegistry.json`
+4. **Build the component**: Use standardized components for structure (see below)
+5. **Add JSON entry**: Register in `moduleRegistry.json` with theme color
 6. **Map icon** (if new): Add to `iconMap` in `moduleRegistry.ts`
 7. **Test and refine**: Ensure the metaphor is clear and memorable
 
@@ -403,50 +403,93 @@ src/
     "textClass": "text-slate-300", // Module text color
     "fontClass": "font-sans" // Typography
   },
+  "themeConfig": {
+    "primaryColor": "cyan" // Theme color: cyan, amber, purple, emerald, red, blue
+  },
   "enabled": true // Visibility toggle
 }
 ```
 
 ### Module Component Structure
 
+Modules should use **standardized components** for consistent structure and UX. See `/src/components/common/README.md` for full documentation.
+
 ```tsx
 // src/modules/your-module-id/index.tsx
 import { useState } from "react";
-import CodeBlock from "@/components/common/CodeBlock";
+import { ModuleHeader } from "@/components/common/ModuleHeader";
+import { ModuleLayout } from "@/components/common/ModuleLayout";
+import { ChapterNavigation } from "@/components/common/ChapterNavigation";
+import { CodeComparison } from "@/components/common/CodeComparison";
+import { CodeBlock } from "@/components/common/CodeBlock";
 
 export default function YourModule() {
+  const [chapter, setChapter] = useState(0);
+
   return (
-    <div className="space-y-6">
-      {/* Hero Section */}
-      <div className="text-center">
-        <h1 className="text-4xl font-bold">Module Title</h1>
-        <p className="text-lg opacity-80">The Metaphor Explanation</p>
-      </div>
+    <div className="min-h-screen bg-slate-950 text-slate-300">
+      {/* Standardized header */}
+      <ModuleHeader
+        icon={YourIcon}
+        title="Fiction Work Title"
+        subtitle="Character, Context, Year"
+        concept="React Concept Name"
+        themeColor="cyan"
+      />
 
-      {/* Concept Explanation */}
-      <section>
-        <h2>The React Concept</h2>
-        <p>Technical explanation...</p>
-      </section>
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        {/* Standardized 8-4 grid layout */}
+        <ModuleLayout
+          sidebar={
+            <div className="sticky top-24">
+              {/* Sidebar content: metrics, reference, controls */}
+            </div>
+          }
+        >
+          {/* Main content: narrative, demos, examples */}
+          <section>
+            <h2>Chapter Title</h2>
+            <p>Story-driven explanation...</p>
+          </section>
 
-      {/* Interactive Demo */}
-      <section>
-        <h2>Interactive Example</h2>
-        {/* Live demo component */}
-      </section>
+          <section>
+            <h3>Interactive Demo</h3>
+            {/* Your interactive demo components */}
+          </section>
 
-      {/* Code Example */}
-      <CodeBlock code={exampleCode} language="tsx" />
+          {/* Code comparisons (bad vs good patterns) */}
+          <CodeComparison
+            badCode="// Anti-pattern example"
+            goodCode="// Correct pattern example"
+            language="tsx"
+            themeColor="cyan"
+            badLabel="❌ Problematic"
+            goodLabel="✅ Better"
+          />
 
-      {/* Learning Points */}
-      <section>
-        <h2>Key Takeaways</h2>
-        <ul>{/* Bullet points */}</ul>
-      </section>
+          {/* Single code examples */}
+          <CodeBlock code="// Example code" language="tsx" />
+
+          {/* Standardized navigation */}
+          <ChapterNavigation
+            currentChapter={chapter}
+            totalChapters={5}
+            onChapterChange={setChapter}
+            themeColor="cyan"
+          />
+        </ModuleLayout>
+      </main>
     </div>
   );
 }
 ```
+
+**Benefits of standardized components:**
+- Consistent header, layout, and navigation across all modules
+- Mobile-optimized code comparisons (toggle vs side-by-side)
+- Automatic keyboard navigation and accessibility
+- Theme-aware styling with minimal configuration
+- See component documentation for full API details
 
 ### Module Query Utilities
 

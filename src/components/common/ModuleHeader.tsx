@@ -69,7 +69,6 @@ export const ModuleHeader: React.FC<ModuleHeaderProps> = ({
       className={`
         border-b border-${themeColor}-800/50 
         bg-slate-950/90 backdrop-blur-sm 
-        sticky top-0 z-10
         ${className}
       `}
     >

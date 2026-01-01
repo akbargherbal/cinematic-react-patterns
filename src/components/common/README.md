@@ -29,7 +29,7 @@ Standardized, reusable components for all fiction-based React learning modules. 
 ### 1. ModuleHeader
 
 **File:** `ModuleHeader.tsx`  
-**Purpose:** Standardized sticky header displaying icon, title, metadata, and concept
+**Purpose:** Standardized header displaying icon, title, metadata, and concept
 
 **Props:**
 ```typescript
@@ -58,9 +58,9 @@ import { ModuleHeader } from '@/components/common/ModuleHeader';
 ```
 
 **Features:**
-- Sticky positioning with backdrop blur
 - Responsive layout (mobile-first)
 - Theme-aware colors
+- Backdrop blur effect for visual depth
 - Horizontal layout: Icon + Title (left) | Metadata (right) | Concept (below)
 
 ---
