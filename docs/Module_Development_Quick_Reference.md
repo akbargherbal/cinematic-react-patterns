@@ -887,7 +887,6 @@ const chapters = [...];
 ## Additional Resources
 
 - **Template Module:** `/src/modules/_template/index.tsx`
-- **Shared Components Guide:** `/src/components/common/Quick_Start_Guide.md`
 - **Registry Documentation:** `README.md` (JSON Registry section)
 
 ---

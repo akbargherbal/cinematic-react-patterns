@@ -183,8 +183,7 @@ export default function YourModule() {
   title="Your Fiction Work"       // Fiction work title
   subtitle="Character • Context • Year" // Metadata line
   concept="React Concept Name"    // React concept being taught
-  themeColor="amber"              // One of 6 safelisted colors
-/>
+  themeColor="amber"              // Choose from 17 safelisted colors 
 ```
 
 **Benefits:** 73% code reduction vs custom header
@@ -471,18 +470,43 @@ const result = useMemo(() => {
 
 ### Safelisted Theme Colors
 
-Only these 6 colors work with dynamic classes:
+**Available Colors (17 total):**
 
-| Color       | Visual Style         | Good For                    |
-|-------------|----------------------|-----------------------------|
-| **cyan**    | Tech, future-forward | Sci-fi, modern tech themes  |
-| **amber**   | Warm, intellectual   | Mystery, deduction, warmth  |
-| **purple**  | Mystery, magic       | Fantasy, mystical themes    |
-| **emerald** | Digital, code        | Matrix-style, code-focused  |
-| **red**     | Danger, urgency      | Error states, dramatic      |
-| **blue**    | Calm, professional   | Traditional, stable         |
+All major Tailwind color families are safelisted for dynamic use in shared components:
 
-**Critical:** Do not use other colors (e.g., `orange`, `lime`, `teal`) — they will not render correctly due to Tailwind's JIT compilation.
+**Warm Spectrum:**
+- **red** - Danger, intensity, passion (1984, Godfather, Fight Club, Pulp Fiction)
+- **orange** - Energy, creativity, transformation (Arrival/Heptapod)
+- **amber** - Classic, warm, magical (Harry Potter, Groundhog Day, Sherlock, Lion King, LOTR)
+- **yellow** - Bright, heroic, optimistic (Batman utility belt)
+
+**Cool Spectrum:**
+- **lime** - Fresh, vibrant, youthful
+- **green** - Growth, natural, balanced
+- **emerald** - Transformation, life, nature (Frankenstein, Jekyll & Hyde, Matrix, Wizard of Oz)
+- **teal** - Sophisticated, calm, medical
+- **cyan** - Tech, futuristic, sci-fi (Inception, Minority Report, Tenet, Edge of Tomorrow)
+- **sky** - Whimsical, ethereal, dreamy (Alice in Wonderland, Titanic)
+- **blue** - Cold, clinical, structured (Strict Mode, useTransition)
+- **indigo** - Deep, mysterious, contemplative
+
+**Vibrant Spectrum:**
+- **violet** - Mystical, surreal, dreamlike
+- **purple** - Fantasy, magic, otherworldly
+- **fuchsia** - Bold, modern, striking
+- **pink** - Playful, romantic, unconventional
+- **rose** - Edgy, rebellious, intense (Fight Club)
+
+**Genre-Color Pairing Suggestions:**
+
+- **Sci-fi/Tech:** cyan, blue, emerald (Matrix aesthetic)
+- **Fantasy/Magic:** amber, purple, violet (Harry Potter aesthetic)
+- **Classic Literature:** amber, emerald, sky (timeless feel)
+- **Thriller/Suspense:** red, rose, indigo (intensity)
+- **Modern/Contemporary:** cyan, teal, fuchsia (current feel)
+- **Historical:** amber, sky, emerald (period pieces)
+
+**Technical Note:** These colors work with dynamic classes because they're explicitly safelisted in `tailwind.config.ts`. All 17 are production-ready.
 
 ### Font Families
 
@@ -638,7 +662,7 @@ Fiction Process C  →  React Pattern Z
 
 ```tsx
 // ❌ Bad: Using non-safelisted color
-<ModuleHeader themeColor="orange" /> // Won't work!
+<ModuleHeader themeColor="turquoise" /> // Won't work!
 ```
 
 ```tsx
@@ -727,7 +751,7 @@ const chapters = [...];
 
 - [ ] Fiction source chosen with **clear, strong metaphor** mapping to React concept
 - [ ] Reviewed template (`/src/modules/_template/index.tsx`)
-- [ ] Identified appropriate theme color (one of 6 safelisted)
+- [ ] Identified appropriate theme color (one of 17 safelisted)
 - [ ] Icon selected from Lucide React library
 - [ ] Chapter structure planned (3-5 chapters recommended)
 - [ ] Metaphor mapping planned for all major concept aspects
