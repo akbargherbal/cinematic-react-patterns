@@ -1,14 +1,25 @@
 import { useState, useReducer, useEffect, useCallback } from "react";
-import { Brain, Zap, AlertTriangle, CheckCircle, ChevronLeft, ChevronRight, RefreshCw, Eye, Code, Activity } from "lucide-react";
+import {
+  Brain,
+  Zap,
+  AlertTriangle,
+  CheckCircle,
+  ChevronLeft,
+  ChevronRight,
+  RefreshCw,
+  Eye,
+  Code,
+  Activity,
+} from "lucide-react";
 import { CodeBlock } from "@/components/common/CodeBlock";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
-const themeColor = 'cyan'; // Try changing to 'amber', 'purple', etc.
-import ModuleHeader from '@/components/common/ModuleHeader';
+const themeColor = "cyan"; // Try changing to 'amber', 'purple', etc.
+import ModuleHeader from "@/components/common/ModuleHeader";
 
 // ==================== TYPES ====================
 interface CrimeVision {
   id: string;
-  type: 'SIMPLE_CRIME' | 'CONDITIONAL_SEQUENCE' | 'MULTI_DEPENDENCY';
+  type: "SIMPLE_CRIME" | "CONDITIONAL_SEQUENCE" | "MULTI_DEPENDENCY";
   victim: string;
   perpetrator: string;
   time: string;
@@ -18,57 +29,63 @@ interface CrimeVision {
 interface PreCrimeState {
   timeline: string[];
   assignedTeam: string | null;
-  alertLevel: 'GREEN' | 'YELLOW' | 'RED';
+  alertLevel: "GREEN" | "YELLOW" | "RED";
   pendingCrimes: CrimeVision[];
   preventedCrimes: number;
   chaosLevel: number;
 }
 
-type Action = 
-  | { type: 'RECEIVE_VISION'; vision: CrimeVision }
-  | { type: 'ASSIGN_TEAM'; team: string }
-  | { type: 'UPDATE_ALERT'; level: PreCrimeState['alertLevel'] }
-  | { type: 'PREVENT_CRIME'; crimeId: string }
-  | { type: 'RESET_SYSTEM' };
+type Action =
+  | { type: "RECEIVE_VISION"; vision: CrimeVision }
+  | { type: "ASSIGN_TEAM"; team: string }
+  | { type: "UPDATE_ALERT"; level: PreCrimeState["alertLevel"] }
+  | { type: "PREVENT_CRIME"; crimeId: string }
+  | { type: "RESET_SYSTEM" };
 
 // ==================== REDUCER ====================
 const precogReducer = (state: PreCrimeState, action: Action): PreCrimeState => {
   switch (action.type) {
-    case 'RECEIVE_VISION':
+    case "RECEIVE_VISION":
       // Centralized logic: Handle all vision types in one place
-      const newTimeline = [...state.timeline, 
-        `${action.vision.time}: ${action.vision.type} - ${action.vision.perpetrator} → ${action.vision.victim}`
+      const newTimeline = [
+        ...state.timeline,
+        `${action.vision.time}: ${action.vision.type} - ${action.vision.perpetrator} → ${action.vision.victim}`,
       ];
-      
+
       let newAlertLevel = state.alertLevel;
-      if (action.vision.type === 'MULTI_DEPENDENCY') newAlertLevel = 'RED';
-      else if (action.vision.type === 'CONDITIONAL_SEQUENCE') newAlertLevel = 'YELLOW';
-      
+      if (action.vision.type === "MULTI_DEPENDENCY") newAlertLevel = "RED";
+      else if (action.vision.type === "CONDITIONAL_SEQUENCE")
+        newAlertLevel = "YELLOW";
+
       return {
         ...state,
         timeline: newTimeline.slice(-3), // Keep only last 3
         pendingCrimes: [...state.pendingCrimes, action.vision],
         alertLevel: newAlertLevel,
-        chaosLevel: state.chaosLevel + (action.vision.type === 'CONDITIONAL_SEQUENCE' ? 10 : 0)
+        chaosLevel:
+          state.chaosLevel +
+          (action.vision.type === "CONDITIONAL_SEQUENCE" ? 10 : 0),
       };
-      
-    case 'ASSIGN_TEAM':
+
+    case "ASSIGN_TEAM":
       return { ...state, assignedTeam: action.team };
-      
-    case 'UPDATE_ALERT':
+
+    case "UPDATE_ALERT":
       return { ...state, alertLevel: action.level };
-      
-    case 'PREVENT_CRIME':
+
+    case "PREVENT_CRIME":
       return {
         ...state,
-        pendingCrimes: state.pendingCrimes.filter(c => c.id !== action.crimeId),
+        pendingCrimes: state.pendingCrimes.filter(
+          (c) => c.id !== action.crimeId,
+        ),
         preventedCrimes: state.preventedCrimes + 1,
-        chaosLevel: Math.max(0, state.chaosLevel - 15)
+        chaosLevel: Math.max(0, state.chaosLevel - 15),
       };
-      
-    case 'RESET_SYSTEM':
+
+    case "RESET_SYSTEM":
       return initialState;
-      
+
     default:
       return state;
   }
@@ -77,80 +94,98 @@ const precogReducer = (state: PreCrimeState, action: Action): PreCrimeState => {
 const initialState: PreCrimeState = {
   timeline: [],
   assignedTeam: null,
-  alertLevel: 'GREEN',
+  alertLevel: "GREEN",
   pendingCrimes: [],
   preventedCrimes: 0,
-  chaosLevel: 0
+  chaosLevel: 0,
 };
 
 // ==================== COMPONENT ====================
 export default function UseReducerMinorityReport(): JSX.Element {
   const [chapter, setChapter] = useState<number>(0);
-  const [demoMode, setDemoMode] = useState<'broken' | 'fixed'>('fixed');
+  const [demoMode, setDemoMode] = useState<"broken" | "fixed">("fixed");
   const [state, dispatch] = useReducer(precogReducer, initialState);
   const [timelineView, setTimelineView] = useState<boolean>(true);
   const [autoAnimateRef] = useAutoAnimate();
-  
+
   // Circuit breaker for chaos
   useEffect(() => {
     if (state.chaosLevel > 50) {
       setTimeout(() => {
-        dispatch({ type: 'RESET_SYSTEM' });
+        dispatch({ type: "RESET_SYSTEM" });
       }, 1000);
     }
   }, [state.chaosLevel]);
-  
+
   // ==================== CHAPTERS ====================
   const chapters = [
     {
       title: "The Temple of State",
-      content: "The air in the Temple is cool and still, thick with the scent of ozone and sterile fluids. It hums with a low, resonant frequency that you feel in your teeth. This is the heart of PreCrime, where the future is born. The PreCogs are a single, unified processing unit—a source of pure, undeniable truth. The future is just a state we haven't rendered yet."
+      content:
+        "The air in the Temple is cool and still, thick with the scent of ozone and sterile fluids. It hums with a low, resonant frequency that you feel in your teeth. This is the heart of PreCrime, where the future is born. The PreCogs are a single, unified processing unit—a source of pure, undeniable truth. The future is just a state we haven't rendered yet.",
     },
     {
       title: "The Chaos of Intersecting Futures",
-      content: "The first vision arrives: a simple robbery. Then a second: a conditional kidnapping that only happens if the maglev train is on time. Then a third: a car chase from the kidnapping's father. Anderton manually updates timeline, team assignments, and alert levels with separate useState calls. The screen becomes a mess of overlapping windows. 'Every vision is another piece of state I have to manage myself!' The system, fractured by scattered logic, fails."
+      content:
+        "The first vision arrives: a simple robbery. Then a second: a conditional kidnapping that only happens if the maglev train is on time. Then a third: a car chase from the kidnapping's father. Anderton manually updates timeline, team assignments, and alert levels with separate useState calls. The screen becomes a mess of overlapping windows. 'Every vision is another piece of state I have to manage myself!' The system, fractured by scattered logic, fails.",
     },
     {
       title: "The Reducer Protocol",
-      content: "Dr. Hineman explains: 'Stop trying to be the reducer, John. Just dispatch the vision.' The PreCogs see contradictions and dependencies—their unified vision is the reconciliation. Anderton defines a protocol: a single reducer function that handles all state transitions. He packages three conflicting visions into one descriptive action and dispatches it. A single wooden ball returns with a perfectly reconciled future."
+      content:
+        "Dr. Hineman explains: 'Stop trying to be the reducer, John. Just dispatch the vision.' The PreCogs see contradictions and dependencies—their unified vision is the reconciliation. Anderton defines a protocol: a single reducer function that handles all state transitions. He packages three conflicting visions into one descriptive action and dispatches it. A single wooden ball returns with a perfectly reconciled future.",
     },
     {
       title: "The Two Timelines",
-      content: "A new complex case: bank heist, power grid failure, solar flare. Fletcher tries the old way—multiple useState hooks, manual dependency tracking. The room becomes a cacophony of alarms. Anderton steps in, composes one action with all dependencies, and dispatches it. The reducer processes everything, returning a single coherent directive. 'The logic doesn't belong on the floor; it belongs in the Temple.'"
+      content:
+        "A new complex case: bank heist, power grid failure, solar flare. Fletcher tries the old way—multiple useState hooks, manual dependency tracking. The room becomes a cacophony of alarms. Anderton steps in, composes one action with all dependencies, and dispatches it. The reducer processes everything, returning a single coherent directive. 'The logic doesn't belong on the floor; it belongs in the Temple.'",
     },
     {
       title: "The Elegance of Dispatch",
-      content: "'This is our initial state,' Anderton says, holding a blank wooden ball. 'This is an action,' holding a data puck. 'The reducer lives in the Temple. Our job is no longer to manage the state. We describe what happened. We dispatch the action. The reducer does the rest.' The system handles complex alerts with effortless grace: Dispatch → Reduce → Render. Harmony."
-    }
+      content:
+        "'This is our initial state,' Anderton says, holding a blank wooden ball. 'This is an action,' holding a data puck. 'The reducer lives in the Temple. Our job is no longer to manage the state. We describe what happened. We dispatch the action. The reducer does the rest.' The system handles complex alerts with effortless grace: Dispatch → Reduce → Render. Harmony.",
+    },
   ];
-  
+
   // ==================== DEMO UTILITIES ====================
-  const generateVision = (type: CrimeVision['type']): CrimeVision => ({
+  const generateVision = (type: CrimeVision["type"]): CrimeVision => ({
     id: Date.now().toString(),
     type,
-    victim: ['Leo Crow', 'Sarah Marks', 'Alex Rivera'][Math.floor(Math.random() * 3)],
-    perpetrator: ['Donald Dubin', 'Howard Marks', 'Elias Vaughn'][Math.floor(Math.random() * 3)],
-    time: `${Math.floor(Math.random() * 23)}:${Math.random() > 0.5 ? '15' : '45'}`,
-    condition: type === 'CONDITIONAL_SEQUENCE' ? 'If maglev train is on time' : undefined
+    victim: ["Leo Crow", "Sarah Marks", "Alex Rivera"][
+      Math.floor(Math.random() * 3)
+    ],
+    perpetrator: ["Donald Dubin", "Howard Marks", "Elias Vaughn"][
+      Math.floor(Math.random() * 3)
+    ],
+    time: `${Math.floor(Math.random() * 23)}:${Math.random() > 0.5 ? "15" : "45"}`,
+    condition:
+      type === "CONDITIONAL_SEQUENCE"
+        ? "If maglev train is on time"
+        : undefined,
   });
-  
+
   const handleReceiveVision = useCallback(() => {
-    const types: CrimeVision['type'][] = ['SIMPLE_CRIME', 'CONDITIONAL_SEQUENCE', 'MULTI_DEPENDENCY'];
-    const vision = generateVision(types[Math.floor(Math.random() * types.length)]);
-    dispatch({ type: 'RECEIVE_VISION', vision });
+    const types: CrimeVision["type"][] = [
+      "SIMPLE_CRIME",
+      "CONDITIONAL_SEQUENCE",
+      "MULTI_DEPENDENCY",
+    ];
+    const vision = generateVision(
+      types[Math.floor(Math.random() * types.length)],
+    );
+    dispatch({ type: "RECEIVE_VISION", vision });
   }, []);
-  
+
   const handlePreventCrime = useCallback(() => {
     if (state.pendingCrimes.length > 0) {
       const crime = state.pendingCrimes[0];
-      dispatch({ type: 'PREVENT_CRIME', crimeId: crime.id });
+      dispatch({ type: "PREVENT_CRIME", crimeId: crime.id });
     }
   }, [state.pendingCrimes]);
-  
+
   const resetSystem = useCallback(() => {
-    dispatch({ type: 'RESET_SYSTEM' });
+    dispatch({ type: "RESET_SYSTEM" });
   }, []);
-  
+
   // ==================== CODE EXAMPLES ====================
   const brokenCode = `// ❌ ANTI-PATTERN: Multiple useState hooks
 const [timeline, setTimeline] = useState([]);
@@ -211,9 +246,9 @@ dispatch(action);
 
   // ==================== RENDER ====================
   const currentChapter = chapters[chapter];
-  
+
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-sans">
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-300">
       <ModuleHeader
         icon={Brain}
         title="Minority Report"
@@ -222,97 +257,106 @@ dispatch(action);
         themeColor="cyan"
       />
 
-      
       {/* MAIN CONTENT - Two Column Layout */}
-      <main className="max-w-7xl mx-auto px-4 md:px-8 py-8 grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <main className="mx-auto grid max-w-7xl grid-cols-1 gap-8 px-4 py-8 md:px-8 lg:grid-cols-12">
         {/* LEFT COLUMN - Content & Demos */}
-        <div className="lg:col-span-8 space-y-8">
+        <div className="space-y-8 lg:col-span-8">
           {/* Chapter Content */}
-          <section className="bg-slate-900/50 border border-slate-800 rounded-xl p-6 md:p-8">
-            <div className="flex items-center justify-between mb-6">
-              <h2 className="text-2xl md:text-3xl font-bold text-white">{currentChapter.title}</h2>
-              <span className="text-sm text-slate-400 bg-slate-800/50 px-3 py-1 rounded-full">
+          <section className="rounded-xl border border-slate-800 bg-slate-900/50 p-6 md:p-8">
+            <div className="mb-6 flex items-center justify-between">
+              <h2 className="text-2xl font-bold text-white md:text-3xl">
+                {currentChapter.title}
+              </h2>
+              <span className="rounded-full bg-slate-800/50 px-3 py-1 text-sm text-slate-400">
                 Chapter {chapter + 1} of 5
               </span>
             </div>
-            
+
             <div className="prose prose-invert prose-lg max-w-none">
-              <p className="leading-relaxed text-slate-300 text-base md:text-lg">
+              <p className="text-base leading-relaxed text-slate-300 md:text-lg">
                 {currentChapter.content}
               </p>
             </div>
           </section>
-          
+
           {/* Interactive Demo */}
-          <section className="bg-slate-900/50 border border-slate-800 rounded-xl p-6 md:p-8">
-            <div className="flex items-center justify-between mb-6">
-              <h3 className="text-xl font-bold text-white flex items-center gap-2">
-                <Zap className="w-5 h-5 text-cyan-400" />
+          <section className="rounded-xl border border-slate-800 bg-slate-900/50 p-6 md:p-8">
+            <div className="mb-6 flex items-center justify-between">
+              <h3 className="flex items-center gap-2 text-xl font-bold text-white">
+                <Zap className="h-5 w-5 text-cyan-400" />
                 PreCrime System Simulation
               </h3>
-              
+
               {chapter === 3 && (
                 <div className="flex gap-2">
                   <button
-                    onClick={() => setDemoMode('broken')}
-                    className={`px-3 py-1.5 text-sm rounded transition-all ${demoMode === 'broken' ? 'bg-red-500/20 border border-red-500/50 text-red-400' : 'bg-slate-800 text-slate-400'}`}
+                    onClick={() => setDemoMode("broken")}
+                    className={`rounded px-3 py-1.5 text-sm transition-all ${demoMode === "broken" ? "border border-red-500/50 bg-red-500/20 text-red-400" : "bg-slate-800 text-slate-400"}`}
                   >
                     ❌ Manual State
                   </button>
                   <button
-                    onClick={() => setDemoMode('fixed')}
-                    className={`px-3 py-1.5 text-sm rounded transition-all ${demoMode === 'fixed' ? 'bg-cyan-500/20 border border-cyan-500/50 text-cyan-400' : 'bg-slate-800 text-slate-400'}`}
+                    onClick={() => setDemoMode("fixed")}
+                    className={`rounded px-3 py-1.5 text-sm transition-all ${demoMode === "fixed" ? "border border-cyan-500/50 bg-cyan-500/20 text-cyan-400" : "bg-slate-800 text-slate-400"}`}
                   >
                     ✅ Reducer Protocol
                   </button>
                 </div>
               )}
             </div>
-            
+
             {/* Demo Content per Chapter */}
             <div ref={autoAnimateRef} className="space-y-6">
               {/* Chapter 1: Simple Reducer */}
               {chapter === 0 && (
                 <div className="space-y-4">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                     <button
                       onClick={handleReceiveVision}
-                      className="bg-cyan-600 hover:bg-cyan-700 text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+                      className="flex items-center justify-center gap-2 rounded-lg bg-cyan-600 px-4 py-3 font-medium text-white transition-colors hover:bg-cyan-700"
                     >
-                      <Eye className="w-5 h-5" />
+                      <Eye className="h-5 w-5" />
                       Receive Vision
                     </button>
                     <button
                       onClick={handlePreventCrime}
                       disabled={state.pendingCrimes.length === 0}
-                      className="bg-emerald-600 hover:bg-emerald-700 disabled:opacity-30 disabled:cursor-not-allowed text-white font-medium py-3 px-4 rounded-lg transition-colors flex items-center justify-center gap-2"
+                      className="flex items-center justify-center gap-2 rounded-lg bg-emerald-600 px-4 py-3 font-medium text-white transition-colors hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-30"
                     >
-                      <CheckCircle className="w-5 h-5" />
+                      <CheckCircle className="h-5 w-5" />
                       Prevent Crime
                     </button>
                   </div>
-                  
-                  <div className="bg-slate-900/50 rounded-lg p-4">
-                    <div className="flex items-center justify-between mb-2">
-                      <h4 className="font-medium text-slate-300">System Status</h4>
-                      <span className={`px-2 py-1 rounded text-xs font-medium ${state.alertLevel === 'GREEN' ? 'bg-emerald-500/20 text-emerald-400' : state.alertLevel === 'YELLOW' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-red-500/20 text-red-400'}`}>
+
+                  <div className="rounded-lg bg-slate-900/50 p-4">
+                    <div className="mb-2 flex items-center justify-between">
+                      <h4 className="font-medium text-slate-300">
+                        System Status
+                      </h4>
+                      <span
+                        className={`rounded px-2 py-1 text-xs font-medium ${state.alertLevel === "GREEN" ? "bg-emerald-500/20 text-emerald-400" : state.alertLevel === "YELLOW" ? "bg-yellow-500/20 text-yellow-400" : "bg-red-500/20 text-red-400"}`}
+                      >
                         {state.alertLevel} ALERT
                       </span>
                     </div>
                     <div className="grid grid-cols-2 gap-4 text-sm">
                       <div>
                         <p className="text-slate-400">Prevented Crimes</p>
-                        <p className="text-2xl font-mono text-emerald-400">{state.preventedCrimes}</p>
+                        <p className="font-mono text-2xl text-emerald-400">
+                          {state.preventedCrimes}
+                        </p>
                       </div>
                       <div>
                         <p className="text-slate-400">Pending Visions</p>
-                        <p className="text-2xl font-mono text-yellow-400">{state.pendingCrimes.length}</p>
+                        <p className="font-mono text-2xl text-yellow-400">
+                          {state.pendingCrimes.length}
+                        </p>
                       </div>
                     </div>
                   </div>
                 </div>
               )}
-              
+
               {/* Chapter 2: Anti-pattern chaos */}
               {chapter === 1 && (
                 <div className="space-y-6">
@@ -322,28 +366,31 @@ dispatch(action);
                     title="// ❌ Manual State Management (Chaos)"
                     defaultExpanded={true}
                   />
-                  
-                  <div className="bg-red-950/20 border border-red-500/30 rounded-lg p-4">
-                    <div className="flex items-center gap-2 mb-3">
-                      <AlertTriangle className="w-5 h-5 text-red-400" />
+
+                  <div className="rounded-lg border border-red-500/30 bg-red-950/20 p-4">
+                    <div className="mb-3 flex items-center gap-2">
+                      <AlertTriangle className="h-5 w-5 text-red-400" />
                       <h4 className="font-medium text-red-400">Chaos Meter</h4>
                     </div>
                     <div className="space-y-2">
-                      <div className="h-2 bg-red-900/50 rounded-full overflow-hidden">
-                        <div 
-                          className="h-full bg-gradient-to-r from-red-500 to-red-400 rounded-full transition-all duration-300"
-                          style={{ width: `${Math.min(100, state.chaosLevel)}%` }}
+                      <div className="h-2 overflow-hidden rounded-full bg-red-900/50">
+                        <div
+                          className="h-full rounded-full bg-gradient-to-r from-red-500 to-red-400 transition-all duration-300"
+                          style={{
+                            width: `${Math.min(100, state.chaosLevel)}%`,
+                          }}
                         />
                       </div>
                       <p className="text-sm text-slate-400">
-                        Managing state with multiple useState hooks increases system chaos.
+                        Managing state with multiple useState hooks increases
+                        system chaos.
                         {state.chaosLevel > 30 && " Critical levels detected!"}
                       </p>
                     </div>
                   </div>
                 </div>
               )}
-              
+
               {/* Chapter 3: Reducer solution */}
               {chapter === 2 && (
                 <div className="space-y-6">
@@ -353,77 +400,95 @@ dispatch(action);
                     title="// ✅ Centralized Reducer Logic"
                     defaultExpanded={true}
                   />
-                  
-                  <div className="bg-cyan-950/20 border border-cyan-500/30 rounded-lg p-4">
-                    <div className="flex items-center gap-2 mb-3">
-                      <CheckCircle className="w-5 h-5 text-cyan-400" />
-                      <h4 className="font-medium text-cyan-400">Reducer in Action</h4>
+
+                  <div className="rounded-lg border border-cyan-500/30 bg-cyan-950/20 p-4">
+                    <div className="mb-3 flex items-center gap-2">
+                      <CheckCircle className="h-5 w-5 text-cyan-400" />
+                      <h4 className="font-medium text-cyan-400">
+                        Reducer in Action
+                      </h4>
                     </div>
                     <div className="space-y-3">
                       <div className="flex items-center justify-between text-sm">
                         <span className="text-slate-400">Last Action:</span>
-                        <span className="text-cyan-300 font-mono">RECEIVE_VISION</span>
+                        <span className="font-mono text-cyan-300">
+                          RECEIVE_VISION
+                        </span>
                       </div>
                       <div className="flex items-center justify-between text-sm">
                         <span className="text-slate-400">State Updates:</span>
-                        <span className="text-emerald-300 font-mono">Single atomic update</span>
+                        <span className="font-mono text-emerald-300">
+                          Single atomic update
+                        </span>
                       </div>
                       <div className="flex items-center justify-between text-sm">
                         <span className="text-slate-400">Logic Location:</span>
-                        <span className="text-cyan-300 font-mono">Centralized reducer</span>
+                        <span className="font-mono text-cyan-300">
+                          Centralized reducer
+                        </span>
                       </div>
                     </div>
                   </div>
                 </div>
               )}
-              
+
               {/* Chapter 4: Comparison */}
               {chapter === 3 && (
                 <div className="space-y-6">
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                    <div className={`border rounded-lg p-4 transition-all ${demoMode === 'broken' ? 'border-red-500/50 bg-red-950/10' : 'border-slate-700/50 bg-slate-900/30'}`}>
-                      <div className="flex items-center gap-2 mb-3">
-                        <AlertTriangle className="w-5 h-5 text-red-400" />
-                        <h4 className="font-medium text-slate-300">Manual Approach</h4>
+                  <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+                    <div
+                      className={`rounded-lg border p-4 transition-all ${demoMode === "broken" ? "border-red-500/50 bg-red-950/10" : "border-slate-700/50 bg-slate-900/30"}`}
+                    >
+                      <div className="mb-3 flex items-center gap-2">
+                        <AlertTriangle className="h-5 w-5 text-red-400" />
+                        <h4 className="font-medium text-slate-300">
+                          Manual Approach
+                        </h4>
                       </div>
-                      <p className="text-sm text-slate-400 mb-3">
-                        Multiple useState hooks, scattered logic, manual dependency tracking.
+                      <p className="mb-3 text-sm text-slate-400">
+                        Multiple useState hooks, scattered logic, manual
+                        dependency tracking.
                       </p>
                       <div className="space-y-2">
                         <div className="flex items-center text-sm">
-                          <div className="w-2 h-2 rounded-full bg-red-500 mr-2" />
+                          <div className="mr-2 h-2 w-2 rounded-full bg-red-500" />
                           <span>Race conditions</span>
                         </div>
                         <div className="flex items-center text-sm">
-                          <div className="w-2 h-2 rounded-full bg-red-500 mr-2" />
+                          <div className="mr-2 h-2 w-2 rounded-full bg-red-500" />
                           <span>Stale closures</span>
                         </div>
                         <div className="flex items-center text-sm">
-                          <div className="w-2 h-2 rounded-full bg-red-500 mr-2" />
+                          <div className="mr-2 h-2 w-2 rounded-full bg-red-500" />
                           <span>Complex bug fixes</span>
                         </div>
                       </div>
                     </div>
-                    
-                    <div className={`border rounded-lg p-4 transition-all ${demoMode === 'fixed' ? 'border-cyan-500/50 bg-cyan-950/10' : 'border-slate-700/50 bg-slate-900/30'}`}>
-                      <div className="flex items-center gap-2 mb-3">
-                        <CheckCircle className="w-5 h-5 text-cyan-400" />
-                        <h4 className="font-medium text-slate-300">Reducer Protocol</h4>
+
+                    <div
+                      className={`rounded-lg border p-4 transition-all ${demoMode === "fixed" ? "border-cyan-500/50 bg-cyan-950/10" : "border-slate-700/50 bg-slate-900/30"}`}
+                    >
+                      <div className="mb-3 flex items-center gap-2">
+                        <CheckCircle className="h-5 w-5 text-cyan-400" />
+                        <h4 className="font-medium text-slate-300">
+                          Reducer Protocol
+                        </h4>
                       </div>
-                      <p className="text-sm text-slate-400 mb-3">
-                        Single dispatch, centralized logic, predictable state transitions.
+                      <p className="mb-3 text-sm text-slate-400">
+                        Single dispatch, centralized logic, predictable state
+                        transitions.
                       </p>
                       <div className="space-y-2">
                         <div className="flex items-center text-sm">
-                          <div className="w-2 h-2 rounded-full bg-cyan-500 mr-2" />
+                          <div className="mr-2 h-2 w-2 rounded-full bg-cyan-500" />
                           <span>Atomic updates</span>
                         </div>
                         <div className="flex items-center text-sm">
-                          <div className="w-2 h-2 rounded-full bg-cyan-500 mr-2" />
+                          <div className="mr-2 h-2 w-2 rounded-full bg-cyan-500" />
                           <span>Easy debugging</span>
                         </div>
                         <div className="flex items-center text-sm">
-                          <div className="w-2 h-2 rounded-full bg-cyan-500 mr-2" />
+                          <div className="mr-2 h-2 w-2 rounded-full bg-cyan-500" />
                           <span>Testable logic</span>
                         </div>
                       </div>
@@ -431,7 +496,7 @@ dispatch(action);
                   </div>
                 </div>
               )}
-              
+
               {/* Chapter 5: Elegant dispatch */}
               {chapter === 4 && (
                 <div className="space-y-6">
@@ -441,208 +506,243 @@ dispatch(action);
                     title="// 🎯 Elegant Dispatch Pattern"
                     defaultExpanded={true}
                   />
-                  
-                  <div className="bg-gradient-to-r from-cyan-950/20 to-emerald-950/20 border border-cyan-500/30 rounded-lg p-6">
-                    <div className="flex items-center gap-2 mb-4">
-                      <Activity className="w-5 h-5 text-cyan-400" />
+
+                  <div className="rounded-lg border border-cyan-500/30 bg-gradient-to-r from-cyan-950/20 to-emerald-950/20 p-6">
+                    <div className="mb-4 flex items-center gap-2">
+                      <Activity className="h-5 w-5 text-cyan-400" />
                       <h4 className="font-medium text-white">System Harmony</h4>
                     </div>
                     <div className="space-y-4">
                       <div className="grid grid-cols-3 gap-4">
                         <div className="text-center">
-                          <div className="text-2xl font-bold text-cyan-400 mb-1">1</div>
-                          <p className="text-xs text-slate-400">Describe Action</p>
+                          <div className="mb-1 text-2xl font-bold text-cyan-400">
+                            1
+                          </div>
+                          <p className="text-xs text-slate-400">
+                            Describe Action
+                          </p>
                         </div>
                         <div className="text-center">
-                          <div className="text-2xl font-bold text-cyan-400 mb-1">2</div>
+                          <div className="mb-1 text-2xl font-bold text-cyan-400">
+                            2
+                          </div>
                           <p className="text-xs text-slate-400">Dispatch</p>
                         </div>
                         <div className="text-center">
-                          <div className="text-2xl font-bold text-cyan-400 mb-1">3</div>
+                          <div className="mb-1 text-2xl font-bold text-cyan-400">
+                            3
+                          </div>
                           <p className="text-xs text-slate-400">Render State</p>
                         </div>
                       </div>
-                      <p className="text-sm text-slate-300 text-center">
-                        Clean flow of information → Predictable state → Maintainable code
+                      <p className="text-center text-sm text-slate-300">
+                        Clean flow of information → Predictable state →
+                        Maintainable code
                       </p>
                     </div>
                   </div>
                 </div>
               )}
             </div>
-            
+
             {/* Reset Button */}
             {(chapter === 1 || chapter === 3) && (
-              <div className="mt-6 pt-6 border-t border-slate-800">
+              <div className="mt-6 border-t border-slate-800 pt-6">
                 <button
                   onClick={resetSystem}
-                  className="flex items-center justify-center gap-2 w-full py-2 px-4 bg-slate-800 hover:bg-slate-700 text-slate-300 rounded-lg transition-colors"
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-800 px-4 py-2 text-slate-300 transition-colors hover:bg-slate-700"
                 >
-                  <RefreshCw className="w-4 h-4" />
+                  <RefreshCw className="h-4 w-4" />
                   Reset System Simulation
                 </button>
               </div>
             )}
           </section>
-          
+
           {/* Navigation */}
-          <nav className="flex items-center justify-between pt-6 border-t border-slate-800">
+          <nav className="flex items-center justify-between border-t border-slate-800 pt-6">
             <button
               onClick={() => setChapter(Math.max(0, chapter - 1))}
               disabled={chapter === 0}
-              className="flex items-center gap-2 px-5 py-3 bg-slate-800 hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
+              className="flex items-center gap-2 rounded-lg bg-slate-800 px-5 py-3 font-medium text-white transition-colors hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-30"
             >
-              <ChevronLeft className="w-5 h-5" />
+              <ChevronLeft className="h-5 w-5" />
               Previous
             </button>
-            
+
             <div className="flex items-center gap-4">
-              <div className="hidden md:flex items-center gap-2">
+              <div className="hidden items-center gap-2 md:flex">
                 {chapters.map((_, idx) => (
                   <button
                     key={idx}
                     onClick={() => setChapter(idx)}
-                    className={`w-3 h-3 rounded-full transition-all ${chapter === idx ? 'bg-cyan-500' : 'bg-slate-700 hover:bg-slate-600'}`}
+                    className={`h-3 w-3 rounded-full transition-all ${chapter === idx ? "bg-cyan-500" : "bg-slate-700 hover:bg-slate-600"}`}
                     aria-label={`Go to chapter ${idx + 1}`}
                   />
                 ))}
               </div>
-              <span className="text-sm text-slate-400 font-mono">
+              <span className="font-mono text-sm text-slate-400">
                 Chapter {chapter + 1} of {chapters.length}
               </span>
             </div>
-            
+
             <button
-              onClick={() => setChapter(Math.min(chapters.length - 1, chapter + 1))}
+              onClick={() =>
+                setChapter(Math.min(chapters.length - 1, chapter + 1))
+              }
               disabled={chapter === chapters.length - 1}
-              className="flex items-center gap-2 px-5 py-3 bg-cyan-600 hover:bg-cyan-700 disabled:opacity-30 disabled:cursor-not-allowed text-white font-medium rounded-lg transition-colors"
+              className="flex items-center gap-2 rounded-lg bg-cyan-600 px-5 py-3 font-medium text-white transition-colors hover:bg-cyan-700 disabled:cursor-not-allowed disabled:opacity-30"
             >
               Next
-              <ChevronRight className="w-5 h-5" />
+              <ChevronRight className="h-5 w-5" />
             </button>
           </nav>
         </div>
-        
+
         {/* RIGHT COLUMN - Sticky Sidebar */}
         <div className="lg:col-span-4">
           <div className="sticky top-24 space-y-6">
             {/* System Status Card */}
-            <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-6">
-              <h3 className="text-lg font-bold text-white mb-4 flex items-center gap-2">
-                <Brain className="w-5 h-5 text-cyan-400" />
+            <div className="rounded-xl border border-slate-800 bg-slate-900/70 p-6">
+              <h3 className="mb-4 flex items-center gap-2 text-lg font-bold text-white">
+                <Brain className="h-5 w-5 text-cyan-400" />
                 Temple Status
               </h3>
-              
+
               <div className="space-y-4">
                 <div>
-                  <div className="flex justify-between text-sm mb-1">
+                  <div className="mb-1 flex justify-between text-sm">
                     <span className="text-slate-400">Timeline Integrity</span>
-                    <span className="text-emerald-400 font-mono">{100 - state.chaosLevel}%</span>
+                    <span className="font-mono text-emerald-400">
+                      {100 - state.chaosLevel}%
+                    </span>
                   </div>
-                  <div className="h-2 bg-slate-800 rounded-full overflow-hidden">
-                    <div 
-                      className="h-full bg-gradient-to-r from-cyan-500 to-emerald-500 rounded-full transition-all duration-500"
-                      style={{ width: `${100 - Math.min(100, state.chaosLevel)}%` }}
+                  <div className="h-2 overflow-hidden rounded-full bg-slate-800">
+                    <div
+                      className="h-full rounded-full bg-gradient-to-r from-cyan-500 to-emerald-500 transition-all duration-500"
+                      style={{
+                        width: `${100 - Math.min(100, state.chaosLevel)}%`,
+                      }}
                     />
                   </div>
                 </div>
-                
+
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-sm text-slate-400 mb-1">Pending</p>
-                    <p className="text-2xl font-bold text-yellow-400 font-mono">{state.pendingCrimes.length}</p>
+                  <div className="rounded-lg bg-slate-800/50 p-3">
+                    <p className="mb-1 text-sm text-slate-400">Pending</p>
+                    <p className="font-mono text-2xl font-bold text-yellow-400">
+                      {state.pendingCrimes.length}
+                    </p>
                   </div>
-                  <div className="bg-slate-800/50 rounded-lg p-3">
-                    <p className="text-sm text-slate-400 mb-1">Prevented</p>
-                    <p className="text-2xl font-bold text-emerald-400 font-mono">{state.preventedCrimes}</p>
+                  <div className="rounded-lg bg-slate-800/50 p-3">
+                    <p className="mb-1 text-sm text-slate-400">Prevented</p>
+                    <p className="font-mono text-2xl font-bold text-emerald-400">
+                      {state.preventedCrimes}
+                    </p>
                   </div>
                 </div>
-                
-                <div className="bg-slate-800/30 rounded-lg p-3">
-                  <p className="text-sm text-slate-400 mb-2">Active Team</p>
-                  <p className="text-cyan-300 font-medium">
-                    {state.assignedTeam || 'Awaiting assignment...'}
+
+                <div className="rounded-lg bg-slate-800/30 p-3">
+                  <p className="mb-2 text-sm text-slate-400">Active Team</p>
+                  <p className="font-medium text-cyan-300">
+                    {state.assignedTeam || "Awaiting assignment..."}
                   </p>
                 </div>
               </div>
             </div>
-            
+
             {/* Vision Log */}
-            <div className="bg-slate-900/70 border border-slate-800 rounded-xl p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h3 className="text-lg font-bold text-white flex items-center gap-2">
-                  <Eye className="w-5 h-5 text-cyan-400" />
+            <div className="rounded-xl border border-slate-800 bg-slate-900/70 p-6">
+              <div className="mb-4 flex items-center justify-between">
+                <h3 className="flex items-center gap-2 text-lg font-bold text-white">
+                  <Eye className="h-5 w-5 text-cyan-400" />
                   Recent Visions
                 </h3>
                 <button
                   onClick={() => setTimelineView(!timelineView)}
                   className="text-sm text-slate-400 hover:text-slate-300"
                 >
-                  {timelineView ? 'Show Details' : 'Show Timeline'}
+                  {timelineView ? "Show Details" : "Show Timeline"}
                 </button>
               </div>
-              
-              <div className="space-y-3 max-h-64 overflow-y-auto pr-2">
+
+              <div className="max-h-64 space-y-3 overflow-y-auto pr-2">
                 {timelineView ? (
                   state.timeline.length > 0 ? (
                     state.timeline.map((event, idx) => (
-                      <div key={idx} className="bg-slate-800/30 rounded p-3">
-                        <div className="flex items-center gap-2 mb-1">
-                          <div className="w-2 h-2 rounded-full bg-cyan-500" />
-                          <span className="text-sm text-slate-300 font-medium">{event}</span>
-                        </div>
-                      </div>
-                    ))
-                  ) : (
-                    <p className="text-slate-500 text-center py-4">No timeline events yet</p>
-                  )
-                ) : (
-                  state.pendingCrimes.length > 0 ? (
-                    state.pendingCrimes.map((crime) => (
-                      <div key={crime.id} className="bg-slate-800/30 rounded p-3">
-                        <div className="flex justify-between items-start mb-1">
-                          <span className={`text-xs font-medium px-2 py-0.5 rounded ${crime.type === 'SIMPLE_CRIME' ? 'bg-blue-500/20 text-blue-400' : crime.type === 'CONDITIONAL_SEQUENCE' ? 'bg-yellow-500/20 text-yellow-400' : 'bg-red-500/20 text-red-400'}`}>
-                            {crime.type.replace('_', ' ')}
+                      <div key={idx} className="rounded bg-slate-800/30 p-3">
+                        <div className="mb-1 flex items-center gap-2">
+                          <div className="h-2 w-2 rounded-full bg-cyan-500" />
+                          <span className="text-sm font-medium text-slate-300">
+                            {event}
                           </span>
-                          <span className="text-xs text-slate-400">{crime.time}</span>
                         </div>
-                        <p className="text-sm text-slate-300">
-                          {crime.perpetrator} → {crime.victim}
-                        </p>
-                        {crime.condition && (
-                          <p className="text-xs text-slate-500 mt-1">Condition: {crime.condition}</p>
-                        )}
                       </div>
                     ))
                   ) : (
-                    <p className="text-slate-500 text-center py-4">No pending crimes</p>
+                    <p className="py-4 text-center text-slate-500">
+                      No timeline events yet
+                    </p>
                   )
+                ) : state.pendingCrimes.length > 0 ? (
+                  state.pendingCrimes.map((crime) => (
+                    <div key={crime.id} className="rounded bg-slate-800/30 p-3">
+                      <div className="mb-1 flex items-start justify-between">
+                        <span
+                          className={`rounded px-2 py-0.5 text-xs font-medium ${crime.type === "SIMPLE_CRIME" ? "bg-blue-500/20 text-blue-400" : crime.type === "CONDITIONAL_SEQUENCE" ? "bg-yellow-500/20 text-yellow-400" : "bg-red-500/20 text-red-400"}`}
+                        >
+                          {crime.type.replace("_", " ")}
+                        </span>
+                        <span className="text-xs text-slate-400">
+                          {crime.time}
+                        </span>
+                      </div>
+                      <p className="text-sm text-slate-300">
+                        {crime.perpetrator} → {crime.victim}
+                      </p>
+                      {crime.condition && (
+                        <p className="mt-1 text-xs text-slate-500">
+                          Condition: {crime.condition}
+                        </p>
+                      )}
+                    </div>
+                  ))
+                ) : (
+                  <p className="py-4 text-center text-slate-500">
+                    No pending crimes
+                  </p>
                 )}
               </div>
             </div>
-            
+
             {/* Key Insight */}
-            <div className="bg-gradient-to-br from-cyan-950/30 to-slate-900/50 border border-cyan-500/20 rounded-xl p-6">
-              <h3 className="text-lg font-bold text-white mb-3 flex items-center gap-2">
-                <Code className="w-5 h-5 text-cyan-400" />
+            <div className="rounded-xl border border-cyan-500/20 bg-gradient-to-br from-cyan-950/30 to-slate-900/50 p-6">
+              <h3 className="mb-3 flex items-center gap-2 text-lg font-bold text-white">
+                <Code className="h-5 w-5 text-cyan-400" />
                 Key Insight
               </h3>
-              <p className="text-slate-300 text-sm leading-relaxed">
-                {chapter === 0 && "useReducer centralizes state logic in one place—like the Temple housing the PreCogs."}
-                {chapter === 1 && "Multiple useState hooks scatter logic, creating race conditions and stale state bugs."}
-                {chapter === 2 && "The reducer is a pure function: given (state, action), it returns the next state."}
-                {chapter === 3 && "Dispatch is the only way to update state—predictable, debuggable, maintainable."}
-                {chapter === 4 && "We don't manage state; we describe what happened. The reducer handles the rest."}
+              <p className="text-sm leading-relaxed text-slate-300">
+                {chapter === 0 &&
+                  "useReducer centralizes state logic in one place—like the Temple housing the PreCogs."}
+                {chapter === 1 &&
+                  "Multiple useState hooks scatter logic, creating race conditions and stale state bugs."}
+                {chapter === 2 &&
+                  "The reducer is a pure function: given (state, action), it returns the next state."}
+                {chapter === 3 &&
+                  "Dispatch is the only way to update state—predictable, debuggable, maintainable."}
+                {chapter === 4 &&
+                  "We don't manage state; we describe what happened. The reducer handles the rest."}
               </p>
             </div>
           </div>
         </div>
       </main>
-      
+
       {/* SAFETY CIRCUIT BREAKER (Hidden but always present) */}
       {state.chaosLevel > 40 && (
-        <div className="fixed bottom-4 right-4 bg-red-900/90 border border-red-500/50 text-red-100 text-sm px-4 py-2 rounded-lg animate-pulse">
-          ⚡ Chaos level critical ({state.chaosLevel}/50). System will auto-reset.
+        <div className="fixed right-4 bottom-4 animate-pulse rounded-lg border border-red-500/50 bg-red-900/90 px-4 py-2 text-sm text-red-100">
+          ⚡ Chaos level critical ({state.chaosLevel}/50). System will
+          auto-reset.
         </div>
       )}
     </div>

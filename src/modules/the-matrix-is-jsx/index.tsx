@@ -25,14 +25,16 @@ export default function TheMatrixIsJSX(): JSX.Element {
 
   // Chapter 3: JSX description builder
   const [jsxDescription, setJsxDescription] = useState<string>(
-    "<div className='street'>\n  <div className='building' />\n  <div className='lamppost' />\n  <div className='woman-red-dress' />\n</div>"
+    "<div className='street'>\n  <div className='building' />\n  <div className='lamppost' />\n  <div className='woman-red-dress' />\n</div>",
   );
   const [sceneRendered, setSceneRendered] = useState<boolean>(false);
 
   // Chapter 4: Comparison
-  const [jsxInput, setJsxInput] = useState<string>("<div className='exit-sign'>EXIT</div>");
+  const [jsxInput, setJsxInput] = useState<string>(
+    "<div className='exit-sign'>EXIT</div>",
+  );
   const [createElementInput, setCreateElementInput] = useState<string>(
-    "React.createElement('div', {className: 'exit-sign'}, 'EXIT')"
+    "React.createElement('div', {className: 'exit-sign'}, 'EXIT')",
   );
   const [comparisonOutput, setComparisonOutput] = useState<string>("");
 
@@ -169,31 +171,37 @@ React.createElement(
   const currentChapter = chapters[chapter];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 p-4 md:p-8 font-mono">
-      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6">
-          <div className="flex items-center justify-between gap-4 md:gap-6 mb-2 flex-wrap">
+    <div className="min-h-screen bg-slate-950 p-4 font-mono text-slate-300 md:p-8">
+      <header className="top-0 z-10 border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm">
+        <div className="mx-auto max-w-7xl px-4 py-4 md:px-6 md:py-6">
+          <div className="mb-2 flex flex-wrap items-center justify-between gap-4 md:gap-6">
             <div className="flex items-center gap-3">
-              <Code className="text-emerald-500 w-6 h-6 md:w-8 md:h-8" />
-              <h1 className="text-2xl md:text-3xl font-bold">The Matrix</h1>
+              <Code className="h-6 w-6 text-emerald-500 md:h-8 md:w-8" />
+              <h1 className="text-2xl font-bold md:text-3xl">The Matrix</h1>
             </div>
-            <p className="text-xs md:text-sm text-slate-400">Neo • The Construct • 1999</p>
+            <p className="text-xs text-slate-400 md:text-sm">
+              Neo • The Construct • 1999
+            </p>
           </div>
-          <p className="text-base md:text-lg text-emerald-500 font-medium">JSX (JavaScript XML)</p>
+          <p className="text-base font-medium text-emerald-500 md:text-lg">
+            JSX (JavaScript XML)
+          </p>
         </div>
       </header>
 
-      <main className="max-w-6xl mx-auto mt-8" ref={parentRef}>
+      <main className="mx-auto mt-8 max-w-6xl" ref={parentRef}>
         {/* Chapter Content */}
-        <div className="prose prose-invert prose-lg max-w-none mb-8 md:mb-12">
-          <h2 className="text-2xl md:text-3xl font-bold mb-4">{currentChapter.title}</h2>
-          <p className="leading-relaxed font-sans">{currentChapter.content}</p>
+        <div className="prose prose-invert prose-lg mb-8 max-w-none md:mb-12">
+          <h2 className="mb-4 text-2xl font-bold md:text-3xl">
+            {currentChapter.title}
+          </h2>
+          <p className="font-sans leading-relaxed">{currentChapter.content}</p>
         </div>
 
         {/* Interactive Demo Section */}
-        <section className="bg-slate-900/50 border border-slate-700 rounded-xl p-6 md:p-8 mb-8 md:mb-12 shadow-lg shadow-emerald-900/10">
-          <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-            <Zap className="text-emerald-500 w-5 h-5" />
+        <section className="mb-8 rounded-xl border border-slate-700 bg-slate-900/50 p-6 shadow-lg shadow-emerald-900/10 md:mb-12 md:p-8">
+          <h3 className="mb-4 flex items-center gap-2 text-xl font-bold">
+            <Zap className="h-5 w-5 text-emerald-500" />
             Interactive Simulation
           </h3>
 
@@ -201,29 +209,33 @@ React.createElement(
           {chapter === 0 && (
             <div className="space-y-6">
               <p className="text-slate-400">
-                Below is a TV set described with JSX. Toggle to see the equivalent React.createElement
-                code.
+                Below is a TV set described with JSX. Toggle to see the
+                equivalent React.createElement code.
               </p>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
                     <h4 className="font-bold">JSX Description</h4>
                     <button
                       onClick={() => setShowGeneratedCode(!showGeneratedCode)}
-                      className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded text-sm flex items-center gap-2"
+                      className="flex items-center gap-2 rounded bg-slate-800 px-4 py-2 text-sm hover:bg-slate-700"
                     >
-                      <Eye className="w-4 h-4" />
+                      <Eye className="h-4 w-4" />
                       {showGeneratedCode ? "Show JSX" : "Show Generated Code"}
                     </button>
                   </div>
                   <CodeBlock
                     code={showGeneratedCode ? tvCreateElement : tvJSX}
                     variant="default"
-                    title={showGeneratedCode ? "// Generated React.createElement" : "// JSX"}
+                    title={
+                      showGeneratedCode
+                        ? "// Generated React.createElement"
+                        : "// JSX"
+                    }
                     language="jsx"
                     defaultExpanded={true}
                   />
-                  <div className="border border-slate-700 rounded p-6 bg-slate-950 flex items-center justify-center min-h-[200px]">
+                  <div className="flex min-h-[200px] items-center justify-center rounded border border-slate-700 bg-slate-950 p-6">
                     <div className="tv-set vintage">
                       <div className="screen">
                         <div className="static" />
@@ -235,27 +247,29 @@ React.createElement(
                     </div>
                   </div>
                 </div>
-                <div className="bg-slate-950/50 border border-slate-700 rounded p-6">
-                  <h4 className="font-bold mb-4">How It Works</h4>
+                <div className="rounded border border-slate-700 bg-slate-950/50 p-6">
+                  <h4 className="mb-4 font-bold">How It Works</h4>
                   <ul className="space-y-3 text-sm text-slate-400">
                     <li className="flex items-start gap-2">
-                      <div className="w-2 h-2 bg-emerald-500 rounded-full mt-1" />
-                      JSX is a <strong>declarative</strong> syntax: you describe what you want.
+                      <div className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
+                      JSX is a <strong>declarative</strong> syntax: you describe
+                      what you want.
                     </li>
                     <li className="flex items-start gap-2">
-                      <div className="w-2 h-2 bg-emerald-500 rounded-full mt-1" />
-                      The <strong>Babel compiler</strong> (the Operator) translates JSX into
-                      React.createElement calls.
+                      <div className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
+                      The <strong>Babel compiler</strong> (the Operator)
+                      translates JSX into React.createElement calls.
                     </li>
                     <li className="flex items-start gap-2">
-                      <div className="w-2 h-2 bg-emerald-500 rounded-full mt-1" />
-                      The generated code is what React actually executes to create the DOM.
+                      <div className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
+                      The generated code is what React actually executes to
+                      create the DOM.
                     </li>
                   </ul>
-                  <div className="mt-6 p-4 bg-emerald-950/20 border border-emerald-500/30 rounded">
+                  <div className="mt-6 rounded border border-emerald-500/30 bg-emerald-950/20 p-4">
                     <p className="text-sm">
-                      <strong className="text-emerald-400">Remember:</strong> You describe the UI,
-                      React builds it.
+                      <strong className="text-emerald-400">Remember:</strong>{" "}
+                      You describe the UI, React builds it.
                     </p>
                   </div>
                 </div>
@@ -267,10 +281,11 @@ React.createElement(
           {chapter === 1 && (
             <div className="space-y-6">
               <p className="text-slate-400">
-                Try to build a street scene by manually specifying each React.createElement call.
-                Notice how verbose and error-prone this is.
+                Try to build a street scene by manually specifying each
+                React.createElement call. Notice how verbose and error-prone
+                this is.
               </p>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
                 <div className="space-y-4">
                   <h4 className="font-bold">Manual createElement Builder</h4>
                   <div className="flex gap-2">
@@ -279,23 +294,23 @@ React.createElement(
                       value={currentStep}
                       onChange={(e) => setCurrentStep(e.target.value)}
                       placeholder="createElement('div', {className: 'building'})"
-                      className="flex-1 bg-slate-900 border border-slate-700 rounded px-4 py-2 text-sm"
+                      className="flex-1 rounded border border-slate-700 bg-slate-900 px-4 py-2 text-sm"
                     />
                     <button
                       onClick={handleAddStep}
-                      className="px-4 py-2 bg-emerald-700 hover:bg-emerald-600 rounded text-sm"
+                      className="rounded bg-emerald-700 px-4 py-2 text-sm hover:bg-emerald-600"
                     >
                       Add Step
                     </button>
                     <button
                       onClick={handleResetManual}
-                      className="px-4 py-2 bg-slate-800 hover:bg-slate-700 rounded text-sm"
+                      className="rounded bg-slate-800 px-4 py-2 text-sm hover:bg-slate-700"
                     >
                       Reset
                     </button>
                   </div>
-                  {error && <p className="text-red-400 text-sm">{error}</p>}
-                  <div className="border border-slate-700 rounded p-4 bg-slate-900/50 max-h-60 overflow-y-auto">
+                  {error && <p className="text-sm text-red-400">{error}</p>}
+                  <div className="max-h-60 overflow-y-auto rounded border border-slate-700 bg-slate-900/50 p-4">
                     <CodeBlock
                       code={manualSteps.join(",\n")}
                       variant="error"
@@ -312,33 +327,39 @@ React.createElement(
                   <h4 className="font-bold">Live Preview</h4>
                   <div
                     ref={streetPreviewRef}
-                    className="border border-slate-700 rounded p-6 bg-slate-950 min-h-[300px]"
+                    className="min-h-[300px] rounded border border-slate-700 bg-slate-950 p-6"
                   >
                     <div className="street">
                       {manualSteps.map((step, idx) => {
                         // Very simplified rendering for demo purposes
                         if (step.includes("building")) {
                           return (
-                            <div key={idx} className="building w-16 h-24 bg-red-900 mb-4" />
+                            <div
+                              key={idx}
+                              className="building mb-4 h-24 w-16 bg-red-900"
+                            />
                           );
                         }
                         if (step.includes("lamppost")) {
                           return (
-                            <div key={idx} className="lamppost w-4 h-20 bg-gray-700 mb-4" />
+                            <div
+                              key={idx}
+                              className="lamppost mb-4 h-20 w-4 bg-gray-700"
+                            />
                           );
                         }
                         return null;
                       })}
                     </div>
                     {manualSteps.length <= 1 && (
-                      <div className="text-slate-600 text-center mt-20">
+                      <div className="mt-20 text-center text-slate-600">
                         Add createElement steps to see the scene build.
                       </div>
                     )}
                   </div>
-                  <div className="bg-red-950/20 border border-red-500/30 rounded p-4">
-                    <h5 className="font-bold text-red-400 mb-2">Pain Points</h5>
-                    <ul className="text-sm space-y-1">
+                  <div className="rounded border border-red-500/30 bg-red-950/20 p-4">
+                    <h5 className="mb-2 font-bold text-red-400">Pain Points</h5>
+                    <ul className="space-y-1 text-sm">
                       <li>• Nested calls are hard to read and maintain</li>
                       <li>• Missing commas or parentheses break everything</li>
                       <li>• No visual intuition of the resulting UI</li>
@@ -353,43 +374,48 @@ React.createElement(
           {chapter === 2 && (
             <div className="space-y-6">
               <p className="text-slate-400">
-                Now describe the same street scene using JSX. It's intuitive and human-readable.
+                Now describe the same street scene using JSX. It's intuitive and
+                human-readable.
               </p>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
                 <div className="space-y-4">
                   <h4 className="font-bold">JSX Description</h4>
                   <textarea
                     value={jsxDescription}
                     onChange={(e) => setJsxDescription(e.target.value)}
-                    className="w-full h-48 bg-slate-900 border border-slate-700 rounded p-4 font-mono text-sm"
+                    className="h-48 w-full rounded border border-slate-700 bg-slate-900 p-4 font-mono text-sm"
                     spellCheck="false"
                   />
                   <button
                     onClick={handleRenderScene}
-                    className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 rounded font-bold flex items-center justify-center gap-2 w-full"
+                    className="flex w-full items-center justify-center gap-2 rounded bg-emerald-600 px-6 py-3 font-bold hover:bg-emerald-500"
                   >
-                    <Eye className="w-5 h-5" />
+                    <Eye className="h-5 w-5" />
                     Render Scene from JSX
                   </button>
                   {sceneRendered && (
-                    <div className="p-4 bg-emerald-950/30 border border-emerald-500/50 rounded flex items-center gap-3">
-                      <CheckCircle className="text-emerald-400 w-5 h-5" />
-                      <span className="text-emerald-400">Scene rendered perfectly!</span>
+                    <div className="flex items-center gap-3 rounded border border-emerald-500/50 bg-emerald-950/30 p-4">
+                      <CheckCircle className="h-5 w-5 text-emerald-400" />
+                      <span className="text-emerald-400">
+                        Scene rendered perfectly!
+                      </span>
                     </div>
                   )}
                 </div>
                 <div className="space-y-4">
                   <h4 className="font-bold">Instant Preview</h4>
-                  <div className="border border-slate-700 rounded p-6 bg-slate-950 min-h-[300px] flex items-center justify-center">
-                    <div className="street relative w-full h-full">
-                      <div className="building absolute left-4 bottom-0 w-20 h-32 bg-red-900" />
-                      <div className="lamppost absolute left-32 bottom-0 w-4 h-24 bg-gray-700" />
-                      <div className="woman-red-dress absolute right-8 bottom-0 w-6 h-16 bg-red-600" />
+                  <div className="flex min-h-[300px] items-center justify-center rounded border border-slate-700 bg-slate-950 p-6">
+                    <div className="street relative h-full w-full">
+                      <div className="building absolute bottom-0 left-4 h-32 w-20 bg-red-900" />
+                      <div className="lamppost absolute bottom-0 left-32 h-24 w-4 bg-gray-700" />
+                      <div className="woman-red-dress absolute right-8 bottom-0 h-16 w-6 bg-red-600" />
                     </div>
                   </div>
-                  <div className="bg-emerald-950/20 border border-emerald-500/30 rounded p-4">
-                    <h5 className="font-bold text-emerald-400 mb-2">Advantages</h5>
-                    <ul className="text-sm space-y-1">
+                  <div className="rounded border border-emerald-500/30 bg-emerald-950/20 p-4">
+                    <h5 className="mb-2 font-bold text-emerald-400">
+                      Advantages
+                    </h5>
+                    <ul className="space-y-1 text-sm">
                       <li>• HTML-like syntax is familiar and intuitive</li>
                       <li>• Clear visual structure mirrors the DOM</li>
                       <li>• Less cognitive load—describe what you want</li>
@@ -404,16 +430,16 @@ React.createElement(
           {chapter === 3 && (
             <div className="space-y-6">
               <p className="text-slate-400">
-                Both JSX and React.createElement produce identical output. The compiler translates
-                JSX into the same function calls.
+                Both JSX and React.createElement produce identical output. The
+                compiler translates JSX into the same function calls.
               </p>
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+              <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
                 <div className="space-y-4">
                   <h4 className="font-bold">JSX Input</h4>
                   <textarea
                     value={jsxInput}
                     onChange={(e) => setJsxInput(e.target.value)}
-                    className="w-full h-32 bg-slate-900 border border-slate-700 rounded p-4 font-mono text-sm"
+                    className="h-32 w-full rounded border border-slate-700 bg-slate-900 p-4 font-mono text-sm"
                     spellCheck="false"
                   />
                   <CodeBlock
@@ -429,7 +455,7 @@ React.createElement(
                   <textarea
                     value={createElementInput}
                     onChange={(e) => setCreateElementInput(e.target.value)}
-                    className="w-full h-32 bg-slate-900 border border-slate-700 rounded p-4 font-mono text-sm"
+                    className="h-32 w-full rounded border border-slate-700 bg-slate-900 p-4 font-mono text-sm"
                     spellCheck="false"
                   />
                   <CodeBlock
@@ -442,19 +468,21 @@ React.createElement(
                 </div>
                 <div className="space-y-4">
                   <h4 className="font-bold">Compiled Output</h4>
-                  <div className="border border-slate-700 rounded p-4 bg-slate-900/50 h-32 overflow-y-auto">
-                    <pre className="text-sm text-emerald-400 whitespace-pre-wrap">
+                  <div className="h-32 overflow-y-auto rounded border border-slate-700 bg-slate-900/50 p-4">
+                    <pre className="text-sm whitespace-pre-wrap text-emerald-400">
                       {comparisonOutput}
                     </pre>
                   </div>
-                  <div className="border border-slate-700 rounded p-6 bg-slate-950 min-h-[100px] flex items-center justify-center">
-                    <div className="exit-sign bg-green-800 text-white font-bold px-4 py-2 rounded border border-green-600">
+                  <div className="flex min-h-[100px] items-center justify-center rounded border border-slate-700 bg-slate-950 p-6">
+                    <div className="exit-sign rounded border border-green-600 bg-green-800 px-4 py-2 font-bold text-white">
                       EXIT
                     </div>
                   </div>
-                  <div className="p-4 bg-slate-900/50 rounded border border-slate-700">
-                    <p className="text-sm text-center">
-                      <strong className="text-emerald-400">Both produce the same result.</strong>
+                  <div className="rounded border border-slate-700 bg-slate-900/50 p-4">
+                    <p className="text-center text-sm">
+                      <strong className="text-emerald-400">
+                        Both produce the same result.
+                      </strong>
                       <br />
                       JSX is syntactic sugar for React.createElement.
                     </p>
@@ -468,10 +496,10 @@ React.createElement(
           {chapter === 4 && (
             <div className="space-y-6">
               <p className="text-slate-400">
-                With mastery, you can rapidly prototype complex scenes using JSX. Select a scene to
-                view its JSX source.
+                With mastery, you can rapidly prototype complex scenes using
+                JSX. Select a scene to view its JSX source.
               </p>
-              <div className="grid grid-cols-1 lg:grid-cols-2 gap-8">
+              <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
                 <div className="space-y-4">
                   <h4 className="font-bold">Scene Gallery</h4>
                   <div className="grid grid-cols-3 gap-4">
@@ -479,24 +507,30 @@ React.createElement(
                       <button
                         key={idx}
                         onClick={() => setSelectedScene(idx)}
-                        className={`p-4 rounded border ${
+                        className={`rounded border p-4 ${
                           selectedScene === idx
                             ? "border-emerald-500 bg-emerald-950/30"
                             : "border-slate-700 bg-slate-900/50"
-                        } hover:border-slate-500 transition-colors`}
+                        } transition-colors hover:border-slate-500`}
                       >
                         <div
-                          className={`w-full h-20 rounded mb-2 ${scene.color} flex items-center justify-center`}
+                          className={`mb-2 h-20 w-full rounded ${scene.color} flex items-center justify-center`}
                         >
-                          <div className="text-xs text-slate-300">{scene.name}</div>
+                          <div className="text-xs text-slate-300">
+                            {scene.name}
+                          </div>
                         </div>
-                        <div className="text-xs text-slate-400 truncate">{scene.name}</div>
+                        <div className="truncate text-xs text-slate-400">
+                          {scene.name}
+                        </div>
                       </button>
                     ))}
                   </div>
-                  <div className="border border-slate-700 rounded p-6 bg-slate-950 min-h-[200px] flex items-center justify-center">
-                    <div className="scene-preview w-full h-full flex items-center justify-center">
-                      <div className="text-slate-600">Visual representation of {scenes[selectedScene].name}</div>
+                  <div className="flex min-h-[200px] items-center justify-center rounded border border-slate-700 bg-slate-950 p-6">
+                    <div className="scene-preview flex h-full w-full items-center justify-center">
+                      <div className="text-slate-600">
+                        Visual representation of {scenes[selectedScene].name}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -509,23 +543,26 @@ React.createElement(
                     language="jsx"
                     defaultExpanded={true}
                   />
-                  <div className="bg-slate-900/50 border border-slate-700 rounded p-6">
-                    <h5 className="font-bold mb-3 flex items-center gap-2">
-                      <FileCode className="w-4 h-4" />
+                  <div className="rounded border border-slate-700 bg-slate-900/50 p-6">
+                    <h5 className="mb-3 flex items-center gap-2 font-bold">
+                      <FileCode className="h-4 w-4" />
                       Mastery Insights
                     </h5>
                     <ul className="space-y-3 text-sm text-slate-400">
                       <li className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-emerald-500 rounded-full mt-1" />
-                        JSX allows you to think in <strong>visual components</strong>, not function calls.
+                        <div className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
+                        JSX allows you to think in{" "}
+                        <strong>visual components</strong>, not function calls.
                       </li>
                       <li className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-emerald-500 rounded-full mt-1" />
-                        The structure is <strong>declarative</strong>: you describe the end state.
+                        <div className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
+                        The structure is <strong>declarative</strong>: you
+                        describe the end state.
                       </li>
                       <li className="flex items-start gap-2">
-                        <div className="w-2 h-2 bg-emerald-500 rounded-full mt-1" />
-                        You can see both the <strong>UI</strong> and the <strong>code</strong> that creates it.
+                        <div className="mt-1 h-2 w-2 rounded-full bg-emerald-500" />
+                        You can see both the <strong>UI</strong> and the{" "}
+                        <strong>code</strong> that creates it.
                       </li>
                     </ul>
                   </div>
@@ -536,11 +573,11 @@ React.createElement(
         </section>
 
         {/* Navigation */}
-        <nav className="flex justify-between items-center mt-8 md:mt-12">
+        <nav className="mt-8 flex items-center justify-between md:mt-12">
           <button
             onClick={() => setChapter(Math.max(0, chapter - 1))}
             disabled={chapter === 0}
-            className="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+            className="flex items-center gap-2 rounded-lg bg-slate-800 px-6 py-3 text-white transition-colors hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-30"
           >
             Previous
           </button>
@@ -548,7 +585,7 @@ React.createElement(
             <span className="text-sm text-slate-400">
               Chapter {chapter + 1} of {chapters.length}
             </span>
-            <div className="w-48 h-2 bg-slate-800 rounded-full overflow-hidden mt-2">
+            <div className="mt-2 h-2 w-48 overflow-hidden rounded-full bg-slate-800">
               <div
                 className="h-full bg-emerald-500 transition-all duration-300"
                 style={{ width: `${((chapter + 1) / chapters.length) * 100}%` }}
@@ -556,9 +593,11 @@ React.createElement(
             </div>
           </div>
           <button
-            onClick={() => setChapter(Math.min(chapters.length - 1, chapter + 1))}
+            onClick={() =>
+              setChapter(Math.min(chapters.length - 1, chapter + 1))
+            }
             disabled={chapter === chapters.length - 1}
-            className="px-6 py-3 bg-emerald-600 hover:bg-emerald-500 text-white rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
+            className="flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-white transition-colors hover:bg-emerald-500 disabled:cursor-not-allowed disabled:opacity-30"
           >
             Next
           </button>

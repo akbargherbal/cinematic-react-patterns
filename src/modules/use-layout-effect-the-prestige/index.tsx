@@ -1,4 +1,10 @@
-import { useState, useEffect, useLayoutEffect, useRef, useCallback } from "react";
+import {
+  useState,
+  useEffect,
+  useLayoutEffect,
+  useRef,
+  useCallback,
+} from "react";
 import { Sparkles, Eye, EyeOff, RotateCcw, Play, Zap } from "lucide-react";
 import { CodeBlock } from "@/components/common/CodeBlock";
 
@@ -70,38 +76,49 @@ Alistair diagrams both methods in his notebook. The Stagehand is for cleanup, po
   const currentChapter = chapters[chapter];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-amber-950/30 text-slate-200 font-serif">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-amber-950/30 font-serif text-slate-200">
       {/* Header */}
-      <header className="border-b border-slate-700 bg-slate-950/90 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
-          <div className="flex items-center justify-between gap-4 sm:gap-6 mb-2 flex-wrap">
+      <header className="sticky top-0 z-50 border-b border-slate-700 bg-slate-950/90 backdrop-blur-sm">
+        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 sm:py-6">
+          <div className="mb-2 flex flex-wrap items-center justify-between gap-4 sm:gap-6">
             <div className="flex items-center gap-2 sm:gap-3">
-              <Sparkles className="text-amber-500 w-6 h-6 sm:w-8 sm:h-8" />
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">The Prestige</h1>
+              <Sparkles className="h-6 w-6 text-amber-500 sm:h-8 sm:w-8" />
+              <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
+                The Prestige
+              </h1>
             </div>
-            <p className="text-xs sm:text-sm md:text-base text-slate-400">
+            <p className="text-xs text-slate-400 sm:text-sm md:text-base">
               Alistair • 2006
             </p>
           </div>
-          <p className="text-sm sm:text-base md:text-lg text-amber-400 font-medium">
+          <p className="text-sm font-medium text-amber-400 sm:text-base md:text-lg">
             useLayoutEffect Hook
           </p>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 lg:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:py-12">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
           {/* Narrative Column */}
           <div className="lg:col-span-7">
             <div className="mb-8 lg:mb-12">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-amber-400">
+              <h2 className="mb-4 text-2xl font-bold text-amber-400 sm:mb-6 sm:text-3xl">
                 {currentChapter.title}
               </h2>
               <div className="prose prose-invert prose-slate max-w-none">
-                {currentChapter.content.split('\n\n').map((paragraph, idx) => (
-                  <p key={idx} className="mb-4 leading-relaxed text-base sm:text-lg text-slate-300">
-                    {paragraph.split('**').map((part, i) =>
-                      i % 2 === 1 ? <strong key={i} className="text-amber-400">{part}</strong> : part
+                {currentChapter.content.split("\n\n").map((paragraph, idx) => (
+                  <p
+                    key={idx}
+                    className="mb-4 text-base leading-relaxed text-slate-300 sm:text-lg"
+                  >
+                    {paragraph.split("**").map((part, i) =>
+                      i % 2 === 1 ? (
+                        <strong key={i} className="text-amber-400">
+                          {part}
+                        </strong>
+                      ) : (
+                        part
+                      ),
                     )}
                   </p>
                 ))}
@@ -118,24 +135,28 @@ Alistair diagrams both methods in his notebook. The Stagehand is for cleanup, po
         </div>
 
         {/* Navigation */}
-        <nav className="flex justify-between items-center mt-8 sm:mt-12 pt-8 border-t border-slate-700">
+        <nav className="mt-8 flex items-center justify-between border-t border-slate-700 pt-8 sm:mt-12">
           <button
             onClick={() => setChapter(Math.max(0, chapter - 1))}
             disabled={chapter === 0}
-            className="px-4 sm:px-6 py-2 sm:py-3 bg-amber-600 text-slate-950 rounded-lg hover:bg-amber-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-sm sm:text-base font-semibold"
+            className="rounded-lg bg-amber-600 px-4 py-2 text-sm font-semibold text-slate-950 transition-all hover:bg-amber-500 disabled:cursor-not-allowed disabled:opacity-30 sm:px-6 sm:py-3 sm:text-base"
           >
             Previous
           </button>
           <div className="text-center">
-            <span className="text-xs sm:text-sm text-slate-400 block mb-1">Act</span>
-            <span className="text-sm sm:text-base font-mono text-amber-400">
+            <span className="mb-1 block text-xs text-slate-400 sm:text-sm">
+              Act
+            </span>
+            <span className="font-mono text-sm text-amber-400 sm:text-base">
               {chapter + 1} of {chapters.length}
             </span>
           </div>
           <button
-            onClick={() => setChapter(Math.min(chapters.length - 1, chapter + 1))}
+            onClick={() =>
+              setChapter(Math.min(chapters.length - 1, chapter + 1))
+            }
             disabled={chapter === chapters.length - 1}
-            className="px-4 sm:px-6 py-2 sm:py-3 bg-amber-600 text-slate-950 rounded-lg hover:bg-amber-500 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-sm sm:text-base font-semibold"
+            className="rounded-lg bg-amber-600 px-4 py-2 text-sm font-semibold text-slate-950 transition-all hover:bg-amber-500 disabled:cursor-not-allowed disabled:opacity-30 sm:px-6 sm:py-3 sm:text-base"
           >
             Next
           </button>
@@ -187,27 +208,30 @@ function ThreeActsDemo(): JSX.Element {
   };
 
   return (
-    <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-4 sm:p-6">
-      <div className="flex items-center gap-2 mb-4">
-        <Sparkles className="text-amber-500 w-5 h-5" />
-        <h3 className="text-lg sm:text-xl font-bold text-amber-400">The Three Acts</h3>
+    <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-4 sm:p-6">
+      <div className="mb-4 flex items-center gap-2">
+        <Sparkles className="h-5 w-5 text-amber-500" />
+        <h3 className="text-lg font-bold text-amber-400 sm:text-xl">
+          The Three Acts
+        </h3>
       </div>
 
-      <p className="text-xs sm:text-sm text-slate-400 mb-6">
-        Watch the sequence of a magic trick. Notice the invisible moment between the Turn and the Prestige.
+      <p className="mb-6 text-xs text-slate-400 sm:text-sm">
+        Watch the sequence of a magic trick. Notice the invisible moment between
+        the Turn and the Prestige.
       </p>
 
       {/* Visual Timeline */}
-      <div className="space-y-4 mb-6">
+      <div className="mb-6 space-y-4">
         {acts.map((act, idx) => (
           <div
             key={idx}
-            className={`border-2 rounded-lg p-4 transition-all duration-500 ${
+            className={`rounded-lg border-2 p-4 transition-all duration-500 ${
               currentAct === idx
-                ? "border-amber-500 bg-amber-950/30 scale-105"
+                ? "scale-105 border-amber-500 bg-amber-950/30"
                 : currentAct > idx
-                ? "border-green-500/50 bg-green-950/20"
-                : "border-slate-700 bg-slate-800/30"
+                  ? "border-green-500/50 bg-green-950/20"
+                  : "border-slate-700 bg-slate-800/30"
             }`}
           >
             <div className="flex items-center gap-3">
@@ -217,7 +241,7 @@ function ThreeActsDemo(): JSX.Element {
                 <p className="text-xs text-slate-400">{act.description}</p>
               </div>
               {currentAct === idx && (
-                <div className="w-3 h-3 rounded-full bg-amber-500 animate-pulse" />
+                <div className="h-3 w-3 animate-pulse rounded-full bg-amber-500" />
               )}
             </div>
           </div>
@@ -226,10 +250,11 @@ function ThreeActsDemo(): JSX.Element {
 
       {/* Invisible Moment Indicator */}
       {currentAct === 1 && (
-        <div className="bg-amber-950/40 border border-amber-500/50 rounded-lg p-4 mb-6 animate-in fade-in duration-300">
-          <p className="text-sm text-amber-300 flex items-center gap-2">
-            <EyeOff className="w-4 h-4" />
-            <strong>The invisible moment:</strong> Between Turn and Prestige, secret work happens unseen.
+        <div className="animate-in fade-in mb-6 rounded-lg border border-amber-500/50 bg-amber-950/40 p-4 duration-300">
+          <p className="flex items-center gap-2 text-sm text-amber-300">
+            <EyeOff className="h-4 w-4" />
+            <strong>The invisible moment:</strong> Between Turn and Prestige,
+            secret work happens unseen.
           </p>
         </div>
       )}
@@ -237,15 +262,16 @@ function ThreeActsDemo(): JSX.Element {
       <button
         onClick={runSequence}
         disabled={isAnimating}
-        className="w-full px-4 py-3 bg-amber-600 text-slate-950 rounded-lg hover:bg-amber-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 font-semibold"
+        className="flex w-full items-center justify-center gap-2 rounded-lg bg-amber-600 px-4 py-3 font-semibold text-slate-950 transition-all hover:bg-amber-500 disabled:cursor-not-allowed disabled:opacity-50"
       >
-        <Play className="w-4 h-4" />
+        <Play className="h-4 w-4" />
         {isAnimating ? "Performing..." : "Perform Trick"}
       </button>
 
-      <div className="mt-6 pt-6 border-t border-slate-700">
+      <div className="mt-6 border-t border-slate-700 pt-6">
         <p className="text-xs text-slate-500">
-          💡 In React, DOM mutations (Turn) and browser paint (Prestige) are separated. useLayoutEffect works in that invisible moment.
+          💡 In React, DOM mutations (Turn) and browser paint (Prestige) are
+          separated. useLayoutEffect works in that invisible moment.
         </p>
       </div>
     </div>
@@ -275,8 +301,8 @@ function FlashingDoveDemo(): JSX.Element {
       const timer = setTimeout(() => {
         setShowDove(true);
         const elapsed = Date.now() - startTime;
-        setTotalFlickerTime(prev => prev + elapsed);
-        setFlickerCount(prev => prev + 1);
+        setTotalFlickerTime((prev) => prev + elapsed);
+        setFlickerCount((prev) => prev + 1);
       }, 150); // Visible delay
 
       return () => clearTimeout(timer);
@@ -330,36 +356,43 @@ function MagicTrick() {
 }`;
 
   return (
-    <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-4 sm:p-6">
-      <div className="flex items-center gap-2 mb-4">
-        <Eye className={`w-5 h-5 ${showCage && !showDove ? "text-red-400 animate-pulse" : "text-slate-500"}`} />
-        <h3 className="text-lg sm:text-xl font-bold text-red-400">The Flashing Dove</h3>
+    <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-4 sm:p-6">
+      <div className="mb-4 flex items-center gap-2">
+        <Eye
+          className={`h-5 w-5 ${showCage && !showDove ? "animate-pulse text-red-400" : "text-slate-500"}`}
+        />
+        <h3 className="text-lg font-bold text-red-400 sm:text-xl">
+          The Flashing Dove
+        </h3>
       </div>
 
-      <p className="text-xs sm:text-sm text-slate-400 mb-6">
-        Watch the trick with useEffect. Notice the visible flicker when the cage appears empty before the dove materializes.
+      <p className="mb-6 text-xs text-slate-400 sm:text-sm">
+        Watch the trick with useEffect. Notice the visible flicker when the cage
+        appears empty before the dove materializes.
       </p>
 
       {/* Stage */}
-      <div className="bg-slate-950 border-2 border-slate-700 rounded-lg p-8 mb-6 min-h-[200px] flex items-center justify-center relative">
+      <div className="relative mb-6 flex min-h-[200px] items-center justify-center rounded-lg border-2 border-slate-700 bg-slate-950 p-8">
         {/* Spotlight effect */}
-        <div className="absolute inset-0 bg-gradient-radial from-amber-500/10 to-transparent rounded-lg pointer-events-none" />
-        
+        <div className="bg-gradient-radial pointer-events-none absolute inset-0 rounded-lg from-amber-500/10 to-transparent" />
+
         {showCage ? (
           <div className="relative">
             {/* Cage */}
-            <div className={`text-6xl transition-all duration-300 ${showDove ? "opacity-100" : "opacity-70"}`}>
+            <div
+              className={`text-6xl transition-all duration-300 ${showDove ? "opacity-100" : "opacity-70"}`}
+            >
               🗝️
             </div>
             {/* Dove - appears AFTER paint */}
             {showDove && (
-              <div className="absolute -top-2 left-1/2 -translate-x-1/2 text-4xl animate-in fade-in duration-300">
+              <div className="animate-in fade-in absolute -top-2 left-1/2 -translate-x-1/2 text-4xl duration-300">
                 🕊️
               </div>
             )}
             {/* Flicker indicator */}
             {showCage && !showDove && (
-              <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-red-400 text-xs font-bold whitespace-nowrap animate-pulse">
+              <div className="absolute -top-8 left-1/2 -translate-x-1/2 animate-pulse text-xs font-bold whitespace-nowrap text-red-400">
                 👁️ FLICKER!
               </div>
             )}
@@ -370,35 +403,35 @@ function MagicTrick() {
       </div>
 
       {/* Controls */}
-      <div className="flex gap-3 mb-6">
+      <div className="mb-6 flex gap-3">
         <button
           onClick={performTrick}
           disabled={isPerforming}
-          className="flex-1 px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 text-sm font-semibold"
+          className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-red-600 px-4 py-3 text-sm font-semibold text-white transition-all hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          <Play className="w-4 h-4" />
+          <Play className="h-4 w-4" />
           {isPerforming ? "Performing..." : "Perform Trick"}
         </button>
         <button
           onClick={reset}
-          className="px-4 py-3 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-all"
+          className="rounded-lg bg-slate-700 px-4 py-3 text-white transition-all hover:bg-slate-600"
           title="Reset"
         >
-          <RotateCcw className="w-4 h-4" />
+          <RotateCcw className="h-4 w-4" />
         </button>
       </div>
 
       {/* Metrics */}
-      <div className="grid grid-cols-2 gap-3 mb-6">
-        <div className="bg-slate-800 rounded-lg p-3">
+      <div className="mb-6 grid grid-cols-2 gap-3">
+        <div className="rounded-lg bg-slate-800 p-3">
           <p className="text-xs text-slate-400">Flicker Count</p>
-          <p className="text-xl font-mono font-bold text-red-400 mt-1">
+          <p className="mt-1 font-mono text-xl font-bold text-red-400">
             {flickerCount}
           </p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-3">
+        <div className="rounded-lg bg-slate-800 p-3">
           <p className="text-xs text-slate-400">Total Flicker (ms)</p>
-          <p className="text-xl font-mono font-bold text-red-400 mt-1">
+          <p className="mt-1 font-mono text-xl font-bold text-red-400">
             {totalFlickerTime}
           </p>
         </div>
@@ -413,10 +446,15 @@ function MagicTrick() {
         defaultExpanded={true}
       />
 
-      <div className="mt-4 pt-4 border-t border-slate-700">
+      <div className="mt-4 border-t border-slate-700 pt-4">
         <p className="text-xs text-slate-500">
-          ⚠️ <strong>The Problem</strong>: useEffect runs after paint. The audience sees the mechanism.
-          {flickerCount >= 45 && <span className="text-red-400 ml-2">(Circuit breaker approaching)</span>}
+          ⚠️ <strong>The Problem</strong>: useEffect runs after paint. The
+          audience sees the mechanism.
+          {flickerCount >= 45 && (
+            <span className="ml-2 text-red-400">
+              (Circuit breaker approaching)
+            </span>
+          )}
         </p>
       </div>
     </div>
@@ -486,67 +524,72 @@ function MagicTrick() {
 }`;
 
   return (
-    <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-4 sm:p-6">
-      <div className="flex items-center gap-2 mb-4">
-        <Zap className="text-amber-500 w-5 h-5" />
-        <h3 className="text-lg sm:text-xl font-bold text-amber-400">The Secret Assistant</h3>
+    <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-4 sm:p-6">
+      <div className="mb-4 flex items-center gap-2">
+        <Zap className="h-5 w-5 text-amber-500" />
+        <h3 className="text-lg font-bold text-amber-400 sm:text-xl">
+          The Secret Assistant
+        </h3>
       </div>
 
-      <p className="text-xs sm:text-sm text-slate-400 mb-6">
-        Watch the trick with useLayoutEffect. Cage and dove appear as one perfect, indivisible moment.
+      <p className="mb-6 text-xs text-slate-400 sm:text-sm">
+        Watch the trick with useLayoutEffect. Cage and dove appear as one
+        perfect, indivisible moment.
       </p>
 
       {/* Stage */}
-      <div className="bg-slate-950 border-2 border-amber-500/30 rounded-lg p-8 mb-6 min-h-[200px] flex items-center justify-center relative">
+      <div className="relative mb-6 flex min-h-[200px] items-center justify-center rounded-lg border-2 border-amber-500/30 bg-slate-950 p-8">
         {/* Spotlight effect */}
-        <div className="absolute inset-0 bg-gradient-radial from-amber-500/20 to-transparent rounded-lg pointer-events-none" />
-        
+        <div className="bg-gradient-radial pointer-events-none absolute inset-0 rounded-lg from-amber-500/20 to-transparent" />
+
         {showElements && (
-          <div ref={cageRef} className="relative opacity-0 transition-opacity duration-300">
+          <div
+            ref={cageRef}
+            className="relative opacity-0 transition-opacity duration-300"
+          >
             {/* Cage */}
-            <div className="text-6xl">
-              🗝️
-            </div>
+            <div className="text-6xl">🗝️</div>
             {/* Dove - appears SYNCHRONOUSLY */}
             <div className="absolute -top-2 left-1/2 -translate-x-1/2 text-4xl">
               🕊️
             </div>
             {/* Success indicator */}
-            <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-green-400 text-xs font-bold whitespace-nowrap">
+            <div className="absolute -top-8 left-1/2 -translate-x-1/2 text-xs font-bold whitespace-nowrap text-green-400">
               ✨ SEAMLESS!
             </div>
           </div>
         )}
-        
+
         {!showElements && !isPerforming && (
           <p className="text-slate-600 italic">Stage empty...</p>
         )}
       </div>
 
       {/* Controls */}
-      <div className="flex gap-3 mb-6">
+      <div className="mb-6 flex gap-3">
         <button
           onClick={performTrick}
           disabled={isPerforming}
-          className="flex-1 px-4 py-3 bg-amber-600 text-slate-950 rounded-lg hover:bg-amber-500 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 text-sm font-semibold"
+          className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-amber-600 px-4 py-3 text-sm font-semibold text-slate-950 transition-all hover:bg-amber-500 disabled:cursor-not-allowed disabled:opacity-50"
         >
-          <Play className="w-4 h-4" />
+          <Play className="h-4 w-4" />
           {isPerforming ? "Performing..." : "Perform Trick"}
         </button>
         <button
           onClick={reset}
-          className="px-4 py-3 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-all"
+          className="rounded-lg bg-slate-700 px-4 py-3 text-white transition-all hover:bg-slate-600"
           title="Reset"
         >
-          <RotateCcw className="w-4 h-4" />
+          <RotateCcw className="h-4 w-4" />
         </button>
       </div>
 
       {/* Success Indicator */}
-      <div className="bg-green-950/30 border border-green-500/30 rounded-lg p-4 mb-6">
-        <p className="text-sm text-green-300 flex items-center gap-2">
-          <Sparkles className="w-4 h-4" />
-          <strong>Perfect illusion:</strong> No flicker, no visible sequence. Pure magic.
+      <div className="mb-6 rounded-lg border border-green-500/30 bg-green-950/30 p-4">
+        <p className="flex items-center gap-2 text-sm text-green-300">
+          <Sparkles className="h-4 w-4" />
+          <strong>Perfect illusion:</strong> No flicker, no visible sequence.
+          Pure magic.
         </p>
       </div>
 
@@ -559,9 +602,10 @@ function MagicTrick() {
         defaultExpanded={true}
       />
 
-      <div className="mt-4 pt-4 border-t border-slate-700">
+      <div className="mt-4 border-t border-slate-700 pt-4">
         <p className="text-xs text-slate-500">
-          ✨ <strong>The Solution</strong>: useLayoutEffect runs synchronously before paint. The audience never sees the mechanism.
+          ✨ <strong>The Solution</strong>: useLayoutEffect runs synchronously
+          before paint. The audience never sees the mechanism.
         </p>
       </div>
     </div>
@@ -570,7 +614,9 @@ function MagicTrick() {
 
 // Chapter 4: Two Performances (Comparison)
 function ComparisonDemo(): JSX.Element {
-  const [mode, setMode] = useState<"useEffect" | "useLayoutEffect">("useEffect");
+  const [mode, setMode] = useState<"useEffect" | "useLayoutEffect">(
+    "useEffect",
+  );
   const [isPerforming, setIsPerforming] = useState<boolean>(false);
   const [showElements, setShowElements] = useState<boolean>(false);
   const [metrics, setMetrics] = useState<Metrics>({
@@ -595,7 +641,7 @@ function ComparisonDemo(): JSX.Element {
         if (elementsRef.current) {
           elementsRef.current.style.opacity = "1";
           const elapsed = Date.now() - startTime;
-          setMetrics(prev => ({
+          setMetrics((prev) => ({
             ...prev,
             flickerCount: prev.flickerCount + 1,
             totalFlickerTime: prev.totalFlickerTime + elapsed,
@@ -610,7 +656,7 @@ function ComparisonDemo(): JSX.Element {
   useLayoutEffect(() => {
     if (mode === "useLayoutEffect" && showElements && elementsRef.current) {
       elementsRef.current.style.opacity = "1";
-      setMetrics(prev => ({
+      setMetrics((prev) => ({
         ...prev,
         seamlessCount: prev.seamlessCount + 1,
       }));
@@ -656,21 +702,23 @@ useLayoutEffect(() => {
 }, [showElements]);`;
 
   return (
-    <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-4 sm:p-6">
-      <div className="flex items-center gap-2 mb-4">
-        <Sparkles className="text-amber-500 w-5 h-5" />
-        <h3 className="text-lg sm:text-xl font-bold text-amber-400">Two Performances</h3>
+    <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-4 sm:p-6">
+      <div className="mb-4 flex items-center gap-2">
+        <Sparkles className="h-5 w-5 text-amber-500" />
+        <h3 className="text-lg font-bold text-amber-400 sm:text-xl">
+          Two Performances
+        </h3>
       </div>
 
-      <p className="text-xs sm:text-sm text-slate-400 mb-6">
+      <p className="mb-6 text-xs text-slate-400 sm:text-sm">
         Compare the two approaches side-by-side.
       </p>
 
       {/* Mode Toggle */}
-      <div className="flex gap-3 mb-6">
+      <div className="mb-6 flex gap-3">
         <button
           onClick={() => setMode("useEffect")}
-          className={`flex-1 px-4 py-3 rounded-lg transition-all text-sm font-semibold ${
+          className={`flex-1 rounded-lg px-4 py-3 text-sm font-semibold transition-all ${
             mode === "useEffect"
               ? "bg-red-600 text-white"
               : "bg-slate-700 text-slate-300 hover:bg-slate-600"
@@ -680,7 +728,7 @@ useLayoutEffect(() => {
         </button>
         <button
           onClick={() => setMode("useLayoutEffect")}
-          className={`flex-1 px-4 py-3 rounded-lg transition-all text-sm font-semibold ${
+          className={`flex-1 rounded-lg px-4 py-3 text-sm font-semibold transition-all ${
             mode === "useLayoutEffect"
               ? "bg-amber-600 text-slate-950"
               : "bg-slate-700 text-slate-300 hover:bg-slate-600"
@@ -691,57 +739,70 @@ useLayoutEffect(() => {
       </div>
 
       {/* Stage */}
-      <div className={`border-2 rounded-lg p-8 mb-6 min-h-[200px] flex items-center justify-center relative ${
-        mode === "useEffect" ? "bg-slate-950 border-red-500/30" : "bg-slate-950 border-amber-500/30"
-      }`}>
-        <div className={`absolute inset-0 bg-gradient-radial rounded-lg pointer-events-none ${
-          mode === "useEffect" ? "from-red-500/10" : "from-amber-500/20"
-        }`} />
-        
+      <div
+        className={`relative mb-6 flex min-h-[200px] items-center justify-center rounded-lg border-2 p-8 ${
+          mode === "useEffect"
+            ? "border-red-500/30 bg-slate-950"
+            : "border-amber-500/30 bg-slate-950"
+        }`}
+      >
+        <div
+          className={`bg-gradient-radial pointer-events-none absolute inset-0 rounded-lg ${
+            mode === "useEffect" ? "from-red-500/10" : "from-amber-500/20"
+          }`}
+        />
+
         {showElements && (
-          <div ref={elementsRef} className="relative opacity-0 transition-opacity duration-300">
+          <div
+            ref={elementsRef}
+            className="relative opacity-0 transition-opacity duration-300"
+          >
             <div className="text-6xl">🗝️</div>
-            <div className="absolute -top-2 left-1/2 -translate-x-1/2 text-4xl">🕊️</div>
+            <div className="absolute -top-2 left-1/2 -translate-x-1/2 text-4xl">
+              🕊️
+            </div>
           </div>
         )}
-        
+
         {!showElements && !isPerforming && (
           <p className="text-slate-600 italic">Stage empty...</p>
         )}
       </div>
 
       {/* Controls */}
-      <div className="flex gap-3 mb-6">
+      <div className="mb-6 flex gap-3">
         <button
           onClick={performTrick}
           disabled={isPerforming}
-          className={`flex-1 px-4 py-3 rounded-lg hover:opacity-90 disabled:opacity-50 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 text-sm font-semibold ${
-            mode === "useEffect" ? "bg-red-600 text-white" : "bg-amber-600 text-slate-950"
+          className={`flex flex-1 items-center justify-center gap-2 rounded-lg px-4 py-3 text-sm font-semibold transition-all hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50 ${
+            mode === "useEffect"
+              ? "bg-red-600 text-white"
+              : "bg-amber-600 text-slate-950"
           }`}
         >
-          <Play className="w-4 h-4" />
+          <Play className="h-4 w-4" />
           Perform
         </button>
         <button
           onClick={reset}
-          className="px-4 py-3 bg-slate-700 text-white rounded-lg hover:bg-slate-600 transition-all"
+          className="rounded-lg bg-slate-700 px-4 py-3 text-white transition-all hover:bg-slate-600"
           title="Reset"
         >
-          <RotateCcw className="w-4 h-4" />
+          <RotateCcw className="h-4 w-4" />
         </button>
       </div>
 
       {/* Metrics */}
-      <div className="grid grid-cols-2 gap-3 mb-6">
-        <div className="bg-slate-800 rounded-lg p-3">
+      <div className="mb-6 grid grid-cols-2 gap-3">
+        <div className="rounded-lg bg-slate-800 p-3">
           <p className="text-xs text-slate-400">Flickers (useEffect)</p>
-          <p className="text-xl font-mono font-bold text-red-400 mt-1">
+          <p className="mt-1 font-mono text-xl font-bold text-red-400">
             {metrics.flickerCount}
           </p>
         </div>
-        <div className="bg-slate-800 rounded-lg p-3">
+        <div className="rounded-lg bg-slate-800 p-3">
           <p className="text-xs text-slate-400">Seamless (useLayoutEffect)</p>
-          <p className="text-xl font-mono font-bold text-green-400 mt-1">
+          <p className="mt-1 font-mono text-xl font-bold text-green-400">
             {metrics.seamlessCount}
           </p>
         </div>
@@ -763,10 +824,15 @@ useLayoutEffect(() => {
         />
       </div>
 
-      <div className="mt-4 pt-4 border-t border-slate-700">
+      <div className="mt-4 border-t border-slate-700 pt-4">
         <p className="text-xs text-slate-500">
-          🎯 <strong>The Difference</strong>: One works after the show. The other makes the show happen.
-          {metrics.flickerCount >= 45 && <span className="text-red-400 ml-2">(Circuit breaker approaching)</span>}
+          🎯 <strong>The Difference</strong>: One works after the show. The
+          other makes the show happen.
+          {metrics.flickerCount >= 45 && (
+            <span className="ml-2 text-red-400">
+              (Circuit breaker approaching)
+            </span>
+          )}
         </p>
       </div>
     </div>
@@ -776,7 +842,10 @@ useLayoutEffect(() => {
 // Chapter 5: The Master's Notebook (Summary)
 function SummaryDemo(): JSX.Element {
   const [tooltipVisible, setTooltipVisible] = useState<boolean>(false);
-  const [tooltipPosition, setTooltipPosition] = useState<{ x: number; y: number }>({ x: 0, y: 0 });
+  const [tooltipPosition, setTooltipPosition] = useState<{
+    x: number;
+    y: number;
+  }>({ x: 0, y: 0 });
   const buttonRef = useRef<HTMLButtonElement>(null);
 
   // Real-world useLayoutEffect: Tooltip positioning
@@ -852,43 +921,46 @@ function AutoSizeTextarea() {
 // Keep operations fast and synchronous`;
 
   return (
-    <div className="bg-slate-900/50 border border-slate-700 rounded-lg p-4 sm:p-6">
-      <div className="flex items-center gap-2 mb-4">
-        <Sparkles className="text-amber-500 w-5 h-5" />
-        <h3 className="text-lg sm:text-xl font-bold text-amber-400">The Master's Notebook</h3>
+    <div className="rounded-lg border border-slate-700 bg-slate-900/50 p-4 sm:p-6">
+      <div className="mb-4 flex items-center gap-2">
+        <Sparkles className="h-5 w-5 text-amber-500" />
+        <h3 className="text-lg font-bold text-amber-400 sm:text-xl">
+          The Master's Notebook
+        </h3>
       </div>
 
-      <p className="text-xs sm:text-sm text-slate-400 mb-6">
-        Real-world example: tooltip positioning with useLayoutEffect prevents flicker.
+      <p className="mb-6 text-xs text-slate-400 sm:text-sm">
+        Real-world example: tooltip positioning with useLayoutEffect prevents
+        flicker.
       </p>
 
       {/* Interactive Demo */}
-      <div className="bg-slate-950 border-2 border-amber-500/30 rounded-lg p-8 mb-6 min-h-[150px] flex items-center justify-center relative">
+      <div className="relative mb-6 flex min-h-[150px] items-center justify-center rounded-lg border-2 border-amber-500/30 bg-slate-950 p-8">
         <button
           ref={buttonRef}
           onMouseEnter={() => setTooltipVisible(true)}
           onMouseLeave={() => setTooltipVisible(false)}
-          className="px-6 py-3 bg-amber-600 text-slate-950 rounded-lg hover:bg-amber-500 transition-all font-semibold"
+          className="rounded-lg bg-amber-600 px-6 py-3 font-semibold text-slate-950 transition-all hover:bg-amber-500"
         >
           Hover for Tooltip
         </button>
 
         {tooltipVisible && (
           <div
-            className="fixed bg-slate-800 border border-amber-500 rounded px-3 py-2 text-sm text-amber-400 pointer-events-none z-50 -translate-x-1/2 -translate-y-full"
+            className="pointer-events-none fixed z-50 -translate-x-1/2 -translate-y-full rounded border border-amber-500 bg-slate-800 px-3 py-2 text-sm text-amber-400"
             style={{
               left: `${tooltipPosition.x}px`,
               top: `${tooltipPosition.y}px`,
             }}
           >
-            <div className="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-1/2 w-2 h-2 bg-slate-800 border-r border-b border-amber-500 rotate-45" />
+            <div className="absolute bottom-0 left-1/2 h-2 w-2 -translate-x-1/2 translate-y-1/2 rotate-45 border-r border-b border-amber-500 bg-slate-800" />
             Positioned with useLayoutEffect
           </div>
         )}
       </div>
 
       {/* Code Examples */}
-      <div className="space-y-4 mb-6">
+      <div className="mb-6 space-y-4">
         <CodeBlock
           code={summaryCode}
           variant="success"
@@ -907,25 +979,31 @@ function AutoSizeTextarea() {
 
       {/* Key Principles */}
       <div className="space-y-3">
-        <div className="bg-amber-950/30 border border-amber-500/30 rounded-lg p-4">
-          <p className="text-sm font-semibold text-amber-300 mb-2">
+        <div className="rounded-lg border border-amber-500/30 bg-amber-950/30 p-4">
+          <p className="mb-2 text-sm font-semibold text-amber-300">
             ✨ Core Principles
           </p>
-          <ul className="text-xs sm:text-sm text-slate-300 space-y-2">
-            <li>• <strong>useEffect</strong>: After paint, async - for side effects</li>
-            <li>• <strong>useLayoutEffect</strong>: Before paint, sync - for layout work</li>
+          <ul className="space-y-2 text-xs text-slate-300 sm:text-sm">
+            <li>
+              • <strong>useEffect</strong>: After paint, async - for side
+              effects
+            </li>
+            <li>
+              • <strong>useLayoutEffect</strong>: Before paint, sync - for
+              layout work
+            </li>
             <li>• The audience must never see the mechanism</li>
             <li>• Keep useLayoutEffect operations fast (blocks paint)</li>
           </ul>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-          <div className="bg-slate-800 rounded-lg p-3">
-            <p className="text-slate-400 mb-1">🎭 The Metaphor</p>
+        <div className="grid grid-cols-1 gap-3 text-xs sm:grid-cols-2">
+          <div className="rounded-lg bg-slate-800 p-3">
+            <p className="mb-1 text-slate-400">🎭 The Metaphor</p>
             <p className="text-slate-200">Stagehand vs Secret Assistant</p>
           </div>
-          <div className="bg-slate-800 rounded-lg p-3">
-            <p className="text-slate-400 mb-1">⚛️ The React API</p>
+          <div className="rounded-lg bg-slate-800 p-3">
+            <p className="mb-1 text-slate-400">⚛️ The React API</p>
             <p className="text-slate-200">useEffect vs useLayoutEffect</p>
           </div>
         </div>

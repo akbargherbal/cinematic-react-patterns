@@ -1,9 +1,9 @@
 import React from "react";
-import modulesJSONData from './moduleRegistry.json'; // ← Changed this line
+import modulesJSONData from "./moduleRegistry.json"; // ← Changed this line
 
 export interface ThemeConfig {
   /** Primary theme color from the safelist: cyan, amber, purple, emerald, red, blue */
-  primaryColor: 'cyan' | 'amber' | 'purple' | 'emerald' | 'red' | 'blue';
+  primaryColor: "cyan" | "amber" | "purple" | "emerald" | "red" | "blue";
 }
 
 import {
@@ -41,7 +41,6 @@ import {
   Code2,
   Ship,
   Image,
-
 } from "lucide-react";
 
 // Type for the raw JSON structure
@@ -61,9 +60,8 @@ interface RawModuleData {
     fontClass?: string;
   };
   enabled: boolean;
-    // NEW: Theme configuration for shared components
-  themeConfig?: ThemeConfig;  // Optional for backward compatibility
-
+  // NEW: Theme configuration for shared components
+  themeConfig?: ThemeConfig; // Optional for backward compatibility
 }
 
 export interface ModuleConfig {
@@ -82,7 +80,7 @@ export interface ModuleConfig {
     fontClass?: string;
   };
   enabled: boolean;
-    // NEW: Theme configuration for shared components
+  // NEW: Theme configuration for shared components
   themeConfig?: ThemeConfig;
 }
 
@@ -105,16 +103,15 @@ const iconMap: Record<string, React.ComponentType<any>> = {
   Car,
 };
 
-
 // Transform JSON data into proper ModuleConfig format
-export const moduleRegistry: ModuleConfig[] = modulesJSONData.map( // ← No type assertion needed
+export const moduleRegistry: ModuleConfig[] = modulesJSONData.map(
+  // ← No type assertion needed
   (raw: RawModuleData): ModuleConfig => ({
     ...raw,
     icon: iconMap[raw.icon] || Brain,
     component: () => import(`../modules/${raw.id}/index.tsx`),
-  })
+  }),
 );
-
 
 /**
  * UTILITY FUNCTIONS

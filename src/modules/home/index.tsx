@@ -26,7 +26,7 @@ export default function Home() {
         <div className="mb-16 text-center">
           <div className="mb-4 inline-flex items-center gap-3 rounded-full border border-zinc-800 bg-zinc-900/50 px-6 py-3">
             <Film className="text-emerald-500" size={24} />
-            <span className="font-mono text-sm uppercase tracking-widest text-zinc-400">
+            <span className="font-mono text-sm tracking-widest text-zinc-400 uppercase">
               Educational Series
             </span>
           </div>
@@ -62,7 +62,7 @@ export default function Home() {
               className={`group ${module.bgClass} relative overflow-hidden rounded-2xl border-2 p-6 transition-all duration-300 hover:scale-105 hover:shadow-2xl`}
             >
               {/* Background Decoration */}
-              <div className="absolute right-0 top-0 p-6 opacity-5 transition-opacity group-hover:opacity-10">
+              <div className="absolute top-0 right-0 p-6 opacity-5 transition-opacity group-hover:opacity-10">
                 <module.icon size={120} />
               </div>
 
@@ -71,11 +71,11 @@ export default function Home() {
                 <div className="mb-4 flex items-center gap-4">
                   {/* Icon (Left) */}
                   <module.icon
-                    className={`${module.colorClass} transition-transform group-hover:scale-110 flex-shrink-0`}
+                    className={`${module.colorClass} flex-shrink-0 transition-transform group-hover:scale-110`}
                     size={32}
                   />
                   {/* Concept (Right) - The core learning topic */}
-                  <p className="text-sm font-semibold uppercase tracking-wider text-zinc-400">
+                  <p className="text-sm font-semibold tracking-wider text-zinc-400 uppercase">
                     {module.concept}
                   </p>
                 </div>
@@ -86,19 +86,19 @@ export default function Home() {
                 {/* SECTION 2: Fiction Work Details (Title + Subtitle) */}
                 <div className="mt-4">
                   {/* Title (Largest text) */}
-                  <h3 className="mb-1 text-3xl font-bold leading-snug transition-colors group-hover:text-white">
+                  <h3 className="mb-1 text-3xl leading-snug font-bold transition-colors group-hover:text-white">
                     {module.title}
                   </h3>
 
                   {/* Subtitle/Metadata */}
-                  <p className="text-sm italic text-zinc-500">
+                  <p className="text-sm text-zinc-500 italic">
                     {module.subtitle}
                   </p>
                 </div>
               </div>
 
               {/* Hover Arrow */}
-              <div className="absolute bottom-4 right-4 opacity-0 transition-opacity group-hover:opacity-100">
+              <div className="absolute right-4 bottom-4 opacity-0 transition-opacity group-hover:opacity-100">
                 <span className={`${module.colorClass} text-2xl`}>→</span>
               </div>
             </Link>
@@ -107,7 +107,7 @@ export default function Home() {
 
         {/* Footer */}
         <div className="text-center">
-          <p className="font-mono text-sm uppercase tracking-[0.3em] text-zinc-600">
+          <p className="font-mono text-sm tracking-[0.3em] text-zinc-600 uppercase">
             A World-Class Learning Experience
           </p>
         </div>
@@ -115,8 +115,8 @@ export default function Home() {
 
       {/* Ambient Background Elements */}
       <div className="pointer-events-none fixed inset-0 z-[-1] opacity-[0.02]">
-        <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-emerald-500 blur-[128px]" />
-        <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-red-500 blur-[128px]" />
+        <div className="absolute top-1/4 left-1/4 h-96 w-96 rounded-full bg-emerald-500 blur-[128px]" />
+        <div className="absolute right-1/4 bottom-1/4 h-96 w-96 rounded-full bg-red-500 blur-[128px]" />
       </div>
     </div>
   );

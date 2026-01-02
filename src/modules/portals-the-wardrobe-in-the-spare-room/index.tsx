@@ -1,6 +1,17 @@
 import { useState, useEffect, useRef } from "react";
 import { createPortal } from "react-dom";
-import { DoorOpen, Map, Eye, EyeOff, RefreshCw, Zap, Wrench, ChevronLeft, ChevronRight, Volume2 } from "lucide-react";
+import {
+  DoorOpen,
+  Map,
+  Eye,
+  EyeOff,
+  RefreshCw,
+  Zap,
+  Wrench,
+  ChevronLeft,
+  ChevronRight,
+  Volume2,
+} from "lucide-react";
 import { CodeBlock } from "@/components/common/CodeBlock";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 
@@ -20,7 +31,7 @@ export default function PortalsTheWardrobe(): JSX.Element {
   const [eventCount, setEventCount] = useState<number>(0);
   const [portalCreations, setPortalCreations] = useState<number>(0);
   const [parentRef] = useAutoAnimate();
-  
+
   // Circuit breaker for portal creations
   useEffect(() => {
     if (portalCreations > 50) {
@@ -33,41 +44,48 @@ export default function PortalsTheWardrobe(): JSX.Element {
   const chapters: Chapter[] = [
     {
       title: "The Grand Map and the Cramped Room",
-      content: "The Professor's house was a component tree unto itself—a sprawling collection of corridors, libraries, and forgotten rooms, each nested inside another. When Lucy Pevensie arrived, the air itself felt full of hidden rules and ancient logic. He entrusted her with a glowing map of Narnia, saying, \"Some things are too grand for the rooms that hold them.\" But when she tried to display it in the small, restrictive spare room, the map's edges were clipped by the walls. The room was a box that wouldn't suffer anything to exist beyond its borders.",
-      atmosphere: "mysterious, dusty, confined"
+      content:
+        "The Professor's house was a component tree unto itself—a sprawling collection of corridors, libraries, and forgotten rooms, each nested inside another. When Lucy Pevensie arrived, the air itself felt full of hidden rules and ancient logic. He entrusted her with a glowing map of Narnia, saying, \"Some things are too grand for the rooms that hold them.\" But when she tried to display it in the small, restrictive spare room, the map's edges were clipped by the walls. The room was a box that wouldn't suffer anything to exist beyond its borders.",
+      atmosphere: "mysterious, dusty, confined",
     },
     {
       title: "The Walls Have Rules",
-      content: "Lucy tried everything. Hanging the map resulted in a dust sheet (higher z-index) obscuring it. Laying it on the floor caused edges to vanish (overflow: hidden). Trying to position it for the hallway proved impossible (position: relative). \"The walls of the room are the edges of its world,\" she whispered. Every CSS constraint of the parent component trapped the child. The map was clipped, obscured, and frustratingly small—a battle against the very architecture of the space.",
-      atmosphere: "frustration, illogical, trapped"
+      content:
+        'Lucy tried everything. Hanging the map resulted in a dust sheet (higher z-index) obscuring it. Laying it on the floor caused edges to vanish (overflow: hidden). Trying to position it for the hallway proved impossible (position: relative). "The walls of the room are the edges of its world," she whispered. Every CSS constraint of the parent component trapped the child. The map was clipped, obscured, and frustratingly small—a battle against the very architecture of the space.',
+      atmosphere: "frustration, illogical, trapped",
     },
     {
       title: "A Door to a Different World",
-      content: "Leaning against the wardrobe, Lucy discovered a passage to a snowy forest. The Professor explained: \"Some things don't belong in the room, but they are still of the room. Their story begins here, but their world must be displayed elsewhere.\" With this insight, she pushed the map through the wardrobe's opening. In Narnia's vast clearing, it unfurled to full size—no walls to clip it, no constraints to limit it. The solution wasn't fighting the room but rendering elsewhere.",
-      atmosphere: "magical, liberating, wondrous"
+      content:
+        "Leaning against the wardrobe, Lucy discovered a passage to a snowy forest. The Professor explained: \"Some things don't belong in the room, but they are still of the room. Their story begins here, but their world must be displayed elsewhere.\" With this insight, she pushed the map through the wardrobe's opening. In Narnia's vast clearing, it unfurled to full size—no walls to clip it, no constraints to limit it. The solution wasn't fighting the room but rendering elsewhere.",
+      atmosphere: "magical, liberating, wondrous",
     },
     {
       title: "Two Worlds, One Story",
-      content: "The contrast was stark: the map trapped versus the map free. But the magic wasn't just visual. When Lucy touched the lion on the map in Narnia, a roar echoed through the woods—and also back through the wardrobe into the spare room. \"Its voice is heard here, even if its world is displayed there,\" the Professor smiled. \"It still reports back to its origin.\" The event bubbled from the portal'd component back to its logical parent, proving the connection remained despite separate rendering.",
-      atmosphere: "reflective, comparative, analytical"
+      content:
+        'The contrast was stark: the map trapped versus the map free. But the magic wasn\'t just visual. When Lucy touched the lion on the map in Narnia, a roar echoed through the woods—and also back through the wardrobe into the spare room. "Its voice is heard here, even if its world is displayed there," the Professor smiled. "It still reports back to its origin." The event bubbled from the portal\'d component back to its logical parent, proving the connection remained despite separate rendering.',
+      atmosphere: "reflective, comparative, analytical",
     },
     {
       title: "Master of the Passages",
-      content: "Lucy now saw every cramped space as a potential starting point. A spyglass for viewing stars from a low-ceilinged attic? She found a shimmering crack and rendered the celestial view outside. A delicate unfolding letter in a narrow hallway? Passed through a loose floorboard. She understood: \"Every room can have a door to a larger world.\" Portals became her tool for modals, tooltips, dropdowns—any component that needed to escape parent constraints while maintaining logical connection.",
-      atmosphere: "celebratory, confident, complete"
-    }
+      content:
+        'Lucy now saw every cramped space as a potential starting point. A spyglass for viewing stars from a low-ceilinged attic? She found a shimmering crack and rendered the celestial view outside. A delicate unfolding letter in a narrow hallway? Passed through a loose floorboard. She understood: "Every room can have a door to a larger world." Portals became her tool for modals, tooltips, dropdowns—any component that needed to escape parent constraints while maintaining logical connection.',
+      atmosphere: "celebratory, confident, complete",
+    },
   ];
 
   // Portal target container
-  const portalContainer = typeof document !== "undefined" 
-    ? document.getElementById("portal-root") || (() => {
-        const div = document.createElement("div");
-        div.id = "portal-root";
-        div.className = "portal-container";
-        document.body.appendChild(div);
-        return div;
-      })()
-    : null;
+  const portalContainer =
+    typeof document !== "undefined"
+      ? document.getElementById("portal-root") ||
+        (() => {
+          const div = document.createElement("div");
+          div.id = "portal-root";
+          div.className = "portal-container";
+          document.body.appendChild(div);
+          return div;
+        })()
+      : null;
 
   const currentChapter = chapters[chapter];
 
@@ -138,75 +156,89 @@ function WardrobeWithEvents() {
 }`;
 
   // Tooltip component for chapter 5
-  const TooltipPortal = ({ children, content }: { children: React.ReactNode; content: string }) => {
+  const TooltipPortal = ({
+    children,
+    content,
+  }: {
+    children: React.ReactNode;
+    content: string;
+  }) => {
     const [show, setShow] = useState(false);
     const [position, setPosition] = useState({ x: 0, y: 0 });
-    
+
     const handleMouseEnter = (e: React.MouseEvent) => {
       const rect = e.currentTarget.getBoundingClientRect();
       setPosition({ x: rect.left, y: rect.top - 10 });
       setShow(true);
     };
-    
+
     return (
       <>
-        <span 
+        <span
           onMouseEnter={handleMouseEnter}
           onMouseLeave={() => setShow(false)}
           className="cursor-help border-b border-dashed border-amber-500/50"
         >
           {children}
         </span>
-        
-        {show && portalContainer && createPortal(
-          <div 
-            className="fixed bg-stone-900/95 backdrop-blur-sm border border-amber-600/40 rounded-lg px-3 py-2 text-sm text-amber-100/90 z-50 shadow-lg shadow-black/50"
-            style={{
-              left: position.x,
-              top: position.y,
-              transform: 'translateY(-100%)'
-            }}
-          >
-            {content}
-            <div className="absolute bottom-0 left-4 transform translate-y-full w-0 h-0 border-l-4 border-r-4 border-t-4 border-l-transparent border-r-transparent border-t-stone-900/95" />
-          </div>,
-          portalContainer
-        )}
+
+        {show &&
+          portalContainer &&
+          createPortal(
+            <div
+              className="fixed z-50 rounded-lg border border-amber-600/40 bg-stone-900/95 px-3 py-2 text-sm text-amber-100/90 shadow-lg shadow-black/50 backdrop-blur-sm"
+              style={{
+                left: position.x,
+                top: position.y,
+                transform: "translateY(-100%)",
+              }}
+            >
+              {content}
+              <div className="absolute bottom-0 left-4 h-0 w-0 translate-y-full transform border-t-4 border-r-4 border-l-4 border-t-stone-900/95 border-r-transparent border-l-transparent" />
+            </div>,
+            portalContainer,
+          )}
       </>
     );
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-stone-950/90 via-stone-900/95 to-stone-950/90 text-amber-100/90 font-serif p-4 md:p-8">
-      <header className="border-b border-stone-800 bg-stone-950/80 backdrop-blur-sm mb-8 md:mb-12">
-        <div className="max-w-7xl mx-auto px-4 md:px-6 py-4 md:py-6">
-          <div className="flex items-center justify-between gap-4 md:gap-6 mb-2 flex-wrap">
+    <div className="min-h-screen bg-gradient-to-br from-stone-950/90 via-stone-900/95 to-stone-950/90 p-4 font-serif text-amber-100/90 md:p-8">
+      <header className="mb-8 border-b border-stone-800 bg-stone-950/80 backdrop-blur-sm md:mb-12">
+        <div className="mx-auto max-w-7xl px-4 py-4 md:px-6 md:py-6">
+          <div className="mb-2 flex flex-wrap items-center justify-between gap-4 md:gap-6">
             <div className="flex items-center gap-3">
-              <DoorOpen className="text-amber-500 w-6 h-6 md:w-8 md:h-8" />
-              <h1 className="text-xl md:text-3xl font-bold">The Chronicles of Narnia</h1>
+              <DoorOpen className="h-6 w-6 text-amber-500 md:h-8 md:w-8" />
+              <h1 className="text-xl font-bold md:text-3xl">
+                The Chronicles of Narnia
+              </h1>
             </div>
-            <p className="text-xs md:text-base text-stone-400">
+            <p className="text-xs text-stone-400 md:text-base">
               The Wardrobe • 1950
             </p>
           </div>
-          <p className="text-sm md:text-lg text-amber-500 font-medium">
+          <p className="text-sm font-medium text-amber-500 md:text-lg">
             React Portals: Rendering Outside Parent DOM Hierarchy
           </p>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 md:gap-8">
+      <main className="mx-auto max-w-7xl">
+        <div className="grid grid-cols-1 gap-6 md:gap-8 lg:grid-cols-12">
           {/* Left column: Narrative */}
           <div className="lg:col-span-7">
-            <div className="prose prose-invert prose-lg max-w-none mb-8 bg-stone-900/40 backdrop-blur-sm border border-stone-800 rounded-xl p-6 md:p-8">
-              <div className="flex items-center gap-3 mb-6">
-                <Map className="text-amber-500 w-5 h-5" />
-                <h2 className="text-xl md:text-2xl font-bold m-0">{currentChapter.title}</h2>
+            <div className="prose prose-invert prose-lg mb-8 max-w-none rounded-xl border border-stone-800 bg-stone-900/40 p-6 backdrop-blur-sm md:p-8">
+              <div className="mb-6 flex items-center gap-3">
+                <Map className="h-5 w-5 text-amber-500" />
+                <h2 className="m-0 text-xl font-bold md:text-2xl">
+                  {currentChapter.title}
+                </h2>
               </div>
-              <p className="leading-relaxed text-amber-100/90 mb-4">{currentChapter.content}</p>
-              <div className="flex items-center gap-2 text-sm text-stone-400 mt-6 pt-4 border-t border-stone-800">
-                <Zap className="w-4 h-4" />
+              <p className="mb-4 leading-relaxed text-amber-100/90">
+                {currentChapter.content}
+              </p>
+              <div className="mt-6 flex items-center gap-2 border-t border-stone-800 pt-4 text-sm text-stone-400">
+                <Zap className="h-4 w-4" />
                 <span>Atmosphere: {currentChapter.atmosphere}</span>
               </div>
             </div>
@@ -222,7 +254,7 @@ function WardrobeWithEvents() {
                   language="jsx"
                 />
               )}
-              
+
               {chapter === 1 && (
                 <>
                   <CodeBlock
@@ -241,7 +273,7 @@ function WardrobeWithEvents() {
                     defaultExpanded={true}
                     language="css"
                   />
-                  
+
                   <CodeBlock
                     code={`// overflow: Map edges vanish
 .spare-room {
@@ -261,7 +293,7 @@ function WardrobeWithEvents() {
                   />
                 </>
               )}
-              
+
               {chapter === 2 && (
                 <CodeBlock
                   code={portalCode}
@@ -271,7 +303,7 @@ function WardrobeWithEvents() {
                   language="jsx"
                 />
               )}
-              
+
               {chapter === 3 && (
                 <CodeBlock
                   code={eventBubblingCode}
@@ -281,7 +313,7 @@ function WardrobeWithEvents() {
                   language="jsx"
                 />
               )}
-              
+
               {chapter === 4 && (
                 <>
                   <CodeBlock
@@ -310,7 +342,7 @@ function Tooltip({ children, content }) {
                     defaultExpanded={true}
                     language="jsx"
                   />
-                  
+
                   <CodeBlock
                     code={`// Modal using portal (best practice)
 function Modal({ isOpen, onClose, children }) {
@@ -339,10 +371,10 @@ function Modal({ isOpen, onClose, children }) {
 
           {/* Right column: Interactive Demo */}
           <div className="lg:col-span-5">
-            <div className="bg-stone-900/60 backdrop-blur-sm border border-amber-600/30 rounded-xl p-6 md:p-8 sticky top-8">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-lg font-bold flex items-center gap-2">
-                  <DoorOpen className="text-amber-500 w-5 h-5" />
+            <div className="sticky top-8 rounded-xl border border-amber-600/30 bg-stone-900/60 p-6 backdrop-blur-sm md:p-8">
+              <div className="mb-6 flex items-center justify-between">
+                <h3 className="flex items-center gap-2 text-lg font-bold">
+                  <DoorOpen className="h-5 w-5 text-amber-500" />
                   Interactive Wardrobe
                 </h3>
                 <button
@@ -351,9 +383,9 @@ function Modal({ isOpen, onClose, children }) {
                     setEventCount(0);
                     setPortalCreations(0);
                   }}
-                  className="text-xs px-3 py-1 bg-stone-800 hover:bg-stone-700 rounded flex items-center gap-1"
+                  className="flex items-center gap-1 rounded bg-stone-800 px-3 py-1 text-xs hover:bg-stone-700"
                 >
-                  <RefreshCw className="w-3 h-3" />
+                  <RefreshCw className="h-3 w-3" />
                   Reset
                 </button>
               </div>
@@ -361,7 +393,7 @@ function Modal({ isOpen, onClose, children }) {
               {/* Demo based on current chapter */}
               <div ref={parentRef} className="space-y-6">
                 {/* Chapter 1-3: Map display demo */}
-                {(chapter <= 3) && (
+                {chapter <= 3 && (
                   <>
                     <div className="space-y-4">
                       <div className="flex items-center justify-between">
@@ -369,130 +401,153 @@ function Modal({ isOpen, onClose, children }) {
                         <div className="flex gap-2">
                           <button
                             onClick={() => setPortalMode("trapped")}
-                            className={`px-3 py-1 text-xs rounded ${portalMode === "trapped" ? "bg-red-900/40 border border-red-700/50" : "bg-stone-800 hover:bg-stone-700"}`}
+                            className={`rounded px-3 py-1 text-xs ${portalMode === "trapped" ? "border border-red-700/50 bg-red-900/40" : "bg-stone-800 hover:bg-stone-700"}`}
                           >
-                            <EyeOff className="inline w-3 h-3 mr-1" />
+                            <EyeOff className="mr-1 inline h-3 w-3" />
                             Trapped in Room
                           </button>
                           <button
                             onClick={() => {
                               setPortalMode("free");
-                              setPortalCreations(c => c + 1);
+                              setPortalCreations((c) => c + 1);
                             }}
-                            className={`px-3 py-1 text-xs rounded ${portalMode === "free" ? "bg-emerald-900/40 border border-emerald-700/50" : "bg-stone-800 hover:bg-stone-700"}`}
+                            className={`rounded px-3 py-1 text-xs ${portalMode === "free" ? "border border-emerald-700/50 bg-emerald-900/40" : "bg-stone-800 hover:bg-stone-700"}`}
                           >
-                            <Eye className="inline w-3 h-3 mr-1" />
+                            <Eye className="mr-1 inline h-3 w-3" />
                             Through Wardrobe
                           </button>
                         </div>
                       </div>
 
                       {/* Spare Room Container */}
-                      <div 
-                        className="relative p-4 rounded-lg border-2 border-dashed"
+                      <div
+                        className="relative rounded-lg border-2 border-dashed p-4"
                         style={{
-                          backgroundColor: portalMode === "trapped" ? '#1c1917' : '#0c0a09',
-                          borderColor: portalMode === "trapped" ? '#dc2626/40' : '#10b981/40',
-                          overflow: overflowHidden ? 'hidden' : 'visible',
-                          position: positionRelative ? 'relative' : 'static',
-                          height: '200px',
-                          zIndex: zIndexProblem ? 1 : 10
+                          backgroundColor:
+                            portalMode === "trapped" ? "#1c1917" : "#0c0a09",
+                          borderColor:
+                            portalMode === "trapped"
+                              ? "#dc2626/40"
+                              : "#10b981/40",
+                          overflow: overflowHidden ? "hidden" : "visible",
+                          position: positionRelative ? "relative" : "static",
+                          height: "200px",
+                          zIndex: zIndexProblem ? 1 : 10,
                         }}
                         onClick={() => {
                           if (showMap) {
-                            setEventCount(c => c + 1);
+                            setEventCount((c) => c + 1);
                           }
                         }}
                       >
                         <div className="absolute top-2 right-2 text-xs opacity-60">
                           Spare Room Container
                         </div>
-                        
+
                         <button
                           onClick={() => {
                             setShowMap(!showMap);
                             if (portalMode === "free") {
-                              setPortalCreations(c => c + 1);
+                              setPortalCreations((c) => c + 1);
                             }
                           }}
-                          className="px-4 py-2 bg-amber-700 hover:bg-amber-600 rounded text-sm"
+                          className="rounded bg-amber-700 px-4 py-2 text-sm hover:bg-amber-600"
                         >
                           {showMap ? "Hide Narnia Map" : "Show Narnia Map"}
                         </button>
 
                         {/* Dust sheet (z-index problem) */}
                         {chapter >= 1 && zIndexProblem && (
-                          <div 
-                            className="absolute top-4 right-4 w-16 h-20 bg-stone-700/80 rotate-12 rounded"
+                          <div
+                            className="absolute top-4 right-4 h-20 w-16 rotate-12 rounded bg-stone-700/80"
                             style={{ zIndex: 2 }}
                           >
-                            <div className="text-xs p-2 rotate-[-12deg] opacity-60">Dust Sheet</div>
+                            <div className="rotate-[-12deg] p-2 text-xs opacity-60">
+                              Dust Sheet
+                            </div>
                           </div>
                         )}
 
                         {/* Map rendered inside container (when trapped) */}
                         {showMap && portalMode === "trapped" && (
-                          <div className="absolute top-12 left-4 w-48 h-32 bg-gradient-to-br from-amber-900/40 to-amber-700/30 border border-amber-600/50 rounded-lg p-3">
-                            <div className="text-sm font-bold text-amber-300">Narnia Map</div>
-                            <div className="text-xs mt-2 opacity-70">Clipped by container edges</div>
+                          <div className="absolute top-12 left-4 h-32 w-48 rounded-lg border border-amber-600/50 bg-gradient-to-br from-amber-900/40 to-amber-700/30 p-3">
+                            <div className="text-sm font-bold text-amber-300">
+                              Narnia Map
+                            </div>
+                            <div className="mt-2 text-xs opacity-70">
+                              Clipped by container edges
+                            </div>
                             <button
                               onClick={(e) => {
                                 e.stopPropagation();
-                                setEventCount(c => c + 1);
+                                setEventCount((c) => c + 1);
                               }}
-                              className="mt-2 px-2 py-1 bg-amber-800 hover:bg-amber-700 text-xs rounded flex items-center gap-1"
+                              className="mt-2 flex items-center gap-1 rounded bg-amber-800 px-2 py-1 text-xs hover:bg-amber-700"
                             >
-                              <Volume2 className="w-3 h-3" />
+                              <Volume2 className="h-3 w-3" />
                               Touch the Lion
                             </button>
                           </div>
                         )}
 
                         {/* Wardrobe visualization */}
-                        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 w-16 h-24 bg-stone-800 border-2 border-stone-700 rounded-lg flex items-center justify-center">
-                          <DoorOpen className="text-amber-500/60 w-8 h-8" />
+                        <div className="absolute bottom-4 left-1/2 flex h-24 w-16 -translate-x-1/2 transform items-center justify-center rounded-lg border-2 border-stone-700 bg-stone-800">
+                          <DoorOpen className="h-8 w-8 text-amber-500/60" />
                         </div>
                       </div>
 
                       {/* Map rendered through portal (when free) */}
-                      {showMap && portalMode === "free" && portalContainer && createPortal(
-                        <div className="fixed inset-0 pointer-events-none z-50">
-                          <div className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 w-64 h-48 bg-gradient-to-br from-emerald-900/40 to-emerald-700/30 border-2 border-emerald-600/60 rounded-xl p-4 shadow-2xl shadow-black/50 pointer-events-auto">
-                            <div className="text-lg font-bold text-emerald-300">The Grand Map of Narnia</div>
-                            <div className="text-sm mt-2 opacity-90">Rendered through portal to document.body</div>
-                            <div className="text-xs mt-2 opacity-60">Full size, no clipping</div>
-                            <button
-                              onClick={() => setEventCount(c => c + 1)}
-                              className="mt-3 px-3 py-1.5 bg-emerald-800 hover:bg-emerald-700 text-sm rounded flex items-center gap-2"
-                            >
-                              <Volume2 className="w-4 h-4" />
-                              Roar from Narnia
-                            </button>
-                          </div>
-                        </div>,
-                        portalContainer
-                      )}
+                      {showMap &&
+                        portalMode === "free" &&
+                        portalContainer &&
+                        createPortal(
+                          <div className="pointer-events-none fixed inset-0 z-50">
+                            <div className="pointer-events-auto absolute top-1/2 left-1/2 h-48 w-64 -translate-x-1/2 -translate-y-1/2 transform rounded-xl border-2 border-emerald-600/60 bg-gradient-to-br from-emerald-900/40 to-emerald-700/30 p-4 shadow-2xl shadow-black/50">
+                              <div className="text-lg font-bold text-emerald-300">
+                                The Grand Map of Narnia
+                              </div>
+                              <div className="mt-2 text-sm opacity-90">
+                                Rendered through portal to document.body
+                              </div>
+                              <div className="mt-2 text-xs opacity-60">
+                                Full size, no clipping
+                              </div>
+                              <button
+                                onClick={() => setEventCount((c) => c + 1)}
+                                className="mt-3 flex items-center gap-2 rounded bg-emerald-800 px-3 py-1.5 text-sm hover:bg-emerald-700"
+                              >
+                                <Volume2 className="h-4 w-4" />
+                                Roar from Narnia
+                              </button>
+                            </div>
+                          </div>,
+                          portalContainer,
+                        )}
 
                       {/* Chapter 2: Constraint toggles */}
                       {chapter >= 1 && (
                         <div className="grid grid-cols-3 gap-2 text-xs">
                           <button
                             onClick={() => setZIndexProblem(!zIndexProblem)}
-                            className={`p-2 rounded ${zIndexProblem ? 'bg-red-900/40' : 'bg-emerald-900/40'}`}
+                            className={`rounded p-2 ${zIndexProblem ? "bg-red-900/40" : "bg-emerald-900/40"}`}
                           >
-                            z-index: {zIndexProblem ? '❌ Problem' : '✅ Fixed'}
+                            z-index: {zIndexProblem ? "❌ Problem" : "✅ Fixed"}
                           </button>
                           <button
                             onClick={() => setOverflowHidden(!overflowHidden)}
-                            className={`p-2 rounded ${overflowHidden ? 'bg-red-900/40' : 'bg-emerald-900/40'}`}
+                            className={`rounded p-2 ${overflowHidden ? "bg-red-900/40" : "bg-emerald-900/40"}`}
                           >
-                            overflow: {overflowHidden ? '❌ hidden' : '✅ visible'}
+                            overflow:{" "}
+                            {overflowHidden ? "❌ hidden" : "✅ visible"}
                           </button>
                           <button
-                            onClick={() => setPositionRelative(!positionRelative)}
-                            className={`p-2 rounded ${positionRelative ? 'bg-red-900/40' : 'bg-emerald-900/40'}`}
+                            onClick={() =>
+                              setPositionRelative(!positionRelative)
+                            }
+                            className={`rounded p-2 ${positionRelative ? "bg-red-900/40" : "bg-emerald-900/40"}`}
                           >
-                            position: {positionRelative ? '❌ relative' : '✅ static'}
+                            position:{" "}
+                            {positionRelative ? "❌ relative" : "✅ static"}
                           </button>
                         </div>
                       )}
@@ -500,32 +555,44 @@ function Modal({ isOpen, onClose, children }) {
 
                     {/* Metrics */}
                     <div className="grid grid-cols-2 gap-4 text-sm">
-                      <div className="bg-stone-800/50 rounded p-3">
-                        <div className="text-xs opacity-60">Roar Events Heard</div>
-                        <div className="text-lg font-mono tabular-nums">{eventCount}</div>
+                      <div className="rounded bg-stone-800/50 p-3">
+                        <div className="text-xs opacity-60">
+                          Roar Events Heard
+                        </div>
+                        <div className="font-mono text-lg tabular-nums">
+                          {eventCount}
+                        </div>
                       </div>
-                      <div className="bg-stone-800/50 rounded p-3">
-                        <div className="text-xs opacity-60">Portal Creations</div>
-                        <div className="text-lg font-mono tabular-nums">{portalCreations}/50</div>
+                      <div className="rounded bg-stone-800/50 p-3">
+                        <div className="text-xs opacity-60">
+                          Portal Creations
+                        </div>
+                        <div className="font-mono text-lg tabular-nums">
+                          {portalCreations}/50
+                        </div>
                       </div>
                     </div>
 
-                    <div className="text-sm p-3 bg-stone-800/30 rounded">
-                      <div className="flex items-center gap-2 mb-1">
+                    <div className="rounded bg-stone-800/30 p-3 text-sm">
+                      <div className="mb-1 flex items-center gap-2">
                         {portalMode === "trapped" ? (
                           <>
-                            <div className="w-2 h-2 rounded-full bg-red-500" />
-                            <span className="font-medium">Map Trapped in Spare Room</span>
+                            <div className="h-2 w-2 rounded-full bg-red-500" />
+                            <span className="font-medium">
+                              Map Trapped in Spare Room
+                            </span>
                           </>
                         ) : (
                           <>
-                            <div className="w-2 h-2 rounded-full bg-emerald-500" />
-                            <span className="font-medium">Map Rendered Through Portal to Narnia</span>
+                            <div className="h-2 w-2 rounded-full bg-emerald-500" />
+                            <span className="font-medium">
+                              Map Rendered Through Portal to Narnia
+                            </span>
                           </>
                         )}
                       </div>
                       <p className="text-xs opacity-70">
-                        {portalMode === "trapped" 
+                        {portalMode === "trapped"
                           ? "Events bubble directly. Map clipped by container CSS."
                           : "Events still bubble to Spare Room. Map free from constraints."}
                       </p>
@@ -537,33 +604,37 @@ function Modal({ isOpen, onClose, children }) {
                 {chapter === 4 && (
                   <div className="space-y-6">
                     <div className="space-y-4">
-                      <h4 className="font-bold text-sm flex items-center gap-2">
-                        <Wrench className="w-4 h-4 text-amber-500" />
+                      <h4 className="flex items-center gap-2 text-sm font-bold">
+                        <Wrench className="h-4 w-4 text-amber-500" />
                         Portal Applications
                       </h4>
-                      
-                      <div className="p-4 bg-stone-800/30 rounded-lg">
-                        <p className="text-sm mb-4">
+
+                      <div className="rounded-lg bg-stone-800/30 p-4">
+                        <p className="mb-4 text-sm">
                           Hover these elements to see portal-rendered tooltips:
                         </p>
-                        
+
                         <div className="space-y-3">
                           <div>
                             <TooltipPortal content="This tooltip renders outside the component hierarchy via portal, avoiding clipping by parent overflow.">
                               Spyglass Tooltip
                             </TooltipPortal>
-                            <span className="text-xs ml-2 opacity-60">(Hover me)</span>
+                            <span className="ml-2 text-xs opacity-60">
+                              (Hover me)
+                            </span>
                           </div>
-                          
+
                           <div>
                             <TooltipPortal content="Another portal example. The tooltip appears at cursor position, not constrained by parent container.">
                               Unfolding Letter
                             </TooltipPortal>
-                            <span className="text-xs ml-2 opacity-60">(Hover me)</span>
+                            <span className="ml-2 text-xs opacity-60">
+                              (Hover me)
+                            </span>
                           </div>
                         </div>
                       </div>
-                      
+
                       <CodeBlock
                         code={`// Portal target in index.html
 <html>
@@ -579,31 +650,39 @@ function Modal({ isOpen, onClose, children }) {
                         language="html"
                       />
                     </div>
-                    
-                    <div className="text-sm p-3 bg-amber-900/20 border border-amber-700/30 rounded">
-                      <div className="font-medium mb-1">✓ Key Portal Use Cases</div>
-                      <ul className="text-xs space-y-1 opacity-90">
+
+                    <div className="rounded border border-amber-700/30 bg-amber-900/20 p-3 text-sm">
+                      <div className="mb-1 font-medium">
+                        ✓ Key Portal Use Cases
+                      </div>
+                      <ul className="space-y-1 text-xs opacity-90">
                         <li>• Modals, dialogs, lightboxes</li>
                         <li>• Tooltips, popovers, dropdowns</li>
                         <li>• Notifications, toasts</li>
-                        <li>• Any UI that needs to escape parent CSS constraints</li>
+                        <li>
+                          • Any UI that needs to escape parent CSS constraints
+                        </li>
                       </ul>
                     </div>
                   </div>
                 )}
               </div>
             </div>
-            
+
             {/* Progress indicator */}
             <div className="mt-6">
-              <div className="flex justify-between text-xs text-stone-400 mb-2">
+              <div className="mb-2 flex justify-between text-xs text-stone-400">
                 <span>Chapter Progress</span>
-                <span>{chapter + 1} / {chapters.length}</span>
+                <span>
+                  {chapter + 1} / {chapters.length}
+                </span>
               </div>
-              <div className="h-2 bg-stone-800 rounded-full overflow-hidden">
-                <div 
+              <div className="h-2 overflow-hidden rounded-full bg-stone-800">
+                <div
                   className="h-full bg-gradient-to-r from-amber-600 to-amber-500 transition-all duration-500"
-                  style={{ width: `${((chapter + 1) / chapters.length) * 100}%` }}
+                  style={{
+                    width: `${((chapter + 1) / chapters.length) * 100}%`,
+                  }}
                 />
               </div>
             </div>
@@ -611,35 +690,37 @@ function Modal({ isOpen, onClose, children }) {
         </div>
 
         {/* Navigation */}
-        <nav className="flex justify-between items-center mt-8 md:mt-12 pt-6 border-t border-stone-800">
+        <nav className="mt-8 flex items-center justify-between border-t border-stone-800 pt-6 md:mt-12">
           <button
             onClick={() => setChapter(Math.max(0, chapter - 1))}
             disabled={chapter === 0}
-            className="px-5 py-2.5 bg-stone-800 hover:bg-stone-700 text-stone-300 rounded-lg disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
+            className="flex items-center gap-2 rounded-lg bg-stone-800 px-5 py-2.5 text-stone-300 transition-colors hover:bg-stone-700 disabled:cursor-not-allowed disabled:opacity-30"
           >
-            <ChevronLeft className="w-4 h-4" />
+            <ChevronLeft className="h-4 w-4" />
             Previous
           </button>
-          
+
           <div className="flex items-center gap-4">
             {chapters.map((_, idx) => (
               <button
                 key={idx}
                 onClick={() => setChapter(idx)}
-                className={`w-8 h-8 rounded-full flex items-center justify-center text-xs ${chapter === idx ? 'bg-amber-600 text-white' : 'bg-stone-800 text-stone-400 hover:bg-stone-700'}`}
+                className={`flex h-8 w-8 items-center justify-center rounded-full text-xs ${chapter === idx ? "bg-amber-600 text-white" : "bg-stone-800 text-stone-400 hover:bg-stone-700"}`}
               >
                 {idx + 1}
               </button>
             ))}
           </div>
-          
+
           <button
-            onClick={() => setChapter(Math.min(chapters.length - 1, chapter + 1))}
+            onClick={() =>
+              setChapter(Math.min(chapters.length - 1, chapter + 1))
+            }
             disabled={chapter === chapters.length - 1}
-            className="px-5 py-2.5 bg-amber-700 hover:bg-amber-600 text-white rounded-lg disabled:opacity-30 disabled:cursor-not-allowed flex items-center gap-2 transition-colors"
+            className="flex items-center gap-2 rounded-lg bg-amber-700 px-5 py-2.5 text-white transition-colors hover:bg-amber-600 disabled:cursor-not-allowed disabled:opacity-30"
           >
             Next
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="h-4 w-4" />
           </button>
         </nav>
       </main>

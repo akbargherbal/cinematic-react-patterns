@@ -412,7 +412,7 @@ src/
 
 ### Module Component Structure
 
-Modules should use **standardized components** for consistent structure and UX. See `/src/components/common/README.md` for full documentation.
+Modules should use **standardized components** for consistent structure and UX. See `/src/components/common/Quick_Start_Guide.md` for full documentation.
 
 ```tsx
 // src/modules/your-module-id/index.tsx

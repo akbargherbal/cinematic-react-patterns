@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { CodeBlock } from './CodeBlock';
+import React, { useState } from "react";
+import { CodeBlock } from "./CodeBlock";
 
 /**
  * CodeComparison - Toggle between "Bad" and "Good" code examples
@@ -52,11 +52,24 @@ interface CodeComparisonProps {
    * Theme color from the safelist: cyan, amber, purple, emerald, red, blue
    * Controls the active toggle button styling
    */
-  themeColor: 'red' | 'orange' | 'amber' | 'yellow' | 'lime' 
-     | 'green' | 'emerald' | 'teal' | 'cyan' | 'sky' 
-     | 'blue' | 'indigo' | 'violet' | 'purple' 
-     | 'fuchsia' | 'pink' | 'rose';
-
+  themeColor:
+    | "red"
+    | "orange"
+    | "amber"
+    | "yellow"
+    | "lime"
+    | "green"
+    | "emerald"
+    | "teal"
+    | "cyan"
+    | "sky"
+    | "blue"
+    | "indigo"
+    | "violet"
+    | "purple"
+    | "fuchsia"
+    | "pink"
+    | "rose";
 
   /** Custom label for the "bad" example (default: "❌ Problematic") */
   badLabel?: string;
@@ -82,29 +95,26 @@ export const CodeComparison: React.FC<CodeComparisonProps> = ({
   goodCode,
   language,
   themeColor,
-  badLabel = '❌ Problematic',
-  goodLabel = '✅ Better',
+  badLabel = "❌ Problematic",
+  goodLabel = "✅ Better",
   badExplanation,
   goodExplanation,
   startWithGood = false,
-  className = '',
+  className = "",
 }) => {
   const [showGood, setShowGood] = useState(startWithGood);
 
   return (
     <div className={`space-y-4 ${className}`}>
-      
       {/* Toggle Buttons */}
       <div className="flex gap-3">
         <button
           onClick={() => setShowGood(false)}
-          className={`
-            px-4 py-2 rounded-lg font-medium transition-all duration-200
-            ${!showGood
-              ? `bg-red-900/40 border-2 border-red-500/50 text-red-200`
-              : 'bg-slate-800 border-2 border-slate-700 text-slate-400 hover:border-slate-600'
-            }
-          `}
+          className={`rounded-lg px-4 py-2 font-medium transition-all duration-200 ${
+            !showGood
+              ? `border-2 border-red-500/50 bg-red-900/40 text-red-200`
+              : "border-2 border-slate-700 bg-slate-800 text-slate-400 hover:border-slate-600"
+          } `}
           aria-pressed={!showGood}
         >
           {badLabel}
@@ -112,13 +122,11 @@ export const CodeComparison: React.FC<CodeComparisonProps> = ({
 
         <button
           onClick={() => setShowGood(true)}
-          className={`
-            px-4 py-2 rounded-lg font-medium transition-all duration-200
-            ${showGood
+          className={`rounded-lg px-4 py-2 font-medium transition-all duration-200 ${
+            showGood
               ? `bg-${themeColor}-900/40 border-2 border-${themeColor}-500/50 text-${themeColor}-200`
-              : 'bg-slate-800 border-2 border-slate-700 text-slate-400 hover:border-slate-600'
-            }
-          `}
+              : "border-2 border-slate-700 bg-slate-800 text-slate-400 hover:border-slate-600"
+          } `}
           aria-pressed={showGood}
         >
           {goodLabel}
@@ -131,8 +139,12 @@ export const CodeComparison: React.FC<CodeComparisonProps> = ({
           <div className="space-y-2">
             <CodeBlock code={goodCode} language={language} />
             {goodExplanation && (
-              <p className={`text-sm text-${themeColor}-400 bg-${themeColor}-950/20 border border-${themeColor}-500/30 rounded-lg p-4`}>
-                <strong className={`text-${themeColor}-300`}>Why this works: </strong>
+              <p
+                className={`text-sm text-${themeColor}-400 bg-${themeColor}-950/20 border border-${themeColor}-500/30 rounded-lg p-4`}
+              >
+                <strong className={`text-${themeColor}-300`}>
+                  Why this works:{" "}
+                </strong>
                 {goodExplanation}
               </p>
             )}
@@ -141,7 +153,7 @@ export const CodeComparison: React.FC<CodeComparisonProps> = ({
           <div className="space-y-2">
             <CodeBlock code={badCode} language={language} />
             {badExplanation && (
-              <p className="text-sm text-red-400 bg-red-950/20 border border-red-500/30 rounded-lg p-4">
+              <p className="rounded-lg border border-red-500/30 bg-red-950/20 p-4 text-sm text-red-400">
                 <strong className="text-red-300">Why this fails: </strong>
                 {badExplanation}
               </p>
@@ -149,7 +161,6 @@ export const CodeComparison: React.FC<CodeComparisonProps> = ({
           </div>
         )}
       </div>
-
     </div>
   );
 };

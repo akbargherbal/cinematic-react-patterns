@@ -9,7 +9,7 @@ import { CodeBlock } from "@/components/common/CodeBlock";
 /**
  * [Module Name]: [React Concept]
  * Teaching [React Concept] through [Fiction Source]
- * 
+ *
  * Replace placeholders:
  * - Module name and fiction source
  * - Icon import (Brain, Code, Zap, etc.)
@@ -24,12 +24,13 @@ export default function ModuleTemplate() {
   const chapters = [
     {
       title: "Chapter 1: Introduction",
-      content: "Your narrative explanation of the concept using fiction metaphors...",
+      content:
+        "Your narrative explanation of the concept using fiction metaphors...",
       demo: (
         <div className="space-y-6">
           {/* Your interactive demo components */}
-          <div className="bg-slate-900/50 border border-cyan-500/20 rounded-lg p-6">
-            <h3 className="font-bold text-cyan-200 mb-4">Interactive Demo</h3>
+          <div className="rounded-lg border border-cyan-500/20 bg-slate-900/50 p-6">
+            <h3 className="mb-4 font-bold text-cyan-200">Interactive Demo</h3>
             <p className="text-slate-300">Your demo content here...</p>
           </div>
 
@@ -83,7 +84,7 @@ function AdvancedComponent() {
   const currentChapter = chapters[chapter];
 
   return (
-    <div className="min-h-screen bg-slate-950 text-slate-300 font-sans">
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-300">
       {/* Standardized Header */}
       <ModuleHeader
         icon={Brain}
@@ -93,21 +94,23 @@ function AdvancedComponent() {
         themeColor="cyan"
       />
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
         {/* Standardized Layout with Sidebar */}
         <ModuleLayout
           sidebar={
             <div className="sticky top-24">
               {/* Quick Reference Card */}
-              <div className="bg-slate-900/60 border border-slate-800 rounded-xl p-6 backdrop-blur-sm">
-                <h3 className="font-bold text-lg mb-4 text-cyan-100">
+              <div className="rounded-xl border border-slate-800 bg-slate-900/60 p-6 backdrop-blur-sm">
+                <h3 className="mb-4 text-lg font-bold text-cyan-100">
                   Quick Reference
                 </h3>
 
                 <div className="space-y-4">
                   {/* Metrics or status displays */}
                   <div>
-                    <h4 className="font-medium text-slate-200 mb-2">📊 Key Metrics</h4>
+                    <h4 className="mb-2 font-medium text-slate-200">
+                      📊 Key Metrics
+                    </h4>
                     <div className="space-y-2 text-sm">
                       <div className="flex justify-between">
                         <span className="text-slate-400">Renders:</span>
@@ -117,12 +120,16 @@ function AdvancedComponent() {
                   </div>
 
                   {/* Metaphor mapping */}
-                  <div className="pt-4 border-t border-slate-800">
-                    <h4 className="font-medium text-slate-200 mb-2">🎭 Metaphor Map</h4>
+                  <div className="border-t border-slate-800 pt-4">
+                    <h4 className="mb-2 font-medium text-slate-200">
+                      🎭 Metaphor Map
+                    </h4>
                     <ul className="space-y-2 text-sm">
                       <li className="flex items-start gap-2">
                         <span className="text-cyan-500">•</span>
-                        <span><strong>Fiction Element</strong> = React Concept</span>
+                        <span>
+                          <strong>Fiction Element</strong> = React Concept
+                        </span>
                       </li>
                     </ul>
                   </div>
@@ -130,11 +137,11 @@ function AdvancedComponent() {
               </div>
 
               {/* Optional quote card */}
-              <div className="mt-4 bg-slate-900/30 border border-slate-800 rounded-xl p-4">
+              <div className="mt-4 rounded-xl border border-slate-800 bg-slate-900/30 p-4">
                 <p className="text-sm text-slate-400 italic">
                   "Memorable quote from your fiction source"
                 </p>
-                <p className="text-xs text-slate-500 mt-2 text-right">
+                <p className="mt-2 text-right text-xs text-slate-500">
                   — Character Name
                 </p>
               </div>
@@ -142,19 +149,19 @@ function AdvancedComponent() {
           }
         >
           {/* Chapter Content */}
-          <div className="prose prose-invert prose-lg max-w-none mb-8 sm:mb-12">
-            <h2 className="text-2xl sm:text-3xl font-bold mb-4 text-cyan-100">
+          <div className="prose prose-invert prose-lg mb-8 max-w-none sm:mb-12">
+            <h2 className="mb-4 text-2xl font-bold text-cyan-100 sm:text-3xl">
               {currentChapter.title}
             </h2>
-            <div className="text-slate-300 leading-relaxed space-y-4">
+            <div className="space-y-4 leading-relaxed text-slate-300">
               <p>{currentChapter.content}</p>
             </div>
           </div>
 
           {/* Interactive Demo Section */}
-          <section className="bg-slate-900/40 border border-cyan-500/20 rounded-xl p-6 sm:p-8 mb-8 sm:mb-12 backdrop-blur-sm">
-            <div className="flex items-center gap-2 mb-6">
-              <div className="w-2 h-6 bg-cyan-500 rounded"></div>
+          <section className="mb-8 rounded-xl border border-cyan-500/20 bg-slate-900/40 p-6 backdrop-blur-sm sm:mb-12 sm:p-8">
+            <div className="mb-6 flex items-center gap-2">
+              <div className="h-6 w-2 rounded bg-cyan-500"></div>
               <h3 className="text-xl font-bold text-cyan-200">
                 Interactive Demonstration
               </h3>

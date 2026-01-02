@@ -11,12 +11,14 @@ Standardized, reusable components for all fiction-based React learning modules. 
 **Problem:** 60% of module structure was identical but implemented independently across 38 modules. Fixing layout bugs required editing 38 separate files.
 
 **Solution:** Extract common patterns into shared components while preserving:
+
 - ✅ Unique theme colors per module
 - ✅ Module-specific demos and content
 - ✅ Creative freedom for designers
 - ✅ Fiction-specific visual metaphors
 
 **Benefits:**
+
 - **40-60% less boilerplate** per module
 - **Single source of truth** for layout/navigation
 - **Consistent UX** across all modules
@@ -32,25 +34,41 @@ Standardized, reusable components for all fiction-based React learning modules. 
 **Purpose:** Standardized header displaying icon, title, metadata, and concept
 
 **Props:**
+
 ```typescript
 interface ModuleHeaderProps {
-  icon: React.ComponentType<any>;      // Lucide icon (e.g., Brain, Code)
-  title: string;                       // Fiction work title (e.g., "Minority Report")
-  subtitle: string;                    // Metadata: "Character • Context • Year"
-  concept: string;                     // React concept (e.g., "useReducer")
-  themeColor: 'red' | 'orange' | 'amber' | 'yellow' | 'lime' 
-     | 'green' | 'emerald' | 'teal' | 'cyan' | 'sky' 
-     | 'blue' | 'indigo' | 'violet' | 'purple' 
-     | 'fuchsia' | 'pink' | 'rose';
+  icon: React.ComponentType<any>; // Lucide icon (e.g., Brain, Code)
+  title: string; // Fiction work title (e.g., "Minority Report")
+  subtitle: string; // Metadata: "Character • Context • Year"
+  concept: string; // React concept (e.g., "useReducer")
+  themeColor:
+    | "red"
+    | "orange"
+    | "amber"
+    | "yellow"
+    | "lime"
+    | "green"
+    | "emerald"
+    | "teal"
+    | "cyan"
+    | "sky"
+    | "blue"
+    | "indigo"
+    | "violet"
+    | "purple"
+    | "fuchsia"
+    | "pink"
+    | "rose";
 
-  className?: string;                  // Optional additional styles
+  className?: string; // Optional additional styles
 }
 ```
 
 **Example Usage:**
+
 ```tsx
-import { Brain } from 'lucide-react';
-import { ModuleHeader } from '@/components/common/ModuleHeader';
+import { Brain } from "lucide-react";
+import { ModuleHeader } from "@/components/common/ModuleHeader";
 
 <ModuleHeader
   icon={Brain}
@@ -58,10 +76,11 @@ import { ModuleHeader } from '@/components/common/ModuleHeader';
   subtitle="PreCrime • John Anderton • 2002"
   concept="useReducer for Complex State Management"
   themeColor="cyan"
-/>
+/>;
 ```
 
 **Features:**
+
 - Responsive layout (mobile-first)
 - Theme-aware colors
 - Backdrop blur effect for visual depth
@@ -75,17 +94,19 @@ import { ModuleHeader } from '@/components/common/ModuleHeader';
 **Purpose:** 8-4 responsive grid with main content and optional sticky sidebar
 
 **Props:**
+
 ```typescript
 interface ModuleLayoutProps {
-  children: React.ReactNode;           // Main content (8 cols desktop)
-  sidebar?: React.ReactNode;           // Optional sidebar (4 cols desktop)
-  className?: string;                  // Optional additional styles
+  children: React.ReactNode; // Main content (8 cols desktop)
+  sidebar?: React.ReactNode; // Optional sidebar (4 cols desktop)
+  className?: string; // Optional additional styles
 }
 ```
 
 **Example Usage:**
+
 ```tsx
-import { ModuleLayout } from '@/components/common/ModuleLayout';
+import { ModuleLayout } from "@/components/common/ModuleLayout";
 
 <ModuleLayout
   sidebar={
@@ -98,10 +119,11 @@ import { ModuleLayout } from '@/components/common/ModuleLayout';
   <ChapterContent />
   <InteractiveDemo />
   <ChapterNavigation />
-</ModuleLayout>
+</ModuleLayout>;
 ```
 
 **Features:**
+
 - 12-column grid: 8 cols content + 4 cols sidebar (desktop)
 - Stacks vertically on mobile (content first, then sidebar)
 - Sticky sidebar at `top-24` (accounts for header height)
@@ -116,26 +138,42 @@ import { ModuleLayout } from '@/components/common/ModuleLayout';
 **Purpose:** Previous/Next buttons, dot indicators, and chapter counter
 
 **Props:**
+
 ```typescript
 interface ChapterNavigationProps {
-  currentChapter: number;              // Current chapter index (0-based)
-  totalChapters: number;               // Total number of chapters
-  onChapterChange: (chapter: number) => void;  // Callback on change
-  themeColor: 'red' | 'orange' | 'amber' | 'yellow' | 'lime' 
-     | 'green' | 'emerald' | 'teal' | 'cyan' | 'sky' 
-     | 'blue' | 'indigo' | 'violet' | 'purple' 
-     | 'fuchsia' | 'pink' | 'rose';
+  currentChapter: number; // Current chapter index (0-based)
+  totalChapters: number; // Total number of chapters
+  onChapterChange: (chapter: number) => void; // Callback on change
+  themeColor:
+    | "red"
+    | "orange"
+    | "amber"
+    | "yellow"
+    | "lime"
+    | "green"
+    | "emerald"
+    | "teal"
+    | "cyan"
+    | "sky"
+    | "blue"
+    | "indigo"
+    | "violet"
+    | "purple"
+    | "fuchsia"
+    | "pink"
+    | "rose";
 
-  previousLabel?: string;              // Default: "Previous"
-  nextLabel?: string;                  // Default: "Next"
-  hideMobileDots?: boolean;            // Default: false
-  className?: string;                  // Optional additional styles
+  previousLabel?: string; // Default: "Previous"
+  nextLabel?: string; // Default: "Next"
+  hideMobileDots?: boolean; // Default: false
+  className?: string; // Optional additional styles
 }
 ```
 
 **Example Usage:**
+
 ```tsx
-import { ChapterNavigation } from '@/components/common/ChapterNavigation';
+import { ChapterNavigation } from "@/components/common/ChapterNavigation";
 
 const [chapter, setChapter] = useState(0);
 
@@ -144,10 +182,11 @@ const [chapter, setChapter] = useState(0);
   totalChapters={5}
   onChapterChange={setChapter}
   themeColor="cyan"
-/>
+/>;
 ```
 
 **Features:**
+
 - Previous/Next buttons with disabled states
 - Clickable dot indicators for direct chapter access
 - Chapter counter display (e.g., "Chapter 2 of 5")
@@ -163,28 +202,44 @@ const [chapter, setChapter] = useState(0);
 **Purpose:** Toggle between "Bad" and "Good" code examples (solves mobile horizontal scrolling)
 
 **Props:**
+
 ```typescript
 interface CodeComparisonProps {
-  badCode: string;                     // Code showing incorrect approach
-  goodCode: string;                    // Code showing correct approach
-  language: string;                    // Language for syntax highlighting
-  themeColor: 'red' | 'orange' | 'amber' | 'yellow' | 'lime' 
-     | 'green' | 'emerald' | 'teal' | 'cyan' | 'sky' 
-     | 'blue' | 'indigo' | 'violet' | 'purple' 
-     | 'fuchsia' | 'pink' | 'rose';
+  badCode: string; // Code showing incorrect approach
+  goodCode: string; // Code showing correct approach
+  language: string; // Language for syntax highlighting
+  themeColor:
+    | "red"
+    | "orange"
+    | "amber"
+    | "yellow"
+    | "lime"
+    | "green"
+    | "emerald"
+    | "teal"
+    | "cyan"
+    | "sky"
+    | "blue"
+    | "indigo"
+    | "violet"
+    | "purple"
+    | "fuchsia"
+    | "pink"
+    | "rose";
 
-  badLabel?: string;                   // Default: "❌ Problematic"
-  goodLabel?: string;                  // Default: "✅ Better"
-  badExplanation?: string;             // Optional explanation below bad code
-  goodExplanation?: string;            // Optional explanation below good code
-  startWithGood?: boolean;             // Default: false
-  className?: string;                  // Optional additional styles
+  badLabel?: string; // Default: "❌ Problematic"
+  goodLabel?: string; // Default: "✅ Better"
+  badExplanation?: string; // Optional explanation below bad code
+  goodExplanation?: string; // Optional explanation below good code
+  startWithGood?: boolean; // Default: false
+  className?: string; // Optional additional styles
 }
 ```
 
 **Example Usage:**
+
 ```tsx
-import { CodeComparison } from '@/components/common/CodeComparison';
+import { CodeComparison } from "@/components/common/CodeComparison";
 
 <CodeComparison
   badCode={`// Bad: Index as key
@@ -199,10 +254,11 @@ import { CodeComparison } from '@/components/common/CodeComparison';
   badExplanation="Using index as key causes React to lose track of component identity when items reorder"
   goodExplanation="Stable unique IDs ensure React correctly matches components across renders"
   themeColor="cyan"
-/>
+/>;
 ```
 
 **Features:**
+
 - Toggle between two code examples with buttons
 - Full-width code blocks (no horizontal scrolling on mobile)
 - Optional explanation text below each code block
@@ -216,14 +272,14 @@ import { CodeComparison } from '@/components/common/CodeComparison';
 
 Components support 6 pre-safelisted theme colors:
 
-| Color | Usage Example | Visual Style |
-|-------|---------------|--------------|
-| **cyan** | Minority Report, Inception | Tech, future-forward |
-| **amber** | Sherlock's Mind Palace | Warm, intellectual |
-| **purple** | Various modules | Mystery, magic |
-| **emerald** | The Matrix | Digital, code |
-| **red** | Various modules | Danger, urgency |
-| **blue** | Various modules | Calm, professional |
+| Color       | Usage Example              | Visual Style         |
+| ----------- | -------------------------- | -------------------- |
+| **cyan**    | Minority Report, Inception | Tech, future-forward |
+| **amber**   | Sherlock's Mind Palace     | Warm, intellectual   |
+| **purple**  | Various modules            | Mystery, magic       |
+| **emerald** | The Matrix                 | Digital, code        |
+| **red**     | Various modules            | Danger, urgency      |
+| **blue**    | Various modules            | Calm, professional   |
 
 **Implementation:** Colors are safelisted in `tailwind.config.ts` to support dynamic class generation.
 
@@ -235,18 +291,17 @@ Components support 6 pre-safelisted theme colors:
 
 ```tsx
 // src/modules/your-module/index.tsx
-import { Brain } from 'lucide-react';
-import { ModuleHeader } from '@/components/common/ModuleHeader';
-import { ModuleLayout } from '@/components/common/ModuleLayout';
-import { ChapterNavigation } from '@/components/common/ChapterNavigation';
-import { CodeComparison } from '@/components/common/CodeComparison';
+import { Brain } from "lucide-react";
+import { ModuleHeader } from "@/components/common/ModuleHeader";
+import { ModuleLayout } from "@/components/common/ModuleLayout";
+import { ChapterNavigation } from "@/components/common/ChapterNavigation";
+import { CodeComparison } from "@/components/common/CodeComparison";
 
 export default function YourModule() {
   const [chapter, setChapter] = useState(0);
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-300">
-      
       {/* Header */}
       <ModuleHeader
         icon={Brain}
@@ -271,7 +326,7 @@ export default function YourModule() {
           <div className="space-y-6">
             <h2 className="text-2xl font-bold">Chapter 1: Introduction</h2>
             <p>Your narrative and teaching content...</p>
-            
+
             <CodeComparison
               badCode={badExample}
               goodCode={goodExample}
@@ -283,9 +338,7 @@ export default function YourModule() {
 
         {/* Chapter 2 Content */}
         {chapter === 1 && (
-          <div className="space-y-6">
-            {/* More content... */}
-          </div>
+          <div className="space-y-6">{/* More content... */}</div>
         )}
 
         {/* Navigation */}
@@ -295,7 +348,6 @@ export default function YourModule() {
           onChapterChange={setChapter}
           themeColor="cyan"
         />
-
       </ModuleLayout>
     </div>
   );
@@ -307,38 +359,44 @@ export default function YourModule() {
 ## 📐 Code Reduction Example
 
 **Before (Minority Report - Old Header):**
+
 ```tsx
-{/* 26 lines of HTML */}
-<header className="border-b border-cyan-800/50 bg-slate-950/90 backdrop-blur-sm top-0 z-10">
-  <div className="max-w-7xl mx-auto px-4 md:px-8 py-4 md:py-6">
-    <div className="flex items-center justify-between gap-4 flex-wrap">
+{
+  /* 26 lines of HTML */
+}
+<header className="top-0 z-10 border-b border-cyan-800/50 bg-slate-950/90 backdrop-blur-sm">
+  <div className="mx-auto max-w-7xl px-4 py-4 md:px-8 md:py-6">
+    <div className="flex flex-wrap items-center justify-between gap-4">
       <div className="flex items-center gap-3">
-        <Brain className="text-cyan-400 w-8 h-8" />
-        <h1 className="text-2xl md:text-3xl font-bold tracking-tight">
+        <Brain className="h-8 w-8 text-cyan-400" />
+        <h1 className="text-2xl font-bold tracking-tight md:text-3xl">
           Minority Report
         </h1>
       </div>
-      <p className="text-sm md:text-base text-slate-400 font-medium">
+      <p className="text-sm font-medium text-slate-400 md:text-base">
         PreCrime • John Anderton • 2002
       </p>
     </div>
-    <p className="text-base md:text-lg text-cyan-400 font-medium mt-2">
+    <p className="mt-2 text-base font-medium text-cyan-400 md:text-lg">
       useReducer for Complex State Management
     </p>
   </div>
-</header>
+</header>;
 ```
 
 **After (With ModuleHeader):**
+
 ```tsx
-{/* 7 lines - 73% reduction */}
+{
+  /* 7 lines - 73% reduction */
+}
 <ModuleHeader
   icon={Brain}
   title="Minority Report"
   subtitle="PreCrime • John Anderton • 2002"
   concept="useReducer for Complex State Management"
   themeColor="cyan"
-/>
+/>;
 ```
 
 **Result:** 73% less code, same visual output, easier to maintain.
@@ -350,37 +408,39 @@ export default function YourModule() {
 ### Converting Existing Modules
 
 **Step 1: Install Imports**
+
 ```tsx
-import { ModuleHeader } from '@/components/common/ModuleHeader';
-import { ModuleLayout } from '@/components/common/ModuleLayout';
-import { ChapterNavigation } from '@/components/common/ChapterNavigation';
-import { CodeComparison } from '@/components/common/CodeComparison';
+import { ModuleHeader } from "@/components/common/ModuleHeader";
+import { ModuleLayout } from "@/components/common/ModuleLayout";
+import { ChapterNavigation } from "@/components/common/ChapterNavigation";
+import { CodeComparison } from "@/components/common/CodeComparison";
 ```
 
 **Step 2: Replace Header HTML**
 Find your existing header section and replace with:
+
 ```tsx
 <ModuleHeader
   icon={YourIcon}
   title="Your Title"
   subtitle="Character • Context • Year"
   concept="Your React Concept"
-  themeColor="cyan"  // Match your module's theme
+  themeColor="cyan" // Match your module's theme
 />
 ```
 
 **Step 3: Wrap Content in ModuleLayout**
 Extract your main content and sidebar:
+
 ```tsx
-<ModuleLayout
-  sidebar={/* Your existing sidebar JSX */}
->
+<ModuleLayout sidebar={/* Your existing sidebar JSX */}>
   {/* Your existing main content */}
 </ModuleLayout>
 ```
 
 **Step 4: Replace Navigation HTML**
 Find your chapter navigation and replace with:
+
 ```tsx
 <ChapterNavigation
   currentChapter={chapter}
@@ -392,6 +452,7 @@ Find your chapter navigation and replace with:
 
 **Step 5: Replace Side-by-Side Code Blocks**
 If you have side-by-side code comparisons causing mobile issues:
+
 ```tsx
 <CodeComparison
   badCode={beforeCode}
@@ -408,12 +469,14 @@ If you have side-by-side code comparisons causing mobile issues:
 ## 📊 Expected Results
 
 ### Code Metrics (Based on Pilot Conversions)
+
 - **Header:** 20-30 lines → 7 lines (70-80% reduction)
 - **Layout:** 15-20 lines → 5 lines (75% reduction)
 - **Navigation:** 40-60 lines → 8 lines (85% reduction)
 - **Code Comparison:** 30-40 lines → 15 lines (60% reduction)
 
 ### Overall Module Reduction
+
 - **Target:** 40-60% less boilerplate
 - **Example:** 870 lines → ~520 lines (Dorian Gray pilot)
 
@@ -422,18 +485,22 @@ If you have side-by-side code comparisons causing mobile issues:
 ## 🐛 Troubleshooting
 
 ### Theme Colors Not Working
+
 **Problem:** Dynamic classes like `text-${color}-500` not applying.  
 **Solution:** Ensure the color is safelisted in `tailwind.config.ts`. Only use: `cyan`, `amber`, `purple`, `emerald`, `red`, `blue`.
 
 ### Sidebar Not Sticky
+
 **Problem:** Sidebar scrolls with content instead of staying fixed.  
 **Solution:** ModuleLayout sets `sticky top-24` automatically. Ensure your module wrapper doesn't have `overflow-hidden` or conflicting positioning.
 
 ### Navigation Dots Not Clickable
+
 **Problem:** Dot indicators don't respond to clicks.  
 **Solution:** Ensure `onChapterChange` callback is properly passed and updates state.
 
 ### Code Blocks Overflowing on Mobile
+
 **Problem:** Code blocks still cause horizontal scrolling.  
 **Solution:** CodeComparison handles this automatically. Ensure you're using the component, not raw side-by-side divs.
 
@@ -464,6 +531,7 @@ If you identify a new pattern that appears in 5+ modules:
 ### Improving Existing Components
 
 Pull requests welcome! Ensure:
+
 - Backward compatibility maintained
 - All theme colors tested
 - JSDoc comments updated

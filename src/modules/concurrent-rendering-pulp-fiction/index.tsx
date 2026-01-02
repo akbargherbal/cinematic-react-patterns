@@ -74,36 +74,47 @@ Opening night. The audience is captivated by the non-linear story—never confus
   return (
     <div className="min-h-screen bg-gradient-to-br from-black via-zinc-950 to-red-950/20 text-zinc-200">
       {/* Header */}
-      <header className="border-b border-zinc-800 bg-black/80 backdrop-blur-sm sticky top-0 z-50">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4 sm:py-6">
-          <div className="flex items-center justify-between gap-4 sm:gap-6 mb-2 flex-wrap">
+      <header className="sticky top-0 z-50 border-b border-zinc-800 bg-black/80 backdrop-blur-sm">
+        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 sm:py-6">
+          <div className="mb-2 flex flex-wrap items-center justify-between gap-4 sm:gap-6">
             <div className="flex items-center gap-2 sm:gap-3">
-              <Film className="text-red-500 w-6 h-6 sm:w-8 sm:h-8" />
-              <h1 className="text-xl sm:text-2xl md:text-3xl font-bold">Pulp Fiction</h1>
+              <Film className="h-6 w-6 text-red-500 sm:h-8 sm:w-8" />
+              <h1 className="text-xl font-bold sm:text-2xl md:text-3xl">
+                Pulp Fiction
+              </h1>
             </div>
-            <p className="text-xs sm:text-sm md:text-base text-zinc-400">
+            <p className="text-xs text-zinc-400 sm:text-sm md:text-base">
               Quentin Tarantino • 1994
             </p>
           </div>
-          <p className="text-sm sm:text-base md:text-lg text-amber-500 font-medium">
+          <p className="text-sm font-medium text-amber-500 sm:text-base md:text-lg">
             Concurrent Rendering
           </p>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-6 sm:py-8 lg:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-8">
+      <main className="mx-auto max-w-7xl px-4 py-6 sm:px-6 sm:py-8 lg:py-12">
+        <div className="grid grid-cols-1 gap-6 lg:grid-cols-12 lg:gap-8">
           {/* Narrative Column */}
           <div className="lg:col-span-7">
             <div className="mb-8 lg:mb-12">
-              <h2 className="text-2xl sm:text-3xl font-bold mb-4 sm:mb-6 text-red-400">
+              <h2 className="mb-4 text-2xl font-bold text-red-400 sm:mb-6 sm:text-3xl">
                 {currentChapter.title}
               </h2>
               <div className="prose prose-invert prose-zinc max-w-none">
-                {currentChapter.content.split('\n\n').map((paragraph, idx) => (
-                  <p key={idx} className="mb-4 leading-relaxed text-base sm:text-lg text-zinc-300">
-                    {paragraph.split('**').map((part, i) =>
-                      i % 2 === 1 ? <strong key={i} className="text-amber-400">{part}</strong> : part
+                {currentChapter.content.split("\n\n").map((paragraph, idx) => (
+                  <p
+                    key={idx}
+                    className="mb-4 text-base leading-relaxed text-zinc-300 sm:text-lg"
+                  >
+                    {paragraph.split("**").map((part, i) =>
+                      i % 2 === 1 ? (
+                        <strong key={i} className="text-amber-400">
+                          {part}
+                        </strong>
+                      ) : (
+                        part
+                      ),
                     )}
                   </p>
                 ))}
@@ -120,24 +131,28 @@ Opening night. The audience is captivated by the non-linear story—never confus
         </div>
 
         {/* Navigation */}
-        <nav className="flex justify-between items-center mt-8 sm:mt-12 pt-8 border-t border-zinc-800">
+        <nav className="mt-8 flex items-center justify-between border-t border-zinc-800 pt-8 sm:mt-12">
           <button
             onClick={() => setChapter(Math.max(0, chapter - 1))}
             disabled={chapter === 0}
-            className="px-4 sm:px-6 py-2 sm:py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-sm sm:text-base font-medium"
+            className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-30 sm:px-6 sm:py-3 sm:text-base"
           >
             Previous
           </button>
           <div className="text-center">
-            <span className="text-xs sm:text-sm text-zinc-400 block mb-1">Progress</span>
-            <span className="text-sm sm:text-base font-mono text-amber-400">
+            <span className="mb-1 block text-xs text-zinc-400 sm:text-sm">
+              Progress
+            </span>
+            <span className="font-mono text-sm text-amber-400 sm:text-base">
               Chapter {chapter + 1} of {chapters.length}
             </span>
           </div>
           <button
-            onClick={() => setChapter(Math.min(chapters.length - 1, chapter + 1))}
+            onClick={() =>
+              setChapter(Math.min(chapters.length - 1, chapter + 1))
+            }
             disabled={chapter === chapters.length - 1}
-            className="px-4 sm:px-6 py-2 sm:py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all text-sm sm:text-base font-medium"
+            className="rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white transition-all hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-30 sm:px-6 sm:py-3 sm:text-base"
           >
             Next
           </button>
@@ -168,7 +183,7 @@ function DemoSection({ chapter }: { chapter: number }): JSX.Element {
 // Chapter 1: The Tapestry - Preparing Multiple UI States
 function TapestryDemo(): JSX.Element {
   const [activeReel, setActiveReel] = useState<string | null>(null);
-  
+
   const reels = [
     { id: "vincent", label: "VINCENT", color: "text-blue-400 border-blue-500" },
     { id: "butch", label: "BUTCH", color: "text-orange-400 border-orange-500" },
@@ -176,45 +191,53 @@ function TapestryDemo(): JSX.Element {
   ];
 
   return (
-    <div className="bg-zinc-900/50 border border-zinc-700 rounded-lg p-4 sm:p-6">
-      <div className="flex items-center gap-2 mb-4">
-        <Zap className="text-amber-500 w-5 h-5" />
-        <h3 className="text-lg sm:text-xl font-bold text-amber-400">Multiple States, One Timeline</h3>
+    <div className="rounded-lg border border-zinc-700 bg-zinc-900/50 p-4 sm:p-6">
+      <div className="mb-4 flex items-center gap-2">
+        <Zap className="h-5 w-5 text-amber-500" />
+        <h3 className="text-lg font-bold text-amber-400 sm:text-xl">
+          Multiple States, One Timeline
+        </h3>
       </div>
-      
-      <p className="text-xs sm:text-sm text-zinc-400 mb-6">
-        Click each reel to "prepare" it. React can work on all three UI updates simultaneously in the background.
+
+      <p className="mb-6 text-xs text-zinc-400 sm:text-sm">
+        Click each reel to "prepare" it. React can work on all three UI updates
+        simultaneously in the background.
       </p>
 
-      <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 mb-6">
+      <div className="mb-6 grid grid-cols-1 gap-3 sm:grid-cols-3 sm:gap-4">
         {reels.map((reel) => (
           <button
             key={reel.id}
             onClick={() => setActiveReel(reel.id)}
-            className={`p-3 sm:p-4 border-2 rounded-lg transition-all ${
+            className={`rounded-lg border-2 p-3 transition-all sm:p-4 ${
               activeReel === reel.id
                 ? `${reel.color} bg-zinc-800`
                 : "border-zinc-700 text-zinc-500 hover:border-zinc-600"
             }`}
           >
-            <Film className="w-6 h-6 sm:w-8 sm:h-8 mx-auto mb-2" />
-            <span className="text-xs sm:text-sm font-mono font-bold">{reel.label}</span>
+            <Film className="mx-auto mb-2 h-6 w-6 sm:h-8 sm:w-8" />
+            <span className="font-mono text-xs font-bold sm:text-sm">
+              {reel.label}
+            </span>
           </button>
         ))}
       </div>
 
       {activeReel && (
-        <div className="bg-zinc-800/50 border border-amber-500/30 rounded-lg p-3 sm:p-4 animate-in fade-in duration-300">
-          <p className="text-xs sm:text-sm text-amber-400">
-            ✓ Reel "<span className="font-bold">{activeReel.toUpperCase()}</span>" is being prepared in the background.
-            React doesn't need to show it yet—it's ready when needed.
+        <div className="animate-in fade-in rounded-lg border border-amber-500/30 bg-zinc-800/50 p-3 duration-300 sm:p-4">
+          <p className="text-xs text-amber-400 sm:text-sm">
+            ✓ Reel "
+            <span className="font-bold">{activeReel.toUpperCase()}</span>" is
+            being prepared in the background. React doesn't need to show it
+            yet—it's ready when needed.
           </p>
         </div>
       )}
 
-      <div className="mt-6 pt-6 border-t border-zinc-700">
+      <div className="mt-6 border-t border-zinc-700 pt-6">
         <p className="text-xs text-zinc-500 italic">
-          💡 In concurrent mode, React can prepare multiple component trees without committing any to the DOM yet.
+          💡 In concurrent mode, React can prepare multiple component trees
+          without committing any to the DOM yet.
         </p>
       </div>
     </div>
@@ -232,16 +255,16 @@ function BlockingDemo(): JSX.Element {
     setIsBlocking(true);
     setCallMissed(false);
     setProgress(0);
-    
+
     // Simulate long, blocking render
     const startTime = Date.now();
     const duration = 3000; // 3 seconds
-    
+
     const interval = setInterval(() => {
       const elapsed = Date.now() - startTime;
       const newProgress = Math.min((elapsed / duration) * 100, 100);
       setProgress(newProgress);
-      
+
       if (elapsed >= duration) {
         clearInterval(interval);
         setIsBlocking(false);
@@ -284,72 +307,91 @@ function BlockingComponent() {
 }`;
 
   return (
-    <div className="bg-zinc-900/50 border border-zinc-700 rounded-lg p-4 sm:p-6">
-      <div className="flex items-center gap-2 mb-4">
-        <Phone className={`w-5 h-5 ${phoneRinging ? "text-red-500 animate-pulse" : "text-zinc-500"}`} />
-        <h3 className="text-lg sm:text-xl font-bold text-red-400">Blocking Render</h3>
+    <div className="rounded-lg border border-zinc-700 bg-zinc-900/50 p-4 sm:p-6">
+      <div className="mb-4 flex items-center gap-2">
+        <Phone
+          className={`h-5 w-5 ${phoneRinging ? "animate-pulse text-red-500" : "text-zinc-500"}`}
+        />
+        <h3 className="text-lg font-bold text-red-400 sm:text-xl">
+          Blocking Render
+        </h3>
       </div>
 
-      <p className="text-xs sm:text-sm text-zinc-400 mb-6">
-        Start the "long scene". Notice the phone rings but cannot be answered until the scene finishes.
+      <p className="mb-6 text-xs text-zinc-400 sm:text-sm">
+        Start the "long scene". Notice the phone rings but cannot be answered
+        until the scene finishes.
       </p>
 
       {/* Controls */}
-      <div className="flex gap-3 mb-6">
+      <div className="mb-6 flex gap-3">
         <button
           onClick={startBlockingRender}
           disabled={isBlocking}
-          className="flex-1 px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-30 disabled:cursor-not-allowed transition-all flex items-center justify-center gap-2 text-sm sm:text-base"
+          className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-red-600 px-4 py-3 text-sm text-white transition-all hover:bg-red-700 disabled:cursor-not-allowed disabled:opacity-30 sm:text-base"
         >
-          <Play className="w-4 h-4" />
+          <Play className="h-4 w-4" />
           {isBlocking ? "RENDERING..." : "Start Scene"}
         </button>
         <button
           onClick={reset}
-          className="px-4 py-3 bg-zinc-700 text-white rounded-lg hover:bg-zinc-600 transition-all"
+          className="rounded-lg bg-zinc-700 px-4 py-3 text-white transition-all hover:bg-zinc-600"
           title="Reset"
         >
-          <RotateCcw className="w-4 h-4" />
+          <RotateCcw className="h-4 w-4" />
         </button>
       </div>
 
       {/* Visual Feedback */}
-      <div className="space-y-4 mb-6">
+      <div className="mb-6 space-y-4">
         {/* Progress Bar */}
-        <div className="bg-zinc-800 rounded-lg p-3 sm:p-4">
-          <div className="flex justify-between text-xs text-zinc-400 mb-2">
+        <div className="rounded-lg bg-zinc-800 p-3 sm:p-4">
+          <div className="mb-2 flex justify-between text-xs text-zinc-400">
             <span>Render Progress</span>
             <span className="font-mono">{progress.toFixed(0)}%</span>
           </div>
-          <div className="w-full bg-zinc-700 rounded-full h-2">
+          <div className="h-2 w-full rounded-full bg-zinc-700">
             <div
-              className="bg-red-500 h-2 rounded-full transition-all duration-100"
+              className="h-2 rounded-full bg-red-500 transition-all duration-100"
               style={{ width: `${progress}%` }}
             />
           </div>
         </div>
 
         {/* Phone Status */}
-        <div className={`border-2 rounded-lg p-3 sm:p-4 transition-all ${
-          phoneRinging
-            ? "border-red-500 bg-red-950/30 animate-pulse"
-            : callMissed
-            ? "border-red-700 bg-red-950/20"
-            : "border-zinc-700 bg-zinc-800/30"
-        }`}>
+        <div
+          className={`rounded-lg border-2 p-3 transition-all sm:p-4 ${
+            phoneRinging
+              ? "animate-pulse border-red-500 bg-red-950/30"
+              : callMissed
+                ? "border-red-700 bg-red-950/20"
+                : "border-zinc-700 bg-zinc-800/30"
+          }`}
+        >
           <div className="flex items-center gap-3">
-            <Phone className={`w-5 h-5 sm:w-6 sm:h-6 ${
-              phoneRinging ? "text-red-400" : callMissed ? "text-red-600" : "text-zinc-500"
-            }`} />
+            <Phone
+              className={`h-5 w-5 sm:h-6 sm:w-6 ${
+                phoneRinging
+                  ? "text-red-400"
+                  : callMissed
+                    ? "text-red-600"
+                    : "text-zinc-500"
+              }`}
+            />
             <div>
-              <p className="text-sm sm:text-base font-semibold">
-                {phoneRinging ? "📞 PHONE RINGING!" : callMissed ? "❌ Call Missed" : "☎️ Phone Idle"}
+              <p className="text-sm font-semibold sm:text-base">
+                {phoneRinging
+                  ? "📞 PHONE RINGING!"
+                  : callMissed
+                    ? "❌ Call Missed"
+                    : "☎️ Phone Idle"}
               </p>
               {isBlocking && phoneRinging && (
-                <p className="text-xs text-red-400 mt-1">UI is blocked - can't answer!</p>
+                <p className="mt-1 text-xs text-red-400">
+                  UI is blocked - can't answer!
+                </p>
               )}
               {callMissed && (
-                <p className="text-xs text-red-500 mt-1">
+                <p className="mt-1 text-xs text-red-500">
                   "The whole movie just... stopped. We're blocked."
                 </p>
               )}
@@ -367,9 +409,10 @@ function BlockingComponent() {
         defaultExpanded={true}
       />
 
-      <div className="mt-4 pt-4 border-t border-zinc-700">
+      <div className="mt-4 border-t border-zinc-700 pt-4">
         <p className="text-xs text-zinc-500">
-          ⚠️ <strong>The Problem</strong>: Heavy work locks the main thread. User interactions queue up and feel broken.
+          ⚠️ <strong>The Problem</strong>: Heavy work locks the main thread.
+          User interactions queue up and feel broken.
         </p>
       </div>
     </div>
@@ -427,62 +470,75 @@ function ConcurrentComponent() {
 }`;
 
   return (
-    <div className="bg-zinc-900/50 border border-zinc-700 rounded-lg p-4 sm:p-6">
-      <div className="flex items-center gap-2 mb-4">
-        <Zap className="text-amber-500 w-5 h-5" />
-        <h3 className="text-lg sm:text-xl font-bold text-amber-400">The Scheduler</h3>
+    <div className="rounded-lg border border-zinc-700 bg-zinc-900/50 p-4 sm:p-6">
+      <div className="mb-4 flex items-center gap-2">
+        <Zap className="h-5 w-5 text-amber-500" />
+        <h3 className="text-lg font-bold text-amber-400 sm:text-xl">
+          The Scheduler
+        </h3>
       </div>
 
-      <p className="text-xs sm:text-sm text-zinc-400 mb-6">
-        Start heavy work, then try typing. The UI stays responsive—you can "answer the phone" immediately.
+      <p className="mb-6 text-xs text-zinc-400 sm:text-sm">
+        Start heavy work, then try typing. The UI stays responsive—you can
+        "answer the phone" immediately.
       </p>
 
       {/* Controls */}
-      <div className="flex gap-3 mb-6">
+      <div className="mb-6 flex gap-3">
         <button
           onClick={startHeavyWork}
-          className="flex-1 px-4 py-3 bg-amber-600 text-black font-semibold rounded-lg hover:bg-amber-500 transition-all flex items-center justify-center gap-2 text-sm sm:text-base"
+          className="flex flex-1 items-center justify-center gap-2 rounded-lg bg-amber-600 px-4 py-3 text-sm font-semibold text-black transition-all hover:bg-amber-500 sm:text-base"
         >
-          <Play className="w-4 h-4" />
+          <Play className="h-4 w-4" />
           {isPending ? "WORKING..." : "Start Background Work"}
         </button>
         <button
           onClick={reset}
-          className="px-4 py-3 bg-zinc-700 text-white rounded-lg hover:bg-zinc-600 transition-all"
+          className="rounded-lg bg-zinc-700 px-4 py-3 text-white transition-all hover:bg-zinc-600"
           title="Reset"
         >
-          <RotateCcw className="w-4 h-4" />
+          <RotateCcw className="h-4 w-4" />
         </button>
       </div>
 
       {/* Interactive Input */}
-      <div className="space-y-4 mb-6">
-        <div className="bg-zinc-800 rounded-lg p-3 sm:p-4">
-          <label className="block text-xs text-zinc-400 mb-2">Type to "answer the phone":</label>
+      <div className="mb-6 space-y-4">
+        <div className="rounded-lg bg-zinc-800 p-3 sm:p-4">
+          <label className="mb-2 block text-xs text-zinc-400">
+            Type to "answer the phone":
+          </label>
           <input
             type="text"
             value={userInput}
             onChange={(e) => handleInput(e.target.value)}
             placeholder="Type anything..."
-            className="w-full bg-zinc-900 border border-zinc-600 rounded px-3 py-2 text-sm text-white focus:outline-none focus:border-amber-500 transition-colors"
+            className="w-full rounded border border-zinc-600 bg-zinc-900 px-3 py-2 text-sm text-white transition-colors focus:border-amber-500 focus:outline-none"
           />
         </div>
 
         {/* Status Indicators */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3">
-          <div className={`border-2 rounded-lg p-3 ${
-            isPending ? "border-amber-500 bg-amber-950/20" : "border-zinc-700 bg-zinc-800/30"
-          }`}>
+        <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+          <div
+            className={`rounded-lg border-2 p-3 ${
+              isPending
+                ? "border-amber-500 bg-amber-950/20"
+                : "border-zinc-700 bg-zinc-800/30"
+            }`}
+          >
             <p className="text-xs text-zinc-400">Background Work</p>
-            <p className="text-sm font-semibold text-amber-400 mt-1">
+            <p className="mt-1 text-sm font-semibold text-amber-400">
               {isPending ? "⏳ In Progress" : "✓ Idle"}
             </p>
           </div>
-          <div className={`border-2 rounded-lg p-3 ${
-            phoneAnswered ? "border-green-500 bg-green-950/20" : "border-zinc-700 bg-zinc-800/30"
-          }`}>
+          <div
+            className={`rounded-lg border-2 p-3 ${
+              phoneAnswered
+                ? "border-green-500 bg-green-950/20"
+                : "border-zinc-700 bg-zinc-800/30"
+            }`}
+          >
             <p className="text-xs text-zinc-400">User Input</p>
-            <p className="text-sm font-semibold text-green-400 mt-1">
+            <p className="mt-1 text-sm font-semibold text-green-400">
               {phoneAnswered ? "✓ Responsive" : "Waiting..."}
             </p>
           </div>
@@ -498,9 +554,11 @@ function ConcurrentComponent() {
         defaultExpanded={true}
       />
 
-      <div className="mt-4 pt-4 border-t border-zinc-700">
+      <div className="mt-4 border-t border-zinc-700 pt-4">
         <p className="text-xs text-zinc-500">
-          ✨ <strong>The Solution</strong>: useTransition marks updates as deferrable. React can pause them to handle urgent work, then seamlessly resume.
+          ✨ <strong>The Solution</strong>: useTransition marks updates as
+          deferrable. React can pause them to handle urgent work, then
+          seamlessly resume.
         </p>
       </div>
     </div>
@@ -536,24 +594,24 @@ function ComparisonDemo(): JSX.Element {
       const startTime = Date.now();
       setTimeout(() => {
         const elapsed = Date.now() - startTime;
-        setMetrics(prev => ({
+        setMetrics((prev) => ({
           ...prev,
           renderCount: prev.renderCount + 1,
           blockedTime: prev.blockedTime + elapsed,
           droppedInputs: prev.droppedInputs + 3,
         }));
-        setBlockedInputs(prev => prev + 3);
+        setBlockedInputs((prev) => prev + 3);
         setIsRunning(false);
       }, 2000);
     } else {
       // Simulate concurrent behavior
       setTimeout(() => {
-        setMetrics(prev => ({
+        setMetrics((prev) => ({
           ...prev,
           renderCount: prev.renderCount + 1,
           responsiveInputs: prev.responsiveInputs + 3,
         }));
-        setSuccessfulInputs(prev => prev + 3);
+        setSuccessfulInputs((prev) => prev + 3);
         setIsRunning(false);
       }, 200);
     }
@@ -593,64 +651,66 @@ function ConcurrentUI() {
 }`;
 
   return (
-    <div className="bg-zinc-900/50 border border-zinc-700 rounded-lg p-4 sm:p-6">
-      <div className="flex items-center gap-2 mb-4">
-        <Film className="text-red-400 w-5 h-5" />
-        <h3 className="text-lg sm:text-xl font-bold text-red-400">Traffic Jam vs. Dance</h3>
+    <div className="rounded-lg border border-zinc-700 bg-zinc-900/50 p-4 sm:p-6">
+      <div className="mb-4 flex items-center gap-2">
+        <Film className="h-5 w-5 text-red-400" />
+        <h3 className="text-lg font-bold text-red-400 sm:text-xl">
+          Traffic Jam vs. Dance
+        </h3>
       </div>
 
-      <p className="text-xs sm:text-sm text-zinc-400 mb-6">
+      <p className="mb-6 text-xs text-zinc-400 sm:text-sm">
         Compare blocking vs. concurrent rendering side-by-side.
       </p>
 
       {/* Mode Toggle */}
-      <div className="flex gap-3 mb-6">
+      <div className="mb-6 flex gap-3">
         <button
           onClick={() => runComparison("blocking")}
           disabled={isRunning}
-          className="flex-1 px-4 py-3 bg-red-600 text-white rounded-lg hover:bg-red-700 disabled:opacity-30 transition-all text-sm"
+          className="flex-1 rounded-lg bg-red-600 px-4 py-3 text-sm text-white transition-all hover:bg-red-700 disabled:opacity-30"
         >
           🚦 Run Blocking
         </button>
         <button
           onClick={() => runComparison("concurrent")}
           disabled={isRunning}
-          className="flex-1 px-4 py-3 bg-green-600 text-white rounded-lg hover:bg-green-700 disabled:opacity-30 transition-all text-sm"
+          className="flex-1 rounded-lg bg-green-600 px-4 py-3 text-sm text-white transition-all hover:bg-green-700 disabled:opacity-30"
         >
           💃 Run Concurrent
         </button>
         <button
           onClick={reset}
-          className="px-4 py-3 bg-zinc-700 text-white rounded-lg hover:bg-zinc-600 transition-all"
+          className="rounded-lg bg-zinc-700 px-4 py-3 text-white transition-all hover:bg-zinc-600"
           title="Reset"
         >
-          <RotateCcw className="w-4 h-4" />
+          <RotateCcw className="h-4 w-4" />
         </button>
       </div>
 
       {/* Metrics Dashboard */}
-      <div className="grid grid-cols-2 gap-3 mb-6">
-        <div className="bg-zinc-800 rounded-lg p-3">
+      <div className="mb-6 grid grid-cols-2 gap-3">
+        <div className="rounded-lg bg-zinc-800 p-3">
           <p className="text-xs text-zinc-400">Dropped Inputs</p>
-          <p className="text-xl sm:text-2xl font-mono font-bold text-red-400 mt-1">
+          <p className="mt-1 font-mono text-xl font-bold text-red-400 sm:text-2xl">
             {metrics.droppedInputs}
           </p>
         </div>
-        <div className="bg-zinc-800 rounded-lg p-3">
+        <div className="rounded-lg bg-zinc-800 p-3">
           <p className="text-xs text-zinc-400">Responsive Inputs</p>
-          <p className="text-xl sm:text-2xl font-mono font-bold text-green-400 mt-1">
+          <p className="mt-1 font-mono text-xl font-bold text-green-400 sm:text-2xl">
             {metrics.responsiveInputs}
           </p>
         </div>
-        <div className="bg-zinc-800 rounded-lg p-3">
+        <div className="rounded-lg bg-zinc-800 p-3">
           <p className="text-xs text-zinc-400">Blocked Time (ms)</p>
-          <p className="text-xl sm:text-2xl font-mono font-bold text-amber-400 mt-1">
+          <p className="mt-1 font-mono text-xl font-bold text-amber-400 sm:text-2xl">
             {metrics.blockedTime}
           </p>
         </div>
-        <div className="bg-zinc-800 rounded-lg p-3">
+        <div className="rounded-lg bg-zinc-800 p-3">
           <p className="text-xs text-zinc-400">Total Renders</p>
-          <p className="text-xl sm:text-2xl font-mono font-bold text-blue-400 mt-1">
+          <p className="mt-1 font-mono text-xl font-bold text-blue-400 sm:text-2xl">
             {metrics.renderCount}
           </p>
         </div>
@@ -672,10 +732,15 @@ function ConcurrentUI() {
         />
       </div>
 
-      <div className="mt-4 pt-4 border-t border-zinc-700">
+      <div className="mt-4 border-t border-zinc-700 pt-4">
         <p className="text-xs text-zinc-500">
-          🎯 <strong>The Difference</strong>: Blocking creates frustration. Concurrent creates flow.
-          {blockedInputs >= 45 && <span className="text-red-400 ml-2">(Circuit breaker approaching - will reset at 50)</span>}
+          🎯 <strong>The Difference</strong>: Blocking creates frustration.
+          Concurrent creates flow.
+          {blockedInputs >= 45 && (
+            <span className="ml-2 text-red-400">
+              (Circuit breaker approaching - will reset at 50)
+            </span>
+          )}
         </p>
       </div>
     </div>
@@ -689,18 +754,32 @@ function SummaryDemo(): JSX.Element {
   const [filteredItems, setFilteredItems] = useState<string[]>([]);
 
   const allItems = [
-    "Vincent Vega", "Jules Winnfield", "Mia Wallace", "Butch Coolidge",
-    "Marsellus Wallace", "Pumpkin", "Honey Bunny", "Winston Wolf",
-    "Brett", "Captain Koons", "Fabienne", "Lance", "Jody",
-    "Marvin", "The Gimp", "Zed", "Maynard", "Esmeralda Villalobos"
+    "Vincent Vega",
+    "Jules Winnfield",
+    "Mia Wallace",
+    "Butch Coolidge",
+    "Marsellus Wallace",
+    "Pumpkin",
+    "Honey Bunny",
+    "Winston Wolf",
+    "Brett",
+    "Captain Koons",
+    "Fabienne",
+    "Lance",
+    "Jody",
+    "Marvin",
+    "The Gimp",
+    "Zed",
+    "Maynard",
+    "Esmeralda Villalobos",
   ];
 
   useEffect(() => {
     if (searchTerm) {
       startTransition(() => {
         // Simulate expensive filtering
-        const results = allItems.filter(item =>
-          item.toLowerCase().includes(searchTerm.toLowerCase())
+        const results = allItems.filter((item) =>
+          item.toLowerCase().includes(searchTerm.toLowerCase()),
         );
         setFilteredItems(results);
       });
@@ -738,14 +817,17 @@ function SearchableList() {
 }`;
 
   return (
-    <div className="bg-zinc-900/50 border border-zinc-700 rounded-lg p-4 sm:p-6">
-      <div className="flex items-center gap-2 mb-4">
-        <Film className="text-amber-500 w-5 h-5" />
-        <h3 className="text-lg sm:text-xl font-bold text-amber-400">The Premiere</h3>
+    <div className="rounded-lg border border-zinc-700 bg-zinc-900/50 p-4 sm:p-6">
+      <div className="mb-4 flex items-center gap-2">
+        <Film className="h-5 w-5 text-amber-500" />
+        <h3 className="text-lg font-bold text-amber-400 sm:text-xl">
+          The Premiere
+        </h3>
       </div>
 
-      <p className="text-xs sm:text-sm text-zinc-400 mb-6">
-        Search through characters. Notice how the input stays responsive even as results update.
+      <p className="mb-6 text-xs text-zinc-400 sm:text-sm">
+        Search through characters. Notice how the input stays responsive even as
+        results update.
       </p>
 
       {/* Search Demo */}
@@ -756,20 +838,23 @@ function SearchableList() {
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
             placeholder="Search characters..."
-            className="w-full bg-zinc-800 border border-zinc-600 rounded-lg px-4 py-3 text-white focus:outline-none focus:border-amber-500 transition-colors text-sm sm:text-base"
+            className="w-full rounded-lg border border-zinc-600 bg-zinc-800 px-4 py-3 text-sm text-white transition-colors focus:border-amber-500 focus:outline-none sm:text-base"
           />
           {isPending && (
-            <div className="absolute right-3 top-1/2 -translate-y-1/2">
-              <div className="w-5 h-5 border-2 border-amber-500 border-t-transparent rounded-full animate-spin" />
+            <div className="absolute top-1/2 right-3 -translate-y-1/2">
+              <div className="h-5 w-5 animate-spin rounded-full border-2 border-amber-500 border-t-transparent" />
             </div>
           )}
         </div>
-        
-        <div className="mt-4 bg-zinc-800 rounded-lg p-4 max-h-64 overflow-y-auto">
+
+        <div className="mt-4 max-h-64 overflow-y-auto rounded-lg bg-zinc-800 p-4">
           {filteredItems.length > 0 ? (
             <ul className="space-y-2">
               {filteredItems.map((item, idx) => (
-                <li key={idx} className="text-sm text-zinc-300 py-1 border-b border-zinc-700 last:border-0">
+                <li
+                  key={idx}
+                  className="border-b border-zinc-700 py-1 text-sm text-zinc-300 last:border-0"
+                >
                   {item}
                 </li>
               ))}
@@ -789,26 +874,33 @@ function SearchableList() {
         defaultExpanded={false}
       />
 
-      <div className="mt-6 pt-6 border-t border-zinc-700 space-y-3">
-        <div className="bg-amber-950/30 border border-amber-500/30 rounded-lg p-4">
-          <p className="text-sm font-semibold text-amber-400 mb-2">
+      <div className="mt-6 space-y-3 border-t border-zinc-700 pt-6">
+        <div className="rounded-lg border border-amber-500/30 bg-amber-950/30 p-4">
+          <p className="mb-2 text-sm font-semibold text-amber-400">
             ✨ Key Takeaway
           </p>
-          <p className="text-xs sm:text-sm text-zinc-300">
-            <strong>"Show the most important piece at the most important time."</strong>
+          <p className="text-xs text-zinc-300 sm:text-sm">
+            <strong>
+              "Show the most important piece at the most important time."
+            </strong>
             <br />
-            Concurrent rendering lets React prepare everything in the background while always prioritizing what the user needs <em>right now</em>.
+            Concurrent rendering lets React prepare everything in the background
+            while always prioritizing what the user needs <em>right now</em>.
           </p>
         </div>
 
-        <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-xs">
-          <div className="bg-zinc-800 rounded-lg p-3">
-            <p className="text-zinc-400 mb-1">🎭 The Metaphor</p>
-            <p className="text-zinc-200">Multiple film reels, one projector—intelligently scheduled</p>
+        <div className="grid grid-cols-1 gap-3 text-xs sm:grid-cols-2">
+          <div className="rounded-lg bg-zinc-800 p-3">
+            <p className="mb-1 text-zinc-400">🎭 The Metaphor</p>
+            <p className="text-zinc-200">
+              Multiple film reels, one projector—intelligently scheduled
+            </p>
           </div>
-          <div className="bg-zinc-800 rounded-lg p-3">
-            <p className="text-zinc-400 mb-1">⚛️ The React API</p>
-            <p className="text-zinc-200">useTransition, useDeferredValue, Suspense</p>
+          <div className="rounded-lg bg-zinc-800 p-3">
+            <p className="mb-1 text-zinc-400">⚛️ The React API</p>
+            <p className="text-zinc-200">
+              useTransition, useDeferredValue, Suspense
+            </p>
           </div>
         </div>
       </div>

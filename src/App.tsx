@@ -49,7 +49,7 @@ const ModuleWrapper = ({
       {/* Universal Exit Button */}
       <Link
         to="/"
-        className="fixed left-3 top-4 z-[100] rounded-full bg-black/70 p-2 font-mono text-xs uppercase tracking-widest text-white opacity-30 shadow-lg transition-opacity hover:bg-black hover:opacity-100"
+        className="fixed top-4 left-3 z-[100] rounded-full bg-black/70 p-2 font-mono text-xs tracking-widest text-white uppercase opacity-30 shadow-lg transition-opacity hover:bg-black hover:opacity-100"
         title="Return to Home"
       >
         ← EXIT

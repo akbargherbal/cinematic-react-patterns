@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 /**
  * ModuleLayout - Standardized 8-4 grid layout for module pages
@@ -61,26 +61,20 @@ interface ModuleLayoutProps {
 export const ModuleLayout: React.FC<ModuleLayoutProps> = ({
   children,
   sidebar,
-  className = '',
+  className = "",
 }) => {
   return (
     <div className={className}>
-      <div className={sidebar ? 'lg:grid lg:grid-cols-12 lg:gap-8' : ''}>
-
+      <div className={sidebar ? "lg:grid lg:grid-cols-12 lg:gap-8" : ""}>
         {/* Main Content Column (8 cols on desktop, full width on mobile) */}
-        <div className={sidebar ? 'lg:col-span-8' : ''}>
-          {children}
-        </div>
+        <div className={sidebar ? "lg:col-span-8" : ""}>{children}</div>
 
         {/* Sidebar Column (4 cols on desktop, stacks below on mobile) */}
         {sidebar && (
-          <div className="lg:col-span-4 lg:mt-0 mt-8">
-            <div className="sticky top-24 space-y-6">
-              {sidebar}
-            </div>
+          <div className="mt-8 lg:col-span-4 lg:mt-0">
+            <div className="sticky top-24 space-y-6">{sidebar}</div>
           </div>
         )}
-
       </div>
     </div>
   );

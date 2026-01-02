@@ -1,5 +1,13 @@
 import { useState, useEffect, useRef } from "react";
-import { Brain, ChevronLeft, ChevronRight, Zap, Cpu, Bird, BookOpen } from "lucide-react";
+import {
+  Brain,
+  ChevronLeft,
+  ChevronRight,
+  Zap,
+  Cpu,
+  Bird,
+  BookOpen,
+} from "lucide-react";
 import { CodeBlock } from "@/components/common/CodeBlock";
 
 interface Chapter {
@@ -10,39 +18,59 @@ interface Chapter {
 // ==================== DEMO COMPONENTS ====================
 
 // Chapter 1: Simple, composable parts
-const Arm = ({ side, strength }: { side: 'left' | 'right'; strength: number }) => (
-  <div className={`p-4 border rounded-lg ${side === 'left' ? 'border-blue-500/50 bg-blue-950/20' : 'border-purple-500/50 bg-purple-950/20'}`}>
+const Arm = ({
+  side,
+  strength,
+}: {
+  side: "left" | "right";
+  strength: number;
+}) => (
+  <div
+    className={`rounded-lg border p-4 ${side === "left" ? "border-blue-500/50 bg-blue-950/20" : "border-purple-500/50 bg-purple-950/20"}`}
+  >
     <div className="font-mono text-sm">{side.toUpperCase()} ARM</div>
     <div className="text-xs opacity-70">Strength: {strength}</div>
   </div>
 );
 
-const Leg = ({ side }: { side: 'left' | 'right' }) => (
-  <div className={`p-4 border rounded-lg ${side === 'left' ? 'border-emerald-500/50 bg-emerald-950/20' : 'border-amber-500/50 bg-amber-950/20'}`}>
+const Leg = ({ side }: { side: "left" | "right" }) => (
+  <div
+    className={`rounded-lg border p-4 ${side === "left" ? "border-emerald-500/50 bg-emerald-950/20" : "border-amber-500/50 bg-amber-950/20"}`}
+  >
     <div className="font-mono text-sm">{side.toUpperCase()} LEG</div>
   </div>
 );
 
 const Eye = ({ color }: { color: string }) => (
-  <div className="p-4 border rounded-lg border-rose-500/50 bg-rose-950/20">
+  <div className="rounded-lg border border-rose-500/50 bg-rose-950/20 p-4">
     <div className="font-mono text-sm">EYE</div>
-    <div className="text-xs opacity-70">Color: <span style={{ color }}>● {color}</span></div>
+    <div className="text-xs opacity-70">
+      Color: <span style={{ color }}>● {color}</span>
+    </div>
   </div>
 );
 
 // A composer that uses composition
-const CreatureComposer = ({ parts }: { parts: Array<'leftArm' | 'rightArm' | 'leftLeg' | 'rightLeg' | 'eye'> }) => {
+const CreatureComposer = ({
+  parts,
+}: {
+  parts: Array<"leftArm" | "rightArm" | "leftLeg" | "rightLeg" | "eye">;
+}) => {
   return (
-    <div className="p-6 border-2 border-emerald-500/30 rounded-xl bg-slate-900/50">
-      <div className="text-sm font-mono text-emerald-400 mb-4">// &lt;CreatureComposer&gt;</div>
-      <div className="flex flex-wrap gap-4 justify-center">
-        {parts.includes('leftArm') && <Arm side="left" strength={90} />}
-        {parts.includes('rightArm') && <Arm side="right" strength={85} />}
-        {parts.includes('leftLeg') && <Leg side="left" />}
-        {parts.includes('rightLeg') && <Leg side="right" />}
-        {parts.includes('eye') && <Eye color="yellow" />}
+    <div className="rounded-xl border-2 border-emerald-500/30 bg-slate-900/50 p-6">
+      <div className="mb-4 font-mono text-sm text-emerald-400">
+        // &lt;CreatureComposer&gt;
       </div>
-      <div className="text-sm font-mono text-emerald-400 mt-4">// &lt;/CreatureComposer&gt;</div>
+      <div className="flex flex-wrap justify-center gap-4">
+        {parts.includes("leftArm") && <Arm side="left" strength={90} />}
+        {parts.includes("rightArm") && <Arm side="right" strength={85} />}
+        {parts.includes("leftLeg") && <Leg side="left" />}
+        {parts.includes("rightLeg") && <Leg side="right" />}
+        {parts.includes("eye") && <Eye color="yellow" />}
+      </div>
+      <div className="mt-4 font-mono text-sm text-emerald-400">
+        // &lt;/CreatureComposer&gt;
+      </div>
     </div>
   );
 };
@@ -58,8 +86,9 @@ const BrokenCreature = () => {
     setCycle(0);
     chaosRef.current = setInterval(() => {
       setChaos(Math.floor(Math.random() * 100));
-      setCycle(c => {
-        if (c >= 5) { // CIRCUIT BREAKER: Max 5 chaotic cycles
+      setCycle((c) => {
+        if (c >= 5) {
+          // CIRCUIT BREAKER: Max 5 chaotic cycles
           if (chaosRef.current) clearInterval(chaosRef.current);
           return c;
         }
@@ -82,72 +111,104 @@ const BrokenCreature = () => {
   }, []);
 
   return (
-    <div className="p-6 border-2 border-rose-500/30 rounded-xl bg-slate-900/50">
-      <div className="text-sm font-mono text-rose-400 mb-2">// &lt;BrokenCreature chaoticSignal={chaos} /&gt;</div>
-      <div className="flex flex-wrap gap-4 justify-center mb-6">
-        <div className="p-4 border border-rose-700 rounded bg-rose-950/30">
+    <div className="rounded-xl border-2 border-rose-500/30 bg-slate-900/50 p-6">
+      <div className="mb-2 font-mono text-sm text-rose-400">
+        // &lt;BrokenCreature chaoticSignal={chaos} /&gt;
+      </div>
+      <div className="mb-6 flex flex-wrap justify-center gap-4">
+        <div className="rounded border border-rose-700 bg-rose-950/30 p-4">
           <div className="font-mono">ARM</div>
-          <div className="text-xs">Twitch: {chaos % 3 === 0 ? 'YES' : 'no'}</div>
+          <div className="text-xs">
+            Twitch: {chaos % 3 === 0 ? "YES" : "no"}
+          </div>
         </div>
-        <div className="p-4 border border-rose-700 rounded bg-rose-950/30">
+        <div className="rounded border border-rose-700 bg-rose-950/30 p-4">
           <div className="font-mono">LEG</div>
-          <div className="text-xs">Kick: {chaos % 5 === 0 ? 'YES' : 'no'}</div>
+          <div className="text-xs">Kick: {chaos % 5 === 0 ? "YES" : "no"}</div>
         </div>
-        <div className="p-4 border border-rose-700 rounded bg-rose-950/30">
+        <div className="rounded border border-rose-700 bg-rose-950/30 p-4">
           <div className="font-mono">EYE</div>
-          <div className="text-xs">Blink: {chaos % 2 === 0 ? 'YES' : 'no'}</div>
+          <div className="text-xs">Blink: {chaos % 2 === 0 ? "YES" : "no"}</div>
         </div>
       </div>
       <div className="flex gap-3">
         <button
           onClick={triggerChaos}
           disabled={cycle >= 5}
-          className="px-4 py-2 bg-rose-600 hover:bg-rose-700 text-white rounded text-sm disabled:opacity-50 disabled:cursor-not-allowed"
+          className="rounded bg-rose-600 px-4 py-2 text-sm text-white hover:bg-rose-700 disabled:cursor-not-allowed disabled:opacity-50"
         >
           🧪 Trigger Chaotic Signal
         </button>
         <button
           onClick={resetChaos}
-          className="px-4 py-2 bg-slate-700 hover:bg-slate-600 text-white rounded text-sm"
+          className="rounded bg-slate-700 px-4 py-2 text-sm text-white hover:bg-slate-600"
         >
           🔄 Reset
         </button>
       </div>
-      <div className="text-xs mt-3 text-slate-400">
-        Chaotic Cycles: <span className={`font-mono ${cycle >= 5 ? 'text-rose-400' : ''}`}>{cycle}/5</span> {cycle >= 5 && '(Circuit Breaker Engaged)'}
+      <div className="mt-3 text-xs text-slate-400">
+        Chaotic Cycles:{" "}
+        <span className={`font-mono ${cycle >= 5 ? "text-rose-400" : ""}`}>
+          {cycle}/5
+        </span>{" "}
+        {cycle >= 5 && "(Circuit Breaker Engaged)"}
       </div>
     </div>
   );
 };
 
 // Chapter 4: The Working Bird (Good Composition)
-const Wing = ({ isFlapping, side }: { isFlapping: boolean; side: 'left' | 'right' }) => (
-  <div className={`p-3 border rounded-lg ${isFlapping ? 'bg-amber-500/20 border-amber-500/60' : 'bg-slate-800/50 border-slate-600'}`}>
+const Wing = ({
+  isFlapping,
+  side,
+}: {
+  isFlapping: boolean;
+  side: "left" | "right";
+}) => (
+  <div
+    className={`rounded-lg border p-3 ${isFlapping ? "border-amber-500/60 bg-amber-500/20" : "border-slate-600 bg-slate-800/50"}`}
+  >
     <div className="font-mono text-xs">{side.toUpperCase()} WING</div>
-    <div className="text-xs opacity-70">{isFlapping ? 'FLAPPING ▲' : 'resting'}</div>
+    <div className="text-xs opacity-70">
+      {isFlapping ? "FLAPPING ▲" : "resting"}
+    </div>
   </div>
 );
 
 const Beak = ({ song }: { song: string }) => (
-  <div className="p-3 border rounded-lg bg-violet-500/20 border-violet-500/60">
+  <div className="rounded-lg border border-violet-500/60 bg-violet-500/20 p-3">
     <div className="font-mono text-xs">BEAK</div>
     <div className="text-xs opacity-70">Song: "{song}"</div>
   </div>
 );
 
-const BirdHarness = ({ flapCount, song }: { flapCount: number; song: string }) => {
+const BirdHarness = ({
+  flapCount,
+  song,
+}: {
+  flapCount: number;
+  song: string;
+}) => {
   const isFlapping = flapCount % 4 < 2; // Simple flapping animation logic
   return (
-    <div className="p-6 border-2 border-emerald-500/30 rounded-xl bg-slate-900/50">
-      <div className="text-sm font-mono text-emerald-400 mb-4">// &lt;BirdHarness flapCount={flapCount} song={song}&gt;</div>
-      <div className="flex items-center justify-center gap-6 mb-4">
+    <div className="rounded-xl border-2 border-emerald-500/30 bg-slate-900/50 p-6">
+      <div className="mb-4 font-mono text-sm text-emerald-400">
+        // &lt;BirdHarness flapCount={flapCount} song={song}&gt;
+      </div>
+      <div className="mb-4 flex items-center justify-center gap-6">
         <Wing isFlapping={isFlapping} side="left" />
         <Beak song={song} />
         <Wing isFlapping={isFlapping} side="right" />
       </div>
-      <div className="text-sm font-mono text-emerald-400">// &lt;/BirdHarness&gt;</div>
-      <div className="text-xs mt-4 text-slate-400 text-center">
-        Props passed: <code className="bg-slate-800 px-2 py-1 rounded">flapCount: {flapCount}</code>, <code className="bg-slate-800 px-2 py-1 rounded">song: "{song}"</code>
+      <div className="font-mono text-sm text-emerald-400">
+        // &lt;/BirdHarness&gt;
+      </div>
+      <div className="mt-4 text-center text-xs text-slate-400">
+        Props passed:{" "}
+        <code className="rounded bg-slate-800 px-2 py-1">
+          flapCount: {flapCount}
+        </code>
+        , <code className="rounded bg-slate-800 px-2 py-1">song: "{song}"</code>
       </div>
     </div>
   );
@@ -155,22 +216,25 @@ const BirdHarness = ({ flapCount, song }: { flapCount: number; song: string }) =
 
 // Chapter 5: Final composed component
 const Avatar = ({ src, alt }: { src: string; alt: string }) => (
-  <div className="w-16 h-16 rounded-full bg-emerald-900 border-2 border-emerald-500/50 flex items-center justify-center">
+  <div className="flex h-16 w-16 items-center justify-center rounded-full border-2 border-emerald-500/50 bg-emerald-900">
     <div className="text-2xl">👨‍🔬</div>
   </div>
 );
 
 const Bio = ({ name, title }: { name: string; title: string }) => (
   <div>
-    <h3 className="font-bold text-lg">{name}</h3>
+    <h3 className="text-lg font-bold">{name}</h3>
     <p className="text-sm text-slate-400">{title}</p>
   </div>
 );
 
 const SkillList = ({ skills }: { skills: string[] }) => (
   <div className="flex flex-wrap gap-2">
-    {skills.map(skill => (
-      <span key={skill} className="px-3 py-1 bg-emerald-950/40 text-emerald-300 border border-emerald-500/30 rounded-full text-xs">
+    {skills.map((skill) => (
+      <span
+        key={skill}
+        className="rounded-full border border-emerald-500/30 bg-emerald-950/40 px-3 py-1 text-xs text-emerald-300"
+      >
         {skill}
       </span>
     ))}
@@ -179,16 +243,28 @@ const SkillList = ({ skills }: { skills: string[] }) => (
 
 const ProfileCard = () => {
   return (
-    <div className="p-8 border-2 border-emerald-500/20 rounded-2xl bg-gradient-to-br from-slate-900 to-slate-950 max-w-md mx-auto">
-      <div className="flex items-start gap-4 mb-6">
+    <div className="mx-auto max-w-md rounded-2xl border-2 border-emerald-500/20 bg-gradient-to-br from-slate-900 to-slate-950 p-8">
+      <div className="mb-6 flex items-start gap-4">
         <Avatar src="#" alt="Victor" />
-        <Bio name="Dr. Victor Frankenstein" title="Master of Component Composition" />
+        <Bio
+          name="Dr. Victor Frankenstein"
+          title="Master of Component Composition"
+        />
       </div>
       <div className="mb-6">
-        <h4 className="text-sm font-semibold text-slate-400 mb-3">CREATOR SKILLS</h4>
-        <SkillList skills={["React Components", "Prop Design", "State Management", "UI Architecture"]} />
+        <h4 className="mb-3 text-sm font-semibold text-slate-400">
+          CREATOR SKILLS
+        </h4>
+        <SkillList
+          skills={[
+            "React Components",
+            "Prop Design",
+            "State Management",
+            "UI Architecture",
+          ]}
+        />
       </div>
-      <p className="text-sm text-slate-500 italic border-t border-slate-800 pt-4">
+      <p className="border-t border-slate-800 pt-4 text-sm text-slate-500 italic">
         "A society of perfect parts, united by a clear and common purpose."
       </p>
     </div>
@@ -206,24 +282,29 @@ export default function CompositionVsInheritanceFrankenstein(): JSX.Element {
   const chapters: Chapter[] = [
     {
       title: "The Promise of Patchwork",
-      content: "Victor Frankenstein rejects the slow mimicry of inheritance. In his laboratory, he collects perfect parts—a mountaineer's leg, an artist's hand. Each is a self-contained component. He envisions not a single lineage, but a collage of excellence. 'Why mimic one life,' he murmurs, 'when I can assemble the perfection of a thousand?' This is the promise of Composition: infinite flexibility by combining discrete, reusable parts."
+      content:
+        "Victor Frankenstein rejects the slow mimicry of inheritance. In his laboratory, he collects perfect parts—a mountaineer's leg, an artist's hand. Each is a self-contained component. He envisions not a single lineage, but a collage of excellence. 'Why mimic one life,' he murmurs, 'when I can assemble the perfection of a thousand?' This is the promise of Composition: infinite flexibility by combining discrete, reusable parts.",
     },
     {
       title: "The Prison of Purity",
-      content: "Dr. Waldman champions inheritance, building an automaton from a single, unified blueprint—a pure lineage. When asked to give it a delicate hand, he discovers the arm and hand are a single, inherited `Limb` class. Changing the hand requires recasting the entire arm. Worse, the modification causes unforeseen failures in the torso. 'This damnable rigidity!' he roars. 'To change the foot, I must rebuild the entire skeleton!' Inheritance creates a tightly-coupled hierarchy where modifications cascade uncontrollably."
+      content:
+        "Dr. Waldman champions inheritance, building an automaton from a single, unified blueprint—a pure lineage. When asked to give it a delicate hand, he discovers the arm and hand are a single, inherited `Limb` class. Changing the hand requires recasting the entire arm. Worse, the modification causes unforeseen failures in the torso. 'This damnable rigidity!' he roars. 'To change the foot, I must rebuild the entire skeleton!' Inheritance creates a tightly-coupled hierarchy where modifications cascade uncontrollably.",
     },
     {
       title: "A Monstrous Union",
-      content: "Frankenstein completes his Creature, stitching perfect components together with crude, generic sinews. He passes a single, chaotic spark of life—a poorly defined prop. The Creature lives, but its parts fail to coordinate. The legs lurch, the hands twitch. It is a cacophony of function. 'The parts are beautiful,' Frankenstein realizes in horror, 'but the seams are monstrous!' Composition alone is not enough. Success depends on the quality of the interfaces—the props—that connect the components."
+      content:
+        "Frankenstein completes his Creature, stitching perfect components together with crude, generic sinews. He passes a single, chaotic spark of life—a poorly defined prop. The Creature lives, but its parts fail to coordinate. The legs lurch, the hands twitch. It is a cacophony of function. 'The parts are beautiful,' Frankenstein realizes in horror, 'but the seams are monstrous!' Composition alone is not enough. Success depends on the quality of the interfaces—the props—that connect the components.",
     },
     {
       title: "The Clockwork Nightingale",
-      content: "Humbled, Frankenstein builds a clockwork bird. His first attempt jams beautiful wings and a beak together with generic rods—composition with bad props. It shatters. His second attempt starts not with the parts, but with the interface. He builds a central harness with specific sockets: `onFlap`, `headAngle`, `songToPlay`. He then modifies each component to connect perfectly to this harness. The result is fluid grace and a clear, perfect note. 'The power is not in the pieces,' he understands, 'but in the elegance of their union.' Well-defined props enable seamless collaboration."
+      content:
+        "Humbled, Frankenstein builds a clockwork bird. His first attempt jams beautiful wings and a beak together with generic rods—composition with bad props. It shatters. His second attempt starts not with the parts, but with the interface. He builds a central harness with specific sockets: `onFlap`, `headAngle`, `songToPlay`. He then modifies each component to connect perfectly to this harness. The result is fluid grace and a clear, perfect note. 'The power is not in the pieces,' he understands, 'but in the elegance of their union.' Well-defined props enable seamless collaboration.",
     },
     {
       title: "The Architect's Journal",
-      content: "Frankenstein writes his new philosophy: 'Create a society of perfect parts, united by a clear and common purpose.' He is no longer a god of monolithic creation, but an architect of systems. The clockwork bird on his shelf is a testament: discrete components (wings, beak, harness) working in concert through clean interfaces to produce a single, beautiful output. In React, we build UIs not by extending rigid class hierarchies, but by composing focused components connected via deliberate, well-named props."
-    }
+      content:
+        "Frankenstein writes his new philosophy: 'Create a society of perfect parts, united by a clear and common purpose.' He is no longer a god of monolithic creation, but an architect of systems. The clockwork bird on his shelf is a testament: discrete components (wings, beak, harness) working in concert through clean interfaces to produce a single, beautiful output. In React, we build UIs not by extending rigid class hierarchies, but by composing focused components connected via deliberate, well-named props.",
+    },
   ];
 
   // Code Examples
@@ -300,7 +381,7 @@ function UserProfile({ user }) {
   useEffect(() => {
     if (chapter === 3) {
       flapIntervalRef.current = setInterval(() => {
-        setFlapCount(c => c + 1);
+        setFlapCount((c) => c + 1);
       }, 800);
     } else {
       if (flapIntervalRef.current) clearInterval(flapIntervalRef.current);
@@ -312,79 +393,105 @@ function UserProfile({ user }) {
   }, [chapter]);
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-950 to-slate-900 text-slate-300 font-serif">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 to-slate-900 font-serif text-slate-300">
       {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm top-0 z-10">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 py-4">
-          <div className="flex items-center justify-between gap-4 flex-wrap mb-1">
+      <header className="top-0 z-10 border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm">
+        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6">
+          <div className="mb-1 flex flex-wrap items-center justify-between gap-4">
             <div className="flex items-center gap-3">
-              <Brain className="text-emerald-500 w-7 h-7 md:w-8 md:h-8" />
-              <h1 className="text-2xl md:text-3xl font-bold font-sans">Frankenstein</h1>
+              <Brain className="h-7 w-7 text-emerald-500 md:h-8 md:w-8" />
+              <h1 className="font-sans text-2xl font-bold md:text-3xl">
+                Frankenstein
+              </h1>
             </div>
-            <p className="text-sm md:text-base text-slate-400 font-sans">
+            <p className="font-sans text-sm text-slate-400 md:text-base">
               Gothic • The Modern Prometheus • 1818
             </p>
           </div>
-          <p className="text-base md:text-lg text-emerald-400 font-medium font-sans">
+          <p className="font-sans text-base font-medium text-emerald-400 md:text-lg">
             Composition vs Inheritance in React
           </p>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8 md:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 lg:gap-12">
+      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 md:py-12">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12 lg:gap-12">
           {/* Left Column: Narrative & Instructions */}
           <div className="lg:col-span-5">
-            <div className="prose prose-invert prose-lg max-w-none mb-8">
-              <div className="flex items-center gap-3 mb-2">
-                <div className={`w-3 h-3 rounded-full ${chapter === 0 ? 'bg-emerald-500' : 'bg-slate-700'}`}></div>
-                <div className={`w-3 h-3 rounded-full ${chapter === 1 ? 'bg-emerald-500' : 'bg-slate-700'}`}></div>
-                <div className={`w-3 h-3 rounded-full ${chapter === 2 ? 'bg-emerald-500' : 'bg-slate-700'}`}></div>
-                <div className={`w-3 h-3 rounded-full ${chapter === 3 ? 'bg-emerald-500' : 'bg-slate-700'}`}></div>
-                <div className={`w-3 h-3 rounded-full ${chapter === 4 ? 'bg-emerald-500' : 'bg-slate-700'}`}></div>
-                <span className="text-sm text-slate-500 ml-2 font-sans">Chapter {chapter + 1} of 5</span>
+            <div className="prose prose-invert prose-lg mb-8 max-w-none">
+              <div className="mb-2 flex items-center gap-3">
+                <div
+                  className={`h-3 w-3 rounded-full ${chapter === 0 ? "bg-emerald-500" : "bg-slate-700"}`}
+                ></div>
+                <div
+                  className={`h-3 w-3 rounded-full ${chapter === 1 ? "bg-emerald-500" : "bg-slate-700"}`}
+                ></div>
+                <div
+                  className={`h-3 w-3 rounded-full ${chapter === 2 ? "bg-emerald-500" : "bg-slate-700"}`}
+                ></div>
+                <div
+                  className={`h-3 w-3 rounded-full ${chapter === 3 ? "bg-emerald-500" : "bg-slate-700"}`}
+                ></div>
+                <div
+                  className={`h-3 w-3 rounded-full ${chapter === 4 ? "bg-emerald-500" : "bg-slate-700"}`}
+                ></div>
+                <span className="ml-2 font-sans text-sm text-slate-500">
+                  Chapter {chapter + 1} of 5
+                </span>
               </div>
-              <h2 className="text-2xl md:text-3xl font-bold font-sans mb-4 text-slate-200">{currentChapter.title}</h2>
+              <h2 className="mb-4 font-sans text-2xl font-bold text-slate-200 md:text-3xl">
+                {currentChapter.title}
+              </h2>
               <div className="leading-relaxed text-slate-300">
                 {currentChapter.content}
               </div>
             </div>
 
             {/* Chapter-specific Instructions */}
-            <div className="bg-slate-900/50 border border-slate-800 rounded-lg p-5 mb-8">
-              <h3 className="font-semibold text-lg mb-2 flex items-center gap-2 font-sans">
-                <Zap className="w-4 h-4 text-emerald-400" />
+            <div className="mb-8 rounded-lg border border-slate-800 bg-slate-900/50 p-5">
+              <h3 className="mb-2 flex items-center gap-2 font-sans text-lg font-semibold">
+                <Zap className="h-4 w-4 text-emerald-400" />
                 Interactive Lesson
               </h3>
               <p className="text-sm text-slate-400">
-                {chapter === 0 && "Use the buttons below to compose a 'Creature' from individual parts. This demonstrates the flexibility of composition."}
-                {chapter === 1 && "Explore the inheritance hierarchy. Try to change a property and see how it requires modifying the entire chain."}
-                {chapter === 2 && "Trigger the 'chaotic signal' to see how poor props (interfaces) lead to uncoordinated, broken behavior."}
-                {chapter === 3 && "Observe the working clockwork bird. It uses the same composition principle as Chapter 1, but with clear, specific props."}
-                {chapter === 4 && "This final ProfileCard is built entirely through composition. Each part is independent and reusable."}
+                {chapter === 0 &&
+                  "Use the buttons below to compose a 'Creature' from individual parts. This demonstrates the flexibility of composition."}
+                {chapter === 1 &&
+                  "Explore the inheritance hierarchy. Try to change a property and see how it requires modifying the entire chain."}
+                {chapter === 2 &&
+                  "Trigger the 'chaotic signal' to see how poor props (interfaces) lead to uncoordinated, broken behavior."}
+                {chapter === 3 &&
+                  "Observe the working clockwork bird. It uses the same composition principle as Chapter 1, but with clear, specific props."}
+                {chapter === 4 &&
+                  "This final ProfileCard is built entirely through composition. Each part is independent and reusable."}
               </p>
             </div>
 
             {/* Navigation */}
-            <nav className="flex items-center justify-between pt-6 border-t border-slate-800">
+            <nav className="flex items-center justify-between border-t border-slate-800 pt-6">
               <button
                 onClick={() => setChapter(Math.max(0, chapter - 1))}
                 disabled={chapter === 0}
-                className="flex items-center gap-2 px-5 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-lg disabled:opacity-40 disabled:cursor-not-allowed transition-colors font-sans"
+                className="flex items-center gap-2 rounded-lg bg-slate-800 px-5 py-3 font-sans text-white transition-colors hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-40"
               >
-                <ChevronLeft className="w-4 h-4" />
+                <ChevronLeft className="h-4 w-4" />
                 Previous
               </button>
-              <div className="text-sm text-slate-500 font-sans px-4 py-2 bg-slate-900/50 rounded-lg">
-                <span className="text-emerald-400 font-mono">{chapter + 1}</span> / 5
+              <div className="rounded-lg bg-slate-900/50 px-4 py-2 font-sans text-sm text-slate-500">
+                <span className="font-mono text-emerald-400">
+                  {chapter + 1}
+                </span>{" "}
+                / 5
               </div>
               <button
-                onClick={() => setChapter(Math.min(chapters.length - 1, chapter + 1))}
+                onClick={() =>
+                  setChapter(Math.min(chapters.length - 1, chapter + 1))
+                }
                 disabled={chapter === chapters.length - 1}
-                className="flex items-center gap-2 px-5 py-3 bg-emerald-700 hover:bg-emerald-600 text-white rounded-lg disabled:opacity-40 disabled:cursor-not-allowed transition-colors font-sans"
+                className="flex items-center gap-2 rounded-lg bg-emerald-700 px-5 py-3 font-sans text-white transition-colors hover:bg-emerald-600 disabled:cursor-not-allowed disabled:opacity-40"
               >
                 Next
-                <ChevronRight className="w-4 h-4" />
+                <ChevronRight className="h-4 w-4" />
               </button>
             </nav>
           </div>
@@ -395,14 +502,31 @@ function UserProfile({ user }) {
               {/* Chapter 0 Demo: Basic Composition */}
               {chapter === 0 && (
                 <>
-                  <div className="bg-emerald-950/20 border border-emerald-500/30 rounded-xl p-6">
-                    <h3 className="font-bold text-lg mb-4 flex items-center gap-2 font-sans">
-                      <Cpu className="w-5 h-5" />
+                  <div className="rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-6">
+                    <h3 className="mb-4 flex items-center gap-2 font-sans text-lg font-bold">
+                      <Cpu className="h-5 w-5" />
                       Live: Composing a Creature
                     </h3>
-                    <CreatureComposer parts={['leftArm', 'rightArm', 'leftLeg', 'rightLeg', 'eye']} />
-                    <p className="text-sm text-slate-400 mt-4">
-                      The <code className="text-emerald-300">&lt;CreatureComposer&gt;</code> renders a UI by combining independent <code className="text-blue-300">&lt;Arm&gt;</code>, <code className="text-emerald-300">&lt;Leg&gt;</code>, and <code className="text-rose-300">&lt;Eye&gt;</code> components. Try imagining adding a <code>&lt;Wing&gt;</code>—it's easy!
+                    <CreatureComposer
+                      parts={[
+                        "leftArm",
+                        "rightArm",
+                        "leftLeg",
+                        "rightLeg",
+                        "eye",
+                      ]}
+                    />
+                    <p className="mt-4 text-sm text-slate-400">
+                      The{" "}
+                      <code className="text-emerald-300">
+                        &lt;CreatureComposer&gt;
+                      </code>{" "}
+                      renders a UI by combining independent{" "}
+                      <code className="text-blue-300">&lt;Arm&gt;</code>,{" "}
+                      <code className="text-emerald-300">&lt;Leg&gt;</code>, and{" "}
+                      <code className="text-rose-300">&lt;Eye&gt;</code>{" "}
+                      components. Try imagining adding a{" "}
+                      <code>&lt;Wing&gt;</code>—it's easy!
                     </p>
                   </div>
                   <CodeBlock
@@ -431,24 +555,37 @@ function CreatureComposer() {
               {/* Chapter 1 Demo: Inheritance Anti-Pattern */}
               {chapter === 1 && (
                 <>
-                  <div className="bg-rose-950/20 border border-rose-500/30 rounded-xl p-6">
-                    <h3 className="font-bold text-lg mb-4 flex items-center gap-2 font-sans">
-                      <Cpu className="w-5 h-5" />
+                  <div className="rounded-xl border border-rose-500/30 bg-rose-950/20 p-6">
+                    <h3 className="mb-4 flex items-center gap-2 font-sans text-lg font-bold">
+                      <Cpu className="h-5 w-5" />
                       Live: The Inheritance Prison
                     </h3>
                     <div className="space-y-4">
-                      <div className="p-4 border border-rose-700/50 rounded-lg bg-rose-950/30">
-                        <div className="font-mono text-sm text-rose-300">BaseAutomaton</div>
-                        <div className="text-xs text-slate-400">material: 'brass'</div>
+                      <div className="rounded-lg border border-rose-700/50 bg-rose-950/30 p-4">
+                        <div className="font-mono text-sm text-rose-300">
+                          BaseAutomaton
+                        </div>
+                        <div className="text-xs text-slate-400">
+                          material: 'brass'
+                        </div>
                       </div>
-                      <div className="p-4 border border-rose-700/50 rounded-lg bg-rose-950/30 ml-6">
-                        <div className="font-mono text-sm text-rose-300">WritingAutomaton extends BaseAutomaton</div>
-                        <div className="text-xs text-slate-400">handType: 'delicate'</div>
-                        <div className="text-xs text-rose-400 mt-1">❌ Problem: Changing handType might break armLength and torso alignment.</div>
+                      <div className="ml-6 rounded-lg border border-rose-700/50 bg-rose-950/30 p-4">
+                        <div className="font-mono text-sm text-rose-300">
+                          WritingAutomaton extends BaseAutomaton
+                        </div>
+                        <div className="text-xs text-slate-400">
+                          handType: 'delicate'
+                        </div>
+                        <div className="mt-1 text-xs text-rose-400">
+                          ❌ Problem: Changing handType might break armLength
+                          and torso alignment.
+                        </div>
                       </div>
                     </div>
-                    <p className="text-sm text-slate-400 mt-4">
-                      In this inheritance chain, modifying a property in a subclass can have unintended consequences up and down the hierarchy. The system is tightly coupled.
+                    <p className="mt-4 text-sm text-slate-400">
+                      In this inheritance chain, modifying a property in a
+                      subclass can have unintended consequences up and down the
+                      hierarchy. The system is tightly coupled.
                     </p>
                   </div>
                   <CodeBlock
@@ -478,29 +615,43 @@ function CreatureComposer() {
               {/* Chapter 3 Demo: Good Props (Working Bird) */}
               {chapter === 3 && (
                 <>
-                  <div className="bg-emerald-950/20 border border-emerald-500/30 rounded-xl p-6">
-                    <h3 className="font-bold text-lg mb-4 flex items-center gap-2 font-sans">
-                      <Bird className="w-5 h-5" />
+                  <div className="rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-6">
+                    <h3 className="mb-4 flex items-center gap-2 font-sans text-lg font-bold">
+                      <Bird className="h-5 w-5" />
                       Live: The Clockwork Nightingale
                     </h3>
-                    <BirdHarness flapCount={flapCount} song="Aria of the Dawn" />
-                    <div className="flex justify-center mt-6">
+                    <BirdHarness
+                      flapCount={flapCount}
+                      song="Aria of the Dawn"
+                    />
+                    <div className="mt-6 flex justify-center">
                       <button
                         onClick={() => {
                           if (flapIntervalRef.current) {
                             clearInterval(flapIntervalRef.current);
                             flapIntervalRef.current = null;
                           } else {
-                            flapIntervalRef.current = setInterval(() => setFlapCount(c => c + 1), 800);
+                            flapIntervalRef.current = setInterval(
+                              () => setFlapCount((c) => c + 1),
+                              800,
+                            );
                           }
                         }}
-                        className="px-4 py-2 bg-emerald-700 hover:bg-emerald-600 text-white rounded text-sm font-sans"
+                        className="rounded bg-emerald-700 px-4 py-2 font-sans text-sm text-white hover:bg-emerald-600"
                       >
-                        {flapIntervalRef.current ? '⏸️ Pause Animation' : '▶️ Start Animation'}
+                        {flapIntervalRef.current
+                          ? "⏸️ Pause Animation"
+                          : "▶️ Start Animation"}
                       </button>
                     </div>
-                    <p className="text-sm text-slate-400 mt-4">
-                      The <code className="text-emerald-300">&lt;BirdHarness&gt;</code> passes clear, specific props (<code>flapCount</code>, <code>song</code>) to its child components. Each child uses only the props it needs to perform its specific role.
+                    <p className="mt-4 text-sm text-slate-400">
+                      The{" "}
+                      <code className="text-emerald-300">
+                        &lt;BirdHarness&gt;
+                      </code>{" "}
+                      passes clear, specific props (<code>flapCount</code>,{" "}
+                      <code>song</code>) to its child components. Each child
+                      uses only the props it needs to perform its specific role.
                     </p>
                   </div>
                   <CodeBlock

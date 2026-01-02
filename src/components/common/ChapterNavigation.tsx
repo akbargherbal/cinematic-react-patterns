@@ -1,17 +1,17 @@
-import React from 'react';
-import { ChevronLeft, ChevronRight } from 'lucide-react';
+import React from "react";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 /**
  * ChapterNavigation - Standardized navigation for multi-chapter modules
- * 
+ *
  * Provides Previous/Next buttons, dot indicators, and chapter counter.
  * Supports keyboard navigation and proper accessibility.
- * 
+ *
  * @example Basic usage
  * ```tsx
  * const [chapter, setChapter] = useState(0);
  * const totalChapters = 5;
- * 
+ *
  * <ChapterNavigation
  *   currentChapter={chapter}
  *   totalChapters={totalChapters}
@@ -19,7 +19,7 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
  *   themeColor="cyan"
  * />
  * ```
- * 
+ *
  * @example With custom labels
  * ```tsx
  * <ChapterNavigation
@@ -36,31 +36,45 @@ import { ChevronLeft, ChevronRight } from 'lucide-react';
 interface ChapterNavigationProps {
   /** Current chapter index (0-based) */
   currentChapter: number;
-  
+
   /** Total number of chapters */
   totalChapters: number;
-  
+
   /** Callback when chapter changes (receives new chapter index) */
   onChapterChange: (chapter: number) => void;
-  
-  /** 
+
+  /**
    * Theme color from the safelist: cyan, amber, purple, emerald, red, blue
    * Controls the active dot color and Next button styling
    */
-  themeColor: 'red' | 'orange' | 'amber' | 'yellow' | 'lime' 
-     | 'green' | 'emerald' | 'teal' | 'cyan' | 'sky' 
-     | 'blue' | 'indigo' | 'violet' | 'purple' 
-     | 'fuchsia' | 'pink' | 'rose';
-  
+  themeColor:
+    | "red"
+    | "orange"
+    | "amber"
+    | "yellow"
+    | "lime"
+    | "green"
+    | "emerald"
+    | "teal"
+    | "cyan"
+    | "sky"
+    | "blue"
+    | "indigo"
+    | "violet"
+    | "purple"
+    | "fuchsia"
+    | "pink"
+    | "rose";
+
   /** Custom label for Previous button (default: "Previous") */
   previousLabel?: string;
-  
+
   /** Custom label for Next button (default: "Next") */
   nextLabel?: string;
-  
+
   /** Hide dot indicators on mobile (default: false) */
   hideMobileDots?: boolean;
-  
+
   /** Optional additional CSS classes */
   className?: string;
 }
@@ -70,10 +84,10 @@ export const ChapterNavigation: React.FC<ChapterNavigationProps> = ({
   totalChapters,
   onChapterChange,
   themeColor,
-  previousLabel = 'Previous',
-  nextLabel = 'Next',
+  previousLabel = "Previous",
+  nextLabel = "Next",
   hideMobileDots = false,
-  className = '',
+  className = "",
 }) => {
   const isFirstChapter = currentChapter === 0;
   const isLastChapter = currentChapter === totalChapters - 1;
@@ -97,38 +111,30 @@ export const ChapterNavigation: React.FC<ChapterNavigationProps> = ({
   // Keyboard navigation
   React.useEffect(() => {
     const handleKeyPress = (e: KeyboardEvent) => {
-      if (e.key === 'ArrowLeft' && !isFirstChapter) {
+      if (e.key === "ArrowLeft" && !isFirstChapter) {
         handlePrevious();
-      } else if (e.key === 'ArrowRight' && !isLastChapter) {
+      } else if (e.key === "ArrowRight" && !isLastChapter) {
         handleNext();
       }
     };
 
-    window.addEventListener('keydown', handleKeyPress);
-    return () => window.removeEventListener('keydown', handleKeyPress);
+    window.addEventListener("keydown", handleKeyPress);
+    return () => window.removeEventListener("keydown", handleKeyPress);
   }, [currentChapter, totalChapters]);
 
   return (
-    <nav 
-      className={`flex items-center justify-between mt-8 pt-6 border-t border-slate-800 ${className}`}
+    <nav
+      className={`mt-8 flex items-center justify-between border-t border-slate-800 pt-6 ${className}`}
       aria-label="Chapter navigation"
     >
       {/* Previous Button */}
       <button
         onClick={handlePrevious}
         disabled={isFirstChapter}
-        className={`
-          px-5 sm:px-6 py-3 
-          bg-slate-800 border border-slate-700 text-slate-300 
-          rounded-lg 
-          hover:bg-slate-700 hover:border-slate-600 
-          disabled:opacity-30 disabled:cursor-not-allowed 
-          transition-all duration-200 
-          flex items-center gap-2
-        `}
+        className={`flex items-center gap-2 rounded-lg border border-slate-700 bg-slate-800 px-5 py-3 text-slate-300 transition-all duration-200 hover:border-slate-600 hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-30 sm:px-6`}
         aria-label="Go to previous chapter"
       >
-        <ChevronLeft className="w-5 h-5" />
+        <ChevronLeft className="h-5 w-5" />
         <span className="hidden sm:inline">{previousLabel}</span>
         <span className="sm:hidden">Prev</span>
       </button>
@@ -136,26 +142,26 @@ export const ChapterNavigation: React.FC<ChapterNavigationProps> = ({
       {/* Center: Dot Indicators + Counter */}
       <div className="flex flex-col items-center gap-2">
         {/* Dot Indicators */}
-        <div className={`flex items-center gap-2 ${hideMobileDots ? 'hidden md:flex' : 'flex'}`}>
+        <div
+          className={`flex items-center gap-2 ${hideMobileDots ? "hidden md:flex" : "flex"}`}
+        >
           {Array.from({ length: totalChapters }).map((_, idx) => (
             <button
               key={idx}
               onClick={() => handleDotClick(idx)}
-              className={`
-                rounded-full transition-all duration-200
-                ${idx === currentChapter 
-                  ? `bg-${themeColor}-500 w-6 h-2` 
-                  : 'bg-slate-700 hover:bg-slate-600 w-2 h-2'
-                }
-              `}
+              className={`rounded-full transition-all duration-200 ${
+                idx === currentChapter
+                  ? `bg-${themeColor}-500 h-2 w-6`
+                  : "h-2 w-2 bg-slate-700 hover:bg-slate-600"
+              } `}
               aria-label={`Go to chapter ${idx + 1}`}
-              aria-current={idx === currentChapter ? 'true' : 'false'}
+              aria-current={idx === currentChapter ? "true" : "false"}
             />
           ))}
         </div>
 
         {/* Chapter Counter */}
-        <span className="text-sm text-slate-400 font-mono">
+        <span className="font-mono text-sm text-slate-400">
           Chapter {currentChapter + 1} of {totalChapters}
         </span>
       </div>
@@ -164,20 +170,12 @@ export const ChapterNavigation: React.FC<ChapterNavigationProps> = ({
       <button
         onClick={handleNext}
         disabled={isLastChapter}
-        className={`
-          px-5 sm:px-6 py-3 
-          bg-${themeColor}-900/40 border border-${themeColor}-700/50 text-${themeColor}-200 
-          rounded-lg 
-          hover:bg-${themeColor}-900/60 hover:border-${themeColor}-600 
-          disabled:opacity-30 disabled:cursor-not-allowed 
-          transition-all duration-200 
-          flex items-center gap-2
-        `}
+        className={`px-5 py-3 sm:px-6 bg-${themeColor}-900/40 border border-${themeColor}-700/50 text-${themeColor}-200 rounded-lg hover:bg-${themeColor}-900/60 hover:border-${themeColor}-600 flex items-center gap-2 transition-all duration-200 disabled:cursor-not-allowed disabled:opacity-30`}
         aria-label="Go to next chapter"
       >
         <span className="hidden sm:inline">{nextLabel}</span>
         <span className="sm:hidden">Next</span>
-        <ChevronRight className="w-5 h-5" />
+        <ChevronRight className="h-5 w-5" />
       </button>
     </nav>
   );

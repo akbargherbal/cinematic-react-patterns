@@ -1,5 +1,19 @@
 import { useState, useEffect, useRef, useMemo, useCallback } from "react";
-import { Car, Wrench, Layers, Code2, Zap, AlertTriangle, CheckCircle, X, RefreshCw, ChevronLeft, ChevronRight, Play, Pause } from "lucide-react";
+import {
+  Car,
+  Wrench,
+  Layers,
+  Code2,
+  Zap,
+  AlertTriangle,
+  CheckCircle,
+  X,
+  RefreshCw,
+  ChevronLeft,
+  ChevronRight,
+  Play,
+  Pause,
+} from "lucide-react";
 import { CodeBlock } from "@/components/common/CodeBlock";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 
@@ -24,7 +38,7 @@ interface CarComponent {
 export default function HigherOrderComponents(): JSX.Element {
   const [chapter, setChapter] = useState<number>(0);
   const [animationParent] = useAutoAnimate();
-  
+
   // Demo states
   const [car, setCar] = useState<CarComponent>({
     id: "user-profile",
@@ -33,9 +47,9 @@ export default function HigherOrderComponents(): JSX.Element {
     wrappers: [],
     installedHooks: [],
     props: { username: "Dave", avatar: "👤" },
-    performance: { renderCount: 0, wrapperDepth: 0 }
+    performance: { renderCount: 0, wrapperDepth: 0 },
   });
-  
+
   const [wrapperCount, setWrapperCount] = useState<number>(0);
   const [propCollisions, setPropCollisions] = useState<number>(0);
   const [showHOCApproach, setShowHOCApproach] = useState<boolean>(true);
@@ -43,34 +57,51 @@ export default function HigherOrderComponents(): JSX.Element {
   const [demoMetrics, setDemoMetrics] = useState({
     totalRenders: 0,
     bugCount: 0,
-    leakCount: 0
+    leakCount: 0,
   });
-  
-  const availableWrappers = ["withAuth", "withTheme", "withLogging", "withAnalytics", "withFeatureFlag"];
-  const availableHooks = ["useAuth", "useTheme", "useLogging", "useAnalytics", "useFeatureFlag"];
+
+  const availableWrappers = [
+    "withAuth",
+    "withTheme",
+    "withLogging",
+    "withAnalytics",
+    "withFeatureFlag",
+  ];
+  const availableHooks = [
+    "useAuth",
+    "useTheme",
+    "useLogging",
+    "useAnalytics",
+    "useFeatureFlag",
+  ];
 
   // Chapters from narrative
   const chapters: Chapter[] = [
     {
       title: "Yo Dawg, I Heard You Like Components",
-      content: "Meet Dave and his basic UserProfile component—a reliable 1998 sedan that needs authentication. Xzibit introduces the magic of HOCs: 'We don't scrap your ride, we wrap it!' Watch as withAuth adds a velvet rope and bouncer (isAuthenticated prop) without touching the original component."
+      content:
+        "Meet Dave and his basic UserProfile component—a reliable 1998 sedan that needs authentication. Xzibit introduces the magic of HOCs: 'We don't scrap your ride, we wrap it!' Watch as withAuth adds a velvet rope and bouncer (isAuthenticated prop) without touching the original component.",
     },
     {
       title: "The Wrapper Hell Garage",
-      content: "Thrilled by the first success, Dave sends his component through withTheme, withLogging, withAnalytics, and withFeatureFlag. The result is a monstrosity: conflicting sound systems, leaking fish tanks, and a dashboard buried under layers. 'You can't even see the engine under all these wrappers!' Debugging becomes impossible as he peels back wrapper after wrapper in DevTools."
+      content:
+        "Thrilled by the first success, Dave sends his component through withTheme, withLogging, withAnalytics, and withFeatureFlag. The result is a monstrosity: conflicting sound systems, leaking fish tanks, and a dashboard buried under layers. 'You can't even see the engine under all these wrappers!' Debugging becomes impossible as he peels back wrapper after wrapper in DevTools.",
     },
     {
       title: "Upgrade the Engine, Don't Wrap the Car",
-      content: "Veteran mechanic Mad Mike intervenes: 'Stop wrapping the car and start upgrading the engine.' He introduces modular parts—custom Hooks like useAuth that install directly inside the component. No more mysterious garages, just clean, transparent logic living where it's used. The revelation: engineering beats magic."
+      content:
+        "Veteran mechanic Mad Mike intervenes: 'Stop wrapping the car and start upgrading the engine.' He introduces modular parts—custom Hooks like useAuth that install directly inside the component. No more mysterious garages, just clean, transparent logic living where it's used. The revelation: engineering beats magic.",
     },
     {
       title: "The Drag Race: Wrapper vs. Module",
-      content: "Two identical CommentList components: one built through the HOC assembly line (resulting in prop collisions and hidden bugs), the other built with modular Hooks installed side-by-side in a clean engine bay. The comparison is stark: 'One is a car hidden inside a pile of features. The other is a car with features.'"
+      content:
+        "Two identical CommentList components: one built through the HOC assembly line (resulting in prop collisions and hidden bugs), the other built with modular Hooks installed side-by-side in a clean engine bay. The comparison is stark: 'One is a car hidden inside a pile of features. The other is a car with features.'",
     },
     {
       title: "Master of the Custom Garage",
-      content: "Dave visits a classic codebase car show, appreciating the craftsmanship of Redux's connect() HOC while understanding its layers. Back in his own garage, his components now feature pristine engine bays with plug-and-play custom Hooks. He's no longer just a driver but a master mechanic, choosing the right tool for every job: 'For new builds, you build modular. For classics, you respect the wrap.'"
-    }
+      content:
+        "Dave visits a classic codebase car show, appreciating the craftsmanship of Redux's connect() HOC while understanding its layers. Back in his own garage, his components now feature pristine engine bays with plug-and-play custom Hooks. He's no longer just a driver but a master mechanic, choosing the right tool for every job: 'For new builds, you build modular. For classics, you respect the wrap.'",
+    },
   ];
 
   // Code examples for each concept
@@ -162,53 +193,62 @@ function Component() {
 }`;
 
   // Interactive demo functions
-  const addWrapper = useCallback((wrapperName: string) => {
-    if (wrapperCount >= 50) {
-      resetDemo();
-      return;
-    }
-    
-    setCar(prev => {
-      const newWrappers = [...prev.wrappers, wrapperName];
-      const newProps = { ...prev.props };
-      
-      // Simulate prop collision
-      if (wrapperName === "withAnalytics" && prev.wrappers.includes("withAuth")) {
-        setPropCollisions(c => c + 1);
-        newProps.user = { source: "analytics", id: Math.random().toString(36) };
+  const addWrapper = useCallback(
+    (wrapperName: string) => {
+      if (wrapperCount >= 50) {
+        resetDemo();
+        return;
       }
-      if (wrapperName === "withAuth" && !prev.props.isAuthenticated) {
-        newProps.isAuthenticated = false;
-      }
-      if (wrapperName === "withTheme" && !prev.props.theme) {
-        newProps.theme = "dark";
-      }
-      
-      return {
-        ...prev,
-        wrappers: newWrappers,
-        props: newProps,
-        performance: {
-          renderCount: prev.performance.renderCount + 1,
-          wrapperDepth: newWrappers.length
+
+      setCar((prev) => {
+        const newWrappers = [...prev.wrappers, wrapperName];
+        const newProps = { ...prev.props };
+
+        // Simulate prop collision
+        if (
+          wrapperName === "withAnalytics" &&
+          prev.wrappers.includes("withAuth")
+        ) {
+          setPropCollisions((c) => c + 1);
+          newProps.user = {
+            source: "analytics",
+            id: Math.random().toString(36),
+          };
         }
-      };
-    });
-    
-    setWrapperCount(c => c + 1);
-    setDemoMetrics(m => ({ ...m, totalRenders: m.totalRenders + 1 }));
-  }, [wrapperCount]);
+        if (wrapperName === "withAuth" && !prev.props.isAuthenticated) {
+          newProps.isAuthenticated = false;
+        }
+        if (wrapperName === "withTheme" && !prev.props.theme) {
+          newProps.theme = "dark";
+        }
+
+        return {
+          ...prev,
+          wrappers: newWrappers,
+          props: newProps,
+          performance: {
+            renderCount: prev.performance.renderCount + 1,
+            wrapperDepth: newWrappers.length,
+          },
+        };
+      });
+
+      setWrapperCount((c) => c + 1);
+      setDemoMetrics((m) => ({ ...m, totalRenders: m.totalRenders + 1 }));
+    },
+    [wrapperCount],
+  );
 
   const installHook = useCallback((hookName: string) => {
-    setCar(prev => ({
+    setCar((prev) => ({
       ...prev,
       installedHooks: [...new Set([...prev.installedHooks, hookName])],
       performance: {
         ...prev.performance,
-        renderCount: prev.performance.renderCount + 1
-      }
+        renderCount: prev.performance.renderCount + 1,
+      },
     }));
-    setDemoMetrics(m => ({ ...m, totalRenders: m.totalRenders + 1 }));
+    setDemoMetrics((m) => ({ ...m, totalRenders: m.totalRenders + 1 }));
   }, []);
 
   const resetDemo = useCallback(() => {
@@ -219,7 +259,7 @@ function Component() {
       wrappers: [],
       installedHooks: [],
       props: { username: "Dave", avatar: "👤" },
-      performance: { renderCount: 0, wrapperDepth: 0 }
+      performance: { renderCount: 0, wrapperDepth: 0 },
     });
     setWrapperCount(0);
     setPropCollisions(0);
@@ -228,16 +268,16 @@ function Component() {
   }, []);
 
   const toggleAuth = useCallback(() => {
-    setCar(prev => ({
+    setCar((prev) => ({
       ...prev,
-      props: { ...prev.props, isAuthenticated: !prev.props.isAuthenticated }
+      props: { ...prev.props, isAuthenticated: !prev.props.isAuthenticated },
     }));
   }, []);
 
   // Circuit breaker for wrapper hell
   useEffect(() => {
     if (wrapperCount > 45) {
-      setDemoMetrics(m => ({ ...m, bugCount: m.bugCount + 1 }));
+      setDemoMetrics((m) => ({ ...m, bugCount: m.bugCount + 1 }));
     }
     if (wrapperCount >= 50) {
       resetDemo();
@@ -247,76 +287,88 @@ function Component() {
   const currentChapter = chapters[chapter];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 text-slate-300 font-sans">
+    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 font-sans text-slate-300">
       {/* Header with atmospheric design */}
       <header className="border-b border-cyan-500/30 bg-slate-900/80 backdrop-blur-sm">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
-          <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4 mb-2">
+        <div className="mx-auto max-w-7xl px-4 py-6 sm:px-6 lg:px-8">
+          <div className="mb-2 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             <div className="flex items-center gap-3">
-              <Car className="text-cyan-400 w-8 h-8" />
-              <h1 className="text-2xl md:text-3xl font-bold tracking-tight">Pimp My Ride</h1>
+              <Car className="h-8 w-8 text-cyan-400" />
+              <h1 className="text-2xl font-bold tracking-tight md:text-3xl">
+                Pimp My Ride
+              </h1>
             </div>
-            <div className="flex flex-col sm:items-end gap-1">
-              <p className="text-sm md:text-base text-slate-400">Reality TV • Xzibit • 2004-2007</p>
+            <div className="flex flex-col gap-1 sm:items-end">
+              <p className="text-sm text-slate-400 md:text-base">
+                Reality TV • Xzibit • 2004-2007
+              </p>
               <div className="flex items-center gap-2">
                 <div className="h-1 w-8 bg-cyan-500/50"></div>
-                <span className="text-xs text-slate-500">West Coast Customs</span>
+                <span className="text-xs text-slate-500">
+                  West Coast Customs
+                </span>
               </div>
             </div>
           </div>
-          <p className="text-lg md:text-xl text-cyan-300 font-medium">
+          <p className="text-lg font-medium text-cyan-300 md:text-xl">
             Higher-Order Components (HOCs) vs Custom Hooks
           </p>
         </div>
       </header>
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
+      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
           {/* Main content - 7 columns */}
-          <div className="lg:col-span-7 space-y-8">
+          <div className="space-y-8 lg:col-span-7">
             {/* Chapter content */}
-            <section className="bg-slate-900/50 border border-slate-700 rounded-xl p-6">
-              <div className="flex items-center justify-between mb-4">
-                <h2 className="text-2xl font-bold text-slate-200">{currentChapter.title}</h2>
-                <span className="text-sm bg-slate-800 px-3 py-1 rounded-full">
+            <section className="rounded-xl border border-slate-700 bg-slate-900/50 p-6">
+              <div className="mb-4 flex items-center justify-between">
+                <h2 className="text-2xl font-bold text-slate-200">
+                  {currentChapter.title}
+                </h2>
+                <span className="rounded-full bg-slate-800 px-3 py-1 text-sm">
                   Chapter {chapter + 1} of {chapters.length}
                 </span>
               </div>
-              <p className="text-lg leading-relaxed text-slate-300 mb-6">
+              <p className="mb-6 text-lg leading-relaxed text-slate-300">
                 {currentChapter.content}
               </p>
-              
+
               {/* Memorable phrase for each chapter */}
-              <div className="border-l-4 border-cyan-500 pl-4 py-2 bg-cyan-950/20">
-                <p className="text-cyan-300 italic font-medium">
+              <div className="border-l-4 border-cyan-500 bg-cyan-950/20 py-2 pl-4">
+                <p className="font-medium text-cyan-300 italic">
                   {chapter === 0 && '"We don\'t scrap your ride, we wrap it!"'}
-                  {chapter === 1 && '"You can\'t even see the engine under all these wrappers!"'}
-                  {chapter === 2 && '"Stop wrapping the car and start upgrading the engine."'}
-                  {chapter === 3 && '"One is a car hidden inside a pile of features. The other is a car with features."'}
-                  {chapter === 4 && '"For new builds, you build modular. For classics, you respect the wrap."'}
+                  {chapter === 1 &&
+                    '"You can\'t even see the engine under all these wrappers!"'}
+                  {chapter === 2 &&
+                    '"Stop wrapping the car and start upgrading the engine."'}
+                  {chapter === 3 &&
+                    '"One is a car hidden inside a pile of features. The other is a car with features."'}
+                  {chapter === 4 &&
+                    '"For new builds, you build modular. For classics, you respect the wrap."'}
                 </p>
               </div>
             </section>
 
             {/* Interactive demo area */}
-            <section className="bg-slate-900/50 border border-slate-700 rounded-xl p-6">
-              <div className="flex items-center justify-between mb-6">
-                <h3 className="text-xl font-bold text-slate-200 flex items-center gap-2">
-                  <Zap className="w-5 h-5 text-cyan-400" />
+            <section className="rounded-xl border border-slate-700 bg-slate-900/50 p-6">
+              <div className="mb-6 flex items-center justify-between">
+                <h3 className="flex items-center gap-2 text-xl font-bold text-slate-200">
+                  <Zap className="h-5 w-5 text-cyan-400" />
                   Interactive Garage
                 </h3>
                 <div className="flex gap-2">
                   <button
                     onClick={() => setShowHOCApproach(!showHOCApproach)}
-                    className={`px-4 py-2 rounded-lg transition-all duration-300 ${showHOCApproach ? 'bg-cyan-900/50 border border-cyan-500/50' : 'bg-fuchsia-900/50 border border-fuchsia-500/50'}`}
+                    className={`rounded-lg px-4 py-2 transition-all duration-300 ${showHOCApproach ? "border border-cyan-500/50 bg-cyan-900/50" : "border border-fuchsia-500/50 bg-fuchsia-900/50"}`}
                   >
-                    {showHOCApproach ? '🚗 HOC Garage' : '🔧 Hook Workshop'}
+                    {showHOCApproach ? "🚗 HOC Garage" : "🔧 Hook Workshop"}
                   </button>
                   <button
                     onClick={resetDemo}
-                    className="px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg hover:bg-slate-700 transition-colors flex items-center gap-2"
+                    className="flex items-center gap-2 rounded-lg border border-slate-600 bg-slate-800 px-4 py-2 transition-colors hover:bg-slate-700"
                   >
-                    <RefreshCw className="w-4 h-4" />
+                    <RefreshCw className="h-4 w-4" />
                     Reset
                   </button>
                 </div>
@@ -328,14 +380,16 @@ function Component() {
                   {/* Wrapper layers visualization */}
                   {car.wrappers.length > 0 && (
                     <div className="mb-4 w-full max-w-md">
-                      <div className="text-sm text-slate-400 mb-2">Wrapper Layers ({car.wrappers.length})</div>
+                      <div className="mb-2 text-sm text-slate-400">
+                        Wrapper Layers ({car.wrappers.length})
+                      </div>
                       <div className="flex flex-wrap gap-2">
                         {car.wrappers.map((wrapper, idx) => (
                           <div
                             key={idx}
-                            className="px-3 py-1.5 bg-cyan-900/40 border border-cyan-500/30 rounded-lg text-sm flex items-center gap-2"
+                            className="flex items-center gap-2 rounded-lg border border-cyan-500/30 bg-cyan-900/40 px-3 py-1.5 text-sm"
                           >
-                            <Layers className="w-3 h-3" />
+                            <Layers className="h-3 w-3" />
                             {wrapper}
                           </div>
                         ))}
@@ -344,18 +398,20 @@ function Component() {
                   )}
 
                   {/* The "car" component */}
-                  <div className={`relative ${car.baseColor} rounded-xl p-6 border-2 ${showHOCApproach && car.wrappers.length > 0 ? 'border-cyan-500' : 'border-slate-600'} transition-all duration-300 w-full max-w-md`}>
-                    <div className="flex items-center justify-between mb-4">
+                  <div
+                    className={`relative ${car.baseColor} rounded-xl border-2 p-6 ${showHOCApproach && car.wrappers.length > 0 ? "border-cyan-500" : "border-slate-600"} w-full max-w-md transition-all duration-300`}
+                  >
+                    <div className="mb-4 flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="w-10 h-10 rounded-lg bg-slate-800 flex items-center justify-center">
-                          <Code2 className="w-5 h-5" />
+                        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-slate-800">
+                          <Code2 className="h-5 w-5" />
                         </div>
                         <div>
-                          <h4 className="font-bold text-lg">{car.name}</h4>
+                          <h4 className="text-lg font-bold">{car.name}</h4>
                           <div className="flex items-center gap-2 text-sm text-slate-400">
                             {car.installedHooks.length > 0 && (
                               <>
-                                <Wrench className="w-3 h-3 text-fuchsia-400" />
+                                <Wrench className="h-3 w-3 text-fuchsia-400" />
                                 <span>Hooks: {car.installedHooks.length}</span>
                               </>
                             )}
@@ -363,33 +419,41 @@ function Component() {
                         </div>
                       </div>
                       <div className="text-right">
-                        <div className="text-xs text-slate-500">Render #{car.performance.renderCount}</div>
-                        <div className="text-sm font-mono">{car.wrappers.length} wrappers deep</div>
+                        <div className="text-xs text-slate-500">
+                          Render #{car.performance.renderCount}
+                        </div>
+                        <div className="font-mono text-sm">
+                          {car.wrappers.length} wrappers deep
+                        </div>
                       </div>
                     </div>
 
                     {/* Component content */}
-                    <div className="bg-slate-800/50 rounded-lg p-4 mb-4">
-                      <div className="flex items-center gap-3 mb-3">
-                        <div className="w-12 h-12 rounded-full bg-slate-700 flex items-center justify-center text-2xl">
+                    <div className="mb-4 rounded-lg bg-slate-800/50 p-4">
+                      <div className="mb-3 flex items-center gap-3">
+                        <div className="flex h-12 w-12 items-center justify-center rounded-full bg-slate-700 text-2xl">
                           {car.props.avatar || "👤"}
                         </div>
                         <div>
-                          <div className="font-bold">{car.props.username || "User"}</div>
-                          <div className="text-sm text-slate-400">React Developer</div>
+                          <div className="font-bold">
+                            {car.props.username || "User"}
+                          </div>
+                          <div className="text-sm text-slate-400">
+                            React Developer
+                          </div>
                         </div>
                       </div>
-                      
+
                       {/* Authentication gate */}
                       {car.props.isAuthenticated === false && (
-                        <div className="bg-red-950/30 border border-red-500/30 rounded p-3 flex items-center gap-3">
-                          <AlertTriangle className="w-5 h-5 text-red-400" />
+                        <div className="flex items-center gap-3 rounded border border-red-500/30 bg-red-950/30 p-3">
+                          <AlertTriangle className="h-5 w-5 text-red-400" />
                           <span>🔒 Authentication required</span>
                         </div>
                       )}
                       {car.props.isAuthenticated === true && (
-                        <div className="bg-emerald-950/30 border border-emerald-500/30 rounded p-3 flex items-center gap-3">
-                          <CheckCircle className="w-5 h-5 text-emerald-400" />
+                        <div className="flex items-center gap-3 rounded border border-emerald-500/30 bg-emerald-950/30 p-3">
+                          <CheckCircle className="h-5 w-5 text-emerald-400" />
                           <span>✅ Authenticated as {car.props.username}</span>
                         </div>
                       )}
@@ -398,9 +462,14 @@ function Component() {
                     {/* Current props */}
                     <div className="grid grid-cols-2 gap-2 text-sm">
                       {Object.entries(car.props).map(([key, value]) => (
-                        <div key={key} className="bg-slate-800/30 rounded px-3 py-2">
-                          <div className="text-slate-400 text-xs">{key}</div>
-                          <div className="font-mono truncate">{JSON.stringify(value)}</div>
+                        <div
+                          key={key}
+                          className="rounded bg-slate-800/30 px-3 py-2"
+                        >
+                          <div className="text-xs text-slate-400">{key}</div>
+                          <div className="truncate font-mono">
+                            {JSON.stringify(value)}
+                          </div>
                         </div>
                       ))}
                     </div>
@@ -409,14 +478,16 @@ function Component() {
                   {/* Installed hooks visualization */}
                   {car.installedHooks.length > 0 && (
                     <div className="mt-4 w-full max-w-md">
-                      <div className="text-sm text-slate-400 mb-2">Installed Hooks ({car.installedHooks.length})</div>
+                      <div className="mb-2 text-sm text-slate-400">
+                        Installed Hooks ({car.installedHooks.length})
+                      </div>
                       <div className="flex flex-wrap gap-2">
                         {car.installedHooks.map((hook, idx) => (
                           <div
                             key={idx}
-                            className="px-3 py-1.5 bg-fuchsia-900/40 border border-fuchsia-500/30 rounded-lg text-sm flex items-center gap-2"
+                            className="flex items-center gap-2 rounded-lg border border-fuchsia-500/30 bg-fuchsia-900/40 px-3 py-1.5 text-sm"
                           >
-                            <Wrench className="w-3 h-3" />
+                            <Wrench className="h-3 w-3" />
                             {hook}
                           </div>
                         ))}
@@ -427,21 +498,21 @@ function Component() {
               </div>
 
               {/* Controls */}
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
                 {showHOCApproach ? (
                   <>
                     <div className="space-y-3">
-                      <h4 className="text-lg font-semibold text-cyan-300 flex items-center gap-2">
-                        <Layers className="w-5 h-5" />
+                      <h4 className="flex items-center gap-2 text-lg font-semibold text-cyan-300">
+                        <Layers className="h-5 w-5" />
                         HOC Assembly Line
                       </h4>
                       <div className="flex flex-wrap gap-2">
-                        {availableWrappers.map(wrapper => (
+                        {availableWrappers.map((wrapper) => (
                           <button
                             key={wrapper}
                             onClick={() => addWrapper(wrapper)}
                             disabled={car.wrappers.includes(wrapper)}
-                            className="px-4 py-2 bg-cyan-900/40 border border-cyan-500/50 rounded-lg hover:bg-cyan-800/60 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                            className="rounded-lg border border-cyan-500/50 bg-cyan-900/40 px-4 py-2 transition-colors hover:bg-cyan-800/60 disabled:cursor-not-allowed disabled:opacity-30"
                           >
                             + {wrapper}
                           </button>
@@ -449,30 +520,42 @@ function Component() {
                       </div>
                       <button
                         onClick={toggleAuth}
-                        className="px-4 py-2 bg-slate-800 border border-slate-600 rounded-lg hover:bg-slate-700 w-full transition-colors"
+                        className="w-full rounded-lg border border-slate-600 bg-slate-800 px-4 py-2 transition-colors hover:bg-slate-700"
                       >
-                        {car.props.isAuthenticated ? '🔓 Log Out' : '🔐 Log In'}
+                        {car.props.isAuthenticated ? "🔓 Log Out" : "🔐 Log In"}
                       </button>
                     </div>
-                    <div className="bg-slate-900/30 border border-slate-700 rounded-lg p-4">
-                      <h4 className="text-lg font-semibold mb-2">HOC Pitfalls</h4>
+                    <div className="rounded-lg border border-slate-700 bg-slate-900/30 p-4">
+                      <h4 className="mb-2 text-lg font-semibold">
+                        HOC Pitfalls
+                      </h4>
                       <div className="space-y-3">
                         <div className="flex items-center justify-between">
                           <span className="text-slate-400">Wrapper Depth</span>
-                          <span className={`font-mono ${car.wrappers.length > 3 ? 'text-amber-400' : 'text-slate-300'}`}>
+                          <span
+                            className={`font-mono ${car.wrappers.length > 3 ? "text-amber-400" : "text-slate-300"}`}
+                          >
                             {car.wrappers.length} layers
                           </span>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-slate-400">Prop Collisions</span>
-                          <span className={`font-mono ${propCollisions > 0 ? 'text-red-400' : 'text-slate-300'}`}>
+                          <span className="text-slate-400">
+                            Prop Collisions
+                          </span>
+                          <span
+                            className={`font-mono ${propCollisions > 0 ? "text-red-400" : "text-slate-300"}`}
+                          >
                             {propCollisions} detected
                           </span>
                         </div>
                         <div className="flex items-center justify-between">
-                          <span className="text-slate-400">Debug Complexity</span>
-                          <span className={`font-mono ${car.wrappers.length > 2 ? 'text-amber-400' : 'text-slate-300'}`}>
-                            {car.wrappers.length > 2 ? 'High' : 'Low'}
+                          <span className="text-slate-400">
+                            Debug Complexity
+                          </span>
+                          <span
+                            className={`font-mono ${car.wrappers.length > 2 ? "text-amber-400" : "text-slate-300"}`}
+                          >
+                            {car.wrappers.length > 2 ? "High" : "Low"}
                           </span>
                         </div>
                       </div>
@@ -481,48 +564,57 @@ function Component() {
                 ) : (
                   <>
                     <div className="space-y-3">
-                      <h4 className="text-lg font-semibold text-fuchsia-300 flex items-center gap-2">
-                        <Wrench className="w-5 h-5" />
+                      <h4 className="flex items-center gap-2 text-lg font-semibold text-fuchsia-300">
+                        <Wrench className="h-5 w-5" />
                         Modular Hook Workshop
                       </h4>
                       <div className="flex flex-wrap gap-2">
-                        {availableHooks.map(hook => (
+                        {availableHooks.map((hook) => (
                           <button
                             key={hook}
                             onClick={() => installHook(hook)}
                             disabled={car.installedHooks.includes(hook)}
-                            className="px-4 py-2 bg-fuchsia-900/40 border border-fuchsia-500/50 rounded-lg hover:bg-fuchsia-800/60 disabled:opacity-30 disabled:cursor-not-allowed transition-colors"
+                            className="rounded-lg border border-fuchsia-500/50 bg-fuchsia-900/40 px-4 py-2 transition-colors hover:bg-fuchsia-800/60 disabled:cursor-not-allowed disabled:opacity-30"
                           >
                             + {hook}
                           </button>
                         ))}
                       </div>
-                      <div className="text-sm text-slate-400 pt-2">
-                        Hooks install directly inside the component—no wrappers, no prop collisions.
+                      <div className="pt-2 text-sm text-slate-400">
+                        Hooks install directly inside the component—no wrappers,
+                        no prop collisions.
                       </div>
                     </div>
-                    <div className="bg-slate-900/30 border border-slate-700 rounded-lg p-4">
-                      <h4 className="text-lg font-semibold mb-2">Hook Advantages</h4>
+                    <div className="rounded-lg border border-slate-700 bg-slate-900/30 p-4">
+                      <h4 className="mb-2 text-lg font-semibold">
+                        Hook Advantages
+                      </h4>
                       <div className="space-y-3">
                         <div className="flex items-center gap-3">
-                          <CheckCircle className="w-5 h-5 text-emerald-400" />
+                          <CheckCircle className="h-5 w-5 text-emerald-400" />
                           <div>
                             <div className="font-medium">Direct Access</div>
-                            <div className="text-sm text-slate-400">Logic lives where it's used</div>
+                            <div className="text-sm text-slate-400">
+                              Logic lives where it's used
+                            </div>
                           </div>
                         </div>
                         <div className="flex items-center gap-3">
-                          <CheckCircle className="w-5 h-5 text-emerald-400" />
+                          <CheckCircle className="h-5 w-5 text-emerald-400" />
                           <div>
                             <div className="font-medium">No Wrapper Hell</div>
-                            <div className="text-sm text-slate-400">Flat component tree</div>
+                            <div className="text-sm text-slate-400">
+                              Flat component tree
+                            </div>
                           </div>
                         </div>
                         <div className="flex items-center gap-3">
-                          <CheckCircle className="w-5 h-5 text-emerald-400" />
+                          <CheckCircle className="h-5 w-5 text-emerald-400" />
                           <div>
                             <div className="font-medium">Easy Debugging</div>
-                            <div className="text-sm text-slate-400">Clear DevTools visibility</div>
+                            <div className="text-sm text-slate-400">
+                              Clear DevTools visibility
+                            </div>
                           </div>
                         </div>
                       </div>
@@ -534,15 +626,15 @@ function Component() {
           </div>
 
           {/* Sidebar with code examples - 5 columns */}
-          <div className="lg:col-span-5 space-y-6">
+          <div className="space-y-6 lg:col-span-5">
             {/* Code examples based on current chapter */}
             <div className="sticky top-8">
-              <div className="bg-slate-900/70 border border-slate-700 rounded-xl p-6 backdrop-blur-sm">
-                <h3 className="text-xl font-bold text-slate-200 mb-6 flex items-center gap-2">
-                  <Code2 className="w-5 h-5 text-cyan-400" />
+              <div className="rounded-xl border border-slate-700 bg-slate-900/70 p-6 backdrop-blur-sm">
+                <h3 className="mb-6 flex items-center gap-2 text-xl font-bold text-slate-200">
+                  <Code2 className="h-5 w-5 text-cyan-400" />
                   Code Examples
                 </h3>
-                
+
                 <div className="space-y-6">
                   {chapter === 0 && (
                     <>
@@ -562,7 +654,7 @@ function Component() {
                       />
                     </>
                   )}
-                  
+
                   {chapter === 1 && (
                     <>
                       <CodeBlock
@@ -572,12 +664,12 @@ function Component() {
                         language="jsx"
                         defaultExpanded={true}
                       />
-                      <div className="bg-amber-950/20 border border-amber-500/30 rounded-lg p-4">
-                        <div className="flex items-center gap-3 mb-2">
-                          <AlertTriangle className="w-5 h-5 text-amber-400" />
+                      <div className="rounded-lg border border-amber-500/30 bg-amber-950/20 p-4">
+                        <div className="mb-2 flex items-center gap-3">
+                          <AlertTriangle className="h-5 w-5 text-amber-400" />
                           <h4 className="font-semibold">The Problem</h4>
                         </div>
-                        <ul className="text-sm space-y-2 text-slate-300">
+                        <ul className="space-y-2 text-sm text-slate-300">
                           <li>• DevTools show 5+ nested wrapper components</li>
                           <li>• Prop sources become untraceable</li>
                           <li>• Name collisions silently overwrite data</li>
@@ -586,7 +678,7 @@ function Component() {
                       </div>
                     </>
                   )}
-                  
+
                   {chapter === 2 && (
                     <>
                       <CodeBlock
@@ -596,12 +688,12 @@ function Component() {
                         language="jsx"
                         defaultExpanded={true}
                       />
-                      <div className="bg-emerald-950/20 border border-emerald-500/30 rounded-lg p-4">
-                        <div className="flex items-center gap-3 mb-2">
-                          <CheckCircle className="w-5 h-5 text-emerald-400" />
+                      <div className="rounded-lg border border-emerald-500/30 bg-emerald-950/20 p-4">
+                        <div className="mb-2 flex items-center gap-3">
+                          <CheckCircle className="h-5 w-5 text-emerald-400" />
                           <h4 className="font-semibold">The Solution</h4>
                         </div>
-                        <ul className="text-sm space-y-2 text-slate-300">
+                        <ul className="space-y-2 text-sm text-slate-300">
                           <li>• Logic lives inside the component function</li>
                           <li>• No wrapper components in DevTools</li>
                           <li>• Values are clearly named and scoped</li>
@@ -610,7 +702,7 @@ function Component() {
                       </div>
                     </>
                   )}
-                  
+
                   {chapter === 3 && (
                     <>
                       <CodeBlock
@@ -629,11 +721,13 @@ function Component() {
                       />
                     </>
                   )}
-                  
+
                   {chapter === 4 && (
                     <>
-                      <div className="bg-slate-800/50 border border-slate-600 rounded-lg p-4">
-                        <h4 className="font-semibold mb-3">Legacy Appreciation</h4>
+                      <div className="rounded-lg border border-slate-600 bg-slate-800/50 p-4">
+                        <h4 className="mb-3 font-semibold">
+                          Legacy Appreciation
+                        </h4>
                         <CodeBlock
                           code={`// Classic Redux connect() HOC
 import { connect } from 'react-redux';
@@ -655,8 +749,9 @@ export default connect(
                           language="jsx"
                           defaultExpanded={true}
                         />
-                        <div className="text-sm text-slate-400 mt-3">
-                          Respect the craftsmanship while understanding modern alternatives.
+                        <div className="mt-3 text-sm text-slate-400">
+                          Respect the craftsmanship while understanding modern
+                          alternatives.
                         </div>
                       </div>
                     </>
@@ -664,24 +759,38 @@ export default connect(
                 </div>
 
                 {/* Demo metrics */}
-                <div className="mt-8 pt-6 border-t border-slate-700">
-                  <h4 className="font-semibold mb-3">Demo Metrics</h4>
+                <div className="mt-8 border-t border-slate-700 pt-6">
+                  <h4 className="mb-3 font-semibold">Demo Metrics</h4>
                   <div className="grid grid-cols-2 gap-4">
-                    <div className="bg-slate-800/30 rounded-lg p-3">
-                      <div className="text-sm text-slate-400">Total Renders</div>
-                      <div className="text-2xl font-mono">{demoMetrics.totalRenders}</div>
+                    <div className="rounded-lg bg-slate-800/30 p-3">
+                      <div className="text-sm text-slate-400">
+                        Total Renders
+                      </div>
+                      <div className="font-mono text-2xl">
+                        {demoMetrics.totalRenders}
+                      </div>
                     </div>
-                    <div className="bg-slate-800/30 rounded-lg p-3">
+                    <div className="rounded-lg bg-slate-800/30 p-3">
                       <div className="text-sm text-slate-400">Bug Count</div>
-                      <div className="text-2xl font-mono text-red-400">{demoMetrics.bugCount}</div>
+                      <div className="font-mono text-2xl text-red-400">
+                        {demoMetrics.bugCount}
+                      </div>
                     </div>
-                    <div className="bg-slate-800/30 rounded-lg p-3">
-                      <div className="text-sm text-slate-400">Wrapper Depth</div>
-                      <div className="text-2xl font-mono text-cyan-400">{car.wrappers.length}</div>
+                    <div className="rounded-lg bg-slate-800/30 p-3">
+                      <div className="text-sm text-slate-400">
+                        Wrapper Depth
+                      </div>
+                      <div className="font-mono text-2xl text-cyan-400">
+                        {car.wrappers.length}
+                      </div>
                     </div>
-                    <div className="bg-slate-800/30 rounded-lg p-3">
-                      <div className="text-sm text-slate-400">Installed Hooks</div>
-                      <div className="text-2xl font-mono text-fuchsia-400">{car.installedHooks.length}</div>
+                    <div className="rounded-lg bg-slate-800/30 p-3">
+                      <div className="text-sm text-slate-400">
+                        Installed Hooks
+                      </div>
+                      <div className="font-mono text-2xl text-fuchsia-400">
+                        {car.installedHooks.length}
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -691,18 +800,18 @@ export default connect(
         </div>
 
         {/* Navigation */}
-        <nav className="flex flex-col sm:flex-row items-center justify-between gap-4 mt-12 pt-6 border-t border-slate-800">
+        <nav className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-slate-800 pt-6 sm:flex-row">
           <button
             onClick={() => setChapter(Math.max(0, chapter - 1))}
             disabled={chapter === 0}
-            className="flex items-center gap-2 px-6 py-3 bg-slate-800 text-slate-300 rounded-lg hover:bg-slate-700 disabled:opacity-30 disabled:cursor-not-allowed transition-colors w-full sm:w-auto justify-center"
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-slate-800 px-6 py-3 text-slate-300 transition-colors hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-30 sm:w-auto"
           >
-            <ChevronLeft className="w-4 h-4" />
+            <ChevronLeft className="h-4 w-4" />
             Previous Chapter
           </button>
-          
+
           <div className="flex items-center gap-4">
-            <div className="hidden sm:block text-sm text-slate-500">
+            <div className="hidden text-sm text-slate-500 sm:block">
               Progress: {Math.round(((chapter + 1) / chapters.length) * 100)}%
             </div>
             <div className="flex gap-1">
@@ -710,20 +819,22 @@ export default connect(
                 <button
                   key={idx}
                   onClick={() => setChapter(idx)}
-                  className={`w-3 h-3 rounded-full transition-all ${idx === chapter ? 'bg-cyan-500' : 'bg-slate-700 hover:bg-slate-600'}`}
+                  className={`h-3 w-3 rounded-full transition-all ${idx === chapter ? "bg-cyan-500" : "bg-slate-700 hover:bg-slate-600"}`}
                   aria-label={`Go to chapter ${idx + 1}`}
                 />
               ))}
             </div>
           </div>
-          
+
           <button
-            onClick={() => setChapter(Math.min(chapters.length - 1, chapter + 1))}
+            onClick={() =>
+              setChapter(Math.min(chapters.length - 1, chapter + 1))
+            }
             disabled={chapter === chapters.length - 1}
-            className="flex items-center gap-2 px-6 py-3 bg-cyan-900 text-cyan-100 rounded-lg hover:bg-cyan-800 disabled:opacity-30 disabled:cursor-not-allowed transition-colors w-full sm:w-auto justify-center"
+            className="flex w-full items-center justify-center gap-2 rounded-lg bg-cyan-900 px-6 py-3 text-cyan-100 transition-colors hover:bg-cyan-800 disabled:cursor-not-allowed disabled:opacity-30 sm:w-auto"
           >
             Next Chapter
-            <ChevronRight className="w-4 h-4" />
+            <ChevronRight className="h-4 w-4" />
           </button>
         </nav>
       </main>
