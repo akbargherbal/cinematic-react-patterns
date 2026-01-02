@@ -1,17 +1,18 @@
-import React, { useState, useEffect, useMemo, useCallback, memo } from "react";
+import React, { useState, useEffect, memo } from "react";
 import {
   Brain,
   SkipForward,
   Zap,
   Cpu,
-  Timer,
   RefreshCw,
-  ChevronLeft,
-  ChevronRight,
   Shield,
   Target,
 } from "lucide-react";
 import { CodeBlock } from "@/components/common/CodeBlock";
+import { ModuleHeader } from "@/components/common/ModuleHeader";
+import { ModuleLayout } from "@/components/common/ModuleLayout";
+import { ChapterNavigation } from "@/components/common/ChapterNavigation";
+import { CodeComparison } from "@/components/common/CodeComparison";
 import { useAutoAnimate } from "@formkit/auto-animate/react";
 
 interface Chapter {
@@ -233,291 +234,221 @@ function arePropsEqual(prevProps, nextProps) {
 const OptimizedComponent = memo(CombatSequence, arePropsEqual);`;
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 font-sans text-slate-300">
-      {/* Header */}
-      <header className="sticky top-0 z-10 border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm">
-        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
-            <div className="flex items-center gap-3">
-              <Brain className="h-8 w-8 text-cyan-400" />
-              <div>
-                <h1 className="text-xl font-bold tracking-tight sm:text-2xl">
-                  Edge of Tomorrow
-                </h1>
-                <p className="text-sm font-medium text-cyan-300">
-                  React.memo Optimization
-                </p>
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-300">
+      <ModuleHeader
+        icon={Brain}
+        title="Edge of Tomorrow"
+        subtitle="Major William Cage • 2014"
+        concept="React.memo Optimization"
+        themeColor="cyan"
+      />
+
+      <ModuleLayout className="p-4"
+        sidebar={
+          <div className="sticky top-24 space-y-6">
+            {/* Demo header */}
+            <div className="rounded-xl border border-slate-700 bg-slate-900 p-5">
+              <h3 className="mb-3 flex items-center gap-2 text-lg font-bold text-white">
+                <Zap className="h-5 w-5 text-cyan-400" />
+                Live Optimization Drill
+              </h3>
+              <p className="mb-4 text-sm text-slate-400">
+                {chapter === 0 &&
+                  "Trigger parent re-renders to see the relentless loop"}
+                {chapter === 1 &&
+                  "Watch energy deplete with brute-force re-renders"}
+                {chapter === 2 &&
+                  "Toggle between memoized and non-memoized components"}
+                {chapter === 3 && "Compare effort vs memory approaches"}
+                {chapter === 4 &&
+                  "Manage the entire battlefield with strategic memoization"}
+              </p>
+
+              {/* Controls */}
+              <div className="space-y-3">
+                <button
+                  onClick={triggerParentRender}
+                  className="flex w-full items-center justify-center gap-2 rounded-lg bg-cyan-600 px-4 py-3 font-medium text-white transition-colors hover:bg-cyan-700"
+                >
+                  <RefreshCw className="h-4 w-4" />
+                  Force Parent Re-render
+                </button>
+
+                {chapter >= 2 && (
+                  <button
+                    onClick={() => setShowOptimized(!showOptimized)}
+                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-slate-600 bg-slate-800 px-4 py-3 font-medium transition-colors hover:bg-slate-700"
+                  >
+                    <SkipForward className="h-4 w-4" />
+                    {showOptimized ? "Show Brute-Force" : "Show Optimized"}
+                  </button>
+                )}
+
+                <button
+                  onClick={resetDemo}
+                  className="flex w-full items-center justify-center gap-2 rounded-lg border border-red-500/30 bg-slate-800 px-4 py-3 font-medium text-red-300 transition-colors hover:bg-slate-700"
+                >
+                  <RefreshCw className="h-4 w-4" />
+                  Reset Simulation
+                </button>
               </div>
             </div>
-            <p className="text-sm text-slate-400">
-              Sci-Fi • Major William Cage • 2014
-            </p>
-          </div>
-        </div>
-      </header>
 
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
-          {/* Left column - Content */}
-          <div className="space-y-8 lg:col-span-2">
-            {/* Chapter content */}
-            <section className="rounded-xl border border-slate-700 bg-slate-900/50 p-6 backdrop-blur-sm">
-              <div className="mb-4 flex items-center justify-between">
-                <h2 className="text-2xl font-bold text-white">
-                  {currentChapter.title}
-                </h2>
-                <span className="rounded-full bg-slate-800 px-3 py-1 font-mono text-sm">
-                  Chapter {chapter + 1} of 5
-                </span>
-              </div>
-              <div className="prose prose-invert max-w-none">
-                <p className="text-lg leading-relaxed text-slate-300">
-                  {currentChapter.content}
-                </p>
-              </div>
-            </section>
+            {/* Metrics dashboard */}
+            <div className="rounded-xl border border-slate-700 bg-slate-900 p-5">
+              <h4 className="mb-4 flex items-center gap-2 font-bold text-white">
+                <Cpu className="h-4 w-4 text-cyan-400" />
+                Battlefield Diagnostics
+              </h4>
 
-            {/* Code examples */}
-            <section className="space-y-6">
-              <h3 className="flex items-center gap-2 text-xl font-bold text-white">
-                <CodeBlock className="h-5 w-5" />
-                Tactical Code Analysis
-              </h3>
-
-              <CodeBlock
-                code={brokenCode}
-                variant="error"
-                title="// ❌ The Brute-Force Loop"
-                language="jsx"
-                defaultExpanded={chapter <= 1}
-              />
-
-              <CodeBlock
-                code={fixedCode}
-                variant="success"
-                title="// ✅ The Optimized Loop"
-                language="jsx"
-                defaultExpanded={chapter >= 2}
-              />
-
-              {chapter >= 3 && (
-                <CodeBlock
-                  code={shallowComparisonCode}
-                  variant="default"
-                  title="// 🔍 Shallow Comparison Mechanics"
-                  language="jsx"
-                  defaultExpanded={true}
-                />
-              )}
-            </section>
-          </div>
-
-          {/* Right column - Interactive demo */}
-          <div className="lg:col-span-1">
-            <div className="sticky top-24 space-y-6">
-              {/* Demo header */}
-              <div className="rounded-xl border border-slate-700 bg-slate-900 p-5">
-                <h3 className="mb-3 flex items-center gap-2 text-lg font-bold text-white">
-                  <Zap className="h-5 w-5 text-cyan-400" />
-                  Live Optimization Drill
-                </h3>
-                <p className="mb-4 text-sm text-slate-400">
-                  {chapter === 0 &&
-                    "Trigger parent re-renders to see the relentless loop"}
-                  {chapter === 1 &&
-                    "Watch energy deplete with brute-force re-renders"}
-                  {chapter === 2 &&
-                    "Toggle between memoized and non-memoized components"}
-                  {chapter === 3 && "Compare effort vs memory approaches"}
-                  {chapter === 4 &&
-                    "Manage the entire battlefield with strategic memoization"}
-                </p>
-
-                {/* Controls */}
-                <div className="space-y-3">
-                  <button
-                    onClick={triggerParentRender}
-                    className="flex w-full items-center justify-center gap-2 rounded-lg bg-cyan-600 px-4 py-3 font-medium text-white transition-colors hover:bg-cyan-700"
-                  >
-                    <RefreshCw className="h-4 w-4" />
-                    Force Parent Re-render
-                  </button>
-
-                  {chapter >= 2 && (
-                    <button
-                      onClick={() => setShowOptimized(!showOptimized)}
-                      className="flex w-full items-center justify-center gap-2 rounded-lg border border-slate-600 bg-slate-800 px-4 py-3 font-medium transition-colors hover:bg-slate-700"
-                    >
-                      <SkipForward className="h-4 w-4" />
-                      {showOptimized ? "Show Brute-Force" : "Show Optimized"}
-                    </button>
-                  )}
-
-                  <button
-                    onClick={resetDemo}
-                    className="flex w-full items-center justify-center gap-2 rounded-lg border border-red-500/30 bg-slate-800 px-4 py-3 font-medium text-red-300 transition-colors hover:bg-slate-700"
-                  >
-                    <RefreshCw className="h-4 w-4" />
-                    Reset Simulation
-                  </button>
+              <div className="space-y-4" ref={animationParent}>
+                <div>
+                  <div className="mb-1 flex justify-between text-sm">
+                    <span className="text-slate-400">Parent Render Cycles</span>
+                    <span className="font-mono">{parentRenderCount}</span>
+                  </div>
+                  <div className="h-2 overflow-hidden rounded-full bg-slate-800">
+                    <div
+                      className="h-full bg-cyan-500 transition-all duration-300"
+                      style={{
+                        width: `${Math.min(parentRenderCount * 2, 100)}%`,
+                      }}
+                    />
+                  </div>
                 </div>
-              </div>
 
-              {/* Metrics dashboard */}
-              <div className="rounded-xl border border-slate-700 bg-slate-900 p-5">
-                <h4 className="mb-4 flex items-center gap-2 font-bold text-white">
-                  <Cpu className="h-4 w-4 text-cyan-400" />
-                  Battlefield Diagnostics
-                </h4>
-
-                <div className="space-y-4" ref={animationParent}>
+                {chapter >= 1 && (
                   <div>
                     <div className="mb-1 flex justify-between text-sm">
-                      <span className="text-slate-400">
-                        Parent Render Cycles
-                      </span>
-                      <span className="font-mono">{parentRenderCount}</span>
+                      <span className="text-slate-400">Energy Reserve</span>
+                      <span className="font-mono">{Math.round(energy)}%</span>
                     </div>
                     <div className="h-2 overflow-hidden rounded-full bg-slate-800">
                       <div
-                        className="h-full bg-cyan-500 transition-all duration-300"
-                        style={{
-                          width: `${Math.min(parentRenderCount * 2, 100)}%`,
-                        }}
+                        className={`h-full transition-all duration-300 ${energy > 30 ? "bg-emerald-500" : "bg-red-500"}`}
+                        style={{ width: `${energy}%` }}
                       />
                     </div>
                   </div>
+                )}
 
-                  {chapter >= 1 && (
-                    <div>
-                      <div className="mb-1 flex justify-between text-sm">
-                        <span className="text-slate-400">Energy Reserve</span>
-                        <span className="font-mono">{Math.round(energy)}%</span>
+                {chapter >= 2 && (
+                  <div className="grid grid-cols-2 gap-4 border-t border-slate-800 pt-2">
+                    <div className="rounded-lg bg-red-950/20 p-3 text-center">
+                      <div className="mb-1 text-xs text-red-400">
+                        Brute Force
                       </div>
-                      <div className="h-2 overflow-hidden rounded-full bg-slate-800">
-                        <div
-                          className={`h-full transition-all duration-300 ${energy > 30 ? "bg-emerald-500" : "bg-red-500"}`}
-                          style={{ width: `${energy}%` }}
-                        />
+                      <div className="font-mono text-2xl font-bold text-red-300">
+                        {bruteForceRenders}
                       </div>
+                      <div className="text-xs text-red-400/70">renders</div>
                     </div>
-                  )}
-
-                  {chapter >= 2 && (
-                    <div className="grid grid-cols-2 gap-4 border-t border-slate-800 pt-2">
-                      <div className="rounded-lg bg-red-950/20 p-3 text-center">
-                        <div className="mb-1 text-xs text-red-400">
-                          Brute Force
-                        </div>
-                        <div className="font-mono text-2xl font-bold text-red-300">
-                          {bruteForceRenders}
-                        </div>
-                        <div className="text-xs text-red-400/70">renders</div>
+                    <div className="rounded-lg bg-emerald-950/20 p-3 text-center">
+                      <div className="mb-1 text-xs text-emerald-400">
+                        Memoized
                       </div>
-                      <div className="rounded-lg bg-emerald-950/20 p-3 text-center">
-                        <div className="mb-1 text-xs text-emerald-400">
-                          Memoized
-                        </div>
-                        <div className="font-mono text-2xl font-bold text-emerald-300">
-                          {memoizedRenders}
-                        </div>
-                        <div className="text-xs text-emerald-400/70">
-                          renders
-                        </div>
+                      <div className="font-mono text-2xl font-bold text-emerald-300">
+                        {memoizedRenders}
                       </div>
+                      <div className="text-xs text-emerald-400/70">renders</div>
                     </div>
-                  )}
-
-                  {chapter >= 3 && executionTime > 0 && (
-                    <div className="border-t border-slate-800 pt-2">
-                      <div className="flex justify-between text-sm">
-                        <span className="text-slate-400">
-                          Total Computation Time
-                        </span>
-                        <span className="font-mono text-cyan-300">
-                          {executionTime.toFixed(2)}ms
-                        </span>
-                      </div>
-                    </div>
-                  )}
-                </div>
-              </div>
-
-              {/* Component visualization */}
-              {chapter >= 4 && (
-                <div className="rounded-xl border border-slate-700 bg-slate-900 p-5">
-                  <h4 className="mb-4 flex items-center gap-2 font-bold text-white">
-                    <Target className="h-4 w-4 text-cyan-400" />
-                    Battlefield Sectors
-                  </h4>
-
-                  <div className="grid grid-cols-2 gap-3">
-                    {Object.entries(sectorProps).map(([sector, value]) => (
-                      <div key={sector} className="space-y-2">
-                        {showOptimized ? (
-                          <MemoizedComponent id={sector} value={value} />
-                        ) : (
-                          <BruteForceComponent id={sector} value={value} />
-                        )}
-                        <button
-                          onClick={() => changeSectorProps(sector)}
-                          className="w-full rounded border border-slate-600 bg-slate-800 px-3 py-1.5 text-xs transition-colors hover:bg-slate-700"
-                        >
-                          Change {sector.toUpperCase()} Props
-                        </button>
-                      </div>
-                    ))}
                   </div>
-                  <p className="mt-3 text-center text-xs text-slate-500">
-                    {showOptimized
-                      ? "Memoized: Only changed sectors re-render"
-                      : "Brute-force: All sectors re-render every time"}
-                  </p>
-                </div>
-              )}
+                )}
+
+                {chapter >= 3 && executionTime > 0 && (
+                  <div className="border-t border-slate-800 pt-2">
+                    <div className="flex justify-between text-sm">
+                      <span className="text-slate-400">
+                        Total Computation Time
+                      </span>
+                      <span className="font-mono text-cyan-300">
+                        {executionTime.toFixed(2)}ms
+                      </span>
+                    </div>
+                  </div>
+                )}
+              </div>
             </div>
+
+            {/* Component visualization */}
+            {chapter >= 4 && (
+              <div className="rounded-xl border border-slate-700 bg-slate-900 p-5">
+                <h4 className="mb-4 flex items-center gap-2 font-bold text-white">
+                  <Target className="h-4 w-4 text-cyan-400" />
+                  Battlefield Sectors
+                </h4>
+
+                <div className="grid grid-cols-2 gap-3">
+                  {Object.entries(sectorProps).map(([sector, value]) => (
+                    <div key={sector} className="space-y-2">
+                      {showOptimized ? (
+                        <MemoizedComponent id={sector} value={value} />
+                      ) : (
+                        <BruteForceComponent id={sector} value={value} />
+                      )}
+                      <button
+                        onClick={() => changeSectorProps(sector)}
+                        className="w-full rounded border border-slate-600 bg-slate-800 px-3 py-1.5 text-xs transition-colors hover:bg-slate-700"
+                      >
+                        Change {sector.toUpperCase()} Props
+                      </button>
+                    </div>
+                  ))}
+                </div>
+                <p className="mt-3 text-center text-xs text-slate-500">
+                  {showOptimized
+                    ? "Memoized: Only changed sectors re-render"
+                    : "Brute-force: All sectors re-render every time"}
+                </p>
+              </div>
+            )}
           </div>
+        }
+      >
+        <div className="prose prose-invert max-w-none mb-8">
+          <h2 className="text-2xl font-bold text-white mb-4">
+            {currentChapter.title}
+          </h2>
+          <p className="text-lg leading-relaxed text-slate-300">
+            {currentChapter.content}
+          </p>
         </div>
 
-        {/* Chapter navigation */}
-        <nav className="mt-12 flex items-center justify-between border-t border-slate-800 pt-6">
-          <button
-            onClick={() => setChapter(Math.max(0, chapter - 1))}
-            disabled={chapter === 0}
-            className="flex items-center gap-2 rounded-lg bg-slate-800 px-5 py-3 font-medium text-white transition-colors hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-slate-800"
-          >
-            <ChevronLeft className="h-5 w-5" />
-            Previous Chapter
-          </button>
+        <section className="space-y-6 mb-8">
+          <h3 className="flex items-center gap-2 text-xl font-bold text-white">
+            <Cpu className="h-5 w-5" />
+            Tactical Code Analysis
+          </h3>
 
-          <div className="flex items-center gap-4">
-            <div className="flex gap-1">
-              {chapters.map((_, idx) => (
-                <button
-                  key={idx}
-                  onClick={() => setChapter(idx)}
-                  className={`h-3 w-3 rounded-full transition-all ${idx === chapter ? "bg-cyan-500" : "bg-slate-700 hover:bg-slate-600"}`}
-                  aria-label={`Go to chapter ${idx + 1}`}
-                />
-              ))}
-            </div>
-            <span className="font-mono text-sm text-slate-400">
-              {chapter + 1} / {chapters.length}
-            </span>
-          </div>
+          <CodeComparison
+            badCode={brokenCode}
+            goodCode={fixedCode}
+            language="jsx"
+            themeColor="cyan"
+            badLabel="❌ Brute-Force Loop"
+            goodLabel="✅ Optimized Loop"
+            badExplanation="Re-runs expensive logic on every render, regardless of props."
+            goodExplanation="Memoizes the component to skip renders when props haven't changed."
+          />
 
-          <button
-            onClick={() =>
-              setChapter(Math.min(chapters.length - 1, chapter + 1))
-            }
-            disabled={chapter === chapters.length - 1}
-            className="flex items-center gap-2 rounded-lg bg-cyan-600 px-5 py-3 font-medium text-white transition-colors hover:bg-cyan-700 disabled:cursor-not-allowed disabled:opacity-30 disabled:hover:bg-cyan-600"
-          >
-            Next Chapter
-            <ChevronRight className="h-5 w-5" />
-          </button>
-        </nav>
-      </main>
+          {chapter >= 3 && (
+            <CodeBlock
+              code={shallowComparisonCode}
+              variant="default"
+              title="// 🔍 Shallow Comparison Mechanics"
+              language="jsx"
+              defaultExpanded={true}
+            />
+          )}
+        </section>
+
+        <ChapterNavigation
+          currentChapter={chapter}
+          totalChapters={chapters.length}
+          onChapterChange={setChapter}
+          themeColor="cyan"
+        />
+      </ModuleLayout>
     </div>
   );
 }
