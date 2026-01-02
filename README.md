@@ -10,7 +10,7 @@ An interactive educational platform that transforms complex React concepts into 
 
 **The Philosophy:** Abstract programming concepts become concrete and memorable when taught through stories we already know and love. Why memorize useEffect dependency rules when you can learn them from Neo dodging bullets in The Matrix?
 
-## 🏗️ Architecture
+## 🗂️ Architecture
 
 ### Switchboard Pattern: JSON-Driven Registry
 
@@ -380,8 +380,8 @@ src/
 1. **Choose your fiction source**: Select a story that naturally maps to the React concept
 2. **Identify the metaphor**: How does the story teach the technical pattern?
 3. **Create component directory**: `src/modules/[module-id]/index.tsx`
-4. **Build the component**: Use standardized components for structure (see below)
-5. **Add JSON entry**: Register in `moduleRegistry.json` with theme color
+4. **Build the component**: Create interactive demo with code examples
+5. **Add JSON entry**: Register in `moduleRegistry.json`
 6. **Map icon** (if new): Add to `iconMap` in `moduleRegistry.ts`
 7. **Test and refine**: Ensure the metaphor is clear and memorable
 
@@ -403,93 +403,43 @@ src/
     "textClass": "text-slate-300", // Module text color
     "fontClass": "font-sans" // Typography
   },
-  "themeConfig": {
-    "primaryColor": "cyan" // Theme color: cyan, amber, purple, emerald, red, blue
-  },
   "enabled": true // Visibility toggle
 }
 ```
 
 ### Module Component Structure
 
-Modules should use **standardized components** for consistent structure and UX. See `/src/components/common/Quick_Start_Guide.md` for full documentation.
+For the current module structure and best practices, see the template at `/src/modules/_template/index.tsx`.
 
-```tsx
-// src/modules/your-module-id/index.tsx
-import { useState } from "react";
-import { ModuleHeader } from "@/components/common/ModuleHeader";
-import { ModuleLayout } from "@/components/common/ModuleLayout";
-import { ChapterNavigation } from "@/components/common/ChapterNavigation";
-import { CodeComparison } from "@/components/common/CodeComparison";
-import { CodeBlock } from "@/components/common/CodeBlock";
+The template demonstrates:
+- Standardized header with ModuleHeader component
+- Responsive layout with ModuleLayout component  
+- Chapter-based navigation with ChapterNavigation component
+- Code comparison patterns with CodeComparison component
 
-export default function YourModule() {
-  const [chapter, setChapter] = useState(0);
+### Available Third-Party Libraries
 
-  return (
-    <div className="min-h-screen bg-slate-950 text-slate-300">
-      {/* Standardized header */}
-      <ModuleHeader
-        icon={YourIcon}
-        title="Fiction Work Title"
-        subtitle="Character, Context, Year"
-        concept="React Concept Name"
-        themeColor="cyan"
-      />
+The platform includes several pre-installed libraries available for use in all modules:
 
-      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
-        {/* Standardized 8-4 grid layout */}
-        <ModuleLayout
-          sidebar={
-            <div className="sticky top-24">
-              {/* Sidebar content: metrics, reference, controls */}
-            </div>
-          }
-        >
-          {/* Main content: narrative, demos, examples */}
-          <section>
-            <h2>Chapter Title</h2>
-            <p>Story-driven explanation...</p>
-          </section>
+#### Animation
+- **@formkit/auto-animate**
+  - Seamless DOM animations for list operations, conditional rendering
+  - See [Animation Integration](#-animation-integration) section for usage
+  - Documentation: [FormKit Auto-Animate](https://auto-animate.formkit.com/)
 
-          <section>
-            <h3>Interactive Demo</h3>
-            {/* Your interactive demo components */}
-          </section>
+#### Error Handling
+- **react-error-boundary**
+  - Declarative error boundaries for React components
+  - Graceful error recovery and fallback UI
+  - Documentation: [react-error-boundary](https://github.com/bvaughn/react-error-boundary)
 
-          {/* Code comparisons (bad vs good patterns) */}
-          <CodeComparison
-            badCode="// Anti-pattern example"
-            goodCode="// Correct pattern example"
-            language="tsx"
-            themeColor="cyan"
-            badLabel="❌ Problematic"
-            goodLabel="✅ Better"
-          />
+#### Icons
+- **lucide-react**
+  - Extensive icon library for UI elements
+  - See [Available Icons](#available-icons) section for mapped icons
+  - Documentation: [Lucide Icons](https://lucide.dev/)
 
-          {/* Single code examples */}
-          <CodeBlock code="// Example code" language="tsx" />
-
-          {/* Standardized navigation */}
-          <ChapterNavigation
-            currentChapter={chapter}
-            totalChapters={5}
-            onChapterChange={setChapter}
-            themeColor="cyan"
-          />
-        </ModuleLayout>
-      </main>
-    </div>
-  );
-}
-```
-
-**Benefits of standardized components:**
-- Consistent header, layout, and navigation across all modules
-- Mobile-optimized code comparisons (toggle vs side-by-side)
-- Automatic keyboard navigation and accessibility
-- Theme-aware styling with minimal configuration
-- See component documentation for full API details
+All libraries are already installed—no additional setup required.
 
 ### Module Query Utilities
 
@@ -551,7 +501,7 @@ MIT License - feel free to use this for educational purposes.
 - Designed for developers who learn through metaphor and narrative
 - Switchboard architecture for scalable module management
 
-## 📧 Contact & Support
+## 🔧 Contact & Support
 
 - **Repository:** [github.com/akbargherbal/cinematic-react-patterns](https://github.com/akbargherbal/cinematic-react-patterns)
 - **Issues:** [Open an issue](https://github.com/akbargherbal/cinematic-react-patterns/issues)
