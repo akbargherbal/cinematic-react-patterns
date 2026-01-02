@@ -1,14 +1,18 @@
-import { useState, useEffect, lazy, Suspense, ComponentType } from "react";
+import { useState, ComponentType } from "react";
 import {
   Brain,
   Code,
   Book,
   Wand,
-  Scroll,
   Zap,
   Loader,
   AlertTriangle,
+  CheckCircle,
 } from "lucide-react";
+import { ModuleHeader } from "@/components/common/ModuleHeader";
+import { ModuleLayout } from "@/components/common/ModuleLayout";
+import { ChapterNavigation } from "@/components/common/ChapterNavigation";
+import { CodeComparison } from "@/components/common/CodeComparison";
 import { CodeBlock } from "@/components/common/CodeBlock";
 
 interface Chapter {
@@ -29,9 +33,8 @@ interface LazyComponent {
 export default function CodeSplittingWithHorcruxes(): JSX.Element {
   const [chapter, setChapter] = useState<number>(0);
   const [monolithicSize, setMonolithicSize] = useState<number>(3500);
-  const [splitMode, setSplitMode] = useState<boolean>(false);
   const [loadedComponents, setLoadedComponents] = useState<Set<string>>(
-    new Set(),
+    new Set()
   );
   const [activeHorcrux, setActiveHorcrux] = useState<string | null>(null);
   const [simulateCrash, setSimulateCrash] = useState<boolean>(false);
@@ -95,7 +98,7 @@ export default function CodeSplittingWithHorcruxes(): JSX.Element {
     setTimeout(() => {
       setLoadedComponents((prev) => new Set([...prev, name]));
       setLazyComponents((prev) =>
-        prev.map((h) => (h.name === name ? { ...h, loaded: true } : h)),
+        prev.map((h) => (h.name === name ? { ...h, loaded: true } : h))
       );
       setActiveHorcrux(null);
     }, networkDelay);
@@ -108,7 +111,7 @@ export default function CodeSplittingWithHorcruxes(): JSX.Element {
     setActiveHorcrux(null);
   };
 
-  // Code examples as template literals
+  // Code examples
   const monolithicCode = `// ❌ Monolithic Anti-Pattern
 import DiaryComponent from './diary';
 import RingComponent from './ring';
@@ -188,312 +191,311 @@ const routes = [
     element: lazy(() => import('./diary'))
   },
   {
-    path: '/ring', 
+    path: '/ring',
     element: lazy(() => import('./ring'))
   }
 ];`;
 
   // Calculate metrics
-  const totalSplitSize = lazyComponents.reduce((sum, h) => sum + h.size, 0);
   const loadedSize = lazyComponents
     .filter((h) => loadedComponents.has(h.name))
     .reduce((sum, h) => sum + h.size, 0);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-950 via-slate-900 to-emerald-950/30 p-4 font-serif text-slate-300 md:p-8">
-      <header className="sticky top-0 z-10 mb-8 border-b border-emerald-500/20 bg-slate-950/80 backdrop-blur-sm">
-        <div className="mx-auto max-w-7xl px-4 py-4 md:px-6 md:py-6">
-          <div className="mb-2 flex flex-wrap items-center justify-between gap-4 md:gap-6">
-            <div className="flex items-center gap-2 md:gap-3">
-              <Brain className="h-6 w-6 text-emerald-400 md:h-8 md:w-8" />
-              <h1 className="text-xl font-bold md:text-2xl lg:text-3xl">
-                Harry Potter series
-              </h1>
-            </div>
-            <p className="text-xs text-slate-400 md:text-sm lg:text-base">
-              Fiction • Voldemort's Horcruxes • 1997-2007
-            </p>
-          </div>
-          <p className="text-sm font-medium text-emerald-400 md:text-base lg:text-lg">
-            Code Splitting and Lazy Loading
-          </p>
-        </div>
-      </header>
+    <div className="min-h-screen bg-slate-950 font-serif text-slate-300">
+      <ModuleHeader
+        icon={Brain}
+        title="Harry Potter series"
+        subtitle="Fiction • Voldemort's Horcruxes • 1997-2007"
+        concept="Code Splitting and Lazy Loading"
+        themeColor="emerald"
+      />
 
-      <main className="mx-auto grid max-w-7xl grid-cols-1 gap-6 md:gap-8 lg:grid-cols-12">
-        {/* Sidebar - Metaphor Registry */}
-        <aside className="space-y-6 lg:col-span-3">
-          <div className="rounded-lg border border-emerald-500/20 bg-slate-900/50 p-4">
-            <h3 className="mb-3 flex items-center gap-2 text-lg font-bold text-emerald-300">
-              <Book className="h-5 w-5" />
-              Metaphor Registry
-            </h3>
-            <ul className="space-y-3 text-sm">
-              <li className="flex items-start gap-2">
-                <div className="mt-1.5 h-2 w-2 rounded-full bg-red-500"></div>
-                <div>
-                  <span className="font-medium">Monolithic Soul</span>
-                  <p className="text-xs text-slate-400">
-                    Single JavaScript bundle
-                  </p>
-                </div>
-              </li>
-              <li className="flex items-start gap-2">
-                <div className="mt-1.5 h-2 w-2 rounded-full bg-emerald-500"></div>
-                <div>
-                  <span className="font-medium">Horcrux</span>
-                  <p className="text-xs text-slate-400">Code-split chunk</p>
-                </div>
-              </li>
-              <li className="flex items-start gap-2">
-                <div className="mt-1.5 h-2 w-2 rounded-full bg-amber-500"></div>
-                <div>
-                  <span className="font-medium">Pensieve</span>
-                  <p className="text-xs text-slate-400">Suspense fallback UI</p>
-                </div>
-              </li>
-              <li className="flex items-start gap-2">
-                <div className="mt-1.5 h-2 w-2 rounded-full bg-purple-500"></div>
-                <div>
-                  <span className="font-medium">Hunt</span>
-                  <p className="text-xs text-slate-400">
-                    Network request for chunk
-                  </p>
-                </div>
-              </li>
-            </ul>
-          </div>
-
-          {/* Chapter Navigation */}
-          <div className="rounded-lg border border-emerald-500/20 bg-slate-900/50 p-4">
-            <h3 className="mb-3 flex items-center gap-2 text-lg font-bold text-emerald-300">
-              <Scroll className="h-5 w-5" />
-              Chapters
-            </h3>
-            <nav className="space-y-2">
-              {chapters.map((chap, idx) => (
-                <button
-                  key={chap.id}
-                  onClick={() => setChapter(idx)}
-                  className={`w-full rounded p-2 text-left transition-colors ${chapter === idx ? "border border-emerald-500/30 bg-emerald-500/20 text-emerald-300" : "hover:bg-slate-800/50"}`}
-                >
-                  <div className="flex items-center gap-2">
-                    <div
-                      className={`h-2 w-2 rounded-full ${chapter === idx ? "bg-emerald-400" : "bg-slate-600"}`}
-                    ></div>
-                    <span className="text-sm">{chap.title}</span>
+      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+        <ModuleLayout
+          sidebar={
+            <div className="sticky top-24 space-y-6">
+              {/* Metrics Card */}
+              <div className="rounded-xl border border-emerald-500/20 bg-slate-900/60 p-4 backdrop-blur-sm">
+                <h3 className="mb-3 font-bold text-emerald-100">
+                  System Metrics
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-400">Bundle Size</span>
+                    <span className="font-mono text-emerald-300">
+                      {monolithicSize} KB
+                    </span>
                   </div>
-                </button>
-              ))}
-            </nav>
-          </div>
-        </aside>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-400">Loaded</span>
+                    <span className="font-mono text-emerald-300">
+                      {loadedSize} KB
+                    </span>
+                  </div>
+                  <div className="flex justify-between text-sm">
+                    <span className="text-slate-400">Savings</span>
+                    <span className="font-mono text-emerald-300">
+                      {Math.round((1 - loadedSize / monolithicSize) * 100)}%
+                    </span>
+                  </div>
+                  <div className="mt-2 h-1.5 w-full rounded-full bg-slate-800">
+                    <div
+                      className="h-1.5 rounded-full bg-emerald-500 transition-all duration-500"
+                      style={{
+                        width: `${(loadedSize / monolithicSize) * 100}%`,
+                      }}
+                    ></div>
+                  </div>
+                </div>
+              </div>
 
-        {/* Main Content */}
-        <div className="space-y-6 md:space-y-8 lg:col-span-9">
-          {/* Chapter Content */}
-          <div className="rounded-xl border border-emerald-500/10 bg-slate-900/30 p-6 backdrop-blur-sm">
-            <h2 className="mb-4 text-2xl font-bold text-emerald-300 md:text-3xl">
-              {currentChapter.title}
-            </h2>
-            <div className="prose prose-invert prose-lg max-w-none">
-              <p className="mb-6 leading-relaxed">{currentChapter.content}</p>
-            </div>
+              {/* Metaphor Registry */}
+              <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-5">
+                <h3 className="mb-4 flex items-center gap-2 text-lg font-bold text-emerald-300">
+                  <Book className="h-5 w-5" />
+                  Metaphor Registry
+                </h3>
+                <ul className="space-y-3 text-sm">
+                  <li className="flex items-start gap-2">
+                    <div className="mt-1.5 h-2 w-2 rounded-full bg-red-500"></div>
+                    <div>
+                      <span className="font-medium">Monolithic Soul</span>
+                      <p className="text-xs text-slate-400">
+                        Single JavaScript bundle
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="mt-1.5 h-2 w-2 rounded-full bg-emerald-500"></div>
+                    <div>
+                      <span className="font-medium">Horcrux</span>
+                      <p className="text-xs text-slate-400">Code-split chunk</p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="mt-1.5 h-2 w-2 rounded-full bg-amber-500"></div>
+                    <div>
+                      <span className="font-medium">Pensieve</span>
+                      <p className="text-xs text-slate-400">
+                        Suspense fallback UI
+                      </p>
+                    </div>
+                  </li>
+                  <li className="flex items-start gap-2">
+                    <div className="mt-1.5 h-2 w-2 rounded-full bg-purple-500"></div>
+                    <div>
+                      <span className="font-medium">Hunt</span>
+                      <p className="text-xs text-slate-400">
+                        Network request for chunk
+                      </p>
+                    </div>
+                  </li>
+                </ul>
+              </div>
 
-            {/* Metrics Bar */}
-            <div className="mb-6 grid grid-cols-2 gap-3 md:grid-cols-4 md:gap-4">
-              <div className="rounded-lg bg-slate-800/50 p-3">
-                <p className="text-xs text-slate-400">Initial Bundle</p>
-                <p className="text-lg font-bold">{monolithicSize} KB</p>
-              </div>
-              <div className="rounded-lg bg-slate-800/50 p-3">
-                <p className="text-xs text-slate-400">Loaded Chunks</p>
-                <p className="text-lg font-bold">{loadedComponents.size} / 6</p>
-              </div>
-              <div className="rounded-lg bg-slate-800/50 p-3">
-                <p className="text-xs text-slate-400">Loaded Size</p>
-                <p className="text-lg font-bold">{loadedSize} KB</p>
-              </div>
-              <div className="rounded-lg bg-slate-800/50 p-3">
-                <p className="text-xs text-slate-400">Savings</p>
-                <p className="text-lg font-bold text-emerald-400">
-                  {Math.round((1 - loadedSize / monolithicSize) * 100)}%
+              {/* Key Insight */}
+              <div className="rounded-xl border border-emerald-500/30 bg-emerald-950/20 p-4">
+                <h4 className="mb-2 flex items-center gap-2 font-bold text-emerald-300">
+                  <CheckCircle className="h-4 w-4" />
+                  Key Insight
+                </h4>
+                <p className="text-sm text-emerald-200/80">
+                  {chapter === 0 &&
+                    "Large bundles create single points of failure and slow initial loads."}
+                  {chapter === 1 &&
+                    "When a monolithic app crashes, the entire user experience is lost."}
+                  {chapter === 2 &&
+                    "Splitting code into chunks (Horcruxes) isolates failures and improves resilience."}
+                  {chapter === 3 &&
+                    "Distributed systems load faster initially but require managing loading states."}
+                  {chapter === 4 &&
+                    "Sequential loading allows for precise control over resource prioritization."}
                 </p>
               </div>
             </div>
+          }
+        >
+          {/* Chapter Content */}
+          <div className="prose prose-invert prose-lg mb-8 max-w-none sm:mb-12">
+            <h2 className="mb-4 text-2xl font-bold text-emerald-300 sm:text-3xl">
+              {currentChapter.title}
+            </h2>
+            <div className="space-y-4 leading-relaxed text-slate-300">
+              <p>{currentChapter.content}</p>
+            </div>
           </div>
 
-          {/* Interactive Demo Area */}
-          <div className="space-y-6">
-            {/* Chapter-specific demos */}
+          {/* Interactive Demo Section */}
+          <section className="mb-8 rounded-xl border border-emerald-500/20 bg-slate-900/40 p-6 backdrop-blur-sm sm:mb-12 sm:p-8">
             {currentChapter.demoKey === "monolithic-bundle" && (
-              <div className="rounded-xl border border-red-500/30 bg-slate-900/50 p-6">
-                <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-red-300">
+              <div className="space-y-6">
+                <h3 className="flex items-center gap-2 text-xl font-bold text-red-300">
                   <AlertTriangle className="h-5 w-5" />
                   Monolithic Bundle: All-or-Nothing
                 </h3>
-                <div className="space-y-4">
-                  <CodeBlock
-                    code={monolithicCode}
-                    variant="error"
-                    title="// ❌ Monolithic Anti-Pattern"
-                    defaultExpanded={true}
-                  />
-                  <div className="flex items-center gap-4">
-                    <button
-                      onClick={() => setMonolithicSize(3500)}
-                      className="rounded-lg bg-red-600 px-4 py-2 text-white transition-colors hover:bg-red-700"
-                    >
-                      Simulate 3.5MB Bundle
-                    </button>
-                    <span className="text-sm text-slate-400">
-                      Initial load: 3500KB • Time-to-Interactive: ~7s
-                    </span>
-                  </div>
+                <CodeBlock
+                  code={monolithicCode}
+                  language="tsx"
+                  title="// ❌ Monolithic Anti-Pattern"
+                  defaultExpanded={true}
+                />
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={() => setMonolithicSize(3500)}
+                    className="rounded-lg bg-red-600 px-4 py-2 text-white transition-colors hover:bg-red-700"
+                  >
+                    Simulate 3.5MB Bundle
+                  </button>
+                  <span className="text-sm text-slate-400">
+                    Initial load: 3500KB • Time-to-Interactive: ~7s
+                  </span>
                 </div>
               </div>
             )}
 
             {currentChapter.demoKey === "crash-demo" && (
-              <div className="rounded-xl border border-red-500/30 bg-slate-900/50 p-6">
-                <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-red-300">
+              <div className="space-y-6">
+                <h3 className="flex items-center gap-2 text-xl font-bold text-red-300">
                   <AlertTriangle className="h-5 w-5" />
                   Single Point of Failure
                 </h3>
-                <div className="space-y-4">
-                  <div className="flex items-center gap-4">
-                    <button
-                      onClick={() => setSimulateCrash(true)}
-                      className="rounded-lg bg-red-600 px-4 py-2 text-white transition-colors hover:bg-red-700"
-                    >
-                      Simulate Bundle Crash
-                    </button>
-                    <button
-                      onClick={() => setSimulateCrash(false)}
-                      className="rounded-lg bg-emerald-600 px-4 py-2 text-white transition-colors hover:bg-emerald-700"
-                    >
-                      Reset
-                    </button>
-                  </div>
-                  {simulateCrash && (
-                    <div className="animate-pulse rounded-lg border border-red-500/50 bg-red-950/30 p-4">
-                      <div className="flex items-center gap-3">
-                        <AlertTriangle className="h-6 w-6 text-red-400" />
-                        <div>
-                          <p className="font-bold text-red-300">
-                            Fatal Bundle Error
-                          </p>
-                          <p className="text-sm text-red-400">
-                            Application crashed: Entire bundle failed to load
-                          </p>
-                        </div>
+                <div className="flex items-center gap-4">
+                  <button
+                    onClick={() => setSimulateCrash(true)}
+                    className="rounded-lg bg-red-600 px-4 py-2 text-white transition-colors hover:bg-red-700"
+                  >
+                    Simulate Bundle Crash
+                  </button>
+                  <button
+                    onClick={() => setSimulateCrash(false)}
+                    className="rounded-lg bg-emerald-600 px-4 py-2 text-white transition-colors hover:bg-emerald-700"
+                  >
+                    Reset
+                  </button>
+                </div>
+                {simulateCrash && (
+                  <div className="animate-pulse rounded-lg border border-red-500/50 bg-red-950/30 p-4">
+                    <div className="flex items-center gap-3">
+                      <AlertTriangle className="h-6 w-6 text-red-400" />
+                      <div>
+                        <p className="font-bold text-red-300">
+                          Fatal Bundle Error
+                        </p>
+                        <p className="text-sm text-red-400">
+                          Application crashed: Entire bundle failed to load
+                        </p>
                       </div>
                     </div>
-                  )}
-                </div>
+                  </div>
+                )}
               </div>
             )}
 
             {currentChapter.demoKey === "lazy-loading" && (
-              <div className="rounded-xl border border-emerald-500/30 bg-slate-900/50 p-6">
-                <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-emerald-300">
-                  <Wand className="h-5 w-5" />
-                  Code Splitting with React.lazy()
-                </h3>
+              <div className="space-y-8">
+                <div>
+                  <h3 className="mb-4 flex items-center gap-2 text-xl font-bold text-emerald-300">
+                    <Wand className="h-5 w-5" />
+                    Code Splitting with React.lazy()
+                  </h3>
+                  <CodeBlock
+                    code={lazyCode}
+                    language="tsx"
+                    title="// ✅ Code Splitting Solution"
+                    defaultExpanded={true}
+                  />
+                </div>
+
+                <CodeComparison
+                  badCode={missingSuspenseCode}
+                  goodCode={correctSuspenseCode}
+                  language="tsx"
+                  themeColor="emerald"
+                  badLabel="❌ Missing Suspense"
+                  goodLabel="✅ With Suspense"
+                  badExplanation="Without Suspense, lazy components will crash the app while loading."
+                  goodExplanation="Suspense provides a fallback UI while the component chunk loads."
+                />
+
                 <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                  <div className="space-y-4">
-                    <CodeBlock
-                      code={lazyCode}
-                      variant="success"
-                      title="// ✅ Code Splitting Solution"
-                      defaultExpanded={true}
-                    />
-                    <CodeBlock
-                      code={missingSuspenseCode}
-                      variant="error"
-                      title="// ❌ Common Mistake: Missing Suspense"
-                    />
-                    <CodeBlock
-                      code={correctSuspenseCode}
-                      variant="success"
-                      title="// ✅ With Suspense Boundary"
-                    />
-                  </div>
-                  <div className="space-y-4">
-                    <div className="rounded-lg bg-slate-800/30 p-4">
-                      <h4 className="mb-3 font-bold text-emerald-300">
-                        Load a Horcrux (Chunk)
-                      </h4>
-                      <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
-                        {lazyComponents.map((horcrux) => (
-                          <button
-                            key={horcrux.name}
-                            onClick={() => loadHorcrux(horcrux.name)}
-                            disabled={horcrux.loaded || activeHorcrux !== null}
-                            className={`flex flex-col items-center justify-center rounded-lg p-3 transition-all ${horcrux.loaded ? "border border-emerald-500/30 bg-emerald-500/20" : "border border-slate-700 bg-slate-800/50 hover:bg-slate-700/50"} disabled:cursor-not-allowed disabled:opacity-30`}
-                          >
-                            {activeHorcrux === horcrux.name ? (
-                              <Loader className="mb-1 h-5 w-5 animate-spin text-amber-400" />
-                            ) : horcrux.loaded ? (
-                              <Zap className="mb-1 h-5 w-5 text-emerald-400" />
-                            ) : (
-                              <Code className="mb-1 h-5 w-5 text-slate-400" />
-                            )}
-                            <span className="text-sm font-medium">
-                              {horcrux.name}
-                            </span>
-                            <span className="text-xs text-slate-400">
-                              {horcrux.size}KB
-                            </span>
-                          </button>
-                        ))}
-                      </div>
-                    </div>
-                    <div className="rounded-lg bg-slate-800/30 p-4">
-                      <div className="mb-3 flex items-center justify-between">
-                        <h4 className="font-bold text-emerald-300">
-                          Network Simulation
-                        </h4>
+                  <div className="rounded-lg bg-slate-800/30 p-4">
+                    <h4 className="mb-3 font-bold text-emerald-300">
+                      Load a Horcrux (Chunk)
+                    </h4>
+                    <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
+                      {lazyComponents.map((horcrux) => (
                         <button
-                          onClick={resetDemo}
-                          className="rounded bg-slate-700 px-3 py-1 text-sm hover:bg-slate-600"
+                          key={horcrux.name}
+                          onClick={() => loadHorcrux(horcrux.name)}
+                          disabled={horcrux.loaded || activeHorcrux !== null}
+                          className={`flex flex-col items-center justify-center rounded-lg p-3 transition-all ${
+                            horcrux.loaded
+                              ? "border border-emerald-500/30 bg-emerald-500/20"
+                              : "border border-slate-700 bg-slate-800/50 hover:bg-slate-700/50"
+                          } disabled:cursor-not-allowed disabled:opacity-30`}
                         >
-                          Reset All
+                          {activeHorcrux === horcrux.name ? (
+                            <Loader className="mb-1 h-5 w-5 animate-spin text-amber-400" />
+                          ) : horcrux.loaded ? (
+                            <Zap className="mb-1 h-5 w-5 text-emerald-400" />
+                          ) : (
+                            <Code className="mb-1 h-5 w-5 text-slate-400" />
+                          )}
+                          <span className="text-sm font-medium">
+                            {horcrux.name}
+                          </span>
+                          <span className="text-xs text-slate-400">
+                            {horcrux.size}KB
+                          </span>
                         </button>
+                      ))}
+                    </div>
+                  </div>
+                  <div className="rounded-lg bg-slate-800/30 p-4">
+                    <div className="mb-3 flex items-center justify-between">
+                      <h4 className="font-bold text-emerald-300">
+                        Network Simulation
+                      </h4>
+                      <button
+                        onClick={resetDemo}
+                        className="rounded bg-slate-700 px-3 py-1 text-sm hover:bg-slate-600"
+                      >
+                        Reset All
+                      </button>
+                    </div>
+                    <div className="space-y-2">
+                      <div className="flex items-center gap-3">
+                        <label className="text-sm">Delay:</label>
+                        <input
+                          type="range"
+                          min="500"
+                          max="3000"
+                          step="100"
+                          value={networkDelay}
+                          onChange={(e) =>
+                            setNetworkDelay(parseInt(e.target.value))
+                          }
+                          className="flex-1"
+                        />
+                        <span className="text-sm">{networkDelay}ms</span>
                       </div>
-                      <div className="space-y-2">
-                        <div className="flex items-center gap-3">
-                          <label className="text-sm">Delay:</label>
-                          <input
-                            type="range"
-                            min="500"
-                            max="3000"
-                            step="100"
-                            value={networkDelay}
-                            onChange={(e) =>
-                              setNetworkDelay(parseInt(e.target.value))
-                            }
-                            className="flex-1"
-                          />
-                          <span className="text-sm">{networkDelay}ms</span>
-                        </div>
-                        {activeHorcrux && (
-                          <div className="rounded border border-amber-500/30 bg-amber-950/20 p-3">
-                            <div className="flex items-center gap-2">
-                              <Loader className="h-4 w-4 animate-spin text-amber-400" />
-                              <span className="text-sm">
-                                Fetching {activeHorcrux} chunk...
-                              </span>
-                            </div>
-                            <div className="mt-2 h-2 w-full rounded-full bg-slate-700">
-                              <div
-                                className="h-2 rounded-full bg-amber-500 transition-all duration-1000"
-                                style={{ width: "100%" }}
-                              ></div>
-                            </div>
+                      {activeHorcrux && (
+                        <div className="rounded border border-amber-500/30 bg-amber-950/20 p-3">
+                          <div className="flex items-center gap-2">
+                            <Loader className="h-4 w-4 animate-spin text-amber-400" />
+                            <span className="text-sm">
+                              Fetching {activeHorcrux} chunk...
+                            </span>
                           </div>
-                        )}
-                      </div>
+                          <div className="mt-2 h-2 w-full rounded-full bg-slate-700">
+                            <div
+                              className="h-2 rounded-full bg-amber-500 transition-all duration-1000"
+                              style={{ width: "100%" }}
+                            ></div>
+                          </div>
+                        </div>
+                      )}
                     </div>
                   </div>
                 </div>
@@ -501,8 +503,8 @@ const routes = [
             )}
 
             {currentChapter.demoKey === "comparison" && (
-              <div className="rounded-xl border border-emerald-500/30 bg-slate-900/50 p-6">
-                <h3 className="mb-4 text-center text-xl font-bold text-emerald-300">
+              <div className="space-y-6">
+                <h3 className="text-center text-xl font-bold text-emerald-300">
                   Monolith vs. Distributed System
                 </h3>
                 <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
@@ -583,138 +585,88 @@ const routes = [
             )}
 
             {currentChapter.demoKey === "sequential-loading" && (
-              <div className="rounded-xl border border-emerald-500/30 bg-slate-900/50 p-6">
-                <h3 className="mb-4 text-xl font-bold text-emerald-300">
+              <div className="space-y-6">
+                <h3 className="text-xl font-bold text-emerald-300">
                   Systematic Component Hunting
                 </h3>
-                <div className="space-y-6">
-                  <CodeBlock
-                    code={chunkConfigCode}
-                    variant="success"
-                    title="// ✅ Optimal Chunk Configuration"
-                    defaultExpanded={true}
-                  />
-                  <div className="rounded-lg bg-slate-800/30 p-4">
-                    <div className="mb-4 flex items-center justify-between">
-                      <h4 className="font-bold text-emerald-300">
-                        Sequential Loading Strategy
-                      </h4>
-                      <div className="text-sm text-slate-400">
-                        Loaded: {loadedComponents.size}/6 • Circuit:{" "}
-                        {5 - loadedComponents.size} remaining
-                      </div>
+                <CodeBlock
+                  code={chunkConfigCode}
+                  language="tsx"
+                  title="// ✅ Optimal Chunk Configuration"
+                  defaultExpanded={true}
+                />
+                <div className="rounded-lg bg-slate-800/30 p-4">
+                  <div className="mb-4 flex items-center justify-between">
+                    <h4 className="font-bold text-emerald-300">
+                      Sequential Loading Strategy
+                    </h4>
+                    <div className="text-sm text-slate-400">
+                      Loaded: {loadedComponents.size}/6 • Circuit:{" "}
+                      {5 - loadedComponents.size} remaining
                     </div>
-                    <div className="space-y-3">
-                      {lazyComponents.map((horcrux) => (
-                        <div
-                          key={horcrux.name}
-                          className={`flex items-center justify-between rounded-lg p-3 transition-all ${horcrux.loaded ? "border border-emerald-500/20 bg-emerald-500/10" : "bg-slate-800/50"}`}
-                        >
-                          <div className="flex items-center gap-3">
-                            {horcrux.loaded ? (
-                              <Zap className="h-5 w-5 text-emerald-400" />
-                            ) : (
-                              <Code className="h-5 w-5 text-slate-500" />
-                            )}
-                            <div>
-                              <p className="font-medium">{horcrux.name}</p>
-                              <p className="text-xs text-slate-400">
-                                {horcrux.size}KB chunk
-                              </p>
-                            </div>
-                          </div>
-                          <div className="flex items-center gap-3">
-                            {horcrux.loaded ? (
-                              <span className="rounded bg-emerald-500/20 px-2 py-1 text-xs text-emerald-300">
-                                Loaded
-                              </span>
-                            ) : (
-                              <button
-                                onClick={() => loadHorcrux(horcrux.name)}
-                                disabled={
-                                  loadedComponents.size >= 5 ||
-                                  activeHorcrux !== null
-                                }
-                                className="rounded bg-emerald-600 px-3 py-1 text-sm text-white hover:bg-emerald-700 disabled:opacity-30"
-                              >
-                                Hunt
-                              </button>
-                            )}
+                  </div>
+                  <div className="space-y-3">
+                    {lazyComponents.map((horcrux) => (
+                      <div
+                        key={horcrux.name}
+                        className={`flex items-center justify-between rounded-lg p-3 transition-all ${
+                          horcrux.loaded
+                            ? "border border-emerald-500/20 bg-emerald-500/10"
+                            : "bg-slate-800/50"
+                        }`}
+                      >
+                        <div className="flex items-center gap-3">
+                          {horcrux.loaded ? (
+                            <Zap className="h-5 w-5 text-emerald-400" />
+                          ) : (
+                            <Code className="h-5 w-5 text-slate-500" />
+                          )}
+                          <div>
+                            <p className="font-medium">{horcrux.name}</p>
+                            <p className="text-xs text-slate-400">
+                              {horcrux.size}KB chunk
+                            </p>
                           </div>
                         </div>
-                      ))}
-                    </div>
-                    <div className="mt-4 border-t border-slate-700 pt-4">
-                      <p className="text-center text-sm text-slate-400">
-                        "We don't go after the main body. We find the pieces.
-                        That's the only way."
-                      </p>
-                    </div>
+                        <div className="flex items-center gap-3">
+                          {horcrux.loaded ? (
+                            <span className="rounded bg-emerald-500/20 px-2 py-1 text-xs text-emerald-300">
+                              Loaded
+                            </span>
+                          ) : (
+                            <button
+                              onClick={() => loadHorcrux(horcrux.name)}
+                              disabled={
+                                loadedComponents.size >= 5 ||
+                                activeHorcrux !== null
+                              }
+                              className="rounded bg-emerald-600 px-3 py-1 text-sm text-white hover:bg-emerald-700 disabled:opacity-30"
+                            >
+                              Hunt
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  <div className="mt-4 border-t border-slate-700 pt-4">
+                    <p className="text-center text-sm text-slate-400">
+                      "We don't go after the main body. We find the pieces.
+                      That's the only way."
+                    </p>
                   </div>
                 </div>
               </div>
             )}
-          </div>
+          </section>
 
-          {/* Navigation */}
-          <nav className="flex flex-col items-center justify-between gap-4 border-t border-slate-800 pt-6 sm:flex-row">
-            <button
-              onClick={() => setChapter(Math.max(0, chapter - 1))}
-              disabled={chapter === 0}
-              className="flex items-center gap-2 rounded-lg bg-slate-800 px-6 py-3 text-white transition-colors hover:bg-slate-700 disabled:cursor-not-allowed disabled:opacity-30"
-            >
-              <svg
-                className="h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M15 19l-7-7 7-7"
-                />
-              </svg>
-              Previous
-            </button>
-            <div className="flex items-center gap-4">
-              <div className="hidden text-sm text-slate-400 sm:block">
-                Chapter {chapter + 1} of {chapters.length}
-              </div>
-              <div className="h-2 w-32 rounded-full bg-slate-800 sm:w-48">
-                <div
-                  className="h-2 rounded-full bg-emerald-500 transition-all duration-300"
-                  style={{
-                    width: `${((chapter + 1) / chapters.length) * 100}%`,
-                  }}
-                ></div>
-              </div>
-            </div>
-            <button
-              onClick={() =>
-                setChapter(Math.min(chapters.length - 1, chapter + 1))
-              }
-              disabled={chapter === chapters.length - 1}
-              className="flex items-center gap-2 rounded-lg bg-emerald-600 px-6 py-3 text-white transition-colors hover:bg-emerald-700 disabled:cursor-not-allowed disabled:opacity-30"
-            >
-              Next
-              <svg
-                className="h-4 w-4"
-                fill="none"
-                stroke="currentColor"
-                viewBox="0 0 24 24"
-              >
-                <path
-                  strokeLinecap="round"
-                  strokeLinejoin="round"
-                  strokeWidth={2}
-                  d="M9 5l7 7-7 7"
-                />
-              </svg>
-            </button>
-          </nav>
-        </div>
+          <ChapterNavigation
+            currentChapter={chapter}
+            totalChapters={chapters.length}
+            onChapterChange={setChapter}
+            themeColor="emerald"
+          />
+        </ModuleLayout>
       </main>
     </div>
   );

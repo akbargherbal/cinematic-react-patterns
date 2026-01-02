@@ -4,10 +4,13 @@ import {
   AlertCircle,
   CheckCircle,
   Play,
-  Pause,
   RefreshCw,
   Theater,
 } from "lucide-react";
+import { ModuleHeader } from "@/components/common/ModuleHeader";
+import { ModuleLayout } from "@/components/common/ModuleLayout";
+import { ChapterNavigation } from "@/components/common/ChapterNavigation";
+import { CodeComparison } from "@/components/common/CodeComparison";
 import { CodeBlock } from "@/components/common/CodeBlock";
 
 interface Chapter {
@@ -19,7 +22,6 @@ interface Chapter {
 
 export default function SuspenseWaitingForGodot(): JSX.Element {
   const [chapter, setChapter] = useState<number>(0);
-  const [mode, setMode] = useState<"imperative" | "declarative">("imperative");
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [data, setData] = useState<string | null>(null);
   const [pollCount, setPollCount] = useState<number>(0);
@@ -105,7 +107,7 @@ export default function SuspenseWaitingForGodot(): JSX.Element {
     },
   ];
 
-  // Code examples as template literals
+  // Code examples
   const imperativeCode = `// ❌ Imperative Loading Anti-pattern
 function GodotChecker() {
   const [isLoading, setIsLoading] = useState(true);
@@ -117,7 +119,7 @@ function GodotChecker() {
       checkForGodot();
       setPollCount(c => c + 1); // Side effect
     }, 500);
-    
+
     // ❌ Missing cleanup
     // return () => clearInterval(interval);
   }, []);
@@ -134,7 +136,7 @@ const Godot = lazy(() => import('./Godot'));
 
 function TheaterStage() {
   return (
-    <Suspense 
+    <Suspense
       fallback={
         <div className="p-8 border border-amber-500/30 rounded">
           <p>🎭 Vladimir & Estragon perform...</p>
@@ -151,7 +153,7 @@ function TheaterStage() {
   const errorBoundaryCode = `// ✅ Error Boundary for Resilience
 function GodotPlay() {
   return (
-    <ErrorBoundary 
+    <ErrorBoundary
       fallback={<p>Godot cannot come today. The show continues.</p>}
     >
       <Suspense fallback={<TheaterFallback />}>
@@ -178,9 +180,6 @@ function GodotPlay() {
         setLeakedIntervals((l) => l + 1);
       }
     }, 800);
-
-    // Note: We're NOT clearing this interval to demonstrate the leak
-    // In a real app, we would: return () => clearInterval(interval);
   };
 
   const resetDemo = () => {
@@ -207,22 +206,28 @@ function GodotPlay() {
             <div className="rounded-lg border border-amber-500/30 bg-amber-950/30 p-6">
               <div className="mb-4 flex items-center gap-3">
                 <Theater className="h-6 w-6 text-amber-400" />
-                <h3 className="text-lg font-semibold">
+                <h3 className="text-lg font-semibold text-amber-200">
                   The Fallback Performance
                 </h3>
               </div>
               <div className="space-y-4">
                 <div className="flex items-center gap-3 rounded bg-amber-950/40 p-3">
                   <div className="h-3 w-3 animate-pulse rounded-full bg-amber-400" />
-                  <p>"We are waiting for Godot. What else is there to do?"</p>
+                  <p className="text-amber-100/80">
+                    "We are waiting for Godot. What else is there to do?"
+                  </p>
                 </div>
                 <div className="flex items-center gap-3 rounded bg-amber-950/40 p-3">
                   <div className="h-3 w-3 animate-pulse rounded-full bg-amber-400" />
-                  <p>👒 Fiddling with hats and boots...</p>
+                  <p className="text-amber-100/80">
+                    👒 Fiddling with hats and boots...
+                  </p>
                 </div>
                 <div className="flex items-center gap-3 rounded bg-amber-950/40 p-3">
                   <div className="h-3 w-3 animate-pulse rounded-full bg-amber-400" />
-                  <p>🥕 Discussing carrots vs. turnips...</p>
+                  <p className="text-amber-100/80">
+                    🥕 Discussing carrots vs. turnips...
+                  </p>
                 </div>
               </div>
             </div>
@@ -236,7 +241,7 @@ const TheaterFallback = () => (
     <p>Loading happens in background</p>
   </div>
 );`}
-              variant="success"
+              language="tsx"
               title="// ✅ Engaging Fallback UI"
               defaultExpanded={true}
             />
@@ -255,16 +260,6 @@ const TheaterFallback = () => (
                 🐛 Trigger Imperative Bug
               </button>
               <button
-                onClick={() =>
-                  setMode(mode === "imperative" ? "declarative" : "imperative")
-                }
-                className="rounded-lg bg-amber-600 px-4 py-2 text-white hover:bg-amber-700"
-              >
-                {mode === "imperative"
-                  ? "✅ Show Declarative Fix"
-                  : "❌ Show Imperative Bug"}
-              </button>
-              <button
                 onClick={resetDemo}
                 className="flex items-center gap-2 rounded-lg bg-slate-700 px-4 py-2 text-white hover:bg-slate-600"
               >
@@ -281,17 +276,17 @@ const TheaterFallback = () => (
                 </h4>
                 <div className="space-y-4">
                   <div className="flex items-center justify-between">
-                    <span>Poll Count:</span>
+                    <span className="text-slate-300">Poll Count:</span>
                     <span className="font-mono text-red-300">{pollCount}</span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span>Leaked Intervals:</span>
+                    <span className="text-slate-300">Leaked Intervals:</span>
                     <span className="font-mono text-red-300">
                       {leakedIntervals}/5
                     </span>
                   </div>
                   <div className="flex items-center justify-between">
-                    <span>Status:</span>
+                    <span className="text-slate-300">Status:</span>
                     <span
                       className={
                         isLoading ? "text-amber-300" : "text-green-300"
@@ -301,7 +296,7 @@ const TheaterFallback = () => (
                     </span>
                   </div>
                   {data && (
-                    <div className="rounded border border-red-500/50 bg-red-900/30 p-3">
+                    <div className="rounded border border-red-500/50 bg-red-900/30 p-3 text-red-200">
                       {data}
                     </div>
                   )}
@@ -339,15 +334,15 @@ const TheaterFallback = () => (
               </div>
             </div>
 
-            <CodeBlock
-              code={mode === "imperative" ? imperativeCode : declarativeCode}
-              variant={mode === "imperative" ? "error" : "success"}
-              title={
-                mode === "imperative"
-                  ? "// ❌ Imperative Anti-pattern"
-                  : "// ✅ Declarative Solution"
-              }
-              defaultExpanded={true}
+            <CodeComparison
+              badCode={imperativeCode}
+              goodCode={declarativeCode}
+              language="tsx"
+              themeColor="amber"
+              badLabel="❌ Imperative Anti-pattern"
+              goodLabel="✅ Declarative Solution"
+              badExplanation="Manual polling creates side effects, memory leaks, and complex state management."
+              goodExplanation="Suspense handles the loading state declaratively, keeping the component logic clean."
             />
           </div>
         );
@@ -395,13 +390,13 @@ const TheaterFallback = () => (
                           "We don't watch the road anymore..."
                         </p>
                         <div className="mt-4 flex justify-center gap-4">
-                          <div className="rounded bg-amber-900/30 p-2">
+                          <div className="rounded bg-amber-900/30 p-2 text-amber-200">
                             👒 Hat-swapping
                           </div>
-                          <div className="rounded bg-amber-900/30 p-2">
+                          <div className="rounded bg-amber-900/30 p-2 text-amber-200">
                             🥕 Carrot debate
                           </div>
-                          <div className="rounded bg-amber-900/30 p-2">
+                          <div className="rounded bg-amber-900/30 p-2 text-amber-200">
                             🌳 Tree contemplation
                           </div>
                         </div>
@@ -414,20 +409,16 @@ const TheaterFallback = () => (
               </div>
             </div>
 
-            <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
-              <CodeBlock
-                code={declarativeCode}
-                variant="success"
-                title="// ✅ Suspense Implementation"
-                defaultExpanded={true}
-              />
-              <CodeBlock
-                code={errorBoundaryCode}
-                variant="default"
-                title="// 💡 Error Boundary for Resilience"
-                defaultExpanded={true}
-              />
-            </div>
+            <CodeComparison
+              badCode={declarativeCode}
+              goodCode={errorBoundaryCode}
+              language="tsx"
+              themeColor="amber"
+              badLabel="Basic Suspense"
+              goodLabel="Resilient Suspense"
+              badExplanation="Handles loading states perfectly, but if the network fails, the whole app crashes."
+              goodExplanation="Wraps the Suspense boundary in an Error Boundary to catch network failures gracefully."
+            />
           </div>
         );
 
@@ -455,7 +446,7 @@ const TheaterFallback = () => (
                   </div>
                 </div>
 
-                <div className="mb-6 space-y-4">
+                <div className="mb-6 space-y-4 text-red-200">
                   <div className="flex items-center gap-3">
                     <div className="h-3 w-3 animate-pulse rounded-full bg-red-500" />
                     <span>Constant road-checking (polling)</span>
@@ -493,7 +484,7 @@ const TheaterFallback = () => (
                   </div>
                 </div>
 
-                <div className="mb-6 space-y-4">
+                <div className="mb-6 space-y-4 text-amber-200">
                   <div className="flex items-center gap-3">
                     <div className="h-3 w-3 animate-pulse rounded-full bg-amber-500" />
                     <span>Suspense boundary handles transitions</span>
@@ -595,19 +586,19 @@ const TheaterFallback = () => (
               code={`// The complete declarative pattern
 function GodotPlay() {
   return (
-    <ErrorBoundary 
+    <ErrorBoundary
       fallback={<TheaterError />}
     >
-      <Suspense 
+      <Suspense
         fallback={
-          <TheaterFallback 
+          <TheaterFallback
             message="🎭 The actors perform while waiting..."
             activities={['Hat-swapping', 'Carrot debates', 'Tree contemplation']}
           />
         }
       >
-        <LazyGodot 
-          delay={2000} 
+        <LazyGodot
+          delay={2000}
           onArrival={() => console.log('Godot arrived!')}
         />
         <OtherAsyncComponents />
@@ -615,7 +606,7 @@ function GodotPlay() {
     </ErrorBoundary>
   );
 }`}
-              variant="success"
+              language="tsx"
               title="// ✅ Complete Declarative Implementation"
               defaultExpanded={true}
             />
@@ -634,157 +625,139 @@ function GodotPlay() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-amber-950 via-slate-950 to-amber-950/30 font-serif text-amber-100">
-      {/* Header */}
-      <header className="sticky top-0 z-10 border-b border-amber-500/20 bg-slate-950/80 backdrop-blur-sm">
-        <div className="mx-auto max-w-7xl px-4 py-4 sm:px-6 lg:px-8">
-          <div className="flex flex-wrap items-center justify-between gap-4">
-            <div className="flex items-center gap-3">
-              <Clock className="h-8 w-8 text-amber-400" />
-              <div>
-                <h1 className="text-2xl font-bold text-amber-300 md:text-3xl">
-                  Waiting for Godot
-                </h1>
-                <p className="text-sm text-amber-400/80 md:text-base">
-                  Suspense • Vladimir & Estragon • 1953
-                </p>
-              </div>
-            </div>
-            <div className="text-right">
-              <p className="text-sm text-amber-400/60">Theatre of React</p>
-              <p className="text-base font-medium text-amber-400">
-                Declarative Async State
-              </p>
-            </div>
-          </div>
-        </div>
-      </header>
+    <div className="min-h-screen bg-slate-950 font-serif text-slate-300">
+      <ModuleHeader
+        icon={Clock}
+        title="Waiting for Godot"
+        subtitle="Suspense • Vladimir & Estragon • 1953"
+        concept="Declarative Async State"
+        themeColor="amber"
+      />
 
-      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
-          {/* Left Column - Content */}
-          <div className="space-y-8 lg:col-span-7">
-            {/* Chapter Content */}
-            <div className="rounded-2xl border border-amber-500/20 bg-slate-900/40 p-6 backdrop-blur-sm md:p-8">
-              <div className="mb-6">
-                <div className="mb-4 flex items-center justify-between">
-                  <h2 className="text-2xl font-bold text-amber-300 md:text-3xl">
-                    {currentChapter.title}
-                  </h2>
-                  <span className="rounded-full bg-amber-900/30 px-3 py-1 text-sm text-amber-300">
-                    Chapter {chapter + 1} of 5
-                  </span>
-                </div>
-                <div className="mb-4 flex items-center gap-2 text-sm text-amber-400/70">
-                  <span>Emotional arc:</span>
-                  <span className="font-medium">
-                    {currentChapter.emotionalArc}
-                  </span>
-                </div>
-              </div>
-
-              <div className="prose prose-invert prose-lg max-w-none">
-                <p className="leading-relaxed text-amber-100/90">
-                  {currentChapter.content}
-                </p>
-              </div>
-            </div>
-
-            {/* Memorable Phrase */}
-            <div className="rounded-r-lg border-l-4 border-amber-500 bg-gradient-to-r from-amber-900/20 to-amber-800/10 p-6">
-              <div className="flex items-start gap-3">
-                <div className="mt-1">
-                  <div className="h-3 w-3 animate-pulse rounded-full bg-amber-400" />
-                </div>
-                <p className="text-lg text-amber-300 italic">
-                  {chapter === 0 &&
-                    "We are waiting for Godot. What else is there to do?"}
-                  {chapter === 1 &&
-                    "Stop talking about carrots! Is he on the road yet? Check again!"}
-                  {chapter === 2 &&
-                    "The stage will hold the wait for us. Our job is just to perform."}
-                  {chapter === 3 &&
-                    "In the first act, we performed the waiting. In the second, we simply performed."}
-                  {chapter === 4 &&
-                    "We don't watch the road anymore. We trust the stage."}
-                </p>
-              </div>
-            </div>
-          </div>
-
-          {/* Right Column - Demo */}
-          <div className="lg:col-span-5">
-            <div className="sticky top-24">
-              <div className="rounded-2xl border border-amber-500/30 bg-gradient-to-b from-slate-900/80 to-slate-950/80 p-6 backdrop-blur-sm">
-                <div className="mb-6 flex items-center justify-between">
-                  <h3 className="flex items-center gap-2 text-xl font-bold text-amber-300">
-                    <Theater className="h-5 w-5" />
-                    Interactive Stage
-                  </h3>
-                  <div className="rounded-full bg-amber-900/30 px-3 py-1 text-sm text-amber-300">
-                    {chapter === 0 && "The Fallback"}
-                    {chapter === 1 && "The Anti-pattern"}
-                    {chapter === 2 && "The Solution"}
-                    {chapter === 3 && "Comparison"}
-                    {chapter === 4 && "Mastery"}
+      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+        <ModuleLayout
+          sidebar={
+            <div className="sticky top-24 space-y-6">
+              {/* Metaphor Registry */}
+              <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-5">
+                <h3 className="mb-4 flex items-center gap-2 text-lg font-bold text-amber-100">
+                  <Theater className="h-5 w-5 text-amber-400" />
+                  Metaphor Registry
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex justify-between border-b border-slate-800 pb-2">
+                    <span className="text-sm text-slate-400">
+                      Waiting/Polling
+                    </span>
+                    <span className="text-sm font-medium text-amber-200">
+                      Imperative State
+                    </span>
                   </div>
-                </div>
-
-                <div className="space-y-6">{renderChapterDemo()}</div>
-
-                {/* Safety Note */}
-                <div className="mt-6 border-t border-amber-500/10 pt-4">
-                  <div className="flex items-center gap-2 text-xs text-amber-400/60">
-                    <AlertCircle className="h-3 w-3" />
-                    <span>
-                      Safety: Circuit breakers prevent infinite loops. Max 5
-                      leaked intervals before auto-reset.
+                  <div className="flex justify-between border-b border-slate-800 pb-2">
+                    <span className="text-sm text-slate-400">Godot</span>
+                    <span className="text-sm font-medium text-amber-200">
+                      Async Data
+                    </span>
+                  </div>
+                  <div className="flex justify-between border-b border-slate-800 pb-2">
+                    <span className="text-sm text-slate-400">Curtain</span>
+                    <span className="text-sm font-medium text-amber-200">
+                      Suspense Boundary
+                    </span>
+                  </div>
+                  <div className="flex justify-between border-b border-slate-800 pb-2">
+                    <span className="text-sm text-slate-400">Director</span>
+                    <span className="text-sm font-medium text-amber-200">
+                      React Framework
                     </span>
                   </div>
                 </div>
               </div>
-            </div>
-          </div>
-        </div>
 
-        {/* Navigation */}
-        <nav className="mt-12 border-t border-amber-500/20 pt-6">
-          <div className="flex flex-col items-center justify-between gap-4 sm:flex-row">
-            <button
-              onClick={() => setChapter(Math.max(0, chapter - 1))}
-              disabled={chapter === 0}
-              className="w-full rounded-lg border border-amber-500/30 bg-gradient-to-r from-amber-900/50 to-amber-800/30 px-6 py-3 text-amber-300 transition-all duration-300 hover:border-amber-500 hover:from-amber-900/70 hover:to-amber-800/50 disabled:cursor-not-allowed disabled:opacity-30 sm:w-auto"
-            >
-              ← Previous Scene
-            </button>
-
-            <div className="flex items-center gap-4">
-              <div className="flex items-center gap-2">
-                {chapters.map((_, idx) => (
-                  <button
-                    key={idx}
-                    onClick={() => setChapter(idx)}
-                    className={`h-3 w-3 rounded-full transition-all ${idx === chapter ? "bg-amber-400" : "bg-amber-400/30 hover:bg-amber-400/50"}`}
-                    aria-label={`Go to chapter ${idx + 1}`}
-                  />
-                ))}
+              {/* Key Insight */}
+              <div className="rounded-xl border border-amber-500/30 bg-amber-950/20 p-4">
+                <h4 className="mb-2 flex items-center gap-2 font-bold text-amber-300">
+                  <CheckCircle className="h-4 w-4" />
+                  Key Insight
+                </h4>
+                <p className="text-sm text-amber-200/80">
+                  {chapter === 0 &&
+                    "Fallback UIs maintain engagement while data loads."}
+                  {chapter === 1 &&
+                    "Manual state checking creates complexity and bugs."}
+                  {chapter === 2 &&
+                    "Suspense boundaries handle loading states declaratively."}
+                  {chapter === 3 &&
+                    "Declarative code shifts the burden from developer to framework."}
+                  {chapter === 4 &&
+                    "Trusting the framework simplifies the mental model."}
+                </p>
               </div>
-              <span className="font-mono text-sm text-amber-400/70">
-                Scene {chapter + 1}/{chapters.length}
-              </span>
-            </div>
 
-            <button
-              onClick={() =>
-                setChapter(Math.min(chapters.length - 1, chapter + 1))
-              }
-              disabled={chapter === chapters.length - 1}
-              className="w-full rounded-lg border border-amber-500/30 bg-gradient-to-r from-amber-800/30 to-amber-900/50 px-6 py-3 text-amber-300 transition-all duration-300 hover:border-amber-500 hover:from-amber-800/50 hover:to-amber-900/70 disabled:cursor-not-allowed disabled:opacity-30 sm:w-auto"
-            >
-              Next Scene →
-            </button>
+              {/* Quote Card */}
+              <div className="rounded-xl border border-slate-800 bg-slate-900/30 p-4">
+                <p className="text-sm text-slate-400 italic">
+                  {chapter === 0 &&
+                    '"We are waiting for Godot. What else is there to do?"'}
+                  {chapter === 1 &&
+                    '"Stop talking about carrots! Is he on the road yet?"'}
+                  {chapter === 2 && '"The stage will hold the wait for us."'}
+                  {chapter === 3 &&
+                    '"In the first act, we performed the waiting."'}
+                  {chapter === 4 &&
+                    '"We don\'t watch the road anymore. We trust the stage."'}
+                </p>
+                <p className="mt-2 text-right text-xs text-slate-500">
+                  — Vladimir & Estragon
+                </p>
+              </div>
+
+              {/* Safety Note */}
+              <div className="rounded-xl border border-amber-500/10 bg-slate-900/30 p-4">
+                <div className="flex items-center gap-2 text-xs text-amber-400/60">
+                  <AlertCircle className="h-3 w-3" />
+                  <span>
+                    Safety: Circuit breakers prevent infinite loops. Max 5
+                    leaked intervals before auto-reset.
+                  </span>
+                </div>
+              </div>
+            </div>
+          }
+        >
+          {/* Chapter Content */}
+          <div className="prose prose-invert prose-lg mb-8 max-w-none sm:mb-12">
+            <h2 className="mb-4 text-2xl font-bold text-amber-100 sm:text-3xl">
+              {currentChapter.title}
+            </h2>
+            <div className="mb-4 flex items-center gap-2 text-sm text-amber-400/70">
+              <span>Emotional arc:</span>
+              <span className="font-medium">{currentChapter.emotionalArc}</span>
+            </div>
+            <div className="space-y-4 leading-relaxed text-slate-300">
+              <p>{currentChapter.content}</p>
+            </div>
           </div>
-        </nav>
+
+          {/* Interactive Demo Section */}
+          <section className="mb-8 rounded-xl border border-amber-500/20 bg-slate-900/40 p-6 backdrop-blur-sm sm:mb-12 sm:p-8">
+            <div className="mb-6 flex items-center gap-2">
+              <div className="h-6 w-2 rounded bg-amber-500"></div>
+              <h3 className="text-xl font-bold text-amber-200">
+                Interactive Stage
+              </h3>
+            </div>
+            {renderChapterDemo()}
+          </section>
+
+          {/* Navigation */}
+          <ChapterNavigation
+            currentChapter={chapter}
+            totalChapters={chapters.length}
+            onChapterChange={setChapter}
+            themeColor="amber"
+          />
+        </ModuleLayout>
       </main>
     </div>
   );
