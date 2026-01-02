@@ -52,7 +52,11 @@ interface CodeComparisonProps {
    * Theme color from the safelist: cyan, amber, purple, emerald, red, blue
    * Controls the active toggle button styling
    */
-  themeColor: 'cyan' | 'amber' | 'purple' | 'emerald' | 'red' | 'blue';
+  themeColor: 'red' | 'orange' | 'amber' | 'yellow' | 'lime' 
+     | 'green' | 'emerald' | 'teal' | 'cyan' | 'sky' 
+     | 'blue' | 'indigo' | 'violet' | 'purple' 
+     | 'fuchsia' | 'pink' | 'rose';
+
 
   /** Custom label for the "bad" example (default: "❌ Problematic") */
   badLabel?: string;

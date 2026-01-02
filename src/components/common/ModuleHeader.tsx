@@ -50,7 +50,11 @@ interface ModuleHeaderProps {
    * Theme color from the safelist: cyan, amber, purple, emerald, red, blue
    * Controls the icon color, border color, and concept text color
    */
-  themeColor: 'cyan' | 'amber' | 'purple' | 'emerald' | 'red' | 'blue';
+  themeColor: 'red' | 'orange' | 'amber' | 'yellow' | 'lime' 
+     | 'green' | 'emerald' | 'teal' | 'cyan' | 'sky' 
+     | 'blue' | 'indigo' | 'violet' | 'purple' 
+     | 'fuchsia' | 'pink' | 'rose';
+
   
   /** Optional additional CSS classes for custom styling */
   className?: string;

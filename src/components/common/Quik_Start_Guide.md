@@ -38,7 +38,11 @@ interface ModuleHeaderProps {
   title: string;                       // Fiction work title (e.g., "Minority Report")
   subtitle: string;                    // Metadata: "Character • Context • Year"
   concept: string;                     // React concept (e.g., "useReducer")
-  themeColor: 'cyan' | 'amber' | 'purple' | 'emerald' | 'red' | 'blue';
+  themeColor: 'red' | 'orange' | 'amber' | 'yellow' | 'lime' 
+     | 'green' | 'emerald' | 'teal' | 'cyan' | 'sky' 
+     | 'blue' | 'indigo' | 'violet' | 'purple' 
+     | 'fuchsia' | 'pink' | 'rose';
+
   className?: string;                  // Optional additional styles
 }
 ```
@@ -117,7 +121,11 @@ interface ChapterNavigationProps {
   currentChapter: number;              // Current chapter index (0-based)
   totalChapters: number;               // Total number of chapters
   onChapterChange: (chapter: number) => void;  // Callback on change
-  themeColor: 'cyan' | 'amber' | 'purple' | 'emerald' | 'red' | 'blue';
+  themeColor: 'red' | 'orange' | 'amber' | 'yellow' | 'lime' 
+     | 'green' | 'emerald' | 'teal' | 'cyan' | 'sky' 
+     | 'blue' | 'indigo' | 'violet' | 'purple' 
+     | 'fuchsia' | 'pink' | 'rose';
+
   previousLabel?: string;              // Default: "Previous"
   nextLabel?: string;                  // Default: "Next"
   hideMobileDots?: boolean;            // Default: false
@@ -160,7 +168,11 @@ interface CodeComparisonProps {
   badCode: string;                     // Code showing incorrect approach
   goodCode: string;                    // Code showing correct approach
   language: string;                    // Language for syntax highlighting
-  themeColor: 'cyan' | 'amber' | 'purple' | 'emerald' | 'red' | 'blue';
+  themeColor: 'red' | 'orange' | 'amber' | 'yellow' | 'lime' 
+     | 'green' | 'emerald' | 'teal' | 'cyan' | 'sky' 
+     | 'blue' | 'indigo' | 'violet' | 'purple' 
+     | 'fuchsia' | 'pink' | 'rose';
+
   badLabel?: string;                   // Default: "❌ Problematic"
   goodLabel?: string;                  // Default: "✅ Better"
   badExplanation?: string;             // Optional explanation below bad code

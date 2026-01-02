@@ -47,7 +47,10 @@ interface ChapterNavigationProps {
    * Theme color from the safelist: cyan, amber, purple, emerald, red, blue
    * Controls the active dot color and Next button styling
    */
-  themeColor: 'cyan' | 'amber' | 'purple' | 'emerald' | 'red' | 'blue';
+  themeColor: 'red' | 'orange' | 'amber' | 'yellow' | 'lime' 
+     | 'green' | 'emerald' | 'teal' | 'cyan' | 'sky' 
+     | 'blue' | 'indigo' | 'violet' | 'purple' 
+     | 'fuchsia' | 'pink' | 'rose';
   
   /** Custom label for Previous button (default: "Previous") */
   previousLabel?: string;
