@@ -1,33 +1,10 @@
-import { useState, useEffect, useRef, Component, ErrorInfo, ReactNode } from "react";
+import { useState, useEffect, useRef } from "react";
 import { Ship, AlertTriangle, Shield, Waves, Anchor } from "lucide-react";
+import { ErrorBoundary } from "react-error-boundary";
+import { ModuleHeader } from "@/components/common/ModuleHeader";
+import { ModuleLayout } from "@/components/common/ModuleLayout";
+import { ChapterNavigation } from "@/components/common/ChapterNavigation";
 import { CodeBlock } from "@/components/common/CodeBlock";
-
-// === Titanic Error Boundary (Teaching Component) ===
-class TitanicErrorBoundary extends Component<
-  { children: ReactNode; fallback: ReactNode; boundaryName: string },
-  { hasError: boolean; errorMessage: string }
-> {
-  constructor(props: { children: ReactNode; fallback: ReactNode; boundaryName: string }) {
-    super(props);
-    this.state = { hasError: false, errorMessage: "" };
-  }
-
-  static getDerivedStateFromError(error: Error) {
-    return { hasError: true, errorMessage: error.message };
-  }
-
-  componentDidCatch(error: Error, errorInfo: ErrorInfo) {
-    console.log(`🚨 Bulkhead "${this.props.boundaryName}" contained error:`, error.message);
-    console.log("Component stack:", errorInfo.componentStack);
-  }
-
-  render() {
-    if (this.state.hasError) {
-      return this.props.fallback;
-    }
-    return this.props.children;
-  }
-}
 
 // === Broken Component that throws errors ===
 const IcebergCollision = ({ shouldCrash }: { shouldCrash: boolean }) => {
@@ -35,10 +12,10 @@ const IcebergCollision = ({ shouldCrash }: { shouldCrash: boolean }) => {
     throw new Error("💥 Iceberg collision! Hull breach detected.");
   }
   return (
-    <div className="p-4 bg-slate-800/50 border border-sky-400/30 rounded">
+    <div className="p-4 bg-slate-800/50 border border-cyan-400/30 rounded">
       <div className="flex items-center gap-2">
-        <Ship className="w-5 h-5 text-sky-400" />
-        <span className="text-sky-300">Compartment: Boiler Room #6</span>
+        <Ship className="w-5 h-5 text-cyan-400" />
+        <span className="text-cyan-300">Compartment: Boiler Room #6</span>
       </div>
       <div className="mt-2 text-sm text-slate-400">Status: Operational ✅</div>
     </div>
@@ -46,7 +23,15 @@ const IcebergCollision = ({ shouldCrash }: { shouldCrash: boolean }) => {
 };
 
 // === Fallback UI (Lifeboats) ===
-const LifeboatFallback = ({ boundaryName }: { boundaryName: string }) => (
+const LifeboatFallback = ({ 
+  error, 
+  resetErrorBoundary, 
+  boundaryName 
+}: { 
+  error?: Error; 
+  resetErrorBoundary?: () => void; 
+  boundaryName: string;
+}) => (
   <div className="p-4 bg-amber-950/40 border border-amber-500/50 rounded animate-pulse">
     <div className="flex items-center gap-2 mb-2">
       <AlertTriangle className="w-5 h-5 text-amber-400" />
@@ -119,7 +104,7 @@ export default function TitanicErrorBoundaries(): JSX.Element {
   const triggerCascade = () => {
     setShouldCrash(true);
     setCascadeErrors((prev) => prev + 1);
-    
+
     // Auto-reset after showing error
     errorTimerRef.current = setTimeout(() => {
       setShouldCrash(false);
@@ -200,31 +185,98 @@ function App() {
 
   return (
     <div className="min-h-screen bg-slate-950 text-slate-300 font-serif">
-      {/* Header */}
-      <header className="border-b border-slate-800 bg-slate-950/90 backdrop-blur-sm sticky top-0 z-10">
-        <div className="max-w-7xl mx-auto px-6 py-6">
-          <div className="flex items-center justify-between gap-6 mb-2 flex-wrap">
-            <div className="flex items-center gap-3">
-              <Ship className="text-sky-400 w-8 h-8" />
-              <h1 className="text-2xl md:text-3xl font-bold">Titanic (1997)</h1>
-            </div>
-            <p className="text-sm md:text-base text-slate-400">
-              Thomas Andrews, The Designer
-            </p>
-          </div>
-          <p className="text-base md:text-lg text-sky-400 font-medium">
-            Error Boundaries: The Titanic's Bulkheads
-          </p>
-        </div>
-      </header>
+      {/* Standardized Header */}
+      <ModuleHeader
+        icon={Ship}
+        title="Titanic (1997)"
+        subtitle="Thomas Andrews, The Designer"
+        concept="Error Boundaries: The Titanic's Bulkheads"
+        themeColor="cyan"
+      />
 
-      <main className="max-w-7xl mx-auto px-4 py-8 lg:grid lg:grid-cols-12 lg:gap-8">
-        {/* Main Content - 7 columns */}
-        <div className="lg:col-span-7 space-y-8">
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 py-8">
+        {/* Standardized Layout */}
+        <ModuleLayout
+          sidebar={
+            <div className="sticky top-24 space-y-6">
+              {/* Metaphor Mapping */}
+              <div className="bg-slate-900/50 border border-slate-700 rounded-xl p-5">
+                <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
+                  <Shield className="w-5 h-5 text-cyan-400" />
+                  Metaphor Registry
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex justify-between border-b border-slate-800 pb-2">
+                    <span className="text-sm text-slate-400">Titanic</span>
+                    <span className="text-sm font-medium">React Application</span>
+                  </div>
+                  <div className="flex justify-between border-b border-slate-800 pb-2">
+                    <span className="text-sm text-slate-400">Bulkheads</span>
+                    <span className="text-sm font-medium">Error Boundaries</span>
+                  </div>
+                  <div className="flex justify-between border-b border-slate-800 pb-2">
+                    <span className="text-sm text-slate-400">Iceberg Collision</span>
+                    <span className="text-sm font-medium">JavaScript Error</span>
+                  </div>
+                  <div className="flex justify-between border-b border-slate-800 pb-2">
+                    <span className="text-sm text-slate-400">Cascade Flood</span>
+                    <span className="text-sm font-medium">Error Propagation</span>
+                  </div>
+                  <div className="flex justify-between border-b border-slate-800 pb-2">
+                    <span className="text-sm text-slate-400">Lifeboats</span>
+                    <span className="text-sm font-medium">Fallback UI</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-sm text-slate-400">Unaffected Sections</span>
+                    <span className="text-sm font-medium">Working Components</span>
+                  </div>
+                </div>
+              </div>
+
+              {/* Key Concept */}
+              <div className="bg-cyan-950/20 border border-cyan-500/30 rounded-xl p-5">
+                <h3 className="text-lg font-bold mb-3 text-cyan-300">Key Concept</h3>
+                <p className="text-sm text-slate-300 mb-3">
+                  Error Boundaries catch JavaScript errors in their child component tree,
+                  log those errors, and display a fallback UI instead of crashing.
+                </p>
+                <div className="text-xs text-cyan-300/80 space-y-1">
+                  <div>• Class components only (or use `react-error-boundary` package)</div>
+                  <div>• Use `getDerivedStateFromError()` to render fallback</div>
+                  <div>• Use `componentDidCatch()` for error logging</div>
+                  <div>• Place boundaries around feature sections</div>
+                </div>
+              </div>
+
+              {/* Reset Section */}
+              <div className="bg-slate-900/50 border border-slate-700 rounded-xl p-5">
+                <h3 className="text-lg font-bold mb-3">Demo Controls</h3>
+                <div className="space-y-3">
+                  <button
+                    onClick={resetDemo}
+                    className="w-full px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded transition-colors"
+                  >
+                    🔄 Reset All Demos
+                  </button>
+                  <div className="text-xs text-slate-400">
+                    <div className="flex items-center gap-2 mb-1">
+                      <div className="w-2 h-2 rounded-full bg-red-500" />
+                      <span>Red = Error / Without Boundary</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-cyan-500" />
+                      <span>Cyan = Contained / With Boundary</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          }
+        >
           {/* Chapter Content */}
-          <section className="prose prose-invert prose-lg max-w-none">
+          <section className="prose prose-invert prose-lg max-w-none mb-8 sm:mb-12">
             <div className="flex items-center justify-between mb-4">
-              <h2 className="text-2xl md:text-3xl font-bold m-0">{currentChapter.title}</h2>
+              <h2 className="text-2xl sm:text-3xl font-bold m-0">{currentChapter.title}</h2>
               <span className="text-sm text-slate-400 bg-slate-800/50 px-3 py-1 rounded-full">
                 Chapter {chapter + 1} of 5
               </span>
@@ -233,25 +285,25 @@ function App() {
           </section>
 
           {/* Interactive Demo Section */}
-          <section className="bg-slate-900/50 border border-slate-700 rounded-xl p-6">
+          <section className="bg-slate-900/50 border border-slate-700 rounded-xl p-6 sm:p-8 mb-8 sm:mb-12">
             <h3 className="text-xl font-bold mb-4 flex items-center gap-2">
-              <Waves className="w-5 h-5 text-sky-400" />
+              <Waves className="w-5 h-5 text-cyan-400" />
               Interactive Demonstration
             </h3>
 
             {chapter === 0 && (
               <div className="space-y-6">
                 <div className="grid grid-cols-2 gap-4">
-                  <div className="p-4 bg-slate-800/30 border border-sky-500/20 rounded">
+                  <div className="p-4 bg-slate-800/30 border border-cyan-500/20 rounded">
                     <div className="flex items-center gap-2 mb-2">
-                      <Ship className="w-4 h-4 text-sky-400" />
+                      <Ship className="w-4 h-4 text-cyan-400" />
                       <span className="text-sm font-medium">Boiler Room</span>
                     </div>
                     <div className="text-xs text-slate-400">Component A</div>
                   </div>
-                  <div className="p-4 bg-slate-800/30 border border-sky-500/20 rounded">
+                  <div className="p-4 bg-slate-800/30 border border-cyan-500/20 rounded">
                     <div className="flex items-center gap-2 mb-2">
-                      <Ship className="w-4 h-4 text-sky-400" />
+                      <Ship className="w-4 h-4 text-cyan-400" />
                       <span className="text-sm font-medium">Grand Staircase</span>
                     </div>
                     <div className="text-xs text-slate-400">Component B</div>
@@ -324,7 +376,7 @@ const TitanicApp = () => (
                   </button>
                   <button
                     onClick={() => setShowBoundary(true)}
-                    className={`px-4 py-2 rounded transition-colors ${showBoundary ? 'bg-sky-600 text-white' : 'bg-slate-800 text-slate-300'}`}
+                    className={`px-4 py-2 rounded transition-colors ${showBoundary ? 'bg-cyan-600 text-white' : 'bg-slate-800 text-slate-300'}`}
                   >
                     ✅ With Boundary
                   </button>
@@ -332,19 +384,24 @@ const TitanicApp = () => (
 
                 <div className="border border-slate-700 rounded p-4">
                   {showBoundary ? (
-                    <TitanicErrorBoundary
-                      fallback={<LifeboatFallback boundaryName="Engine Room Bulkhead" />}
-                      boundaryName="Engine Room"
+                    <ErrorBoundary
+                      FallbackComponent={(props) => (
+                        <LifeboatFallback {...props} boundaryName="Engine Room Bulkhead" />
+                      )}
+                      onError={(error, errorInfo) => {
+                        console.log(`🚨 Bulkhead "Engine Room" contained error:`, error.message);
+                        console.log("Component stack:", errorInfo.componentStack);
+                      }}
                     >
                       <IcebergCollision shouldCrash={shouldCrash} />
-                    </TitanicErrorBoundary>
+                    </ErrorBoundary>
                   ) : (
                     <IcebergCollision shouldCrash={shouldCrash} />
                   )}
-                  
+
                   <div className="mt-4 p-3 bg-slate-800/30 rounded border border-slate-700">
                     <div className="flex items-center gap-2">
-                      <Ship className="w-4 h-4 text-sky-400" />
+                      <Ship className="w-4 h-4 text-cyan-400" />
                       <span>Rest of the Ship (Other Components)</span>
                     </div>
                     <div className="text-sm text-slate-400 mt-1">
@@ -385,15 +442,15 @@ const TitanicApp = () => (
                     </div>
                   </div>
 
-                  <div className="bg-sky-950/20 border border-sky-500/30 p-4 rounded">
-                    <h4 className="font-bold text-sky-300 mb-3">✅ The Containment</h4>
+                  <div className="bg-cyan-950/20 border border-cyan-500/30 p-4 rounded">
+                    <h4 className="font-bold text-cyan-300 mb-3">✅ The Containment</h4>
                     <div className="space-y-2">
                       <div className="p-2 bg-amber-900/40 rounded text-sm">Boiler Room: 🚨 SEALED</div>
-                      <div className="p-2 bg-sky-900/30 rounded text-sm">Engine Room: ✅ OPERATIONAL</div>
-                      <div className="p-2 bg-sky-900/30 rounded text-sm">Bridge: ✅ OPERATIONAL</div>
+                      <div className="p-2 bg-cyan-900/30 rounded text-sm">Engine Room: ✅ OPERATIONAL</div>
+                      <div className="p-2 bg-cyan-900/30 rounded text-sm">Bridge: ✅ OPERATIONAL</div>
                       <div className="p-2 bg-amber-800/30 rounded text-sm">Lifeboats: ✅ DEPLOYED</div>
                     </div>
-                    <div className="mt-4 text-xs text-sky-300">
+                    <div className="mt-4 text-xs text-cyan-300">
                       80% of ship functional. Graceful degradation.
                     </div>
                   </div>
@@ -419,7 +476,7 @@ const TitanicApp = () => (
                   </button>
                   <button
                     onClick={() => setNestedMode("contained")}
-                    className={`px-4 py-2 rounded transition-colors ${nestedMode === "contained" ? 'bg-sky-600 text-white' : 'bg-slate-800 text-slate-300'}`}
+                    className={`px-4 py-2 rounded transition-colors ${nestedMode === "contained" ? 'bg-cyan-600 text-white' : 'bg-slate-800 text-slate-300'}`}
                   >
                     Nested Boundaries
                   </button>
@@ -428,9 +485,14 @@ const TitanicApp = () => (
                 <div className="border border-slate-700 rounded p-4">
                   {nestedMode === "contained" ? (
                     <div className="space-y-4">
-                      <TitanicErrorBoundary
-                        fallback={<LifeboatFallback boundaryName="Navigation Deck" />}
-                        boundaryName="Navigation"
+                      <ErrorBoundary
+                        FallbackComponent={(props) => (
+                          <LifeboatFallback {...props} boundaryName="Navigation Deck" />
+                        )}
+                        onError={(error, errorInfo) => {
+                          console.log(`🚨 Bulkhead "Navigation" contained error:`, error.message);
+                          console.log("Component stack:", errorInfo.componentStack);
+                        }}
                       >
                         <div className="p-3 bg-slate-800/30 rounded">
                           <div className="text-sm font-medium">Navigation System</div>
@@ -441,22 +503,32 @@ const TitanicApp = () => (
                             Trigger Error
                           </button>
                         </div>
-                      </TitanicErrorBoundary>
+                      </ErrorBoundary>
 
-                      <TitanicErrorBoundary
-                        fallback={<LifeboatFallback boundaryName="Passenger Area" />}
-                        boundaryName="Passenger"
+                      <ErrorBoundary
+                        FallbackComponent={(props) => (
+                          <LifeboatFallback {...props} boundaryName="Passenger Area" />
+                        )}
+                        onError={(error, errorInfo) => {
+                          console.log(`🚨 Bulkhead "Passenger" contained error:`, error.message);
+                          console.log("Component stack:", errorInfo.componentStack);
+                        }}
                       >
                         <div className="p-3 bg-slate-800/30 rounded">
                           <div className="text-sm font-medium">Passenger Interface</div>
                           <div className="text-xs text-slate-400 mt-1">✅ Fully Functional</div>
                         </div>
-                      </TitanicErrorBoundary>
+                      </ErrorBoundary>
                     </div>
                   ) : (
-                    <TitanicErrorBoundary
-                      fallback={<LifeboatFallback boundaryName="Main Ship" />}
-                      boundaryName="Main"
+                    <ErrorBoundary
+                      FallbackComponent={(props) => (
+                        <LifeboatFallback {...props} boundaryName="Main Ship" />
+                      )}
+                      onError={(error, errorInfo) => {
+                        console.log(`🚨 Bulkhead "Main" contained error:`, error.message);
+                        console.log("Component stack:", errorInfo.componentStack);
+                      }}
                     >
                       <div className="space-y-4">
                         <div className="p-3 bg-slate-800/30 rounded">
@@ -468,7 +540,7 @@ const TitanicApp = () => (
                           <div className="text-xs text-slate-400 mt-1">✅ Operational</div>
                         </div>
                       </div>
-                    </TitanicErrorBoundary>
+                    </ErrorBoundary>
                   )}
                 </div>
 
@@ -482,116 +554,14 @@ const TitanicApp = () => (
             )}
           </section>
 
-          {/* Navigation */}
-          <nav className="flex items-center justify-between pt-6 border-t border-slate-800">
-            <button
-              onClick={() => setChapter(Math.max(0, chapter - 1))}
-              disabled={chapter === 0}
-              className="px-6 py-3 bg-slate-800 hover:bg-slate-700 text-white rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
-            >
-              ← Previous
-            </button>
-            
-            <div className="flex flex-col items-center">
-              <div className="flex gap-1 mb-2">
-                {chapters.map((_, i) => (
-                  <div
-                    key={i}
-                    className={`w-2 h-2 rounded-full ${i === chapter ? 'bg-sky-500' : 'bg-slate-700'}`}
-                  />
-                ))}
-              </div>
-              <span className="text-sm text-slate-400">
-                Chapter {chapter + 1} of {chapters.length}
-              </span>
-            </div>
-            
-            <button
-              onClick={() => setChapter(Math.min(chapters.length - 1, chapter + 1))}
-              disabled={chapter === chapters.length - 1}
-              className="px-6 py-3 bg-sky-600 hover:bg-sky-700 text-white rounded-lg disabled:opacity-30 disabled:cursor-not-allowed transition-colors flex items-center gap-2"
-            >
-              Next →
-            </button>
-          </nav>
-        </div>
-
-        {/* Sidebar - 5 columns */}
-        <div className="lg:col-span-5 mt-8 lg:mt-0">
-          <div className="sticky top-24 space-y-6">
-            {/* Metaphor Mapping */}
-            <div className="bg-slate-900/50 border border-slate-700 rounded-xl p-5">
-              <h3 className="text-lg font-bold mb-4 flex items-center gap-2">
-                <Shield className="w-5 h-5 text-sky-400" />
-                Metaphor Registry
-              </h3>
-              <div className="space-y-3">
-                <div className="flex justify-between border-b border-slate-800 pb-2">
-                  <span className="text-sm text-slate-400">Titanic</span>
-                  <span className="text-sm font-medium">React Application</span>
-                </div>
-                <div className="flex justify-between border-b border-slate-800 pb-2">
-                  <span className="text-sm text-slate-400">Bulkheads</span>
-                  <span className="text-sm font-medium">Error Boundaries</span>
-                </div>
-                <div className="flex justify-between border-b border-slate-800 pb-2">
-                  <span className="text-sm text-slate-400">Iceberg Collision</span>
-                  <span className="text-sm font-medium">JavaScript Error</span>
-                </div>
-                <div className="flex justify-between border-b border-slate-800 pb-2">
-                  <span className="text-sm text-slate-400">Cascade Flood</span>
-                  <span className="text-sm font-medium">Error Propagation</span>
-                </div>
-                <div className="flex justify-between border-b border-slate-800 pb-2">
-                  <span className="text-sm text-slate-400">Lifeboats</span>
-                  <span className="text-sm font-medium">Fallback UI</span>
-                </div>
-                <div className="flex justify-between">
-                  <span className="text-sm text-slate-400">Unaffected Sections</span>
-                  <span className="text-sm font-medium">Working Components</span>
-                </div>
-              </div>
-            </div>
-
-            {/* Key Concept */}
-            <div className="bg-sky-950/20 border border-sky-500/30 rounded-xl p-5">
-              <h3 className="text-lg font-bold mb-3 text-sky-300">Key Concept</h3>
-              <p className="text-sm text-slate-300 mb-3">
-                Error Boundaries catch JavaScript errors in their child component tree, 
-                log those errors, and display a fallback UI instead of crashing.
-              </p>
-              <div className="text-xs text-sky-300/80 space-y-1">
-                <div>• Class components only (or use `react-error-boundary` package)</div>
-                <div>• Use `getDerivedStateFromError()` to render fallback</div>
-                <div>• Use `componentDidCatch()` for error logging</div>
-                <div>• Place boundaries around feature sections</div>
-              </div>
-            </div>
-
-            {/* Reset Section */}
-            <div className="bg-slate-900/50 border border-slate-700 rounded-xl p-5">
-              <h3 className="text-lg font-bold mb-3">Demo Controls</h3>
-              <div className="space-y-3">
-                <button
-                  onClick={resetDemo}
-                  className="w-full px-4 py-2 bg-slate-800 hover:bg-slate-700 text-white rounded transition-colors"
-                >
-                  🔄 Reset All Demos
-                </button>
-                <div className="text-xs text-slate-400">
-                  <div className="flex items-center gap-2 mb-1">
-                    <div className="w-2 h-2 rounded-full bg-red-500" />
-                    <span>Red = Error / Without Boundary</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <div className="w-2 h-2 rounded-full bg-sky-500" />
-                    <span>Blue = Contained / With Boundary</span>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+          {/* Standardized Navigation */}
+          <ChapterNavigation
+            currentChapter={chapter}
+            totalChapters={chapters.length}
+            onChapterChange={setChapter}
+            themeColor="cyan"
+          />
+        </ModuleLayout>
       </main>
     </div>
   );
