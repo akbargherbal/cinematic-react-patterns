@@ -243,7 +243,7 @@ const OptimizedComponent = memo(CombatSequence, arePropsEqual);`;
         themeColor="cyan"
       />
 
-      <ModuleLayout className="p-4"
+      <ModuleLayout className="py-4 px-6"
         sidebar={
           <div className="sticky top-24 space-y-6">
             {/* Demo header */}

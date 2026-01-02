@@ -1,5 +1,9 @@
-import { useState, useEffect, Fragment } from "react";
-import { Code2, AlertTriangle, Check, Minus, Plus } from "lucide-react";
+import { useState, useEffect } from "react";
+import { Code2, AlertTriangle, Check, Shield, Users } from "lucide-react";
+import { ModuleHeader } from "@/components/common/ModuleHeader";
+import { ModuleLayout } from "@/components/common/ModuleLayout";
+import { ChapterNavigation } from "@/components/common/ChapterNavigation";
+import { CodeComparison } from "@/components/common/CodeComparison";
 import { CodeBlock } from "@/components/common/CodeBlock";
 
 interface Chapter {
@@ -7,7 +11,7 @@ interface Chapter {
   content: string;
 }
 
-export default function ReactFragmentsFightClub(): JSX.Element {
+export default function ReactFragmentsFightClub() {
   const [chapter, setChapter] = useState<number>(0);
   const [wrapperMode, setWrapperMode] = useState<"div" | "fragment">("div");
   const [flexLayoutBroken, setFlexLayoutBroken] = useState<boolean>(false);
@@ -94,7 +98,7 @@ function CleanComponent() {
         <h1>Project Mayhem</h1>
         <p>The cleanest structures have nothing extra</p>
       </header>
-      
+
       <main>
         {/* Fragment for related content */}
         <>
@@ -110,7 +114,7 @@ function CleanComponent() {
             </ol>
           </section>
         </>
-        
+
         {/* Another fragment for actions */}
         <>
           <button>Destroy something beautiful</button>
@@ -187,337 +191,366 @@ function CleanComponent() {
   const currentChapter = chapters[chapter];
 
   return (
-    <div className="min-h-screen bg-slate-950 p-4 font-sans text-slate-300 md:p-8">
-      {/* Header */}
-      <header className="mb-8 border-b border-slate-800 bg-slate-950/80 backdrop-blur-sm">
-        <div className="mx-auto max-w-7xl px-4 py-6 md:px-6">
-          <div className="mb-2 flex flex-wrap items-center justify-between gap-6">
-            <div className="flex items-center gap-3">
-              <Code2 className="h-7 w-7 text-rose-500 md:h-8 md:w-8" />
-              <h1 className="text-2xl font-bold md:text-3xl">Fight Club</h1>
-            </div>
-            <p className="text-sm text-slate-400 md:text-base">
-              Fiction • The Narrator/Tyler Durden • 1999
-            </p>
-          </div>
-          <p className="text-base font-medium text-rose-500 md:text-lg">
-            React Fragments: Returning Multiple Elements
-          </p>
-        </div>
-      </header>
+    <div className="min-h-screen bg-slate-950 font-sans text-slate-300">
+      <ModuleHeader
+        icon={Code2}
+        title="Fight Club"
+        subtitle="The Narrator/Tyler Durden • 1999"
+        concept="React Fragments"
+        themeColor="rose"
+      />
 
-      <main className="mx-auto max-w-6xl">
-        {/* Chapter Content */}
-        <div className="prose prose-invert prose-lg mb-8 max-w-none md:mb-12">
-          <h2 className="mb-4 text-2xl font-bold md:text-3xl">
-            {currentChapter.title}
-          </h2>
-          <p className="leading-relaxed text-slate-300">
-            {currentChapter.content}
-          </p>
-        </div>
-
-        {/* Interactive Demo Section */}
-        <section className="mb-8 rounded-lg border border-slate-700 bg-slate-900/50 p-6 md:mb-12">
-          <h3 className="mb-6 flex items-center gap-2 text-xl font-semibold text-rose-400">
-            <Code2 className="h-5 w-5" />
-            Interactive Demonstration
-          </h3>
-
-          {/* Chapter-specific demos */}
-          {chapter === 0 && (
-            <div className="space-y-6">
-              <div className="rounded-lg border border-red-500/30 bg-red-950/20 p-6">
-                <div className="mb-4 flex items-center gap-2">
-                  <AlertTriangle className="h-5 w-5 text-red-500" />
-                  <h4 className="text-lg font-medium">
-                    The Problem: Adjacent JSX Elements
-                  </h4>
-                </div>
-                <CodeBlock
-                  code={errorCode}
-                  variant="error"
-                  title="// ❌ Syntax Error: Adjacent JSX elements must be wrapped"
-                  defaultExpanded={true}
-                />
-                <div className="mt-4 rounded border border-red-500/50 bg-red-950/30 p-4">
-                  <p className="flex items-center gap-2 text-red-300">
-                    <AlertTriangle className="h-4 w-4" />
-                    Console Error: "Adjacent JSX elements must be wrapped in an
-                    enclosing tag"
-                  </p>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {chapter === 1 && (
-            <div className="space-y-6">
-              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
+      <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6">
+        <ModuleLayout
+          sidebar={
+            <div className="sticky top-24 space-y-6">
+              {/* Status Card */}
+              <div className="rounded-xl border border-rose-500/20 bg-slate-900/60 p-6 backdrop-blur-sm">
+                <h3 className="mb-4 text-lg font-bold text-rose-100">
+                  Project Mayhem Status
+                </h3>
                 <div className="space-y-4">
-                  <h4 className="text-lg font-medium text-yellow-400">
-                    ❌ The Third Man (div wrapper)
-                  </h4>
-                  <CodeBlock
-                    code={divWrapperCode}
-                    variant="error"
-                    title="// ❌ Extra wrapper div breaks layouts"
-                    defaultExpanded={true}
-                  />
-                  <button
-                    onClick={addWrapper}
-                    className="rounded bg-yellow-600 px-4 py-2 text-white transition-colors hover:bg-yellow-700"
-                  >
-                    🧍 Add Another "Third Man" Wrapper
-                  </button>
-                </div>
-                <div className="space-y-4">
-                  <div className="rounded-lg bg-slate-800 p-6">
-                    <h5 className="mb-3 text-sm font-medium text-slate-400">
-                      Flexbox Layout Demo
-                    </h5>
-                    <div
-                      className={`flex gap-4 rounded p-4 ${flexLayoutBroken ? "border border-red-500/50 bg-red-950/30" : "bg-slate-900"}`}
-                    >
-                      <DemoComponent useFragment={false} />
-                      <div className="flex-1 rounded bg-slate-700 p-4 text-slate-300">
-                        Space Monkey 3
-                      </div>
+                  <div>
+                    <h4 className="mb-2 text-sm font-medium text-slate-400">
+                      Leaked Wrappers
+                    </h4>
+                    <div className="flex items-end gap-2">
+                      <span className="font-mono text-3xl font-bold text-rose-400">
+                        {leakedWrappers}
+                      </span>
+                      <span className="mb-1 text-xs text-slate-500">
+                        / 50 (Circuit Breaker)
+                      </span>
                     </div>
-                    {flexLayoutBroken && (
-                      <p className="mt-3 flex items-center gap-2 text-sm text-red-400">
-                        <AlertTriangle className="h-4 w-4" />
-                        Layout broken: Wrapper div adds unexpected spacing
-                      </p>
-                    )}
-                  </div>
-                </div>
-              </div>
-            </div>
-          )}
-
-          {chapter === 2 && (
-            <div className="space-y-6">
-              <div className="grid grid-cols-1 gap-6 lg:grid-cols-2">
-                <div className="space-y-4">
-                  <h4 className="text-lg font-medium text-emerald-400">
-                    ✅ The Fragment Solution
-                  </h4>
-                  <CodeBlock
-                    code={fragmentCode}
-                    variant="success"
-                    title="// ✅ Fragment: Groups without extra DOM nodes"
-                    defaultExpanded={true}
-                  />
-                  <div className="flex gap-2">
-                    <button
-                      onClick={() => setWrapperMode("div")}
-                      className={`rounded px-4 py-2 transition-colors ${wrapperMode === "div" ? "bg-yellow-600" : "bg-slate-700 hover:bg-slate-600"}`}
-                    >
-                      Show Div Wrapper
-                    </button>
-                    <button
-                      onClick={() => setWrapperMode("fragment")}
-                      className={`rounded px-4 py-2 transition-colors ${wrapperMode === "fragment" ? "bg-emerald-600" : "bg-slate-700 hover:bg-slate-600"}`}
-                    >
-                      Show Fragment
-                    </button>
-                  </div>
-                </div>
-                <div className="space-y-4">
-                  <div className="rounded-lg bg-slate-800 p-6">
-                    <h5 className="mb-3 text-sm font-medium text-slate-400">
-                      Live Preview
-                    </h5>
-                    <div className="flex gap-4 rounded bg-slate-900 p-4">
-                      <DemoComponent useFragment={wrapperMode === "fragment"} />
-                      <div className="flex-1 rounded bg-slate-700 p-4 text-slate-300">
-                        Space Monkey 3
-                      </div>
-                    </div>
-                    <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
-                      <div className="rounded bg-slate-900/50 p-3">
-                        <div className="text-slate-400">Wrapper Type</div>
-                        <div
-                          className={
-                            wrapperMode === "div"
-                              ? "text-yellow-400"
-                              : "text-emerald-400"
-                          }
-                        >
-                          {wrapperMode === "div"
-                            ? "div (extra node)"
-                            : "<> (fragment)"}
-                        </div>
-                      </div>
-                      <div className="rounded bg-slate-900/50 p-3">
-                        <div className="text-slate-400">DOM Nodes</div>
-                        <div className="text-slate-300">
-                          {wrapperMode === "div" ? "3" : "2"}
-                        </div>
-                      </div>
+                    <div className="mt-2 h-2 w-full overflow-hidden rounded-full bg-slate-800">
+                      <div
+                        className="h-full bg-rose-500 transition-all duration-300"
+                        style={{ width: `${(leakedWrappers / 50) * 100}%` }}
+                      />
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
 
-          {chapter === 3 && (
-            <div className="space-y-6">
-              <div className="grid grid-cols-1 gap-8 lg:grid-cols-2">
-                <div className="space-y-4">
-                  <h4 className="text-lg font-medium text-yellow-400">
-                    ❌ Div Wrapper (Breaks Layout)
-                  </h4>
-                  <CodeBlock
-                    code={comparisonCodeDiv}
-                    variant="error"
-                    title="// ❌ Wrapper div breaks flex parent expectations"
-                    defaultExpanded={true}
-                  />
-                  <div className="rounded border border-red-500/30 bg-red-950/20 p-4">
-                    <p className="text-sm text-red-300">
-                      The extra div becomes a flex item itself, causing
-                      unexpected spacing and alignment issues.
-                    </p>
+              {/* Metaphor Map */}
+              <div className="rounded-xl border border-slate-700 bg-slate-900/50 p-5">
+                <h3 className="mb-4 flex items-center gap-2 text-lg font-bold text-slate-200">
+                  <Shield className="h-5 w-5 text-rose-400" />
+                  Metaphor Registry
+                </h3>
+                <div className="space-y-3">
+                  <div className="flex justify-between border-b border-slate-800 pb-2">
+                    <span className="text-sm text-slate-400">Wrapper Div</span>
+                    <span className="text-sm font-medium text-rose-300">
+                      The Third Man
+                    </span>
                   </div>
-                </div>
-                <div className="space-y-4">
-                  <h4 className="text-lg font-medium text-emerald-400">
-                    ✅ Fragment (Clean Structure)
-                  </h4>
-                  <CodeBlock
-                    code={comparisonCodeFragment}
-                    variant="success"
-                    title="// ✅ Fragment maintains parent layout"
-                    defaultExpanded={true}
-                  />
-                  <div className="rounded border border-emerald-500/30 bg-emerald-950/20 p-4">
-                    <p className="text-sm text-emerald-300">
-                      Fragment groups children without adding a DOM node,
-                      preserving flexbox layout rules.
-                    </p>
+                  <div className="flex justify-between border-b border-slate-800 pb-2">
+                    <span className="text-sm text-slate-400">Fragment</span>
+                    <span className="text-sm font-medium text-emerald-300">
+                      Integrated Self
+                    </span>
                   </div>
-                </div>
-              </div>
-
-              <div className="mt-8 border-t border-slate-700 pt-6">
-                <div className="flex items-center justify-between">
-                  <button
-                    onClick={resetDemo}
-                    className="rounded bg-slate-700 px-4 py-2 text-white transition-colors hover:bg-slate-600"
-                  >
-                    🔄 Reset Demo
-                  </button>
-                  <div className="text-sm text-slate-400">
-                    Leaked wrapper divs:{" "}
-                    <span className="font-mono text-yellow-400">
-                      {leakedWrappers}
+                  <div className="flex justify-between border-b border-slate-800 pb-2">
+                    <span className="text-sm text-slate-400">Flex Layout</span>
+                    <span className="text-sm font-medium text-slate-300">
+                      Social Structure
                     </span>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
 
-          {chapter === 4 && (
-            <div className="space-y-6">
-              <div className="space-y-4">
-                <div className="mb-4 flex items-center gap-2">
-                  <Check className="h-5 w-5 text-emerald-500" />
-                  <h4 className="text-lg font-medium">
-                    Clean Implementation with Fragments
-                  </h4>
+              {/* Key Insight */}
+              <div className="rounded-xl border border-rose-500/30 bg-rose-950/20 p-4">
+                <h4 className="mb-2 flex items-center gap-2 font-bold text-rose-300">
+                  <Check className="h-4 w-4" />
+                  Key Insight
+                </h4>
+                <p className="text-sm text-rose-200/80">
+                  {chapter === 0 &&
+                    "A component can only return one root element, just as you can only be one person at a time."}
+                  {chapter === 1 &&
+                    "Wrapping elements in a div creates a 'Third Man' that breaks layout structures."}
+                  {chapter === 2 &&
+                    "Fragments (<>...</>) allow you to group elements without adding a node to the DOM."}
+                  {chapter === 3 &&
+                    "Fragments preserve the parent's layout rules (like Flexbox or Grid) by being invisible."}
+                  {chapter === 4 &&
+                    "The cleanest structures have nothing extra. No wrapper divs, no layout breakage."}
+                </p>
+              </div>
+
+              {/* Quote */}
+              <div className="rounded-xl border border-slate-800 bg-slate-900/30 p-4">
+                <p className="text-sm italic text-slate-400">
+                  "It's only after we've lost everything that we're free to do
+                  anything."
+                </p>
+                <p className="mt-2 text-right text-xs text-slate-500">
+                  — Tyler Durden
+                </p>
+              </div>
+            </div>
+          }
+        >
+          {/* Chapter Content */}
+          <div className="prose prose-invert prose-lg mb-8 max-w-none sm:mb-12">
+            <h2 className="mb-4 text-2xl font-bold text-rose-100 sm:text-3xl">
+              {currentChapter.title}
+            </h2>
+            <p className="leading-relaxed text-slate-300">
+              {currentChapter.content}
+            </p>
+          </div>
+
+          {/* Interactive Demo Section */}
+          <section className="mb-8 rounded-xl border border-rose-500/20 bg-slate-900/40 p-6 backdrop-blur-sm sm:mb-12 sm:p-8">
+            <div className="mb-6 flex items-center gap-2">
+              <div className="h-6 w-2 rounded bg-rose-500"></div>
+              <h3 className="text-xl font-bold text-rose-200">
+                Interactive Demonstration
+              </h3>
+            </div>
+
+            {chapter === 0 && (
+              <div className="space-y-6">
+                <div className="rounded-lg border border-red-500/30 bg-red-950/20 p-6">
+                  <div className="mb-4 flex items-center gap-2">
+                    <AlertTriangle className="h-5 w-5 text-red-500" />
+                    <h4 className="text-lg font-medium text-red-200">
+                      The Problem: Adjacent JSX Elements
+                    </h4>
+                  </div>
+                  <CodeBlock
+                    code={errorCode}
+                    language="tsx"
+                    title="// ❌ Syntax Error: Adjacent JSX elements must be wrapped"
+                    defaultExpanded={true}
+                  />
+                  <div className="mt-4 rounded border border-red-500/50 bg-red-950/30 p-4">
+                    <p className="flex items-center gap-2 text-red-300">
+                      <AlertTriangle className="h-4 w-4" />
+                      Console Error: "Adjacent JSX elements must be wrapped in
+                      an enclosing tag"
+                    </p>
+                  </div>
                 </div>
-                <CodeBlock
-                  code={cleanCode}
-                  variant="success"
-                  title="// ✅ Clean component using multiple fragments"
-                  defaultExpanded={true}
-                  language="jsx"
-                />
-                <div className="rounded-lg border border-emerald-500/30 bg-emerald-950/20 p-6">
-                  <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
-                    <div className="rounded bg-slate-900/50 p-4">
-                      <div className="mb-2 font-medium text-emerald-400">
-                        DOM Efficiency
+              </div>
+            )}
+
+            {chapter === 1 && (
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 gap-6">
+                  <div className="space-y-4">
+                    <h4 className="text-lg font-medium text-yellow-400">
+                      ❌ The Third Man (div wrapper)
+                    </h4>
+                    <CodeBlock
+                      code={divWrapperCode}
+                      language="tsx"
+                      title="// ❌ Extra wrapper div breaks layouts"
+                      defaultExpanded={true}
+                    />
+                    <button
+                      onClick={addWrapper}
+                      className="w-full rounded bg-yellow-600 px-4 py-2 text-white transition-colors hover:bg-yellow-700"
+                    >
+                      🧍 Add Another "Third Man" Wrapper
+                    </button>
+                  </div>
+                  <div className="space-y-4">
+                    <div className="rounded-lg bg-slate-800 p-6">
+                      <h5 className="mb-3 text-sm font-medium text-slate-400">
+                        Flexbox Layout Demo
+                      </h5>
+                      <div
+                        className={`flex gap-4 rounded p-4 ${flexLayoutBroken ? "border border-red-500/50 bg-red-950/30" : "bg-slate-900"}`}
+                      >
+                        <DemoComponent useFragment={false} />
+                        <div className="flex-1 rounded bg-slate-700 p-4 text-slate-300">
+                          Space Monkey 3
+                        </div>
                       </div>
-                      <div className="font-mono text-3xl font-bold text-emerald-300">
-                        0
-                      </div>
-                      <div className="text-sm text-slate-400">
-                        extra wrapper nodes
-                      </div>
+                      {flexLayoutBroken && (
+                        <p className="mt-3 flex items-center gap-2 text-sm text-red-400">
+                          <AlertTriangle className="h-4 w-4" />
+                          Layout broken: Wrapper div adds unexpected spacing
+                        </p>
+                      )}
                     </div>
-                    <div className="rounded bg-slate-900/50 p-4">
-                      <div className="mb-2 font-medium text-emerald-400">
-                        Layout Integrity
-                      </div>
-                      <div className="text-3xl font-bold text-emerald-300">
-                        ✓
-                      </div>
-                      <div className="text-sm text-slate-400">
-                        CSS rules preserved
-                      </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {chapter === 2 && (
+              <div className="space-y-6">
+                <div className="grid grid-cols-1 gap-6">
+                  <div className="space-y-4">
+                    <h4 className="text-lg font-medium text-emerald-400">
+                      ✅ The Fragment Solution
+                    </h4>
+                    <CodeBlock
+                      code={fragmentCode}
+                      language="tsx"
+                      title="// ✅ Fragment: Groups without extra DOM nodes"
+                      defaultExpanded={true}
+                    />
+                    <div className="flex gap-2">
+                      <button
+                        onClick={() => setWrapperMode("div")}
+                        className={`flex-1 rounded px-4 py-2 transition-colors ${wrapperMode === "div" ? "bg-yellow-600 text-white" : "bg-slate-700 text-slate-300 hover:bg-slate-600"}`}
+                      >
+                        Show Div Wrapper
+                      </button>
+                      <button
+                        onClick={() => setWrapperMode("fragment")}
+                        className={`flex-1 rounded px-4 py-2 transition-colors ${wrapperMode === "fragment" ? "bg-emerald-600 text-white" : "bg-slate-700 text-slate-300 hover:bg-slate-600"}`}
+                      >
+                        Show Fragment
+                      </button>
                     </div>
-                    <div className="rounded bg-slate-900/50 p-4">
-                      <div className="mb-2 font-medium text-emerald-400">
-                        Semantic Value
+                  </div>
+                  <div className="space-y-4">
+                    <div className="rounded-lg bg-slate-800 p-6">
+                      <h5 className="mb-3 text-sm font-medium text-slate-400">
+                        Live Preview
+                      </h5>
+                      <div className="flex gap-4 rounded bg-slate-900 p-4">
+                        <DemoComponent
+                          useFragment={wrapperMode === "fragment"}
+                        />
+                        <div className="flex-1 rounded bg-slate-700 p-4 text-slate-300">
+                          Space Monkey 3
+                        </div>
                       </div>
-                      <div className="text-3xl font-bold text-emerald-300">
-                        ✓
-                      </div>
-                      <div className="text-sm text-slate-400">
-                        clean HTML structure
+                      <div className="mt-4 grid grid-cols-2 gap-4 text-sm">
+                        <div className="rounded bg-slate-900/50 p-3">
+                          <div className="text-slate-400">Wrapper Type</div>
+                          <div
+                            className={
+                              wrapperMode === "div"
+                                ? "text-yellow-400"
+                                : "text-emerald-400"
+                            }
+                          >
+                            {wrapperMode === "div"
+                              ? "div (extra node)"
+                              : "<> (fragment)"}
+                          </div>
+                        </div>
+                        <div className="rounded bg-slate-900/50 p-3">
+                          <div className="text-slate-400">DOM Nodes</div>
+                          <div className="text-slate-300">
+                            {wrapperMode === "div" ? "3" : "2"}
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-            </div>
-          )}
-        </section>
+            )}
 
-        {/* Navigation */}
-        <nav className="mt-8 flex items-center justify-between md:mt-12">
-          <button
-            onClick={() => setChapter(Math.max(0, chapter - 1))}
-            disabled={chapter === 0}
-            className="flex items-center gap-2 rounded-lg bg-rose-700 px-5 py-3 text-white transition-colors hover:bg-rose-600 disabled:cursor-not-allowed disabled:opacity-30"
-          >
-            <Minus className="h-4 w-4" />
-            Previous
-          </button>
+            {chapter === 3 && (
+              <div className="space-y-6">
+                <CodeComparison
+                  badCode={comparisonCodeDiv}
+                  goodCode={comparisonCodeFragment}
+                  language="tsx"
+                  themeColor="rose"
+                  badLabel="❌ Div Wrapper (Breaks Layout)"
+                  goodLabel="✅ Fragment (Clean Structure)"
+                  badExplanation="The extra div becomes a flex item itself, causing unexpected spacing and alignment issues."
+                  goodExplanation="Fragment groups children without adding a DOM node, preserving flexbox layout rules."
+                />
 
-          <div className="flex flex-col items-center">
-            <div className="mb-1 flex items-center gap-2">
-              <span className="text-sm text-slate-400">Chapter</span>
-              <span className="font-mono font-bold text-rose-400">
-                {chapter + 1}
-              </span>
-              <span className="text-sm text-slate-400">of</span>
-              <span className="font-mono font-bold">{chapters.length}</span>
-            </div>
-            <div className="h-1.5 w-48 overflow-hidden rounded-full bg-slate-800">
-              <div
-                className="h-full bg-rose-500 transition-all duration-300"
-                style={{ width: `${((chapter + 1) / chapters.length) * 100}%` }}
-              />
-            </div>
-          </div>
+                <div className="mt-8 border-t border-slate-700 pt-6">
+                  <div className="flex items-center justify-between">
+                    <button
+                      onClick={resetDemo}
+                      className="rounded bg-slate-700 px-4 py-2 text-white transition-colors hover:bg-slate-600"
+                    >
+                      🔄 Reset Demo
+                    </button>
+                    <div className="text-sm text-slate-400">
+                      Leaked wrapper divs:{" "}
+                      <span className="font-mono text-yellow-400">
+                        {leakedWrappers}
+                      </span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
 
-          <button
-            onClick={() =>
-              setChapter(Math.min(chapters.length - 1, chapter + 1))
-            }
-            disabled={chapter === chapters.length - 1}
-            className="flex items-center gap-2 rounded-lg bg-rose-700 px-5 py-3 text-white transition-colors hover:bg-rose-600 disabled:cursor-not-allowed disabled:opacity-30"
-          >
-            Next
-            <Plus className="h-4 w-4" />
-          </button>
-        </nav>
+            {chapter === 4 && (
+              <div className="space-y-6">
+                <div className="space-y-4">
+                  <div className="mb-4 flex items-center gap-2">
+                    <Check className="h-5 w-5 text-emerald-500" />
+                    <h4 className="text-lg font-medium text-emerald-200">
+                      Clean Implementation with Fragments
+                    </h4>
+                  </div>
+                  <CodeBlock
+                    code={cleanCode}
+                    language="tsx"
+                    title="// ✅ Clean component using multiple fragments"
+                    defaultExpanded={true}
+                  />
+                  <div className="rounded-lg border border-emerald-500/30 bg-emerald-950/20 p-6">
+                    <div className="grid grid-cols-1 gap-6 md:grid-cols-3">
+                      <div className="rounded bg-slate-900/50 p-4">
+                        <div className="mb-2 font-medium text-emerald-400">
+                          DOM Efficiency
+                        </div>
+                        <div className="flex items-center gap-2">
+                          <span className="font-mono text-3xl font-bold text-emerald-300">
+                            0
+                          </span>
+                          <Users className="h-5 w-5 text-slate-500" />
+                        </div>
+                        <div className="text-sm text-slate-400">
+                          extra wrapper nodes
+                        </div>
+                      </div>
+                      <div className="rounded bg-slate-900/50 p-4">
+                        <div className="mb-2 font-medium text-emerald-400">
+                          Layout Integrity
+                        </div>
+                        <div className="text-3xl font-bold text-emerald-300">
+                          ✓
+                        </div>
+                        <div className="text-sm text-slate-400">
+                          CSS rules preserved
+                        </div>
+                      </div>
+                      <div className="rounded bg-slate-900/50 p-4">
+                        <div className="mb-2 font-medium text-emerald-400">
+                          Semantic Value
+                        </div>
+                        <div className="text-3xl font-bold text-emerald-300">
+                          ✓
+                        </div>
+                        <div className="text-sm text-slate-400">
+                          clean HTML structure
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+          </section>
+
+          <ChapterNavigation
+            currentChapter={chapter}
+            totalChapters={chapters.length}
+            onChapterChange={setChapter}
+            themeColor="rose"
+          />
+        </ModuleLayout>
       </main>
     </div>
   );
