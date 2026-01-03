@@ -48,43 +48,43 @@ export default function CodeSplittingWithHorcruxes(): JSX.Element {
     { name: "Nagini", size: 890, loaded: false, error: false, component: null },
   ]);
 
-  const chapters: Chapter[] = [
-    {
-      id: "intro",
-      title: "The All-or-Nothing Soul",
-      content:
-        "The air in the Forbidden Section of the Hogwarts library was thick with the scent of decaying parchment and forgotten spells. Moonlight struggled through the high, grimy windows, illuminating swirling dust motes like tiny galaxies. Here, long after the castle had fallen silent, Tom Riddle worked. He wasn't studying for his exams; he was plotting against mortality itself. His fingers traced the embossed title of a book bound in what looked unsettlingly like human skin: Magick Moste Evile. He turned a page, the parchment crackling in protest. His eyes devoured a passage on the nature of the soul. The ancient text described it as a singular, whole, and indivisible essence—the complete source of a wizard's power. All of one's magic, memories, and being, contained in a single, perfect vessel. Tom felt a surge of pride in his own powerful soul, but it was immediately followed by a cold spike of contempt. Perfect? No. It was fragile. He closed the book with a soft thud. 'A single soul, however powerful, is a single point of failure,' he whispered to the darkness. The entire structure, dependent on one component. It was poor design.",
-      demoKey: "monolithic-bundle",
-    },
-    {
-      id: "build",
-      title: "The Godric's Hollow Crash",
-      content:
-        "The night was cold and still in Godric's Hollow, but Lord Voldemort was a furnace of dark energy. As he glided toward the Potter's cottage, he felt the totality of his power thrumming within him. Every curse he had ever mastered, every secret torn from the minds of his victims, every ounce of his ambition and rage—it was all present, a single, monolithic payload of pure magical might. He was a walking cataclysm, his entire application loaded into memory, ready to execute. There was no part of him held in reserve; he was all here, all at once. Invincible. Then, the rebound. It was not pain. It was not death. It was a system crash on a cosmic scale. One moment, he was the complete, unified architecture of Lord Voldemort. The next, a fatal error. His entire being—the whole, massive, singular soul—was violently ejected from its container. He felt his knowledge, his power, his very consciousness being ripped away not in pieces, but as one cohesive, screaming whole. The monolithic structure, having hit an unhandled exception, was collapsing entirely. The application wasn't just closing; it was being uninstalled by a hurricane. 'My entire being,' he hissed, 'dependent on a single vessel. One flaw in the execution, and the entire structure failed. All or nothing. And I got nothing.'",
-      demoKey: "crash-demo",
-    },
-    {
-      id: "climax",
-      title: "The Soul Divided",
-      content:
-        "In a dark, dripping chamber far beneath the earth, the newly reborn Lord Voldemort prepared to correct his fundamental design flaw. His rudimentary body was weak, but his mind was ruthlessly clear. He would never again be a single entity. His target was Nagini, his loyal serpent. The murder of Bertha Jorkins was fresh, the act having ripped his soul, preparing it for the ritual. Now came the deliberate, architectural work. He focused his will, not outward to destroy, but inward, to partition. He reached into his own essence and took hold of a fragment. The sensation was a violation of nature—a tearing, shearing agony that made the Cruciatus Curse feel like a tickle. He was deliberately corrupting his own source code, splitting a piece off from the main thread. He felt his immediate power diminish; the monolithic force he once commanded was now lesser, fractured. But as he incanted the final words of the spell, forcing the severed piece of his soul into the hissing snake, he felt something new replace the pain: security. Resilience. 'They can destroy this body,' he whispered, his voice raspy. 'But they cannot destroy me. I am no longer a single entity. I am a network.'",
-      demoKey: "lazy-loading",
-    },
-    {
-      id: "resolution",
-      title: "Monolith vs. Plague",
-      content:
-        "In his office, surrounded by the gentle whirring of silver instruments, Dumbledore led Harry to the Pensieve. 'To understand how to fight Voldemort now, you must first understand what he was,' he said. He uncorked a vial of silvery memory. 'Observe.' Approach A: The Monolith at the Ministry. Harry was standing in the Atrium of the Ministry of Magic. There was a sudden, violent crack of Apparition, and Lord Voldemort stood there in his entirety. It was not just an arrival; it was a detonation of presence. His entire, unsplit soul manifested at once—a massive, instantaneous payload of terror and power. He was a walking catastrophe, and the initial load time was zero. Dumbledore appeared and the duel began. But Harry noticed that all of Voldemort's focus, all of his magic, was right here. When Dumbledore finally forced him back, Voldemort Disapparated with another deafening crack. And then... silence. The threat was immense, but it was either 100% present or 100% gone. Approach B: The Plague at the Ministry. The Atrium was the same, but the sequence was different. The attack began not with Voldemort, but with Bellatrix Lestrange—a smaller, separate piece of his plan. Then, the fountain statues creaked to life—another component loading in. The sense of dread built in layers. Only then did Voldemort himself appear. The main bundle had arrived. The duel with Dumbledore was just as fierce, but Harry felt a crucial difference. Voldemort's power wasn't only in the man standing before him. It was anchored elsewhere—in a locket, in a diary, in a ring. When Dumbledore drove him away, the man vanished, but the threat did not. 'He was a monolith. Now, he is a plague.'",
-      demoKey: "comparison",
-    },
-    {
-      id: "summary",
-      title: "Hunting the Pieces",
-      content:
-        "The cold seeped through the canvas of the tent, but inside, a single lantern cast a warm, golden glow on a worn parchment map. Harry, Ron, and Hermione were not planning a frontal assault. They were not trying to force a single, decisive confrontation with Lord Voldemort. Their entire strategy had shifted. They were hunting. 'The locket is done,' Hermione said, her voice low and steady. 'We think the cup might be at Gringotts. That's the next request we need to make.' Ron nodded. 'It's slow work. One at a time.' 'It's the only way,' Harry said. The lesson from Dumbledore's Pensieve was burned into his mind. Attacking Voldemort's main body was pointless while the other pieces of his soul—the lazy-loaded components of his power—remained hidden and active. 'We don't go after the main body. We find the pieces. That's the only way.' Their quest was no longer a battle, but a systematic process of discovery and destruction, triggering the load of each Horcrux, dealing with it, and moving to the next. This new understanding culminated in the final moments of the Battle of Hogwarts. As Harry walked toward the Forbidden Forest, ready to sacrifice himself, he felt a strange sense of completeness. He was the final, unknown Horcrux. Every other piece had been located and destroyed. The network of souls that had made Voldemort immortal was being dismantled, one node at a time.",
-      demoKey: "sequential-loading",
-    },
-  ];
+const chapters: Chapter[] = [
+  {
+    id: "intro",
+    title: "The All-or-Nothing Soul",
+    content:
+      "Tom Riddle closed the ancient tome with contempt. His soul—powerful, singular, complete—was also fragile. 'A single soul is a single point of failure,' he whispered. 'Poor design.'",
+    demoKey: "monolithic-bundle",
+  },
+  {
+    id: "build",
+    title: "The Godric's Hollow Crash",
+    content:
+      "Voldemort arrived at the Potter cottage as pure, concentrated power—his entire being loaded into one vessel. When the curse rebounded, it wasn't partial failure. The whole monolithic structure collapsed instantly.",
+    demoKey: "crash-demo",
+  },
+  {
+    id: "climax",
+    title: "The Soul Divided",
+    content:
+      "The newly reborn Voldemort performed the ritual, tearing his soul and anchoring a fragment into Nagini. His immediate power diminished, but something replaced it: resilience. 'I am no longer a single entity. I am a network.'",
+    demoKey: "lazy-loading",
+  },
+  {
+    id: "resolution",
+    title: "Monolith vs. Plague",
+    content:
+      "In Dumbledore's Pensieve, Harry saw two approaches. The Monolith: Voldemort arrived in full, overwhelming presence—but when driven away, the threat vanished entirely. The Plague: He appeared in stages, anchored elsewhere. When the man fled, the threat remained.",
+    demoKey: "comparison",
+  },
+  {
+    id: "summary",
+    title: "Hunting the Pieces",
+    content:
+      "'The locket is done. The cup is next,' Hermione said. Their strategy was clear: don't attack the main body while distributed pieces remain. Hunt systematically, one Horcrux at a time, until the network falls.",
+    demoKey: "sequential-loading",
+  },
+];
 
   const currentChapter = chapters[chapter];
 
