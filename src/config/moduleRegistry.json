@@ -1,10 +1,27 @@
 [
   {
-    "id": "inception-dream-layers-as-components",
-    "path": "/inception-dream-layers-as-components",
-    "title": "Inception",
-    "subtitle": "Ariadne, The Architect, 2010",
-    "concept": "React Components",
+    "id": "usestate-hook-macbeth",
+    "path": "/usestate-hook-macbeth",
+    "title": "Macbeth",
+    "subtitle": "The Scottish Play, c. 1606",
+    "concept": "React Concept: useState Hook",
+    "icon": "Crown",
+    "colorClass": "text-amber-500",
+    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
+    "component": "dynamic_import",
+    "wrapperProps": {
+      "bgClass": "bg-slate-950",
+      "textClass": "text-slate-300",
+      "fontClass": "font-serif"
+    },
+    "enabled": true
+  },
+  {
+    "id": "state-through-hamlet",
+    "path": "/state-through-hamlet",
+    "title": "Hamlet",
+    "subtitle": "The Prince of Denmark, c. 1600",
+    "concept": "React Concept: Component State",
     "icon": "Brain",
     "colorClass": "text-cyan-500",
     "bgClass": "bg-cyan-950/20 border-cyan-500/30 hover:border-cyan-500",
@@ -12,323 +29,170 @@
     "wrapperProps": {
       "bgClass": "bg-slate-950",
       "textClass": "text-slate-300",
-      "fontClass": "font-sans"
+      "fontClass": "font-serif"
     },
     "enabled": true
   },
   {
-    "id": "the-matrix-is-jsx",
-    "path": "/the-matrix-is-jsx",
-    "title": "The Matrix",
-    "subtitle": "Neo, The One, 1999",
-    "concept": "JSX (JavaScript XML)",
-    "icon": "Code",
+    "id": "jsx-hamlet-mousetrap",
+    "path": "/jsx-hamlet-mousetrap",
+    "title": "Hamlet's Mousetrap",
+    "subtitle": "Hamlet, The Playwright, c. 1600",
+    "concept": "React Concept: JSX (JavaScript XML)",
+    "icon": "BookOpen",
+    "colorClass": "text-amber-500",
+    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
+    "component": "dynamic_import",
+    "wrapperProps": {
+      "bgClass": "bg-slate-950",
+      "textClass": "text-slate-300",
+      "fontClass": "font-serif"
+    },
+    "enabled": true
+  },
+  {
+    "id": "conditional-rendering-forest-of-arden",
+    "path": "/conditional-rendering-forest-of-arden",
+    "title": "As You Like It",
+    "subtitle": "Rosalind, The Forest of Arden, 1599",
+    "concept": "Conditional Rendering",
+    "icon": "Mask",
     "colorClass": "text-emerald-500",
     "bgClass": "bg-emerald-950/20 border-emerald-500/30 hover:border-emerald-500",
     "component": "dynamic_import",
     "wrapperProps": {
       "bgClass": "bg-slate-950",
       "textClass": "text-slate-300",
-      "fontClass": "font-mono"
-    },
-    "enabled": true
-  },
-  {
-    "id": "props-the-wand-chooses-the-wizard",
-    "path": "/props-the-wand-chooses-the-wizard",
-    "title": "Harry Potter and the Philosopher's Stone",
-    "subtitle": "Harry Potter, Ollivander's, 1997",
-    "concept": "Props (Properties)",
-    "icon": "Wand",
-    "colorClass": "text-amber-400",
-    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-gradient-to-br from-slate-950 via-slate-900 to-amber-950/30",
-      "textClass": "text-amber-50",
       "fontClass": "font-serif"
     },
     "enabled": true
   },
   {
-    "id": "react-state-groundhog-day",
-    "path": "/react-state-groundhog-day",
-    "title": "Groundhog Day",
-    "subtitle": "Phil Connors, 1993",
-    "concept": "React State Management",
-    "icon": "Calendar",
+    "id": "event-handling-julius-caesar",
+    "path": "/event-handling-julius-caesar",
+    "title": "Julius Caesar (Act 3, Scene 2)",
+    "subtitle": "Mark Antony, The Roman Forum, 44 BC",
+    "concept": "React Event Handling",
+    "icon": "Volume2",
     "colorClass": "text-amber-500",
     "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
     "component": "dynamic_import",
     "wrapperProps": {
-      "bgClass": "bg-gradient-to-br from-slate-950 to-blue-950",
-      "textClass": "text-slate-300",
-      "fontClass": "font-sans"
+      "bgClass": "bg-stone-950",
+      "textClass": "text-stone-300",
+      "fontClass": "font-serif"
     },
     "enabled": true
   },
   {
-    "id": "useeffect-back-to-the-future",
-    "path": "/useeffect-back-to-the-future",
-    "title": "Back to the Future",
-    "subtitle": "Marty McFly, 1985",
-    "concept": "useEffect Hook",
-    "icon": "Zap",
-    "colorClass": "text-amber-500",
-    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
+    "id": "use-effect-hamlet-ghost",
+    "path": "/use-effect-hamlet-ghost",
+    "title": "Hamlet",
+    "subtitle": "The Prince of Denmark, c. 1600",
+    "concept": "React Concept: useEffect Hook",
+    "icon": "Ghost",
+    "colorClass": "text-indigo-500",
+    "bgClass": "bg-indigo-950/20 border-indigo-500/30 hover:border-indigo-500",
     "component": "dynamic_import",
     "wrapperProps": {
-      "bgClass": "bg-gradient-to-br from-slate-900 to-slate-950",
-      "textClass": "text-slate-300",
-      "fontClass": "font-sans"
-    },
-    "enabled": true
-  },
-  {
-    "id": "conditional-rendering-in-wonderland",
-    "path": "/conditional-rendering-in-wonderland",
-    "title": "Alice's Adventures in Wonderland",
-    "subtitle": "Alice, Wonderland, 1865",
-    "concept": "Conditional Rendering",
-    "icon": "Door",
-    "colorClass": "text-sky-500",
-    "bgClass": "bg-sky-950/20 border border-sky-500/30 hover:border-sky-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-gradient-to-br from-slate-950 via-purple-950/20 to-slate-950",
+      "bgClass": "bg-slate-950",
       "textClass": "text-slate-300",
       "fontClass": "font-serif"
     },
     "enabled": true
   },
   {
-    "id": "component-lifecycle-circle-of-life",
-    "path": "/component-lifecycle-circle-of-life",
-    "title": "The Lion King",
-    "subtitle": "Simba, Pride Lands, 1994",
-    "concept": "Component Lifecycle",
+    "id": "lists-and-keys-henry-v",
+    "path": "/lists-and-keys-henry-v",
+    "title": "Henry V",
+    "subtitle": "The Band of Brothers, 1415",
+    "concept": "React Lists and Keys",
     "icon": "Crown",
     "colorClass": "text-amber-500",
     "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
     "component": "dynamic_import",
     "wrapperProps": {
-      "bgClass": "bg-gradient-to-br from-amber-950 via-stone-900 to-amber-950",
-      "textClass": "text-amber-100",
+      "bgClass": "bg-slate-950",
+      "textClass": "text-slate-300",
       "fontClass": "font-serif"
     },
     "enabled": true
   },
   {
-    "id": "lifting-state-up-in-middle-earth",
-    "path": "/lifting-state-up-in-middle-earth",
-    "title": "The Lord of the Rings",
-    "subtitle": "The Fellowship, 1954",
+    "id": "lifting-state-up",
+    "path": "/lifting-state-up",
+    "title": "Romeo and Juliet",
+    "subtitle": "Verona, 1597",
     "concept": "Lifting State Up",
-    "icon": "Zap",
-    "colorClass": "text-amber-500",
-    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-gradient-to-b from-slate-950 to-slate-900",
-      "textClass": "text-amber-50",
-      "fontClass": "font-serif"
-    },
-    "enabled": true
-  },
-  {
-    "id": "composition-vs-inheritance-frankenstein",
-    "path": "/composition-vs-inheritance-frankenstein",
-    "title": "Frankenstein",
-    "subtitle": "The Modern Prometheus, 1818",
-    "concept": "Composition vs Inheritance",
-    "icon": "Brain",
-    "colorClass": "text-emerald-500",
-    "bgClass": "bg-emerald-950/20 border-emerald-500/30 hover:border-emerald-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-slate-950",
-      "textClass": "text-slate-300",
-      "fontClass": "font-serif"
-    },
-    "enabled": true
-  },
-  {
-    "id": "use-reducer-minority-report",
-    "path": "/use-reducer-minority-report",
-    "title": "Minority Report",
-    "subtitle": "John Anderton, 2002",
-    "concept": "useReducer for Complex State",
-    "icon": "Brain",
-    "colorClass": "text-cyan-400",
-    "bgClass": "bg-cyan-950/20 border-cyan-500/30 hover:border-cyan-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-slate-950",
-      "textClass": "text-slate-300",
-      "fontClass": "font-sans"
-    },
-    "enabled": true
-  },
-  {
-    "id": "useref-dorian-grays-portrait",
-    "path": "/useref-dorian-grays-portrait",
-    "title": "The Picture of Dorian Gray",
-    "subtitle": "Dorian Gray, 1890",
-    "concept": "useRef Hook",
-    "icon": "Image",
-    "colorClass": "text-amber-500",
-    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-slate-950",
-      "textClass": "text-slate-300",
-      "fontClass": "font-serif"
-    },
-    "enabled": true
-  },
-  {
-    "id": "usememo-sherlocks-mind-palace",
-    "path": "/usememo-sherlocks-mind-palace",
-    "title": "Sherlock",
-    "subtitle": "Sherlock Holmes, 2010",
-    "concept": "useMemo Hook",
-    "icon": "Brain",
-    "colorClass": "text-amber-500",
-    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-slate-950",
-      "textClass": "text-slate-300",
-      "fontClass": "font-serif"
-    },
-    "enabled": true
-  },
-  {
-    "id": "memo-edge-of-tomorrow",
-    "path": "/memo-edge-of-tomorrow",
-    "title": "Edge of Tomorrow",
-    "subtitle": "Major William Cage, 2014",
-    "concept": "React.memo Optimization",
-    "icon": "Brain",
-    "colorClass": "text-cyan-400",
-    "bgClass": "bg-slate-900/50 border border-slate-700 hover:border-cyan-400/50",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950",
-      "textClass": "text-slate-300",
-      "fontClass": "font-sans"
-    },
-    "enabled": true
-  },
-  {
-    "id": "error-boundaries-the-titanics-bulkheads",
-    "path": "/error-boundaries-the-titanics-bulkheads",
-    "title": "Titanic (1997)",
-    "subtitle": "Thomas Andrews, The Designer",
-    "concept": "Error Boundaries",
-    "icon": "Ship",
-    "colorClass": "text-sky-400",
-    "bgClass": "bg-sky-950/20 border-sky-500/30 hover:border-sky-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-slate-950",
-      "textClass": "text-slate-300",
-      "fontClass": "font-serif"
-    },
-    "enabled": true
-  },
-  {
-    "id": "react-fragments-fight-club",
-    "path": "/react-fragments-fight-club",
-    "title": "Fight Club",
-    "subtitle": "The Narrator/Tyler Durden, 1999",
-    "concept": "React Fragments",
-    "icon": "Code2",
+    "icon": "Heart",
     "colorClass": "text-rose-500",
     "bgClass": "bg-rose-950/20 border-rose-500/30 hover:border-rose-500",
     "component": "dynamic_import",
     "wrapperProps": {
       "bgClass": "bg-slate-950",
       "textClass": "text-slate-300",
-      "fontClass": "font-sans"
-    },
-    "enabled": true
-  },
-  {
-    "id": "code-splitting-with-horcruxes",
-    "path": "/code-splitting-with-horcruxes",
-    "title": "Harry Potter series",
-    "subtitle": "Voldemort's Horcruxes, 1997-2007",
-    "concept": "Code Splitting and Lazy Loading",
-    "icon": "Brain",
-    "colorClass": "text-emerald-500",
-    "bgClass": "bg-emerald-950/20 border-emerald-500/30 hover:border-emerald-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-slate-950",
-      "textClass": "text-slate-300",
       "fontClass": "font-serif"
     },
     "enabled": true
   },
   {
-    "id": "suspense-waiting-for-godot",
-    "path": "/suspense-waiting-for-godot",
-    "title": "Waiting for Godot",
-    "subtitle": "Vladimir & Estragon, 1953",
-    "concept": "Suspense",
-    "icon": "Clock",
-    "colorClass": "text-amber-500",
-    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-slate-950",
-      "textClass": "text-slate-300",
-      "fontClass": "font-serif"
-    },
-    "enabled": true
-  },
-  {
-    "id": "use-deferred-value-tenet",
-    "path": "/use-deferred-value-tenet",
-    "title": "Tenet",
-    "subtitle": "The Protagonist, 2020",
-    "concept": "useDeferredValue Hook",
-    "icon": "RotateCcw",
+    "id": "the-tempest-composition-over-inheritance",
+    "path": "/the-tempest-composition-over-inheritance",
+    "title": "The Tempest",
+    "subtitle": "Prospero's Island, 1611",
+    "concept": "Composition vs Inheritance",
+    "icon": "BookOpen",
     "colorClass": "text-cyan-500",
     "bgClass": "bg-cyan-950/20 border-cyan-500/30 hover:border-cyan-500",
     "component": "dynamic_import",
     "wrapperProps": {
-      "bgClass": "bg-gradient-to-br from-slate-950 to-blue-950",
+      "bgClass": "bg-slate-950",
       "textClass": "text-slate-300",
-      "fontClass": "font-sans"
+      "fontClass": "font-serif"
     },
     "enabled": true
   },
   {
-    "id": "rsc-the-truman-show",
-    "path": "/rsc-the-truman-show",
-    "title": "The Truman Show",
-    "subtitle": "Truman Burbank, 1998",
-    "concept": "Server Components (RSC)",
-    "icon": "Film",
+    "id": "component-lifecycle-shakespeare",
+    "path": "/component-lifecycle-shakespeare",
+    "title": "As You Like It",
+    "subtitle": "The Forest of Arden, 1599",
+    "concept": "Component Lifecycle",
+    "icon": "Theater",
+    "colorClass": "text-emerald-500",
+    "bgClass": "bg-emerald-950/20 border-emerald-500/30 hover:border-emerald-500",
+    "component": "dynamic_import",
+    "wrapperProps": {
+      "bgClass": "bg-slate-950",
+      "textClass": "text-slate-300",
+      "fontClass": "font-serif"
+    },
+    "enabled": true
+  },
+  {
+    "id": "the-conspiracy-context",
+    "path": "/the-conspiracy-context",
+    "title": "Julius Caesar",
+    "subtitle": "The Conspiracy, 44 BC",
+    "concept": "React Concept: useContext Hook",
+    "icon": "Swords",
     "colorClass": "text-amber-500",
     "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
     "component": "dynamic_import",
     "wrapperProps": {
-      "bgClass": "bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950",
+      "bgClass": "bg-gradient-to-br from-slate-950 via-slate-900 to-stone-950",
       "textClass": "text-slate-300",
-      "fontClass": "font-sans"
+      "fontClass": "font-serif"
     },
     "enabled": true
   },
   {
-    "id": "forwarding-the-golden-ticket",
-    "path": "/forwarding-the-golden-ticket",
-    "title": "Charlie and the Chocolate Factory",
-    "subtitle": "Willy Wonka, 1964",
-    "concept": "Forward Refs",
-    "icon": "Ticket",
+    "id": "use-callback-hook-hamlet",
+    "path": "/use-callback-hook-hamlet",
+    "title": "Hamlet",
+    "subtitle": "The Players, 1600",
+    "concept": "React Concept: useCallback Hook",
+    "icon": "Drama",
     "colorClass": "text-amber-500",
     "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
     "component": "dynamic_import",
@@ -340,252 +204,99 @@
     "enabled": true
   },
   {
-    "id": "higher-order-components",
-    "path": "/higher-order-components",
-    "title": "Pimp My Ride",
-    "subtitle": "Xzibit, 2004-2007",
-    "concept": "Higher-Order Components (HOCs)",
-    "icon": "Car",
-    "colorClass": "text-cyan-400",
+    "id": "prosperos-custom-spells",
+    "path": "/prosperos-custom-spells",
+    "title": "The Tempest",
+    "subtitle": "Prospero, The Enchanted Isle, 1611",
+    "concept": "React Concept: Custom Hooks",
+    "icon": "Wand2",
+    "colorClass": "text-violet-500",
+    "bgClass": "bg-violet-950/20 border-violet-500/30 hover:border-violet-500",
+    "component": "dynamic_import",
+    "wrapperProps": {
+      "bgClass": "bg-gradient-to-br from-slate-950 via-purple-950/30 to-slate-950",
+      "textClass": "text-slate-300",
+      "fontClass": "font-serif"
+    },
+    "enabled": true
+  },
+  {
+    "id": "global-state-winters-tale",
+    "path": "/global-state-winters-tale",
+    "title": "The Winter's Tale",
+    "subtitle": "Sicilia's Court, 1611",
+    "concept": "Global State Management with Zustand",
+    "icon": "Snowflake",
+    "colorClass": "text-cyan-500",
     "bgClass": "bg-cyan-950/20 border-cyan-500/30 hover:border-cyan-500",
     "component": "dynamic_import",
     "wrapperProps": {
-      "bgClass": "bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950",
-      "textClass": "text-slate-300",
-      "fontClass": "font-sans"
-    },
-    "enabled": true
-  },
-  {
-    "id": "render-props-heist-plans",
-    "path": "/render-props-heist-plans",
-    "title": "Ocean's Eleven",
-    "subtitle": "Danny Ocean & Crew, 2001",
-    "concept": "Render Props: Inverting Control",
-    "icon": "Brain",
-    "colorClass": "text-amber-500",
-    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500 hover:bg-amber-950/30",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-slate-950",
-      "textClass": "text-slate-300",
-      "fontClass": "font-sans"
-    },
-    "enabled": true
-  },
-  {
-    "id": "reconciliation-as-heptapod-language",
-    "path": "/reconciliation-as-heptapod-language",
-    "title": "Arrival",
-    "subtitle": "Dr. Louise Banks, 2016",
-    "concept": "Reconciliation and Virtual DOM",
-    "icon": "Brain",
-    "colorClass": "text-orange-500",
-    "bgClass": "bg-orange-950/20 border-orange-500/30 hover:border-orange-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-slate-950",
-      "textClass": "text-slate-300",
-      "fontClass": "font-sans"
-    },
-    "enabled": true
-  },
-  {
-    "id": "useimperativehandle-wizard-of-oz",
-    "path": "/useimperativehandle-wizard-of-oz",
-    "title": "The Wizard of Oz",
-    "subtitle": "The Man Behind the Curtain, 1939",
-    "concept": "useImperativeHandle Hook",
-    "icon": "Zap",
-    "colorClass": "text-emerald-500",
-    "bgClass": "bg-emerald-950/20 border-emerald-500/30 hover:border-emerald-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-slate-950",
+      "bgClass": "bg-gradient-to-br from-slate-950 to-cyan-950/30",
       "textClass": "text-slate-300",
       "fontClass": "font-serif"
     },
     "enabled": true
   },
   {
-    "id": "strict-mode-precognition",
-    "path": "/strict-mode-precognition",
-    "title": "Minority Report",
-    "subtitle": "Chief John Anderton, 2002",
-    "concept": "React Strict Mode",
-    "icon": "Brain",
-    "colorClass": "text-blue-400",
-    "bgClass": "bg-blue-950/20 border-blue-500/30 hover:border-blue-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-gradient-to-br from-slate-950 via-blue-950/40 to-slate-950",
-      "textClass": "text-slate-300",
-      "fontClass": "font-sans"
-    },
-    "enabled": true
-  },
-  {
-    "id": "performance-profiling-moneyball",
-    "path": "/performance-profiling-moneyball",
-    "title": "Moneyball",
-    "subtitle": "Billy Beane, 2011",
-    "concept": "Performance Profiling",
-    "icon": "Brain",
-    "colorClass": "text-emerald-500",
-    "bgClass": "bg-emerald-950/20 border-emerald-500/30 hover:border-emerald-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-slate-950",
-      "textClass": "text-slate-300",
-      "fontClass": "font-sans"
-    },
-    "enabled": true
-  },
-  {
-    "id": "usestate-jekyll-and-hyde",
-    "path": "/usestate-jekyll-and-hyde",
-    "title": "Strange Case of Dr Jekyll and Mr Hyde",
-    "subtitle": "Dr. Henry Jekyll / Mr. Edward Hyde, 1886",
-    "concept": "useState Hook",
-    "icon": "FlaskRound",
-    "colorClass": "text-emerald-500",
-    "bgClass": "bg-emerald-950/20 border-emerald-500/30 hover:border-emerald-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-slate-950",
-      "textClass": "text-slate-300",
-      "fontClass": "font-serif"
-    },
-    "enabled": true
-  },
-  {
-    "id": "event-handling-goonies-contraptions",
-    "path": "/event-handling-goonies-contraptions",
-    "title": "The Goonies",
-    "subtitle": "Data's Contraptions, 1985",
-    "concept": "Event Handling",
-    "icon": "Zap",
-    "colorClass": "text-amber-500",
-    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-stone-900",
-      "textClass": "text-stone-300",
-      "fontClass": "font-sans"
-    },
-    "enabled": true
-  },
-  {
-    "id": "lists-and-keys-marauders-map",
-    "path": "/lists-and-keys-marauders-map",
-    "title": "Harry Potter and the Prisoner of Azkaban",
-    "subtitle": "The Marauder's Map, 2004",
-    "concept": "Lists and Keys",
-    "icon": "Map",
-    "colorClass": "text-amber-500",
-    "bgClass": "bg-amber-950/20 border-amber-600/30 hover:border-amber-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-gradient-to-b from-slate-950 to-amber-950/20",
-      "textClass": "text-slate-300",
-      "fontClass": "font-serif"
-    },
-    "enabled": true
-  },
-  {
-    "id": "controlled-components-1984",
-    "path": "/controlled-components-1984",
-    "title": "1984",
-    "subtitle": "Winston Smith, 1949",
-    "concept": "Forms and Controlled Components",
-    "icon": "Eye",
-    "colorClass": "text-red-500",
-    "bgClass": "bg-red-950/20 border-red-500/30 hover:border-red-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-slate-950",
-      "textClass": "text-slate-300",
-      "fontClass": "font-serif"
-    },
-    "enabled": true
-  },
-  {
-    "id": "the-force-is-the-context",
-    "path": "/the-force-is-the-context",
-    "title": "Star Wars",
-    "subtitle": "Anya, Jedi Temple, 1977",
-    "concept": "useContext Hook and Context API",
-    "icon": "Brain",
+    "id": "memoization-merchant-of-venice",
+    "path": "/memoization-merchant-of-venice",
+    "title": "The Merchant of Venice",
+    "subtitle": "Portia as Balthazar, c. 1596",
+    "concept": "React Concept: useMemo Hook",
+    "icon": "Scale",
     "colorClass": "text-amber-500",
     "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
     "component": "dynamic_import",
     "wrapperProps": {
       "bgClass": "bg-slate-950",
       "textClass": "text-slate-300",
-      "fontClass": "font-sans"
+      "fontClass": "font-serif"
     },
     "enabled": true
   },
   {
-    "id": "custom-hooks-utility-belt",
-    "path": "/custom-hooks-utility-belt",
-    "title": "Batman",
-    "subtitle": "Bruce Wayne / Batman, Gotham City",
-    "concept": "Custom Hooks",
-    "icon": "Zap",
-    "colorClass": "text-yellow-500",
-    "bgClass": "bg-yellow-950/20 border-yellow-500/30 hover:border-yellow-500",
+    "id": "hamlet-error-boundaries",
+    "path": "/hamlet-error-boundaries",
+    "title": "Hamlet",
+    "subtitle": "The Duel, 1609",
+    "concept": "React Concept: Error Boundaries",
+    "icon": "Sword",
+    "colorClass": "text-purple-500",
+    "bgClass": "bg-purple-950/20 border-purple-500/30 hover:border-purple-500",
     "component": "dynamic_import",
     "wrapperProps": {
-      "bgClass": "bg-slate-950",
+      "bgClass": "bg-gradient-to-br from-slate-950 via-purple-950/40 to-slate-950",
       "textClass": "text-slate-300",
-      "fontClass": "font-sans"
+      "fontClass": "font-serif"
     },
     "enabled": true
   },
   {
-    "id": "usecallback-westworld-loops",
-    "path": "/usecallback-westworld-loops",
-    "title": "Westworld",
-    "subtitle": "Dolores & Teddy, 2016",
-    "concept": "useCallback Hook",
-    "icon": "Repeat",
-    "colorClass": "text-amber-500",
-    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-slate-950",
-      "textClass": "text-slate-300",
-      "fontClass": "font-sans"
-    },
-    "enabled": true
-  },
-  {
-    "id": "portals-the-wardrobe-in-the-spare-room",
-    "path": "/portals-the-wardrobe-in-the-spare-room",
-    "title": "The Chronicles of Narnia",
-    "subtitle": "The Wardrobe, 1950",
+    "id": "portals-midsummer-play-within-play",
+    "path": "/portals-midsummer-play-within-play",
+    "title": "A Midsummer Night's Dream",
+    "subtitle": "The Mechanicals, 1595",
     "concept": "React Portals",
-    "icon": "DoorOpen",
-    "colorClass": "text-amber-500",
-    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
+    "icon": "Mask",
+    "colorClass": "text-purple-500",
+    "bgClass": "bg-purple-950/20 border-purple-500/30 hover:border-purple-500",
     "component": "dynamic_import",
     "wrapperProps": {
-      "bgClass": "bg-stone-950",
-      "textClass": "text-amber-100/90",
+      "bgClass": "bg-gradient-to-br from-slate-950 to-purple-950/30",
+      "textClass": "text-slate-300",
       "fontClass": "font-serif"
     },
     "enabled": true
   },
   {
-    "id": "godfather-batching-requests",
-    "path": "/godfather-batching-requests",
-    "title": "The Godfather",
-    "subtitle": "Vito Corleone, 1972",
-    "concept": "Batching and Automatic Batching",
-    "icon": "FlaskConical",
-    "colorClass": "text-red-500",
-    "bgClass": "bg-red-950/20 border-red-500/30 hover:border-red-500",
+    "id": "fragments-twins-of-ephasus",
+    "path": "/fragments-twins-of-ephasus",
+    "title": "The Comedy of Errors",
+    "subtitle": "Twins of Ephesus, 1594",
+    "concept": "React Fragments",
+    "icon": "Users",
+    "colorClass": "text-amber-500",
+    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
     "component": "dynamic_import",
     "wrapperProps": {
       "bgClass": "bg-stone-950",
@@ -595,47 +306,120 @@
     "enabled": true
   },
   {
-    "id": "concurrent-rendering-pulp-fiction",
-    "path": "/concurrent-rendering-pulp-fiction",
-    "title": "Pulp Fiction",
-    "subtitle": "Quentin Tarantino, 1994",
-    "concept": "Concurrent Rendering",
-    "icon": "Film",
-    "colorClass": "text-red-500",
-    "bgClass": "bg-red-950/20 border-red-500/30 hover:border-red-500",
-    "component": "dynamic_import",
-    "wrapperProps": { "bgClass": "bg-black", "textClass": "text-zinc-200" },
-    "enabled": true
-  },
-  {
-    "id": "use-transition-hook",
-    "path": "/use-transition-hook",
-    "title": "Inception",
-    "subtitle": "Ariadne, 2010",
-    "concept": "useTransition Hook",
-    "icon": "Layers",
-    "colorClass": "text-blue-400",
-    "bgClass": "bg-blue-950/20 border-blue-500/30 hover:border-blue-500",
-    "component": "dynamic_import",
-    "wrapperProps": {
-      "bgClass": "bg-slate-950",
-      "textClass": "text-slate-200"
-    },
-    "enabled": true
-  },
-  {
-    "id": "use-layout-effect-the-prestige",
-    "path": "/use-layout-effect-the-prestige",
-    "title": "The Prestige",
-    "subtitle": "Alistair, 2006",
-    "concept": "useLayoutEffect Hook",
-    "icon": "Sparkles",
+    "id": "the-mousetrap-test",
+    "path": "/the-mousetrap-test",
+    "title": "The Mousetrap",
+    "subtitle": "Hamlet, c. 1600",
+    "concept": "React Testing Library",
+    "icon": "Theater",
     "colorClass": "text-amber-500",
     "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
     "component": "dynamic_import",
     "wrapperProps": {
       "bgClass": "bg-slate-950",
-      "textClass": "text-slate-200",
+      "textClass": "text-slate-300",
+      "fontClass": "font-serif"
+    },
+    "enabled": true
+  },
+  {
+    "id": "headless-ui-primitives",
+    "path": "/headless-ui-primitives",
+    "title": "The Tempest (1611)",
+    "subtitle": "Prospero, Ariel, and the Lords",
+    "concept": "Headless UI Primitives",
+    "icon": "Box",
+    "colorClass": "text-emerald-500",
+    "bgClass": "bg-emerald-950/20 border-emerald-500/30 hover:border-emerald-500",
+    "component": "dynamic_import",
+    "wrapperProps": {
+      "bgClass": "bg-slate-950",
+      "textClass": "text-slate-300",
+      "fontClass": "font-serif"
+    },
+    "enabled": true
+  },
+  {
+    "id": "much-ado-about-memo",
+    "path": "/much-ado-about-memo",
+    "title": "Much Ado About Nothing",
+    "subtitle": "Benedick, Leonato's Orchard, 1598",
+    "concept": "React.memo Optimization",
+    "icon": "Brain",
+    "colorClass": "text-emerald-500",
+    "bgClass": "bg-emerald-950/20 border-emerald-500/30 hover:border-emerald-500",
+    "component": "dynamic_import",
+    "wrapperProps": {
+      "bgClass": "bg-gradient-to-br from-slate-950 to-emerald-950/30",
+      "textClass": "text-slate-300",
+      "fontClass": "font-serif"
+    },
+    "enabled": true
+  },
+  {
+    "id": "react-query-caesar",
+    "path": "/react-query-caesar",
+    "title": "The State of Rome",
+    "subtitle": "Julius Caesar, 44 BC",
+    "concept": "React Query: Server State Management",
+    "icon": "Swords",
+    "colorClass": "text-red-500",
+    "bgClass": "bg-red-950/20 border-red-500/30 hover:border-red-500",
+    "component": "dynamic_import",
+    "wrapperProps": {
+      "bgClass": "bg-stone-950",
+      "textClass": "text-slate-300",
+      "fontClass": "font-serif"
+    },
+    "enabled": true
+  },
+  {
+    "id": "react-router-pericles-journey",
+    "path": "/react-router-pericles-journey",
+    "title": "Pericles, Prince of Tyre",
+    "subtitle": "Pericles, The Journeyman, 1600s",
+    "concept": "React Router: Client-Side Navigation",
+    "icon": "Compass",
+    "colorClass": "text-teal-500",
+    "bgClass": "bg-teal-950/20 border-teal-500/30 hover:border-teal-500",
+    "component": "dynamic_import",
+    "wrapperProps": {
+      "bgClass": "bg-gradient-to-br from-slate-950 via-teal-950/20 to-slate-950",
+      "textClass": "text-slate-300",
+      "fontClass": "font-serif"
+    },
+    "enabled": true
+  },
+  {
+    "id": "useref-hamlet-yoricks-skull",
+    "path": "/useref-hamlet-yoricks-skull",
+    "title": "Hamlet",
+    "subtitle": "Yorick's Skull, 1600",
+    "concept": "React Concept: useRef Hook",
+    "icon": "Skull",
+    "colorClass": "text-cyan-500",
+    "bgClass": "bg-cyan-950/20 border-cyan-500/30 hover:border-cyan-500",
+    "component": "dynamic_import",
+    "wrapperProps": {
+      "bgClass": "bg-slate-950",
+      "textClass": "text-slate-300",
+      "fontClass": "font-serif"
+    },
+    "enabled": true
+  },
+  {
+    "id": "components-mechanicals-play",
+    "path": "/components-mechanicals-play",
+    "title": "A Midsummer Night's Dream",
+    "subtitle": "The Mechanicals' Play, 1595",
+    "concept": "React Components",
+    "icon": "Theater",
+    "colorClass": "text-amber-500",
+    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
+    "component": "dynamic_import",
+    "wrapperProps": {
+      "bgClass": "bg-stone-950",
+      "textClass": "text-stone-300",
       "fontClass": "font-serif"
     },
     "enabled": true
