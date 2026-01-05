@@ -107,7 +107,7 @@ export const CodeComparison: React.FC<CodeComparisonProps> = ({
   return (
     <div className={`space-y-4 ${className}`}>
       {/* Toggle Buttons */}
-      <div className="flex gap-3">
+      <div className="flex gap-3 justify-center">
         <button
           onClick={() => setShowGood(false)}
           className={`rounded-lg px-4 py-2 font-medium transition-all duration-200 ${

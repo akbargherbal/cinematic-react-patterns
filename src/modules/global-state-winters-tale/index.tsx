@@ -5,7 +5,7 @@ import { ModuleLayout } from "@/components/common/ModuleLayout";
 import { ChapterNavigation } from "@/components/common/ChapterNavigation";
 import { CodeBlock } from "@/components/common/CodeBlock";
 import { CodeComparison } from "@/components/common/CodeComparison";
-import { create } from "zustand";
+import {create} from "zustand";
 
 interface Chapter {
   title: string;
@@ -557,7 +557,7 @@ function Component() {
                         </li>
                         <li className="flex items-start gap-2">
                           <CheckCircle className="h-4 w-4 text-cyan-400 mt-0.5" />
-                          <span><strong>Simple API</strong> - Just useStore(s =&gt; s.state)</span>
+                          <span><strong>Simple API</strong> - Just `useStore(s =&gt; s.state)`</span>
                         </li>
                       </ul>
                     </div>

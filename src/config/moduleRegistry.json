@@ -423,5 +423,124 @@
       "fontClass": "font-serif"
     },
     "enabled": true
+  },
+  {
+    "id": "performance-profiling-agincourt",
+    "path": "/performance-profiling-agincourt",
+    "title": "Henry V (c. 1599)",
+    "subtitle": "King Henry V, 1415",
+    "concept": "Performance Profiling",
+    "icon": "Sword",
+    "colorClass": "text-amber-500",
+    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
+    "component": "dynamic_import",
+    "wrapperProps": {
+      "bgClass": "bg-slate-950",
+      "textClass": "text-slate-300",
+      "fontClass": "font-serif"
+    },
+    "enabled": true
+  },
+  {
+    "id": "strict-mode-hamlet-advice",
+    "path": "/strict-mode-hamlet-advice",
+    "title": "Hamlet",
+    "subtitle": "Polonius's Advice, 1603",
+    "concept": "React Strict Mode",
+    "icon": "Brain",
+    "colorClass": "text-amber-500",
+    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
+    "component": "dynamic_import",
+    "wrapperProps": {
+      "bgClass": "bg-slate-950",
+      "textClass": "text-slate-300",
+      "fontClass": "font-serif"
+    },
+    "enabled": true
+  },
+  {
+    "id": "props-through-king-lear",
+    "path": "/props-through-king-lear",
+    "title": "King Lear",
+    "subtitle": "The Kingdom, Antiquity",
+    "concept": "React Props: One-Way Data Flow",
+    "icon": "Crown",
+    "colorClass": "text-amber-500",
+    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
+    "component": "dynamic_import",
+    "wrapperProps": {
+      "bgClass": "bg-slate-950",
+      "textClass": "text-slate-300",
+      "fontClass": "font-serif"
+    },
+    "enabled": true
+  },
+  {
+    "id": "merchant-of-venice-controlled-forms",
+    "path": "/merchant-of-venice-controlled-forms",
+    "title": "The Merchant of Venice",
+    "subtitle": "Portia & Bassanio, c.1596",
+    "concept": "Forms and Controlled Components",
+    "icon": "KeyRound",
+    "colorClass": "text-amber-500",
+    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
+    "component": "dynamic_import",
+    "wrapperProps": {
+      "bgClass": "bg-slate-950",
+      "textClass": "text-slate-300",
+      "fontClass": "font-serif"
+    },
+    "enabled": true
+  },
+  {
+    "id": "reducer-conspiracy",
+    "path": "/reducer-conspiracy",
+    "title": "Julius Caesar",
+    "subtitle": "Brutus & Cassius, 44 BC",
+    "concept": "useReducer Hook",
+    "icon": "Scale",
+    "colorClass": "text-amber-500",
+    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
+    "component": "dynamic_import",
+    "wrapperProps": {
+      "bgClass": "bg-slate-950",
+      "textClass": "text-slate-300",
+      "fontClass": "font-serif"
+    },
+    "enabled": true
+  },
+  {
+    "id": "synchronous-translation-layout-effect",
+    "path": "/synchronous-translation-layout-effect",
+    "title": "A Midsummer Night's Dream",
+    "subtitle": "Puck & Bottom, c. 1595",
+    "concept": "React Concept: useLayoutEffect Hook",
+    "icon": "Sparkles",
+    "colorClass": "text-violet-500",
+    "bgClass": "bg-violet-950/20 border-violet-500/30 hover:border-violet-500",
+    "component": "dynamic_import",
+    "wrapperProps": {
+      "bgClass": "bg-slate-950",
+      "textClass": "text-slate-300",
+      "fontClass": "font-serif"
+    },
+    "enabled": true
+  },
+  {
+    "id": "zod-and-the-pound-of-flesh",
+    "path": "/zod-and-the-pound-of-flesh",
+    "title": "The Merchant of Venice",
+    "subtitle": "Portia & Shylock, c. 1596",
+    "concept": "Zod Schema Validation",
+    "icon": "Scale",
+    "colorClass": "text-amber-500",
+    "bgClass": "bg-amber-950/20 border-amber-500/30 hover:border-amber-500",
+    "component": "dynamic_import",
+    "wrapperProps": {
+      "bgClass": "bg-slate-950",
+      "textClass": "text-slate-300",
+      "fontClass": "font-serif"
+    },
+    "enabled": true
   }
 ]
